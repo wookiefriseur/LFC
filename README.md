@@ -2,6 +2,9 @@
 
 Official Furniture Catalogue database library. Used by FurnitureCatalogue.
 
+- **This Library:** https://www.esoui.com/downloads/info4804-LibFurnitureCatalogue.html
+- **Main AddOn:** https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html
+
 This repo contains the following:
 
 1. AddOn src files in [./LibFurnitureCatalogue](./LibFurnitureCatalogue)
