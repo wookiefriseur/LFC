@@ -1,1 +1,20 @@
-TODO: Generator script to build BBCODE for ESOUI AddOn page?
+Official library containing the [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL] database. Currently bundled in FurnitureCatalogue, starting with 7.0.0
+
+
+The bundled lib will disappear after a while and then this one will be required to load FurnitureCatalogue.
+
+
+Offers API endpoints for other AddOns. Instructions will follow.
+
+
+I set it to beta, because I don't want it showing up in the regular lists yet, but it is identical with the bundled version and can already be used.
+
+
+This description will be more useful in the future, I swear.
+
+
+Details:
+https://github.com/manavortex/FurnitureCatalogue/issues/196
+
+
+LFC repo: https://github.com/wookiefriseur/LFC

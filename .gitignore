@@ -6,8 +6,6 @@
 .zed/
 *.swp
 .luarc.json
-.editorconfig
-stylua.toml
 
 # Binaries and some artifacts
 bin/
