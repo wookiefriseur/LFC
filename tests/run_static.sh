@@ -14,13 +14,18 @@ if [[ -f "$ROOT/.env" ]]; then
   set -a; . "$ROOT/.env"; set +a
 fi
 
-LUAC="${LUAC:-$ROOT/../bin/luac}"
-LUA="${LUA:-$ROOT/../bin/lua}"
+# bin/ in the repo is the documented spot, ../bin next to it still works
+LUAC="${LUAC:-}"
+LUA="${LUA:-}"
+for dir in "$ROOT/bin" "$ROOT/../bin"; do
+  [ -z "$LUAC" ] && [ -x "$dir/luac" ] && LUAC="$dir/luac"
+  [ -z "$LUA" ] && [ -x "$dir/lua" ] && LUA="$dir/lua"
+done
 
 for tool in "$LUAC" "$LUA"; do
-  [ -x "$tool" ] || {
-    echo "run_static.sh: not executable: $tool" >&2
-    echo "  put lua and luac in ../bin, or set LUAC and LUA (env or .env)" >&2
+  [ -n "$tool" ] && [ -x "$tool" ] || {
+    echo "run_static.sh: no usable lua/luac found" >&2
+    echo "  put them in bin/, or set LUAC and LUA (env or .env)" >&2
     exit 2
   }
 done

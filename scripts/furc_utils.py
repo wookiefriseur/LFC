@@ -1,0 +1,634 @@
+#!/usr/bin/env python3
+
+import argparse
+import glob
+import os
+import re
+import shutil
+import sys
+import urllib.request
+
+from tempfile import NamedTemporaryFile
+
+"""
+Utilities module for GitHub actions and general use.
+"""
+
+
+'''
+.---------------------------------------.
+|                                       |
+|     PARSING & STRING OPERATIONS       |
+|                                       |
+.---------------------------------------.
+'''
+
+TYPE_MF_ESO = 'TYPE_MF_ESO'
+EXT_MF_ESO = '.txt'
+EXT_MF_ADDITIONAL = '.manifest'
+TYPE_MF_ADDITIONAL = 'TYPE_MF_ADDITIONAL'
+
+PROP_MF_TITLE='Title'
+
+PROP_MF_VERSION='Version'
+"""human readable version like 1.2.3"""
+
+PROP_MF_APIVERSION='APIVersion'
+"""ESOAPI Version like 101050"""
+
+PROP_MF_ADDONVERSION='AddOnVersion'
+"""numeric version the game compares, like 1001000"""
+
+PROP_MF_TYPE='type'
+PROP_MF_FILES='files'
+
+MANIFEST_HEADER = {
+  PROP_MF_TITLE: '', # Title ingame
+  PROP_MF_VERSION: '',
+  PROP_MF_TYPE: TYPE_MF_ADDITIONAL,
+  PROP_MF_FILES: None
+}
+
+RE_MANIFEST_FIELD = re.compile(r"^##\s*(?P<KEY>\w+):\s*(?P<VALUE>.+)$")
+"""match manifest properties"""
+
+RE_CL_SPLIT = re.compile(r"(?=\n\d+\s?[\w\.\(\)\-]*)")
+"""just for splitting changelog"""
+
+RE_CL_VERSION_HEADER = re.compile(r"^\d+[\.\d]*.*$", re.MULTILINE)
+"""Headers like: 1.2.3 (2020-12-12)"""
+
+def get_manifest_data(manifest_file: str) -> dict:
+  """Extracts data from manifest file.
+  All listed files are considered to be located relative to the manifest file path.
+
+  Relevant fields:
+    - PROP_MF_TITLE: str
+    - PROP_MF_VERSION: str
+    - PROP_MF_APIVERSION: str
+    - PROP_MF_TYPE: TYPE_MF_ESO | TYPE_MF_ADDITIONAL
+    - PROP_MF_FILES: list[str]
+
+  Args:
+      manifest_file (str): Path to manifest file
+
+  Returns:
+      str: Manifest as a dict.
+  """
+
+  manifest = dict.copy(MANIFEST_HEADER)
+  manifest[PROP_MF_FILES] = []
+  manifest_file = os.path.normpath(manifest_file)
+  manifest_dir = os.path.dirname(manifest_file)
+  try:
+    with open(manifest_file, 'r') as file:
+      for line in file:
+        line = line.strip()
+        if line.startswith((';', '# ')): continue # skip comments
+
+        match = re.fullmatch(RE_MANIFEST_FIELD, line)
+        if match:
+          key,value = match.group('KEY', 'VALUE')
+          manifest[key] = value # duplicates shall be overwritten
+        else:
+          if line and not line.startswith(("#", ";")):
+            line = line.replace('$(language)', '*') # mask for all files in lang dir
+            line = line.replace('\\', '/')
+            line = os.path.normpath(line)
+            if '*' in line: # resolve mask to get filenames
+              manifest[PROP_MF_FILES].extend(glob.glob(os.path.join(manifest_dir, line)))
+            else:
+              manifest[PROP_MF_FILES].append(os.path.join(manifest_dir, line))
+
+    if manifest_file.endswith(EXT_MF_ESO):
+      manifest[PROP_MF_TYPE] = TYPE_MF_ESO
+
+  except Exception as ex:
+    print(f"Failed to get data from {manifest_file}: {ex}")
+  return manifest
+
+
+def validate_manifest(manifest_file: str) -> dict:
+  """Parse manifest and assert mandatory header fields are present.
+
+  Returns the manifest dict on success; crashes on missing field
+  """
+  manifest = get_manifest_data(manifest_file)
+  for field in (PROP_MF_TITLE, PROP_MF_VERSION, PROP_MF_APIVERSION):
+    if not manifest.get(field):
+      crash_and_burn(f"missing {field} in manifest {manifest_file}")
+  return manifest
+
+
+def get_manifest_version(manifest_file: str) -> str:
+  """Return the human-readable Version field from a manifest (empty if unset)."""
+  return get_manifest_data(manifest_file).get(PROP_MF_VERSION, '')
+
+
+def check_versions() -> int:
+  """Assert manifest AddOnVersion and the lua MINOR carry the same number.
+
+  Both are written by `changeversion`, so a mismatch means someone hand-edited one.
+  """
+  manifest = validate_manifest(MANIFEST_PATH)
+  declared = manifest.get(PROP_MF_ADDONVERSION, '')
+  if not declared.isdigit():
+    crash_and_burn(f"missing or non-numeric {PROP_MF_ADDONVERSION} in {MANIFEST_PATH}")
+
+  with open(MAINLUA_PATH, 'r', encoding='utf-8') as f:
+    match = RE_MAINLUA_VERSION_LINE.search(f.read())
+  if not match:
+    crash_and_burn(f"no MAJOR, MINOR version line in {MAINLUA_PATH}")
+
+  if int(declared) != int(match.group('VERSION')):
+    crash_and_burn(f"{MANIFEST_PATH} says {declared}, {MAINLUA_PATH} says {match.group('VERSION')}")
+
+  expected = semver_to_int(manifest[PROP_MF_VERSION])
+  if int(declared) != expected:
+    print(f"⚠️ AddOnVersion {declared} is off the semver scheme, a release bump would set it to {expected}")
+  return int(declared)
+
+
+def get_log_entries(cl_file: str, entries: int=20) -> list[str]:
+  """Gets latest x entries from full changelog file
+
+  Args:
+      cl_file (str): Path to changelog file
+      entries (int, optional): Max number of entries to show. Defaults to 20.
+
+  Returns:
+      list[str]: Truncated changelog
+  """
+  with open(cl_file, 'r') as f:
+    data = f.read()
+  return RE_CL_SPLIT.split(data, entries)[0:entries]
+
+
+def extract_header_from_file(path: str, delim: str="[//]:"):
+  if not os.path.exists(path): return ''
+
+  with open(path, 'r', encoding='utf-8') as file:
+    data = file.read()
+  return extract_header(data, delim)
+
+
+def extract_header(note: str, delim: str="[//]:") -> str:
+  """Extracts text that comes before a specified delimiter's first occurence, usually a header.
+
+  Args:
+      note (str): Text we might want to separate from the rest
+      delim (str, optional): Delimiter the text will be split at. Defaults to "[//]:".
+
+  Returns:
+      str: Extracted header or empty string if no delimiter or whitepace text
+  """
+  if not note: return ''
+  note_parts = note.split(delim, 1)
+  if len(note_parts) == 1: return ''
+  return note_parts[0].strip()
+
+CL_FILE = 'CHANGELOG'
+
+def update_changelog(notes_file:str, header: str, cl_file: str=CL_FILE):
+  # Empty/missing file = nothing to mention, no error
+  change = ''
+  if os.path.exists(notes_file):
+    with open(notes_file, 'r', encoding='utf-8') as f:
+      change = f.read().strip()
+  if change:
+    if header:
+      # strip existing header, if any
+      change = RE_CL_VERSION_HEADER.sub('', change.strip())
+      # add new header, like: 1.2.3 (2020-12-12)
+      change = f"{header}\n{change}"
+    print(f"🧾 Writing to changelog:\n{change}")
+    prepend_str_to_file(change, cl_file)
+  else:
+    print(f"🧾 Changelog unchanged")
+
+
+'''
+.---------------------------------------.
+|                                       |
+|           FILE OPERATIONS             |
+|                                       |
+.---------------------------------------.
+'''
+
+def prepend_str_to_file(text:str, file: str):
+  text = str.strip(text)
+  if not text or not file: return
+
+  dir_name = os.path.dirname(file)
+  temp = NamedTemporaryFile(dir=dir_name) # what is my purpose?
+  renamed_file = temp.name # > you pass the name
+  temp.close() # oh my god
+
+  os.rename(file, renamed_file)
+  with open(file, 'w') as target:
+    target.write(text + '\n\n')
+    with open(renamed_file, 'r') as old:
+      shutil.copyfileobj(old, target)
+  os.remove(renamed_file)
+
+
+def file_to_binary_string(archive_uri: str):
+  """Returns file content as binary string
+
+  Args:
+      archive_uri (str): file path or URL
+
+  Returns:
+      _type_: binary string
+  """
+
+  msg = f"{archive_uri}: "
+  # Try to open it as a URL, because that is our default use case
+  try:
+    with urllib.request.urlopen(archive_uri) as response:
+      return response.read()
+  except Exception:
+    msg += 'Cannot be reached as URL. '
+
+  # Not a URL or other problem, check locally
+  if not os.path.isfile(archive_uri):
+    msg += 'Cannot find file locally either. '
+    raise ValueError(msg)
+
+  try:
+    with open(archive_uri, 'rb') as file:
+      return file.read()
+  except Exception:
+    msg += 'Could not open file.'
+
+  # If we reached this point, then the file content could not be retrieved
+  raise ValueError(msg)
+
+
+def replace_once_in_file(pattern_repl_fallback: list[tuple], path: str) -> bool:
+  """Replaces first occurence of a matched regex pattern in a file
+
+  Args:
+      options (list[tuple]): tuples like (pattern, replacement, fallback)
+      path (str): path to file (r+w)
+
+  Returns:
+      bool: True if file has changed
+  """
+  with open(path, 'r+', encoding='utf-8') as f:
+    f_current = f.read()
+    f_new = f_current
+
+    for entry in pattern_repl_fallback:
+      pattern, replacement, fallback = entry
+      if not pattern.search(f_current):
+        f_new = f"{fallback}\n" + f_new
+      else:
+        f_new = pattern.sub(repl=replacement, string=f_new, count=1)
+
+    # Unify leading and trailing whitespace to make the relevant part comparable
+    f_current = f"{f_current}".strip() + "\n"
+    f_new = f"{f_new}".strip() + "\n"
+    if f_current != f_new:
+      f.seek(0)
+      f.write(f_new)
+      f.truncate()
+
+  return f_current != f_new
+
+
+'''
+.---------------------------------------.
+|                                       |
+|   VERSIONING & VERSION PARSING        |
+|                                       |
+.---------------------------------------.
+'''
+
+
+SCALE_MAJOR = 1_000_000
+SCALE_MINOR = 1_000
+FIELD_MAX = 999
+
+MAX_ADDON_VERSION = 2_147_483_647
+"""Just to catch mistakes. Version >2147.483.647 not realistically reachable"""
+
+def to_semver(ver: str) -> str:
+  return int_to_semver(semver_to_int(ver))
+
+def compare_versions(a: str, b: str) -> int:
+  """Compares 2 version numbers
+
+  Args:
+      a (str): version str like 1.23
+      b (str): version str like 1.23
+
+  Returns:
+      int: a<b: -1, a==b: 0, a>b: 1
+  """
+  if a is None and b is None: return 0
+  if a is None: return -1
+  if b is None: return 1
+
+  a_num = semver_to_int(a)
+  b_num = semver_to_int(b)
+
+  if a_num < b_num:
+      return -1
+  elif a_num > b_num:
+      return 1
+  else:
+      return 0
+
+def semver_to_int(version: str) -> int:
+  """AddOnVersion from semver to: major*1_000_000 + minor*1_000 + patch
+
+  That way we can easily see which version we're on, without having to track separate number
+  """
+  if not version: raise ValueError("Version required")
+
+  parts = version.split('.')
+  major = int(parts[0])
+  minor = int(parts[1]) if len(parts) > 1 else 0
+  patch = int(parts[2]) if len(parts) > 2 else 0
+  if min(major, minor, patch) < 0: raise ValueError("No support for negative values")
+
+  # minor/patch are max 3 digits. Value over 999 is typo, hand-edited and/or a crime
+  # assuming it's legitimate it carries over like in a normal bump:
+  # 1.2.1000 -> 1.3.0, 1.1000.5 -> 2.0.0
+  if patch > FIELD_MAX or minor > FIELD_MAX:
+    if patch > FIELD_MAX:
+      patch = 0
+      minor += 1
+    if minor > FIELD_MAX:
+      patch = 0
+      minor = 0
+      major += 1
+    print(f"⚠️️ {version}: minor/patch over {FIELD_MAX}, pulled some strings and rolled it up to {major}.{minor}.{patch}, but don't do that again", file=sys.stderr)
+
+  num = major * SCALE_MAJOR + minor * SCALE_MINOR + patch
+  if num > MAX_ADDON_VERSION:
+    crash_and_burn(f"AddOnVersion {num} ({major}.{minor}.{patch}) exceeds max allowed int {MAX_ADDON_VERSION}, assuming mistake")
+  return num
+
+def int_to_semver(num: int) -> str:
+  major, rest = divmod(int(num), SCALE_MAJOR)
+  minor, patch = divmod(rest, SCALE_MINOR)
+  return f"{major}.{minor}.{patch}"
+
+
+VERSION_IMPACT_MAJOR = 'major'
+VERSION_IMPACT_MINOR = 'minor'
+VERSION_IMPACT_PATCH = 'patch'
+def get_next_version(current: str, impact: str = VERSION_IMPACT_MINOR) -> str:
+  """Generates the next major, minor or patch version number.
+
+  Args:
+      current (str): version `x.y.z`, like `1.23.4` or `1`
+      impact (str): 'major', 'minor' or 'patch'. Defaults to 'minor'.
+
+  Returns:
+      str: from `1.23.4` => major: `2.0.0`, minor: `1.24.0`, patch: `1.23.5`
+  """
+  # Validates version number and converts it to int
+  ver_int = semver_to_int(current)
+
+  if impact == VERSION_IMPACT_PATCH:
+    ver_int += 1
+  elif impact == VERSION_IMPACT_MAJOR:
+    ver_int = (ver_int // SCALE_MAJOR + 1) * SCALE_MAJOR
+  else:
+    ver_int = (ver_int // SCALE_MINOR + 1) * SCALE_MINOR
+
+  return int_to_semver(ver_int)
+
+
+def is_single_increment(current: str, nxt: str) -> bool:
+  """True when `nxt` is exactly one increment above `current`"""
+
+  cmaj, cmin, cpat = (int(p) for p in to_semver(current).split('.'))
+  nmaj, nmin, npat = (int(p) for p in to_semver(nxt).split('.'))
+
+  pat_incr = (nmaj, nmin, npat) == (cmaj, cmin, cpat + 1)
+  min_incr = (nmaj, nmin, npat) == (cmaj, cmin + 1, 0)
+  maj_incr = (nmaj, nmin, npat) == (cmaj + 1, 0, 0)
+
+  return pat_incr or min_incr or maj_incr
+
+
+def assert_single_increment(current: str, nxt: str):
+  """Abort if `nxt` skips more than one step above `current` (that's illegal)
+
+  Guards release against jumping over ESOUI version by >1 step
+  which would mean something failed and needs manual intervention
+  """
+  if not is_single_increment(current, nxt):
+    crash_and_burn(f"{nxt} is not a single step above {current}; refusing to skip versions, bump manually if deliberate")
+
+
+RE_GHLIST_TAG = re.compile(r"\s+(\d+[\.\d]+)\s+")
+"""version tags like 1.23"""
+
+def get_highest_version_from_gh_list(gh_list :str) -> str:
+  """Get the highest release version from a list generated by gh cli
+
+  ```
+  Input example:
+  Version 1.23    Pre-release     1.23    2023-05-16T15:12:00Z
+  Version 4.6     Pre-release     4.6     2023-05-15T00:36:49Z
+  Version 4.5     Latest  4.5     2023-05-15T00:59:34Z
+  ```
+
+  Args:
+      gh_list (str): see input example
+
+  Returns:
+      str: highest version or 0
+  """
+  highest = "0"
+  for entry in gh_list.split('\n'):
+    current = RE_GHLIST_TAG.search(entry)
+    if not current: continue
+    current = current.groups()[-1]
+    cmp = compare_versions(current, highest)
+    if cmp <= 0: continue
+    highest = current
+
+  return highest
+
+
+ADDON_NAME = 'LibFurnitureCatalogue'
+MANIFEST_PATH = f"{ADDON_NAME}/{ADDON_NAME}.txt"
+MAINLUA_PATH = f"{ADDON_NAME}/{ADDON_NAME}.lua"
+
+RE_MF_VERSION_LINE = re.compile(r"(?P<PREFIX>^##\s*Version:\s*).*$", re.MULTILINE)
+RE_MF_ADDONVERSION_LINE = re.compile(r"(?P<PREFIX>^##\s*AddOnVersion:\s*).*$", re.MULTILINE | re.IGNORECASE)
+RE_MAINLUA_VERSION_LINE = re.compile(rf'(?P<PREFIX>^local\s+MAJOR,\s*MINOR\s*=\s*"{ADDON_NAME}",\s*)(?P<VERSION>\d+).*$', re.MULTILINE)
+
+def replace_versions(new_semver: str, output_file: str=None):
+  new_intver = semver_to_int(new_semver) # throws error if invalid
+  new_semver = int_to_semver(new_intver)
+  changes = []
+
+  # Replace version in main manifest
+  mfpath = MANIFEST_PATH
+  mf_values = [
+    (RE_MF_VERSION_LINE, rf"\g<PREFIX>{new_semver}", f"## Version: {new_semver}"),
+    (RE_MF_ADDONVERSION_LINE, rf"\g<PREFIX>{new_intver}", f"## AddOnVersion: {new_intver}"),
+  ]
+  if replace_once_in_file(mf_values, mfpath): changes.append(mfpath)
+
+  # Replace version in main file. MINOR is the lib's AddOnVersion, LibStub-style
+  luapath = MAINLUA_PATH
+  lua_values = [(RE_MAINLUA_VERSION_LINE, rf"\g<PREFIX>{new_intver} -- AUTOREPLACED with AddOnVersion",
+    f'local MAJOR, MINOR = "{ADDON_NAME}", {new_intver} -- AUTOREPLACED with AddOnVersion')]
+  if replace_once_in_file(lua_values, luapath): changes.append(luapath)
+
+  if output_file:
+    with open(output_file, 'w') as f:
+      f.writelines('\n'.join(changes) + '\n')
+  else:
+    print(f"Changed {len(changes)} files:")
+    print('\n'.join(changes))
+
+
+'''
+.---------------------------------------.
+|                                       |
+|       ERROR HANDLING & MAIN           |
+|                                       |
+.---------------------------------------.
+'''
+
+EXIT_FAILURE = -1
+
+def crash_and_burn(msg: str=''):
+  """Performs some crashing and/or burning
+
+  raises SystemExit
+  """
+  print(f"🔥 ABORT ABORT ABORT: {msg} 🔥")
+  exit(EXIT_FAILURE)
+
+# Make some methods available for shell use
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  subparsers = parser.add_subparsers(dest='command')
+
+  # 1. Bump Versions
+  parser_bump = subparsers.add_parser('changeversion', help='Replace versions in predefined files')
+  parser_bump.add_argument('--new-version', help='New version')
+  parser_bump.add_argument('--output-file', help='Write list of changed files to this file')
+
+  # 2. Compare Versions
+  parser_cmp = subparsers.add_parser('compare', help='Compare two versions like 1.23.4<=>1.23.39 --> 1')
+  parser_cmp.add_argument('a', type=str, help='First Version')
+  parser_cmp.add_argument('b', type=str, help='Second version')
+
+  # 3. Convert Version
+  parser_conv = subparsers.add_parser('convert_version', help='Semver to int or other way around')
+  conv_grp = parser_conv.add_mutually_exclusive_group(required=True)
+  conv_grp.add_argument('--int', type=int, help='Int to semver like 3456780 -> 3.456.780')
+  conv_grp.add_argument('--semver', type=str, help='Semver to int like 1.23.4 -> 1023004')
+
+  # 4. Get String before delimiter
+  parser_eh = subparsers.add_parser('extract_header', help='Get the first part of a text split at given delimiter')
+  parser_eh.add_argument("--delimiter", default='[//]:', help='Delimiter the string splits at. Default=[//]')
+  eh_group = parser_eh.add_mutually_exclusive_group(required=True)
+  eh_group.add_argument('--text', help='Text containing the header')
+  eh_group.add_argument('--file', help='Textfile containing the header')
+
+  # 5. Get Binary String from file/URL
+  parser_f2bin = subparsers.add_parser('file2binary', help='Return file content as a binary string like b\'ABC\\0x00\'')
+  parser_f2bin.add_argument('filepath', help='local file or url')
+
+  # 6. Get highest version number from gh formatted list
+  parser_latest = subparsers.add_parser('getlatest', help='Get the highest version number from gh release list')
+  parser_latest.add_argument('list', nargs='?', default=sys.stdin, help='The output of gh release list')
+
+  # 7. Get next version number
+  parser_next = subparsers.add_parser('nextversion', help='Get incremented version', description='Use a flag to set version change impact. No flag means minor change: 1.23.4 -> 1.24.0')
+  parser_next.add_argument('--current', required=True, help='Current version')
+  next_grp = parser_next.add_mutually_exclusive_group(required=False)
+  next_grp.add_argument('--major', action='store_true', help='Major: 1.23.4 -> 2.0.0')
+  next_grp.add_argument('--patch', action='store_true', help='Patch: 1.23.4 -> 1.23.5')
+
+  # 8. Update Changelog
+  parser_clup = subparsers.add_parser('update_changelog', help='Update the changelog if there are notes')
+  parser_clup.add_argument('--notes-file', help='File containing notes')
+  parser_clup.add_argument('--changelog-file', help='File to add changes to', default=CL_FILE)
+  parser_clup.add_argument('--header', help='Header to add to the notes.')
+
+  # 9. Validate manifest header fields
+  parser_valm = subparsers.add_parser('validatemanifest', help='Assert manifest has Title, Version and APIVersion')
+  parser_valm.add_argument('manifest', help='Path to manifest file')
+
+  # 10. Read manifest Version field
+  parser_mver = subparsers.add_parser('manifestversion', help='Print the Version field from a manifest')
+  parser_mver.add_argument('manifest', help='Path to manifest file')
+
+  # 11. Guard: reject version skips
+  parser_inc = subparsers.add_parser('checkincrement', help='Abort if --next skips more than one step above --current')
+  parser_inc.add_argument('--current', required=True, help='Current (live) version')
+  parser_inc.add_argument('--next', dest='next', required=True, help='Proposed next version')
+
+  # 12. Guard: manifest and lua carry the same AddOnVersion
+  subparsers.add_parser('checkversions', help='Abort if manifest AddOnVersion and the lua MINOR disagree')
+
+  args = parser.parse_args()
+  # 1. Bump Versions
+  if args.command == 'changeversion':
+    replace_versions(args.new_version, args.output_file)
+  # 2. Compare Versions
+  elif args.command == 'compare':
+    print(compare_versions(args.a, args.b))
+  # 3. Convert Version
+  elif args.command == 'convert_version':
+    if args.int:
+      print(int_to_semver(args.int))
+    else:
+      print(semver_to_int(args.semver))
+  # 4. Get String before delimiter
+  elif args.command == 'extract_header':
+    if args.file:
+      print(extract_header_from_file(args.file, args.delimiter))
+    else:
+      print(extract_header(args.text, args.delimiter))
+  # 5. Get Binary String from file/URL
+  elif args.command == 'file2binary':
+    print(file_to_binary_string(args.filepath))
+  # 6. Get highest version number from gh formatted list
+  elif args.command == 'getlatest':
+    if args.list is sys.stdin:
+      release_list = args.list.read()
+    else:
+      release_list = args.list
+    print(get_highest_version_from_gh_list(release_list))
+  # 7. Get next version number
+  elif args.command == 'nextversion':
+    if args.major:
+      impact = VERSION_IMPACT_MAJOR
+    elif args.patch:
+      impact = VERSION_IMPACT_PATCH
+    else:
+      impact = VERSION_IMPACT_MINOR
+    print(get_next_version(args.current, impact))
+  # 8. Get next version number
+  elif args.command == 'update_changelog':
+    update_changelog(args.notes_file, args.header, args.changelog_file)
+  # 9. Validate manifest header fields
+  elif args.command == 'validatemanifest':
+    m = validate_manifest(args.manifest)
+    print(f"manifest OK: {m[PROP_MF_TITLE]} v{m[PROP_MF_VERSION]}")
+  # 10. Read manifest Version field
+  elif args.command == 'manifestversion':
+    print(get_manifest_version(args.manifest))
+  # 11. Guard: reject version skips
+  elif args.command == 'checkincrement':
+    assert_single_increment(args.current, args.next)
+    print(f"OK: {args.next} is a single step above {args.current}")
+  # 12. Guard: manifest and lua carry the same AddOnVersion
+  elif args.command == 'checkversions':
+    print(f"OK: manifest and lua both on AddOnVersion {check_versions()}")
+  else:
+    parser.print_help()

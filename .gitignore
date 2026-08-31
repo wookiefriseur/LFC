@@ -9,3 +9,7 @@
 
 # Binaries and some artifacts
 bin/
+__pycache__/
+.package/
+release-preview/
+*.zip

@@ -1,4 +1,4 @@
-openapi: "3.0.0"
+openapi: "3.2.0"
 info:
   title: "ESOUI AddOns API"
   version: "1.0.0"
@@ -27,7 +27,7 @@ components:
     "401":
       description: "Permission Denied. You are not the author or team member of this AddOn"
     "403":
-      description: "AddOn Disabled (An admin has disabled your AddOn)"
+      description: "AddOn Disabled: Request is missig credentials or an admin has disabled your AddOn!"
     "404":
       description: "No AddOns found. (You don't have any AddOns) or ID(s) are missing for AddOn details"
     "405":
@@ -64,7 +64,7 @@ components:
         updatefile:
           description: "AddOn Zip or Rar file."
           type: "string"
-          format: "binary"
+          contentMediaType: "application/octet-stream"
       required:
         - id
     AddOnInfo:
@@ -72,41 +72,38 @@ components:
       properties:
         id:
           type: "string"
-          example: "1617"
+          examples: ["4804"]
         title:
           type: "string"
-          example: "Furniture Catalogue"
+          examples: ["LibFurnitureCatalogue"]
         filename:
           description: "filename of zip archive"
           type: "string"
-          example: "FurnitureCatalogue-4.71.zip"
+          examples: ["LibFurnitureCatalogue-1.0.0.zip"]
         version:
           type: "string"
-          example: "4.71"
+          examples: ["1.0.0"]
         updated:
           type: "string"
-          example: "1678719846"
+          examples: ["1678719846"]
         created:
           type: "string"
-          example: "1487548838"
+          examples: ["1487548838"]
         description:
           type: "string"
-          example: "some text"
+          examples: ["some text"]
         changelog:
           type: "string"
-          example: "some more text"
+          examples: ["some more text"]
         compatibility:
-          example:
-            - "8.3.5"
-            - "8.2.5"
-            - "8.1.5"
-            - "8.0.0"
+          examples:
+            - ["12.1.0", "12.0.0", "11.3.0", "11.2.0"]
           type: "array"
           items:
             type: "string"
         update:
           type: "string"
-          example: "https://api.esoui.com/addons/update"
+          examples: ["https://api.esoui.com/addons/update"]
 
 paths:
   /update:
@@ -125,8 +122,10 @@ paths:
                       properties:
                         ERROR:
                           type: "string"
-                          example: "Please POST the following data for AddOn Updates.."
+                          examples: ["Please POST the following data for AddOn Updates.."]
                     - $ref: "#/components/schemas/UpdateBody"
+        "403":
+          $ref: "#/components/responses/403"
     post:
       summary: "Update AddOn"
       requestBody:
@@ -149,10 +148,42 @@ paths:
         "415":
           $ref: "#/components/responses/415"
 
+  /updatetest:
+    post:
+      summary: "Update AddOn, simulated"
+      description: >
+        Same as /update, but nothing is published.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UpdateBody"
+      responses:
+        "202":
+          description: >
+            Update Accepted. Body is "invalid" JSON: a compatibility list and the
+            real response concatenated, like [{...}]{...}.
+          $ref: "#/components/responses/202"
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "405":
+          $ref: "#/components/responses/405"
+        "415":
+          $ref: "#/components/responses/415"
+
   /compatible.json:
     get:
       summary: "Get compatible versions"
+      description: >
+        Lists compatible game versions.
       responses:
+        "403":
+          $ref: "#/components/responses/403"
         "200":
           description: "Successful operation"
           content:
@@ -183,6 +214,8 @@ paths:
   /details/{ADDON_ID}.json:
     get:
       summary: "Get AddOn details"
+      description: >
+        Get version and other AddOn infos.
       parameters:
         - in: path
           name: ADDON_ID
@@ -199,6 +232,8 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/AddOnInfo"
+        "403":
+          $ref: "#/components/responses/403"
         "404":
           $ref: "#/components/responses/404"
 
@@ -206,6 +241,8 @@ paths:
     get:
       summary: "Get AddOns you have access to"
       responses:
+        "403":
+          $ref: "#/components/responses/403"
         "200":
           description: "Successful operation"
           content:
@@ -221,7 +258,7 @@ paths:
                       type: "string"
                     details:
                       type: "string"
-                  example:
-                    id: "1617"
-                    title: "Furniture Catalogue"
-                    details: "https://api.esoui.com/addons/details/1617.json"
+                  examples:
+                    - id: "4804"
+                      title: "LibFurnitureCatalogue"
+                      details: "https://api.esoui.com/addons/details/4804.json"

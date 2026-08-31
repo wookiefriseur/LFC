@@ -1,0 +1,92 @@
+name: PublishToESOUI
+
+# Connected workflows are:
+# 1. PrepareRelease      - prepare_release.yml
+# 2. FinalizeRelease     - finalize_release.yml
+# 3. 📍PublishToESOUI    - publish_to_esoui.yml
+# Refer to README.md for more info.
+
+# Publishes latest GitHub release zip to ESOUI.
+# 2 modes:
+#   - automatically, called by FinalizeRelease
+#   - manually from Actions tab (for re-run)
+# If upload fails, GitHub release (with the zip attached) still exists, so you can just re-run oder download that zip and upload it manually to ESOUI
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+    inputs:
+      print_response:
+        description: 'Full ESOUI response 4 debug.'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run: post to the ESOUI test endpoint, the listing stays untouched.'
+        type: boolean
+        default: false
+  workflow_call:
+    inputs:
+      print_response:
+        type: boolean
+        default: false
+      dry_run:
+        type: boolean
+        default: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (for scripts/)
+        uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-python-env
+
+      # Always publish latest GitHub release
+      - name: Resolve latest release
+        id: tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="$(gh release list --limit 10 | python scripts/furc_utils.py getlatest)"
+          ARCHIVE_URL="$(gh release view "$TAG" --json assets --jq '.assets[0].url')"
+          test -n "$ARCHIVE_URL" || { echo "🔥 Release $TAG has no asset attached" >&2; exit 1; }
+          echo "TAG=$TAG" >> "$GITHUB_OUTPUT"
+          echo "ARCHIVE_URL=$ARCHIVE_URL" >> "$GITHUB_OUTPUT"
+
+      # Manifest must match release tag
+      - name: Check manifest matches tag
+        run: |
+          MANIFEST_VERSION="$(python scripts/furc_utils.py manifestversion LibFurnitureCatalogue/LibFurnitureCatalogue.txt)"
+          TAG="${{ steps.tag.outputs.TAG }}"
+          if [[ "$MANIFEST_VERSION" != "$TAG" ]]; then
+            echo "🔥 Manifest version ($MANIFEST_VERSION) does not match release tag ($TAG)." >&2
+            echo "🔥 The repo is probably not checked out at the release commit. Aborting." >&2
+            exit 1
+          fi
+
+      # New version must be higher than live one. We check it here so we don't spam ESOUI with missclicks
+      - name: Upload to ESOUI
+        env:
+          ESOUI_API_TOKEN: ${{ secrets.ESOUI_API_TOKEN }}
+        run: |
+          ARGS=( --changelog-max-entries 15 --archive-file "${{ steps.tag.outputs.ARCHIVE_URL }}" )
+          if [[ "${{ inputs.print_response }}" == "true" ]]; then
+            ARGS+=( --print-response )
+          fi
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            ARGS+=( --test )
+          fi
+          python scripts/publish.py "${ARGS[@]}"
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            HEADING="## 🧪 Dry run: ${{ steps.tag.outputs.TAG }} not published, listing untouched"
+          else
+            HEADING="## ✅ Uploaded ${{ steps.tag.outputs.TAG }} to ESOUI"
+          fi
+          {
+            echo "$HEADING"
+            echo ""
+            echo "Asset source: ${{ steps.tag.outputs.ARCHIVE_URL }}"
+          } >> "$GITHUB_STEP_SUMMARY"

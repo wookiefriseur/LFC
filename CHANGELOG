@@ -1,1 +1,5 @@
-TODO: Generator script
+1.0.0 (2026-08-30)
+- First standalone release, split out of the FurnitureCatalogue main AddOn
+- identical with the bundled lib in FurnitureCatalogue 7.0.0 release
+- Multi source support
+- Lots of source fixes and cleanup, weekly lux furnishings

@@ -1,0 +1,51 @@
+name: PRChecks
+
+# PR can still merge if a job fails, but the red X is visible.
+# PrepareRelease also runs this at release time. Running on PRs just catches problems earlier.
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  stylua-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: StyLua check
+        uses: ./.github/actions/run-stylua
+        with:
+          mode: check
+
+  manifest-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-python-env
+      - name: Parse manifest
+        run: python scripts/furc_utils.py validatemanifest LibFurnitureCatalogue/LibFurnitureCatalogue.txt
+      - name: Manifest and lua agree on AddOnVersion
+        run: python scripts/furc_utils.py checkversions
+
+  package-dryrun:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-python-env
+      - name: Build zip and list contents
+        run: |
+          python scripts/package.py
+          ZIP="$(ls -1 *.zip | head -1)"
+          {
+            echo "## Package contents (\`$ZIP\`)"
+            echo ""
+            echo '```'
+            unzip -l "$ZIP"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

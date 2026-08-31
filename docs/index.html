@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LibFurnitureCatalogue</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --fg: #1b1b1b;
+        --bg: #fdfdfb;
+        --muted: #5c5c5c;
+        --rule: #dcdcd6;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #e6e6e2;
+          --bg: #17181a;
+          --muted: #9a9a95;
+          --rule: #33353a;
+        }
+      }
+      body {
+        margin: 0 auto;
+        padding: 3rem 1.25rem 4rem;
+        max-width: 42rem;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.6 system-ui, sans-serif;
+      }
+      h1 { font-size: 1.6rem; margin: 0 0 0.25rem; }
+      p.sub { color: var(--muted); margin: 0 0 2rem; }
+      h2 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+      ul { padding-left: 1.2rem; }
+      a { color: inherit; }
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LibFurnitureCatalogue</h1>
+    <p class="sub">Official furniture database used by FurnitureCatalogue AddOn for The Elder Scrolls Online.</p>
+
+    <p>
+      This library carries item source data, vendors, recipes, events, crown store and a query API other
+      AddOns can call.
+    </p>
+
+    <h2>Where things are</h2>
+    <ul>
+      <li><a href="https://github.com/wookiefriseur/LFC">Source on GitHub</a></li>
+      <li><a href="https://www.esoui.com/downloads/info4804-LibFurnitureCatalogue.html">Library on ESOUI</a></li>
+      <li><a href="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html">FurnitureCatalogue on ESOUI</a></li>
+    </ul>
+
+    <h2>Coming here</h2>
+    <ul>
+      <li>API documentation for add-on authors</li>
+      <li>A contributor interface for database entries</li>
+    </ul>
+
+    <footer>Published from <code>docs/</code> on <code>main</code>.</footer>
+  </body>
+</html>
