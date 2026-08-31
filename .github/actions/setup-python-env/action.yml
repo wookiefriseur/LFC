@@ -1,0 +1,14 @@
+name: Setup Python environment
+description: Installs Python + libs from requirements.txt. Caches pip. Version pinned repo-wide.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: "3.13"
+        cache: pip
+    - name: Install Python deps
+      shell: bash
+      run: pip install -r scripts/requirements.txt

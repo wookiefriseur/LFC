@@ -20,7 +20,11 @@ local DATA_FILES = {
 -- Minimal env for data files that need a fake FurC.* table
 local function makeSandbox()
   local env = setmetatable({}, { __index = _G })
-  env.FurC = { Constants = { Versioning = setmetatable({}, { __index = function() return 0 end }) } }
+  env.FurC = { Constants = { Versioning = setmetatable({}, {
+    __index = function()
+      return 0
+    end,
+  }) } }
   return env
 end
 
@@ -49,7 +53,9 @@ end
 
 if #dupes > 0 then
   print("DATA VALIDATION FAILED:")
-  for _, m in ipairs(dupes) do print("  " .. m) end
+  for _, m in ipairs(dupes) do
+    print("  " .. m)
+  end
   os.exit(1)
 end
 print("  ok")
