@@ -1,20 +1,45 @@
-Official library containing the [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL] database. Currently bundled in FurnitureCatalogue, starting with 7.0.0
+Official library containing the FurnitureCatalogue database. Currently bundled in [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL], starting with version 7.0.0. Will be required by FurnitureCatalogue in the future.
+
+[color=red][SIZE=4]Any new database updates go in here and will be more recent than the bundled version![/SIZE][/COLOR]
+
+[COLOR=wheat][SIZE=6]AddOns that use this lib[/SIZE][/COLOR]
+
+[LIST]
+[*][URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL]
+[/LIST]
 
 
-The bundled lib will disappear after a while and then this one will be required to load FurnitureCatalogue.
+[COLOR=wheat][SIZE=6]Adds Commands[/SIZE][/COLOR]
 
+[COLOR=red]NOT IMPLEMENTED YET AND SUBJECT TO CHANGE[/COLOR]
+
+[CODE]// Show all infos for an item
+/LFC <ITEMLINK OR ID>
+
+// Show main source for an item
+/LFC source <ITEMLINK OR ID>
+
+// Show all sources for an item
+/LFC sources <ITEMLINK OR ID>
+
+// Show mats required to craft an item (empty if not craftable)
+/LFC mats <ITEM>
+
+// Find an item by name (shows max 6 results, 1 item per line)
+/LFC find <SOME NAME>[/CODE]
+
+
+[COLOR=wheat][SIZE=6]For Devs[/SIZE][/COLOR]
+
+[URL="https://github.com/wookiefriseur/LFC"]Repo on GitHub[/URL]
+
+It is currently identical with the bundled version and can already be used. Any DB updates will be done here instead of the main AddOn and as soon as this lib version gets bumped to 1.0.1, it will be preferred by the main AddOn if installed. The bundled lib will disappear within the next 2-3 FurnitureCatalogue updates and then this one will be required to load the main AddOn.
+
+[URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]GitHub issue discussing this split[/URL]
 
 Offers API endpoints for other AddOns. Instructions will follow.
 
-
-I set it to beta, because I don't want it showing up in the regular lists yet, but it is identical with the bundled version and can already be used.
-
+[highlight="lua"]-- Incredible code examples go here
+[/highlight]
 
 This description will be more useful in the future, I swear.
-
-
-Details:
-https://github.com/manavortex/FurnitureCatalogue/issues/196
-
-
-LFC repo: https://github.com/wookiefriseur/LFC
