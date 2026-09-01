@@ -146,6 +146,10 @@ this.Versioning = {
 
 this.Versioning.LATEST = this.Versioning.THIEVES
 
+---@deprecated Version smushing related compatibility workaround.
+--- Required to work with 7.0.0. Delete at next main version update.
+this.Versioning.ZERO2 = this.Versioning.THIEVES
+
 -- Location Ids, mix of ingame strings and translations, more control over translations
 this.Locations = {
   -- Translations exist ingame

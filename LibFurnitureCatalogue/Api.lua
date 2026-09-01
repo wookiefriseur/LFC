@@ -407,7 +407,7 @@ end
 ---local ver = API.GetDataVersions()
 ---
 ---ver.HOMESTEAD --> 2
----ver.LATEST    --> 40
+---ver.LATEST    --> 39
 ---
 ---for _, record in ipairs(API.GetSourceDetails(itemLink)) do
 ---  if record.availability.version == ver.LATEST then
