@@ -62,6 +62,12 @@ this.ItemSources = {
   COLL_MERCH = getNextIdFor("ITEM_SOURCES"), -- 22
   EDITOR = getNextIdFor("ITEM_SOURCES"), -- 23
   ANTIQUITY = getNextIdFor("ITEM_SOURCES"), -- 24
+  DUNGEON = getNextIdFor("ITEM_SOURCES"), -- 25
+  HARVEST = getNextIdFor("ITEM_SOURCES"), -- 26
+  CHEST = getNextIdFor("ITEM_SOURCES"), -- 27
+  QUEST = getNextIdFor("ITEM_SOURCES"), -- 28
+  PICKPOCKET = getNextIdFor("ITEM_SOURCES"), -- 29
+  CONTAINER = getNextIdFor("ITEM_SOURCES"), -- 30
 }
 
 ---@alias FurCItemSource integer # FurC.Constants.ItemSources values
