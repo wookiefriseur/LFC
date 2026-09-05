@@ -131,7 +131,4 @@ local strings = {
   SI_FURC_TRADERS_ROLIS = "Rolis Hlaalu",
 }
 
-for stringId, stringValue in pairs(strings) do
-  ZO_CreateStringId(stringId, stringValue)
-  SafeAddVersion(stringId, 1)
-end
+LibFurnitureCatalogue.Internal.RegisterStrings(strings)

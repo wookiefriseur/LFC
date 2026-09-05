@@ -130,7 +130,4 @@ local strings = {
   -- ////// END   : DON'T REMOVE THIS LINE
 }
 
-for stringId, stringValue in pairs(strings) do
-  ZO_CreateStringId(stringId, stringValue)
-  SafeAddVersion(stringId, 1)
-end
+LibFurnitureCatalogue.Internal.RegisterStrings(strings)

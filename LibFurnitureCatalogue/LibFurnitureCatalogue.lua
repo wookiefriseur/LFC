@@ -2,11 +2,25 @@
 
 local MAJOR, MINOR = "LibFurnitureCatalogue", 10000 -- TODO: generate version from bump
 
-if _G[MAJOR] and _G[MAJOR].version and _G[MAJOR].version >= MINOR then
+-- set up key maps for "id -> SI_" (used in locale files)
+local lib = _G[MAJOR] or {}
+_G[MAJOR] = lib
+lib.Internal = lib.Internal or {}
+lib.Internal.StringKeys = lib.Internal.StringKeys or {}
+lib.Internal.RegisterStrings = lib.Internal.RegisterStrings
+  or function(strings)
+    local keys = lib.Internal.StringKeys
+    for stringId, stringValue in pairs(strings) do
+      ZO_CreateStringId(stringId, stringValue)
+      SafeAddVersion(stringId, 1)
+      keys[_G[stringId]] = stringId
+    end
+  end
+
+if lib.version and lib.version >= MINOR then
   return
 end
 
-local lib = _G[MAJOR] or {}
 lib.version = MINOR
 lib.name = MAJOR
 _G[MAJOR] = lib
