@@ -208,17 +208,29 @@ function api.GetItemIds()
 end
 
 --TODO: add luadoc types for our constants for better autocomplete
----Every source of an item, one record per source, ranked best-first
+---Every source of an item, one record per source, ranked best-first (slow)
+---
+---Ids, not text. `location` is a game zone id, `vendor` and `event` are locale string
+---ids, and `note` qualifies the source as either a locale string id or a literal.
+---Resolve at render time with `GetZoneNameById` and `GetString`.
+---
+---A locale string id is assigned per session and carries no meaning outside it.
+---Compare against `SI_FURC_*`, never against a stored number.
 ---@param itemOrLink string|integer
----@return { source: { type: integer, vendor: string?, location: string?, achievement: integer?, event: string? }, cost: { currency: integer, amount: integer }?, availability: { version: integer, lastSeen: string? } }[]
+---@return { source: { type: integer, vendor: integer?, location: integer?, note: (integer|string)?, achievement: integer?, event: integer? }, cost: { currency: integer, amount: integer }?, availability: { version: integer, lastSeen: string? } }[]
 ---```lua
 ---local src = API.GetSourceTypes()
 ---
 ----- 203600 has three: vendor, writ vendor and pvp
 ---for _, record in ipairs(API.GetSourceDetails(203600)) do
 ---  record.source.type              --> 6, then 13, then 7
----  record.source.vendor            --> "Faustina Curio" on the writ vendor one
+---  GetString(record.source.vendor) --> "Faustina Curio" on the writ vendor one
 ---  record.availability.version     --> 32, see GetDataVersions
+---
+---  -- location is a zone, note is whatever qualifies the source and is not one:
+---  -- a string id for a place the game has no zone for, or a bare literal
+---  GetZoneNameById(record.source.location) --> "Wrothgar", nil on the writ vendor one
+---  GetString(record.source.note)           --> "in any capital city" on that one
 ---
 ---  -- one price per source, nil when the source has no price. A source that
 ---  -- takes two currencies is modelled as two sources, not two prices

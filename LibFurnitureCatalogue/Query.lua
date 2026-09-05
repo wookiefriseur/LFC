@@ -10,6 +10,13 @@ local colour = LFC.Internal.Constants.Colours
 local loc = LFC.Internal.Constants.Locations
 local npc = LFC.Internal.Constants.NPC
 local src = LFC.Internal.Constants.ItemSources
+local npcIds = LFC.Internal.Constants.NpcIds
+local placeIds = LFC.Internal.Constants.PlaceIds
+local zoneIds = LFC.Internal.Constants.ZoneIds
+local npcByName = LFC.Internal.Constants.NpcByName
+local zoneByName = LFC.Internal.Constants.ZoneByName
+local placeByName = LFC.Internal.Constants.PlaceByName
+local eventByName = LFC.Internal.Constants.EventByName
 
 local colourise = LFC.Internal.Format.Colourise
 local getItemId = LFC.Internal.Format.GetItemId
@@ -555,6 +562,23 @@ end
 this.GetRankedSources = getRankedSources
 
 -- Typed per-source records for API
+-- Data tables are keyed by localised name; records carry the id behind it
+
+---@param name string localised NPC name
+local function setVendor(rec, name)
+  rec.source.vendor = npcByName[name]
+end
+
+--- A location is a game zone or nothing; anything else treats the source as a note / custom text
+---@param name string localised name of a zone or a place
+local function setLocation(rec, name)
+  local zoneId = zoneByName[name]
+  if zoneId then
+    rec.source.location = zoneId
+    return
+  end
+  rec.source.note = placeByName[name]
+end
 
 local function achievementVendorRecord(rec, recipeKey, version)
   local function findIn(versionData)
@@ -582,8 +606,8 @@ local function achievementVendorRecord(rec, recipeKey, version)
   if not entry then
     return
   end
-  rec.source.vendor = vendor
-  rec.source.location = zone
+  setVendor(rec, vendor)
+  setLocation(rec, zone)
   rec.source.achievement = entry.achievement
   if entry.itemPrice then
     rec.cost = { currency = entry.currency or CURT_MONEY, amount = entry.itemPrice }
@@ -604,8 +628,8 @@ local function luxuryRecord(rec, recipeKey, version)
   if not itemData then
     return
   end
-  rec.source.vendor = npc.LUXF
-  rec.source.location = loc.COLDH
+  rec.source.vendor = npcIds.LUXF
+  rec.source.location = zoneIds.COLDH
   if itemData.itemPrice then
     rec.cost = { currency = CURT_MONEY, amount = itemData.itemPrice }
   end
@@ -638,8 +662,8 @@ local function pvpRecord(rec, recipeKey, version)
   if not item then
     return
   end
-  rec.source.vendor = vendor
-  rec.source.location = location
+  setVendor(rec, vendor)
+  setLocation(rec, location)
   rec.source.achievement = item.achievement
   if item.itemPrice then
     rec.cost = { currency = item.currency or CURT_ALLIANCE_POINTS, amount = item.itemPrice }
@@ -648,12 +672,12 @@ end
 
 local function voucherRecord(rec, recipeKey, blueprintId)
   local version = rec.availability.version
-  local vendor = npc.ROLIS
+  local vendor = npcIds.ROLIS
   local entry = voucherEntry(FurC.Rolis[version], recipeKey, blueprintId)
   if not entry then
     entry = voucherEntry(FurC.Faustina[version], recipeKey, blueprintId)
       or voucherEntry(FurC.FaustinaRecipes[version], recipeKey, blueprintId)
-    vendor = npc.FAUSTINA
+    vendor = npcIds.FAUSTINA
   end
   if not entry then
     if FurC.FurnishingFolios then
@@ -661,8 +685,8 @@ local function voucherRecord(rec, recipeKey, blueprintId)
         if folioData.contents then
           for _, contentId in ipairs(folioData.contents) do
             if contentId == recipeKey or contentId == blueprintId then
-              rec.source.vendor = npc.FAUSTINA
-              rec.source.location = loc.ANY_CAPITAL
+              rec.source.vendor = npcIds.FAUSTINA
+              rec.source.note = placeIds.ANY_CAPITAL
               rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = folioData.price }
               return
             end
@@ -673,7 +697,7 @@ local function voucherRecord(rec, recipeKey, blueprintId)
     return
   end
   rec.source.vendor = vendor
-  rec.source.location = loc.ANY_CAPITAL
+  rec.source.note = placeIds.ANY_CAPITAL
   local price = type(entry) == "table" and entry.itemPrice or entry
   if type(price) == "number" then
     rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = price }
@@ -688,8 +712,12 @@ local function eventRecord(rec, recipeKey)
         local hasSrcName = type(items) == "table"
         local item = (hasSrcName and items[recipeKey]) or (srcName == recipeKey and items) or nil
         if nil ~= item then
-          rec.source.vendor = hasSrcName and srcName or nil
-          rec.source.event = eventName
+          if hasSrcName then
+            -- a source that is not an NPC is a container item link
+            rec.source.vendor = npcByName[srcName]
+            rec.source.note = rec.source.vendor == nil and srcName or nil
+          end
+          rec.source.event = eventByName[eventName]
           if type(item) == "table" and item.itemPrice then
             rec.source.achievement = item.achievement
             rec.cost = {
