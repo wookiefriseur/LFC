@@ -8,6 +8,7 @@ LFC.Internal.Build = this
 local db = LFC.Internal.DB
 local src = LFC.Internal.Constants.ItemSources
 local SOURCE_PRIORITY = LFC.Internal.Constants.SOURCE_PRIORITY
+local compat = LFC.Internal.Compat
 local apiEvents = LFC.Internal.Constants.ApiEvents
 local lifecycle = LFC.Internal.Lifecycle
 local state = lifecycle.State
@@ -111,6 +112,13 @@ local function addDatabaseEntry(recipeKey, partial)
       end
     end
   end
+  local injected = stored.compatSources or {}
+  stored.compatSources = injected
+  if partial.origin ~= nil then
+    injected[partial.origin] = nil
+  end
+  compat.CloseOverAncestors(sources, injected)
+
   if next(sources) ~= nil then
     stored.origin = primarySource(sources)
   end
@@ -268,6 +276,8 @@ for _, splitData in ipairs(splitFiles) do
     end
   end
 end
+
+compat.MirrorAncestorBuckets(FurC.MiscItemSources, legacyMirror)
 
 ---@param blocking? boolean scan inline instead of yielding through LibAsync
 local function scanFromFiles(blocking)

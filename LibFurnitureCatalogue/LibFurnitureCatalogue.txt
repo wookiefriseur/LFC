@@ -12,6 +12,7 @@ locale\en.lua
 locale\$(language).lua
 
 Constants.lua
+Compat.lua
 Format.lua
 
 data\Rumours.lua
