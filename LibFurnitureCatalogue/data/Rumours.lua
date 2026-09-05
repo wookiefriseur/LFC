@@ -118,7 +118,6 @@ FurC.Rumours[ver.ZERO] = {
   [223849] = rumourSource, -- Hearts Week Decor, Floral Dangle
   [223850] = rumourSource, -- Hearts Week Decor, Long Floral Dangle
   [223851] = rumourSource, -- Hearts Week Wreath, Floral
-  [223892] = rumourSource, -- Kelp Tree, Giant
   [223841] = rumourSource, -- Hearts Week Banner, Standing
   [223842] = rumourSource, -- Hearts Week Banner, Hanging
   [223843] = rumourSource, -- Hearts Week Banner, Small Standing
