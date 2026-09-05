@@ -540,9 +540,10 @@ local function getRankedSources(recipeKey, recipeArray, stripColor, opts)
     return {}
   end
 
+  local compatSources = recipeArray.compatSources
   local ranked = {}
   for s in pairs(sources) do
-    if s ~= src.CRAFTING then
+    if s ~= src.CRAFTING and not (compatSources and compatSources[s]) then
       ranked[#ranked + 1] = s
     end
   end
@@ -845,9 +846,12 @@ local function getSourceRecords(itemOrLink)
   end
   local recipeKey = getItemId(itemOrLink)
 
+  local compatSources = recipeArray.compatSources
   local ranked = {}
   for s in pairs(sources) do
-    ranked[#ranked + 1] = s
+    if not (compatSources and compatSources[s]) then
+      ranked[#ranked + 1] = s
+    end
   end
   table.sort(ranked, function(a, b)
     return (SOURCE_PRIORITY[a] or math.huge) < (SOURCE_PRIORITY[b] or math.huge)

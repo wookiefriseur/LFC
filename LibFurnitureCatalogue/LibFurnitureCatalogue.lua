@@ -30,7 +30,8 @@ lib.Internal = lib.Internal or {} -- internal use only
 
 ---Single furniture entry returned by FurC.Find
 ---@class FurCEntry
----@field sources table<FurCItemSource, boolean> every source this item has
+---@field sources table<FurCItemSource, boolean> every source this item has, plus the ones a refined source was carved from
+---@field compatSources table<FurCItemSource, boolean>|nil which members of `sources` exist only for deprecated calls
 ---@field origin FurCItemSource top-ranked source
 ---@field version integer game version when the item was added
 ---@field blueprint integer|nil blueprint itemId, when craftable

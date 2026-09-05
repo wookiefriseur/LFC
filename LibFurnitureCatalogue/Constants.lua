@@ -107,6 +107,13 @@ do
     [src.COLL_MERCH] = 32,
     [src.BAZAAR] = 61,
     -- drop / harvest / steal
+    -- fine-grained sources rank higher than their parent
+    [src.DUNGEON] = 33,
+    [src.HARVEST] = 34,
+    [src.CHEST] = 35,
+    [src.QUEST] = 36,
+    [src.PICKPOCKET] = 37,
+    [src.CONTAINER] = 38,
     [src.DROP] = 40,
     [src.JUSTICE] = 41,
     [src.FISHING] = 42,
