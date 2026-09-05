@@ -35,6 +35,9 @@ find "$ROOT" -name '*.lua' -not -path '*/.git/*' -print0 \
   | xargs -0 -n1 "$LUAC" -p
 echo "  ok"
 
+echo "== constants validation =="
+"$LUA" "$HERE/validate_constants.lua" "$ROOT/LibFurnitureCatalogue"
+
 echo "== data validation =="
 "$LUA" "$HERE/validate_data.lua" "$ROOT"
 
