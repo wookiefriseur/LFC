@@ -80,6 +80,10 @@ local function getIngredients(itemLink, recipeArray)
   if not recipeArray or next(recipeArray) == nil then
     return ingredients
   end
+  -- for non valid blueprints "ingredients" just returns "1x Fish". We have to catch it before it passes the fish.
+  if not (recipeArray.blueprint or (recipeArray.recipeListIndex and recipeArray.recipeIndex)) then
+    return ingredients
+  end
   if recipeArray.blueprint then
     local blueprintLink = getItemLink(recipeArray.blueprint)
     local numIngredients = GetItemLinkRecipeNumIngredients(blueprintLink)

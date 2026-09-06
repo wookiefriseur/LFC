@@ -1,4 +1,5 @@
 -- Formatting and string/link utilities
+-- TODO: mv most parts to FC, leave basic formatter, lib doesn't need a pretty one
 
 FurC = FurC or {}
 local LFC = LibFurnitureCatalogue

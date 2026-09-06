@@ -177,10 +177,16 @@ this.Versioning = {
   THIEVES = getNextIdFor("VERSIONING"), -- 39 Season One (U50)
 }
 
+-- value -> name, taken before the aliases below start sharing values
+this.VersionNames = {}
+for name, value in pairs(this.Versioning) do
+  this.VersionNames[value] = name
+end
+
 this.Versioning.LATEST = this.Versioning.THIEVES
 
----@deprecated Version smushing related compatibility workaround.
---- Required to work with 7.0.0. Delete at next main version update.
+---@deprecated Version smushing related compatibility workaround. Currently required by FC 7.0.0
+--- Delete at next main version update.
 this.Versioning.ZERO2 = this.Versioning.THIEVES
 
 -- Game zones, translated by the game

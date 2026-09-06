@@ -423,6 +423,13 @@ SI_MONSTERSOCIALCLASS47 = 1066
 -- ////// END   : Manual entries and overrides
 
 -- ////// START : GENERATED FROM LibFurnitureCatalogue/locale/en.lua
+SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id"
+SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment."
+SI_FURC_CHAT_MATS = "Mats:"
+SI_FURC_CHAT_NO_MATS = "Not craftable."
+SI_FURC_CHAT_NO_SOURCE = "No known source."
+SI_FURC_CHAT_UNKNOWN = "<<1>> is not in the database"
+SI_FURC_CHAT_USAGE = "Commands:"
 SI_FURC_DATAMINED_UNCLEAR = "This item has been seen in-game, but it's not yet known where you can get it."
 SI_FURC_DB = "The Dark Brotherhood supplies vendor hands these out "
 SI_FURC_DB_EQUIP = "with equipment"

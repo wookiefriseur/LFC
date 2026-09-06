@@ -1,4 +1,4 @@
-Official library containing the FurnitureCatalogue database. Currently bundled in [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL], starting with version 7.0.0. Will be required by FurnitureCatalogue in the future.
+Official library containing the FurnitureCatalogue database. LFC version 1.0.0 is bundled in [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL], starting with version 7.0.0. This standalone version will be required by FurnitureCatalogue in the near future.
 
 [color=red][SIZE=4]Any new database updates go in here and will be more recent than the bundled version![/SIZE][/COLOR]
 
@@ -11,29 +11,27 @@ Official library containing the FurnitureCatalogue database. Currently bundled i
 
 [COLOR=wheat][SIZE=6]Adds Commands[/SIZE][/COLOR]
 
-[COLOR=red]NOT IMPLEMENTED YET AND SUBJECT TO CHANGE[/COLOR]
+[CODE]// Everything about an item: its sources, and its mats when craftable
+/lfc <ITEMLINK OR ID>
 
-[CODE]// Show all infos for an item
-/LFC <ITEMLINK OR ID>
+// The stored record, with the enums named
+/lfc raw <ITEMLINK OR ID>
 
-// Show main source for an item
-/LFC source <ITEMLINK OR ID>
+// Database status: library version, state, revision, item count
+/lfc db[/CODE]
 
-// Show all sources for an item
-/LFC sources <ITEMLINK OR ID>
+Both item commands take an item link or a plain item id, so [B]/lfc 203600[/B] and [B]/lfc |H1:item:203600:...|h|h[/B] answer the same.
 
-// Show mats required to craft an item (empty if not craftable)
-/LFC mats <ITEM>
-
-// Find an item by name (shows max 6 results, 1 item per line)
-/LFC find <SOME NAME>[/CODE]
+[CODE][2] type=ROLIS vendor=SI_FURC_TRADERS_FAUSTINA note=SI_FURC_LOC_ANY_CAPITAL cost=1100/4[/CODE]
 
 
-[COLOR=wheat][SIZE=6]For Devs[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=6]For Devs and Contributors[/SIZE][/COLOR]
+
+[URL="https://wookiefriseur.github.io/LFC/"]GH Pages[/URL]
 
 [URL="https://github.com/wookiefriseur/LFC"]Repo on GitHub[/URL]
 
-It is currently identical with the bundled version and can already be used. Any DB updates will be done here instead of the main AddOn and as soon as this lib version gets bumped to 1.0.1, it will be preferred by the main AddOn if installed. The bundled lib will disappear within the next 2-3 FurnitureCatalogue updates and then this one will be required to load the main AddOn.
+Any DB updates will be done here instead of the main AddOn. As soon as this lib version gets bumped to 1.0.1+, it will be preferred by the main AddOn if installed. The bundled lib will disappear with the next major FurnitureCatalogue update and then this one will be required to load the main AddOn.
 
 [URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]GitHub issue discussing this split[/URL]
 
