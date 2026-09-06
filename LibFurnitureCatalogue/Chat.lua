@@ -196,7 +196,7 @@ end
 
 -- /lfc raw <item>
 function COMMANDS.raw(rest)
-    local itemId, entry = resolve(rest)
+  local itemId, entry = resolve(rest)
   if not itemId or not entry then
     return
   end

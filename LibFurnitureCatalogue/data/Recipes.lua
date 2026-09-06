@@ -1369,7 +1369,6 @@ FurC.Recipes[ver.MARKAT] = {
   171483, -- Diagram: Dwarven Lamp, Conal Frustum Cage
   171482, -- Diagram: Dwarven Lamp, Cylinder Cage
   171481, -- Diagram: Dwarven Potted Plant, Polished Vase
-  141901, -- Pattern: Psijic Banner, Long
   119408, -- Pattern: Simple Blue Banner
 }
 
@@ -2491,6 +2490,7 @@ FurC.Recipes[ver.ALTMER] = {
   139580, -- Sketch: Scrimshaw Jewelry Box, Floral
   139549, -- Blueprint: Alinor Chair, Polished
   139496, -- Pattern: Psijic Banner, Large
+  141901, -- Pattern: Psijic Banner, Long
   139576, -- Sketch: Scrimshaw, Sea Monster
   139502, -- Praxis: Alinor Column, Slender Timeworn
   139568, -- Blueprint: Alinor Jewelry Box, Polished

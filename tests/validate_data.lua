@@ -1,61 +1,89 @@
 -- Static data validator for LibFurnitureCatalogue:
---   * no duplicate item IDs
---   * each entry matches expected schema
--- Skeleton: fill DATA_FILES + SCHEMA once the data files are extracted here
+--   * every vocabulary symbol is defined in Constants
 -- Called by run_static.sh
+--
+-- TODO: no duplicate item IDs, each entry matches expected schema.
+--       Needs the data files to actually load, which needs the locale files + Format.lua
+--       Do it once the rows carry records instead of strings
 
--- TODO: recipeResult == recipe? just ignore?
---       pain in the ass to statically check, would have to be tracked
---       (unless we need reverse lookup getRecipeFor function if getRecipeResult is too slow)
--- TODO: unsure yet if it should only generated DB
---       or human-readable too (depends on file extension)
+local here = ((arg and arg[0]) or ""):match("^(.*[/\\])") or ""
+local makeSandbox = dofile(here .. "eso_sandbox.lua")
 
 local root = (arg and arg[1]) or "../LibFurnitureCatalogue"
 
--- Data files to validate, relative to root
-local DATA_FILES = {
-  -- "data/Vendor.lua", ...
-}
-
--- Minimal env for data files that need a fake FurC.* table
-local function makeSandbox()
-  local env = setmetatable({}, { __index = _G })
-  env.FurC = { Constants = { Versioning = setmetatable({}, {
-    __index = function()
-      return 0
-    end,
-  }) } }
-  return env
+local failures = {}
+local function fail(message)
+  failures[#failures + 1] = message
 end
 
-local seen, dupes = {}, {}
-local function recordId(id, where)
-  if seen[id] then
-    dupes[#dupes + 1] = string.format("duplicate id %s (in %s and %s)", tostring(id), seen[id], where)
+local function readFile(path)
+  local handle = io.open(path, "r")
+  if not handle then
+    return nil
+  end
+  local text = handle:read("*a")
+  handle:close()
+  return text
+end
+
+local constantsPath = root .. "/Constants.lua"
+local chunk, err = loadfile(constantsPath)
+assert(chunk, "cannot load " .. constantsPath .. ": " .. tostring(err))
+local env = makeSandbox()
+setfenv(chunk, env)
+chunk()
+local constants = env.LibFurnitureCatalogue.Internal.Constants
+assert(type(constants) == "table", "Constants.lua defined no constants table")
+
+-- The manifest is the authority on which data files ship
+local manifestPath = root .. "/LibFurnitureCatalogue.txt"
+local manifest = readFile(manifestPath)
+assert(manifest, "cannot read " .. manifestPath)
+
+local dataFiles = {}
+for line in manifest:gmatch("[^\r\n]+") do
+  local rel = line:match("^%s*(data[\\/][%w_]+%.lua)%s*$")
+  if rel then
+    dataFiles[#dataFiles + 1] = rel:gsub("\\", "/")
+  end
+end
+assert(#dataFiles > 0, "no data files listed in " .. manifestPath)
+
+for _, rel in ipairs(dataFiles) do
+  local text = readFile(root .. "/" .. rel)
+  if not text then
+    fail(rel .. " is in the manifest but not on disk")
   else
-    seen[id] = where
+    -- local <alias> = LFC.Internal.Constants.<Vocabulary>
+    local aliases = {}
+    for alias, vocabulary in text:gmatch("local%s+([%a_][%w_]*)%s*=%s*[%w_%.]-Constants%.([%a_][%w_]*)") do
+      if type(constants[vocabulary]) == "table" then
+        aliases[alias] = vocabulary
+      else
+        fail(string.format("%s: Constants.%s does not exist", rel, vocabulary))
+      end
+    end
+
+    for alias, vocabulary in pairs(aliases) do
+      local seen = {}
+      for key in text:gmatch(alias .. "%.([%a_][%w_]*)") do
+        if not seen[key] then
+          seen[key] = true
+          if constants[vocabulary][key] == nil then
+            fail(string.format("%s: %s.%s is not defined in Constants.%s", rel, alias, key, vocabulary))
+          end
+        end
+      end
+    end
   end
 end
 
-if #DATA_FILES == 0 then
-  print("  ok: no data files yet")
-  os.exit(0)
-end
-
-for _, rel in ipairs(DATA_FILES) do
-  local path = root .. "/" .. rel
-  local chunk, err = loadfile(path)
-  assert(chunk, "cannot load " .. path .. ": " .. tostring(err))
-  setfenv(chunk, makeSandbox())
-  chunk()
-  -- TODO: check tables, recordId(id, rel), assert schema per entry
-end
-
-if #dupes > 0 then
+if #failures > 0 then
   print("DATA VALIDATION FAILED:")
-  for _, m in ipairs(dupes) do
-    print("  " .. m)
+  table.sort(failures)
+  for _, message in ipairs(failures) do
+    print("  " .. message)
   end
   os.exit(1)
 end
-print("  ok")
+print(string.format("  ok: %d data files", #dataFiles))

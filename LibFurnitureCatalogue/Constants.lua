@@ -14,6 +14,20 @@ local getCrateStr = GetCrownCrateName
 local getSkillLineStr = GetSkillLineNameById
 local sFormat = zo_strformat
 
+local function getStr(id)
+  return GetString(id)
+end
+
+--- One resolver per type: stable id -> localised text
+this.Resolvers = {
+  Zone = getZoneStr,
+  Place = getStr,
+  Npc = getStr,
+  Event = getStr,
+  Crate = getCrateStr,
+  SkillLine = getSkillLineStr,
+}
+
 local idCounter = {}
 
 ---Generate consecutive ids for constants
@@ -38,10 +52,6 @@ local function deriveNames(ids, resolve, names, byName)
       byName[name] = id
     end
   end
-end
-
-local function getStr(id)
-  return GetString(id)
 end
 
 -- Public event names, used in Api.lua as LFC.API.Events

@@ -27,6 +27,13 @@ local strGeneric = LFC.Internal.Format.FmtGeneric
 local stripText = LFC.Internal.Format.stripTxt
 local strSrc = LFC.Internal.Format.FmtSources
 local strPartOf = LFC.Internal.Format.FormatPartOf
+local strRank = LFC.Internal.Format.FmtRank
+
+local resolvers = LFC.Internal.Constants.Resolvers
+local resolveNpc = resolvers.Npc
+local resolvePlace = resolvers.Place
+local resolveSkillLine = resolvers.SkillLine
+local resolveZone = resolvers.Zone
 
 local db = LFC.Internal.DB
 local ensureDB = LFC.Internal.Build.EnsureDB
@@ -149,8 +156,10 @@ local function voucherEntry(versionData, recipeKey, blueprintId)
 end
 
 local function strVoucher(vendor, entry)
-  local price = type(entry) == "table" and entry.itemPrice or entry
-  local info = type(entry) == "table" and entry.info or nil
+  local isRecord = type(entry) == "table"
+  local price = (isRecord and entry.itemPrice) or entry
+  -- `info` is an achievement id, `partOf` is a folio the recipe comes in
+  local info = isRecord and (entry.info or (entry.partOf and strPartOf(entry.partOf))) or nil
   return strFurnisher(vendor, loc.ANY_CAPITAL, price, CURT_WRIT_VOUCHERS, info)
 end
 
@@ -438,6 +447,50 @@ local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
 end
 this.GetMiscItemSource = getMiscItemSource
 
+local strSrcQuest = GetString(SI_FURC_SRC_QUEST)
+local strSrcQuestDaily = GetString(SI_FURC_SRC_QUEST_DAILY)
+
+---Render a FurC.RecipeSources row. The row carries ids, see data/RecipeSources.lua
+---@param row table
+---@return string
+local function renderRecipeSource(row)
+  if row.quest then
+    local zoneNames = {}
+    for i, zoneId in ipairs(row.locations or {}) do
+      zoneNames[i] = resolveZone(zoneId)
+    end
+    return strGeneric(row.daily and strSrcQuestDaily or strSrcQuest, nil, nil, unpack(zoneNames))
+  end
+
+  -- one suffix slot, so the most specific qualifier wins
+  local info = row.achievement or (row.partOf and strPartOf(row.partOf))
+  if row.skillLine then
+    info = strRank(resolveSkillLine(row.skillLine), row.skillRank)
+  end
+  if not info and row.note then
+    info = (type(row.note) == "string" and row.note) or resolvePlace(row.note)
+  end
+
+  local location = (row.location and resolveZone(row.location)) or (row.place and resolvePlace(row.place))
+  return strFurnisher(resolveNpc(row.vendor), location, row.itemPrice, row.currency, info)
+end
+
+---Row backing an item: keyed on the recipe, so the item answers through its blueprint
+---@param recipeKey integer
+---@param recipeArray? FurCEntry
+---@return table? row
+local function recipeRow(recipeKey, recipeArray)
+  if nil == FurC.RecipeSources then
+    return nil
+  end
+  local row = FurC.RecipeSources[recipeKey]
+  if nil ~= row then
+    return row
+  end
+  recipeArray = recipeArray or find(recipeKey)
+  return FurC.RecipeSources[recipeArray.blueprint or recipeKey]
+end
+
 local function getRecipeSource(recipeKey, recipeArray)
   if nil == recipeKey and nil == recipeArray then
     return
@@ -445,16 +498,24 @@ local function getRecipeSource(recipeKey, recipeArray)
   if nil == FurC.RecipeSources then
     return
   end
-  if nil ~= FurC.RecipeSources[recipeKey] then
-    return FurC.RecipeSources[recipeKey]
+  local row = FurC.RecipeSources[recipeKey]
+  if nil ~= row then
+    return renderRecipeSource(row)
   end
 
   recipeArray = recipeArray or find(recipeKey)
 
   recipeKey = recipeArray.blueprint or recipeKey
 
-  return (recipeArray.origin == src.RUMOUR and this.GetRumourSource(recipeKey, recipeArray))
-    or FurC.RecipeSources[recipeKey]
+  if recipeArray.origin == src.RUMOUR then
+    local rumourSource = this.GetRumourSource(recipeKey, recipeArray)
+    if rumourSource then
+      return rumourSource
+    end
+  end
+
+  row = FurC.RecipeSources[recipeKey]
+  return row and renderRecipeSource(row)
 end
 this.GetRecipeSource = getRecipeSource
 
@@ -481,6 +542,13 @@ this.GetCraftingSkillType = getCraftingSkillType
 
 -- Description string for each source
 local function describeSource(recipeKey, recipeArray, source, stripColor, opts)
+  -- a recipe row that names its own source answers for just that source
+  local row = recipeRow(recipeKey, recipeArray)
+  if row and row.source == source then
+    local rowSource = renderRecipeSource(row)
+    return (stripColor and stripText(rowSource)) or rowSource
+  end
+
   if source == src.CRAFTING or source == src.WRIT_VENDOR then
     -- where blueprint is bought, if we know (otherwise just material list)
     local recipeSource = this.GetRecipeSource(recipeKey, recipeArray)
@@ -839,6 +907,25 @@ local RECORD_BUILDERS = {
   end,
 }
 
+---Fills record from a recipe row
+---@param rec table
+---@param row table
+local function recipeSourceRecord(rec, row)
+  if row.quest then
+    -- different attributes:
+    -- { quest = true, daily = <boolean>, locations = { <ZoneIds>, ... } }
+    return
+  end
+  local source = rec.source
+  source.vendor = row.vendor
+  source.location = row.location
+  source.note = row.note or row.place
+  source.achievement = row.achievement
+  if row.itemPrice then
+    rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }
+  end
+end
+
 ---Schema-shaped source records, ranked by priority
 ---@param itemOrLink string|integer
 ---@return { source: table, cost: table[], availability: table }[]
@@ -864,9 +951,15 @@ local function getSourceRecords(itemOrLink)
   local records = {}
   for i, s in ipairs(ranked) do
     local rec = { source = { type = s }, availability = { version = recipeArray.version } }
-    local build = RECORD_BUILDERS[s]
-    if build then
-      build(rec, recipeKey, recipeArray)
+    -- same rule the source line follows: a row that names this source answers for it
+    local row = recipeRow(recipeKey, recipeArray)
+    if row and row.source == s then
+      recipeSourceRecord(rec, row)
+    else
+      local build = RECORD_BUILDERS[s]
+      if build then
+        build(rec, recipeKey, recipeArray)
+      end
     end
     records[i] = rec
   end

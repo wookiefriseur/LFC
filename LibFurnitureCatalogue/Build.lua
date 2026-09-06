@@ -344,6 +344,21 @@ local function scanFromFiles(blocking)
     end
   end
 
+  -- Rows that name their own source
+  -- (writ vendor rows do not, because FurC.Rolis/FurC.Faustina already carry them)
+  local function scanRecipeSources()
+    for recipeId, row in pairs(FurC.RecipeSources) do
+      if type(row) == "table" and nil ~= row.source then
+        local itemId, blueprintId = resolveRecipe(recipeId)
+        if nil == itemId then
+          logDebug("scanRecipeSources: %s is not a resolvable furniture recipe", recipeId)
+        else
+          addDatabaseEntry(itemId, { origin = row.source, version = row.version, blueprint = blueprintId })
+        end
+      end
+    end
+  end
+
   local function scanRolis()
     -- Both tables mix furnishings with Master Writ recipes
     -- We resolve first, otherwise we get item+blueprint (duplicate)
@@ -536,6 +551,7 @@ local function scanFromFiles(blocking)
 
   local steps = {
     scanRecipeFile,
+    scanRecipeSources,
     scanMiscItemFile,
     scanCrownStore,
     scanAntiquities,

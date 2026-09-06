@@ -39,6 +39,6 @@ echo "== constants validation =="
 "$LUA" "$HERE/validate_constants.lua" "$ROOT/LibFurnitureCatalogue"
 
 echo "== data validation =="
-"$LUA" "$HERE/validate_data.lua" "$ROOT"
+"$LUA" "$HERE/validate_data.lua" "$ROOT/LibFurnitureCatalogue"
 
 echo "ALL STATIC CHECKS PASSED"
