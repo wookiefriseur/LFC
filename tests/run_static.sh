@@ -41,4 +41,7 @@ echo "== constants validation =="
 echo "== data validation =="
 "$LUA" "$HERE/validate_data.lua" "$ROOT/LibFurnitureCatalogue"
 
+echo "== public API surface =="
+"$LUA" "$HERE/validate_api_surface.lua" "$ROOT/LibFurnitureCatalogue"
+
 echo "ALL STATIC CHECKS PASSED"

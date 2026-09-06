@@ -66,6 +66,35 @@ for nameTable, idTables in pairs(VOCABULARIES) do
   end
 end
 
+-- Every source type has a stable English name
+-- Without this, adding a source silently degrades to the raw key
+do
+  local sources = constants.ItemSources
+  local labels = constants.SourceLabels
+  if type(sources) ~= "table" or type(labels) ~= "table" then
+    fail("ItemSources or SourceLabels is missing")
+  else
+    local known = {}
+    for key, value in pairs(sources) do
+      known[value] = key
+      local label = labels[value]
+      if type(label) ~= "string" or label == "" then
+        fail(string.format("ItemSources.%s has no entry in SourceLabels", key))
+      end
+    end
+    for value in pairs(labels) do
+      if not known[value] then
+        fail(string.format("SourceLabels[%s] names no ItemSources value", tostring(value)))
+      end
+    end
+    for value in pairs(constants.NotASource or {}) do
+      if not known[value] then
+        fail(string.format("NotASource[%s] names no ItemSources value", tostring(value)))
+      end
+    end
+  end
+end
+
 if #failures > 0 then
   print("CONSTANTS VALIDATION FAILED:")
   table.sort(failures)
