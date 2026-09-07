@@ -102,7 +102,6 @@ FurC.Rumours[ver.THIEVES] = {
   [225407] = rumourSource, -- Colovian Throne, Noble
   [224876] = rumourSource, -- Music Box, A Wish for Fish
   [225184] = rumourSource, -- Pipe, Stately
-  [223844] = rumourSource, -- Hearts Week Decor, Red Bow
 }
 
 -- Season Zero
