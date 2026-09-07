@@ -12,7 +12,6 @@ local dataminedUnclear = GetString(SI_FURC_DATAMINED_UNCLEAR)
 -- Return of the Thieves Guild
 FurC.Rumours[ver.THIEVES] = {
   [225408] = rumourSource, -- Tapestry, Sanguine
-  [217601] = rumourSource, -- Molag Bal Plaque
   [225410] = rumourSource, -- Vines, Rose Ivy Curtain
   [225411] = rumourSource, -- Vines, Rose Ivy Swath
   [225028] = rumourSource, -- Witches Fest, Plunder Skull Basket
@@ -26,7 +25,6 @@ FurC.Rumours[ver.THIEVES] = {
   [224860] = rumourSource, -- Imperial Brazier, Cold-Flame
   [224859] = rumourSource, -- Necrom Brazier, Cold-Flame
   [226760] = rumourSource, -- Pirate Flag, Sea Elf
-  [217650] = rumourSource, -- Argonian Houseboat
   [226941] = rumourSource, -- School of fish Green
   [226784] = rumourSource, -- Driftwood Log
   [226776] = rumourSource, -- Sage Voernet's Tome, Replica
