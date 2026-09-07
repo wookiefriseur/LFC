@@ -188,13 +188,10 @@ local function publish(eventName, ...)
   end
 end
 
-local function publishLifecycleSuccess(publishedBefore, revision)
+local function publishLifecycleSuccess(revision)
   local publishReady = LFC.Internal.PublishReady
   if publishReady then
     publishReady(revision)
-  end
-  if publishedBefore then
-    publish(apiEvents.CHANGE, revision)
   end
 end
 
@@ -218,14 +215,14 @@ local function parseFurnitureItem(itemLink, override) -- saves to DB, returns re
   local recipeKey = GetItemLinkItemId(itemLink)
   local recipeArray = db[recipeKey]
   if nil ~= recipeArray then
-    return recipeArray
+    return recipeArray, recipeKey
   end
 
   recipeArray = {}
 
   addDatabaseEntry(recipeKey, recipeArray)
 
-  return recipeArray
+  return recipeArray, recipeKey
 end
 this.ParseFurnitureItem = parseFurnitureItem
 
@@ -244,7 +241,7 @@ local function parseBlueprint(blueprintLink) -- saves to DB, returns recipeArray
   local stored = db[recipeKey]
   if stored ~= nil and stored.origin ~= nil and stored.craftingSkill ~= nil and stored.blueprint ~= nil then
     -- Already carries everything a blueprint contributes (otherwise we would just wastefully rewrite the data)
-    return stored
+    return stored, recipeKey
   end
 
   local recipeArray = stored or {}
@@ -253,7 +250,7 @@ local function parseBlueprint(blueprintLink) -- saves to DB, returns recipeArray
   recipeArray.blueprint = recipeArray.blueprint or blueprintId
 
   addDatabaseEntry(recipeKey, recipeArray)
-  return recipeArray
+  return recipeArray, recipeKey
 end
 this.ParseBlueprint = parseBlueprint
 
@@ -307,7 +304,6 @@ compat.MirrorAncestorBuckets(FurC.MiscItemSources, legacyMirror)
 local function scanFromFiles(blocking)
   lifecycle.task = lifecycle.task or (LibAsync and LibAsync:Create("LibFurnitureCatalogue_ScanDataFiles"))
   local task = lifecycle.task
-  local publishedBefore = lifecycle.everReady
 
   -- Expects [zone][vendor][itemId]
   local function parseZoneData(zoneName, zoneData, versionNumber, origin)
@@ -554,11 +550,10 @@ local function scanFromFiles(blocking)
   local function finish()
     flushDatabaseChange()
     setState(state.READY)
-    lifecycle.everReady = true
     logDebug("DB build finished: %d entries in %d ms", NonContiguousCount(db), GetGameTimeMilliseconds() - buildStarted)
     notify(function()
       local revision = LFC.Internal.DBRevision
-      publishLifecycleSuccess(publishedBefore, revision)
+      publishLifecycleSuccess(revision)
       publish(apiEvents.SCAN_COMPLETE, revision)
     end)
   end

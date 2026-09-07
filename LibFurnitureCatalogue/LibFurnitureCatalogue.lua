@@ -28,16 +28,20 @@ _G[MAJOR] = lib
 lib.API = lib.API or {} -- public API for DB queries and stuff
 lib.Internal = lib.Internal or {} -- internal use only
 
----Single furniture entry returned by FurC.Find
+---Single furniture entry, returned by GetEntry and Query.Find
+---
+---"NOT PROMISED" = delivered but not warranted
 ---@class FurCEntry
----@field sources table<FurCItemSource, boolean> every source this item has, plus the ones a refined source was carved from
----@field compatSources table<FurCItemSource, boolean>|nil which members of `sources` exist only for deprecated calls
+---@field sources table<FurCItemSource, boolean> every source this item has, plus the ones a fine-grained source was carved from
 ---@field origin FurCItemSource top-ranked source
 ---@field version integer game version when the item was added
 ---@field blueprint integer|nil blueprint itemId, when craftable
----@field craftingSkill integer|nil crafting skill type, when known
----@field furnCategory integer cached ESO furniture category id (0 = no category)
----@field furnSubcategory integer cached ESO furniture subcategory id
+---@field craftingSkill integer|nil NOT PROMISED. Game crafting skill type, when known
+---@field furnCategory integer NOT PROMISED. Furniture category id (0 = no category)
+---@field furnSubcategory integer NOT PROMISED. Furniture subcategory id
+---@field recipeListIndex integer|nil NOT PROMISED. Set only on rows the recipe scan found, pairs with recipeIndex
+---@field recipeIndex integer|nil NOT PROMISED. Set only on rows the recipe scan found, pairs with recipeListIndex
+---@field compatSources table<FurCItemSource, boolean>|nil NOT PROMISED, deprecated. Which members of `sources` exist only for deprecated calls
 
 -- Runtime furniture database, built per session by the scanner: DB[itemId] = FurCEntry
 ---@type table<integer, FurCEntry>
@@ -60,13 +64,12 @@ lifecycle.State = lifecycle.State
   }
 lifecycle.current = lifecycle.current
   or (lib.Internal.DBReady == true and lifecycle.State.READY or lifecycle.State.UNINITIALIZED)
-lifecycle.everReady = lifecycle.everReady or lifecycle.current == lifecycle.State.READY
 lifecycle.readyWaiters = lifecycle.readyWaiters or {}
 lifecycle.callbacks = lifecycle.callbacks or {}
 lifecycle.notifying = lifecycle.notifying == true
 lib.Internal.DBReady = lifecycle.current == lifecycle.State.READY
 
--- Legacy alias, same table — never reassign either side
+-- Legacy alias, same table
 FurC = FurC or {}
 FurC.DB = lib.Internal.DB
 

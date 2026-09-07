@@ -524,7 +524,7 @@ local function getItemLink(item)
 end
 this.GetItemLink = getItemLink
 
---- Drops id→link just for benchmarks
+--- Drops id->link (just for benchmarks)
 function this.ClearLinkCache()
   linkCache = {}
 end

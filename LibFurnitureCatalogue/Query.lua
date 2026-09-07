@@ -44,12 +44,15 @@ local SOURCE_PRIORITY = LFC.Internal.Constants.SOURCE_PRIORITY
 -- single-entry memo for find
 local lastLink = nil
 local recipeArray = nil
+local lastKey = nil
 local memoRevision = nil
 
----DB entry for an item/blueprint, builds DB on first use
+---Same lookup as `find`, but also hands back the id the entry is stored under (only worth calling when you need that id)
+--- A blueprint resolves to the crafted item's entry
 ---@param itemOrBlueprintLink string|integer item link, blueprint link, or itemId
 ---@return FurCEntry entry the entry, or `{}` if unknown
-local function find(itemOrBlueprintLink)
+---@return integer? key the crafted item's id (not the blueprint). nil when unknown
+local function findWithKey(itemOrBlueprintLink)
   ensureDB()
   if tonumber(itemOrBlueprintLink) == itemOrBlueprintLink then
     itemOrBlueprintLink = getItemLink(itemOrBlueprintLink)
@@ -59,25 +62,34 @@ local function find(itemOrBlueprintLink)
   end
 
   if itemOrBlueprintLink == lastLink and nil ~= recipeArray and memoRevision == LFC.Internal.DBRevision then
-    return recipeArray
+    return recipeArray, lastKey
   else
-    recipeArray = nil
+    recipeArray, lastKey = nil, nil
     lastLink = itemOrBlueprintLink
   end
 
   if IsItemLinkFurnitureRecipe(itemOrBlueprintLink) then
-    recipeArray = parseBlueprint(itemOrBlueprintLink)
+    recipeArray, lastKey = parseBlueprint(itemOrBlueprintLink)
   elseif IsItemLinkPlaceableFurniture(itemOrBlueprintLink) then
-    recipeArray = parseFurnitureItem(itemOrBlueprintLink)
+    recipeArray, lastKey = parseFurnitureItem(itemOrBlueprintLink)
   else
     local itemId = getItemId(itemOrBlueprintLink)
     if itemId ~= nil and tonumber(itemId) > 0 then
       recipeArray = db[itemId]
+      lastKey = recipeArray and itemId or nil
     end
   end
 
   memoRevision = LFC.Internal.DBRevision
-  return recipeArray or {}
+  return recipeArray or {}, lastKey
+end
+this.FindWithKey = findWithKey
+
+---DB entry for an item/blueprint, builds DB on first use. The normal lookup to reach for
+---@param itemOrBlueprintLink string|integer item link, blueprint link, or itemId
+---@return FurCEntry entry the entry, or `{}` if unknown
+local function find(itemOrBlueprintLink)
+  return (findWithKey(itemOrBlueprintLink))
 end
 this.Find = find
 
@@ -594,11 +606,15 @@ this.DescribeSource = describeSource
 ---@param opts? { dateFormat?: string } render options, e.g. the luxury date format (default "YYYY-MM-DD")
 ---@return string
 local function getItemDescription(recipeKey, recipeArray, stripColor, opts)
-  recipeKey = getItemId(recipeKey)
-  recipeArray = recipeArray or find(recipeKey)
+  local resolvedKey
+  if nil == recipeArray then
+    recipeArray, resolvedKey = findWithKey(recipeKey)
+  end
   if nil == next(recipeArray) then
     return ""
   end
+  -- The key find resolved, so a blueprint argument still keys by the crafted item
+  recipeKey = resolvedKey or getItemId(recipeKey)
   return describeSource(recipeKey, recipeArray, recipeArray.origin, stripColor, opts)
 end
 this.GetItemDescription = getItemDescription
@@ -938,12 +954,13 @@ end
 ---@param itemOrLink string|integer
 ---@return { source: table, cost: table[], availability: table }[]
 local function getSourceRecords(itemOrLink)
-  local recipeArray = find(itemOrLink)
+  local recipeArray, resolvedKey = findWithKey(itemOrLink)
   local sources = recipeArray and recipeArray.sources
   if nil == next(recipeArray) or not sources then
     return {}
   end
-  local recipeKey = getItemId(itemOrLink)
+  -- The key find resolved: a blueprint link resolves to the crafted item's entry, and every data table below is keyed by that item
+  local recipeKey = resolvedKey or getItemId(itemOrLink)
 
   local compatSources = recipeArray.compatSources
   local ranked = {}
