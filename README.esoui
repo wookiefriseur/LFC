@@ -1,30 +1,23 @@
 Official library containing the FurnitureCatalogue database. LFC version 1.0.0 is bundled in [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL], starting with version 7.0.0. This standalone version will be required by FurnitureCatalogue in the near future.
 
-[color=red][SIZE=4]Any new database updates go in here and will be more recent than the bundled version![/SIZE][/COLOR]
+[COLOR=red][SIZE=4]Any new database updates go in here and will be more recent than the bundled version![/SIZE][/COLOR]
 
-[COLOR=wheat][SIZE=6]AddOns that use this lib[/SIZE][/COLOR]
-
+[COLOR=wheat][SIZE=6]AddOns that use this Lib[/SIZE][/COLOR]
 [LIST]
-[*][URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL]
-[/LIST]
-
+[*][URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL][/LIST]
 
 [COLOR=wheat][SIZE=6]Adds Commands[/SIZE][/COLOR]
 
-[CODE]// Everything about an item: its sources (and its mats if craftable)
+[highlight="lua"]---Everything about an item: its sources (and its mats if craftable)
 /lfc <ITEMLINK OR ID>
 
-// The raw record, with the enums named
+---The raw record, with the enums named
 /lfc raw <ITEMLINK OR ID>
 
-// Database status: library version, state, revision, item count
-/lfc db[/CODE]
+---Database status: library version, state, revision, item count
+/lfc db[/highlight]Both item commands take an item link or a plain item id, so [B]/lfc 203600[/B] and [B]/lfc |H1:item:203600:...|h|h[/B] answer the same.
 
-Both item commands take an item link or a plain item id, so [B]/lfc 203600[/B] and [B]/lfc |H1:item:203600:...|h|h[/B] answer the same.
-
-[CODE][2] type=ROLIS vendor=SI_FURC_TRADERS_FAUSTINA place=SI_FURC_LOC_ANY_CAPITAL cost=800/4[/CODE]
-
-
+[code][2] type=ROLIS vendor=SI_FURC_TRADERS_FAUSTINA place=SI_FURC_LOC_ANY_CAPITAL cost=800/4[/code]
 [COLOR=wheat][SIZE=6]For Devs and Contributors[/SIZE][/COLOR]
 
 [URL="https://wookiefriseur.github.io/LFC/"]GH Pages[/URL]
@@ -40,9 +33,7 @@ Any DB updates will be done here instead of the main AddOn. As soon as this lib 
 
 Declare it in your manifest, then reach it as a global. All endpoints are on the LibFurnitureCatalogue.API table. [B]OnReady[/B] tells you when the DB is populated. One [B]OnReady[/B] is enough. Wrap the first use so you don't query an empty database, then reach LFC from anywhere.
 
-[CODE]## DependsOn: LibFurnitureCatalogue>=1000000[/CODE]
-
-[highlight="lua"]local LFC = LibFurnitureCatalogue.API
+[code]## DependsOn: LibFurnitureCatalogue>=1000000[/code][highlight="lua"]local LFC = LibFurnitureCatalogue.API
 
 LFC.OnReady(function()
   d(LFC.GetEntryCount() .. " furnishings")

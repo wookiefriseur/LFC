@@ -25,6 +25,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$REPO_ROOT"
 
+# Must match package.py's ADDON_NAME: it names the archive <ADDON_NAME>-<Version>.zip
+ADDON_NAME="LibFurnitureCatalogue"
+
 # ------------------------------------------
 # load optional .env (same file the tests read)
 # ------------------------------------------
@@ -120,8 +123,8 @@ rm -f "$CHANGED_TMP"
 
 echo "[build] package zip"
 "$PY" scripts/package.py
-ZIP="$(ls -1 *.zip | head -1)"
-test -s "$ZIP" || { echo "🔥 package.py produced no zip" >&2; exit 1; }
+ZIP="${ADDON_NAME}-${RELEASE_VERSION}.zip"
+test -s "$ZIP" || { echo "🔥 package.py produced no $ZIP" >&2; exit 1; }
 
 # package.py only wipes .package/build, so previous zips here survive
 mkdir -p .package
