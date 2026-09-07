@@ -462,6 +462,11 @@ local function renderRecipeSource(row)
     return strGeneric(row.daily and strSrcQuestDaily or strSrcQuest, nil, nil, unpack(zoneNames))
   end
 
+  -- we use `src` instead of `loc`, or we'd get "Event: in SomeEvent"
+  if row.event and not row.vendor then
+    return strGeneric(srcEvent, nil, "src", GetString(row.event))
+  end
+
   -- one suffix slot, so the most specific qualifier wins
   local info = row.achievement or (row.partOf and strPartOf(row.partOf))
   if row.skillLine then
@@ -642,7 +647,7 @@ local function setVendor(rec, name)
   rec.source.vendor = npcByName[name]
 end
 
---- A location is a game zone or nothing; anything else treats the source as a note / custom text
+--- A location is a game zone, anything the game has no zone for is a place
 ---@param name string localised name of a zone or a place
 local function setLocation(rec, name)
   local zoneId = zoneByName[name]
@@ -650,7 +655,7 @@ local function setLocation(rec, name)
     rec.source.location = zoneId
     return
   end
-  rec.source.note = placeByName[name]
+  rec.source.place = placeByName[name]
 end
 
 local function achievementVendorRecord(rec, recipeKey, version)
@@ -759,7 +764,7 @@ local function voucherRecord(rec, recipeKey, blueprintId)
           for _, contentId in ipairs(folioData.contents) do
             if contentId == recipeKey or contentId == blueprintId then
               rec.source.vendor = npcIds.FAUSTINA
-              rec.source.note = placeIds.ANY_CAPITAL
+              rec.source.place = placeIds.ANY_CAPITAL
               rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = folioData.price }
               return
             end
@@ -770,7 +775,7 @@ local function voucherRecord(rec, recipeKey, blueprintId)
     return
   end
   rec.source.vendor = vendor
-  rec.source.note = placeIds.ANY_CAPITAL
+  rec.source.place = placeIds.ANY_CAPITAL
   local price = type(entry) == "table" and entry.itemPrice or entry
   if type(price) == "number" then
     rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = price }
@@ -919,8 +924,11 @@ local function recipeSourceRecord(rec, row)
   local source = rec.source
   source.vendor = row.vendor
   source.location = row.location
-  source.note = row.note or row.place
+  -- location and place are exclusive, note enriches either
+  source.place = row.place
+  source.note = row.note
   source.achievement = row.achievement
+  source.event = row.event
   if row.itemPrice then
     rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }
   end

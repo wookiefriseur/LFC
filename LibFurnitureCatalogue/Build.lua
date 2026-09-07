@@ -73,6 +73,24 @@ local function primarySource(sources)
   return best
 end
 
+-- DB revision is a change counter and starts at 1,  writes outside a build bump straight away
+local pendingChange = false
+
+local function markDatabaseChanged()
+  if lifecycle.current == state.BUILDING then
+    pendingChange = true
+  else
+    LFC.Internal.DBRevision = LFC.Internal.DBRevision + 1
+  end
+end
+
+local function flushDatabaseChange()
+  if pendingChange then
+    pendingChange = false
+    LFC.Internal.DBRevision = LFC.Internal.DBRevision + 1
+  end
+end
+
 -- partial update or full overwrite
 local function addDatabaseEntry(recipeKey, partial)
   if not (recipeKey and partial and next(partial) ~= nil) then
@@ -129,7 +147,7 @@ local function addDatabaseEntry(recipeKey, partial)
     cacheFurnishingCategory(itemLink, stored)
   end
 
-  LFC.Internal.DBRevision = LFC.Internal.DBRevision + 1
+  markDatabaseChanged()
 end
 this.Upsert = addDatabaseEntry
 
@@ -138,7 +156,7 @@ local function clear()
   for itemId in pairs(db) do
     db[itemId] = nil
   end
-  LFC.Internal.DBRevision = LFC.Internal.DBRevision + 1
+  markDatabaseChanged()
 end
 this.Clear = clear
 
@@ -223,10 +241,16 @@ local function parseBlueprint(blueprintLink) -- saves to DB, returns recipeArray
     return
   end
 
-  local recipeArray = db[recipeKey] or {}
+  local stored = db[recipeKey]
+  if stored ~= nil and stored.origin ~= nil and stored.craftingSkill ~= nil and stored.blueprint ~= nil then
+    -- Already carries everything a blueprint contributes (otherwise we would just wastefully rewrite the data)
+    return stored
+  end
+
+  local recipeArray = stored or {}
   recipeArray.origin = recipeArray.origin or src.CRAFTING
   recipeArray.craftingSkill = recipeArray.craftingSkill or GetItemLinkCraftingSkillType(blueprintLink)
-  recipeArray.blueprint = recipeArray.blueprint or getItemId(blueprintLink)
+  recipeArray.blueprint = recipeArray.blueprint or blueprintId
 
   addDatabaseEntry(recipeKey, recipeArray)
   return recipeArray
@@ -385,14 +409,11 @@ local function scanFromFiles(blocking)
         for eventItemSource, eventItemData in pairs(eventData) do
           if type(eventItemData) == "table" then
             for itemId in pairs(eventItemData) do
-              addDatabaseEntry(itemId, { origin = src.FESTIVAL_DROP, version = versionNumber, craftable = false })
+              addDatabaseEntry(itemId, { origin = src.FESTIVAL_DROP, version = versionNumber })
             end
           else
             -- No container/coffer level: eventItemSource IS the itemId (e.g. environment drops)
-            addDatabaseEntry(
-              eventItemSource,
-              { origin = src.FESTIVAL_DROP, version = versionNumber, craftable = false }
-            )
+            addDatabaseEntry(eventItemSource, { origin = src.FESTIVAL_DROP, version = versionNumber })
           end
         end
       end
@@ -531,6 +552,7 @@ local function scanFromFiles(blocking)
 
   local buildStarted = GetGameTimeMilliseconds()
   local function finish()
+    flushDatabaseChange()
     setState(state.READY)
     lifecycle.everReady = true
     logDebug("DB build finished: %d entries in %d ms", NonContiguousCount(db), GetGameTimeMilliseconds() - buildStarted)
@@ -542,6 +564,8 @@ local function scanFromFiles(blocking)
   end
 
   local function fail(err)
+    -- a failed build still leaves partial writes behind
+    flushDatabaseChange()
     setState(state.FAILED, err)
     logError("DB build failed: %s", tostring(err))
     notify(function()

@@ -142,6 +142,52 @@ do
   }
 end
 
+-- Stable English names for the source types (because the enum meaning might not be obvious)
+-- Those are not and will not be locale strings
+do
+  local src = this.ItemSources
+  this.SourceLabels = {
+    [src.NONE] = "Unknown",
+    [src.FAVE] = "Favourite",
+    [src.CRAFTING] = "Crafting",
+    [src.CRAFTING_KNOWN] = "Crafting",
+    [src.CRAFTING_UNKNOWN] = "Crafting",
+    [src.VENDOR] = "Achievement Vendor",
+    [src.PVP] = "PvP Vendor",
+    [src.WRIT_VENDOR] = "Master Writ Vendor",
+    [src.CROWN] = "Crown Store",
+    [src.RUMOUR] = "Datamined, unconfirmed",
+    [src.LUXURY] = "Luxury Furnisher",
+    [src.OTHER] = "Other",
+    [src.ROLIS] = "Rolis Hlaalu",
+    [src.DROP] = "Drop",
+    [src.JUSTICE] = "Justice",
+    [src.FISHING] = "Fishing",
+    [src.GUILDSTORE] = "Guild Store",
+    [src.FESTIVAL_DROP] = "Event",
+    [src.BAZAAR] = "Gold Coast Bazaar",
+    [src.TOMES] = "Tamriel Tomes",
+    [src.TELVAR] = "Tel Var Merchant",
+    [src.COLL_MERCH] = "Collectibles Merchant",
+    [src.EDITOR] = "Housing Editor",
+    [src.ANTIQUITY] = "Antiquity",
+    [src.DUNGEON] = "Dungeon",
+    [src.HARVEST] = "Harvesting",
+    [src.CHEST] = "Treasure Chest",
+    [src.QUEST] = "Quest Reward",
+    [src.PICKPOCKET] = "Pickpocketing",
+    [src.CONTAINER] = "Container",
+  }
+
+  -- Enum values that just exist for filtering, not as an item source
+  -- TODO: mv those into FC only
+  this.NotASource = {
+    [src.FAVE] = true,
+    [src.CRAFTING_KNOWN] = true,
+    [src.CRAFTING_UNKNOWN] = true,
+  }
+end
+
 -- TODO #REFACTOR Switch version numbering to the same as game update numbers
 
 -- versioning

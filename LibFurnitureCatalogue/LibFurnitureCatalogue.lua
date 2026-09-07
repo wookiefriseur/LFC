@@ -35,7 +35,6 @@ lib.Internal = lib.Internal or {} -- internal use only
 ---@field origin FurCItemSource top-ranked source
 ---@field version integer game version when the item was added
 ---@field blueprint integer|nil blueprint itemId, when craftable
----@field craftable boolean|nil
 ---@field craftingSkill integer|nil crafting skill type, when known
 ---@field furnCategory integer cached ESO furniture category id (0 = no category)
 ---@field furnSubcategory integer cached ESO furniture subcategory id

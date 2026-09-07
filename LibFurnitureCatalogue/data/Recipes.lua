@@ -867,7 +867,7 @@ FurC.Recipes[ver.SCRIBE] = {
   194390, -- Diagram: Firesong Sculpture, Archdruid's Staff,
   194391, -- Diagram: Firesong Sculpture, Menhir,
   194392, -- Sketch: Resonance Crystal, Cerulean,
-  194393, -- Forumula: Druidic Throne, Y'ffre's Bloom,
+  194393, -- Formula: Druidic Throne, Y'ffre's Bloom,
   194394, -- Design: Druidic Oven, Stone,
   194395, -- Pattern: Mage Tapestry, Aurbic Phoenix,
   194396, -- Praxis: Stone, Lava-Etched,
