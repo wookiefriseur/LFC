@@ -39,6 +39,25 @@ local db = LFC.Internal.DB
 local ensureDB = LFC.Internal.Build.EnsureDB
 local parseFurnitureItem = LFC.Internal.Build.ParseFurnitureItem
 local parseBlueprint = LFC.Internal.Build.ParseBlueprint
+local primarySource = LFC.Internal.Build.PrimarySource
+local isInjected = LFC.Internal.Compat.IsInjected
+
+---The row's top-ranked source
+---A stored row derives this through its metatable
+---@param recipeArray FurCEntry|table
+---@return integer? origin
+local function originOf(recipeArray)
+  if not recipeArray then
+    return nil
+  end
+  local origin = recipeArray.origin
+  if origin ~= nil then
+    return origin
+  end
+  local sources = recipeArray.sources
+  return sources and primarySource(sources) or nil
+end
+this.OriginOf = originOf
 local SOURCE_PRIORITY = LFC.Internal.Constants.SOURCE_PRIORITY
 
 -- single-entry memo for find
@@ -407,7 +426,7 @@ local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
   recipeArray = recipeArray or find(recipeKey)
   -- "source" allows asking for specific category
   -- defaults to primary (top ranked source)
-  source = source or recipeArray.origin
+  source = source or originOf(recipeArray)
   if nil == next(recipeArray) or not source then
     return emptyString
   end
@@ -524,7 +543,7 @@ local function getRecipeSource(recipeKey, recipeArray)
 
   recipeKey = recipeArray.blueprint or recipeKey
 
-  if recipeArray.origin == src.RUMOUR then
+  if originOf(recipeArray) == src.RUMOUR then
     local rumourSource = this.GetRumourSource(recipeKey, recipeArray)
     if rumourSource then
       return rumourSource
@@ -615,7 +634,7 @@ local function getItemDescription(recipeKey, recipeArray, stripColor, opts)
   end
   -- The key find resolved, so a blueprint argument still keys by the crafted item
   recipeKey = resolvedKey or getItemId(recipeKey)
-  return describeSource(recipeKey, recipeArray, recipeArray.origin, stripColor, opts)
+  return describeSource(recipeKey, recipeArray, originOf(recipeArray), stripColor, opts)
 end
 this.GetItemDescription = getItemDescription
 
@@ -636,7 +655,7 @@ local function getRankedSources(recipeKey, recipeArray, stripColor, opts)
   local compatSources = recipeArray.compatSources
   local ranked = {}
   for s in pairs(sources) do
-    if s ~= src.CRAFTING and not (compatSources and compatSources[s]) then
+    if s ~= src.CRAFTING and not isInjected(compatSources, s) then
       ranked[#ranked + 1] = s
     end
   end
@@ -966,7 +985,7 @@ local function getSourceRecords(itemOrLink)
   local compatSources = recipeArray.compatSources
   local ranked = {}
   for s in pairs(sources) do
-    if not (compatSources and compatSources[s]) then
+    if not isInjected(compatSources, s) then
       ranked[#ranked + 1] = s
     end
   end

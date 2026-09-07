@@ -11,10 +11,10 @@ Official library containing the FurnitureCatalogue database. LFC version 1.0.0 i
 
 [COLOR=wheat][SIZE=6]Adds Commands[/SIZE][/COLOR]
 
-[CODE]// Everything about an item: its sources, and its mats when craftable
+[CODE]// Everything about an item: its sources (and its mats if craftable)
 /lfc <ITEMLINK OR ID>
 
-// The stored record, with the enums named
+// The raw record, with the enums named
 /lfc raw <ITEMLINK OR ID>
 
 // Database status: library version, state, revision, item count
@@ -22,7 +22,7 @@ Official library containing the FurnitureCatalogue database. LFC version 1.0.0 i
 
 Both item commands take an item link or a plain item id, so [B]/lfc 203600[/B] and [B]/lfc |H1:item:203600:...|h|h[/B] answer the same.
 
-[CODE][2] type=ROLIS vendor=SI_FURC_TRADERS_FAUSTINA note=SI_FURC_LOC_ANY_CAPITAL cost=1100/4[/CODE]
+[CODE][2] type=ROLIS vendor=SI_FURC_TRADERS_FAUSTINA place=SI_FURC_LOC_ANY_CAPITAL cost=800/4[/CODE]
 
 
 [COLOR=wheat][SIZE=6]For Devs and Contributors[/SIZE][/COLOR]
@@ -31,13 +31,85 @@ Both item commands take an item link or a plain item id, so [B]/lfc 203600[/B] a
 
 [URL="https://github.com/wookiefriseur/LFC"]Repo on GitHub[/URL]
 
-Any DB updates will be done here instead of the main AddOn. As soon as this lib version gets bumped to 1.0.1+, it will be preferred by the main AddOn if installed. The bundled lib will disappear with the next major FurnitureCatalogue update and then this one will be required to load the main AddOn.
+Any DB updates will be done here instead of the main AddOn. As soon as this lib version gets bumped to 1.0.1+, it will be preferred by the main AddOn if installed. The bundled lib will disappear with the next major FurnitureCatalogue update and then this one will be required to load the main AddOn ([URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]see GitHub issue discussing this split[/URL])
 
-[URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]GitHub issue discussing this split[/URL]
 
-Offers API endpoints for other AddOns. Instructions will follow.
+[COLOR=wheat][SIZE=6]API[/SIZE][/COLOR]
 
-[highlight="lua"]-- Incredible code examples go here
+[COLOR=wheat][SIZE=3]Initialise[/SIZE][/COLOR]
+
+Declare it in your manifest, then reach it as a global. All endpoints are on the LibFurnitureCatalogue.API table. [B]OnReady[/B] tells you when the DB is populated. One [B]OnReady[/B] is enough. Wrap the first use so you don't query an empty database, then reach LFC from anywhere.
+
+[CODE]## DependsOn: LibFurnitureCatalogue>=1000000[/CODE]
+
+[highlight="lua"]local LFC = LibFurnitureCatalogue.API
+
+LFC.OnReady(function()
+  d(LFC.GetEntryCount() .. " furnishings")
+end)
 [/highlight]
 
-This description will be more useful in the future, I swear.
+
+[COLOR=wheat][SIZE=3]Where does this item come from?[/SIZE][/COLOR]
+Every call hands out a fresh copy, yours to keep and to mutate
+
+[highlight="lua"]local src = LFC.GetSourceTypes()
+local entry = LFC.GetEntry(203600) -- item link, blueprint link or itemId
+
+if entry then
+  entry.version --> 32, the update it arrived in
+
+  -- sources is a SET, so membership is one lookup
+  entry.sources          --> { [6] = true, [7] = true, [13] = true }
+  entry.sources[src.PVP] --> true
+
+  if entry.blueprint then d("craftable") end
+end
+[/highlight]
+
+Nil means the catalogue does not have it. [B]LFC.Has(itemId)[/B] answers the same question without the copy.
+
+[COLOR=wheat][SIZE=3]Get all of it, one record per source[/SIZE][/COLOR]
+You get identifiers, so it reads the same on every client language.
+
+[highlight="lua"]for _, record in ipairs(LFC.GetSourceDetails(203600)) do
+  record.source.type              --> 6, then 13, then 7
+  GetString(record.source.vendor) --> "Faustina Curio" on the writ vendor one
+
+  -- a zone, or a place the game has no zone for
+  GetZoneNameById(record.source.location)
+  GetString(record.source.place)
+
+  if record.cost then
+    record.cost.currency --> 12, then 4, then 2
+    record.cost.amount   --> 30000, then 800, then 1000000
+  end
+end
+[/highlight]
+
+[COLOR=wheat][SIZE=3]Get Mats[/SIZE][/COLOR]
+Keyed by ingredient link, because that is what the game hands back and you need it to render a name anyways. Empty table when it is not craftable.
+
+[highlight="lua"]for ingredientLink, quantity in pairs(LFC.GetIngredients(itemId)) do
+  d(quantity .. "x " .. GetItemLinkName(ingredientLink)) --> "6x Banana"
+end
+[/highlight]
+
+[COLOR=wheat][SIZE=3]Use Enums, not numbers[/SIZE][/COLOR]
+The numeric values can change, so use the enums for comparison instead of storing numbers in your AddOn.
+
+[highlight="lua"]LFC.GetSourceTypes()      -- key -> id, for comparing
+LFC.GetSourceTypeInfo()   -- id -> stable key and English label, for exports
+LFC.GetDataVersions()     -- update key -> id
+LFC.GetDataVersionKeys()  -- id -> update key
+[/highlight]
+
+[COLOR=wheat][SIZE=3]Rebuilds[/SIZE][/COLOR]
+The database is rebuilt when the player rescans. Subscribe if you cache anything that has to be cleared.
+
+[highlight="lua"]LFC.RegisterCallback(LFC.Events.SCAN_COMPLETE, function(revision)
+  myAddon:Invalidate(revision)
+end)
+[/highlight]
+
+Every endpoint is documented in [B]Api.lua[/B], which opens with a list of which one to reach for. Ask, or open an issue, if something you need is missing.

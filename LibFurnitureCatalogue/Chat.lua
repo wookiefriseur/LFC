@@ -10,6 +10,8 @@ local fmt = LFC.Internal.Format
 local query = LFC.Internal.Query
 
 local resolveRecipe = LFC.Internal.Build.ResolveRecipe
+local furnishingCategory = LFC.Internal.Build.FurnishingCategory
+local isInjected = LFC.Internal.Compat.IsInjected
 local CRAFTING = LFC.Internal.Constants.ItemSources.CRAFTING
 
 local getItemId, getItemLink = fmt.GetItemId, fmt.GetItemLink
@@ -202,22 +204,24 @@ function COMMANDS.raw(rest)
   end
   say(label(itemId, entry))
 
+  -- The row stores only what the game cannot answer, so this one asks the game for the rest
   local flags = {
     "origin=" .. sourceName(entry.origin),
     "version=" .. versionLabel(entry.version),
-    "cat=" .. categoryLabel(entry.furnCategory, entry.furnSubcategory),
+    "cat=" .. categoryLabel(furnishingCategory(itemId)),
   }
   if entry.blueprint then
     flags[#flags + 1] = "blueprint=" .. tostring(entry.blueprint)
   end
-  if entry.craftingSkill then
-    flags[#flags + 1] = "skill=" .. tostring(entry.craftingSkill)
+  local craftingSkill = query.GetCraftingSkillType(itemId, entry)
+  if craftingSkill and craftingSkill ~= 0 then
+    flags[#flags + 1] = "skill=" .. tostring(craftingSkill)
   end
   say(table.concat(flags, " "))
 
   local names, compat = {}, {}
   for source in pairs(entry.sources) do
-    local target = (entry.compatSources and entry.compatSources[source]) and compat or names
+    local target = isInjected(entry.compatSources, source) and compat or names
     target[#target + 1] = sourceName(source)
   end
   table.sort(names)
@@ -230,7 +234,8 @@ function COMMANDS.raw(rest)
 
   for index, record in ipairs(api.GetSourceDetails(itemId)) do
     local parts = { string.format("[%d] type=%s", index, sourceName(record.source.type)) }
-    for _, field in ipairs({ "vendor", "note", "achievement", "event" }) do
+    -- place sits beside location on purpose: a record carries one or the other
+    for _, field in ipairs({ "vendor", "place", "note", "achievement", "event" }) do
       local value = idWithKey(record.source[field])
       if value then
         parts[#parts + 1] = field .. "=" .. value

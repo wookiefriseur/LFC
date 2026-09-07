@@ -21,19 +21,51 @@ this.SOURCE_PARENT = {
 
 local SOURCE_PARENT = this.SOURCE_PARENT
 
+--
+-- Black magic bitmask technology to save some memory
+--
+-- Subtables have 64-byte overhead, and we would be putting that into most of the 8500+ records, which wastes memory.
+--
+-- Only the two values in SOURCE_PARENT above can ever be injected, so one integer is enough to represent them all:
+--
+-- Bit positions come from ItemSources, numbered in declaration order. Inserting a source in the middle renumbers everything below it.
+-- This mask is built during the scan, don't store it
+local function bitFor(source)
+  return 2 ^ (source - 1)
+end
+
+---Is this source in `sources` only because compatibility put it there?
+---@param mask integer|nil the row's compatSources
+---@param source integer
+---@return boolean injected
+function this.IsInjected(mask, source)
+  if not mask or mask == 0 then
+    return false
+  end
+  local bit = bitFor(source)
+  return mask % (bit + bit) >= bit
+end
+local isInjected = this.IsInjected
+
 ---Add source each fine-grained value was split from (mostly for tests)
 ---@param sources table<integer, boolean> mutated in place
----@param injected table<integer, boolean> records what was added here
+---@param injected integer|nil mask of what earlier passes added here
+---@return integer injected the mask including whatever this pass added
 function this.CloseOverAncestors(sources, injected)
+  injected = injected or 0
   for s in pairs(sources) do
     local parent = SOURCE_PARENT[s]
-    if parent and not sources[parent] then
-      injected[parent] = true
+    -- two fine-grained sources can share a parent, so the mask has to be checked: sources[parent] is only written in the loop below
+    if parent and not sources[parent] and not isInjected(injected, parent) then
+      injected = injected + bitFor(parent)
     end
   end
-  for parent in pairs(injected) do
-    sources[parent] = true
+  for _, parent in pairs(SOURCE_PARENT) do
+    if isInjected(injected, parent) then
+      sources[parent] = true
+    end
   end
+  return injected
 end
 
 ---Mirror each fine-grained source's rows for AddOns reading data tables directly.. ha, they won't even notice!

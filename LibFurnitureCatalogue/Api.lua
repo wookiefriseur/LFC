@@ -84,6 +84,7 @@ local state = lifecycle.State
 local fmt, query = internal.Format, internal.Query
 local getItemId, getItemLink = fmt.GetItemId, fmt.GetItemLink
 local find, getSourceRecords = query.Find, query.GetSourceRecords
+local originOf = query.OriginOf
 local getIngredients, getItemDescription = query.GetIngredients, query.GetItemDescription
 local getMiscItemPrice = query.GetMiscItemPrice
 local ensureDB = internal.Build.EnsureDB
@@ -274,7 +275,7 @@ function api.OnReady(callback, arg)
   if lifecycle.current == state.FAILED then
     return false
   end
-    -- Registering same function twice queues it once (the arg of the most recent registration wins)
+  -- Registering same function twice queues it once (the arg of the most recent registration wins)
   lifecycle.readyWaiters[callback] = arg == nil and true or { arg = arg }
   if lifecycle.current == state.UNINITIALIZED then
     ensureDB()
@@ -384,7 +385,8 @@ end
 ---`sources` carries backwards compatibility members.
 --- Some sources were split into finer ones and the coarse one is added back so nothing breaks:
 ---   fine-grained DUNGEON also answers to the coarse DROP. `compatSources` is the subset that exists only for that reason, treat it as deprecated.
---- The real sources are `sources` minus `compatSources`, and those are the ones GetSourceDetails returns a record for
+--- It is a bitmask, absent when nothing was injected, and the bit positions follow the enum, so they move when the enum does (don't store bitmasks, they change)
+--- Real sources are the ones GetSourceDetails returns a record for, which is exactly `sources` minus the injected members
 ---
 ---Every call deep-copies the row, so hold the result rather than calling it per frame
 ---```lua
@@ -405,7 +407,10 @@ function api.GetEntry(itemOrLink)
   if nil == next(entry) then
     return nil
   end
-  return ZO_DeepTableCopy(entry)
+  local copy = ZO_DeepTableCopy(entry)
+  -- Compatibility, origin is derived on the stored row
+  copy.origin = originOf(entry)
+  return copy
 end
 
 ---Where one source of an item comes from
@@ -461,7 +466,7 @@ end
 ---end
 ---
 ----- just checking membership? the entry answers it in one lookup
----LFC.GetEntry(203600).sources[src.CRAFTING] --> true
+---LFC.GetEntry(203600).sources[src.PVP] --> true
 ---```
 function api.GetSourceDetails(itemOrLink)
   return getSourceRecords(itemOrLink)
@@ -609,24 +614,28 @@ end
 
 local categoryMemo
 ---Game client's furnishing categories and subcategories in one id space
----`name` is the client's localised label, `parent` is 0 for a top-level category,
----and an entry's `furnCategory` of 0 means no category
+---`name` is the client's localised label, `parent` is 0 for a top-level category, and category 0 means the game knows no furnishing for that item
+---
+---Not a per-item lookup: an item's own category comes from the game, and the library does not store it
+--- `GetItemLinkFurnitureDataId` then
+---`GetFurnitureDataCategoryInfo` is the builtin route
 ---
 ---Read from the client once and kept for the session, so the names are in the language the client was started in
 ---@return table<integer, { name: string, parent: integer, order: integer }> categories
 ---```lua
 ---local categories = LFC.GetFurnitureCategories()
----local entry = LFC.GetEntry(120385)
+---local dataId = GetItemLinkFurnitureDataId(LFC.GetItemLink(120385))
+---local categoryId, subcategoryId = GetFurnitureDataCategoryInfo(dataId)
 ---
----entry.furnCategory              --> 4
----entry.furnSubcategory           --> 62
+---categoryId                      --> 4
+---subcategoryId                   --> 62
 ---categories[4]                   --> { name = "Library", parent = 0, order = 3 }
 ---categories[62].parent           --> 4
 ---
 ----- right: an id comparison, same answer in every language
----if entry.furnCategory == 4 then end
+---if categoryId == 4 then end
 ----- wrong: breaks on a German client
----if categories[entry.furnCategory].name == "Library" then end
+---if categories[categoryId].name == "Library" then end
 ---```
 function api.GetFurnitureCategories()
   if not categoryMemo then

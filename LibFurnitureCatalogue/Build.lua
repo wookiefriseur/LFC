@@ -39,28 +39,20 @@ local function resolveRecipe(recipeId)
 end
 this.ResolveRecipe = resolveRecipe
 
--- Looks up furniture category and subcategory for item link
-local function cacheFurnishingCategory(itemLink, recipeArray)
-  if not recipeArray then
-    return
-  end
-  -- Skip if already cached
-  if recipeArray.furnCategory ~= nil then
-    return
-  end
-
-  local dataId = GetItemLinkFurnitureDataId(itemLink)
+---Furniture category and subcategory the game holds for an item
+---@param itemId integer
+---@return integer categoryId 0 when the game knows no furnishing for it
+---@return integer subcategoryId
+local function furnishingCategory(itemId)
+  local itemLink = itemId and getItemLink(itemId)
+  local dataId = itemLink and GetItemLinkFurnitureDataId(itemLink)
   if not dataId or dataId == 0 then
-    recipeArray.furnCategory = 0
-    recipeArray.furnSubcategory = 0
-    return
+    return 0, 0
   end
-
   local categoryId, subcategoryId = GetFurnitureDataCategoryInfo(dataId)
-  recipeArray.furnCategory = categoryId or 0
-  recipeArray.furnSubcategory = subcategoryId or 0
+  return categoryId or 0, subcategoryId or 0
 end
-this.CacheFurnishingCategory = cacheFurnishingCategory
+this.FurnishingCategory = furnishingCategory
 
 local function primarySource(sources)
   local best, bestRank
@@ -72,6 +64,28 @@ local function primarySource(sources)
   end
   return best
 end
+this.PrimarySource = primarySource
+
+-- Metatable shared by every stored row
+--
+-- `pairs` does not see these fields, so a shallow copy of a row does not carry them
+local rowMeta = {
+  __index = function(row, key)
+    if key == "origin" then
+      local sources = rawget(row, "sources")
+      return sources and primarySource(sources) or nil
+    end
+    if key == "furnCategory" then
+      return (furnishingCategory(rawget(row, "id")))
+    end
+    if key == "furnSubcategory" then
+      local _, subcategoryId = furnishingCategory(rawget(row, "id"))
+      return subcategoryId
+    end
+    return nil
+  end,
+}
+this.RowMeta = rowMeta
 
 -- DB revision is a change counter and starts at 1,  writes outside a build bump straight away
 local pendingChange = false
@@ -91,6 +105,16 @@ local function flushDatabaseChange()
   end
 end
 
+-- Fields a row actually keeps. `origin` is an input here, not a field
+-- a caller says which source it found, the row records it in `sources`, and origin is derived (primary source)
+-- Anything not named here can already be looked up by the game
+local STORED_FIELDS = {
+  version = true,
+  blueprint = true,
+  recipeListIndex = true,
+  recipeIndex = true,
+}
+
 -- partial update or full overwrite
 local function addDatabaseEntry(recipeKey, partial)
   if not (recipeKey and partial and next(partial) ~= nil) then
@@ -99,13 +123,12 @@ local function addDatabaseEntry(recipeKey, partial)
 
   local stored = db[recipeKey]
   if stored == nil then
-    stored = partial
+    stored = setmetatable({ id = recipeKey }, rowMeta)
     db[recipeKey] = stored
-  else
-    for k, v in pairs(partial) do
-      if k ~= "origin" and k ~= "sources" then
-        stored[k] = v -- last writer wins
-      end
+  end
+  for k, v in pairs(partial) do
+    if STORED_FIELDS[k] and v ~= nil then
+      stored[k] = v -- last writer wins
     end
   end
 
@@ -130,21 +153,16 @@ local function addDatabaseEntry(recipeKey, partial)
       end
     end
   end
-  local injected = stored.compatSources or {}
-  stored.compatSources = injected
-  if partial.origin ~= nil then
-    injected[partial.origin] = nil
+  local injected = stored.compatSources or 0
+  if partial.origin ~= nil and compat.IsInjected(injected, partial.origin) then
+    -- a scan naming it outright means it is genuinely a source, not an injected one
+    injected = injected - (2 ^ (partial.origin - 1))
   end
-  compat.CloseOverAncestors(sources, injected)
-
-  if next(sources) ~= nil then
-    stored.origin = primarySource(sources)
-  end
-
-  -- Cache furnishing category IDs onto the stored entry
-  local itemLink = getItemLink(recipeKey)
-  if itemLink then
-    cacheFurnishingCategory(itemLink, stored)
+  injected = compat.CloseOverAncestors(sources, injected)
+  --
+  -- Used when versions are changed / split. Not written when there is nothing to record
+  if injected ~= 0 or stored.compatSources ~= nil then
+    stored.compatSources = injected ~= 0 and injected or nil
   end
 
   markDatabaseChanged()
@@ -239,18 +257,13 @@ local function parseBlueprint(blueprintLink) -- saves to DB, returns recipeArray
   end
 
   local stored = db[recipeKey]
-  if stored ~= nil and stored.origin ~= nil and stored.craftingSkill ~= nil and stored.blueprint ~= nil then
-    -- Already carries everything a blueprint contributes (otherwise we would just wastefully rewrite the data)
+  if stored ~= nil and stored.blueprint ~= nil and stored.sources and stored.sources[src.CRAFTING] then
+    -- Already carries everything a blueprint contributes (otherwise we would just wastefully rewrite the data while happily bumping revision and invalidating cache)
     return stored, recipeKey
   end
 
-  local recipeArray = stored or {}
-  recipeArray.origin = recipeArray.origin or src.CRAFTING
-  recipeArray.craftingSkill = recipeArray.craftingSkill or GetItemLinkCraftingSkillType(blueprintLink)
-  recipeArray.blueprint = recipeArray.blueprint or blueprintId
-
-  addDatabaseEntry(recipeKey, recipeArray)
-  return recipeArray, recipeKey
+  addDatabaseEntry(recipeKey, { origin = src.CRAFTING, blueprint = blueprintId })
+  return db[recipeKey], recipeKey
 end
 this.ParseBlueprint = parseBlueprint
 
