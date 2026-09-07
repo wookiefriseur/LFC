@@ -54,6 +54,8 @@
 --   GetFurnitureCategories  the client's furnishing category ids, names, parents and display order
 --
 -- Deprecated - we'll call the guards if you keep using those
+--   GetSources            old name and shape of GetSourceDetails, where cost is a list (LibPrice currently needs it)
+--   SourceType            shared source enum table. Use GetSourceTypes for a copy of your own
 --   GetItemDescription [FC] rendered source text (moves to FC). Use GetSourceDetails instead
 --   GetMiscItemPrice      a price extracted back out of formatted string. Use GetSourceDetails
 --   FurC.Find        [FC] mutable internal row, and {} on a miss, where GetEntry copies and returns nil. Not the same call, so switching to GetEntry is not a rename
@@ -663,6 +665,23 @@ end
 function api.GetMiscItemPrice(itemId, version, source)
   return getMiscItemPrice(itemId, version, source)
 end
+
+---Old name and record shape of GetSourceDetails
+---@deprecated Use GetSourceDetails instead. That one names the field `cost` and leaves it nil when a source has no price. The old one always hands back a table and puts the price at `cost[1]`
+---@param itemOrLink string|integer
+---@return LFCSourceRecord[] records
+function api.GetSources(itemOrLink)
+  local records = getSourceRecords(itemOrLink)
+  for _, record in ipairs(records) do
+    record.cost = (record.cost and { record.cost }) or {}
+  end
+  return records
+end
+
+---Source enum table
+---@deprecated Use GetSourceTypes(), which hands out a fresh copy. This one is
+---shared, so treat it as read-only.
+api.SourceType = api.GetSourceTypes()
 
 -- Legacy flat aliases for third-party AddOns
 -- The deprecated enum globals are in Constants.lua, all marked
