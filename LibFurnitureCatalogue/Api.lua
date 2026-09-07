@@ -14,6 +14,11 @@
 -- Mostly ids. Resolve them with GetZoneNameById, GetString, etc.
 -- Numeric source and version values shift between releases, so if you need to persist references in your addon, use the string keys / enums
 --
+-- Before the DB is ready:
+-- Any endpoint below that reads the DB starts the build, and none of them wait for it: the build is async
+-- An early call answers nil / false / {} / 0, which might look the same like "item not found"
+-- Use IsReady, or do the work from OnReady and it should be all there
+--
 -- Shapes:
 --  a list is 1..n (order means nothing unless the endpoint says otherwise)
 --  a set is [id] = true
@@ -33,12 +38,12 @@
 --   GetVersion            library's AddOnVersion
 --
 -- Item identity - pure link/id conversion, no DB, works before OnReady
---   GetItemId        [FC] link or id -> id, nil when it's neither
---   GetItemLink      [FC] id or link -> link, empty str when it's neither
+--   GetItemId        [FC] link or id -> id, nil when it's neither. A number counts only above 9999
+--   GetItemLink      [FC] id or link -> link, empty str when it's neither. Just builds from the number without looking it up: It trusts you
 --
 -- One item
 --   Has                   is this item in the DB
---   GetEntry              record copy. Promised: sources, origin, version, blueprint. Also carries cached game ids, unwarranted
+--   GetEntry              record copy. Promised: sources, origin, version, blueprint. Anything else on it is subject to change
 --   GetSourceDetails      one record per source, ranked, with cost and availability (the structured and slow answer)
 --   GetIngredients        what a craftable item is made of (empty table if not craftable)
 --
@@ -177,8 +182,8 @@ end
 function internal.PublishReady(revision)
   local waiters = lifecycle.readyWaiters
   lifecycle.readyWaiters = {}
-  for callback in pairs(waiters) do
-    invokeCallback("OnReady", callback, nil, revision)
+  for callback, queued in pairs(waiters) do
+    invokeCallback("OnReady", callback, type(queued) == "table" and queued.arg or nil, revision)
   end
 end
 
@@ -192,15 +197,18 @@ end
 ---   `(revision)`: SCAN_COMPLETE
 ---   `(errorString)`: SCAN_FAILED
 ---SCAN_COMPLETE fires after every successful build, the first one included. For a one-shot, use OnReady
+---
+---Registering the same callback and arg multiple times adds just one registration but still answers true, so one UnregisterCallback removes what looked like two
 ---@param eventName string one of LibFurnitureCatalogue.API.Events
 ---@param callback function
 ---@param arg? any prepended to the payload, so the callback sees `(arg, ...)`
----@return boolean registered
+---@return boolean registered false only when the event name or the callback is not one
 ---```lua
 ---local LFC = LibFurnitureCatalogue.API
 ---
 ---local function onScanComplete(revision) end
 ---LFC.RegisterCallback(LFC.Events.SCAN_COMPLETE, onScanComplete) --> true
+---LFC.RegisterCallback(LFC.Events.SCAN_COMPLETE, onScanComplete) --> true, still registered once
 ---
 ----- arg comes first, the payload follows it
 ---local function onScanCompleteFor(self, revision) self:Rebuild(revision) end
@@ -244,25 +252,30 @@ end
 ---Calls immediately when already ready, otherwise starts the lazy build and waits.
 ---For every later rebuild, use RegisterCallback
 ---@param callback fun(revision: integer)
+---@param arg? any prepended to the payload, so the callback sees `(arg, revision)`. Same shape RegisterCallback takes
 ---@return boolean accepted false when the last build failed, so the callback would never run. Check GetState, or watch SCAN_FAILED
 ---```lua
 ---LFC.OnReady(function(revision)
 ---  d(LFC.GetEntryCount() .. " items at revision " .. revision)
 ---end) --> true
+---
+----- method-style, without a closure
+---LFC.OnReady(function(self, revision) self:Build(revision) end, myAddon) --> true
 ---```
-function api.OnReady(callback)
+function api.OnReady(callback, arg)
   if type(callback) ~= "function" then
     return false
   end
   if api.IsReady() then
-    invokeCallback("OnReady", callback, nil, internal.DBRevision)
+    invokeCallback("OnReady", callback, arg, internal.DBRevision)
     return true
   end
 
   if lifecycle.current == state.FAILED then
     return false
   end
-  lifecycle.readyWaiters[callback] = true
+    -- Registering same function twice queues it once (the arg of the most recent registration wins)
+  lifecycle.readyWaiters[callback] = arg == nil and true or { arg = arg }
   if lifecycle.current == state.UNINITIALIZED then
     ensureDB()
   end
@@ -306,9 +319,9 @@ end
 
 ---This library's AddOnVersion
 ---For a game update version see GetDataVersions, for a DB revision see GetDBRevision
----@return integer libVersion
+---@return integer libVersion the manifest's AddOnVersion
 ---```lua
----LFC.GetVersion() --> 10000
+---if LFC.GetVersion() >= myMinimumVersion then end
 ---```
 function api.GetVersion()
   return LFC.version
@@ -319,22 +332,29 @@ end
 -- ---------------------------------------------------------------------------
 
 ---Resolve an item link or numeric id to a numeric item id
----Number only counts if id is above 9999
+---A number only counts as an id above 9999; below that you get nil, because no
+---furnishing lives down there and a small number is far more likely a mistake
 ---@param itemOrLink string|integer
 ---@return integer? id nil on empty/invalid
 ---```lua
 ---LFC.GetItemId("|H1:item:134686:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h") --> 134686
 ---LFC.GetItemId(134686) --> 134686
+---LFC.GetItemId(5000)   --> nil, below the threshold
 ---```
 function api.GetItemId(itemOrLink)
   return getItemId(itemOrLink)
 end
 
 ---Build item link from id, or pass through an existing link
+---Link is directly built from the number, not looked up, so any number above 0 gets a link
+--- "Empty string on invalid" means malformed input
+---
+---This one accepts anything above 0 and GetItemId only recognises a number above 9999
 ---@param itemOrLink string|integer
 ---@return string link empty string on invalid
 ---```lua
 ---LFC.GetItemLink(134686) --> "|H1:item:134686:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+---LFC.GetItemId(LFC.GetItemLink(5000)) --> 5000, though LFC.GetItemId(5000) is nil
 ---```
 function api.GetItemLink(itemOrLink)
   return getItemLink(itemOrLink)
@@ -356,6 +376,7 @@ function api.Has(itemOrLink)
 end
 
 ---Snapshot of one DB entry
+---
 ---@param itemOrLink string|integer item link, blueprint link, or itemId
 ---@return FurCEntry? entry deep copy, nil when the item is not in the DB
 ---@see LibFurnitureCatalogue.API.GetSourceDetails for vendor, price and version per source
@@ -471,11 +492,14 @@ end
 
 ---Snapshot of every item id in the DB
 ---Built by walking a table, so the order is whatever Lua felt like. Sort it yourself if you need one
+---
+---Starts the build async, so first call after load returns an empty list (check IsReady, or ask from OnReady)
 ---@return integer[] itemIds
 ---```lua
 ---#LFC.GetItemIds() --> 8528
 ---```
 function api.GetItemIds()
+  ensureDB()
   local ids = {}
   for id in pairs(internal.DB) do
     -- malformed data files can leave string keys behind, we need numeric
@@ -488,11 +512,14 @@ end
 
 local countRevision, countMemo
 ---How many items are in the DB, without building the id list
+---
+---Starts the build, does not wait for it, and answers 0 until it finishes: Check IsReady first
 ---@return integer count
 ---```lua
 ---LFC.GetEntryCount() --> 8528
 ---```
 function api.GetEntryCount()
+  ensureDB()
   if countRevision ~= internal.DBRevision then
     countRevision = internal.DBRevision
     local count = 0
@@ -515,6 +542,8 @@ end
 -- ---------------------------------------------------------------------------
 
 ---Source key -> id, the forward direction
+---This is the library's whole vocabulary, and a few of its values are filter state.
+--- Use values from GetSourceDetails if you want only real sources
 ---@return table<string, integer> sourceTypes
 ---```lua
 ---local src = LFC.GetSourceTypes()
@@ -528,6 +557,9 @@ end
 
 ---Source id -> stable key and English label, the reverse direction of GetSourceTypes
 ---Build an export or a filter from this instead of transcribing the enum
+---
+---Every value gets an entry, so a filter built from this one gets the whole vocabulary (including filter sources that are not real sources).
+--- Use values from GetSourceDetails if you want only real sources
 ---@return table<integer, { key: string, label: string }> sourceTypeInfo
 ---```lua
 ---local info = LFC.GetSourceTypeInfo()

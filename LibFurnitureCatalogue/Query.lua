@@ -951,8 +951,9 @@ local function recipeSourceRecord(rec, row)
 end
 
 ---Schema-shaped source records, ranked by priority
+---`cost` is one record or absent, never a list (2 currencies is modelled as two sources)
 ---@param itemOrLink string|integer
----@return { source: table, cost: table[], availability: table }[]
+---@return LFCSourceRecord[] records one per real source, compat-injected ones excluded
 local function getSourceRecords(itemOrLink)
   local recipeArray, resolvedKey = findWithKey(itemOrLink)
   local sources = recipeArray and recipeArray.sources
