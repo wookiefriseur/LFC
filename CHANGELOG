@@ -1,3 +1,12 @@
+1.1.0 (2026-09-08)
+- first bump of the standalone version
+- API endpoints now set in stone and with docs
+- slash commands for "/lfc"
+- moving logic out of the data layer
+- several sourcing fixes and updates (rumours, psijic, lux)
+- DB schema overhaul
+- backwards compatibility
+
 1.0.0 (2026-08-30)
 - First standalone release, split out of the FurnitureCatalogue main AddOn
 - identical with the bundled lib in FurnitureCatalogue 7.0.0 release

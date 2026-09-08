@@ -1,6 +1,6 @@
 -- LibFurnitureCatalogue - Furniture Catalogue database library, startup file
 
-local MAJOR, MINOR = "LibFurnitureCatalogue", 10000 -- TODO: generate version from bump
+local MAJOR, MINOR = "LibFurnitureCatalogue", 1001000 -- AUTOREPLACED with AddOnVersion
 
 -- set up key maps for "id -> SI_" (used in locale files)
 local lib = _G[MAJOR] or {}
