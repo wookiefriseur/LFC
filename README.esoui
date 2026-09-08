@@ -1,4 +1,4 @@
-Official library containing the FurnitureCatalogue database. LFC version 1.0.0 is bundled in [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL], starting with version 7.0.0. This standalone version will be required by FurnitureCatalogue in the near future.
+Official library containing the FurnitureCatalogue database. [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL] 7.0.0 comes with the old, bundled, LFC version 1.0.0. This standalone version will soon be required by FurnitureCatalogue and the bundled version will disappear.
 
 [COLOR=red][SIZE=4]Any new database updates go in here and will be more recent than the bundled version![/SIZE][/COLOR]
 
@@ -24,7 +24,7 @@ Official library containing the FurnitureCatalogue database. LFC version 1.0.0 i
 
 [URL="https://github.com/wookiefriseur/LFC"]Repo on GitHub[/URL]
 
-Any DB updates will be done here instead of the main AddOn. As soon as this lib version gets bumped to 1.0.1+, it will be preferred by the main AddOn if installed. The bundled lib will disappear with the next major FurnitureCatalogue update and then this one will be required to load the main AddOn ([URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]see GitHub issue discussing this split[/URL])
+Any DB updates are done here instead of the main AddOn. If this lib is installed, it will be preferred by the main AddOn. The bundled lib is out of date and will disappear with the next major FurnitureCatalogue update and then this one will be required to load the main AddOn ([URL="https://github.com/manavortex/FurnitureCatalogue/issues/196"]see GitHub issue discussing this split[/URL])
 
 
 [COLOR=wheat][SIZE=6]API[/SIZE][/COLOR]
@@ -33,7 +33,7 @@ Any DB updates will be done here instead of the main AddOn. As soon as this lib 
 
 Declare it in your manifest, then reach it as a global. All endpoints are on the LibFurnitureCatalogue.API table. [B]OnReady[/B] tells you when the DB is populated. One [B]OnReady[/B] is enough. Wrap the first use so you don't query an empty database, then reach LFC from anywhere.
 
-[code]## DependsOn: LibFurnitureCatalogue>=1000000[/code][highlight="lua"]local LFC = LibFurnitureCatalogue.API
+[code]## DependsOn: LibFurnitureCatalogue>=1001000[/code][highlight="lua"]local LFC = LibFurnitureCatalogue.API
 
 LFC.OnReady(function()
   d(LFC.GetEntryCount() .. " furnishings")
