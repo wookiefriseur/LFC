@@ -1,18 +1,21 @@
 -- Book containers: buying container item unpacks into individual book furnishings
+--
+-- A collection is shorthand helper, not the stored data shape: `location` a ZoneIds value, `place` a PlaceIds value, `itemPrice` with its `currency`, and the `contents` it unpacks into.
+-- The loop at the end expands it into one row per book, `Query.GetMiscItemSource` renders the "part of <container>" line on demand
 FurC.BookCollections = FurC.BookCollections or {}
 
 local LFC = LibFurnitureCatalogue
 local bc = LFC.Internal.Constants.BookContainers
-local loc = LFC.Internal.Constants.Locations
+local places = LFC.Internal.Constants.PlaceIds
 local src = LFC.Internal.Constants.ItemSources
 local ver = LFC.Internal.Constants.Versioning
-
-local strPartOf = LFC.Internal.Format.FormatPartOf
-local strPrice = LFC.Internal.Format.FormatPrice
+local zones = LFC.Internal.Constants.ZoneIds
 
 FurC.BookCollections[bc.TEMPLE_DOCTRINE] = { -- Temple Doctrine: The 36 Lessons
   version = ver.MORROWIND,
-  note = zo_strformat("<<1>>: <<2>>", loc.VVARDENFELL, strPrice(130000, CURT_MONEY)),
+  location = zones.VVARDENFELL,
+  itemPrice = 130000,
+  currency = CURT_MONEY,
   contents = {
     126793, -- The 36 Lessons: Sermon 1
     -- 126794 Sermon 37/36 is sold separately, same trader
@@ -56,7 +59,9 @@ FurC.BookCollections[bc.TEMPLE_DOCTRINE] = { -- Temple Doctrine: The 36 Lessons
 
 FurC.BookCollections[bc.TRUTH_IN_SEQUENCE] = { -- The Truth in Sequence
   version = ver.CLOCKWORK,
-  note = zo_strformat("<<1>>: <<2>>", loc.CWC, strPrice(20000, CURT_MONEY)),
+  location = zones.CWC,
+  itemPrice = 20000,
+  currency = CURT_MONEY,
   contents = {
     134548, -- The Truth in Sequence: Volume 1
     134549, -- The Truth in Sequence: Volume 2
@@ -75,7 +80,10 @@ FurC.BookCollections[bc.TRUTH_IN_SEQUENCE] = { -- The Truth in Sequence
 
 FurC.BookCollections[bc.NOTHING_EYES] = { -- Look Upon Their Nothing Eyes
   version = ver.SLAVES,
-  note = zo_strformat("<<1>>, <<2>>: <<3>>", loc.MURKMIRE, loc.MURKMIRE_LIL, strPrice(15000, CURT_MONEY)),
+  location = zones.MURKMIRE,
+  place = places.MURKMIRE_LIL,
+  itemPrice = 15000,
+  currency = CURT_MONEY,
   contents = {
     145597, -- Scales of Shadow
     145923, -- Lies of the Dread-Father
@@ -87,15 +95,21 @@ FurC.BookCollections[bc.NOTHING_EYES] = { -- Look Upon Their Nothing Eyes
 
 -- TODO: Add the Mages Guild books
 
--- "Part of item <container>"
+-- One row per book, all naming the container they come out of
 for containerId, collection in pairs(FurC.BookCollections) do
   local versionData = FurC.MiscItemSources[collection.version] or {}
   FurC.MiscItemSources[collection.version] = versionData
   local dropData = versionData[src.DROP] or {}
   versionData[src.DROP] = dropData
 
-  local sourceText = strPartOf(containerId, collection.note)
+  local row = {
+    partOf = containerId,
+    location = collection.location,
+    place = collection.place,
+    itemPrice = collection.itemPrice,
+    currency = collection.currency,
+  }
   for _, bookId in ipairs(collection.contents) do
-    dropData[bookId] = dropData[bookId] or sourceText
+    dropData[bookId] = dropData[bookId] or row
   end
 end

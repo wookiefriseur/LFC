@@ -39,7 +39,7 @@ echo "== constants validation =="
 "$LUA" "$HERE/validate_constants.lua" "$ROOT/LibFurnitureCatalogue"
 
 echo "== data validation =="
-"$LUA" "$HERE/validate_data.lua" "$ROOT/LibFurnitureCatalogue"
+"$LUA" "$HERE/validate_data.lua" "$ROOT/LibFurnitureCatalogue" "$LUAC"
 
 echo "== public API surface =="
 "$LUA" "$HERE/validate_api_surface.lua" "$ROOT/LibFurnitureCatalogue"

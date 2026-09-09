@@ -27,10 +27,16 @@ local strGeneric = LFC.Internal.Format.FmtGeneric
 local stripText = LFC.Internal.Format.stripTxt
 local strSrc = LFC.Internal.Format.FmtSources
 local strPartOf = LFC.Internal.Format.FormatPartOf
+local strQuest = LFC.Internal.Format.FmtQuest
+local strPrice = LFC.Internal.Format.FormatPrice
 local strRank = LFC.Internal.Format.FmtRank
+local getItemName = LFC.Internal.Format.GetItemName
+local formatAchievement = LFC.Internal.Format.FormatAchievement
 
 local resolvers = LFC.Internal.Constants.Resolvers
+local resolveEvent = resolvers.Event
 local resolveNpc = resolvers.Npc
+local resolveNpcClass = resolvers.NpcClass
 local resolvePlace = resolvers.Place
 local resolveSkillLine = resolvers.SkillLine
 local resolveZone = resolvers.Zone
@@ -422,6 +428,133 @@ local function getEventDropSource(recipeKey, recipeArray)
 end
 this.GetEventDropSource = getEventDropSource
 
+-- The category word a row renders under when it does not name its own category
+local MISC_CATEGORY = {
+  [src.DROP] = SI_FURC_SRC_DROP,
+  [src.DUNGEON] = SI_FURC_SRC_DUNG,
+  [src.HARVEST] = SI_FURC_SRC_HARVEST,
+  [src.CHEST] = SI_FURC_SRC_CHESTS,
+  [src.QUEST] = SI_FURC_SRC_QUEST,
+  [src.BAZAAR] = SI_FURC_SRC_BAZAAR,
+}
+
+---Resolve one note value: a string id, a literal, or a `{ npc = }` / `{ item = }` part
+---@param value string|integer|table
+---@return string
+local function resolveNote(value)
+  if type(value) == "table" then
+    if value.npc then
+      return resolveNpc(value.npc)
+    end
+    if value.npcClass ~= nil then
+      return resolveNpcClass(value.npcClass)
+    end
+    if value.item then
+      return getItemName(value.item)
+    end
+    return ""
+  end
+  if type(value) == "string" then
+    return value
+  end
+  return GetString(value)
+end
+
+---Render a FurC.MiscItemSources row. The row carries ids, see data/MiscItemSources.lua
+---@param source integer the item's source
+---@param row table
+---@return string
+local function renderMiscSource(source, row)
+  -- text rows: already the whole description, nothing to generate
+  if row.text then
+    if type(row.text) ~= "table" then
+      return resolveNote(row.text)
+    end
+    local words = {}
+    for i, part in ipairs(row.text) do
+      words[i] = resolveNote(part)
+    end
+    return table.concat(words, " ")
+  end
+
+  if row.reward then
+    return string.format("%s %s", formatAchievement(row.reward, true), strSrc("loc", resolveZone(row.location)))
+  end
+
+  if row.itemPack then
+    return zo_strformat(GetString(SI_FURC_SRC_TOMESPACK), GetString(row.itemPack))
+  end
+
+  -- an event is its own category word, the event name goes where a location would
+  local category = GetString(row.category or (row.event and SI_FURC_EVENT) or MISC_CATEGORY[source])
+
+  -- `locations` are several places with ids one source covers
+  -- `place` is inside the `location`, so the two go in as one nested location
+  local places = {}
+  for _, zoneId in ipairs(row.locations or {}) do
+    places[#places + 1] = resolveZone(zoneId)
+  end
+  if row.location and row.place then
+    places[#places + 1] = { resolveZone(row.location), resolvePlace(row.place) }
+  elseif row.location then
+    places[#places + 1] = resolveZone(row.location)
+  elseif row.place then
+    places[#places + 1] = resolvePlace(row.place)
+  end
+  if row.event then
+    places[#places + 1] = resolveEvent(row.event)
+  end
+
+  -- a book coming from a container names its container
+  if row.partOf then
+    local detail
+    if #places > 0 then
+      local named = {}
+      for _, name in ipairs(places) do
+        for _, part in ipairs(type(name) == "table" and name or { name }) do
+          named[#named + 1] = zo_strformat("<<1>>", part)
+        end
+      end
+      detail = string.format("%s: %s", table.concat(named, ", "), strPrice(row.itemPrice, row.currency))
+    end
+    return strPartOf(row.partOf, detail)
+  end
+
+  -- no location renders as "<category>: <price>"
+  if row.itemPrice and #places == 0 then
+    return string.format("%s: %s", category, strPrice(row.itemPrice, row.currency))
+  end
+
+  -- One suffix slot, so parts are joined in a fixed order
+  local notes = {}
+  if row.note ~= nil then
+    if type(row.note) == "table" and row.note[1] ~= nil then
+      -- a list of notes is a list of alternatives: "A or B"
+      local alternatives = {}
+      for i, value in ipairs(row.note) do
+        alternatives[i] = resolveNote(value)
+      end
+      notes[#notes + 1] = strSrc("other", unpack(alternatives))
+    else
+      notes[#notes + 1] = strSrc("src", resolveNote(row.note))
+    end
+  end
+  if row.container then
+    notes[#notes + 1] = getItemLink(row.container)
+  end
+  if row.rarity then
+    notes[#notes + 1] = GetString(row.rarity)
+  end
+  local suffix = table.concat(notes, ", ")
+
+  -- the quest formatter owns the suffix slot: it names the quest and appends the rest (if any)
+  if row.quest then
+    return strQuest(row.quest, suffix, unpack(places))
+  end
+
+  return strGeneric(category, suffix, "loc", unpack(places))
+end
+
 local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
   recipeArray = recipeArray or find(recipeKey)
   -- "source" allows asking for specific category
@@ -462,6 +595,11 @@ local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
   end
   if not originData then
     return emptyString
+  end
+
+  -- some old records still return a string
+  if type(originData) == "table" then
+    originData = renderMiscSource(source, originData)
   end
 
   if source == src.EDITOR then
@@ -959,7 +1097,7 @@ local function recipeSourceRecord(rec, row)
   local source = rec.source
   source.vendor = row.vendor
   source.location = row.location
-  -- location and place are exclusive, note enriches either
+  -- a place is inside the location when both are set, and the only thing we know if there is no location
   source.place = row.place
   source.note = row.note
   source.achievement = row.achievement

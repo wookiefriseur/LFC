@@ -18,11 +18,17 @@ local function getStr(id)
   return GetString(id)
 end
 
+--- Monster Social Classes are the game's strings, not ours (missing one renders empty)
+local function getNpcClassStr(id)
+  return (id and sFormat("<<1>>", GetString(id))) or ""
+end
+
 --- One resolver per type: stable id -> localised text
 this.Resolvers = {
   Zone = getZoneStr,
   Place = getStr,
   Npc = getStr,
+  NpcClass = getNpcClassStr,
   Event = getStr,
   Crate = getCrateStr,
   SkillLine = getSkillLineStr,
@@ -445,8 +451,7 @@ this.NPC = {}
 this.NpcByName = {}
 deriveNames(this.NpcIds, getStr, this.NPC, this.NpcByName)
 deriveNames(SOCIAL_CLASS_STRINGS, function(stringId)
-  local id = _G[stringId]
-  return id and sFormat("<<1>>", GetString(id)) or ""
+  return getNpcClassStr(_G[stringId])
 end, this.NPC, this.NpcByName)
 deriveNames(this.NpcGroupIds, function(id)
   return sFormat("<<m:1>>", GetString(id))
@@ -603,6 +608,13 @@ this.ItemPacks = {
   WINTER = 223659, -- Furnishing Pack: Winter's Feast
   WRITHING = 223665, -- Furnishing Pack: Writhing Fortress
   ZENI = 197985, -- Furnishing Pack: Chapel of Zenithar
+}
+
+--- Tamriel Tomes item packs. We don't have ids for those, so we use the strings
+this.TomesPacks = {
+  ARMOR = SI_FURC_TOMESPACK_ARMOR,
+  DAWN = SI_FURC_TOMESPACK_DAWN,
+  LOGIC = SI_FURC_TOMESPACK_LOGIC,
 }
 
 --- Crown Store bundles without itemlink, mv to ItemPacks when you get an ID

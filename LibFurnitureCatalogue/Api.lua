@@ -418,8 +418,8 @@ end
 ---@field type integer source type, see GetSourceTypes
 ---@field vendor integer|nil locale string id, resolve with GetString
 ---@field location integer|nil game zone id, resolve with GetZoneNameById
----@field place integer|nil locale string id for somewhere the game has no zone for, resolve with GetString
----@field note (integer|string)|nil qualifies location or place. Locale string id or a bare literal
+---@field place integer|nil locale string id for somewhere the game has no zone for, resolve with GetString. With `location` it is a place inside that zone, on its own it's all the record knows
+---@field note (integer|string)|nil adds details to a source. Locale string id or a bare literal
 ---@field achievement integer|nil achievement id
 ---@field event integer|nil locale string id, resolve with GetString
 
@@ -443,7 +443,7 @@ end
 ---
 ---Resolve at render time. Compare against `SI_FURC_*`
 ---
----A record normally carries `location` or `place`, not both. Prefer `location` when it has both
+---A record may carry `location`, `place`, or both. Both means the place is inside the zone: name the zone, then the place
 ---@param itemOrLink string|integer item link, blueprint link, or itemId
 ---@return LFCSourceRecord[] records empty only when the item is not in the DB. Every stored item has at least one source
 ---```lua

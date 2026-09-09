@@ -294,6 +294,20 @@ local function fmtGeneric(cat, suffix, srcType, ...)
     return sFormat("<<Cal:1>>", cat)
   end
 
+  -- A location may be a nested pair (zone, then the place inside it), so the prefix stays singular and parts are joined
+  if #locations == 1 and type(locations[1]) == "table" then
+    local named = {}
+    for i, part in ipairs(locations[1]) do
+      named[i] = colourise(stripTxt(part, STRIP_CONTROL), colours.Location)
+    end
+    local prefix = sFormat("<<t:1>>", cat)
+    local nested = table.concat(named, ", ")
+    if hasSuffix then
+      return string.format("%s: %s (%s)", prefix, nested, suffix)
+    end
+    return string.format("%s: %s", prefix, nested)
+  end
+
   if #locations == 1 then
     local prefix = sFormat("<<t:1>>", cat)
     -- `<<Cl:1>>: <<2>>`, "dungeon^n,from` => "Dungeon: in the Fungal Grotto"
