@@ -1,21 +1,16 @@
--- Data: fishing stuff
-
+--- Data: fishing stuff (`src.FISHING`)
 FurC.Fishing = FurC.Fishing or {}
 
 local LFC = LibFurnitureCatalogue
-local ver = LFC.Internal.Constants.Versioning
 local src = LFC.Internal.Constants.ItemSources
-local loc = LFC.Internal.Constants.Locations
-
-local strGeneric = LFC.Internal.Format.FmtGeneric
-
-local srcFish = GetString(SI_FURC_SRC_FISH)
+local ver = LFC.Internal.Constants.Versioning
+local zones = LFC.Internal.Constants.ZoneIds
 
 -- Furnishings obtained via fishing
-local fishing = strGeneric(srcFish)
-local fishing_summerset = strGeneric(srcFish, nil, nil, loc.SUMMERSET)
-local fishing_swamp = strGeneric(srcFish, nil, "loc", loc.MURKMIRE)
-local fishing_solstice = strGeneric(srcFish, nil, nil, loc.SOLSTICE)
+local fishing = {}
+local fishing_summerset = { location = zones.SUMMERSET }
+local fishing_swamp = { location = zones.MURKMIRE }
+local fishing_solstice = { location = zones.SOLSTICE }
 
 -- Seasons of the Worm Cult Part 2
 FurC.Fishing[ver.WORMS2] = {

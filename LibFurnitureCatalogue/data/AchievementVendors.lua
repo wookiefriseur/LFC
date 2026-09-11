@@ -7,11 +7,10 @@ local LFC = LibFurnitureCatalogue
 local events = LFC.Internal.Constants.Events
 local loc = LFC.Internal.Constants.Locations
 local npc = LFC.Internal.Constants.NPC
-local skillLine = LFC.Internal.Constants.SkillLines
+local skillIds = LFC.Internal.Constants.SkillLineIds
 local ver = LFC.Internal.Constants.Versioning
 
-local merge = LFC.Internal.Format.MergeTable
-local strRank = LFC.Internal.Format.FmtRank
+local merge = LFC.Internal.MergeTable
 
 local function getQuestString(questIdOrName)
   local questName = questIdOrName
@@ -3247,7 +3246,8 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
       },
       [120957] = { -- Faded Fence Banner
         itemPrice = 10000,
-        achievement = strRank(skillLine.LEGERDEMAIN, 20),
+        skillLine = skillIds.LEGERDEMAIN,
+        skillRank = 20,
       },
       [120033] = { -- Decorative Safebox
         itemPrice = 5000,
@@ -3287,7 +3287,8 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
       },
       [120023] = { -- Outlaw Banner
         itemPrice = 5000,
-        achievement = strRank(skillLine.LEGERDEMAIN, 20),
+        skillLine = skillIds.LEGERDEMAIN,
+        skillRank = 20,
       },
     },
   },

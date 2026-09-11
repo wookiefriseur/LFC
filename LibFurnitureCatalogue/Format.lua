@@ -20,7 +20,8 @@ local colours = LFC.Internal.Constants.Colours
 --- @param t2 any
 --- @see ZO_CombineNonContiguousTables (for no entry replacement)
 --- @return table
-function this.MergeTable(t1, t2)
+--- Not a formatter:
+function LFC.Internal.MergeTable(t1, t2)
   if nil == t2 and nil == t1 then
     return {}
   elseif nil == t2 then

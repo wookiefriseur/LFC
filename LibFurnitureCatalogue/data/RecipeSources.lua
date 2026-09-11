@@ -108,14 +108,14 @@ for folioId, folioData in pairs(FurC.FurnishingFolios) do
     FurC.Recipes[folioData.version] = FurC.Recipes[folioData.version] or {}
     for _, recipeId in ipairs(folioData.contents) do
       FurC.RecipeSources[recipeId] = {
-        vendor = npcIds.FAUSTINA,
-        place = placeIds.ANY_CAPITAL,
-        itemPrice = folioData.price,
-        currency = CURT_WRIT_VOUCHERS,
+        vendor = folioData.vendor,
+        place = folioData.place,
+        itemPrice = folioData.itemPrice,
+        currency = folioData.currency,
         partOf = folioId,
       }
       -- Store as table so getRolisSource can access both price and folio
-      FurC.Faustina[folioData.version][recipeId] = { itemPrice = folioData.price, partOf = folioId }
+      FurC.Faustina[folioData.version][recipeId] = { itemPrice = folioData.itemPrice, partOf = folioId }
       table.insert(FurC.Recipes[folioData.version], recipeId)
     end
   end

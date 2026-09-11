@@ -23,12 +23,18 @@ local function getNpcClassStr(id)
   return (id and sFormat("<<1>>", GetString(id))) or ""
 end
 
+--- Groups of enemies are rendered plural
+local function getNpcGroupStr(id)
+  return sFormat("<<m:1>>", GetString(id))
+end
+
 --- One resolver per type: stable id -> localised text
 this.Resolvers = {
   Zone = getZoneStr,
   Place = getStr,
   Npc = getStr,
   NpcClass = getNpcClassStr,
+  NpcGroup = getNpcGroupStr,
   Event = getStr,
   Crate = getCrateStr,
   SkillLine = getSkillLineStr,
@@ -369,7 +375,7 @@ this.NpcIds = {
   BGF = SI_FURC_TRADERS_BGF, -- Battlegrounds Furnishers
   CAF = SI_FURC_TRADERS_CAF, -- Global Achievement Vendor: Nolenowen, ...
   EVENT = SI_FURC_TRADERS_EVENT, -- Event Merchant, any capital city: The Impressario
-  HGF = SI_FURC_TRADERS_HGF, -- Home Goods Furnisher: Maladiq, Rohzika, ...
+  HGF = SI_FURC_TRADERS_HGF, -- Home Goods Furnisher: Maladdiq, Rohzika, ... (19 named NPCs over 44 placements)
   HOLIDAY = SI_FURC_TRADERS_HOLIDAY, -- Heralda, Tildannire, ...
   LUXF = SI_FURC_TRADERS_LUXF, -- Luxury Furnisher: Zanil
   NM = SI_FURC_TRADERS_NM, -- Night Market Vendors: Nymisasha, Fennel, Najirra
@@ -453,9 +459,7 @@ deriveNames(this.NpcIds, getStr, this.NPC, this.NpcByName)
 deriveNames(SOCIAL_CLASS_STRINGS, function(stringId)
   return getNpcClassStr(_G[stringId])
 end, this.NPC, this.NpcByName)
-deriveNames(this.NpcGroupIds, function(id)
-  return sFormat("<<m:1>>", GetString(id))
-end, this.NPC, this.NpcByName)
+deriveNames(this.NpcGroupIds, getNpcGroupStr, this.NPC, this.NpcByName)
 
 this.CrownCrateIds = {
   -- Source: https://en.uesp.net/wiki/Online:Crown_Crates

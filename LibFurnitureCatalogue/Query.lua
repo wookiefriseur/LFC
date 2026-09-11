@@ -32,11 +32,13 @@ local strPrice = LFC.Internal.Format.FormatPrice
 local strRank = LFC.Internal.Format.FmtRank
 local getItemName = LFC.Internal.Format.GetItemName
 local formatAchievement = LFC.Internal.Format.FormatAchievement
+local formatPieces = LFC.Internal.Format.FormatPieces
 
 local resolvers = LFC.Internal.Constants.Resolvers
 local resolveEvent = resolvers.Event
 local resolveNpc = resolvers.Npc
 local resolveNpcClass = resolvers.NpcClass
+local resolveNpcGroup = resolvers.NpcGroup
 local resolvePlace = resolvers.Place
 local resolveSkillLine = resolvers.SkillLine
 local resolveZone = resolvers.Zone
@@ -184,6 +186,16 @@ local strVoucherVendor = strSrc("src", npc.ROLIS, npc.FAUSTINA)
 local strMultiple = LFC.Internal.Format.JoinSources
 local splitFirstSource = LFC.Internal.Format.SplitFirstSource
 
+---Requirements a vendor has: achievement, or a skill/guild rank
+---@param row table
+---@return string|integer|nil
+local function vendorInfo(row)
+  if row.skillLine then
+    return strRank(resolveSkillLine(row.skillLine), row.skillRank)
+  end
+  return row.achievement
+end
+
 -- Writ Voucher recipes referenced by blueprint id, so every lookup has to try blueprint as well as id
 local function voucherEntry(versionData, recipeKey, blueprintId)
   if nil == versionData then
@@ -226,7 +238,13 @@ local function getRolisSource(recipeKey, recipeArray)
         for _, contentId in ipairs(folioData.contents) do
           if contentId == recipeKey or contentId == blueprintId then
             local partOfStr = strPartOf(folioId)
-            return strFurnisher(npc.FAUSTINA, loc.ANY_CAPITAL, folioData.price, CURT_WRIT_VOUCHERS, partOfStr)
+            return strFurnisher(
+              resolveNpc(folioData.vendor),
+              resolvePlace(folioData.place),
+              folioData.itemPrice,
+              folioData.currency,
+              partOfStr
+            )
           end
         end
       end
@@ -315,7 +333,8 @@ local function getPvpSource(recipeKey, recipeArray, stripColor)
   end
 
   local currency = item.currency or CURT_ALLIANCE_POINTS
-  local result = strFurnisher(vendorName, locationName, item.itemPrice, currency, item.achievement)
+  local result =
+    strFurnisher(resolveNpc(vendorName), resolveZone(locationName), item.itemPrice, currency, vendorInfo(item))
   if stripColor then
     result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
   end
@@ -361,7 +380,7 @@ local function getAchievementVendorSource(recipeKey, recipeArray, stripColor)
     currency = databaseEntry.currency
   end
 
-  local result = strFurnisher(vendorName, zoneName, databaseEntry.itemPrice, currency, databaseEntry.achievement)
+  local result = strFurnisher(vendorName, zoneName, databaseEntry.itemPrice, currency, vendorInfo(databaseEntry))
   if stripColor then
     result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
   end
@@ -436,6 +455,10 @@ local MISC_CATEGORY = {
   [src.CHEST] = SI_FURC_SRC_CHESTS,
   [src.QUEST] = SI_FURC_SRC_QUEST,
   [src.BAZAAR] = SI_FURC_SRC_BAZAAR,
+  [src.FISHING] = SI_FURC_SRC_FISH,
+  [src.PICKPOCKET] = SI_FURC_SRC_PICK,
+  [src.CONTAINER] = SI_FURC_SRC_STEAL,
+  [src.ANTIQUITY] = SI_FURC_SRC_SCRYING,
 }
 
 ---Resolve one note value: a string id, a literal, or a `{ npc = }` / `{ item = }` part
@@ -448,6 +471,9 @@ local function resolveNote(value)
     end
     if value.npcClass ~= nil then
       return resolveNpcClass(value.npcClass)
+    end
+    if value.npcGroup then
+      return resolveNpcGroup(value.npcGroup)
     end
     if value.item then
       return getItemName(value.item)
@@ -527,6 +553,9 @@ local function renderMiscSource(source, row)
 
   -- One suffix slot, so parts are joined in a fixed order
   local notes = {}
+  if row.pieces then
+    notes[#notes + 1] = formatPieces(row.pieces)
+  end
   if row.note ~= nil then
     if type(row.note) == "table" and row.note[1] ~= nil then
       -- a list of notes is a list of alternatives: "A or B"
@@ -936,9 +965,9 @@ local function voucherRecord(rec, recipeKey, blueprintId)
         if folioData.contents then
           for _, contentId in ipairs(folioData.contents) do
             if contentId == recipeKey or contentId == blueprintId then
-              rec.source.vendor = npcIds.FAUSTINA
-              rec.source.place = placeIds.ANY_CAPITAL
-              rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = folioData.price }
+              rec.source.vendor = folioData.vendor
+              rec.source.place = folioData.place
+              rec.cost = { currency = folioData.currency, amount = folioData.itemPrice }
               return
             end
           end

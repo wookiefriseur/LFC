@@ -14,6 +14,7 @@
 --   container  item id of the box it comes in
 --   partOf     item id of the container the row unpacks from (renders as "part of <container>")
 --   rarity     string id of a rarity remark
+--   pieces     how many antiquity leads make the furnishing (renders "N pieces")
 --   quest      quest id
 --   reward     achievement id, for an item handed out for earning it
 --   itemPack   TomesPacks value
@@ -21,13 +22,14 @@
 --   text       the row is prose rather than a source: the whole description, as one
 --              value or a list joined with spaces
 --
--- `note` and `text` take a string id, a literal, or a `{ npc = }`, `{ npcClass = }` or `{ item = }` part where the value needs its own vocabulary to resolve
+-- `note` and `text` take a string id, a literal, or a `{ npc = }`, `{ npcClass = }`, `{ npcGroup = }` or `{ item = }` part where the value needs its own vocabulary to resolve
 
 FurC.MiscItemSources = FurC.MiscItemSources or {}
 
 local LFC = LibFurnitureCatalogue
 local events = LFC.Internal.Constants.EventIds
 local npcClasses = LFC.Internal.Constants.NpcClassIds
+local npcGroups = LFC.Internal.Constants.NpcGroupIds
 local npcIds = LFC.Internal.Constants.NpcIds
 local packs = LFC.Internal.Constants.TomesPacks
 local places = LFC.Internal.Constants.PlaceIds
@@ -666,7 +668,12 @@ FurC.MiscItemSources[ver.WEREWOLF] = {
 }
 
 -- 8 Murkmire
-FurC.MiscItemSources[ver.SLAVES] = {}
+FurC.MiscItemSources[ver.SLAVES] = {
+  [src.DROP] = {
+    -- also stealable, see data/Justice.lua. Two sources, so two rows
+    [145550] = { location = zones.MURKMIRE, note = { npcGroup = npcGroups.ENEMY_RND } }, -- Murkmire Hunting Lure, Grisly
+  },
+}
 
 -- 7 Summerset Isles
 FurC.MiscItemSources[ver.ALTMER] = {

@@ -1,37 +1,35 @@
--- Data: items that can be stolen
+
+--- Data: items that can be stolen (`src.PICKPOCKET`,`src.CONTAINER`)
 
 FurC.Justice = FurC.Justice or {}
 
 local LFC = LibFurnitureCatalogue
-local ver = LFC.Internal.Constants.Versioning
+local npcClasses = LFC.Internal.Constants.NpcClassIds
 local src = LFC.Internal.Constants.ItemSources
-local loc = LFC.Internal.Constants.Locations
-local npc = LFC.Internal.Constants.NPC
-
-local strGeneric = LFC.Internal.Format.FmtGeneric
-local strSrc = LFC.Internal.Format.FmtSources
-
-local strMultiple = LFC.Internal.Format.JoinSources
-
-local srcDrop = GetString(SI_FURC_SRC_DROP)
-local srcPick = GetString(SI_FURC_SRC_PICK)
-local srcSteal = GetString(SI_FURC_SRC_STEAL)
+local ver = LFC.Internal.Constants.Versioning
+local zones = LFC.Internal.Constants.ZoneIds
 
 -- Furnishings obtained via pickpocketing / stealing (Justice system)
-local stealable = strGeneric(srcSteal)
-local stealable_guard = strGeneric(srcPick, strSrc("other", npc.CLASS_GUARD))
-local stealable_cc = strGeneric(srcSteal, nil, "loc", loc.CWC)
-local stealable_scholars = strGeneric(srcPick, strSrc("other", npc.CLASS_SCHOLAR))
-local stealable_nerds = strGeneric(srcPick, strSrc("other", npc.CLASS_MAGE, npc.CLASS_SCHOLAR))
-local stealable_thief = strGeneric(srcPick, strSrc("other", npc.CLASS_THIEF))
-local stealable_noble = strGeneric(srcPick, strSrc("other", npc.CLASS_NOBLE))
-local stealable_swamp = strGeneric(srcSteal, nil, "loc", loc.MURKMIRE)
-local stealable_elsewhere = strGeneric(srcSteal, nil, "other", loc.NELSWEYR, loc.SELSWEYR)
-local pickpocket_necrom = strGeneric(srcPick, nil, "other", loc.TELVANNI, loc.APOCRYPHA)
-local pickpocket_summerset = strGeneric(srcPick, nil, "other", loc.SUMMERSET)
-local pickpocket_weald = strGeneric(srcPick, nil, "other", loc.WEALD)
-local pickpocket_solstice = strGeneric(srcPick, nil, "other", loc.SOLSTICE)
-local pickpocket_glenumbra = strGeneric(srcPick, nil, "other", loc.GLENUMBRA)
+local stealable = { category = SI_FURC_SRC_STEAL }
+local stealable_guard = { note = { npcClass = npcClasses.CLASS_GUARD } }
+local stealable_scholars = { note = { npcClass = npcClasses.CLASS_SCHOLAR } }
+local stealable_nerds = {
+  note = { { npcClass = npcClasses.CLASS_MAGE }, { npcClass = npcClasses.CLASS_SCHOLAR } },
+}
+local stealable_thief = { note = { npcClass = npcClasses.CLASS_THIEF } }
+local stealable_noble = { note = { npcClass = npcClasses.CLASS_NOBLE } }
+local stealable_swamp = { location = zones.MURKMIRE }
+local stealable_elsewhere = { locations = { zones.NELSWEYR, zones.SELSWEYR } }
+local pickpocket_necrom = { locations = { zones.TELVANNI, zones.APOCRYPHA } }
+local pickpocket_summerset = { location = zones.SUMMERSET }
+local pickpocket_weald = { location = zones.WEALD }
+local pickpocket_solstice = { location = zones.SOLSTICE }
+local pickpocket_glenumbra = { location = zones.GLENUMBRA }
+
+-- Containers to steal from (TODO: wardrobes^p,from or something localisable)
+local from_wardrobes = "from wardrobes"
+local from_cabinets = "from cabinets and wardrobes"
+local from_safeboxes = "from safeboxes"
 
 -- Season One
 FurC.Justice[ver.THIEVES] = {
@@ -115,15 +113,15 @@ FurC.Justice[ver.KITTY] = {
   },
 
   [src.CONTAINER] = {
-    [151892] = strGeneric(srcSteal, "from wardrobes", nil, loc.NELSWEYR), -- Elsweyr Fragrance Bottle, Moons-Blessed
+    [151892] = { location = zones.NELSWEYR, note = from_wardrobes }, -- Elsweyr Fragrance Bottle, Moons-Blessed
     [151889] = stealable_elsewhere, -- Elsweyr Comb, Grooming
-    [151893] = strGeneric(srcSteal, "from wardrobes", nil, loc.NELSWEYR), -- Elsweyr Fragrance Bottle, Moonlit Tryst
-    [151899] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Pillow, Night Blues Wide
-    [151898] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Pillow, Gold-Ruby Roll
-    [151900] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Pillow, Gold-Ruby Throw
-    [151895] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Cloth, Rolled
-    [151643] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Rolling Pin, Well-Worn
-    [151897] = strGeneric(srcSteal, "from cabinets and wardrobes", nil, loc.NELSWEYR), -- Elsweyr Fabric, Display
+    [151893] = { location = zones.NELSWEYR, note = from_wardrobes }, -- Elsweyr Fragrance Bottle, Moonlit Tryst
+    [151899] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Night Blues Wide
+    [151898] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Gold-Ruby Roll
+    [151900] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Gold-Ruby Throw
+    [151895] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Cloth, Rolled
+    [151643] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Rolling Pin, Well-Worn
+    [151897] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Fabric, Display
     [151886] = stealable_elsewhere, -- Elsweyr Fan, Handheld
     [151887] = stealable_elsewhere, -- Elsweyr Brush, Body
     [151888] = stealable_elsewhere, -- Elsweyr Brush, Head
@@ -139,7 +137,7 @@ FurC.Justice[ver.SLAVES] = {
     [145398] = stealable_swamp, -- Murkmire Rug, Supine Turtle Worn
     [145397] = stealable_swamp, -- Murkmire Rug, Hist Gathering Worn
     [145396] = stealable_swamp, -- Murkmire Tapestry, Hist Gathering Worn
-    [145550] = strMultiple(stealable_swamp, strGeneric(srcDrop, strSrc("src", npc.ENEMY_RND), nil, loc.MURKMIRE)), -- Murkmire Hunting Lure, Grisly
+    [145550] = stealable_swamp, -- Murkmire Hunting Lure, Grisly
     [145401] = stealable_swamp, -- Murkmire Tapestry, Xanmeer Worn
     [145403] = stealable_swamp, -- Jel Parchment
   },
@@ -160,18 +158,18 @@ FurC.Justice[ver.ALTMER] = {
 -- 5 Clockwork City
 FurC.Justice[ver.CLOCKWORK] = {
   [src.CONTAINER] = {
-    [134403] = strGeneric(srcSteal, "from wardrobes", nil, loc.HEWSBANE), -- Spool, Red Thread
-    [134410] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Crank, Miniature
-    [134411] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Gear Shaft, Miniature
-    [134412] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Piston, Miniature
-    [134413] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Magnifier, Handheld
-    [134414] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Micrometer, Handheld
-    [134415] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Dial Calipers, Handheld
-    [134416] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Slide Calipers, Handheld
+    [134403] = { location = zones.HEWSBANE, note = from_wardrobes }, -- Spool, Red Thread
+    [134410] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Crank, Miniature
+    [134411] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Gear Shaft, Miniature
+    [134412] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Piston, Miniature
+    [134413] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Magnifier, Handheld
+    [134414] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Micrometer, Handheld
+    [134415] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Dial Calipers, Handheld
+    [134416] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Slide Calipers, Handheld
     [134402] = stealable, -- Spool, Empty
     [134400] = stealable, -- Soft Leather, Stacked
     [134401] = stealable, -- Soft Leather, Folded
-    [134417] = strGeneric(srcSteal, "from safeboxes", nil, loc.CWC), -- Clockwork Firm-Joint Calipers, Handheld
+    [134417] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Firm-Joint Calipers, Handheld
     [134399] = stealable, -- Quality Fabric, Folded
   },
 }
@@ -186,7 +184,10 @@ FurC.Justice[ver.REACH] = {
 -- 3 Morrowind
 FurC.Justice[ver.MORROWIND] = {
   [src.PICKPOCKET] = {
-    [126481] = strGeneric(srcPick, strSrc("src", npc.CLASS_PRIEST, npc.CLASS_PILGRIM), loc.VVARDENFELL), -- Indoril Incense, Burning
+    [126481] = {
+      location = zones.VVARDENFELL,
+      note = { { npcClass = npcClasses.CLASS_PRIEST }, { npcClass = npcClasses.CLASS_PILGRIM } },
+    }, -- Indoril Incense, Burning
     [126772] = stealable_thief, -- Khajiit Ponder Sphere
   },
 }
@@ -194,11 +195,11 @@ FurC.Justice[ver.MORROWIND] = {
 -- 2 Homestead
 FurC.Justice[ver.HOMESTEAD] = {
   [src.PICKPOCKET] = {
-    [117939] = strGeneric(srcPick, strSrc("src", npc.CLASS_WOODWORKER)), -- Rough Axe, Practical
+    [117939] = { note = { npcClass = npcClasses.CLASS_WOODWORKER } }, -- Rough Axe, Practical
     [118206] = stealable_thief, -- Gaming die
     [118489] = stealable_scholars, -- Papers, Stack
     [118528] = stealable, -- Signed Contract
-    [118890] = strGeneric(srcPick, strSrc("src", npc.CLASS_CULTIST, npc.CLASS_ASSASSIN)), -- Skull, Human
+    [118890] = { note = { { npcClass = npcClasses.CLASS_CULTIST }, { npcClass = npcClasses.CLASS_ASSASSIN } } }, -- Skull, Human
     [118487] = stealable_scholars, -- Letter, Personal
     [120008] = stealable_nerds, -- Soul Gem, Lesser
     [120005] = stealable_nerds, -- Soul Gem, Common
@@ -211,10 +212,10 @@ FurC.Justice[ver.HOMESTEAD] = {
     [118713] = stealable_guard, -- Bounty Sheet: Khajiiti Man
     [118716] = stealable_guard, -- Bounty Sheet: Orc Woman
     [118717] = stealable_guard, -- Bounty Sheet: Orc Man
-    [121055] = strGeneric(srcPick, strSrc("src", npc.CLASS_DRUNKARD)), -- Breton Mug, Full
+    [121055] = { note = { npcClass = npcClasses.CLASS_DRUNKARD } }, -- Breton Mug, Full
   },
 
   [src.CONTAINER] = {
-    [116512] = strGeneric(srcSteal, nil, nil, loc.WROTHGAR), -- Orcish Carpet, Blood
+    [116512] = { location = zones.WROTHGAR }, -- Orcish Carpet, Blood
   },
 }

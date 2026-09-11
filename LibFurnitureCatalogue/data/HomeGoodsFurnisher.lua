@@ -1,5 +1,4 @@
--- Data: currently merges into AchievementVendors, must load after AchievementVendors.lua
--- TODO: add separate table for HGF?
+-- Data: currently merges into AchievementVendors, must load after AchievementVendors.lua ()
 
 FurC.AchievementVendors = FurC.AchievementVendors or {}
 
@@ -8,7 +7,7 @@ local loc = LFC.Internal.Constants.Locations
 local npc = LFC.Internal.Constants.NPC
 local ver = LFC.Internal.Constants.Versioning
 
-local merge = LFC.Internal.Format.MergeTable
+local merge = LFC.Internal.MergeTable
 
 local structures = {
   [117984] = { -- Rough Block, Dark Stone

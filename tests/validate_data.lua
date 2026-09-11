@@ -54,9 +54,15 @@ assert(#dataFiles > 0, "no data files listed in " .. manifestPath)
 
 -- Files whose rows are records of ids. These have no business reaching for a formatter and we check for that regression
 local DEBAKED = {
+  ["data/AchievementVendors.lua"] = true,
+  ["data/HomeGoodsFurnisher.lua"] = true,
+  ["data/Antiquity.lua"] = true,
   ["data/Books.lua"] = true,
+  ["data/Fishing.lua"] = true,
+  ["data/Justice.lua"] = true,
   ["data/MiscItemSources.lua"] = true,
   ["data/RecipeSources.lua"] = true,
+  ["data/Rolis.lua"] = true,
 }
 
 -- A name a data file never declared is a nil

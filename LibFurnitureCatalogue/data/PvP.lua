@@ -3,13 +3,13 @@
 FurC.PVP = FurC.PVP or {}
 
 local LFC = LibFurnitureCatalogue
-local loc = LFC.Internal.Constants.Locations
-local npc = LFC.Internal.Constants.NPC
+local zoneIds = LFC.Internal.Constants.ZoneIds
+local npcIds = LFC.Internal.Constants.NpcIds
 local ver = LFC.Internal.Constants.Versioning
 
 FurC.PVP[ver.BASE44] = {
-  [npc.COLL_MERCH] = {
-    [loc.IMPCITY] = {
+  [npcIds.COLL_MERCH] = {
+    [zoneIds.IMPCITY] = {
       [211572] = { -- Imperial Tent, Large
         itemPrice = 18000,
         currency = CURT_TELVAR_STONES,
@@ -52,8 +52,8 @@ FurC.PVP[ver.BASE44] = {
 
 -- 32 Home Tours U43
 FurC.PVP[ver.BASE43] = {
-  [npc.AF] = {
-    [loc.CYRO] = {
+  [npcIds.AF] = {
+    [zoneIds.CYRO] = {
       [203600] = { -- Scribing Altar
         itemPrice = 1000000,
         achievement = 3985, -- Inheritor of the Scholarium
@@ -64,8 +64,8 @@ FurC.PVP[ver.BASE43] = {
 
 -- Scalebreaker
 FurC.PVP[ver.SCALES] = {
-  [npc.AF] = {
-    [loc.CYRO] = {
+  [npcIds.AF] = {
+    [zoneIds.CYRO] = {
       [153751] = { -- Volendrung Replica
         itemPrice = 2000000,
         achievement = 2510, -- need either Volendrung Wielder (2510) and Volundrung Vanquisher (2511)
@@ -76,8 +76,8 @@ FurC.PVP[ver.SCALES] = {
 
 -- 2 Homestead
 FurC.PVP[ver.HOMESTEAD] = {
-  [npc.AF] = {
-    [loc.CYRO] = {
+  [npcIds.AF] = {
+    [zoneIds.CYRO] = {
       [120079] = { -- Disconnected Transitus shrine
         itemPrice = 100000,
         achievement = 114, -- Overlord
@@ -364,7 +364,7 @@ FurC.PVP[ver.HOMESTEAD] = {
       },
     },
 
-    [loc.IMPCITY] = {
+    [zoneIds.IMPCITY] = {
       [119983] = { -- Imperial Banner
         itemPrice = 15000,
         currency = CURT_TELVAR_STONES,

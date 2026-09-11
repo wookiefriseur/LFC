@@ -9,11 +9,10 @@ FurC.FaustinaRecipes = FurC.FaustinaRecipes or {}
 local LFC = LibFurnitureCatalogue
 local ver = LFC.Internal.Constants.Versioning
 
-local strPartOf = LFC.Internal.Format.FormatPartOf
 FurC.FurnishingFolios = FurC.FurnishingFolios or {}
 
-local npc = LFC.Internal.Constants.NPC
-local loc = LFC.Internal.Constants.Locations
+local npcIds = LFC.Internal.Constants.NpcIds
+local placeIds = LFC.Internal.Constants.PlaceIds
 
 FurC.RolisRecipes[ver.ZERO] = {
   [223930] = 125, -- Pattern: Worm Cult Tent, Large
@@ -37,9 +36,9 @@ FurC.FaustinaRecipes[ver.ZERO] = {
 
 -- 34 Fallen Banners
 FurC.FurnishingFolios[223978] = { -- West Weald 2
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.FALLBAN,
   contents = {
@@ -55,9 +54,9 @@ FurC.FurnishingFolios[223978] = { -- West Weald 2
 
 -- 32 Home Tours
 FurC.FurnishingFolios[219721] = { -- West Weald 1
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.BASE43,
   contents = {
@@ -77,9 +76,9 @@ FurC.Faustina[ver.BASE43] = {
 
 -- 30 Scions of Ithelia
 FurC.FurnishingFolios[214255] = { -- Tomehold
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.SCIONS,
   contents = {
@@ -103,9 +102,9 @@ FurC.Faustina[ver.ENDLESS] = {
 
 -- 27 Based
 FurC.FurnishingFolios[211090] = { -- Necrom
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.BASED,
   contents = {
@@ -121,9 +120,9 @@ FurC.FurnishingFolios[211090] = { -- Necrom
 
 -- 26 Scribes of Fate
 FurC.FurnishingFolios[204499] = { -- Galen
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.SCRIBE,
   contents = {
@@ -139,9 +138,9 @@ FurC.FurnishingFolios[204499] = { -- Galen
 
 -- 24 Lost Depths
 FurC.FurnishingFolios[198597] = { -- High Isle
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.DEPTHS,
   contents = {
@@ -157,9 +156,9 @@ FurC.FurnishingFolios[198597] = { -- High Isle
 
 -- 22 Ascending Tides
 FurC.FurnishingFolios[194429] = { -- Deadlands
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.TIDES,
   contents = {
@@ -175,9 +174,9 @@ FurC.FurnishingFolios[194429] = { -- Deadlands
 
 -- 20 Waking Flame
 FurC.FurnishingFolios[190121] = { -- Blackwood
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.WAKE,
   contents = {
@@ -193,9 +192,9 @@ FurC.FurnishingFolios[190121] = { -- Blackwood
 
 -- 18 Flames of Ambition
 FurC.FurnishingFolios[184192] = { -- Markarth
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.FLAMES,
   contents = {
@@ -211,9 +210,9 @@ FurC.FurnishingFolios[184192] = { -- Markarth
 
 -- 16 Stonethorn
 FurC.FurnishingFolios[171808] = { -- Western Skyrim
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.STONET,
   contents = {
@@ -229,9 +228,9 @@ FurC.FurnishingFolios[171808] = { -- Western Skyrim
 
 -- 14 Harrowstorm
 FurC.FurnishingFolios[171778] = { -- Dragonhold
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.HARROW,
   contents = {
@@ -247,9 +246,9 @@ FurC.FurnishingFolios[171778] = { -- Dragonhold
 
 -- 13 Scalebreaker
 FurC.FurnishingFolios[171574] = { -- Elsweyr
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.SCALES,
   contents = {
@@ -265,9 +264,9 @@ FurC.FurnishingFolios[171574] = { -- Elsweyr
 
 -- 10 Wrathstone
 FurC.FurnishingFolios[171573] = { -- Ebonheart
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 700,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 700,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.WOTL,
   contents = {
@@ -283,9 +282,9 @@ FurC.FurnishingFolios[171573] = { -- Ebonheart
 
 -- 9 Wolfhunter
 FurC.FurnishingFolios[171572] = { -- Summerset
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 800,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 800,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.WEREWOLF,
   contents = {
@@ -302,9 +301,9 @@ FurC.FurnishingFolios[171572] = { -- Summerset
 
 -- 6 Dragon Bones
 FurC.FurnishingFolios[171571] = { -- Dark Elf
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 600,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 600,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.DRAGONS,
   contents = {
@@ -336,9 +335,9 @@ FurC.Rolis[ver.CLOCKWORK] = {
 
 -- 4 Reach
 FurC.FurnishingFolios[171569] = { -- Morrowind
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 600,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 600,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.REACH,
   contents = {
@@ -353,9 +352,9 @@ FurC.FurnishingFolios[171569] = { -- Morrowind
 
 -- 2 Homestead
 FurC.FurnishingFolios[171568] = { -- Crafter's
-  vendor = npc.FAUSTINA,
-  location = loc.ANY_CAPITAL,
-  price = 1100,
+  vendor = npcIds.FAUSTINA,
+  place = placeIds.ANY_CAPITAL,
+  itemPrice = 1100,
   currency = CURT_WRIT_VOUCHERS,
   version = ver.HOMESTEAD,
   contents = {
