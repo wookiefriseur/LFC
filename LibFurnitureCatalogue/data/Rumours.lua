@@ -122,7 +122,6 @@ FurC.Rumours[ver.ZERO] = {
   [223845] = rumourSource, -- Hearts Week Garland, Curved Ribbon
   [223846] = rumourSource, -- Hearts Week Garland, Curved Long Ribbon
   [223847] = rumourSource, -- Hearts Week Garland, Curved Floral Dangles
-  [223893] = rumourSource, -- Plants, Sunset Pitcher Patch
   [223139] = rumourSource, -- Worm Cult Shrine
   [223141] = rumourSource, -- Coldharbour Sconce
   [219862] = rumourSource, -- Music Box, Grave-Stake Gambol
