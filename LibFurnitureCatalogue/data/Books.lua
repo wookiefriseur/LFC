@@ -1,11 +1,18 @@
 -- Book containers: buying container item unpacks into individual book furnishings
 --
--- A collection is shorthand helper, not the stored data shape: `location` a ZoneIds value, `place` a PlaceIds value, `itemPrice` with its `currency`, and the `contents` it unpacks into.
--- The loop at the end expands it into one row per book, `Query.GetMiscItemSource` renders the "part of <container>" line on demand
+-- A collection is shorthand helper, not the stored data shape:
+-- - `vendor`: NpcIds value
+-- - `location`: ZoneIds value
+-- - `place`: PlaceIds value
+-- - `itemPrice`: price value with `currency`, and the `contents` it unpacks into
+--
+-- It is expanded into one row per book, `Query.GetMiscItemSource` renders the "part of <container>" line on demand
+-- Basically all books are bought, not found, so they land in `src.VENDOR`
 FurC.BookCollections = FurC.BookCollections or {}
 
 local LFC = LibFurnitureCatalogue
 local bc = LFC.Internal.Constants.BookContainers
+local npcIds = LFC.Internal.Constants.NpcIds
 local places = LFC.Internal.Constants.PlaceIds
 local src = LFC.Internal.Constants.ItemSources
 local ver = LFC.Internal.Constants.Versioning
@@ -13,6 +20,7 @@ local zones = LFC.Internal.Constants.ZoneIds
 
 FurC.BookCollections[bc.TEMPLE_DOCTRINE] = { -- Temple Doctrine: The 36 Lessons
   version = ver.MORROWIND,
+  vendor = npcIds.AF,
   location = zones.VVARDENFELL,
   itemPrice = 130000,
   currency = CURT_MONEY,
@@ -59,6 +67,7 @@ FurC.BookCollections[bc.TEMPLE_DOCTRINE] = { -- Temple Doctrine: The 36 Lessons
 
 FurC.BookCollections[bc.TRUTH_IN_SEQUENCE] = { -- The Truth in Sequence
   version = ver.CLOCKWORK,
+  vendor = npcIds.AF,
   location = zones.CWC,
   itemPrice = 20000,
   currency = CURT_MONEY,
@@ -80,6 +89,7 @@ FurC.BookCollections[bc.TRUTH_IN_SEQUENCE] = { -- The Truth in Sequence
 
 FurC.BookCollections[bc.NOTHING_EYES] = { -- Look Upon Their Nothing Eyes
   version = ver.SLAVES,
+  vendor = npcIds.AF,
   location = zones.MURKMIRE,
   place = places.MURKMIRE_LIL,
   itemPrice = 15000,
@@ -99,17 +109,18 @@ FurC.BookCollections[bc.NOTHING_EYES] = { -- Look Upon Their Nothing Eyes
 for containerId, collection in pairs(FurC.BookCollections) do
   local versionData = FurC.MiscItemSources[collection.version] or {}
   FurC.MiscItemSources[collection.version] = versionData
-  local dropData = versionData[src.DROP] or {}
-  versionData[src.DROP] = dropData
+  local soldData = versionData[src.VENDOR] or {}
+  versionData[src.VENDOR] = soldData
 
   local row = {
     partOf = containerId,
+    vendor = collection.vendor,
     location = collection.location,
     place = collection.place,
     itemPrice = collection.itemPrice,
     currency = collection.currency,
   }
   for _, bookId in ipairs(collection.contents) do
-    dropData[bookId] = dropData[bookId] or row
+    soldData[bookId] = soldData[bookId] or row
   end
 end

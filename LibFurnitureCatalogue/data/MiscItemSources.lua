@@ -11,18 +11,23 @@
 --   locations  ZoneIds values, for ONE source that covers several of them (group of dungeons, neighbouring zones, pub dung in a zone)
 --   event      EventIds value. event is the category word and event name goes where a location would
 --   note       source details: the mob or harvesting node it comes from (a list of notes is a list of alternatives, "A or B")
+--   npcClass   NpcClassIds value, the class of NPC carrying it (a list is alternatives, same as `note`)
+--   containerKind  string id naming a kind of container it is found in (safebox, wardrobe (a list is alternatives))
 --   container  item id of the box it comes in
 --   partOf     item id of the container the row unpacks from (renders as "part of <container>")
---   rarity     string id of a rarity remark
---   pieces     how many antiquity leads make the furnishing (renders "N pieces")
+--   vendor     NpcIds value, who sells it
+--   rarity     how rare the drop is: SI_FURC_RARITY_RARE or SI_FURC_RARITY_EXTREMELYRARE --TODO: drop this?
+--   leads      true when an antiquity is assembled from multiple leads
 --   quest      quest id
 --   reward     achievement id, for an item handed out for earning it
 --   itemPack   TomesPacks value
 --   itemPrice  what it costs, with `currency`
---   text       the row is prose rather than a source: the whole description, as one
---              value or a list joined with spaces
 --
--- `note` and `text` take a string id, a literal, or a `{ npc = }`, `{ npcClass = }`, `{ npcGroup = }` or `{ item = }` part where the value needs its own vocabulary to resolve
+-- `note` takes a string id, a literal, or a special table where the value needs its own vocabulary to resolve
+--
+-- No row writes its own finished sentence, that's what a formatter is for
+--
+-- A list inside one field is alternatives, rendered as "A or B". Separate fields add to each other ("treasure chests or safeboxes, extremely rare")
 
 FurC.MiscItemSources = FurC.MiscItemSources or {}
 
@@ -40,9 +45,9 @@ local zones = LFC.Internal.Constants.ZoneIds
 -- Quests and guilds
 local tribute = { category = SI_FURC_SRC_TOT }
 local tribute_ranked = { category = SI_FURC_SRC_TOT, note = SI_FURC_REWARD_RANKED_MAIL }
-local db_poison = { text = { SI_FURC_DB, SI_FURC_DB_POISON } }
-local db_sneaky = { text = { SI_FURC_DB, SI_FURC_DB_STEALTH } }
-local db_equip = { text = { SI_FURC_DB, SI_FURC_DB_EQUIP } }
+local db_poison = { category = SI_FURC_DB, note = SI_FURC_DB_POISON }
+local db_sneaky = { category = SI_FURC_DB, note = SI_FURC_DB_STEALTH }
+local db_equip = { category = SI_FURC_DB, note = SI_FURC_DB_EQUIP }
 local quest_worms = { quest = 5952 }
 
 --- TODO maybe: add reward coffers to containers in Constants
@@ -57,13 +62,13 @@ local daily_ashlander = {
 -- reward box: 145568 Tribal Treasure Crate
 local daily_murk = { category = SI_FURC_SRC_QUEST_DAILY, location = zones.MURKMIRE, container = 145568 }
 
--- Player guilds are community entities the game has no id for, and they hand out an item rarely enough not to earn a field. The whole name is the note, "guild" included,
-local guild_aetherius = { category = SI_FURC_EVENT, note = "Aetherius Art guild" }
-local guild_bananas = { category = SI_FURC_EVENT, note = "Dauntless Bananas guild" }
-local guild_disenfranchised = { category = SI_FURC_EVENT, note = "Disenfranchised guild" }
-local guild_goldleaf = { category = SI_FURC_EVENT, note = "Goldleaf Acquisitions guild" }
-local guild_museum = { category = SI_FURC_EVENT, note = "Museum guild" }
-local guild_nomads = { category = SI_FURC_EVENT, note = "Nomads of Nirn guild" }
+-- Player guilds have no id in the game, so the name is free text in the note
+local guild_aetherius = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Aetherius Art" }
+local guild_bananas = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Dauntless Bananas" }
+local guild_disenfranchised = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Disenfranchised" }
+local guild_goldleaf = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Goldleaf Acquisitions" }
+local guild_museum = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Museum" }
+local guild_nomads = { category = SI_FURC_SRC_PLAYER_GUILD, note = "Nomads of Nirn" }
 
 -- Events
 local ev_elsweyr = { event = events.ELSWEYR }
@@ -535,7 +540,7 @@ FurC.MiscItemSources[ver.TIDES] = {}
 -- 20 Deadlands
 FurC.MiscItemSources[ver.DEADL] = {
   [src.DROP] = {
-    [166960] = { text = "From combining Stone Husk Fragments from the Labyrinthian in Western Skyrim" }, -- Target Stone Husk
+    [166960] = { location = zones.WSKYRIM, note = SI_FURC_SRC_STONEHUSK }, -- Target Stone Husk (from item 166466: "Stone Husk Fragment"; TODO: use fragment itemlink, it already contains the info.. no need to translate that stuff)
     [163432] = { reward = 2669, location = zones.WSKYRIM }, -- Music Box, Merry Mead Maker ; Achievement
     [166027] = { location = zones.BLACKREACH_GMC, note = "chaurus mobs" }, -- Chaurus Egg, Dormant
   },
@@ -689,7 +694,7 @@ FurC.MiscItemSources[ver.DRAGONS] = {
     [139062] = summerset_clamsngeysers, -- Pearl, Large
     [139063] = summerset_clamsngeysers, -- Pearl, Enormous
     [139061] = summerset_clamsngeysers, -- Giant Clam, Sealed
-    [139059] = { text = "drops from Echatere, and probably a lot else" }, -- Ivory, Polished
+    [139059] = { note = { npc = npcIds.ENEMY_ECHATERE } }, -- Ivory, Polished
   },
 
   [src.DUNGEON] = {

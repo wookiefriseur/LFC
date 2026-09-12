@@ -20,10 +20,7 @@ local stripTxt = fmt.stripTxt
 local stringKeys = LFC.Internal.StringKeys
 
 -- value -> name (readable source name instead of id)
-local SOURCE_NAME = {}
-for name, value in pairs(LFC.Internal.Constants.ItemSources) do
-  SOURCE_NAME[value] = name
-end
+local SOURCE_NAME = LFC.Internal.Constants.SourceNames
 
 ---@param value integer source type value
 ---@return string

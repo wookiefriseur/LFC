@@ -92,6 +92,22 @@ do
         fail(string.format("NotASource[%s] names no ItemSources value", tostring(value)))
       end
     end
+
+    local names = constants.SourceNames
+    if type(names) ~= "table" then
+      fail("SourceNames is missing")
+    else
+      for value in pairs(labels) do
+        if names[value] == nil then
+          fail(string.format("SourceNames has no key for source %s", tostring(value)))
+        end
+      end
+      for value, key in pairs(names) do
+        if sources[key] ~= value then
+          fail(string.format("SourceNames[%s] is %s, which is not that value's key", tostring(value), tostring(key)))
+        end
+      end
+    end
   end
 end
 

@@ -14,7 +14,7 @@ FurC.Antiquities[ver.THIEVES] = {
     [224858] = { location = zones.GLENUMBRA }, -- Zenithar Devotional Stele
     [224855] = { location = zones.GLENUMBRA }, -- Fool's Gold Pile
     [224856] = { location = zones.GLENUMBRA }, -- Tapestry of the Prince's Hunt
-    [224854] = { location = zones.HEWSBANE, pieces = 5 }, -- Thieves Guild Armory Station
+    [224854] = { location = zones.HEWSBANE, leads = true }, -- Thieves Guild Armory Station
   },
 }
 
@@ -43,7 +43,7 @@ FurC.Antiquities[ver.WORMS2] = {
     [223155] = { location = zones.SOLSTICE }, -- Daedric Gate, Coldharbour
     [223156] = { location = zones.SOLSTICE }, -- Reaper, Pattern Template
     [219870] = { location = zones.SOLSTICE }, -- Antique Map of Solstice
-    [219871] = { location = zones.SOLSTICE, pieces = 5 }, -- Cult Blacksmithing Station
+    [219871] = { location = zones.SOLSTICE, leads = true }, -- Cult Blacksmithing Station
   },
 }
 
@@ -51,7 +51,7 @@ FurC.Antiquities[ver.WORMS2] = {
 FurC.Antiquities[ver.WORMS] = {
   [src.ANTIQUITY] = {
     [214358] = { location = zones.SOLSTICE }, -- Large Solstice Bismuth Tower
-    [214343] = { location = zones.SOLSTICE, pieces = 5 }, -- Music Box, The Hermit Crab Dance
+    [214343] = { location = zones.SOLSTICE, leads = true }, -- Music Box, The Hermit Crab Dance
     [214355] = { location = zones.SOLSTICE }, -- Solstice Giant Crocodile Skull
     [214356] = { location = zones.SOLSTICE }, -- Solstice Giant Crocodile Ribs
     [214357] = { location = zones.SOLSTICE }, -- Solstice Giant Crocodile Tail
@@ -65,7 +65,7 @@ FurC.Antiquities[ver.WORMS] = {
 -- 32 Home Tours
 FurC.Antiquities[ver.BASE43] = {
   [src.ANTIQUITY] = {
-    [208128] = { location = zones.APOCRYPHA, pieces = 10 }, -- Apocrypha Jewelry Crafting Station
+    [208128] = { location = zones.APOCRYPHA, leads = true }, -- Apocrypha Jewelry Crafting Station
   },
 }
 
@@ -73,7 +73,7 @@ FurC.Antiquities[ver.BASE43] = {
 FurC.Antiquities[ver.WEALD] = {
   [src.ANTIQUITY] = {
     [204424] = { location = zones.WEALD }, -- Antique Map of West Weald
-    [204423] = { location = zones.WEALD, pieces = 5 }, -- Music Box, Lament for the Path Not Taken
+    [204423] = { location = zones.WEALD, leads = true }, -- Music Box, Lament for the Path Not Taken
     [204618] = { location = zones.WEALD }, -- Ayleid Arch, Wide
     [204619] = { location = zones.WEALD }, -- Ayleid Window, Large
     [204620] = { location = zones.WEALD }, -- Ayleid Sculpture, Simple Tree
@@ -85,7 +85,7 @@ FurC.Antiquities[ver.WEALD] = {
     [204623] = { location = zones.WEALD }, -- Colovian Tapestry, Worn
     [204624] = { location = zones.WEALD }, -- Colovian Tapestry, Pastoral Farm
     [204625] = { location = zones.WEALD }, -- Colovian Tapestry, Fancy Gate
-    [204420] = { location = zones.WEALD, pieces = 5 }, -- Ayleid Blacksmithing Station
+    [204420] = { location = zones.WEALD, leads = true }, -- Ayleid Blacksmithing Station
   },
 }
 
@@ -102,8 +102,8 @@ FurC.Antiquities[ver.ENDLESS] = {
     [199128] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Watchful Light
     [199127] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Petrified Watcher
     [199126] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Forged Black Book
-    [199119] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 3 }, -- Infinite Tome
-    [199118] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 5 }, -- Apocryphal Clothier Station
+    [199119] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Infinite Tome
+    [199118] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Apocryphal Clothier Station
     [198576] = { location = zones.DEADLANDS }, -- Shelf, Black Soul Gems
     [198575] = { location = zones.SELSWEYR }, -- Khajiiti Well
     [198574] = { location = zones.NELSWEYR }, -- Khajiiti Water Vessel, Large
@@ -115,7 +115,7 @@ FurC.Antiquities[ver.ENDLESS] = {
     [198568] = { location = zones.ALIKR }, -- Stone Relief, Yokudan
     [198567] = { location = zones.GLENUMBRA }, -- Breton Well, Storm Grey
     [198566] = { location = zones.REAPER }, -- Khajiiti Arch, Rising
-    [198325] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 3 }, -- Vision of Mora
+    [198325] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Vision of Mora
     [197916] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Archival Light Diffuser, Small
   },
 }
@@ -123,14 +123,14 @@ FurC.Antiquities[ver.ENDLESS] = {
 -- 26 Necrom
 FurC.Antiquities[ver.NECROM] = {
   [src.ANTIQUITY] = {
-    [197829] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 10 }, -- Music Box, Glyphic Secrets
+    [197829] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Music Box, Glyphic Secrets
     [197712] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Antique Map of Apocrypha
     [197711] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Antique Map of the Telvanni Peninsula
     [197710] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Mushroom Classification Book
     [197709] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Tribunal Window, Stained Glass
-    [197707] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 3 }, -- Apocryphal Well
-    [197706] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 3 }, -- Trifold Mirror of Alternatives
-    [197705] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, pieces = 10 }, -- Telvanni Alchemy Station
+    [197707] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Apocryphal Well
+    [197706] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Trifold Mirror of Alternatives
+    [197705] = { locations = { zones.TELVANNI, zones.APOCRYPHA }, leads = true }, -- Telvanni Alchemy Station
     [197703] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Apocrypha Fossil, Arch
     [197702] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Apocrypha Fossil, Worm
     [197701] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Apocrypha Fossil, Nautilus
@@ -141,10 +141,10 @@ FurC.Antiquities[ver.NECROM] = {
 -- 24 Firesong
 FurC.Antiquities[ver.DRUID] = {
   [src.ANTIQUITY] = {
-    [192432] = { location = zones.GALEN, pieces = 3 }, -- Shipbuilder's Crafting Station
+    [192432] = { location = zones.GALEN, leads = true }, -- Shipbuilder's Crafting Station
     [192431] = { location = zones.GALEN }, -- Antique Map of Galen
     [192430] = { location = zones.GALEN }, -- Vulk'esh Egg
-    [190938] = { location = zones.GALEN, pieces = 5 }, -- Music Box, Blessings of Stone
+    [190938] = { location = zones.GALEN, leads = true }, -- Music Box, Blessings of Stone
   },
 }
 
@@ -161,7 +161,7 @@ FurC.Antiquities[ver.BRETON] = {
 -- 20 Deadlands
 FurC.Antiquities[ver.DEADL] = {
   [src.ANTIQUITY] = {
-    [182302] = { location = zones.DEADLANDS, pieces = 3 }, -- Daedric Enchanting Station
+    [182302] = { location = zones.DEADLANDS, leads = true }, -- Daedric Enchanting Station
     [183196] = { location = zones.DEADLANDS }, -- Antique Map of the Deadlands
     [182303] = { location = zones.DEADLANDS }, -- Dagon's Scalding Gibbet
     [197708] = { locations = { zones.TELVANNI, zones.APOCRYPHA } }, -- Cliff Strider Skeleton Stand
@@ -192,7 +192,7 @@ FurC.Antiquities[ver.SKYRIM] = {
   [src.ANTIQUITY] = {
     [165866] = { location = zones.STONEFALLS }, -- Ashen Infernace Gate
     [165992] = { location = zones.WSKYRIM }, -- Antique Map of Western Skyrim
-    [163431] = { place = places.ANY, pieces = 3 }, -- Music Box, Dreams and Memories
+    [163431] = { place = places.ANY, leads = true }, -- Music Box, Dreams and Memories
     [165863] = { location = zones.GRAHTWOOD }, -- St. Alessia, Paravant
     [165859] = { location = zones.BALFOYEN }, -- The Dutiful Guar
     [165854] = { location = zones.MURKMIRE }, -- Nisswo's Soul Tender

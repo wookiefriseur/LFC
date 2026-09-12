@@ -107,8 +107,18 @@ this.ItemSources = {
   CHEST = getNextIdFor("ITEM_SOURCES"), -- 27
   QUEST = getNextIdFor("ITEM_SOURCES"), -- 28
   PICKPOCKET = getNextIdFor("ITEM_SOURCES"), -- 29
-  CONTAINER = getNextIdFor("ITEM_SOURCES"), -- 30
+  STEAL_CONTAINER = getNextIdFor("ITEM_SOURCES"), -- 30
 }
+
+-- value -> name
+this.SourceNames = {}
+for name, value in pairs(this.ItemSources) do
+  this.SourceNames[value] = name
+end
+
+---@deprecated Renamed to STEAL_CONTAINER, same id. Currently required by FC 7.0.0.
+--- TODO: Delete at next main version update
+this.ItemSources.CONTAINER = this.ItemSources.STEAL_CONTAINER
 
 ---@alias FurCItemSource integer # FurC.Constants.ItemSources values
 
@@ -133,7 +143,7 @@ do
     [src.CHEST] = 35,
     [src.QUEST] = 36,
     [src.PICKPOCKET] = 37,
-    [src.CONTAINER] = 38,
+    [src.STEAL_CONTAINER] = 38,
     [src.DROP] = 40,
     [src.JUSTICE] = 41,
     [src.FISHING] = 42,
@@ -186,7 +196,7 @@ do
     [src.CHEST] = "Treasure Chest",
     [src.QUEST] = "Quest Reward",
     [src.PICKPOCKET] = "Pickpocketing",
-    [src.CONTAINER] = "Container",
+    [src.STEAL_CONTAINER] = "Stealing-marked Container",
   }
 
   -- Enum values that just exist for filtering, not as an item source
@@ -355,6 +365,15 @@ this.PlaceByName = {}
 deriveNames(this.ZoneIds, getZoneStr, this.Locations, this.ZoneByName)
 deriveNames(this.PlaceIds, getStr, this.Locations, this.PlaceByName)
 
+this.IsZoneId = {}
+for _, id in pairs(this.ZoneIds) do
+  this.IsZoneId[id] = true
+end
+this.IsPlaceId = {}
+for _, id in pairs(this.PlaceIds) do
+  this.IsPlaceId[id] = true
+end
+
 -- NPC ids, for better readability and more control of the string sources
 -- Names keep the game's grammar markup; the formatter resolves it
 this.NpcIds = {
@@ -390,6 +409,7 @@ this.NpcIds = {
 
   -- enemies (loot)
   ENEMY_AUTOMATON = SI_FURC_NPC_AUTOMATON,
+  ENEMY_ECHATERE = SI_FURC_NPC_ECHATERE,
 }
 
 -- Social classes (pickpocketing), rendered singular
@@ -631,9 +651,12 @@ this.ItemBundles = {
   STABLE = SI_FURC_ITEMPACK_STABLE,
 }
 
+-- The game's guilds are skill lines, so a vendor row uses this table to say which guild sells the item
+-- Guild source can be Mages, Fighters, Psijic, Thieves, Antiquariats (Thieves are connected to LEGERDEMAIN skill line; mages, fighters, antiquariats and psijic have their own)
 this.SkillLineIds = {
   -- manual lookup for now:
-  -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
+    -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
+  -- TODO: add skill line search to furcdev
 
   LEGERDEMAIN = 111,
   PSIJIC = 130,

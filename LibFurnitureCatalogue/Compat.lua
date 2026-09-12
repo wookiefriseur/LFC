@@ -16,7 +16,7 @@ this.SOURCE_PARENT = {
   [src.CHEST] = src.DROP,
   [src.QUEST] = src.DROP,
   [src.PICKPOCKET] = src.JUSTICE,
-  [src.CONTAINER] = src.JUSTICE,
+  [src.STEAL_CONTAINER] = src.JUSTICE,
 }
 
 local SOURCE_PARENT = this.SOURCE_PARENT

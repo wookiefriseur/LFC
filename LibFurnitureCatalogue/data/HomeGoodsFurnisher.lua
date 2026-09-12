@@ -1,10 +1,17 @@
 -- Data: currently merges into AchievementVendors, must load after AchievementVendors.lua ()
+--
+-- Rows nest `[version][location][vendor][itemId]`, every key an id:
+-- - `location`: ZoneIds or PlaceIds value (where a merchant is, like "any capital city" or "Undaunted enclave")
+-- - `vendor`: NpcIds value
+--
+-- Row carries `itemPrice` with its `currency`, and requirements (`achievement`, or a `skillRank` of a `skillLine`)
 
 FurC.AchievementVendors = FurC.AchievementVendors or {}
 
 local LFC = LibFurnitureCatalogue
-local loc = LFC.Internal.Constants.Locations
-local npc = LFC.Internal.Constants.NPC
+local places = LFC.Internal.Constants.PlaceIds
+local zones = LFC.Internal.Constants.ZoneIds
+local npcIds = LFC.Internal.Constants.NpcIds
 local ver = LFC.Internal.Constants.Versioning
 
 local merge = LFC.Internal.MergeTable
@@ -107,8 +114,8 @@ local miscVendor = merge(merge(merge(structures, boxes), laundry), fishing_trip)
 -- ZERO2
 local homeGoodsFurnisherData = {
   [ver.THIEVES] = {
-    [loc.GLENUMBRA] = {
-      [npc.HGF] = {
+    [zones.GLENUMBRA] = {
+      [npcIds.HGF] = {
         [225029] = { -- Boulders, Mossy Cluster
           itemPrice = 225,
         },
@@ -158,8 +165,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.WORMS2] = {
-    [loc.SOLSTICE] = {
-      [npc.HGF] = {
+    [zones.SOLSTICE] = {
+      [npcIds.HGF] = {
         [220354] = { -- Tree, Flowering Red Poinsettia
           itemPrice = 5000,
         },
@@ -215,8 +222,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.SHADOWS] = {
-    [loc.SOLSTICE] = {
-      [npc.HGF] = {
+    [zones.SOLSTICE] = {
+      [npcIds.HGF] = {
         [217938] = { -- Tree, Hooked Dawnwood
           itemPrice = 3000,
         },
@@ -239,8 +246,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.WORMS] = {
-    [loc.SOLSTICE] = {
-      [npc.HGF] = {
+    [zones.SOLSTICE] = {
+      [npcIds.HGF] = {
         [214496] = { -- Boulder, Horizontal Sandstone
           itemPrice = 500,
         },
@@ -317,8 +324,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.FALLBAN] = {
-    [loc.ALIKR] = {
-      [npc.HGF] = {
+    [zones.ALIKR] = {
+      [npcIds.HGF] = {
         [118168] = { -- Block, Carved Stone
           itemPrice = 500,
         },
@@ -326,8 +333,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.WEALD] = {
-    [loc.WEALD] = {
-      [npc.HGF] = {
+    [zones.WEALD] = {
+      [npcIds.HGF] = {
         [204774] = { -- Boulder, Colovian Highland
           itemPrice = 100,
         },
@@ -425,8 +432,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.ENDLESS] = {
-    [loc.TELVANNI] = {
-      [npc.HGF] = {
+    [zones.TELVANNI] = {
+      [npcIds.HGF] = {
         [198463] = { -- Apocrypha Boulder
           itemPrice = 500,
         },
@@ -479,8 +486,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.NECROM] = {
-    [loc.TELVANNI] = {
-      [npc.HGF] = {
+    [zones.TELVANNI] = {
+      [npcIds.HGF] = {
         [197642] = { -- Apocrypha Plant, Anemone Cluster
           itemPrice = 1200,
         },
@@ -518,8 +525,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.DRUID] = {
-    [loc.GALEN] = {
-      [npc.HGF] = {
+    [zones.GALEN] = {
+      [npcIds.HGF] = {
         [192400] = { -- Druidic Planter, Sunflowers
           itemPrice = 4500,
         },
@@ -548,8 +555,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.BRETON] = {
-    [loc.HIGHISLE] = {
-      [npc.HGF] = {
+    [zones.HIGHISLE] = {
+      [npcIds.HGF] = {
         [187780] = { -- Boulder, Large Mossy Limestone
           itemPrice = 200,
         },
@@ -578,8 +585,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.DEADL] = {
-    [loc.FARGRAVE] = {
-      [npc.HGF] = {
+    [zones.FARGRAVE] = {
+      [npcIds.HGF] = {
         [181598] = { -- Bush, Low Redleaf Cluster
           itemPrice = 300,
         },
@@ -647,8 +654,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.BLACKW] = {
-    [loc.BLACKWOOD] = {
-      [npc.HGF] = {
+    [zones.BLACKWOOD] = {
+      [npcIds.HGF] = {
         [165809] = { -- Firelogs, White Pine
           itemPrice = 250,
         },
@@ -692,8 +699,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.MARKAT] = {
-    [loc.REACH] = {
-      [npc.HGF] = {
+    [zones.REACH] = {
+      [npcIds.HGF] = {
         [171383] = { -- Dwarven Broom, Restored
           itemPrice = 400,
         },
@@ -710,8 +717,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.SKYRIM] = {
-    [loc.WSKYRIM] = {
-      [npc.HGF] = {
+    [zones.WSKYRIM] = {
+      [npcIds.HGF] = {
         [165809] = { -- Firelogs, White Pine
           itemPrice = 250,
         },
@@ -767,8 +774,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.DRAGON2] = {
-    [loc.SELSWEYR] = {
-      [npc.HGF] = {
+    [zones.SELSWEYR] = {
+      [npcIds.HGF] = {
         [156677] = { -- Vines, Verdant Ivy Climber
           itemPrice = 750,
         },
@@ -779,8 +786,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.KITTY] = {
-    [loc.NELSWEYR] = {
-      [npc.HGF] = {
+    [zones.NELSWEYR] = {
+      [npcIds.HGF] = {
         [151821] = { -- Desert Grass, Patch
           itemPrice = 150,
         },
@@ -876,8 +883,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.WEREWOLF] = {
-    [loc.SUMMERSET] = {
-      [npc.HGF] = {
+    [zones.SUMMERSET] = {
+      [npcIds.HGF] = {
         [141824] = {
           itemPrice = 100,
         },
@@ -895,8 +902,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.GLENUMBRA] = {
-      [npc.HGF] = {
+    [zones.GLENUMBRA] = {
+      [npcIds.HGF] = {
         [130305] = { -- Stone, Mossy Swamp
           itemPrice = 100,
         },
@@ -911,8 +918,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.REAPER] = {
-      [npc.HGF] = {
+    [zones.REAPER] = {
+      [npcIds.HGF] = {
         [120658] = { -- Tree, Forked Sturdy
           itemPrice = 250,
         },
@@ -920,8 +927,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.SLAVES] = {
-    [loc.MURKMIRE] = {
-      [npc.HGF] = {
+    [zones.MURKMIRE] = {
+      [npcIds.HGF] = {
         [145551] = { -- Murkmire Kiln, Derelict
           itemPrice = 450,
         },
@@ -974,8 +981,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.ALTMER] = {
-    [loc.SUMMERSET] = {
-      [npc.HGF] = {
+    [zones.SUMMERSET] = {
+      [npcIds.HGF] = {
         [139122] = { -- Bush, Summerset Spruce
           itemPrice = 100,
         },
@@ -1070,8 +1077,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.DRAGONS] = {
-    [loc.FARGRAVE] = {
-      [npc.HGF] = {
+    [zones.FARGRAVE] = {
+      [npcIds.HGF] = {
         [134942] = { -- Bushes, Withered Cluster
           itemPrice = 100,
         },
@@ -1079,8 +1086,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.CLOCKWORK] = {
-    [loc.CWC] = {
-      [npc.HGF] = {
+    [zones.CWC] = {
+      [npcIds.HGF] = {
         [134304] = { -- Boulder, Basalt Slap
           itemPrice = 1000,
         },
@@ -1127,8 +1134,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.REACH] = {
-    [loc.COLDH] = {
-      [npc.HGF] = {
+    [zones.COLDH] = {
+      [npcIds.HGF] = {
         [130273] = { -- Boulder, Coldharbour Fan
           itemPrice = 5000,
         },
@@ -1155,8 +1162,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.GLENUMBRA] = {
-      [npc.HGF] = {
+    [zones.GLENUMBRA] = {
+      [npcIds.HGF] = {
         [120706] = { -- Boulder, Giant Mossy
           itemPrice = 100,
         },
@@ -1210,8 +1217,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.EASTMARCH] = {
-      [npc.HGF] = {
+    [zones.EASTMARCH] = {
+      [npcIds.HGF] = {
         [132215] = { -- Boulder, Granite Cap
           itemPrice = 1000,
         },
@@ -1259,8 +1266,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.AURIDON] = {
-      [npc.HGF] = {
+    [zones.AURIDON] = {
+      [npcIds.HGF] = {
         [120652] = { -- Boulder, Flat Lichen
           itemPrice = 100,
         },
@@ -1337,8 +1344,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.MORROWIND] = {
-    [loc.VVARDENFELL] = {
-      [npc.HGF] = {
+    [zones.VVARDENFELL] = {
+      [npcIds.HGF] = {
         [125481] = { -- Boulder, Volcanic Column
           itemPrice = 500,
         },
@@ -1415,8 +1422,8 @@ local homeGoodsFurnisherData = {
     },
   },
   [ver.HOMESTEAD] = {
-    [loc.DESHAAN] = {
-      [npc.HGF] = {
+    [zones.DESHAAN] = {
+      [npcIds.HGF] = {
         [120567] = { -- Bush, Vibrant Barberry
           itemPrice = 250,
         },
@@ -1446,8 +1453,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.BALFOYEN] = {
-      [npc.HGF] = {
+    [zones.BALFOYEN] = {
+      [npcIds.HGF] = {
         [120502] = { -- Flower, Grandmother Hibiscus
           itemPrice = 1000,
         },
@@ -1468,8 +1475,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.STONEFALLS] = {
-      [npc.HGF] = {
+    [zones.STONEFALLS] = {
+      [npcIds.HGF] = {
         [120502] = { -- Flower, Grandmother Hibiscus
           itemPrice = 1000,
         },
@@ -1505,11 +1512,11 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.EASTMARCH] = {
-      [npc.HGF] = miscVendor,
+    [zones.EASTMARCH] = {
+      [npcIds.HGF] = miscVendor,
     },
-    [loc.SHADOWFEN] = {
-      [npc.HGF] = {
+    [zones.SHADOWFEN] = {
+      [npcIds.HGF] = {
         [120502] = { -- Flower, Grandmother Hibiscus
           itemPrice = 1000,
         },
@@ -1539,8 +1546,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.RIFT] = {
-      [npc.HGF] = {
+    [zones.RIFT] = {
+      [npcIds.HGF] = {
         [120502] = { -- Flower, Grandmother Hibiscus
           itemPrice = 1000,
         },
@@ -1567,11 +1574,11 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.ALIKR] = {
-      [npc.HGF] = miscVendor,
+    [zones.ALIKR] = {
+      [npcIds.HGF] = miscVendor,
     },
-    [loc.BANG] = {
-      [npc.HGF] = {
+    [zones.BANG] = {
+      [npcIds.HGF] = {
         [120449] = { -- Bush, Desert Scrub
           itemPrice = 100,
         },
@@ -1640,11 +1647,11 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.BETNIKH] = {
-      [npc.HGF] = miscVendor,
+    [zones.BETNIKH] = {
+      [npcIds.HGF] = miscVendor,
     },
-    [loc.GLENUMBRA] = {
-      [npc.HGF] = {
+    [zones.GLENUMBRA] = {
+      [npcIds.HGF] = {
         [121011] = { -- Trees, young autumn birch
           itemPrice = 100,
         },
@@ -1683,8 +1690,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.RIVENSPIRE] = {
-      [npc.HGF] = {
+    [zones.RIVENSPIRE] = {
+      [npcIds.HGF] = {
         [120578] = { -- Sapling, Young Aspen
           itemPrice = 100,
         },
@@ -1699,8 +1706,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.STORMHAVEN] = {
-      [npc.HGF] = {
+    [zones.STORMHAVEN] = {
+      [npcIds.HGF] = {
         [120582] = { -- Tree, Yellowing Oak
           itemPrice = 20000,
         },
@@ -1715,8 +1722,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.AURIDON] = {
-      [npc.HGF] = {
+    [zones.AURIDON] = {
+      [npcIds.HGF] = {
         [120663] = { -- Saplings, Healthy Forest
           itemPrice = 100,
         },
@@ -1728,8 +1735,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.GREENSHADE] = {
-      [npc.HGF] = {
+    [zones.GREENSHADE] = {
+      [npcIds.HGF] = {
         [120597] = { -- Fern Plant, Vibrant
           itemPrice = 100,
         },
@@ -1771,11 +1778,11 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.KHENARTHI] = {
-      [npc.HGF] = miscVendor,
+    [zones.KHENARTHI] = {
+      [npcIds.HGF] = miscVendor,
     },
-    [loc.MALABAL] = {
-      [npc.HGF] = {
+    [zones.MALABAL] = {
+      [npcIds.HGF] = {
         [120529] = { -- Fern Cluster, Healthy
           itemPrice = 100,
         },
@@ -1835,8 +1842,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.GRAHTWOOD] = {
-      [npc.HGF] = {
+    [zones.GRAHTWOOD] = {
+      [npcIds.HGF] = {
         [120725] = { -- Boulder, Mossy Crag
           itemPrice = 100,
         },
@@ -1866,8 +1873,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.REAPER] = {
-      [npc.HGF] = {
+    [zones.REAPER] = {
+      [npcIds.HGF] = {
 
         [120511] = { -- Bush, Mountain Scrub
           itemPrice = 100,
@@ -1931,8 +1938,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.CRAGLORN] = {
-      [npc.HGF] = {
+    [zones.CRAGLORN] = {
+      [npcIds.HGF] = {
         [120964] = { -- Boulder, Craggy Heap
           itemPrice = 100,
         },
@@ -2016,17 +2023,17 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.COLDH] = {
-      [npc.HGF] = boxes,
+    [zones.COLDH] = {
+      [npcIds.HGF] = boxes,
     },
-    [loc.GOLDCOAST] = {
-      [npc.HGF] = structures,
+    [zones.GOLDCOAST] = {
+      [npcIds.HGF] = structures,
     },
-    [loc.HEWSBANE] = {
-      [npc.HGF] = structures,
+    [zones.HEWSBANE] = {
+      [npcIds.HGF] = structures,
     },
-    [loc.WROTHGAR] = {
-      [npc.HGF] = {
+    [zones.WROTHGAR] = {
+      [npcIds.HGF] = {
         [117986] = { -- Rough Plank, Long
           itemPrice = 100,
         },
@@ -2053,8 +2060,8 @@ local homeGoodsFurnisherData = {
         },
       },
     },
-    [loc.ANY_CITY] = {
-      [npc.HGF] = {
+    [places.ANY_CITY] = {
+      [npcIds.HGF] = {
         [120998] = { -- Block, Wood Cutting
           itemPrice = 100,
         },

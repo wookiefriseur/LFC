@@ -14,8 +14,6 @@ local npcIds = LFC.Internal.Constants.NpcIds
 local placeIds = LFC.Internal.Constants.PlaceIds
 local zoneIds = LFC.Internal.Constants.ZoneIds
 local npcByName = LFC.Internal.Constants.NpcByName
-local zoneByName = LFC.Internal.Constants.ZoneByName
-local placeByName = LFC.Internal.Constants.PlaceByName
 local eventByName = LFC.Internal.Constants.EventByName
 
 local colourise = LFC.Internal.Format.Colourise
@@ -32,7 +30,6 @@ local strPrice = LFC.Internal.Format.FormatPrice
 local strRank = LFC.Internal.Format.FmtRank
 local getItemName = LFC.Internal.Format.GetItemName
 local formatAchievement = LFC.Internal.Format.FormatAchievement
-local formatPieces = LFC.Internal.Format.FormatPieces
 
 local resolvers = LFC.Internal.Constants.Resolvers
 local resolveEvent = resolvers.Event
@@ -42,6 +39,17 @@ local resolveNpcGroup = resolvers.NpcGroup
 local resolvePlace = resolvers.Place
 local resolveSkillLine = resolvers.SkillLine
 local resolveZone = resolvers.Zone
+local isZoneId = LFC.Internal.Constants.IsZoneId
+
+---Get a location (zone or place)
+---@param id integer a ZoneIds or PlaceIds value
+---@return string
+local function resolveLocation(id)
+  if isZoneId[id] then
+    return resolveZone(id)
+  end
+  return resolvePlace(id)
+end
 
 local db = LFC.Internal.DB
 local ensureDB = LFC.Internal.Build.EnsureDB
@@ -190,7 +198,7 @@ local splitFirstSource = LFC.Internal.Format.SplitFirstSource
 ---@param row table
 ---@return string|integer|nil
 local function vendorInfo(row)
-  if row.skillLine then
+  if row.skillRank then
     return strRank(resolveSkillLine(row.skillLine), row.skillRank)
   end
   return row.achievement
@@ -353,19 +361,19 @@ local function getAchievementVendorSource(recipeKey, recipeArray, stripColor)
     if not versionData then
       return
     end
-    for zoneName, zoneData in pairs(versionData) do
-      for vendorName, vendorData in pairs(zoneData) do
+    for location, locationData in pairs(versionData) do
+      for vendor, vendorData in pairs(locationData) do
         if vendorData[recipeKey] then
-          return zoneName, vendorName, vendorData[recipeKey]
+          return location, vendor, vendorData[recipeKey]
         end
       end
     end
   end
 
-  local zoneName, vendorName, databaseEntry = findIn(FurC.AchievementVendors[recipeArray.version])
+  local location, vendor, databaseEntry = findIn(FurC.AchievementVendors[recipeArray.version])
   if not databaseEntry then
     for _, versionData in pairs(FurC.AchievementVendors) do
-      zoneName, vendorName, databaseEntry = findIn(versionData)
+      location, vendor, databaseEntry = findIn(versionData)
       if databaseEntry then
         break
       end
@@ -380,7 +388,13 @@ local function getAchievementVendorSource(recipeKey, recipeArray, stripColor)
     currency = databaseEntry.currency
   end
 
-  local result = strFurnisher(vendorName, zoneName, databaseEntry.itemPrice, currency, vendorInfo(databaseEntry))
+  local result = strFurnisher(
+    resolveNpc(vendor),
+    resolveLocation(location),
+    databaseEntry.itemPrice,
+    currency,
+    vendorInfo(databaseEntry)
+  )
   if stripColor then
     result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
   end
@@ -447,6 +461,8 @@ local function getEventDropSource(recipeKey, recipeArray)
 end
 this.GetEventDropSource = getEventDropSource
 
+local strLeads = GetString(SI_FURC_SRC_LEADS)
+
 -- The category word a row renders under when it does not name its own category
 local MISC_CATEGORY = {
   [src.DROP] = SI_FURC_SRC_DROP,
@@ -457,7 +473,7 @@ local MISC_CATEGORY = {
   [src.BAZAAR] = SI_FURC_SRC_BAZAAR,
   [src.FISHING] = SI_FURC_SRC_FISH,
   [src.PICKPOCKET] = SI_FURC_SRC_PICK,
-  [src.CONTAINER] = SI_FURC_SRC_STEAL,
+  [src.STEAL_CONTAINER] = SI_FURC_SRC_STEAL,
   [src.ANTIQUITY] = SI_FURC_SRC_SCRYING,
 }
 
@@ -486,23 +502,35 @@ local function resolveNote(value)
   return GetString(value)
 end
 
+---Adds to a suffix: a single value, or a list of alternatives. A value that resolves to nothing adds no part.
+---@param parts string[] suffix parts, appended to in place
+---@param value any a vocabulary value, a `{ npc = }`-style note part, or a list of either
+---@param resolve fun(value: any): string
+local function addQualifier(parts, value, resolve)
+  if value == nil then
+    return
+  end
+  if type(value) ~= "table" or value[1] == nil then
+    local resolved = resolve(value)
+    if resolved ~= "" then
+      parts[#parts + 1] = strSrc("src", resolved)
+    end
+    return
+  end
+  local alternatives = {}
+  for _, part in ipairs(value) do
+    alternatives[#alternatives + 1] = resolve(part)
+  end
+  if #alternatives > 0 then
+    parts[#parts + 1] = strSrc("other", unpack(alternatives))
+  end
+end
+
 ---Render a FurC.MiscItemSources row. The row carries ids, see data/MiscItemSources.lua
 ---@param source integer the item's source
 ---@param row table
 ---@return string
 local function renderMiscSource(source, row)
-  -- text rows: already the whole description, nothing to generate
-  if row.text then
-    if type(row.text) ~= "table" then
-      return resolveNote(row.text)
-    end
-    local words = {}
-    for i, part in ipairs(row.text) do
-      words[i] = resolveNote(part)
-    end
-    return table.concat(words, " ")
-  end
-
   if row.reward then
     return string.format("%s %s", formatAchievement(row.reward, true), strSrc("loc", resolveZone(row.location)))
   end
@@ -510,9 +538,6 @@ local function renderMiscSource(source, row)
   if row.itemPack then
     return zo_strformat(GetString(SI_FURC_SRC_TOMESPACK), GetString(row.itemPack))
   end
-
-  -- an event is its own category word, the event name goes where a location would
-  local category = GetString(row.category or (row.event and SI_FURC_EVENT) or MISC_CATEGORY[source])
 
   -- `locations` are several places with ids one source covers
   -- `place` is inside the `location`, so the two go in as one nested location
@@ -531,20 +556,26 @@ local function renderMiscSource(source, row)
     places[#places + 1] = resolveEvent(row.event)
   end
 
-  -- a book coming from a container names its container
+  -- a book coming from a container names its container, and who sells that
   if row.partOf then
     local detail
-    if #places > 0 then
-      local named = {}
-      for _, name in ipairs(places) do
-        for _, part in ipairs(type(name) == "table" and name or { name }) do
-          named[#named + 1] = zo_strformat("<<1>>", part)
-        end
+    local named = {}
+    if row.vendor then
+      named[#named + 1] = zo_strformat("<<1>>", resolveNpc(row.vendor))
+    end
+    for _, name in ipairs(places) do
+      for _, part in ipairs(type(name) == "table" and name or { name }) do
+        named[#named + 1] = zo_strformat("<<1>>", part)
       end
+    end
+    if #named > 0 then
       detail = string.format("%s: %s", table.concat(named, ", "), strPrice(row.itemPrice, row.currency))
     end
     return strPartOf(row.partOf, detail)
   end
+
+  -- an event is its own category word, the event name goes where a location would
+  local category = GetString(row.category or (row.event and SI_FURC_EVENT) or MISC_CATEGORY[source])
 
   -- no location renders as "<category>: <price>"
   if row.itemPrice and #places == 0 then
@@ -553,21 +584,12 @@ local function renderMiscSource(source, row)
 
   -- One suffix slot, so parts are joined in a fixed order
   local notes = {}
-  if row.pieces then
-    notes[#notes + 1] = formatPieces(row.pieces)
+  if row.leads then
+    notes[#notes + 1] = strLeads
   end
-  if row.note ~= nil then
-    if type(row.note) == "table" and row.note[1] ~= nil then
-      -- a list of notes is a list of alternatives: "A or B"
-      local alternatives = {}
-      for i, value in ipairs(row.note) do
-        alternatives[i] = resolveNote(value)
-      end
-      notes[#notes + 1] = strSrc("other", unpack(alternatives))
-    else
-      notes[#notes + 1] = strSrc("src", resolveNote(row.note))
-    end
-  end
+  addQualifier(notes, row.npcClass, resolveNpcClass)
+  addQualifier(notes, row.containerKind, resolveNote)
+  addQualifier(notes, row.note, resolveNote)
   if row.container then
     notes[#notes + 1] = getItemLink(row.container)
   end
@@ -667,7 +689,7 @@ local function renderRecipeSource(row)
 
   -- one suffix slot, so the most specific qualifier wins
   local info = row.achievement or (row.partOf and strPartOf(row.partOf))
-  if row.skillLine then
+  if row.skillRank then
     info = strRank(resolveSkillLine(row.skillLine), row.skillRank)
   end
   if not info and row.note then
@@ -842,22 +864,20 @@ end
 this.GetRankedSources = getRankedSources
 
 -- Typed per-source records for API
--- Data tables are keyed by localised name; records carry the id behind it
 
----@param name string localised NPC name
-local function setVendor(rec, name)
-  rec.source.vendor = npcByName[name]
+---@param id integer NpcIds value
+local function setVendor(rec, id)
+  rec.source.vendor = id
 end
 
 --- A location is a game zone, anything the game has no zone for is a place
----@param name string localised name of a zone or a place
-local function setLocation(rec, name)
-  local zoneId = zoneByName[name]
-  if zoneId then
-    rec.source.location = zoneId
+---@param id integer a ZoneIds or PlaceIds value
+local function setLocation(rec, id)
+  if isZoneId[id] then
+    rec.source.location = id
     return
   end
-  rec.source.place = placeByName[name]
+  rec.source.place = id
 end
 
 local function achievementVendorRecord(rec, recipeKey, version)
@@ -889,6 +909,8 @@ local function achievementVendorRecord(rec, recipeKey, version)
   setVendor(rec, vendor)
   setLocation(rec, zone)
   rec.source.achievement = entry.achievement
+  rec.source.skillLine = entry.skillLine
+  rec.source.skillRank = entry.skillRank
   if entry.itemPrice then
     rec.cost = { currency = entry.currency or CURT_MONEY, amount = entry.itemPrice }
   end
@@ -1130,6 +1152,8 @@ local function recipeSourceRecord(rec, row)
   source.place = row.place
   source.note = row.note
   source.achievement = row.achievement
+  source.skillLine = row.skillLine
+  source.skillRank = row.skillRank
   source.event = row.event
   if row.itemPrice then
     rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }

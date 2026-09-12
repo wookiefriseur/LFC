@@ -61,7 +61,7 @@ FurC.LuxuryFurnisher[ver.THIEVES] = {
   },
   [223893] = { -- Plants, Sunset Pitcher Patch
     itemPrice = 4000,
-	itemDate = "2026-09-11",
+    itemDate = "2026-09-11",
   },
 }
 

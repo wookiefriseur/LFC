@@ -128,15 +128,6 @@ function this.FormatPrice(price, currency)
   return ZO_Currency_FormatKeyboard(currency, price, curFmt)
 end
 
-local strPieces = GetString(SI_FURC_STRING_PIECES)
-local function fmtPieces(piecenum)
-  if piecenum <= 1 then
-    return ""
-  end
-  return sFormat(strPieces, piecenum)
-end
-this.FormatPieces = fmtPieces
-
 local fmtPartOf = GetString(SI_FURC_PART_OF)
 function this.FormatPartOf(itemid, note)
   if not itemid or itemid == 0 then

@@ -1,5 +1,4 @@
-
---- Data: items that can be stolen (`src.PICKPOCKET`,`src.CONTAINER`)
+--- Data: items that can be stolen (`src.PICKPOCKET`, `src.STEAL_CONTAINER`)
 
 FurC.Justice = FurC.Justice or {}
 
@@ -11,13 +10,11 @@ local zones = LFC.Internal.Constants.ZoneIds
 
 -- Furnishings obtained via pickpocketing / stealing (Justice system)
 local stealable = { category = SI_FURC_SRC_STEAL }
-local stealable_guard = { note = { npcClass = npcClasses.CLASS_GUARD } }
-local stealable_scholars = { note = { npcClass = npcClasses.CLASS_SCHOLAR } }
-local stealable_nerds = {
-  note = { { npcClass = npcClasses.CLASS_MAGE }, { npcClass = npcClasses.CLASS_SCHOLAR } },
-}
-local stealable_thief = { note = { npcClass = npcClasses.CLASS_THIEF } }
-local stealable_noble = { note = { npcClass = npcClasses.CLASS_NOBLE } }
+local stealable_guard = { npcClass = npcClasses.CLASS_GUARD }
+local stealable_scholars = { npcClass = npcClasses.CLASS_SCHOLAR }
+local stealable_nerds = { npcClass = { npcClasses.CLASS_MAGE, npcClasses.CLASS_SCHOLAR } }
+local stealable_thief = { npcClass = npcClasses.CLASS_THIEF }
+local stealable_noble = { npcClass = npcClasses.CLASS_NOBLE }
 local stealable_swamp = { location = zones.MURKMIRE }
 local stealable_elsewhere = { locations = { zones.NELSWEYR, zones.SELSWEYR } }
 local pickpocket_necrom = { locations = { zones.TELVANNI, zones.APOCRYPHA } }
@@ -26,10 +23,13 @@ local pickpocket_weald = { location = zones.WEALD }
 local pickpocket_solstice = { location = zones.SOLSTICE }
 local pickpocket_glenumbra = { location = zones.GLENUMBRA }
 
--- Containers to steal from (TODO: wardrobes^p,from or something localisable)
-local from_wardrobes = "from wardrobes"
-local from_cabinets = "from cabinets and wardrobes"
-local from_safeboxes = "from safeboxes"
+-- Kinds of container that can be stolen from. A list is alternatives, "A or B"
+local elsweyr_wardrobes = { location = zones.NELSWEYR, containerKind = SI_FURC_SRC_WARDROBE }
+local elsweyr_cabinets = {
+  location = zones.NELSWEYR,
+  containerKind = { SI_FURC_SRC_CABINET, SI_FURC_SRC_WARDROBE },
+}
+local cwc_safeboxes = { location = zones.CWC, containerKind = SI_FURC_SRC_SAFEBOX }
 
 -- Season One
 FurC.Justice[ver.THIEVES] = {
@@ -112,16 +112,16 @@ FurC.Justice[ver.KITTY] = {
     [151891] = stealable_noble, -- Elsweyr Hand Mirror, Rectangular
   },
 
-  [src.CONTAINER] = {
-    [151892] = { location = zones.NELSWEYR, note = from_wardrobes }, -- Elsweyr Fragrance Bottle, Moons-Blessed
+  [src.STEAL_CONTAINER] = {
+    [151892] = elsweyr_wardrobes, -- Elsweyr Fragrance Bottle, Moons-Blessed
     [151889] = stealable_elsewhere, -- Elsweyr Comb, Grooming
-    [151893] = { location = zones.NELSWEYR, note = from_wardrobes }, -- Elsweyr Fragrance Bottle, Moonlit Tryst
-    [151899] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Night Blues Wide
-    [151898] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Gold-Ruby Roll
-    [151900] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Pillow, Gold-Ruby Throw
-    [151895] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Cloth, Rolled
-    [151643] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Rolling Pin, Well-Worn
-    [151897] = { location = zones.NELSWEYR, note = from_cabinets }, -- Elsweyr Fabric, Display
+    [151893] = elsweyr_wardrobes, -- Elsweyr Fragrance Bottle, Moonlit Tryst
+    [151899] = elsweyr_cabinets, -- Elsweyr Pillow, Night Blues Wide
+    [151898] = elsweyr_cabinets, -- Elsweyr Pillow, Gold-Ruby Roll
+    [151900] = elsweyr_cabinets, -- Elsweyr Pillow, Gold-Ruby Throw
+    [151895] = elsweyr_cabinets, -- Elsweyr Cloth, Rolled
+    [151643] = elsweyr_cabinets, -- Elsweyr Rolling Pin, Well-Worn
+    [151897] = elsweyr_cabinets, -- Elsweyr Fabric, Display
     [151886] = stealable_elsewhere, -- Elsweyr Fan, Handheld
     [151887] = stealable_elsewhere, -- Elsweyr Brush, Body
     [151888] = stealable_elsewhere, -- Elsweyr Brush, Head
@@ -131,7 +131,7 @@ FurC.Justice[ver.KITTY] = {
 
 -- 8 Murkmire
 FurC.Justice[ver.SLAVES] = {
-  [src.CONTAINER] = {
+  [src.STEAL_CONTAINER] = {
     [145399] = stealable_swamp, -- Murkmire Rug, Crawling Serpents Worn
     [145400] = stealable_swamp, -- Murkmire Rug, Lurking Lizard Worn
     [145398] = stealable_swamp, -- Murkmire Rug, Supine Turtle Worn
@@ -157,26 +157,26 @@ FurC.Justice[ver.ALTMER] = {
 
 -- 5 Clockwork City
 FurC.Justice[ver.CLOCKWORK] = {
-  [src.CONTAINER] = {
-    [134403] = { location = zones.HEWSBANE, note = from_wardrobes }, -- Spool, Red Thread
-    [134410] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Crank, Miniature
-    [134411] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Gear Shaft, Miniature
-    [134412] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Piston, Miniature
-    [134413] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Magnifier, Handheld
-    [134414] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Micrometer, Handheld
-    [134415] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Dial Calipers, Handheld
-    [134416] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Slide Calipers, Handheld
+  [src.STEAL_CONTAINER] = {
+    [134403] = { location = zones.HEWSBANE, containerKind = SI_FURC_SRC_WARDROBE }, -- Spool, Red Thread
+    [134410] = cwc_safeboxes, -- Clockwork Crank, Miniature
+    [134411] = cwc_safeboxes, -- Clockwork Gear Shaft, Miniature
+    [134412] = cwc_safeboxes, -- Clockwork Piston, Miniature
+    [134413] = cwc_safeboxes, -- Clockwork Magnifier, Handheld
+    [134414] = cwc_safeboxes, -- Clockwork Micrometer, Handheld
+    [134415] = cwc_safeboxes, -- Clockwork Dial Calipers, Handheld
+    [134416] = cwc_safeboxes, -- Clockwork Slide Calipers, Handheld
     [134402] = stealable, -- Spool, Empty
     [134400] = stealable, -- Soft Leather, Stacked
     [134401] = stealable, -- Soft Leather, Folded
-    [134417] = { location = zones.CWC, note = from_safeboxes }, -- Clockwork Firm-Joint Calipers, Handheld
+    [134417] = cwc_safeboxes, -- Clockwork Firm-Joint Calipers, Handheld
     [134399] = stealable, -- Quality Fabric, Folded
   },
 }
 
 -- 4 Horns of the Reach
 FurC.Justice[ver.REACH] = {
-  [src.CONTAINER] = {
+  [src.STEAL_CONTAINER] = {
     [130191] = stealable, -- The Shivering Cheese
   },
 }
@@ -186,7 +186,7 @@ FurC.Justice[ver.MORROWIND] = {
   [src.PICKPOCKET] = {
     [126481] = {
       location = zones.VVARDENFELL,
-      note = { { npcClass = npcClasses.CLASS_PRIEST }, { npcClass = npcClasses.CLASS_PILGRIM } },
+      npcClass = { npcClasses.CLASS_PRIEST, npcClasses.CLASS_PILGRIM },
     }, -- Indoril Incense, Burning
     [126772] = stealable_thief, -- Khajiit Ponder Sphere
   },
@@ -195,11 +195,11 @@ FurC.Justice[ver.MORROWIND] = {
 -- 2 Homestead
 FurC.Justice[ver.HOMESTEAD] = {
   [src.PICKPOCKET] = {
-    [117939] = { note = { npcClass = npcClasses.CLASS_WOODWORKER } }, -- Rough Axe, Practical
+    [117939] = { npcClass = npcClasses.CLASS_WOODWORKER }, -- Rough Axe, Practical
     [118206] = stealable_thief, -- Gaming die
     [118489] = stealable_scholars, -- Papers, Stack
     [118528] = stealable, -- Signed Contract
-    [118890] = { note = { { npcClass = npcClasses.CLASS_CULTIST }, { npcClass = npcClasses.CLASS_ASSASSIN } } }, -- Skull, Human
+    [118890] = { npcClass = { npcClasses.CLASS_CULTIST, npcClasses.CLASS_ASSASSIN } }, -- Skull, Human
     [118487] = stealable_scholars, -- Letter, Personal
     [120008] = stealable_nerds, -- Soul Gem, Lesser
     [120005] = stealable_nerds, -- Soul Gem, Common
@@ -212,10 +212,10 @@ FurC.Justice[ver.HOMESTEAD] = {
     [118713] = stealable_guard, -- Bounty Sheet: Khajiiti Man
     [118716] = stealable_guard, -- Bounty Sheet: Orc Woman
     [118717] = stealable_guard, -- Bounty Sheet: Orc Man
-    [121055] = { note = { npcClass = npcClasses.CLASS_DRUNKARD } }, -- Breton Mug, Full
+    [121055] = { npcClass = npcClasses.CLASS_DRUNKARD }, -- Breton Mug, Full
   },
 
-  [src.CONTAINER] = {
+  [src.STEAL_CONTAINER] = {
     [116512] = { location = zones.WROTHGAR }, -- Orcish Carpet, Blood
   },
 }
