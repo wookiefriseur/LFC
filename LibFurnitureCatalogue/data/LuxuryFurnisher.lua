@@ -59,6 +59,10 @@ FurC.LuxuryFurnisher[ver.THIEVES] = {
     itemPrice = 20000,
     itemDate = "2026-09-04",
   },
+  [223893] = { -- Plants, Sunset Pitcher Patch
+    itemPrice = 4000,
+	itemDate = "2026-09-11",
+  },
 }
 
 -- Season Zero
@@ -285,7 +289,7 @@ FurC.LuxuryFurnisher[ver.FALLBAN] = {
   },
   [212579] = { -- Flowers, Sunflower Row
     itemPrice = 1000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [212578] = { -- Grass, Wispy Plume Cluster
     itemPrice = 450,
@@ -497,7 +501,7 @@ FurC.LuxuryFurnisher[ver.SCIONS] = {
   },
   [203590] = { -- Flowers, Snowspray
     itemPrice = 10000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [203589] = { -- Festering Coral, Large Crimson-Orange
     itemPrice = 5000,
@@ -753,7 +757,7 @@ FurC.LuxuryFurnisher[ver.SCRIBE] = {
   },
   [193791] = { -- Palm, Blooming Tropical
     itemPrice = 4500,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [193790] = { -- Festering Coral, Crimson-Orange
     itemPrice = 4000,
@@ -989,7 +993,7 @@ FurC.LuxuryFurnisher[ver.TIDES] = {
   },
   [184199] = { -- Mushroom, Twisted Tufted Cap
     itemPrice = 4500,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [184198] = { -- Coral Formation, Branching Red Cluster
     itemPrice = 1000,
@@ -1225,7 +1229,7 @@ FurC.LuxuryFurnisher[ver.FLAMES] = {
   },
   [171824] = { -- Mushroom, Tufted Cap
     itemPrice = 5000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [171823] = { -- Coral Formation, Branching Red
     itemPrice = 2000,
@@ -1481,7 +1485,7 @@ FurC.LuxuryFurnisher[ver.DRAGON2] = {
   },
   [156652] = { -- Garlas Alpinia, Branching
     itemPrice = 2000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [156651] = { -- Anchor, Hanging
     itemPrice = 20000,
@@ -1873,7 +1877,7 @@ FurC.LuxuryFurnisher[ver.SLAVES] = {
   },
   [145474] = { -- Plant, Flytrap
     itemPrice = 4000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [145473] = { -- Antler Coral, Stout Crimson
     itemPrice = 75000,
@@ -2032,7 +2036,7 @@ FurC.LuxuryFurnisher[ver.DRAGONS] = {
   },
   [134829] = { -- Fern, Woody Slough
     itemPrice = 3000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [134828] = { -- Antler Coral, Branched Spire
     itemPrice = 100000,
@@ -2728,19 +2732,19 @@ FurC.LuxuryFurnisher[ver.HOMESTEAD] = {
   },
   [120886] = { -- White Hosta
     itemPrice = 3000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [120885] = { -- Alik'r Cactus
     itemPrice = 2000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [120884] = { -- Buckthorn
     itemPrice = 4000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [120883] = { -- Void Flower
     itemPrice = 5000,
-    itemDate = "2025-08-15",
+    itemDate = "2026-09-11",
   },
   [120850] = { -- Harbor Floats
     itemPrice = 5000,
