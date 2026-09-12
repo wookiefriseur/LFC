@@ -465,6 +465,14 @@ end
 this.FmtCrownCrate = fmtCrownCrate
 
 local strQuest = GetString(SI_FURC_SRC_QUEST)
+
+---Format a quest a vendor requires, "Quest: <name>"
+---@param questId number
+---@return string
+function this.FmtQuestReq(questId)
+  return sFormat("<<1>>: <<2>>", strQuest, GetQuestName(questId))
+end
+
 ---Format a quest
 ---@param questId? number defaults to 0 = no quest
 

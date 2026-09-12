@@ -2,7 +2,6 @@
 -- Edit values between START/END markers
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
-  SI_FURC_DATAMINED_UNCLEAR = "ゲーム内に存在はしていますが、入手方法は不明です。",
   SI_FURC_DB = "闇の一党の配達人から確率で入手",
   SI_FURC_DB_EQUIP = "「装備はあるか？」",
   SI_FURC_DB_POISON = "「毒か薬はないか？」",

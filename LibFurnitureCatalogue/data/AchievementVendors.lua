@@ -4,7 +4,7 @@
 -- - `location`: ZoneIds or PlaceIds value (where a merchant is, like "any capital city" or "Undaunted enclave")
 -- - `vendor`: NpcIds value
 --
--- Row carries `itemPrice` with its `currency`, and requirements (`achievement`, or a `skillRank` of a `skillLine`). Most guilds have a skill line, so it also says which guild sells an item
+-- Row carries `itemPrice` with its `currency`, and requirements (`achievement`, `quest`, or a `skillRank` of a `skillLine`). Most guilds have a skill line, so it also says which guild sells an item
 
 FurC.AchievementVendors = FurC.AchievementVendors or {}
 FurC.Books = FurC.Books or {}
@@ -18,14 +18,6 @@ local skillIds = LFC.Internal.Constants.SkillLineIds
 local ver = LFC.Internal.Constants.Versioning
 
 local merge = LFC.Internal.MergeTable
-
-local function getQuestString(questIdOrName)
-  local questName = questIdOrName
-  if type(questIdOrName) == "number" then
-    questName = GetQuestName(questIdOrName)
-  end
-  return zo_strformat("<<1>>: <<2>>", GetString(SI_FURC_SRC_QUEST), questName)
-end
 
 local bookList = {
   [120197] = { -- 16 accords of madness, vol vi
@@ -1854,7 +1846,7 @@ FurC.AchievementVendors[ver.KITTY] = {
     [npcIds.AF] = {
       [151790] = { -- Akaviri Table, Stone
         itemPrice = 10000,
-        achievement = getQuestString(6307), -- Descendant of the Potentate
+        quest = 6307, -- Descendant of the Potentate
       },
       [151781] = { -- Banner, Anequina
         itemPrice = 10000,
@@ -1866,11 +1858,11 @@ FurC.AchievementVendors[ver.KITTY] = {
       },
       [151801] = { -- Barrel, Riverhold
         itemPrice = 1000,
-        achievement = getQuestString(6311), -- The Riverhold Abduction
+        quest = 6311, -- The Riverhold Abduction
       },
       [151800] = { -- Cage, Small Animal
         itemPrice = 4000,
-        achievement = getQuestString(6311), -- The Riverhold Abduction
+        quest = 6311, -- The Riverhold Abduction
       },
       [151791] = { -- Column, Fatal Warning
         itemPrice = 3000,
@@ -1878,7 +1870,7 @@ FurC.AchievementVendors[ver.KITTY] = {
       },
       [151802] = { -- Crate, Riverhold
         itemPrice = 1000,
-        achievement = getQuestString(6311), -- The Riverhold Abduction
+        quest = 6311, -- The Riverhold Abduction
       },
       [151625] = { -- Door, Akatosh Chancel
         itemPrice = 100000,
@@ -1946,7 +1938,7 @@ FurC.AchievementVendors[ver.KITTY] = {
       },
       [151792] = { -- Tojay-Raht Statue, Monk
         itemPrice = 75000,
-        achievement = getQuestString(6310), -- The Lunacy of Two Moons
+        quest = 6310, -- The Lunacy of Two Moons
       },
       [151785] = { -- Wrathstone, Replica
         itemPrice = 50000,
@@ -2022,7 +2014,7 @@ FurC.AchievementVendors[ver.SLAVES] = {
       },
       [145549] = { -- Murkmire Totem, Stone Head
         itemPrice = 12000,
-        achievement = getQuestString(6280), -- Art of the Nisswo
+        quest = 6280, -- Art of the Nisswo
       },
       [145407] = { -- Remnant of Argon, Replica
         itemPrice = 75000,
@@ -2054,7 +2046,7 @@ FurC.AchievementVendors[ver.ALTMER] = {
       },
       [139388] = { -- Banner of the House of Reveries, Hanging
         itemPrice = 10000,
-        achievement = getQuestString(6114), -- Manor of Masques
+        quest = 6114, -- Manor of Masques
       },
       [139377] = { -- Banner of the Sapiarchs, Hanging
         itemPrice = 10000,
@@ -2078,7 +2070,7 @@ FurC.AchievementVendors[ver.ALTMER] = {
       },
       [139386] = { -- Direnni Banner, Hanging
         itemPrice = 10000,
-        achievement = getQuestString(6118), -- Lauriel's Lament
+        quest = 6118, -- Lauriel's Lament
       },
       [139302] = { -- Display Case, Exhibit
         itemPrice = 25000,
@@ -2102,7 +2094,7 @@ FurC.AchievementVendors[ver.ALTMER] = {
       },
       [139387] = { -- Lillandril Banner
         itemPrice = 10000,
-        achievement = getQuestString(6111), -- Murder In Lillandril
+        quest = 6111, -- Murder In Lillandril
       },
       [139372] = { -- Mind Trap Kelp, Full-Sized
         itemPrice = 20000,
@@ -3125,7 +3117,7 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
       },
       [119967] = { -- Vibrant Garden Flowers
         itemPrice = 500,
-        achievement = getQuestString(4641), -- That Which Was Lost
+        quest = 4641, -- That Which Was Lost
       },
       [119963] = { -- Yokudan Puzzle Column
         itemPrice = 5000,

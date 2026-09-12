@@ -26,6 +26,7 @@ local stripText = LFC.Internal.Format.stripTxt
 local strSrc = LFC.Internal.Format.FmtSources
 local strPartOf = LFC.Internal.Format.FormatPartOf
 local strQuest = LFC.Internal.Format.FmtQuest
+local strQuestReq = LFC.Internal.Format.FmtQuestReq
 local strPrice = LFC.Internal.Format.FormatPrice
 local strRank = LFC.Internal.Format.FmtRank
 local getItemName = LFC.Internal.Format.GetItemName
@@ -200,6 +201,9 @@ local splitFirstSource = LFC.Internal.Format.SplitFirstSource
 local function vendorInfo(row)
   if row.skillRank then
     return strRank(resolveSkillLine(row.skillLine), row.skillRank)
+  end
+  if row.quest then
+    return strQuestReq(row.quest)
   end
   return row.achievement
 end
@@ -444,14 +448,14 @@ local function getEventDropSource(recipeKey, recipeArray)
             return strMultiple(src1, src2)
           end
 
-          if itemType == "table" then -- Schema: must have price, may have currency + achievement
+          if itemType == "table" then -- Schema: must have price, may have currency + a requirement
             local currency = item.currency or (hasSrcName and srcName == npc.EVENT and CURT_TRADE_BARS or CURT_MONEY)
             return strFurnisher(
               hasSrcName and srcName or eventName,
               eventName,
               item.itemPrice,
               currency,
-              item.achievement
+              vendorInfo(item)
             )
           end
         end
@@ -909,6 +913,7 @@ local function achievementVendorRecord(rec, recipeKey, version)
   setVendor(rec, vendor)
   setLocation(rec, zone)
   rec.source.achievement = entry.achievement
+  rec.source.quest = entry.quest
   rec.source.skillLine = entry.skillLine
   rec.source.skillRank = entry.skillRank
   if entry.itemPrice then

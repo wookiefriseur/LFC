@@ -8,14 +8,6 @@ local events = LFC.Internal.Constants.Events
 local npc = LFC.Internal.Constants.NPC
 local containers = LFC.Internal.Constants.Containers
 
-local function getQuestString(questIdOrName)
-  local questName = questIdOrName
-  if type(questIdOrName) == "number" then
-    questName = GetQuestName(questIdOrName)
-  end
-  return zo_strformat("<<1>>: <<2>>", GetString(SI_FURC_SRC_QUEST), questName)
-end
-
 local function getCollectibleString(collectibleIdOrName)
   local collectibleName = collectibleIdOrName
   if type(collectibleIdOrName) == "number" then
@@ -39,27 +31,27 @@ FurC.EventItems[ver.ZERO] = {
     [npc.NM] = {
       [224092] = { -- Thousand Eyes Banner, Small Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363), -- Those Who Would Rule
+        quest = 7363, -- Those Who Would Rule
       },
       [224089] = { -- Thousand Eyes Banner, Large Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363),
+        quest = 7363,
       },
       [224090] = { -- Glittering Goad Banner, Small Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363),
+        quest = 7363,
       },
       [224087] = { -- Glittering Goad Banner, Large Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363),
+        quest = 7363,
       },
       [224091] = { -- Ruckus Banner, Small Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363),
+        quest = 7363,
       },
       [224088] = { -- Ruckus Banner, Large Hanging
         itemPrice = 5000,
-        achievement = getQuestString(7363),
+        quest = 7363,
       },
       [224095] = { -- Antiweather Pylon
         itemPrice = 20000,

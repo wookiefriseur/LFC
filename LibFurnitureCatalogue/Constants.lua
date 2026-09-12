@@ -657,9 +657,13 @@ this.SkillLineIds = {
   -- manual lookup for now:
     -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
   -- TODO: add skill line search to furcdev
+  -- TODO: look up the Antiquarian Circle id
 
+  FIGHTERS = 45,
   LEGERDEMAIN = 111,
+  MAGES = 44,
   PSIJIC = 130,
+  UNDAUNTED = 55,
 }
 
 this.SkillLines = {}

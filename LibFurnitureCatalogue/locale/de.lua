@@ -9,7 +9,6 @@ local strings = {
   SI_FURC_CHAT_NO_SOURCE = "Keine bekannte Quelle.",
   SI_FURC_CHAT_UNKNOWN = "<<1>> ist nicht in der Datenbank",
   SI_FURC_CHAT_USAGE = "Befehle:",
-  SI_FURC_DATAMINED_UNCLEAR = "Die Existenz dieses Gegenstands wurde bestätigt, aber sein Ursprung ist noch nicht bekannt.",
   SI_FURC_DB = "Die Händler der Dunklen Bruderschaft verkaufen diese",
   SI_FURC_DB_EQUIP = "mit Ausrüstung",
   SI_FURC_DB_POISON = "mit Gift",

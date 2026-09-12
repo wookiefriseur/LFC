@@ -2,7 +2,6 @@
 -- Edit values between START/END markers
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
-  SI_FURC_DATAMINED_UNCLEAR = "Cet élément a été confirmé comme existant, mais son origine n'est pas encore connue.",
   SI_FURC_DB = "Le vendeur de fournitures de la Confrérie noire les distribue ",
   SI_FURC_DB_POISON = "Avec du poison ",
   SI_FURC_DB_STEALTH = "Comme moyen d'être moins voyant ",

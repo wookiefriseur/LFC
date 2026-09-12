@@ -6,8 +6,7 @@ FurC.Rumours = FurC.Rumours or {}
 local LFC = LibFurnitureCatalogue
 local ver = LFC.Internal.Constants.Versioning
 
-local rumourSource = GetString(SI_FURC_SRC_RUMOUR_ITEM)
-local dataminedUnclear = GetString(SI_FURC_DATAMINED_UNCLEAR)
+local rumourSource = SI_FURC_SRC_RUMOUR_ITEM
 
 -- Return of the Thieves Guild
 FurC.Rumours[ver.THIEVES] = {
@@ -355,61 +354,61 @@ FurC.Rumours[ver.WOTL] = {
 
 -- 9 Wolfhunter
 FurC.Rumours[ver.WEREWOLF] = {
-  [132198] = dataminedUnclear, -- Death Skeleton, Wrapped
-  [126776] = dataminedUnclear, -- Indoril Tapestry, House
-  [126771] = dataminedUnclear, -- Velothi Podium of Illumination
-  [126109] = dataminedUnclear, -- Display Death Crown Crate
-  [126108] = dataminedUnclear, -- Display Atronach Crown Crate
-  [126107] = dataminedUnclear, -- Display Wild Hunt Crown Crate
-  [125592] = dataminedUnclear, -- Mushroom, Lavaburster
-  [121000] = dataminedUnclear, -- Shrub, Trimmed Green
-  [120987] = dataminedUnclear, -- Dark Elf Lightpost, Capped
-  --[120986] = dataminedUnclear, -- Dark Elf Lightpost, Full ; removed @BASE44?
-  [120985] = dataminedUnclear, -- Dark Elf Lightpost, Single
-  [120873] = dataminedUnclear, -- Daedric Coffin
-  [120871] = dataminedUnclear, -- Daedric Vase, Spiked
-  [120867] = dataminedUnclear, -- Daedric Pike, Clannfear Head
-  [120866] = dataminedUnclear, -- Daedric Brazier, Tabletop
-  [120865] = dataminedUnclear, -- Daedric Table
-  [120863] = dataminedUnclear, -- Daedric Light Pillar
-  [120862] = dataminedUnclear, -- Ancient Patriarch Banner
-  [120859] = dataminedUnclear, -- Yokudan Wall Embellishment
-  [120855] = dataminedUnclear, -- Collected Wanted Poster
-  [120854] = dataminedUnclear, -- Guard Lamppost
+  [132198] = rumourSource, -- Death Skeleton, Wrapped
+  [126776] = rumourSource, -- Indoril Tapestry, House
+  [126771] = rumourSource, -- Velothi Podium of Illumination
+  [126109] = rumourSource, -- Display Death Crown Crate
+  [126108] = rumourSource, -- Display Atronach Crown Crate
+  [126107] = rumourSource, -- Display Wild Hunt Crown Crate
+  [125592] = rumourSource, -- Mushroom, Lavaburster
+  [121000] = rumourSource, -- Shrub, Trimmed Green
+  [120987] = rumourSource, -- Dark Elf Lightpost, Capped
+  --[120986] = rumourSource, -- Dark Elf Lightpost, Full ; removed @BASE44?
+  [120985] = rumourSource, -- Dark Elf Lightpost, Single
+  [120873] = rumourSource, -- Daedric Coffin
+  [120871] = rumourSource, -- Daedric Vase, Spiked
+  [120867] = rumourSource, -- Daedric Pike, Clannfear Head
+  [120866] = rumourSource, -- Daedric Brazier, Tabletop
+  [120865] = rumourSource, -- Daedric Table
+  [120863] = rumourSource, -- Daedric Light Pillar
+  [120862] = rumourSource, -- Ancient Patriarch Banner
+  [120859] = rumourSource, -- Yokudan Wall Embellishment
+  [120855] = rumourSource, -- Collected Wanted Poster
+  [120854] = rumourSource, -- Guard Lamppost
 }
 
 -- 7 Summerset Isles
 FurC.Rumours[ver.ALTMER] = {
   -- [134287] = rumourSource, -- Projector TBD ; removed @BASE44?
-  [132197] = dataminedUnclear, -- Death Skeleton, Shrouded
-  [132166] = dataminedUnclear, -- Death Skeleton, Robed
-  [130195] = dataminedUnclear, -- Target Iron Atronach
-  [130194] = dataminedUnclear, -- Target Stone Atronach
-  [130193] = dataminedUnclear, -- Robust Target Minotaur Handler
-  [120882] = dataminedUnclear, -- Tombstone, Small
-  [120881] = dataminedUnclear, -- Tombstone, Engraved, Order of the Hour
-  [120880] = dataminedUnclear, -- Tombstone, Engraved, Decorative
-  [120874] = dataminedUnclear, -- Daedric Coffin, Lid
-  [120872] = dataminedUnclear, -- Daedric Pike, Daedroth Head
-  [120858] = dataminedUnclear, -- Yokudan Tapestry
-  [120857] = dataminedUnclear, -- Yokudan Sarcophagus Lid
-  [120856] = dataminedUnclear, -- Yokudan Sarcophagus
+  [132197] = rumourSource, -- Death Skeleton, Shrouded
+  [132166] = rumourSource, -- Death Skeleton, Robed
+  [130195] = rumourSource, -- Target Iron Atronach
+  [130194] = rumourSource, -- Target Stone Atronach
+  [130193] = rumourSource, -- Robust Target Minotaur Handler
+  [120882] = rumourSource, -- Tombstone, Small
+  [120881] = rumourSource, -- Tombstone, Engraved, Order of the Hour
+  [120880] = rumourSource, -- Tombstone, Engraved, Decorative
+  [120874] = rumourSource, -- Daedric Coffin, Lid
+  [120872] = rumourSource, -- Daedric Pike, Daedroth Head
+  [120858] = rumourSource, -- Yokudan Tapestry
+  [120857] = rumourSource, -- Yokudan Sarcophagus Lid
+  [120856] = rumourSource, -- Yokudan Sarcophagus
 }
 
 -- 5 Clockwork City
 FurC.Rumours[ver.CLOCKWORK] = {
-  [125509] = dataminedUnclear, -- Replica Dwarven Crown Crate
+  [125509] = rumourSource, -- Replica Dwarven Crown Crate
 }
 
 -- 3 Morrowind
 FurC.Rumours[ver.MORROWIND] = {
-  [132531] = dataminedUnclear, -- Hlaalu Planter, Tall
-  [126568] = dataminedUnclear, -- Daedric Urn, Ritual
-  [125591] = dataminedUnclear, -- Mushroom, Lavaburst Patch
-  [125576] = dataminedUnclear, -- Hlaalu Wall Pillar, Sillar Stone
-  [125570] = dataminedUnclear, -- Hlaalu Stairs, Sillar Stone
-  [125569] = dataminedUnclear, -- Hlaalu Sidewalk, Sillar Stone Corner
-  [120411] = dataminedUnclear, -- Noble's Chalice of Wine
+  [132531] = rumourSource, -- Hlaalu Planter, Tall
+  [126568] = rumourSource, -- Daedric Urn, Ritual
+  [125591] = rumourSource, -- Mushroom, Lavaburst Patch
+  [125576] = rumourSource, -- Hlaalu Wall Pillar, Sillar Stone
+  [125570] = rumourSource, -- Hlaalu Stairs, Sillar Stone
+  [125569] = rumourSource, -- Hlaalu Sidewalk, Sillar Stone Corner
+  [120411] = rumourSource, -- Noble's Chalice of Wine
 }
 
 -- 2 Homestead
