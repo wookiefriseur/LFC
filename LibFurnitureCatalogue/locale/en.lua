@@ -14,6 +14,7 @@ local strings = {
   SI_FURC_DB_EQUIP = "with equipment",
   SI_FURC_DB_POISON = "with poison",
   SI_FURC_DB_STEALTH = "as a way to be less obtrusive",
+  SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_ESO_PLUS = "ESO+",
   SI_FURC_EVENT = "event",
   SI_FURC_EVENT_ANNIVERSARY = "Anniversary Jubilee",

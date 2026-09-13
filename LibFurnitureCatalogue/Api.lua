@@ -420,7 +420,7 @@ end
 ---@field location integer|nil game zone id, resolve with GetZoneNameById
 ---@field place integer|nil locale string id for somewhere the game has no zone for, resolve with GetString. With `location` it is a place inside that zone, on its own it's all the record knows
 ---@field note (integer|string)|nil adds details to a source. Locale string id or a bare literal
----@field achievement integer|nil achievement id
+---@field achievement integer|nil achievement id. `0` when it requires an achievement but the id is unknown
 ---@field quest integer|nil quest id, resolve with GetQuestName
 ---@field skillLine integer|nil skill line id, resolve with GetSkillLineNameById. On a vendor record it tells which guild sells it and asking what the Thieves Guild sells is asking for Legerdemain skills
 ---@field skillRank integer|nil required rank in that skill line. nil means no rank required

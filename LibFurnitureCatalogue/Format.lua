@@ -97,25 +97,12 @@ this.Colourise = colourise
 
 -- TODO: newline instead of "+"?
 local SOURCE_SEPARATOR = " + "
-this.SourceSeparator = SOURCE_SEPARATOR
 
 ---Join independent sources of one item
 ---@param ... string
 ---@return string
 function this.JoinSources(...)
   return zo_strjoin(SOURCE_SEPARATOR, ...)
-end
-
----Split off first source
----@param sources string joined by this.JoinSources
----@return string first leading source
----@return string rest remaining sources including separator, empty if there is only one
-function this.SplitFirstSource(sources)
-  local cut = sources and string.find(sources, SOURCE_SEPARATOR, 1, true)
-  if not cut then
-    return sources, ""
-  end
-  return string.sub(sources, 1, cut - 1), string.sub(sources, cut)
 end
 
 ---Format price string with currency
@@ -360,6 +347,7 @@ end
 
 local fmtAch = GetString(SI_FURC_REQUIRES_ACHIEVEMENT)
 local fmtReward = GetString(SI_FURC_STRING_REWARD_FOR)
+local anyAchievement = sFormat("<<a:1>>", GetString(SI_FURC_ACHIEVEMENT_UNKNOWN))
 ---Format an achievement string from a requirement id or description
 ---@param req number|string
 ---@param isReward? boolean defaults to false
@@ -374,6 +362,9 @@ local function formatAchievement(req, isReward)
   if type(req) == "string" then
     -- probably description, format as is
     return sFormat(fmt, req)
+  end
+  if req == 0 then
+    return sFormat(fmt, anyAchievement)
   end
   -- probably achievement id, make link
   return sFormat(fmt, GetAchievementLink(req, LINK_STYLE_DEFAULT))

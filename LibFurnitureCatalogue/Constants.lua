@@ -481,6 +481,8 @@ deriveNames(SOCIAL_CLASS_STRINGS, function(stringId)
 end, this.NPC, this.NpcByName)
 deriveNames(this.NpcGroupIds, getNpcGroupStr, this.NPC, this.NpcByName)
 
+this.AchievementIds = { UNKNOWN = 0 }
+
 this.CrownCrateIds = {
   -- Source: https://en.uesp.net/wiki/Online:Crown_Crates
 

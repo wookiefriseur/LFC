@@ -102,7 +102,8 @@ local strings = {
   SI_FURC_TRADERS_HOLIDAY = "ホリデーの実績家具商人^n,from",
   SI_FURC_TRADERS_LUXF = "高級家具商人^Nd,from",
   SI_FURC_TRADERS_ROLIS = "ロリス・フラール",
-  -- 36 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 37 ENTRIES UNTRANSLATED/IDENTICAL
+  SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
   SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
   SI_FURC_CHAT_MATS = "Mats:",

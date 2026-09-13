@@ -16,6 +16,7 @@ local zones = LFC.Internal.Constants.ZoneIds
 local npcIds = LFC.Internal.Constants.NpcIds
 local skillIds = LFC.Internal.Constants.SkillLineIds
 local ver = LFC.Internal.Constants.Versioning
+local achievementIds = LFC.Internal.Constants.AchievementIds
 
 local merge = LFC.Internal.MergeTable
 
@@ -2851,6 +2852,7 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
     [npcIds.AF] = {
       [119986] = { -- Maormer Totem
         itemPrice = 10000,
+        achievement = achievementIds.UNKNOWN, -- TODO: probably 525
       },
     },
   },

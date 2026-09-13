@@ -99,7 +99,8 @@ local strings = {
   SI_FURC_TRADERS_HGF = "Hausaustatter^n,von",
   SI_FURC_TRADERS_HOLIDAY = "Festtagsausstatter^n,von",
   SI_FURC_TRADERS_LUXF = "Luxusausstatter^n,von",
-  -- 39 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 40 ENTRIES UNTRANSLATED/IDENTICAL
+  SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_ESO_PLUS = "ESO+",
   SI_FURC_EVENT_ANNIVERSARY = "Anniversary Jubilee",
   SI_FURC_EVENT_CRIME = "Crime Wave",

@@ -3,7 +3,8 @@
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
   SI_FURC_EVENT_IC = "Imperial City Celebration",
-  -- 135 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 136 ENTRIES UNTRANSLATED/IDENTICAL
+  SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
   SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
   SI_FURC_CHAT_MATS = "Mats:",
