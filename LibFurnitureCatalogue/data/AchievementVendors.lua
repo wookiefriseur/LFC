@@ -2852,7 +2852,7 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
     [npcIds.AF] = {
       [119986] = { -- Maormer Totem
         itemPrice = 10000,
-        achievement = achievementIds.UNKNOWN, -- TODO: probably 525
+        achievement = 525,
       },
     },
   },
