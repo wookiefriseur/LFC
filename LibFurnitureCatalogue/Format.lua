@@ -380,6 +380,15 @@ local function formatAchievement(req, isReward)
 end
 this.FormatAchievement = formatAchievement
 
+local strCollectible = GetString(SI_FURC_SRC_COLLECTIBLE)
+
+---Format the collectible a furnishing comes with, "Collectible: <name>"
+---@param collectibleId integer see https://wiki.esoui.com/Collectibles
+---@return string
+function this.FormatCollectible(collectibleId)
+  return sFormat("<<1>>: <<2>>", strCollectible, GetCollectibleName(collectibleId))
+end
+
 ---Format furnisher (Home Goods, Achievement, others)
 ---@param trader string formatted furnisher string
 ---@param location string formatted location string

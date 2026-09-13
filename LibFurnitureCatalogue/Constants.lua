@@ -696,7 +696,6 @@ this.Events = {}
 this.EventByName = {}
 deriveNames(this.EventIds, getStr, this.Events, this.EventByName)
 
-
 -- Source key for an event row the event itself drops (no vendor, no container)
 this.EVENT_DROP = 0
 

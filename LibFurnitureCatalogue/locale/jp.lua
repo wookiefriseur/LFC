@@ -102,7 +102,7 @@ local strings = {
   SI_FURC_TRADERS_HOLIDAY = "ホリデーの実績家具商人^n,from",
   SI_FURC_TRADERS_LUXF = "高級家具商人^Nd,from",
   SI_FURC_TRADERS_ROLIS = "ロリス・フラール",
-  -- 35 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 36 ENTRIES UNTRANSLATED/IDENTICAL
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
   SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
   SI_FURC_CHAT_MATS = "Mats:",
@@ -110,6 +110,7 @@ local strings = {
   SI_FURC_CHAT_NO_SOURCE = "No known source.",
   SI_FURC_CHAT_UNKNOWN = "<<1>> is not in the database",
   SI_FURC_CHAT_USAGE = "Commands:",
+  SI_FURC_ESO_PLUS = "ESO+",
   SI_FURC_EVENT_CRIME = "Crime Wave",
   SI_FURC_EVENT_HEARTS = "Hearts Week",
   SI_FURC_EVENT_NIGHTMARKET = "Night Market",

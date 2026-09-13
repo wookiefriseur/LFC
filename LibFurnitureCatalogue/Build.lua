@@ -507,8 +507,6 @@ local function scanFromFiles(blocking)
   end
 
   local function scanVendorFiles()
-    FurC.InitAchievementVendorList()
-
     for versionNumber, versionData in pairs(FurC.AchievementVendors) do
       for zoneName, zoneData in pairs(versionData) do
         parseZoneData(zoneName, zoneData, versionNumber, src.VENDOR)

@@ -9,21 +9,13 @@ local npc = LFC.Internal.Constants.NPC
 local containers = LFC.Internal.Constants.Containers
 local eventDrop = LFC.Internal.Constants.EVENT_DROP
 
-local function getCollectibleString(collectibleIdOrName)
-  local collectibleName = collectibleIdOrName
-  if type(collectibleIdOrName) == "number" then
-    collectibleName = GetCollectibleName(collectibleIdOrName)
-  end
-  return zo_strformat("<<1>>: <<2>>", GetString(SI_FURC_SRC_COLLECTIBLE), collectibleName)
-end
-
 FurC.EventItems[ver.ZERO] = {
   [events.ANNIVERSARY] = {
     [npc.EVENT] = {
       [223759] = { itemPrice = 100 }, -- Replica Jubilee Cake Slice 2026
       [224081] = { -- Replica Jubilee Cake 2026
         itemPrice = 300,
-        achievement = getCollectibleString(14325),
+        collectible = 14325,
       },
     },
   },
@@ -142,7 +134,7 @@ FurC.EventItems[ver.FALLBAN] = {
       [214243] = { itemPrice = 100 }, -- Replica Jubilee Cake Slice 2025
       [214242] = { -- Replica Jubilee Cake 2025
         itemPrice = 300,
-        achievement = getCollectibleString(13520),
+        collectible = 13520,
       },
     },
   },
@@ -266,7 +258,7 @@ FurC.EventItems[ver.SCIONS] = {
       [203882] = { itemPrice = 100 }, -- Replica Jubilee Cake Slice 2016-2018
       [203829] = { -- Replica Jubilee Cake 2024
         itemPrice = 300,
-        achievement = getCollectibleString(12422),
+        collectible = 12422,
       },
     },
   },
@@ -305,7 +297,7 @@ FurC.EventItems[ver.SCRIBE] = {
     [npc.EVENT] = {
       [194359] = { -- Replica Jubilee Cake 2023
         itemPrice = 300,
-        achievement = getCollectibleString(11089),
+        collectible = 11089,
       },
     },
   },
@@ -317,7 +309,7 @@ FurC.EventItems[ver.TIDES] = {
     [npc.EVENT] = {
       [183902] = { -- Replica Jubilee Cake 2022
         itemPrice = 300,
-        achievement = getCollectibleString(10287),
+        collectible = 10287,
       },
     },
   },
@@ -368,27 +360,27 @@ FurC.EventItems[ver.HARROW] = {
     [npc.EVENT] = {
       [171601] = { -- Replica Jubilee Cake 2021
         itemPrice = 300,
-        achievement = getCollectibleString(9012),
+        collectible = 9012,
       },
       [159470] = { -- Replica Jubilee Cake 2020
         itemPrice = 300,
-        achievement = getCollectibleString(7619),
+        collectible = 7619,
       },
       [159467] = { -- Replica Jubilee Cake 2019
         itemPrice = 300,
-        achievement = getCollectibleString(5886),
+        collectible = 5886,
       },
       [159466] = { -- Replica Jubilee Cake 2018
         itemPrice = 300,
-        achievement = getCollectibleString(4786),
+        collectible = 4786,
       },
       [159465] = { -- Replica Jubilee Cake 2017
         itemPrice = 300,
-        achievement = getCollectibleString(1109),
+        collectible = 1109,
       },
       [159464] = { -- Replica Jubilee Cake 2016
         itemPrice = 300,
-        achievement = getCollectibleString(356),
+        collectible = 356,
       },
     },
   },

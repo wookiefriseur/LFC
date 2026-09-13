@@ -429,6 +429,7 @@ end
 ---@field pack integer|nil item id of the furnishing pack it is part of
 ---@field bundle integer|nil locale string id of a Crown Store bundle that does not have an item id, resolve with GetString
 ---@field houses integer[]|nil collectible ids of the houses it comes furnished with, resolve with GetCollectibleName
+---@field collectible integer|nil collectible id the furnishing comes with (resolve with `GetCollectibleName`)
 
 ---What one source costs. A source taking two currencies is modelled as two sources, not two costs
 ---@class LFCSourceCost

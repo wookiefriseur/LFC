@@ -2445,7 +2445,7 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
       },
       [120066] = { -- Display Craft Bag
         itemPrice = 5000,
-        achievement = "ESO+",
+        note = SI_FURC_ESO_PLUS,
       },
       [120063] = { -- Dominion Hero Shield
         itemPrice = 10000,
@@ -3354,7 +3354,6 @@ FurC.AchievementVendors[ver.HOMESTEAD] = {
   },
 }
 
-function FurC.InitAchievementVendorList()
-  local mages = FurC.AchievementVendors[ver.HOMESTEAD][places.GUILD_MAGES]
-  mages[npcIds.MAGES_MYSTIC] = merge(mages[npcIds.MAGES_MYSTIC], bookList)
-end
+-- --TODO: The mystic sells the book collections as well as her own two rows. They don't belong in here
+local mages = FurC.AchievementVendors[ver.HOMESTEAD][places.GUILD_MAGES]
+mages[npcIds.MAGES_MYSTIC] = merge(mages[npcIds.MAGES_MYSTIC], bookList)

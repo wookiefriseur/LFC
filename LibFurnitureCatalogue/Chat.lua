@@ -232,7 +232,7 @@ function COMMANDS.raw(rest)
   for index, record in ipairs(api.GetSourceDetails(itemId)) do
     local parts = { string.format("[%d] type=%s", index, sourceName(record.source.type)) }
     -- place sits beside location on purpose: a record carries one or the other
-    for _, field in ipairs({ "vendor", "place", "note", "achievement", "event" }) do
+    for _, field in ipairs({ "vendor", "place", "note", "achievement", "collectible", "event" }) do
       local value = idWithKey(record.source[field])
       if value then
         parts[#parts + 1] = field .. "=" .. value

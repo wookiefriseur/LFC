@@ -35,6 +35,7 @@ local strPrice = LFC.Internal.Format.FormatPrice
 local strRank = LFC.Internal.Format.FmtRank
 local getItemName = LFC.Internal.Format.GetItemName
 local formatAchievement = LFC.Internal.Format.FormatAchievement
+local formatCollectible = LFC.Internal.Format.FormatCollectible
 
 local resolvers = LFC.Internal.Constants.Resolvers
 local resolveEvent = resolvers.Event
@@ -200,8 +201,32 @@ local strVoucherVendor = strSrc("src", npc.ROLIS, npc.FAUSTINA)
 
 local strMultiple = LFC.Internal.Format.JoinSources
 
+---Resolve one note value: a string id, a literal, or a `{ npc = }` / `{ item = }` part
+---@param value string|integer|table
+---@return string
+local function resolveNote(value)
+  if type(value) == "table" then
+    if value.npc then
+      return resolveNpc(value.npc)
+    end
+    if value.npcClass ~= nil then
+      return resolveNpcClass(value.npcClass)
+    end
+    if value.npcGroup then
+      return resolveNpcGroup(value.npcGroup)
+    end
+    if value.item then
+      return getItemName(value.item)
+    end
+    return ""
+  end
+  if type(value) == "string" then
+    return value
+  end
+  return GetString(value)
+end
 
----Rendered requirements a vendor has (achievement, quest or skill/guild rank)
+---The detail a vendor entry carries (requirement, the collectible it comes with, or a note)
 ---@param row table
 ---@return string|nil
 local function vendorInfo(row)
@@ -212,10 +237,13 @@ local function vendorInfo(row)
     return strQuestReq(row.quest)
   end
   if row.achievement then
-    if type(row.achievement) == "string" then
-      return row.achievement
-    end
     return formatAchievement(row.achievement)
+  end
+  if row.collectible then
+    return formatCollectible(row.collectible)
+  end
+  if row.note then
+    return resolveNote(row.note)
   end
 end
 
@@ -464,31 +492,6 @@ local MISC_CATEGORY = {
   [src.STEAL_CONTAINER] = SI_FURC_SRC_STEAL,
   [src.ANTIQUITY] = SI_FURC_SRC_SCRYING,
 }
-
----Resolve one note value: a string id, a literal, or a `{ npc = }` / `{ item = }` part
----@param value string|integer|table
----@return string
-local function resolveNote(value)
-  if type(value) == "table" then
-    if value.npc then
-      return resolveNpc(value.npc)
-    end
-    if value.npcClass ~= nil then
-      return resolveNpcClass(value.npcClass)
-    end
-    if value.npcGroup then
-      return resolveNpcGroup(value.npcGroup)
-    end
-    if value.item then
-      return getItemName(value.item)
-    end
-    return ""
-  end
-  if type(value) == "string" then
-    return value
-  end
-  return GetString(value)
-end
 
 ---Adds to a suffix: a single value, or a list of alternatives. A value that resolves to nothing adds no part.
 ---@param parts string[] suffix parts, appended to in place
@@ -941,6 +944,7 @@ local function achievementVendorRecord(rec, recipeKey, version)
   setVendor(rec, vendor)
   setLocation(rec, zone)
   rec.source.achievement = entry.achievement
+  rec.source.note = entry.note
   rec.source.quest = entry.quest
   rec.source.skillLine = entry.skillLine
   rec.source.skillRank = entry.skillRank
@@ -1053,6 +1057,7 @@ local function eventRecord(rec, recipeKey)
           rec.source.event = eventByName[eventName]
           if item.itemPrice then
             rec.source.achievement = item.achievement
+            rec.source.collectible = item.collectible
             rec.cost = {
               currency = item.currency or (srcName == npc.EVENT and CURT_TRADE_BARS or CURT_MONEY),
               amount = item.itemPrice,

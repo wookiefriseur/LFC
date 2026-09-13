@@ -52,33 +52,15 @@ for line in manifest:gmatch("[^\r\n]+") do
 end
 assert(#dataFiles > 0, "no data files listed in " .. manifestPath)
 
--- Files whose rows are records of ids. These have no business reaching for a formatter and we check for that regression
-local DEBAKED = {
-  ["data/AchievementVendors.lua"] = true,
-  ["data/HomeGoodsFurnisher.lua"] = true,
-  ["data/Antiquity.lua"] = true,
-  ["data/Books.lua"] = true,
-  ["data/CrownStore.lua"] = true,
-  ["data/Fishing.lua"] = true,
-  ["data/Justice.lua"] = true,
-  ["data/MiscItemSources.lua"] = true,
-  ["data/RecipeSources.lua"] = true,
-  ["data/Rolis.lua"] = true,
-}
-
 -- A name a data file never declared is a nil
 local KNOWN_GLOBALS = {
   FurC = true,
   LibFurnitureCatalogue = true,
-  GetCollectibleName = true,
-  GetQuestName = true,
-  GetString = true,
   ipairs = true,
   pairs = true,
   string = true,
   table = true,
   type = true,
-  zo_strformat = true,
 }
 
 ---Every global a chunk reads or writes, taken from the bytecode listing
@@ -110,8 +92,15 @@ for _, rel in ipairs(dataFiles) do
   if not text then
     fail(rel .. " is in the manifest but not on disk")
   else
-    if DEBAKED[rel] and text:find("Internal%.Format") then
+    if text:find("Internal%.Format") then
       fail(rel .. " is de-baked but uses Internal.Format, so it renders at load again")
+    end
+
+    local declared = text:match("\n%s*function%s+([%w_%.:]+)%s*%(")
+    if declared then
+      fail(
+        string.format("%s: defines the function `%s`; a data file states data, it does not carry code", rel, declared)
+      )
     end
 
     local globals, err = globalNames(root .. "/" .. rel)
