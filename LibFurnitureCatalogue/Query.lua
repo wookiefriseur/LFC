@@ -501,6 +501,10 @@ local function addQualifier(parts, value, resolve)
   if value == nil then
     return
   end
+  -- A list of ids the client does not define is an empty table, nothing to resolve
+  if type(value) == "table" and next(value) == nil then
+    return
+  end
   if type(value) ~= "table" or value[1] == nil then
     local resolved = resolve(value)
     if resolved ~= "" then
@@ -510,7 +514,10 @@ local function addQualifier(parts, value, resolve)
   end
   local alternatives = {}
   for _, part in ipairs(value) do
-    alternatives[#alternatives + 1] = resolve(part)
+    local resolved = resolve(part)
+    if resolved ~= "" then
+      alternatives[#alternatives + 1] = resolved
+    end
   end
   if #alternatives > 0 then
     parts[#parts + 1] = strSrc("other", unpack(alternatives))
@@ -643,6 +650,66 @@ local function renderCrownRow(row, tagFirst)
   return strMultiple(unpack(parts))
 end
 
+-- The data files sharing the [version][source][itemId] shape, in lookup order
+local BAKED_DATA_FILES = nil -- lazy init to avoid load-order issues
+local function bakedDataFiles()
+  local dataFiles = BAKED_DATA_FILES
+  if dataFiles then
+    return dataFiles
+  end
+  dataFiles = {}
+  local expected = 0
+  local function add(dataFile)
+    expected = expected + 1
+    if dataFile then
+      dataFiles[#dataFiles + 1] = dataFile
+    end
+  end
+  add(FurC.MiscItemSources)
+  add(FurC.CrownStore)
+  add(FurC.Antiquities)
+  add(FurC.Justice)
+  add(FurC.Fishing)
+  if #dataFiles == expected then
+    BAKED_DATA_FILES = dataFiles
+  end
+  return dataFiles
+end
+
+---The row a source keeps for one item, in the item's own version
+---@return table|string|number|nil
+local function lookupBakedData(recipeKey, version, source)
+  for _, dataFile in ipairs(bakedDataFiles()) do
+    local versionFiles = version and dataFile[version]
+    local bucket = versionFiles and versionFiles[source]
+    local entry = bucket and bucket[recipeKey]
+    if entry then
+      return entry
+    end
+  end
+  return nil
+end
+
+---Same row, falling back to any other version that has one
+--- A row moved between versions still answers, which is what the renderers have always done
+---@return table|string|number|nil
+local function findMiscRow(recipeKey, version, source)
+  local row = lookupBakedData(recipeKey, version, source)
+  if row then
+    return row
+  end
+  -- TODO: overwrite version (there can be only one)
+  for _, dataFile in ipairs(bakedDataFiles()) do
+    for _, versionFiles in pairs(dataFile) do
+      local bucket = versionFiles[source]
+      if bucket and bucket[recipeKey] then
+        return bucket[recipeKey]
+      end
+    end
+  end
+  return nil
+end
+
 local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
   recipeArray = recipeArray or find(recipeKey)
   -- "source" allows asking for specific category
@@ -652,35 +719,7 @@ local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
     return emptyString
   end
 
-  -- same [version][source][itemId] shape in both files
-  local dataFiles = { FurC.MiscItemSources, FurC.CrownStore, FurC.Antiquities, FurC.Justice, FurC.Fishing }
-
-  -- TODO: overwrite version (there can be only one)
-  local function lookup(version)
-    for _, dataFile in ipairs(dataFiles) do
-      local versionFiles = version and dataFile[version]
-      local bucket = versionFiles and versionFiles[source]
-      local originData = bucket and bucket[recipeKey]
-      if originData then
-        return originData
-      end
-    end
-  end
-  local originData = lookup(recipeArray.version)
-  if not originData then
-    for _, dataFile in ipairs(dataFiles) do
-      for version, versionFiles in pairs(dataFile) do
-        local bucket = versionFiles[source]
-        if bucket and bucket[recipeKey] then
-          originData = bucket[recipeKey]
-          break
-        end
-      end
-      if originData then
-        break
-      end
-    end
-  end
+  local originData = findMiscRow(recipeKey, recipeArray.version, source)
   if not originData then
     return emptyString
   end
@@ -939,18 +978,20 @@ local function achievementVendorRecord(rec, recipeKey, version)
     end
   end
   if not entry then
-    return
+    return false
   end
   setVendor(rec, vendor)
   setLocation(rec, zone)
   rec.source.achievement = entry.achievement
   rec.source.note = entry.note
   rec.source.quest = entry.quest
+  rec.source.collectible = entry.collectible
   rec.source.skillLine = entry.skillLine
   rec.source.skillRank = entry.skillRank
   if entry.itemPrice then
     rec.cost = { currency = entry.currency or CURT_MONEY, amount = entry.itemPrice }
   end
+  return true
 end
 
 local function luxuryRecord(rec, recipeKey, version)
@@ -1004,6 +1045,11 @@ local function pvpRecord(rec, recipeKey, version)
   setVendor(rec, vendor)
   setLocation(rec, location)
   rec.source.achievement = item.achievement
+  rec.source.note = item.note
+  rec.source.quest = item.quest
+  rec.source.collectible = item.collectible
+  rec.source.skillLine = item.skillLine
+  rec.source.skillRank = item.skillRank
   if item.itemPrice then
     rec.cost = { currency = item.currency or CURT_ALLIANCE_POINTS, amount = item.itemPrice }
   end
@@ -1026,6 +1072,7 @@ local function voucherRecord(rec, recipeKey, blueprintId)
             if contentId == recipeKey or contentId == blueprintId then
               rec.source.vendor = folioData.vendor
               rec.source.place = folioData.place
+              rec.source.partOf = folioId
               rec.cost = { currency = folioData.currency, amount = folioData.itemPrice }
               return
             end
@@ -1037,7 +1084,9 @@ local function voucherRecord(rec, recipeKey, blueprintId)
   end
   rec.source.vendor = vendor
   rec.source.place = placeIds.ANY_CAPITAL
+  -- one slot, and a voucher row carries either the achievement it needs or the folio it comes in
   rec.source.achievement = entry.info
+  rec.source.partOf = entry.partOf
   if entry.itemPrice then
     rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = entry.itemPrice }
   end
@@ -1055,9 +1104,18 @@ local function eventRecord(rec, recipeKey)
             rec.source.note = rec.source.vendor == nil and srcName or nil
           end
           rec.source.event = eventByName[eventName]
-          if item.itemPrice then
+          -- a row is sold when it names a price or an NPC holds it, and only then does its detail reach a line
+          if item.itemPrice or npcByName[srcName] then
             rec.source.achievement = item.achievement
             rec.source.collectible = item.collectible
+            rec.source.quest = item.quest
+            rec.source.skillLine = item.skillLine
+            rec.source.skillRank = item.skillRank
+            if item.note ~= nil then
+              rec.source.note = item.note
+            end
+          end
+          if item.itemPrice then
             rec.cost = {
               currency = item.currency or (srcName == npc.EVENT and CURT_TRADE_BARS or CURT_MONEY),
               amount = item.itemPrice,
@@ -1068,40 +1126,6 @@ local function eventRecord(rec, recipeKey)
       end
     end
   end
-end
-
--- Lookup helper for baked-string data files (MiscItemSources, CrownStore, Justice, etc.)
--- Returns the raw entry from dataFile[version][source][itemId], or nil
-local BAKED_DATA_FILES = nil -- lazy init to avoid load-order issues
-local function lookupBakedData(recipeKey, version, source)
-  local dataFiles = BAKED_DATA_FILES
-  if not dataFiles then
-    dataFiles = {}
-    local expected = 0
-    local function add(dataFile)
-      expected = expected + 1
-      if dataFile then
-        dataFiles[#dataFiles + 1] = dataFile
-      end
-    end
-    add(FurC.MiscItemSources)
-    add(FurC.CrownStore)
-    add(FurC.Antiquities)
-    add(FurC.Justice)
-    add(FurC.Fishing)
-    if #dataFiles == expected then
-      BAKED_DATA_FILES = dataFiles
-    end
-  end
-  for _, dataFile in ipairs(dataFiles) do
-    local versionFiles = dataFile[version]
-    local bucket = versionFiles and versionFiles[source]
-    local entry = bucket and bucket[recipeKey]
-    if entry then
-      return entry
-    end
-  end
-  return nil
 end
 
 local SOURCE_CURRENCY_MAP = {
@@ -1161,42 +1185,116 @@ local function extractPrice(entry, source)
   return nil, nil
 end
 
----Fills a record from a FurC.CrownStore row: one source, or a list of them
----
----@param rec table
----@param row table
-local function crownStoreRecord(rec, row)
-  local sources = row[1] ~= nil and row or { row }
-  local source = rec.source
-  for i = 1, #sources do
-    local one = sources[i]
-    if one.itemPrice and not rec.cost then
-      rec.cost = { currency = one.currency or CURT_CROWNS, amount = one.itemPrice }
+-- A crown-store offer names exactly one of these
+local CROWN_OFFER_KINDS = { "itemPrice", "pack", "bundle", "crate", "houses", "note", "category" }
+
+local function crownOfferKind(offer)
+  for _, kind in ipairs(CROWN_OFFER_KINDS) do
+    if offer[kind] ~= nil then
+      return kind
     end
-    source.crate = source.crate or one.crate
-    source.pack = source.pack or one.pack
-    source.bundle = source.bundle or one.bundle
-    source.houses = source.houses or one.houses
-    source.note = source.note or one.note
   end
+end
+
+---Records for a FurC.CrownStore row: 1 offer or a list of offers
+---@param rec table the record the caller prepared, for its type and version
+---@param row table
+---@return table[]? records in the order the row states them, nil when the row names no offer
+local function crownRecords(rec, row)
+  local offers = row[1] ~= nil and row or { row }
+  local records, byKind = {}, {}
+  for i = 1, #offers do
+    local offer = offers[i]
+    local kind = crownOfferKind(offer)
+    if kind then
+      local record = byKind[kind]
+      if not record then
+        record = {
+          source = { type = rec.source.type },
+          availability = { version = rec.availability.version },
+        }
+        byKind[kind] = record
+        records[#records + 1] = record
+      end
+      if kind == "itemPrice" then
+        record.cost = record.cost or { currency = offer.currency or CURT_CROWNS, amount = offer.itemPrice }
+      elseif kind == "pack" then
+        local packs = record.source.packs or {}
+        record.source.packs = packs
+        packs[#packs + 1] = offer.pack
+      else
+        record.source[kind] = record.source[kind] or offer[kind]
+      end
+    end
+  end
+  return (#records > 0 and records) or nil
 end
 
 local function crownRecord(rec, recipeKey, recipeArray, source)
-  local row = lookupBakedData(recipeKey, recipeArray.version, source)
+  local row = findMiscRow(recipeKey, recipeArray.version, source)
   if type(row) == "table" then
-    crownStoreRecord(rec, row)
+    return crownRecords(rec, row)
   end
 end
 
+-- What a row in the [version][source][itemId] files states about its source
+-- TODO: different solution?
+local MISC_ROW_FIELDS = {
+  "vendor",
+  "location",
+  "locations",
+  "place",
+  "event",
+  "quest",
+  "achievement",
+  "reward",
+  "collectible",
+  "skillLine",
+  "skillRank",
+  "note",
+  "category",
+  "itemPack",
+  "partOf",
+  "container",
+  "containerKind",
+  "npcClass",
+  "npcGroup",
+  "leads",
+  "rarity",
+}
+
+---Fills a record from whichever of the misc-shaped files holds this item under this source
+---@return boolean found
+local function miscRecord(rec, recipeKey, recipeArray, source)
+  local row = findMiscRow(recipeKey, recipeArray.version, source)
+  if type(row) ~= "table" then
+    return row ~= nil
+  end
+  local target = rec.source
+  for _, field in ipairs(MISC_ROW_FIELDS) do
+    if target[field] == nil then
+      target[field] = row[field]
+    end
+  end
+  if row.itemPrice and not rec.cost then
+    rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }
+  end
+  return true
+end
+
+-- A builder fills the record it is handed, or returns a list of records when there are several sources
 local RECORD_BUILDERS = {
   [src.CROWN] = function(rec, recipeKey, recipeArray)
-    crownRecord(rec, recipeKey, recipeArray, src.CROWN)
+    return crownRecord(rec, recipeKey, recipeArray, src.CROWN)
   end,
   [src.EDITOR] = function(rec, recipeKey, recipeArray)
-    crownRecord(rec, recipeKey, recipeArray, src.EDITOR)
+    return crownRecord(rec, recipeKey, recipeArray, src.EDITOR)
   end,
+  -- mostly achievement vendors, but a row can also name the same vendor from a misc file
   [src.VENDOR] = function(rec, recipeKey, recipeArray)
-    achievementVendorRecord(rec, recipeKey, recipeArray.version)
+    if not achievementVendorRecord(rec, recipeKey, recipeArray.version) then
+      miscRecord(rec, recipeKey, recipeArray, src.VENDOR)
+    end
   end,
   [src.LUXURY] = function(rec, recipeKey, recipeArray)
     luxuryRecord(rec, recipeKey, recipeArray.version)
@@ -1216,18 +1314,20 @@ local RECORD_BUILDERS = {
 ---@param rec table
 ---@param row table
 local function recipeSourceRecord(rec, row)
+  local source = rec.source
   if row.quest then
-    -- different attributes:
-    -- { quest = true, daily = <boolean>, locations = { <ZoneIds>, ... } }
+    -- a quest row names no quest, only that it is one and where: { quest = true, locations = { ... } }
+    source.category = row.daily and SI_FURC_SRC_QUEST_DAILY or SI_FURC_SRC_QUEST
+    source.locations = row.locations
     return
   end
-  local source = rec.source
   source.vendor = row.vendor
   source.location = row.location
   -- a place is inside the location when both are set, and the only thing we know if there is no location
   source.place = row.place
   source.note = row.note
   source.achievement = row.achievement
+  source.partOf = row.partOf
   source.skillLine = row.skillLine
   source.skillRank = row.skillRank
   source.event = row.event
@@ -1238,6 +1338,7 @@ end
 
 ---Schema-shaped source records, ranked by priority
 ---`cost` is one record or absent, never a list (2 currencies is modelled as two sources)
+---A source type whose row states several ways to obtain the item yields one record each, kept together in rank order
 ---@param itemOrLink string|integer
 ---@return LFCSourceRecord[] records one per real source, compat-injected ones excluded
 local function getSourceRecords(itemOrLink)
@@ -1261,19 +1362,25 @@ local function getSourceRecords(itemOrLink)
   end)
 
   local records = {}
-  for i, s in ipairs(ranked) do
+  for _, s in ipairs(ranked) do
     local rec = { source = { type = s }, availability = { version = recipeArray.version } }
+    local several
     -- same rule the source line follows: a row that names this source answers for it
     local row = recipeRow(recipeKey, recipeArray)
     if row and row.source == s then
       recipeSourceRecord(rec, row)
     else
-      local build = RECORD_BUILDERS[s]
-      if build then
-        build(rec, recipeKey, recipeArray)
-      end
+      -- every other source keeps its rows in the misc-shaped files, so that is the default
+      local build = RECORD_BUILDERS[s] or miscRecord
+      several = build(rec, recipeKey, recipeArray, s)
     end
-    records[i] = rec
+    if type(several) == "table" then
+      for _, one in ipairs(several) do
+        records[#records + 1] = one
+      end
+    else
+      records[#records + 1] = rec
+    end
   end
   return records
 end

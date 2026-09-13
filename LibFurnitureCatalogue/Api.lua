@@ -23,6 +23,8 @@
 --  a list is 1..n (order means nothing unless the endpoint says otherwise)
 --  a set is [id] = true
 --  a map names its own key
+--  a source record names one way to obtain an item.
+-- (several ways is several records; a field that can name several things of one kind is a list)
 --
 -- [FC] markers show what FurnitureCatalogue itself uses internally
 --
@@ -61,7 +63,7 @@
 -- Deprecated - we'll call the guards if you keep using those
 --   GetSources            old name and shape of GetSourceDetails, where cost is a list (LibPrice currently needs it)
 --   SourceType            shared source enum table. Use GetSourceTypes for a copy of your own
---   GetItemDescription [FC] rendered source text (moves to FC). Use GetSourceDetails instead
+--   GetItemDescription [FC] rendered source text. The add-on composes its own lines from GetSourceDetails now and calls this only for a craftable, whose line names where the *blueprint* comes from. Use GetSourceDetails instead
 --   GetMiscItemPrice      a price extracted back out of formatted string. Use GetSourceDetails
 --   FurC.Find        [FC] mutable internal row, and {} on a miss, where GetEntry copies and returns nil. Not the same call, so switching to GetEntry is not a rename
 --   FurC.GetItemId        flat alias
@@ -414,22 +416,35 @@ function api.GetEntry(itemOrLink)
 end
 
 ---Where one source of an item comes from
+---
+---A field that can name several things of one kind is a list (`houses`, `packs`, `locations`), everything else is one id
 ---@class LFCSourceOrigin
 ---@field type integer source type, see GetSourceTypes
 ---@field vendor integer|nil locale string id, resolve with GetString
 ---@field location integer|nil game zone id, resolve with GetZoneNameById
+---@field locations integer[]|nil game zone ids, when one source covers several zones. Set instead of `location`
 ---@field place integer|nil locale string id for somewhere the game has no zone for, resolve with GetString. With `location` it is a place inside that zone, on its own it's all the record knows
----@field note (integer|string)|nil adds details to a source. Locale string id or a bare literal
+---@field note (integer|string|table)|nil adds details to a source. Locale string id, a bare literal, structured table, or a list of alternatives
+---@field category integer|nil locale string id naming what kind of source this is, when the row names its own rather than taking the source type's word
 ---@field achievement integer|nil achievement id. `0` when it requires an achievement but the id is unknown
+---@field reward integer|nil achievement id the item is handed out for, as opposed to `achievement`, which gates a purchase
 ---@field quest integer|nil quest id, resolve with GetQuestName
 ---@field skillLine integer|nil skill line id, resolve with GetSkillLineNameById. On a vendor record it tells which guild sells it and asking what the Thieves Guild sells is asking for Legerdemain skills
 ---@field skillRank integer|nil required rank in that skill line. nil means no rank required
 ---@field event integer|nil locale string id, resolve with GetString
 ---@field crate integer|nil crown crate id, resolve with GetCrownCrateName. `0` when it's a crate but the id is unknown and we have no name
----@field pack integer|nil item id of the furnishing pack it is part of
+---@field packs integer[]|nil item ids of the furnishing packs it is part of
 ---@field bundle integer|nil locale string id of a Crown Store bundle that does not have an item id, resolve with GetString
+---@field itemPack integer|nil locale string id of a Tamriel Tomes item pack, resolve with GetString
 ---@field houses integer[]|nil collectible ids of the houses it comes furnished with, resolve with GetCollectibleName
 ---@field collectible integer|nil collectible id the furnishing comes with (resolve with `GetCollectibleName`)
+---@field partOf integer|nil item id of the container, folio or collection the item is bought as part of
+---@field container integer|nil item id of the container it is found in
+---@field containerKind (integer|integer[])|nil locale string id(s) naming a kind of container, resolve with GetString
+---@field npcClass (integer|integer[])|nil monster social class string id(s), the game's own, resolve with GetString
+---@field npcGroup (integer|integer[])|nil locale string id(s) for a group of enemies, resolve with GetString
+---@field leads true|nil the antiquity is assembled from several leads; the player's codex has the count
+---@field rarity integer|nil locale string id naming how rare the source is, resolve with GetString
 
 ---What one source costs. A source taking two currencies is modelled as two sources, not two costs
 ---@class LFCSourceCost
