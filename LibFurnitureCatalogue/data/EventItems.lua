@@ -7,6 +7,7 @@ local ver = LFC.Internal.Constants.Versioning
 local events = LFC.Internal.Constants.Events
 local npc = LFC.Internal.Constants.NPC
 local containers = LFC.Internal.Constants.Containers
+local eventDrop = LFC.Internal.Constants.EVENT_DROP
 
 local function getCollectibleString(collectibleIdOrName)
   local collectibleName = collectibleIdOrName
@@ -88,12 +89,14 @@ FurC.EventItems[ver.WORMS2] = {
   -- Dropped during Worm Cult invasion event
   -- Plans are now ordinary container drops
   [events.WRITHING] = {
-    [219727] = true, -- Worm Cult Papers, Scattered
-    [219728] = true, -- Worm Cult Scroll, Unfinished
-    [219729] = true, -- Worm Cult Sconce, Jaw
-    [219730] = true, -- Worm Cult Brew, Bubbling
-    [219731] = true, -- Worm Cult Rug, Triangular Sigil
-    [219732] = true, -- Worm Cult Lamp, Jaw
+    [eventDrop] = {
+      [219727] = {}, -- Worm Cult Papers, Scattered
+      [219728] = {}, -- Worm Cult Scroll, Unfinished
+      [219729] = {}, -- Worm Cult Sconce, Jaw
+      [219730] = {}, -- Worm Cult Brew, Bubbling
+      [219731] = {}, -- Worm Cult Rug, Triangular Sigil
+      [219732] = {}, -- Worm Cult Lamp, Jaw
+    },
   },
 
   [events.JESTER] = {
@@ -126,11 +129,11 @@ FurC.EventItems[ver.WORMS2] = {
 FurC.EventItems[ver.FALLBAN] = {
   [events.CRIME] = {
     [containers.POUCH] = {
-      [214244] = true, -- Crime Notice, Large
-      [214245] = true, -- Crime Notice, Small
-      [214246] = true, -- Coin, Single
-      [214247] = true, -- Coin Pile, Small
-      [214248] = true, -- Coin Pile, Tall
+      [214244] = {}, -- Crime Notice, Large
+      [214245] = {}, -- Crime Notice, Small
+      [214246] = {}, -- Coin, Single
+      [214247] = {}, -- Coin Pile, Small
+      [214248] = {}, -- Coin Pile, Tall
     },
   },
 
@@ -237,15 +240,15 @@ FurC.EventItems[ver.BASE44] = {
 FurC.EventItems[ver.BASE43] = {
   [events.UNDAUNTED] = {
     [containers.UNDAUNTEDBOX] = {
-      [208112] = true, -- Rug of the Undaunted, Rectangular
-      [208110] = true, -- Tankard of Undaunted Victory, Infernal
-      [208108] = true, -- Tankard of Undaunted Victory, Green
-      [208107] = true, -- Wind Chimes, Undaunted Glory
-      [208106] = true, -- Stuffed Troll Head, Ivy-Adorned
-      [208114] = true, -- Garland of Undaunted Trophies
-      [208113] = true, -- Rug of the Undaunted, Octagram
-      [208111] = true, -- Keg of Triumph, Jeering Clannfear Beer
-      [208109] = true, -- Tankard of Undaunted Victory, Bone
+      [208112] = {}, -- Rug of the Undaunted, Rectangular
+      [208110] = {}, -- Tankard of Undaunted Victory, Infernal
+      [208108] = {}, -- Tankard of Undaunted Victory, Green
+      [208107] = {}, -- Wind Chimes, Undaunted Glory
+      [208106] = {}, -- Stuffed Troll Head, Ivy-Adorned
+      [208114] = {}, -- Garland of Undaunted Trophies
+      [208113] = {}, -- Rug of the Undaunted, Octagram
+      [208111] = {}, -- Keg of Triumph, Jeering Clannfear Beer
+      [208109] = {}, -- Tankard of Undaunted Victory, Bone
     },
   },
 }
@@ -273,25 +276,25 @@ FurC.EventItems[ver.SCIONS] = {
 FurC.EventItems[ver.BASED] = {
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [198390] = true, -- Apocrypha Specimen Jar, Leech
-      [198389] = true, -- Apocrypha Specimen Jar, Spider
-      [198388] = true, -- Apocrypha Specimen Jar, Tomeshell Viscera
-      [198387] = true, -- Apocrypha Specimen Jar, Scorpion
-      [198386] = true, -- Apocrypha Specimen Jar, Eyes
-      [198385] = true, -- Apocrypha Specimen Jar, Abyssal Eel
-      [198384] = true, -- Apocrypha Specimen Jar, Nascent Creatia
-      [198383] = true, -- Apocrypha Specimen Jar, Centipede
-      [198382] = true, -- Apocrypha Specimen Jar, Brains
-      [198381] = true, -- Apocrypha Ink Pestle, Green
-      [198380] = true, -- Apocrypha Ink Pestle, Black
-      [198379] = true, -- Apocrypha Inkwell
-      [198378] = true, -- Apocrypha Ink Jar, Green
-      [198377] = true, -- Apocrypha Ink Jar, Black
-      [198376] = true, -- Apocrypha Ink Vat, Small
-      [198375] = true, -- Apocrypha Ink Vat, Green
-      [198374] = true, -- Apocrypha Ink Vat, Black
-      [198373] = true, -- Apocrypha Ink Bottle, Green
-      [198372] = true, -- Apocrypha Ink Bottle, Black
+      [198390] = {}, -- Apocrypha Specimen Jar, Leech
+      [198389] = {}, -- Apocrypha Specimen Jar, Spider
+      [198388] = {}, -- Apocrypha Specimen Jar, Tomeshell Viscera
+      [198387] = {}, -- Apocrypha Specimen Jar, Scorpion
+      [198386] = {}, -- Apocrypha Specimen Jar, Eyes
+      [198385] = {}, -- Apocrypha Specimen Jar, Abyssal Eel
+      [198384] = {}, -- Apocrypha Specimen Jar, Nascent Creatia
+      [198383] = {}, -- Apocrypha Specimen Jar, Centipede
+      [198382] = {}, -- Apocrypha Specimen Jar, Brains
+      [198381] = {}, -- Apocrypha Ink Pestle, Green
+      [198380] = {}, -- Apocrypha Ink Pestle, Black
+      [198379] = {}, -- Apocrypha Inkwell
+      [198378] = {}, -- Apocrypha Ink Jar, Green
+      [198377] = {}, -- Apocrypha Ink Jar, Black
+      [198376] = {}, -- Apocrypha Ink Vat, Small
+      [198375] = {}, -- Apocrypha Ink Vat, Green
+      [198374] = {}, -- Apocrypha Ink Vat, Black
+      [198373] = {}, -- Apocrypha Ink Bottle, Green
+      [198372] = {}, -- Apocrypha Ink Bottle, Black
     },
   },
 }
@@ -330,13 +333,13 @@ FurC.EventItems[ver.WAKE] = {
 
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [181494] = true, -- Vampiric Container, Yellow Liquid
-      [181493] = true, -- Vampiric Container, Congealed Liquid
-      [181492] = true, -- Vampiric Flask Stand, Double
-      [181491] = true, -- Vampiric Lightpost, Azure Double
-      [181490] = true, -- Vampiric Lightpost, Azure Single
-      [181489] = true, -- Vampiric Lamp, Azure Tall
-      [178799] = true, -- Ruby Candlefly Gathering
+      [181494] = {}, -- Vampiric Container, Yellow Liquid
+      [181493] = {}, -- Vampiric Container, Congealed Liquid
+      [181492] = {}, -- Vampiric Flask Stand, Double
+      [181491] = {}, -- Vampiric Lightpost, Azure Double
+      [181490] = {}, -- Vampiric Lightpost, Azure Single
+      [181489] = {}, -- Vampiric Lamp, Azure Tall
+      [178799] = {}, -- Ruby Candlefly Gathering
     },
   },
 }
@@ -412,10 +415,10 @@ FurC.EventItems[ver.SCALES] = {
 FurC.EventItems[ver.WEREWOLF] = {
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [145317] = true, -- Gravestone, Broken
-      [120877] = true, -- Gravestone, Cracked
-      [145318] = true, -- Gravestone, Small Broken
-      [120878] = true, -- Gravestone, Ornamented
+      [145317] = {}, -- Gravestone, Broken
+      [120877] = {}, -- Gravestone, Cracked
+      [145318] = {}, -- Gravestone, Small Broken
+      [120878] = {}, -- Gravestone, Ornamented
     },
     [npc.EVENT] = {
       [142004] = { itemPrice = 200 }, -- Specimen Jar, Spare Brain
@@ -427,12 +430,12 @@ FurC.EventItems[ver.WEREWOLF] = {
 FurC.EventItems[ver.DRAGONS] = {
   [events.JESTER] = {
     [containers.JESTERBOX] = {
-      [134680] = true, -- Jester's Coffer
+      [134680] = {}, -- Jester's Coffer
     },
   },
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [139162] = true, -- Webs, Cone
+      [139162] = {}, -- Webs, Cone
     },
   },
 }
@@ -457,20 +460,20 @@ FurC.EventItems[ver.CLOCKWORK] = {
 FurC.EventItems[ver.REACH] = {
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [130340] = true, -- Witches Totem, Gnarled Vines and Skull
-      [130339] = true, -- Witches Totem, Twisted Vines and Skull
-      [130326] = true, -- Witches Brazier, Primitive Log
-      [130338] = true, -- Witches Bones, Offering
-      [130337] = true, -- Witches Corpse, Wrapped
-      [130332] = true, -- Witches Totem, Bone Charms
-      [130328] = true, -- Witches Skull, Horned Ram
-      [130327] = true, -- Witches Totem, Wooden Rack
-      [130325] = true, -- Witches Totem, Emphatic Warning
-      [130322] = true, -- Tool, Harvest Scythe
-      [130319] = true, -- Crop, Wheat Stack
-      [130318] = true, -- Crop, Wheat Pile
-      [130317] = true, -- Pumpkin, Sickly
-      [130316] = true, -- Pumpkin, Frail
+      [130340] = {}, -- Witches Totem, Gnarled Vines and Skull
+      [130339] = {}, -- Witches Totem, Twisted Vines and Skull
+      [130326] = {}, -- Witches Brazier, Primitive Log
+      [130338] = {}, -- Witches Bones, Offering
+      [130337] = {}, -- Witches Corpse, Wrapped
+      [130332] = {}, -- Witches Totem, Bone Charms
+      [130328] = {}, -- Witches Skull, Horned Ram
+      [130327] = {}, -- Witches Totem, Wooden Rack
+      [130325] = {}, -- Witches Totem, Emphatic Warning
+      [130322] = {}, -- Tool, Harvest Scythe
+      [130319] = {}, -- Crop, Wheat Stack
+      [130318] = {}, -- Crop, Wheat Pile
+      [130317] = {}, -- Pumpkin, Sickly
+      [130316] = {}, -- Pumpkin, Frail
     },
 
     [npc.HOLIDAY] = {
@@ -494,14 +497,14 @@ FurC.EventItems[ver.REACH] = {
 FurC.EventItems[ver.MORROWIND] = {
   [events.MAYHEM] = {
     [containers.BOONBOX] = {
-      [126164] = true, -- Song of Pelinal, #8
-      [126163] = true, -- Song of Pelinal, #7
-      [126162] = true, -- Song of Pelinal, #6
-      [126161] = true, -- Song of Pelinal, #5
-      [126160] = true, -- Song of Pelinal, #4
-      [126159] = true, -- Song of Pelinal, #3
-      [126158] = true, -- Song of Pelinal, #2
-      [126157] = true, -- Song of Pelinal, #1
+      [126164] = {}, -- Song of Pelinal, #8
+      [126163] = {}, -- Song of Pelinal, #7
+      [126162] = {}, -- Song of Pelinal, #6
+      [126161] = {}, -- Song of Pelinal, #5
+      [126160] = {}, -- Song of Pelinal, #4
+      [126159] = {}, -- Song of Pelinal, #3
+      [126158] = {}, -- Song of Pelinal, #2
+      [126157] = {}, -- Song of Pelinal, #1
     },
 
     [npc.HOLIDAY] = {
@@ -534,20 +537,20 @@ FurC.EventItems[ver.MORROWIND] = {
 
   [events.NEWLIFE] = {
     [containers.NEWLIFEBOX] = {
-      [118053] = true, -- Common Campfire, Outdoor
+      [118053] = {}, -- Common Campfire, Outdoor
     },
   },
 
   [events.WITCHES] = {
     [containers.PLUNDERSKULL] = {
-      [118149] = true, -- Block and Axe, Chopping
-      [125589] = true, -- Mushroom, Lavaburst Bud
-      [125672] = true, -- Toadstool, Bloodtooth Cluster
-      [125671] = true, -- Toadstool, Bloodtooth Cap
-      [125670] = true, -- Toadstool, Bloodtooth
-      [125598] = true, -- Mushroom, Emerging Stinkhorn
-      [125596] = true, -- Mushroom, Poison Pax Stool
-      [125590] = true, -- Mushroom, Lavaburst Cluster
+      [118149] = {}, -- Block and Axe, Chopping
+      [125589] = {}, -- Mushroom, Lavaburst Bud
+      [125672] = {}, -- Toadstool, Bloodtooth Cluster
+      [125671] = {}, -- Toadstool, Bloodtooth Cap
+      [125670] = {}, -- Toadstool, Bloodtooth
+      [125598] = {}, -- Mushroom, Emerging Stinkhorn
+      [125596] = {}, -- Mushroom, Poison Pax Stool
+      [125590] = {}, -- Mushroom, Lavaburst Cluster
     },
   },
 }

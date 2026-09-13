@@ -58,6 +58,7 @@ local DEBAKED = {
   ["data/HomeGoodsFurnisher.lua"] = true,
   ["data/Antiquity.lua"] = true,
   ["data/Books.lua"] = true,
+  ["data/CrownStore.lua"] = true,
   ["data/Fishing.lua"] = true,
   ["data/Justice.lua"] = true,
   ["data/MiscItemSources.lua"] = true,
@@ -138,7 +139,7 @@ for _, rel in ipairs(dataFiles) do
     for alias, vocabulary in text:gmatch("local%s+([%a_][%w_]*)%s*=%s*[%w_%.]-Constants%.([%a_][%w_]*)") do
       if type(constants[vocabulary]) == "table" then
         aliases[alias] = vocabulary
-      else
+      elseif constants[vocabulary] == nil then
         fail(string.format("%s: Constants.%s does not exist", rel, vocabulary))
       end
     end

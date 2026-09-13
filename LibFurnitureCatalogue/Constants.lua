@@ -484,6 +484,9 @@ deriveNames(this.NpcGroupIds, getNpcGroupStr, this.NPC, this.NpcByName)
 this.CrownCrateIds = {
   -- Source: https://en.uesp.net/wiki/Online:Crown_Crates
 
+  -- a crate row that does not say which crate
+  UNKNOWN = 0,
+
   -- ids not confirmed ingame yet
 
   KINDRED = 64, -- 2025-12, Hidden Kindred
@@ -655,7 +658,7 @@ this.ItemBundles = {
 -- Guild source can be Mages, Fighters, Psijic, Thieves, Antiquariats (Thieves are connected to LEGERDEMAIN skill line; mages, fighters, antiquariats and psijic have their own)
 this.SkillLineIds = {
   -- manual lookup for now:
-    -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
+  -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
   -- TODO: add skill line search to furcdev
   -- TODO: look up the Antiquarian Circle id
 
@@ -692,6 +695,10 @@ this.EventIds = {
 this.Events = {}
 this.EventByName = {}
 deriveNames(this.EventIds, getStr, this.Events, this.EventByName)
+
+
+-- Source key for an event row the event itself drops (no vendor, no container)
+this.EVENT_DROP = 0
 
 this.Containers = {
   BOONBOX = "|H0:item:121526:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h", -- during Whitestrake's Mayhem

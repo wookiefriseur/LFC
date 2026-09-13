@@ -29,6 +29,10 @@ local function makeSandbox()
     return "zone:" .. tostring(id)
   end
   env.GetCrownCrateName = function(id)
+    -- id 0 is "no crate": the game answers "" for it, so an unnamed crate cannot look named here either
+    if id == 0 then
+      return ""
+    end
     return "crate:" .. tostring(id)
   end
   env.GetSkillLineNameById = function(id)

@@ -74,31 +74,31 @@ FurC.RecipeSources = {
 for versionNo, rolisRecipes in pairs(FurC.RolisRecipes) do
   FurC.Rolis = FurC.Rolis or {}
   FurC.Rolis[versionNo] = FurC.Rolis[versionNo] or {}
-  for recipeId, itemPrice in pairs(rolisRecipes) do
+  for recipeId, row in pairs(rolisRecipes) do
     FurC.RecipeSources[recipeId] = {
       vendor = npcIds.ROLIS,
       place = placeIds.ANY_CAPITAL,
-      itemPrice = itemPrice,
+      itemPrice = row.itemPrice,
       currency = CURT_WRIT_VOUCHERS,
     }
     -- Price lookup by blueprint: scanner resolves to furnishing
-    FurC.Rolis[versionNo][recipeId] = itemPrice
+    FurC.Rolis[versionNo][recipeId] = row
   end
 end
 
 for versionNo, faustinaRecipes in pairs(FurC.FaustinaRecipes) do
   FurC.Faustina = FurC.Faustina or {}
   FurC.Faustina[versionNo] = FurC.Faustina[versionNo] or {}
-  for recipeId, itemPrice in pairs(faustinaRecipes) do
+  for recipeId, row in pairs(faustinaRecipes) do
     FurC.RecipeSources[recipeId] = {
       vendor = npcIds.FAUSTINA,
       place = placeIds.ANY_CAPITAL,
-      itemPrice = itemPrice,
+      itemPrice = row.itemPrice,
       currency = CURT_WRIT_VOUCHERS,
       achievement = 1801,
     }
     -- Price lookup by blueprint: scanner resolves to furnishing
-    FurC.Faustina[versionNo][recipeId] = itemPrice
+    FurC.Faustina[versionNo][recipeId] = row
   end
 end
 

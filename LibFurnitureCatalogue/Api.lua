@@ -425,6 +425,10 @@ end
 ---@field skillLine integer|nil skill line id, resolve with GetSkillLineNameById. On a vendor record it tells which guild sells it and asking what the Thieves Guild sells is asking for Legerdemain skills
 ---@field skillRank integer|nil required rank in that skill line. nil means no rank required
 ---@field event integer|nil locale string id, resolve with GetString
+---@field crate integer|nil crown crate id, resolve with GetCrownCrateName. `0` when it's a crate but the id is unknown and we have no name
+---@field pack integer|nil item id of the furnishing pack it is part of
+---@field bundle integer|nil locale string id of a Crown Store bundle that does not have an item id, resolve with GetString
+---@field houses integer[]|nil collectible ids of the houses it comes furnished with, resolve with GetCollectibleName
 
 ---What one source costs. A source taking two currencies is modelled as two sources, not two costs
 ---@class LFCSourceCost

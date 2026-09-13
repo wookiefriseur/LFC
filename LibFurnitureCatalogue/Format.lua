@@ -173,6 +173,30 @@ function this.FormatHouses(...)
   return sFormat(fmtHouse, houses)
 end
 
+local fmtItemPack = GetString(SI_FURC_SRC_ITEMPACK)
+local packSources = {}
+
+---Format the furnishing pack an item is part of
+---@param packItemId integer see LFC.Internal.Constants.ItemPacks
+---@return string
+function this.FormatItemPack(packItemId)
+  local source = packSources[packItemId]
+  if not source then
+    source = sFormat(fmtItemPack, this.GetItemLink(packItemId))
+    packSources[packItemId] = source
+  end
+  return source
+end
+
+local fmtItemBundle = GetString(SI_FURC_SRC_ITEMBUNDLE)
+
+---Format a Crown Store bundle
+---@param bundleStringId integer see LFC.Internal.Constants.ItemBundles
+---@return string
+function this.FormatItemBundle(bundleStringId)
+  return sFormat(fmtItemBundle, GetString(bundleStringId))
+end
+
 --- Unique locations in the English client mostly come without the `^N` suffix (unique name)
 --- This causes results like "at the Clockwork City" instead of "in Clockwork City"
 --- We fix this by adding the `^N`, if no control char was specified
@@ -375,17 +399,8 @@ function this.FormatFurnisher(trader, location, price, curt, info)
     strPrice = this.FormatPrice(price, curt)
   end
 
-  local strInfo = ""
-  local hasReq = (info and info ~= "" and 1) or 0
-  if hasReq == 1 then
-    if type(info) == "number" then
-      -- must be an achievment ID
-      strInfo = formatAchievement(info) or ""
-    else
-      -- must be a description
-      strInfo = info or ""
-    end
-  end
+  local strInfo = info or ""
+  local hasReq = (strInfo ~= "" and 1) or 0
 
   local strVendor = colourise(trader, colours.Vendor)
   local strLoc = colourise(location, colours.Location)

@@ -15,23 +15,23 @@ local npcIds = LFC.Internal.Constants.NpcIds
 local placeIds = LFC.Internal.Constants.PlaceIds
 
 FurC.RolisRecipes[ver.ZERO] = {
-  [223930] = 125, -- Pattern: Worm Cult Tent, Large
-  [223927] = 125, -- Sketch: Golden Skull, Argonian
-  [223929] = 125, -- Praxis: Stone-Nest Fountain, Four Headed
-  [223926] = 125, -- Formula: Coldharbour Focusing Lens
-  [223931] = 125, -- Diagram: Worm Cult Forge, Mining
-  [223928] = 125, -- Design: Shell-Tide Hatchery Altar, Replica
-  [223932] = 125, -- Blueprint: Worm Cult Torture Rack
+  [223930] = { itemPrice = 125 }, -- Pattern: Worm Cult Tent, Large
+  [223927] = { itemPrice = 125 }, -- Sketch: Golden Skull, Argonian
+  [223929] = { itemPrice = 125 }, -- Praxis: Stone-Nest Fountain, Four Headed
+  [223926] = { itemPrice = 125 }, -- Formula: Coldharbour Focusing Lens
+  [223931] = { itemPrice = 125 }, -- Diagram: Worm Cult Forge, Mining
+  [223928] = { itemPrice = 125 }, -- Design: Shell-Tide Hatchery Altar, Replica
+  [223932] = { itemPrice = 125 }, -- Blueprint: Worm Cult Torture Rack
 }
 
 FurC.FaustinaRecipes[ver.ZERO] = {
-  [219665] = 100, -- Blueprint: Tide-Born Hut, Elevated
-  [219663] = 100, -- Design: Fruit Arrangement, Tide-Born
-  [219664] = 100, -- Diagram: Naj-Caldeesh Impaler, Deactivated
-  [219660] = 100, -- Formula: High Elf Castle Painting, In Progress
-  [219661] = 100, -- Pattern: Vossa-Satl, Display
-  [219666] = 100, -- Praxis: Stone-Nest Fountain, Triple Spout
-  [219662] = 100, -- Sketch: Meridian Bell, Temple
+  [219665] = { itemPrice = 100 }, -- Blueprint: Tide-Born Hut, Elevated
+  [219663] = { itemPrice = 100 }, -- Design: Fruit Arrangement, Tide-Born
+  [219664] = { itemPrice = 100 }, -- Diagram: Naj-Caldeesh Impaler, Deactivated
+  [219660] = { itemPrice = 100 }, -- Formula: High Elf Castle Painting, In Progress
+  [219661] = { itemPrice = 100 }, -- Pattern: Vossa-Satl, Display
+  [219666] = { itemPrice = 100 }, -- Praxis: Stone-Nest Fountain, Triple Spout
+  [219662] = { itemPrice = 100 }, -- Sketch: Meridian Bell, Temple
 }
 
 -- 34 Fallen Banners
@@ -318,19 +318,19 @@ FurC.FurnishingFolios[171571] = { -- Dark Elf
 
 -- 7 Summerset
 FurC.Faustina[ver.ALTMER] = {
-  [137947] = 250, -- Attunable Jewelry Station
-  [137870] = 125, -- Jewelry Crafting Station
+  [137947] = { itemPrice = 250 }, -- Attunable Jewelry Station
+  [137870] = { itemPrice = 125 }, -- Jewelry Crafting Station
 }
 
 -- 6 Dragon Bones
 FurC.Faustina[ver.DRAGONS] = {
-  [134675] = 500, -- Outfit station
+  [134675] = { itemPrice = 500 }, -- Outfit station
   [139391] = { itemPrice = 10, info = 1801 }, -- Master Crafter's Banner, Hanging
 }
 
 -- 5 Clockwork City
 FurC.Rolis[ver.CLOCKWORK] = {
-  [133576] = 1250, -- Transmute Station
+  [133576] = { itemPrice = 1250 }, -- Transmute Station
 }
 
 -- 4 Reach
@@ -374,22 +374,22 @@ FurC.FurnishingFolios[171568] = { -- Crafter's
 
 -- 2 Homestead
 FurC.Rolis[ver.HOMESTEAD] = {
-  [119822] = 250, -- Attunable Woodworking station
-  [119821] = 250, -- Attunable Clothing station
-  [119781] = 35, -- Blacksmithing station
-  [119744] = 35, -- Woodworking station
-  [119707] = 35, -- Clothing station
-  [119594] = 250, -- Attunable Blacksmithing station
-  [118330] = 35, -- Enchanting station
-  [118329] = 35, -- Dye Station
-  [118328] = 35, -- Alchemy station
-  [118327] = 35, -- Provisioning station
+  [119822] = { itemPrice = 250 }, -- Attunable Woodworking station
+  [119821] = { itemPrice = 250 }, -- Attunable Clothing station
+  [119781] = { itemPrice = 35 }, -- Blacksmithing station
+  [119744] = { itemPrice = 35 }, -- Woodworking station
+  [119707] = { itemPrice = 35 }, -- Clothing station
+  [119594] = { itemPrice = 250 }, -- Attunable Blacksmithing station
+  [118330] = { itemPrice = 35 }, -- Enchanting station
+  [118329] = { itemPrice = 35 }, -- Dye Station
+  [118328] = { itemPrice = 35 }, -- Alchemy station
+  [118327] = { itemPrice = 35 }, -- Provisioning station
 }
 
 -- 2 Homestead
 FurC.RolisRecipes[ver.HOMESTEAD] = {
-  [126583] = 450, -- Praxis: Target Centurion, Robust Refabricated
-  [126582] = 275, -- Praxis: Target Centurion, Dwarf-Brass
-  [121315] = 200, -- Praxis: Target Skeleton, Robust Humanoid
-  [119592] = 125, -- Praxis: Target Skeleton, Humanoid
+  [126583] = { itemPrice = 450 }, -- Praxis: Target Centurion, Robust Refabricated
+  [126582] = { itemPrice = 275 }, -- Praxis: Target Centurion, Dwarf-Brass
+  [121315] = { itemPrice = 200 }, -- Praxis: Target Skeleton, Robust Humanoid
+  [119592] = { itemPrice = 125 }, -- Praxis: Target Skeleton, Humanoid
 }
