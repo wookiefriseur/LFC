@@ -2006,10 +2006,6 @@ FurC.LuxuryFurnisher[ver.DRAGONS] = {
     itemPrice = 2000,
     itemDate = "2025-09-19",
   },
-  [134839] = { -- Necromancer's Brazier, Cold-Flame
-    itemPrice = 10000,
-    itemDate = "2025-10-03",
-  },
   [139098] = { -- Darkshade Glowstalks, Inquisitive
     itemPrice = 45000,
     itemDate = "2025-12-26",

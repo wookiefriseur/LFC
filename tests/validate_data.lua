@@ -96,6 +96,55 @@ for _, rel in ipairs(dataFiles) do
       fail(rel .. " is de-baked but uses Internal.Format, so it renders at load again")
     end
 
+    -- A row states ids and raw values only. If there is client markup like `|c`, `|H`, `|t`, `|u`, it means something was baked in again
+    local markup = text:match("[^\n]-|[cHtu][^\n]*")
+    if markup then
+      fail(
+        string.format(
+          "%s: carries client markup, so a value is rendered text rather than an id: %s",
+          rel,
+          markup:sub(1, 80)
+        )
+      )
+    end
+
+    -- table keeps the LAST value written for a key, so an item id used twice with the same block drops the previous row (reusing an id is fine, but the same table using it twice is not)
+    do
+      local depth, keysAtDepth = 0, {}
+      local number = 0
+      for line in (text .. "\n"):gmatch("([^\n]*)\n") do
+        number = number + 1
+        local item = line:match("^%s*%[(%d+)%]%s*=")
+        if item then
+          keysAtDepth[depth] = keysAtDepth[depth] or {}
+          local first = keysAtDepth[depth][item]
+          if first then
+            fail(
+              string.format(
+                "%s:%d: item %s is already a key at line %d in the same table, so one of the two rows is dropped on load",
+                rel,
+                number,
+                item,
+                first
+              )
+            )
+          else
+            keysAtDepth[depth][item] = number
+          end
+        end
+        local opens = select(2, line:gsub("{", ""))
+        local closes = select(2, line:gsub("}", ""))
+        if opens > closes then
+          depth = depth + (opens - closes)
+        elseif closes > opens then
+          for _ = 1, closes - opens do
+            keysAtDepth[depth] = nil
+            depth = (depth > 0 and depth - 1) or 0
+          end
+        end
+      end
+    end
+
     local declared = text:match("\n%s*function%s+([%w_%.:]+)%s*%(")
     if declared then
       fail(
