@@ -63,7 +63,7 @@
 -- Deprecated - we'll call the guards if you keep using those
 --   GetSources            old name and shape of GetSourceDetails, where cost is a list (LibPrice currently needs it)
 --   SourceType            shared source enum table. Use GetSourceTypes for a copy of your own
---   GetItemDescription [FC] rendered source text. The add-on composes its own lines from GetSourceDetails now and calls this only for a craftable, whose line names where the *blueprint* comes from. Use GetSourceDetails instead
+--   GetItemDescription [FC] rudimentary rendered source text: no grammar and no presentation (use `GetSourceDetails` and write your own)
 --   GetMiscItemPrice      a price extracted back out of formatted string. Use GetSourceDetails
 --   FurC.Find        [FC] mutable internal row, and {} on a miss, where GetEntry copies and returns nil. Not the same call, so switching to GetEntry is not a rename
 --   FurC.GetItemId        flat alias
@@ -692,20 +692,19 @@ end
 -- We'll call the guards if you keep using those for too long
 -- ---------------------------------------------------------------------------
 
----Human-readable description for a primary source
----Pretty descriptions will move to the main AddOn
+---Plain description of an item's primary source, assembled from the record (presentation lives in FC and your AddOn now)
 ---@deprecated Use GetSourceDetails and render the records yourself
 ---@param recipeKey string|integer item link or id
 ---@param recipeArray? FurCEntry looked up via GetEntry when omitted
 ---@param stripColor? boolean strip colour control characters
----@param opts? { dateFormat?: string } render options, for instance luxury date format
+---@param opts? { dateFormat?: string } ignored
 ---@return string description localised, empty when the item is not in the DB
 ---```lua
 ---LFC.GetItemDescription(134686, LFC.GetEntry(134686), true)
------>  "|H1:item:134686:...|h|h 2,000"
+----->  "Luxury Furnisher: Coldharbour (2,000) - 2026-04-10"
 ---```
 function api.GetItemDescription(recipeKey, recipeArray, stripColor, opts)
-  return getItemDescription(recipeKey, recipeArray, stripColor, opts)
+  return getItemDescription(recipeKey, recipeArray, stripColor)
 end
 
 ---Temporary compatibility bridge for prices hidden in baked strings

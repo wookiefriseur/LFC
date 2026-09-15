@@ -6,8 +6,6 @@ local this = FurC.DBQuery
 LibFurnitureCatalogue.Internal.Query = this
 
 local LFC = LibFurnitureCatalogue
-local colour = LFC.Internal.Constants.Colours
-local loc = LFC.Internal.Constants.Locations
 local npc = LFC.Internal.Constants.NPC
 local src = LFC.Internal.Constants.ItemSources
 local npcIds = LFC.Internal.Constants.NpcIds
@@ -16,26 +14,12 @@ local zoneIds = LFC.Internal.Constants.ZoneIds
 local npcByName = LFC.Internal.Constants.NpcByName
 local eventByName = LFC.Internal.Constants.EventByName
 
-local colourise = LFC.Internal.Format.Colourise
 local getItemId = LFC.Internal.Format.GetItemId
 local getItemLink = LFC.Internal.Format.GetItemLink
-local strEvent = LFC.Internal.Format.FormatEvent
-local strFurnisher = LFC.Internal.Format.FormatFurnisher
-local strGeneric = LFC.Internal.Format.FmtGeneric
-local strCrate = LFC.Internal.Format.FmtCrownCrate
-local strHouses = LFC.Internal.Format.FormatHouses
-local strItemPack = LFC.Internal.Format.FormatItemPack
-local strItemBundle = LFC.Internal.Format.FormatItemBundle
-local stripText = LFC.Internal.Format.stripTxt
-local strSrc = LFC.Internal.Format.FmtSources
-local strPartOf = LFC.Internal.Format.FormatPartOf
-local strQuest = LFC.Internal.Format.FmtQuest
-local strQuestReq = LFC.Internal.Format.FmtQuestReq
-local strPrice = LFC.Internal.Format.FormatPrice
-local strRank = LFC.Internal.Format.FmtRank
 local getItemName = LFC.Internal.Format.GetItemName
-local formatAchievement = LFC.Internal.Format.FormatAchievement
-local formatCollectible = LFC.Internal.Format.FormatCollectible
+local stripText = LFC.Internal.Format.stripTxt
+local strPrice = LFC.Internal.Format.FormatPrice
+local STRIP_CONTROL = LFC.Internal.Format.STRIP_CONTROL
 
 local resolvers = LFC.Internal.Constants.Resolvers
 local resolveEvent = resolvers.Event
@@ -47,16 +31,6 @@ local resolveSkillLine = resolvers.SkillLine
 local resolveZone = resolvers.Zone
 local resolveCrate = resolvers.Crate
 local isZoneId = LFC.Internal.Constants.IsZoneId
-
----Get a location (zone or place)
----@param id integer a ZoneIds or PlaceIds value
----@return string
-local function resolveLocation(id)
-  if isZoneId[id] then
-    return resolveZone(id)
-  end
-  return resolvePlace(id)
-end
 
 local db = LFC.Internal.DB
 local ensureDB = LFC.Internal.Build.EnsureDB
@@ -192,15 +166,7 @@ local function makeMaterial(recipeKey, recipeArray, tryPlaintext, forcePlaintext
 end
 this.GetMats = makeMaterial
 
-local srcEvent = GetString(SI_FURC_EVENT)
 local eventDrop = LFC.Internal.Constants.EVENT_DROP
-local srcEditor = GetString(SI_FURC_SRC_EDITOR)
-local strEditorTag = GetString(SI_FURC_SRC_EDITOR_TAG)
-
-local strVoucherVendor = strSrc("src", npc.ROLIS, npc.FAUSTINA)
-
-local strMultiple = LFC.Internal.Format.JoinSources
-
 ---Resolve one note value: a string id, a literal, or a `{ npc = }` / `{ item = }` part
 ---@param value string|integer|table
 ---@return string
@@ -226,27 +192,6 @@ local function resolveNote(value)
   return GetString(value)
 end
 
----The detail a vendor entry carries (requirement, the collectible it comes with, or a note)
----@param row table
----@return string|nil
-local function vendorInfo(row)
-  if row.skillRank then
-    return strRank(resolveSkillLine(row.skillLine), row.skillRank)
-  end
-  if row.quest then
-    return strQuestReq(row.quest)
-  end
-  if row.achievement then
-    return formatAchievement(row.achievement)
-  end
-  if row.collectible then
-    return formatCollectible(row.collectible)
-  end
-  if row.note then
-    return resolveNote(row.note)
-  end
-end
-
 -- Writ Voucher recipes referenced by blueprint id, so every lookup has to try blueprint as well as id
 local function voucherEntry(versionData, recipeKey, blueprintId)
   if nil == versionData then
@@ -255,232 +200,7 @@ local function voucherEntry(versionData, recipeKey, blueprintId)
   return versionData[recipeKey] or (blueprintId and versionData[blueprintId])
 end
 
-local function strVoucher(vendor, entry)
-  -- `achievement` is a requirement, `partOf` is a folio the recipe comes in
-  local info = (entry.achievement and formatAchievement(entry.achievement))
-    or (entry.partOf and strPartOf(entry.partOf))
-  local price = entry.itemPrice
-  return strFurnisher(vendor, loc.ANY_CAPITAL, price, CURT_WRIT_VOUCHERS, info)
-end
-
-local function getRolisSource(recipeKey, recipeArray)
-  recipeArray = recipeArray or find(recipeKey)
-  if nil == next(recipeArray) then
-    return
-  end
-  local version = recipeArray.version
-  local blueprintId = recipeArray.blueprint
-
-  local entry = voucherEntry(FurC.Rolis[version], recipeKey, blueprintId)
-  if nil ~= entry then
-    return strVoucher(npc.ROLIS, entry)
-  end
-
-  entry = voucherEntry(FurC.Faustina[version], recipeKey, blueprintId)
-    or voucherEntry(FurC.FaustinaRecipes[version], recipeKey, blueprintId)
-  if nil ~= entry then
-    return strVoucher(npc.FAUSTINA, entry)
-  end
-
-  -- check if this recipe is part of a furnishing folio
-  if FurC.FurnishingFolios then
-    for folioId, folioData in pairs(FurC.FurnishingFolios) do
-      if folioData.contents then
-        for _, contentId in ipairs(folioData.contents) do
-          if contentId == recipeKey or contentId == blueprintId then
-            local partOfStr = strPartOf(folioId)
-            return strFurnisher(
-              resolveNpc(folioData.vendor),
-              resolvePlace(folioData.place),
-              folioData.itemPrice,
-              folioData.currency,
-              partOfStr
-            )
-          end
-        end
-      end
-    end
-  end
-
-  return strVoucherVendor -- fallback
-end
-
-this.GetRolisSource = getRolisSource
-
 local emptyString = GetString(SI_FURC_SRC_EMPTY)
-
-local strAroundDate = GetString(SI_FURC_STRING_WEEKEND_AROUND)
-local function getLuxurySource(recipeKey, recipeArray, stripColor, opts)
-  recipeArray = recipeArray or find(recipeKey)
-  if nil == next(recipeArray) then
-    return
-  end
-
-  local versionData = FurC.LuxuryFurnisher[recipeArray.version]
-  local itemData = versionData and versionData[recipeKey]
-  if not itemData then
-    for _, vData in pairs(FurC.LuxuryFurnisher) do
-      if vData[recipeKey] then
-        itemData = vData[recipeKey]
-        break
-      end
-    end
-  end
-  if not itemData then
-    return emptyString
-  end
-
-  local yyyy, mm, dd = string.match(itemData.itemDate, "(%d+)-(%d+)-(%d+)")
-
-  local formattedDate = ""
-  if yyyy and mm and dd then
-    local formatted = (opts and opts.dateFormat) or "YYYY-MM-DD"
-    formatted = string.gsub(formatted, "YYYY", yyyy)
-    formatted = string.gsub(formatted, "MM", mm)
-    formatted = string.gsub(formatted, "DD", dd)
-    formattedDate = formatted
-  end
-
-  local luxuryStr = (nil == itemData.itemDate and "")
-    or zo_strformat(strAroundDate, colourise(formattedDate, colour.Gold))
-  local result = strFurnisher(npc.LUXF, loc.COLDH, itemData.itemPrice, nil, luxuryStr)
-  if stripColor then
-    result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
-  end
-  return result
-end
-this.GetLuxurySource = getLuxurySource
-
-local function getPvpSource(recipeKey, recipeArray, stripColor)
-  recipeArray = recipeArray or find(recipeKey)
-  if nil == next(recipeArray) then
-    return
-  end
-
-  local function findIn(versionData)
-    if not versionData then
-      return
-    end
-    for vendorName, vendorData in pairs(versionData) do
-      for locationName, locationData in pairs(vendorData) do
-        if nil ~= locationData[recipeKey] then
-          return vendorName, locationName, locationData[recipeKey]
-        end
-      end
-    end
-  end
-
-  local vendorName, locationName, item = findIn(FurC.PVP[recipeArray.version])
-  if not item then
-    for _, versionData in pairs(FurC.PVP) do
-      vendorName, locationName, item = findIn(versionData)
-      if item then
-        break
-      end
-    end
-  end
-  if not item then
-    return emptyString
-  end
-
-  local currency = item.currency or CURT_ALLIANCE_POINTS
-  local result =
-    strFurnisher(resolveNpc(vendorName), resolveZone(locationName), item.itemPrice, currency, vendorInfo(item))
-  if stripColor then
-    result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
-  end
-  return result
-end
-this.GetPvpSource = getPvpSource
-
--- TODO #REFACTOR: add info to item in DB and generate str from that. then use lookup by id
-local function getAchievementVendorSource(recipeKey, recipeArray, stripColor)
-  recipeArray = recipeArray or find(recipeKey)
-  if nil == next(recipeArray) then
-    return
-  end
-
-  local function findIn(versionData)
-    if not versionData then
-      return
-    end
-    for location, locationData in pairs(versionData) do
-      for vendor, vendorData in pairs(locationData) do
-        if vendorData[recipeKey] then
-          return location, vendor, vendorData[recipeKey]
-        end
-      end
-    end
-  end
-
-  local location, vendor, databaseEntry = findIn(FurC.AchievementVendors[recipeArray.version])
-  if not databaseEntry then
-    for _, versionData in pairs(FurC.AchievementVendors) do
-      location, vendor, databaseEntry = findIn(versionData)
-      if databaseEntry then
-        break
-      end
-    end
-  end
-  if not databaseEntry then
-    return emptyString
-  end
-
-  local currency = CURT_MONEY
-  if databaseEntry.currency then
-    currency = databaseEntry.currency
-  end
-
-  local result = strFurnisher(
-    resolveNpc(vendor),
-    resolveLocation(location),
-    databaseEntry.itemPrice,
-    currency,
-    vendorInfo(databaseEntry)
-  )
-  if stripColor then
-    result = string.format("%s %s", getItemLink(recipeKey), stripText(result))
-  end
-  return result
-end
-this.GetAchievementVendorSource = getAchievementVendorSource
-
-local function getEventDropSource(recipeKey, recipeArray)
-  recipeArray = recipeArray or find(recipeKey)
-  if nil == next(recipeArray) then
-    return
-  end
-
-  local itemPriceString = "getEventDropSource: couldn't find " .. tostring(recipeKey)
-  local versionDataExists = nil ~= FurC.EventItems[recipeArray.version]
-  if not versionDataExists then
-    return itemPriceString
-  end
-
-  -- Every row is [version][event][source][itemId] = record (source is EVENT_DROP, when the event itself drops it)
-  -- FurC.EventItems[27]["Witches Festival"]["plunderskulllink"][198390] = {}
-  -- FurC.EventItems[25]["Anniversary"]["npcname"][198390] = { itemPrice = 123 }
-  for version, events in pairs(FurC.EventItems) do
-    for eventName, sources in pairs(events) do
-      for srcName, items in pairs(sources) do
-        local item = items[recipeKey]
-        if nil ~= item then
-          local named = srcName ~= eventDrop and srcName or nil
-          -- a key that is not an NPC is a container
-          if named and nil == npcByName[srcName] then
-            named = getItemLink(getItemId(named))
-          end
-          if item.itemPrice or npcByName[srcName] then
-            local currency = item.currency or (named == npc.EVENT and CURT_TRADE_BARS or CURT_MONEY)
-            return strFurnisher(named or eventName, eventName, item.itemPrice, currency, vendorInfo(item))
-          end
-          return strGeneric(srcEvent, named, "src", eventName)
-        end
-      end
-    end
-  end
-end
-this.GetEventDropSource = getEventDropSource
 
 local strLeads = GetString(SI_FURC_SRC_LEADS)
 
@@ -498,8 +218,15 @@ local MISC_CATEGORY = {
   [src.ANTIQUITY] = SI_FURC_SRC_SCRYING,
 }
 
----Adds to a suffix: a single value, or a list of alternatives. A value that resolves to nothing adds no part.
----@param parts string[] suffix parts, appended to in place
+---Vocabulary carries the grammar suffix a formatter needs (`Summerset^N,in`), and this one has no formatter
+---@param text any
+---@return string
+local function plain(text)
+  return stripText(tostring(text or ""), STRIP_CONTROL)
+end
+
+---Adds a qualifier: a single value, or a list of alternatives. A value that resolves to nothing adds no part.
+---@param parts string[] parts, appended to in place
 ---@param value any a vocabulary value, a `{ npc = }`-style note part, or a list of either
 ---@param resolve fun(value: any): string
 local function addQualifier(parts, value, resolve)
@@ -511,150 +238,22 @@ local function addQualifier(parts, value, resolve)
     return
   end
   if type(value) ~= "table" or value[1] == nil then
-    local resolved = resolve(value)
+    local resolved = plain(resolve(value))
     if resolved ~= "" then
-      parts[#parts + 1] = strSrc("src", resolved)
+      parts[#parts + 1] = resolved
     end
     return
   end
   local alternatives = {}
   for _, part in ipairs(value) do
-    local resolved = resolve(part)
+    local resolved = plain(resolve(part))
     if resolved ~= "" then
       alternatives[#alternatives + 1] = resolved
     end
   end
-  -- One alternative means it's just one value
-  if #alternatives == 1 then
-    parts[#parts + 1] = strSrc("src", alternatives[1])
-  elseif #alternatives > 1 then
-    parts[#parts + 1] = strSrc("other", unpack(alternatives))
+  if #alternatives > 0 then
+    parts[#parts + 1] = table.concat(alternatives, " / ")
   end
-end
-
----Render a FurC.MiscItemSources row. The row carries ids, see data/MiscItemSources.lua
----@param source integer the item's source
----@param row table
----@return string
-local function renderMiscSource(source, row)
-  if row.itemPack then
-    return zo_strformat(GetString(SI_FURC_SRC_TOMESPACK), GetString(row.itemPack))
-  end
-
-  -- `locations` are several places with ids one source covers
-  -- `place` is inside the `location`, so the two go in as one nested location
-  local places = {}
-  for _, zoneId in ipairs(row.locations or {}) do
-    places[#places + 1] = resolveZone(zoneId)
-  end
-  if row.location and row.place then
-    places[#places + 1] = { resolveZone(row.location), resolvePlace(row.place) }
-  elseif row.location then
-    places[#places + 1] = resolveZone(row.location)
-  elseif row.place then
-    places[#places + 1] = resolvePlace(row.place)
-  end
-  if row.event then
-    places[#places + 1] = resolveEvent(row.event)
-  end
-
-  -- a book coming from a container names its container, and who sells that
-  if row.partOf then
-    local detail
-    local named = {}
-    if row.vendor then
-      named[#named + 1] = zo_strformat("<<1>>", resolveNpc(row.vendor))
-    end
-    for _, name in ipairs(places) do
-      for _, part in ipairs(type(name) == "table" and name or { name }) do
-        named[#named + 1] = zo_strformat("<<1>>", part)
-      end
-    end
-    if #named > 0 then
-      detail = string.format("%s: %s", table.concat(named, ", "), strPrice(row.itemPrice, row.currency))
-    end
-    return strPartOf(row.partOf, detail)
-  end
-
-  -- an event is its own category word, the event name goes where a location would
-  local category = GetString(row.category or (row.event and SI_FURC_EVENT) or MISC_CATEGORY[source])
-
-  -- no location renders as "<category>: <price>"
-  if row.itemPrice and #places == 0 then
-    return string.format("%s: %s", category, strPrice(row.itemPrice, row.currency))
-  end
-
-  -- One suffix slot, so parts are joined in a fixed order
-  local notes = {}
-  if row.leads then
-    notes[#notes + 1] = strLeads
-  end
-  addQualifier(notes, row.npcClass, resolveNpcClass)
-  addQualifier(notes, row.containerKind, resolveNote)
-  addQualifier(notes, row.note, resolveNote)
-  if row.achievement then
-    notes[#notes + 1] = formatAchievement(row.achievement)
-  end
-  if row.container then
-    notes[#notes + 1] = getItemLink(row.container)
-  end
-  if row.rarity then
-    notes[#notes + 1] = GetString(row.rarity)
-  end
-  local suffix = table.concat(notes, ", ")
-
-  -- the quest formatter owns the suffix slot: it names the quest and appends the rest (if any)
-  if row.quest then
-    return strQuest(row.quest, suffix, unpack(places))
-  end
-
-  return strGeneric(category, suffix, "loc", unpack(places))
-end
-
----Render one source of a CrownStore row, exactly one of the fields below decides the kind of source
----@param row table one source
----@return string
-local function renderCrownSource(row)
-  if row.itemPrice then
-    return strPrice(row.itemPrice, row.currency or CURT_CROWNS)
-  end
-  if row.pack then
-    return strItemPack(row.pack)
-  end
-  if row.bundle then
-    return strItemBundle(row.bundle)
-  end
-  if row.crate then
-    return strCrate(resolveCrate(row.crate))
-  end
-  if row.houses then
-    return strHouses(unpack(row.houses))
-  end
-  -- a house purchase with no house named
-  if row.note then
-    return GetString(row.note)
-  end
-  -- the row is not a crown-store offer at all (crafted, levelup reward) -- TODO: doesn't belong in there
-  if row.category then
-    return strGeneric(GetString(row.category))
-  end
-  return emptyString
-end
-
----Render a FurC.CrownStore row: one source, or an ordered list of them
----@param row table
----@param tagFirst boolean|nil mark the leading source as the housing editor offer
----@return string
-local function renderCrownRow(row, tagFirst)
-  local sources = row[1] ~= nil and row or { row }
-  local parts = {}
-  for i = 1, #sources do
-    parts[i] = renderCrownSource(sources[i])
-  end
-  if tagFirst then
-    parts[1] = zo_strformat(strEditorTag, parts[1], srcEditor)
-  end
-  return strMultiple(unpack(parts))
 end
 
 -- The data files sharing the [version][source][itemId] shape, in lookup order
@@ -717,69 +316,6 @@ local function findMiscRow(recipeKey, version, source)
   return nil
 end
 
-local function getMiscItemSource(recipeKey, recipeArray, stripColor, source)
-  recipeArray = recipeArray or find(recipeKey)
-  -- "source" allows asking for specific category
-  -- defaults to primary (top ranked source)
-  source = source or originOf(recipeArray)
-  if nil == next(recipeArray) or not source then
-    return emptyString
-  end
-
-  local originData = findMiscRow(recipeKey, recipeArray.version, source)
-  if not originData then
-    return emptyString
-  end
-
-  -- some old records still return a string
-  if type(originData) == "table" then
-    if source == src.CROWN or source == src.EDITOR then
-      originData = renderCrownRow(originData, source == src.EDITOR)
-    else
-      originData = renderMiscSource(source, originData)
-    end
-  end
-
-  if stripColor then
-    originData = string.format("%s %s", getItemLink(recipeKey), stripText(originData))
-  end
-
-  return originData
-end
-this.GetMiscItemSource = getMiscItemSource
-
-local strSrcQuest = GetString(SI_FURC_SRC_QUEST)
-
----Render a FurC.RecipeSources row. The row carries ids, see data/RecipeSources.lua
----@param row table
----@return string
-local function renderRecipeSource(row)
-  if row.quest then
-    local zoneNames = {}
-    for i, zoneId in ipairs(row.locations or {}) do
-      zoneNames[i] = resolveZone(zoneId)
-    end
-    return strGeneric((row.category and GetString(row.category)) or strSrcQuest, nil, nil, unpack(zoneNames))
-  end
-
-  -- we use `src` instead of `loc`, or we'd get "Event: in SomeEvent"
-  if row.event and not row.vendor then
-    return strGeneric(srcEvent, nil, "src", GetString(row.event))
-  end
-
-  -- one suffix slot, so the most specific qualifier wins
-  local info = (row.achievement and formatAchievement(row.achievement)) or (row.partOf and strPartOf(row.partOf))
-  if row.skillRank then
-    info = strRank(resolveSkillLine(row.skillLine), row.skillRank)
-  end
-  if not info and row.note then
-    info = (type(row.note) == "string" and row.note) or resolvePlace(row.note)
-  end
-
-  local location = (row.location and resolveZone(row.location)) or (row.place and resolvePlace(row.place))
-  return strFurnisher(resolveNpc(row.vendor), location, row.itemPrice, row.currency, info)
-end
-
 ---Row backing an item: keyed on the recipe, so the item answers through its blueprint
 ---@param recipeKey integer
 ---@param recipeArray? FurCEntry
@@ -796,41 +332,6 @@ local function recipeRow(recipeKey, recipeArray)
   return FurC.RecipeSources[recipeArray.blueprint or recipeKey]
 end
 
-local function getRecipeSource(recipeKey, recipeArray)
-  if nil == recipeKey and nil == recipeArray then
-    return
-  end
-  if nil == FurC.RecipeSources then
-    return
-  end
-  local row = FurC.RecipeSources[recipeKey]
-  if nil ~= row then
-    return renderRecipeSource(row)
-  end
-
-  recipeArray = recipeArray or find(recipeKey)
-
-  recipeKey = recipeArray.blueprint or recipeKey
-
-  if originOf(recipeArray) == src.RUMOUR then
-    local rumourSource = this.GetRumourSource(recipeKey, recipeArray)
-    if rumourSource then
-      return rumourSource
-    end
-  end
-
-  row = FurC.RecipeSources[recipeKey]
-  return row and renderRecipeSource(row)
-end
-this.GetRecipeSource = getRecipeSource
-
-local strRItem = GetString(SI_FURC_SRC_RUMOUR_ITEM)
-local strRRecipe = GetString(SI_FURC_SRC_RUMOUR_RECIPE)
-local function getRumourSource(recipeKey, recipeArray)
-  return (recipeArray.blueprint and strRRecipe) or strRItem
-end
-this.GetRumourSource = getRumourSource
-
 local function getCraftingSkillType(recipeKey, recipeArray)
   local itemLink = getItemLink(recipeKey)
   local craftingSkillType = GetItemLinkCraftingSkillType(itemLink)
@@ -844,104 +345,6 @@ local function getCraftingSkillType(recipeKey, recipeArray)
   return craftingSkillType
 end
 this.GetCraftingSkillType = getCraftingSkillType
-
--- Description string for each source
-local function describeSource(recipeKey, recipeArray, source, stripColor, opts)
-  -- a recipe row that names its own source answers for just that source
-  local row = recipeRow(recipeKey, recipeArray)
-  if row and row.source == source then
-    local rowSource = renderRecipeSource(row)
-    return (stripColor and stripText(rowSource)) or rowSource
-  end
-
-  if source == src.CRAFTING or source == src.WRIT_VENDOR then
-    -- where blueprint is bought, if we know (otherwise just material list)
-    local recipeSource = this.GetRecipeSource(recipeKey, recipeArray)
-    if recipeSource and #recipeSource > 0 then
-      return (stripColor and stripText(recipeSource)) or recipeSource
-    end
-    return makeMaterial(recipeKey, recipeArray, stripColor)
-  end
-  if source == src.ROLIS then
-    return this.GetRolisSource(recipeKey, recipeArray, stripColor)
-  end
-  if source == src.LUXURY then
-    return this.GetLuxurySource(recipeKey, recipeArray, stripColor, opts)
-  end
-  if source == src.GUILDSTORE then
-    return GetString(SI_FURC_SEEN_IN_GUILDSTORE)
-  end
-  if source == src.VENDOR then
-    return this.GetAchievementVendorSource(recipeKey, recipeArray, stripColor)
-  end
-  if source == src.FESTIVAL_DROP then
-    return this.GetEventDropSource(recipeKey, recipeArray, stripColor)
-  end
-  if source == src.PVP then
-    return this.GetPvpSource(recipeKey, recipeArray, stripColor)
-  end
-  if source == src.RUMOUR then
-    return this.GetRumourSource(recipeKey, recipeArray, stripColor)
-  end
-  return this.GetMiscItemSource(recipeKey, recipeArray, stripColor, source)
-end
-this.DescribeSource = describeSource
-
--- Single-string description for primary origin (by ranking)
----@param recipeKey string|integer item link or id
----@param recipeArray? FurCEntry looked up via FurC.Find if omitted
----@param stripColor? boolean strip colour control chars
----@param opts? { dateFormat?: string } render options, e.g. the luxury date format (default "YYYY-MM-DD")
----@return string
-local function getItemDescription(recipeKey, recipeArray, stripColor, opts)
-  local resolvedKey
-  if nil == recipeArray then
-    recipeArray, resolvedKey = findWithKey(recipeKey)
-  end
-  if nil == next(recipeArray) then
-    return ""
-  end
-  -- The key find resolved, so a blueprint argument still keys by the crafted item
-  recipeKey = resolvedKey or getItemId(recipeKey)
-  return describeSource(recipeKey, recipeArray, originOf(recipeArray), stripColor, opts)
-end
-this.GetItemDescription = getItemDescription
-
--- Every non-crafting source of an item, ranked, unfiltered
----@param recipeKey string|integer item link or id
----@param recipeArray? FurCEntry looked up if omitted
----@param stripColor? boolean strip colour control chars
----@param opts? { dateFormat?: string } render options, e.g. the luxury date format (default "YYYY-MM-DD")
----@return { source: FurCItemSource, text: string }[] ranked best-first, empty renders omitted
-local function getRankedSources(recipeKey, recipeArray, stripColor, opts)
-  recipeKey = getItemId(recipeKey)
-  recipeArray = recipeArray or find(recipeKey)
-  local sources = recipeArray and recipeArray.sources
-  if not sources then
-    return {}
-  end
-
-  local compatSources = recipeArray.compatSources
-  local ranked = {}
-  for s in pairs(sources) do
-    if s ~= src.CRAFTING and not isInjected(compatSources, s) then
-      ranked[#ranked + 1] = s
-    end
-  end
-  table.sort(ranked, function(a, b)
-    return (SOURCE_PRIORITY[a] or math.huge) < (SOURCE_PRIORITY[b] or math.huge)
-  end)
-
-  local lines = {}
-  for _, s in ipairs(ranked) do
-    local text = describeSource(recipeKey, recipeArray, s, stripColor, opts)
-    if text and #text > 0 then
-      lines[#lines + 1] = { source = s, text = text }
-    end
-  end
-  return lines
-end
-this.GetRankedSources = getRankedSources
 
 -- Typed per-source records for API
 
@@ -1286,6 +689,32 @@ local function miscRecord(rec, recipeKey, recipeArray, source)
   return true
 end
 
+---Fills record from a recipe row
+---@param rec table
+---@param row table
+local function recipeSourceRecord(rec, row)
+  local source = rec.source
+  if row.quest then
+    -- a quest row names no quest, only that it is one and where: { quest = true, locations = { ... } }
+    source.category = row.category or SI_FURC_SRC_QUEST
+    source.locations = row.locations
+    return
+  end
+  source.vendor = row.vendor
+  source.location = row.location
+  -- a place is inside the location when both are set (and the only thing we know if there is no location)
+  source.place = row.place
+  source.note = row.note
+  source.achievement = row.achievement
+  source.partOf = row.partOf
+  source.skillLine = row.skillLine
+  source.skillRank = row.skillRank
+  source.event = row.event
+  if row.itemPrice then
+    rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }
+  end
+end
+
 -- A builder fills the record it is handed, or returns a list of records when there are several sources
 local RECORD_BUILDERS = {
   [src.CROWN] = function(rec, recipeKey, recipeArray)
@@ -1312,33 +741,13 @@ local RECORD_BUILDERS = {
   [src.FESTIVAL_DROP] = function(rec, recipeKey)
     eventRecord(rec, recipeKey)
   end,
+  [src.CRAFTING] = function(rec, recipeKey, recipeArray)
+    local row = recipeRow(recipeKey, recipeArray)
+    if row then
+      recipeSourceRecord(rec, row)
+    end
+  end,
 }
-
----Fills record from a recipe row
----@param rec table
----@param row table
-local function recipeSourceRecord(rec, row)
-  local source = rec.source
-  if row.quest then
-    -- a quest row names no quest, only that it is one and where: { quest = true, locations = { ... } }
-    source.category = row.category or SI_FURC_SRC_QUEST
-    source.locations = row.locations
-    return
-  end
-  source.vendor = row.vendor
-  source.location = row.location
-  -- a place is inside the location when both are set, and the only thing we know if there is no location
-  source.place = row.place
-  source.note = row.note
-  source.achievement = row.achievement
-  source.partOf = row.partOf
-  source.skillLine = row.skillLine
-  source.skillRank = row.skillRank
-  source.event = row.event
-  if row.itemPrice then
-    rec.cost = { currency = row.currency or CURT_MONEY, amount = row.itemPrice }
-  end
-end
 
 ---Schema-shaped source records, ranked by priority
 ---`cost` is one record or absent, never a list (2 currencies is modelled as two sources)
@@ -1401,3 +810,214 @@ local function getMiscItemPrice(itemId, version, source)
   return extractPrice(entry, source)
 end
 this.GetMiscItemPrice = getMiscItemPrice
+
+--[[_______________________
+    |                     |
+    | RUDIMENTARY RENDER  |
+    |_____________________|]]
+-- One renderer over the published records. It resolves the ids a record carries and joins them in a fixed order
+-- no grammar forms, no prepositions, no colours, no truncation (use FC or custom renderers for that)
+
+local SOURCE_LABEL = LFC.Internal.Constants.SourceLabels
+
+---What a record says the item comes from
+---@param source table
+---@return string
+local function whatOf(source)
+  if source.vendor then
+    return plain(resolveNpc(source.vendor))
+  end
+  if source.category then
+    return plain(GetString(source.category))
+  end
+  local category = MISC_CATEGORY[source.type]
+  if category then
+    return plain(GetString(category))
+  end
+  return SOURCE_LABEL[source.type] or tostring(source.type)
+end
+
+---Where a record says the item is, every place it names
+---@param source table
+---@return string
+local function whereOf(source)
+  local places = {}
+  for _, zoneId in ipairs(source.locations or {}) do
+    places[#places + 1] = plain(resolveZone(zoneId))
+  end
+  if source.location then
+    places[#places + 1] = plain(resolveZone(source.location))
+  end
+  if source.place then
+    places[#places + 1] = plain(resolvePlace(source.place))
+  end
+  if source.event then
+    places[#places + 1] = plain(resolveEvent(source.event))
+  end
+  return table.concat(places, ", ")
+end
+
+---Everything else a record carries, each id resolved to a name
+---@param record table
+---@return string
+local function detailsOf(record)
+  local source = record.source
+  local parts = {}
+  if source.achievement then
+    if type(source.achievement) == "string" then
+      parts[#parts + 1] = source.achievement
+    elseif source.achievement ~= 0 then
+      parts[#parts + 1] = GetAchievementLink(source.achievement, LINK_STYLE_DEFAULT)
+    end
+  end
+  if source.quest then
+    parts[#parts + 1] = plain(GetQuestName(source.quest))
+  end
+  if source.collectible then
+    parts[#parts + 1] = plain(GetCollectibleName(source.collectible))
+  end
+  if source.skillRank then
+    parts[#parts + 1] = string.format("%s %d", plain(resolveSkillLine(source.skillLine)), source.skillRank)
+  end
+  if source.partOf then
+    parts[#parts + 1] = getItemLink(source.partOf)
+  end
+  if source.container then
+    parts[#parts + 1] = getItemLink(source.container)
+  end
+  if source.itemPack then
+    parts[#parts + 1] = plain(GetString(source.itemPack))
+  end
+  for _, packId in ipairs(source.packs or {}) do
+    parts[#parts + 1] = getItemLink(packId)
+  end
+  if source.bundle then
+    parts[#parts + 1] = plain(GetString(source.bundle))
+  end
+  if source.crate then
+    parts[#parts + 1] = plain(resolveCrate(source.crate))
+  end
+  for _, houseId in ipairs(source.houses or {}) do
+    parts[#parts + 1] = plain(GetCollectibleName(houseId))
+  end
+  if source.leads then
+    parts[#parts + 1] = plain(strLeads)
+  end
+  addQualifier(parts, source.npcClass, resolveNpcClass)
+  addQualifier(parts, source.containerKind, resolveNote)
+  addQualifier(parts, source.note, resolveNote)
+  if source.rarity then
+    parts[#parts + 1] = plain(GetString(source.rarity))
+  end
+  local lastSeen = record.availability and record.availability.lastSeen
+  if lastSeen then
+    parts[#parts + 1] = tostring(lastSeen)
+  end
+  return table.concat(parts, ", ")
+end
+
+---One record as a line: `<what>: <where> (<price>) - <details>`
+---@param record LFCSourceRecord
+---@return string
+local function renderRecord(record)
+  local text = whatOf(record.source)
+  local where = whereOf(record.source)
+  if where ~= "" then
+    text = string.format("%s: %s", text, where)
+  end
+  local cost = record.cost
+  if cost and cost.amount then
+    text = string.format("%s (%s)", text, strPrice(cost.amount, cost.currency))
+  end
+  local details = detailsOf(record)
+  if details ~= "" then
+    text = string.format("%s - %s", text, details)
+  end
+  return text
+end
+this.RenderRecord = renderRecord
+
+---A record that names nothing but its own type: a craftable says what it is made of instead
+---@param record table
+---@return boolean
+local function isBare(record)
+  if record.cost then
+    return false
+  end
+  for key in pairs(record.source) do
+    if key ~= "type" then
+      return false
+    end
+  end
+  return true
+end
+
+---One named source of an item as a line
+---@param recipeKey string|integer item link or id
+---@param recipeArray? FurCEntry looked up via Find if omitted
+---@param source integer source type constant
+---@param stripColor? boolean strip colour control chars
+---@return string
+local function describeSource(recipeKey, recipeArray, source, stripColor)
+  local crafted = source == src.CRAFTING or source == src.WRIT_VENDOR
+  for _, record in ipairs(getSourceRecords(recipeKey)) do
+    -- a craftable's line names where its blueprint comes from
+    if record.source.type == source and not (crafted and isBare(record)) then
+      local text = renderRecord(record)
+      return (stripColor and stripText(text)) or text
+    end
+  end
+  if crafted then
+    return makeMaterial(recipeKey, recipeArray or find(recipeKey), stripColor)
+  end
+  return emptyString
+end
+this.DescribeSource = describeSource
+
+---Single-string description for the item's primary origin (by ranking)
+---@param recipeKey string|integer item link or id
+---@param recipeArray? FurCEntry looked up via Find if omitted
+---@param stripColor? boolean strip colour control chars
+---@return string
+local function getItemDescription(recipeKey, recipeArray, stripColor)
+  local resolvedKey
+  if nil == recipeArray then
+    recipeArray, resolvedKey = findWithKey(recipeKey)
+  end
+  if nil == next(recipeArray) then
+    return ""
+  end
+  -- The key find resolved, so a blueprint argument still uses the crafted item id
+  recipeKey = resolvedKey or getItemId(recipeKey)
+  return describeSource(recipeKey, recipeArray, originOf(recipeArray), stripColor)
+end
+this.GetItemDescription = getItemDescription
+
+---Every non-crafting source of an item, ranked, one line per source type
+---@param recipeKey string|integer item link or id
+---@param recipeArray? FurCEntry unused, the records are looked up by key
+---@param stripColor? boolean strip colour control chars
+---@return { source: FurCItemSource, text: string }[] ranked best-first, empty renders omitted
+local function getRankedSources(recipeKey, recipeArray, stripColor)
+  local lines, byType = {}, {}
+  for _, record in ipairs(getSourceRecords(recipeKey)) do
+    local sourceType = record.source.type
+    if sourceType ~= src.CRAFTING then
+      local text = renderRecord(record)
+      if text ~= "" then
+        text = (stripColor and stripText(text)) or text
+        local line = byType[sourceType]
+        if line then
+          -- one source type, several ways to obtain it: one line
+          line.text = string.format("%s + %s", line.text, text)
+        else
+          line = { source = sourceType, text = text }
+          byType[sourceType] = line
+          lines[#lines + 1] = line
+        end
+      end
+    end
+  end
+  return lines
+end
+this.GetRankedSources = getRankedSources
