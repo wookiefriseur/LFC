@@ -1,6 +1,6 @@
 -- Data: CrownStore (bundles, packs, housing editor, scamboxes)
 --
--- `Query.GetMiscItemSource` builds the source line on demand
+-- `LFC.API.GetSourceDetails` publishes these ids as a record, and the consumer renders the line from it
 --
 -- A row is one source, or a list of sources when the item has several
 -- One field decides which kind of source it is:
@@ -641,9 +641,9 @@ FurC.CrownStore[ver.WAKE] = {
     [181605] = { { itemPrice = 5 }, { houses = { 12270, 9735 } } }, -- Rock, Gabbro Set
     [181601] = { { itemPrice = 50 }, { houses = { 9735 } } }, -- Rock, Wide Gabbro Slab
     [181603] = { itemPrice = 70 }, -- Plant, White Flowered Lily Pads
-    [181607] = { { itemPrice = 90 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Elder Blackwood Beech
-    [181608] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Blackwood Beech
-    [181609] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Blackwood Beech Cluster
+    [181607] = { { itemPrice = 90 }, { houses = {} } }, -- Tree, Elder Blackwood Beech
+    [181608] = { { itemPrice = 20 }, { houses = {} } }, -- Tree, Blackwood Beech
+    [181609] = { { itemPrice = 20 }, { houses = {} } }, -- Tree, Blackwood Beech Cluster
     [181610] = { { itemPrice = 25 }, { houses = { 13882, 9735 } } }, -- Vines, Snow Lillies Swath
     [181611] = { { itemPrice = 10 }, { houses = { 13882, 9735 } } }, -- Vines, Snow Lillies Climber
     [182932] = { { itemPrice = 260 }, { houses = { 10052 } } }, -- Tree, Charred Large Twisted Deadlands
@@ -727,19 +727,19 @@ FurC.CrownStore[ver.STONET] = {
   },
 
   [src.EDITOR] = {
-    [167294] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Boulder, Jagged Stone
+    [167294] = { { itemPrice = 20 }, { houses = {} } }, -- Boulder, Jagged Stone
     [167299] = { { itemPrice = 920 }, { houses = { 8697, 14609, 8323 } } }, -- Dwarven Chandelier, Polished Braced
     [167301] = { { itemPrice = 560 }, { houses = { 8697, 14609, 8323 } } }, -- Dwarven Lamppost, Polished Powered
     [167300] = { { itemPrice = 160 }, { houses = { 8697, 14609, 8323 } } }, -- Dwarven Lantern, Polished Wall
     [167298] = { { itemPrice = 310 }, { houses = { 8697, 14609, 8323 } } }, -- Dwarven Sconce, Polished Barred
-    [167289] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Lowland White Pine
-    [167290] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Great Lowland White Pine
-    [167291] = { { itemPrice = 150 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Towering Royal Pine
-    [167306] = { { itemPrice = 70 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Towering Snowy White Pine
-    [167292] = { { itemPrice = 5 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rocks, Large Jagged Set
-    [167293] = { { itemPrice = 30 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Shrub, Long Amber Bayberry
-    [167297] = { { itemPrice = 30 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Trees, Young Snowy White Pine Cluster
-    [167296] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Giant Snowy White Pine
+    [167289] = { { itemPrice = 20 }, { houses = {} } }, -- Tree, Lowland White Pine
+    [167290] = { { itemPrice = 20 }, { houses = {} } }, -- Tree, Great Lowland White Pine
+    [167291] = { { itemPrice = 150 }, { houses = {} } }, -- Tree, Towering Royal Pine
+    [167306] = { { itemPrice = 70 }, { houses = {} } }, -- Tree, Towering Snowy White Pine
+    [167292] = { { itemPrice = 5 }, { houses = {} } }, -- Rocks, Large Jagged Set
+    [167293] = { { itemPrice = 30 }, { houses = {} } }, -- Shrub, Long Amber Bayberry
+    [167297] = { { itemPrice = 30 }, { houses = {} } }, -- Trees, Young Snowy White Pine Cluster
+    [167296] = { { itemPrice = 20 }, { houses = {} } }, -- Tree, Giant Snowy White Pine
   },
 }
 
@@ -784,7 +784,7 @@ FurC.CrownStore[ver.HARROW] = {
     [159458] = { { itemPrice = 310 }, { houses = { 7600 } } }, -- Tree, Broad Wrothgar Pine
     [159456] = { { itemPrice = 410 }, { houses = { 7600 } } }, -- Orsinium Well, Open
     [159460] = { { itemPrice = 310 }, { houses = { 7600 } } }, -- Tree, Slim Wrothgar Pine
-    [118277] = { { itemPrice = 140 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Ram Horns, Mounted
+    [118277] = { { itemPrice = 140 }, { houses = {} } }, -- Ram Horns, Mounted
     [159496] = { { itemPrice = 240 }, { houses = { 7600 } } }, -- Tree, Ancient Bristlecone
     [159457] = { { itemPrice = 170 }, { houses = { 7601 } } }, -- Tree, Dagger Bark
     [159461] = { { itemPrice = 30 }, { houses = { 7601 } } }, -- Shrubs, Desert Scrub
@@ -858,14 +858,14 @@ FurC.CrownStore[ver.KITTY] = {
     [151906] = { pack = packs.MOONBISHOP }, -- Robust Target Dro-m'Athra
     [151829] = { pack = packs.MOONBISHOP }, -- Suthay Statue, Nimble Bishop
     [150775] = { bundle = bundles.JYGGALAG }, -- Banner of Jyggalag
-    [152145] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Tapestry, War       CRAFTABLE
-    [152149] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Brazier, Pillar     CRAFTABLE
-    [152148] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Tapestry, Hunt      CRAFTABLE
-    [152146] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Chandelier, Spiked  CRAFTABLE
-    [152141] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Brazier, Bordered   CRAFTABLE
-    [152144] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Mirror, Peaked      CRAFTABLE
-    [152143] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Sconce, Scrolled    CRAFTABLE
-    [152142] = { { note = SI_FURC_SRC_MISCHOUSE }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Sconce, Bordered    CRAFTABLE
+    [152145] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Tapestry, War       CRAFTABLE
+    [152149] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Brazier, Pillar     CRAFTABLE
+    [152148] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Tapestry, Hunt      CRAFTABLE
+    [152146] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Chandelier, Spiked  CRAFTABLE
+    [152141] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Brazier, Bordered   CRAFTABLE
+    [152144] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Mirror, Peaked      CRAFTABLE
+    [152143] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Sconce, Scrolled    CRAFTABLE
+    [152142] = { { houses = {} }, { category = SI_FURC_SRC_CRAFTING } }, -- Orcish Sconce, Bordered    CRAFTABLE
     [151612] = { crate = crateIds.BAANDARI }, -- Pile of Dubious Riches
     [151611] = { crate = crateIds.BAANDARI }, -- The Mane, Moons-Blessed
     [151589] = { crate = crateIds.BAANDARI }, -- Baandari Lunar Compass
@@ -878,19 +878,19 @@ FurC.CrownStore[ver.KITTY] = {
     [151842] = { { itemPrice = 20 }, { pack = packs.OASIS }, { houses = { 12456 } } }, -- Plant, Cask Palm
     [151843] = { { itemPrice = 45 }, { pack = packs.OASIS } }, -- Cactus, Flowering Cluster
     [151844] = { { itemPrice = 30 }, { pack = packs.OASIS } }, -- Cactus, Bilberry
-    [151845] = { { itemPrice = 95 }, { pack = packs.OASIS }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Elsweyr Potted Cactus, Flowering
+    [151845] = { { itemPrice = 95 }, { pack = packs.OASIS }, { houses = {} } }, -- Elsweyr Potted Cactus, Flowering
     [151846] = {
       { itemPrice = 35 },
       { pack = packs.OASIS },
       { pack = packs.MERMAID },
-      { note = SI_FURC_SRC_MISCHOUSE },
+      { houses = {} },
     }, -- Elsweyr Potted Plant, Cask Palm
     [151847] = { { itemPrice = 20 }, { pack = packs.OASIS } }, -- Plant, Flowering Desert Aloe
     [151848] = { { itemPrice = 15 }, { pack = packs.OASIS } }, -- Trees, Sunset Palm Cluster
     [151849] = { { itemPrice = 45 }, { pack = packs.OASIS } }, -- Cactus, Lily Flower
     [151850] = { { itemPrice = 20 }, { pack = packs.OASIS } }, -- Tree, Anequina Bonsai
     [151834] = { { itemPrice = 90 }, { pack = packs.OASIS }, { houses = { 6399 } } }, -- Tree, Desert Acacia Shade
-    [151830] = { { itemPrice = 190 }, { pack = packs.MOONBISHOP }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Elsweyr Divider, Elegant Wooden
+    [151830] = { { itemPrice = 190 }, { pack = packs.MOONBISHOP }, { houses = {} } }, -- Elsweyr Divider, Elegant Wooden
     [151832] = { { itemPrice = 100 }, { pack = packs.MOONBISHOP } }, -- Elsweyr Ceremonial Lantern, Jone
     [151833] = { { itemPrice = 100 }, { pack = packs.MOONBISHOP } }, -- Elsweyr Ceremonial Lantern, Jode
     [151831] = { { itemPrice = 290 }, { pack = packs.MOONBISHOP }, { houses = { 10051 } } }, -- Elsweyr Sugar Pipe, Ceremonial
@@ -1168,7 +1168,7 @@ FurC.CrownStore[ver.DRAGONS] = {
     [134893] = { { itemPrice = 85 }, { pack = packs.DIBELLA }, { houses = { 14587 } } }, -- Tree, Argent Blue
     [134894] = { { itemPrice = 20 }, { pack = packs.DIBELLA } }, -- Wildflowers, Yellow and Orange
     [134897] = { { itemPrice = 45 }, { pack = packs.DIBELLA }, { houses = { 13882 } } }, -- Vine Curtain, Festive Flowers
-    [134921] = { { itemPrice = 520 }, { note = SI_FURC_SRC_MISCHOUSE }, { pack = packs.FARGRAVE } }, -- Redguard Lamppost, Stone
+    [134921] = { { itemPrice = 520 }, { houses = {} }, { pack = packs.FARGRAVE } }, -- Redguard Lamppost, Stone
     [134922] = { { itemPrice = 250 }, { houses = { 4795 } } }, -- Redguard Pillar, Tiered
     [134923] = { { itemPrice = 2000 }, { houses = { 4795 } } }, -- Redguard Trellis, Peaked
     [134924] = { itemPrice = 380 }, -- Redguard Fence, Brass Capped
@@ -1220,11 +1220,11 @@ FurC.CrownStore[ver.DRAGONS] = {
     [139345] = { { itemPrice = 45 }, { houses = { 13882 } } }, -- Flowers, Lizard Tail Cluster
     [139344] = { itemPrice = 45 }, -- Flowers, Hummingbird Mint Cluster
     [139343] = { { itemPrice = 45 }, { houses = { 13882 } } }, -- Tree, Cloud White
-    [139342] = { { itemPrice = 45 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Vibrant Pink
+    [139342] = { { itemPrice = 45 }, { houses = {} } }, -- Tree, Vibrant Pink
     [139341] = { itemPrice = 310 }, -- Tree, Towering Poplar
     [139340] = { itemPrice = 310 }, -- Tree, Ancient Summerset Spruce
     [139339] = { { itemPrice = 25 }, { houses = { 5462, 9014 } } }, -- Vines, Sun-Bronzed Ivy Climber
-    [139338] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Vines, Sun-Bronzed Ivy Swath
+    [139338] = { { itemPrice = 25 }, { houses = {} } }, -- Vines, Sun-Bronzed Ivy Swath
     [139337] = { { itemPrice = 580 }, { houses = { 5462, 13882 } } }, -- Tree, Ancient Blooming Ginkgo
     [139336] = { itemPrice = 90 }, -- Trees, Shade Interwoven
     [139335] = { itemPrice = 310 }, -- Tree, Shade Ancient
@@ -1535,12 +1535,12 @@ FurC.CrownStore[ver.HOMESTEAD] = {
   },
 
   [src.EDITOR] = {
-    [118148] = { { itemPrice = 80 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Firelogs, Ashen
-    [118146] = { { itemPrice = 80 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Firelogs, Flaming
-    [118147] = { { itemPrice = 80 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Firelogs, Charred
-    [118350] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Box of Tangerines
-    [118352] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Box of Oranges
-    [118482] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Book Stack, Tall
+    [118148] = { { itemPrice = 80 }, { houses = {} } }, -- Firelogs, Ashen
+    [118146] = { { itemPrice = 80 }, { houses = {} } }, -- Firelogs, Flaming
+    [118147] = { { itemPrice = 80 }, { houses = {} } }, -- Firelogs, Charred
+    [118350] = { { itemPrice = 25 }, { houses = {} } }, -- Box of Tangerines
+    [118352] = { { itemPrice = 25 }, { houses = {} } }, -- Box of Oranges
+    [118482] = { { itemPrice = 25 }, { houses = {} } }, -- Book Stack, Tall
     [118353] = { { itemPrice = 25 }, { houses = { 1095 } } }, -- Box of Grapes
     [118354] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE }, { houses = { 14078, 11456, 5462 } } }, -- Box of Fruit
     [118175] = { itemPrice = 170 }, -- Shutters, Hinged Lattice
@@ -1554,20 +1554,20 @@ FurC.CrownStore[ver.HOMESTEAD] = {
       { itemPrice = 50 },
       { pack = packs.CRAGPARLOUR },
       { category = SI_FURC_SRC_LVLUP },
-      { note = SI_FURC_SRC_MISCHOUSE },
+      { houses = {} },
     }, -- Imperial BookCase, Swirled
     [117901] = { { itemPrice = 140 }, { pack = packs.HUBTREASURE }, { houses = { 7601, 10051 } } }, -- Redguard Amphora, Gilded
     [117894] = {
       { itemPrice = 240 },
       { pack = packs.CRAGBED },
       { pack = packs.HUBTREASURE },
-      { note = SI_FURC_SRC_MISCHOUSE },
+      { houses = {} },
     }, -- Redguard Divider, Gilded
     [117904] = { { itemPrice = 190 }, { pack = packs.CRAGBED }, { pack = packs.HUBTREASURE } }, -- Redguard Trunk, Garish
     [121053] = { { itemPrice = 170 }, { pack = packs.CRAGKNICKS }, { pack = packs.HUBTREASURE } }, -- Jar, Gilded Canopic
-    [121046] = { { itemPrice = 30 }, { pack = packs.CRAGKNICKS }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Cheeses of Tamriel
-    [118490] = { { itemPrice = 55 }, { pack = packs.CRAGKNICKS }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Scroll, Rolled
-    [94163] = { { itemPrice = 290 }, { pack = packs.DIBELLA }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bench, Scrollwork
+    [121046] = { { itemPrice = 30 }, { pack = packs.CRAGKNICKS }, { houses = {} } }, -- Cheeses of Tamriel
+    [118490] = { { itemPrice = 55 }, { pack = packs.CRAGKNICKS }, { houses = {} } }, -- Scroll, Rolled
+    [94163] = { { itemPrice = 290 }, { pack = packs.DIBELLA }, { houses = {} } }, -- Imperial Bench, Scrollwork
     [119587] = { { itemPrice = 10 }, { houses = { 1066 } } }, -- Auridon Coneplants, Cluster
     [118347] = { itemPrice = 20 }, -- Bread, Various Loaves
     [118344] = { { itemPrice = 20 }, { houses = { 7601 } } }, -- Breads, Assortment
@@ -1589,16 +1589,16 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [94096] = { { itemPrice = 140 }, { houses = { 1085 } } }, -- Imperial Banner, Stendarr
     [94097] = { { itemPrice = 95 }, { houses = { 1086, 5756 } } }, -- Imperial Bed, Bunk
     [94099] = { { itemPrice = 60 }, { houses = { 9014, 6140 } } }, -- Imperial Dresser, Short
-    [94101] = { { itemPrice = 45 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Chair, Slatted
-    [94102] = { { itemPrice = 120 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Rack, Cask
-    [94103] = { { itemPrice = 60 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Dresser, Open
-    [94104] = { { itemPrice = 40 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Stool, Sturdy
+    [94101] = { { itemPrice = 45 }, { houses = {} } }, -- Imperial Chair, Slatted
+    [94102] = { { itemPrice = 120 }, { houses = {} } }, -- Imperial Rack, Cask
+    [94103] = { { itemPrice = 60 }, { houses = {} } }, -- Imperial Dresser, Open
+    [94104] = { { itemPrice = 40 }, { houses = {} } }, -- Imperial Stool, Sturdy
     [94105] = { { itemPrice = 95 }, { houses = { 4794, 6140 } } }, -- Imperial Table, Family
     [94106] = { { itemPrice = 95 }, { houses = { 5756 } } }, -- Imperial Desk, Sturdy
-    [94107] = { { itemPrice = 50 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Table, Common
-    [94108] = { { itemPrice = 50 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Shelf, Wall
-    [94109] = { { itemPrice = 50 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Lantern, Wall
-    [94110] = { { itemPrice = 110 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Lightpost, Stone
+    [94107] = { { itemPrice = 50 }, { houses = {} } }, -- Imperial Table, Common
+    [94108] = { { itemPrice = 50 }, { houses = {} } }, -- Imperial Shelf, Wall
+    [94109] = { { itemPrice = 50 }, { houses = {} } }, -- Imperial Lantern, Wall
+    [94110] = { { itemPrice = 110 }, { houses = {} } }, -- Imperial Lightpost, Stone
     [94111] = { { itemPrice = 95 }, { houses = { 5756 } } }, -- Imperial Well, Grated
     [94112] = { itemPrice = 70 }, -- Imperial Pedestal, Stone
     [94113] = { itemPrice = 70 }, -- Imperial Basin, Stone
@@ -1606,31 +1606,31 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [94115] = { itemPrice = 430 }, -- Imperial Statue, Obelisk
     [115083] = { { itemPrice = 220 }, { houses = { 1309, 4794, 12656 } } }, -- Imperial Rug, Arkay
     [94118] = { itemPrice = 220 }, -- Imperial Rug, Kynareth
-    [94119] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Rug, Stars
+    [94119] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Rug, Stars
     [94120] = { itemPrice = 220 }, -- Imperial Rug, Stendarr
     [94129] = { itemPrice = 220 }, -- Imperial Tapestry, Arkay
     [94130] = { itemPrice = 220 }, -- Imperial Tapestry, Kynareth
     [94131] = { itemPrice = 220 }, -- Imperial Tapestry, Stendarr
     [94132] = { { itemPrice = 150 }, { houses = { 6140 } } }, -- Imperial Brazier, Firepot
-    [94133] = { { itemPrice = 150 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bed, Four-Poster
+    [94133] = { { itemPrice = 150 }, { houses = {} } }, -- Imperial Bed, Four-Poster
     [94134] = { itemPrice = 220 }, -- Imperial Bed, Double
-    [94135] = { { itemPrice = 160 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Pew, Windowed
-    [94136] = { { itemPrice = 160 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bench, Fitted
-    [94137] = { { itemPrice = 110 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bookcase, Scrollwork
+    [94135] = { { itemPrice = 160 }, { houses = {} } }, -- Imperial Pew, Windowed
+    [94136] = { { itemPrice = 160 }, { houses = {} } }, -- Imperial Bench, Fitted
+    [94137] = { { itemPrice = 110 }, { houses = {} } }, -- Imperial Bookcase, Scrollwork
     [94138] = { { itemPrice = 100 }, { houses = { 6140, 1085 } } }, -- Imperial Chair, Rocking
-    [94139] = { { itemPrice = 100 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Chair, Windowed
-    [94140] = { { itemPrice = 85 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Chest, Sturdy
-    [94141] = { { itemPrice = 120 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Hutch, Scrollwork
+    [94139] = { { itemPrice = 100 }, { houses = {} } }, -- Imperial Chair, Windowed
+    [94140] = { { itemPrice = 85 }, { houses = {} } }, -- Imperial Chest, Sturdy
+    [94141] = { { itemPrice = 120 }, { houses = {} } }, -- Imperial Hutch, Scrollwork
     [94142] = { { itemPrice = 120 }, { houses = { 5756, 1309 } } }, -- Imperial Cupboard, Scrollwork
-    [94143] = { { itemPrice = 180 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Chest of Drawers
-    [94144] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Counter, Long Cabinet
-    [94145] = { { itemPrice = 110 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Shelf, Barrel
-    [94146] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Desk, Swirled
-    [94147] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Table, Dining
+    [94143] = { { itemPrice = 180 }, { houses = {} } }, -- Imperial Chest of Drawers
+    [94144] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Counter, Long Cabinet
+    [94145] = { { itemPrice = 110 }, { houses = {} } }, -- Imperial Shelf, Barrel
+    [94146] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Desk, Swirled
+    [94147] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Table, Dining
     [94148] = { { itemPrice = 220 }, { houses = { 9014 } } }, -- Imperial Trestle, Sturdy
-    [94149] = { { itemPrice = 85 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Table, Game
-    [94150] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Table, Kitchen
-    [94151] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Lightpost, Pair
+    [94149] = { { itemPrice = 85 }, { houses = {} } }, -- Imperial Table, Game
+    [94150] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Table, Kitchen
+    [94151] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Lightpost, Pair
     [94152] = { itemPrice = 240 }, -- Imperial Lightpost, Single
     [94153] = { itemPrice = 220 }, -- Imperial Well, Arched
     [94154] = { itemPrice = 160 }, -- Imperial Basin, Heavy
@@ -1639,27 +1639,27 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [94158] = { itemPrice = 410 }, -- Imperial Tapestry, Stars
     [94159] = { itemPrice = 450 }, -- Imperial Streetlight, Imperial City
     [94161] = { { itemPrice = 310 }, { houses = { 1084, 1086 } } }, -- Imperial Pedestal, Chiseled
-    [94162] = { { itemPrice = 290 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Pew, Scrollwork
-    [94164] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Sideboard, Scrollwork
-    [94165] = { { itemPrice = 200 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Chair, Scrollwork
-    [94166] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Armchair, Scrollwork
-    [94167] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Cabinet, Scrollwork
-    [94168] = { { itemPrice = 220 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Curio, Scrollwork
+    [94162] = { { itemPrice = 290 }, { houses = {} } }, -- Imperial Pew, Scrollwork
+    [94164] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Sideboard, Scrollwork
+    [94165] = { { itemPrice = 200 }, { houses = {} } }, -- Imperial Chair, Scrollwork
+    [94166] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Armchair, Scrollwork
+    [94167] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Cabinet, Scrollwork
+    [94168] = { { itemPrice = 220 }, { houses = {} } }, -- Imperial Curio, Scrollwork
     [94169] = { { itemPrice = 160 }, { houses = { 1309 } } }, -- Imperial Coffer, Scrollwork
-    [94170] = { { itemPrice = 270 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Dresser, Scrollwork
-    [94171] = { { itemPrice = 240 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Counter, Corner
-    [94172] = { { itemPrice = 490 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bar, Cabinet
-    [94173] = { { itemPrice = 200 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Mirror, Standing
-    [94174] = { { itemPrice = 120 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Nightstand, Scrollwork
-    [94175] = { { itemPrice = 200 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Divider, Folding
-    [94176] = { { itemPrice = 200 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Divider, Curved
-    [94177] = { { itemPrice = 170 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Stool, Padded
+    [94170] = { { itemPrice = 270 }, { houses = {} } }, -- Imperial Dresser, Scrollwork
+    [94171] = { { itemPrice = 240 }, { houses = {} } }, -- Imperial Counter, Corner
+    [94172] = { { itemPrice = 490 }, { houses = {} } }, -- Imperial Bar, Cabinet
+    [94173] = { { itemPrice = 200 }, { houses = {} } }, -- Imperial Mirror, Standing
+    [94174] = { { itemPrice = 120 }, { houses = {} } }, -- Imperial Nightstand, Scrollwork
+    [94175] = { { itemPrice = 200 }, { houses = {} } }, -- Imperial Divider, Folding
+    [94176] = { { itemPrice = 200 }, { houses = {} } }, -- Imperial Divider, Curved
+    [94177] = { { itemPrice = 170 }, { houses = {} } }, -- Imperial Stool, Padded
     [94178] = { { itemPrice = 410 }, { houses = { 6140 } } }, -- Imperial Desk, Scrollwork
-    [94179] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Table, Formal
+    [94179] = { { itemPrice = 410 }, { houses = {} } }, -- Imperial Table, Formal
     [94180] = { { itemPrice = 410 }, { houses = { 6140, 1086 } } }, -- Imperial Trestle, Scrollwork
-    [94182] = { { itemPrice = 160 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Footlocker, Scrollwork
-    [94183] = { { itemPrice = 350 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Wardrobe, Scrollwork
-    [94184] = { { itemPrice = 240 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Wine Rack, Scrollwork
+    [94182] = { { itemPrice = 160 }, { houses = {} } }, -- Imperial Footlocker, Scrollwork
+    [94183] = { { itemPrice = 350 }, { houses = {} } }, -- Imperial Wardrobe, Scrollwork
+    [94184] = { { itemPrice = 240 }, { houses = {} } }, -- Imperial Wine Rack, Scrollwork
     [94185] = { itemPrice = 450 }, -- Imperial Lightpost, Full
     [94187] = { itemPrice = 410 }, -- Imperial Well, Covered
     [94188] = { itemPrice = 410 }, -- Imperial Carpet, Gilded Dibella
@@ -1669,7 +1669,7 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [94192] = { { itemPrice = 610 }, { houses = { 1309 } } }, -- Imperial Banner, Dibella
     [94193] = { itemPrice = 410 }, -- Imperial Pillar, Straight
     [94194] = { itemPrice = 410 }, -- Imperial Pillar, Chipped
-    [94195] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bed, Canopy
+    [94195] = { { itemPrice = 410 }, { houses = {} } }, -- Imperial Bed, Canopy
     [94196] = { { itemPrice = 410 }, { houses = { 1309 } } }, -- Imperial Cradle, Scrollwork
     [94197] = { itemPrice = 610 }, -- Imperial Shrine of the Bay
     [94198] = { itemPrice = 610 }, -- Imperial Altar of the Bay
@@ -1682,8 +1682,8 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [118163] = { itemPrice = 340 }, -- Mat of the Oasis, Faded
     [118165] = { itemPrice = 340 }, -- Mat of the Sunrise, Faded
     [115421] = { { itemPrice = 110 }, { houses = { 5461 } } }, -- Nord Sconce, Torch
-    [118244] = { { itemPrice = 340 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Orc Rug, Echatere Skin
-    [118131] = { { itemPrice = 180 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Pelt, Bear
+    [118244] = { { itemPrice = 340 }, { houses = {} } }, -- Orc Rug, Echatere Skin
+    [118131] = { { itemPrice = 180 }, { houses = {} } }, -- Pelt, Bear
     [118107] = { { itemPrice = 40 }, { pack = packs.NOBLEKIT }, { houses = { 1081 } } }, -- Pie, Display
     [120603] = { { itemPrice = 20 }, { houses = { 1074 } } }, -- Boulder, Flat Mossy
     [120604] = { { itemPrice = 20 }, { houses = { 1074 } } }, -- Rock, Slanted Mossy
@@ -1701,7 +1701,7 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [121029] = { { itemPrice = 45 }, { houses = { 1309, 5462 } } }, -- Topiary, Strong Cypress
     [120709] = { { itemPrice = 70 }, { houses = { 1097 } } }, -- Tree, Sturdy Young Birch
     [121026] = { { itemPrice = 45 }, { houses = { 1309, 13078 } } }, -- Hedge, Dense High Wall
-    [121025] = { { itemPrice = 70 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Trees, Sprawling Juniper Cluster
+    [121025] = { { itemPrice = 70 }, { houses = {} } }, -- Trees, Sprawling Juniper Cluster
     [121024] = { { itemPrice = 70 }, { houses = { 11456 } } }, -- Trees, Paired Leaning Juniper
     [121021] = { { itemPrice = 10 }, { pack = packs.TREES } }, -- Plants, Dry Underbrush
     [121020] = { { itemPrice = 10 }, { pack = packs.TREES }, { houses = { 1097, 1310 } } }, -- Plants, Sparse Underbrush
@@ -1717,13 +1717,13 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [120731] = { { itemPrice = 25 }, { houses = { 1099 } } }, -- Tree, Mossy Summer
     [120732] = { { itemPrice = 70 }, { houses = { 1099 } } }, -- Tree, Mossy Forest
     [120734] = { { itemPrice = 25 }, { houses = { 1099 } } }, -- Saplings, Squat Desert
-    [120735] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Saplings, Young Desert
+    [120735] = { { itemPrice = 25 }, { houses = {} } }, -- Saplings, Young Desert
     [120736] = { { itemPrice = 290 }, { houses = { 1099 } } }, -- Tree, Gentle Weeping Willow
     [120737] = { { itemPrice = 150 }, { houses = { 1099 } } }, -- Tree, Weeping Willow
     [120738] = { { itemPrice = 70 }, { houses = { 1099 } } }, -- Tree, Towering Willow
     [120743] = { { itemPrice = 70 }, { houses = { 1099 } } }, -- Tree, Strong Cypress
     [120996] = { { itemPrice = 120 }, { houses = { 1094 } } }, -- Banner, Tattered Red
-    [120745] = { { itemPrice = 60 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Water Palm
+    [120745] = { { itemPrice = 60 }, { houses = {} } }, -- Tree, Water Palm
     [120483] = { { itemPrice = 30 }, { houses = { 1095, 14078 } } }, -- Cactus, Lemon Bulbs
     [120748] = { { itemPrice = 70 }, { houses = { 1099 } } }, -- Tree, Leaning Swamp
     [120749] = { { itemPrice = 10 }, { houses = { 1099 } } }, -- Grass, Tall Bamboo Shoots
@@ -1736,21 +1736,21 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [120456] = { { itemPrice = 5 }, { houses = { 1093 } } }, -- Stone, Smooth Desert
     [120760] = { { itemPrice = 50 }, { houses = { 1099, 12270 } } }, -- Flower, Red Honeysuckle
     [125546] = { { itemPrice = 85 }, { houses = { 1245 } } }, -- Flower Patch, Lava Blooms
-    [120765] = { { itemPrice = 15 }, { pack = packs.JESTER }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Breton Cup, Empty
+    [120765] = { { itemPrice = 15 }, { pack = packs.JESTER }, { houses = {} } }, -- Breton Cup, Empty
     [120766] = { { itemPrice = 15 }, { houses = { 1097 } } }, -- Breton Cup, Full
-    [118491] = { { itemPrice = 55 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Scroll, Bound
-    [118145] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of a Desert, Refined
-    [118144] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of a Forest, Refined
-    [118142] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of Swamp, Refined
-    [118140] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of a Waterfall, Refined
-    [118138] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of Mountains, Refined
+    [118491] = { { itemPrice = 55 }, { houses = {} } }, -- Scroll, Bound
+    [118145] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of a Desert, Refined
+    [118144] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of a Forest, Refined
+    [118142] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of Swamp, Refined
+    [118140] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of a Waterfall, Refined
+    [118138] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of Mountains, Refined
     [121400] = { itemPrice = 2000 }, -- Target Skeleton, Robust Argonian
     [121399] = { itemPrice = 2000 }, -- Target Skeleton, Robust Khajiit
-    [121056] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Book Stack, Decorative
+    [121056] = { { itemPrice = 25 }, { houses = {} } }, -- Book Stack, Decorative
     [121054] = { itemPrice = 30 }, -- Breton Mug, Empty
     [121052] = { { itemPrice = 100 }, { houses = { 1095 } } }, -- Vase, Gilded Offering
-    [121047] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Book Row, Long
-    [121045] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Book Row, Decorative
+    [121047] = { { itemPrice = 25 }, { houses = {} } }, -- Book Row, Long
+    [121045] = { { itemPrice = 25 }, { houses = {} } }, -- Book Row, Decorative
     [121044] = { { itemPrice = 30 }, { houses = { 14587, 12732, 12655 } } }, -- Plant, Healthy White Hosta
     [121043] = { { itemPrice = 30 }, { houses = { 4795, 12732, 12655 } } }, -- Plant, Summer Hosta
     [121042] = { { itemPrice = 10 }, { houses = { 12655 } } }, -- Plant, Young Summer Hosta
@@ -1769,17 +1769,17 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [120486] = { { itemPrice = 30 }, { houses = { 14078, 1095, 1093 } } }, -- Cactus, Stocky Columnar
     [120484] = { { itemPrice = 30 }, { houses = { 14078, 1095 } } }, -- Cactus, Golden Barrel
     [120482] = { { itemPrice = 30 }, { houses = { 14078, 1095, 1093 } } }, -- Cactus, Golden Bulbs
-    [120481] = { { itemPrice = 150 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Tree, Ancient Juniper
-    [120475] = { { itemPrice = 70 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Trees, Paired Wax Palms
+    [120481] = { { itemPrice = 150 }, { houses = {} } }, -- Tree, Ancient Juniper
+    [120475] = { { itemPrice = 70 }, { houses = {} } }, -- Trees, Paired Wax Palms
     [120473] = { itemPrice = 60 }, -- Sapling, Thin Palm
     [120472] = { { itemPrice = 25 }, { houses = { 14078, 1095, 14077 } } }, -- Tree, Young Palm
     [120470] = { { itemPrice = 25 }, { houses = { 14078, 1095 } } }, -- Tree, Leaning Palm
     [120466] = { { itemPrice = 5 }, { houses = { 14078, 1095 } } }, -- Pebble, Stacked Desert
-    [120464] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rocks, Stacked Cracked
+    [120464] = { { itemPrice = 20 }, { houses = {} } }, -- Rocks, Stacked Cracked
     [120427] = { itemPrice = 1500 }, -- Target Skeleton, Argonian
     [120426] = { itemPrice = 1500 }, -- Target Skeleton, Khajiit
     [120420] = { { itemPrice = 140 }, { houses = { 1088, 14586, 7601 } } }, -- Plaque, Bolted Deer Antlers
-    [120416] = { { itemPrice = 40 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Cloak on a Hook
+    [120416] = { { itemPrice = 40 }, { houses = {} } }, -- Common Cloak on a Hook
     [120415] = { { itemPrice = 30 }, { houses = { 1097, 1076 } } }, -- Breton Tankard, Full
     [120414] = { { itemPrice = 30 }, { houses = { 1097 } } }, -- Breton Tankard, Empty
     [120413] = { { itemPrice = 30 }, { houses = { 1098 } } }, -- Breton Pitcher, Clay
@@ -1787,31 +1787,31 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [120409] = { itemPrice = 100 }, -- Argonian Rack, Woven
     [120408] = { { itemPrice = 25 }, { houses = { 1071 } } }, -- Argonian Fish in a Basket
     [120607] = { { itemPrice = 50 }, { houses = { 1074 } } }, -- Sapling, Lanky Ash
-    [118351] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Box of Peaches
+    [118351] = { { itemPrice = 25 }, { houses = {} } }, -- Box of Peaches
     [118278] = { { itemPrice = 140 }, { pack = packs.CRAGPARLOUR }, { houses = { 7600 } } }, -- Plaque, Bordered Deer Antlers
     [118126] = { itemPrice = 95 }, -- Plaque, Standard
     [118121] = { itemPrice = 10 }, -- Knife, Carving
     [118120] = { { itemPrice = 120 }, { houses = { 12731 } } }, -- Minecart, Push
     [118119] = { { itemPrice = 120 }, { houses = { 12731 } } }, -- Minecart, Empty
     [118118] = { { itemPrice = 100 }, { houses = { 6752 } } }, -- Candles, Lasting
-    [118098] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Bowl, Serving
-    [118096] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Bread, Plain
+    [118098] = { { itemPrice = 10 }, { houses = {} } }, -- Common Bowl, Serving
+    [118096] = { { itemPrice = 10 }, { houses = {} } }, -- Bread, Plain
     [118071] = { itemPrice = 120 }, -- Simple Red Banner
     [118070] = { itemPrice = 120 }, -- Simple Purple Banner
     [118069] = { itemPrice = 120 }, -- Simple Gray Banner
     [118068] = { itemPrice = 120 }, -- Simple Brown Banner
     [118066] = { itemPrice = 15 }, -- Steak Dinner
-    [118065] = { { itemPrice = 45 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Cargo Crate, Dry
-    [118064] = { { itemPrice = 45 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Barrel, Dry
-    [118062] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Chicken Meal, Display
-    [118061] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Chicken Dinner, Display
-    [118060] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Sack of Grain
-    [118059] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Sack of Millet
-    [118058] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Sack of Rice
-    [118057] = { { itemPrice = 20 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Sack of Beans
+    [118065] = { { itemPrice = 45 }, { houses = {} } }, -- Common Cargo Crate, Dry
+    [118064] = { { itemPrice = 45 }, { houses = {} } }, -- Common Barrel, Dry
+    [118062] = { { itemPrice = 15 }, { houses = {} } }, -- Chicken Meal, Display
+    [118061] = { { itemPrice = 15 }, { houses = {} } }, -- Chicken Dinner, Display
+    [118060] = { { itemPrice = 20 }, { houses = {} } }, -- Sack of Grain
+    [118059] = { { itemPrice = 20 }, { houses = {} } }, -- Sack of Millet
+    [118058] = { { itemPrice = 20 }, { houses = {} } }, -- Sack of Rice
+    [118057] = { { itemPrice = 20 }, { houses = {} } }, -- Sack of Beans
     [118056] = { itemPrice = 15 }, -- Common Stewpot, Hanging
-    [118055] = { { itemPrice = 80 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Firepit, Piled
-    [118054] = { { itemPrice = 80 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Common Firepit, Outdoor
+    [118055] = { { itemPrice = 80 }, { houses = {} } }, -- Common Firepit, Piled
+    [118054] = { { itemPrice = 80 }, { houses = {} } }, -- Common Firepit, Outdoor
     [118000] = { { itemPrice = 10 }, { houses = { 1067, 1099 } } }, -- Garlic String, Display
     [117952] = { { itemPrice = 35 }, { houses = { 1310, 1074 } } }, -- Rough Torch, Wall
     [117881] = { { itemPrice = 70 }, { houses = { 14078, 7601 } } }, -- Redguard Pillow, Lattice Sands
@@ -1819,13 +1819,13 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [117885] = { { itemPrice = 70 }, { pack = packs.CRAGBED } }, -- Redguard Pillow Roll, Sands
     [117886] = { { itemPrice = 70 }, { houses = { 7601 } } }, -- Redguard Throw Pillow, Sands
     [117899] = { { itemPrice = 190 }, { houses = { 14078, 14077 } } }, -- Redguard Chest, Crested
-    [117941] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Broom, Practical
-    [117897] = { { itemPrice = 480 }, { pack = packs.CRAGPARLOUR }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Redguard Mat, Sun
+    [117941] = { { itemPrice = 15 }, { houses = {} } }, -- Rough Broom, Practical
+    [117897] = { { itemPrice = 480 }, { pack = packs.CRAGPARLOUR }, { houses = {} } }, -- Redguard Mat, Sun
     [117893] = { { itemPrice = 190 }, { pack = packs.CRAGBED }, { houses = { 4795 } } }, -- Redguard Footlocker, Bolted
     [117896] = { { itemPrice = 290 }, { pack = packs.CRAGKNICKS }, { houses = { 1095, 7601 } } }, -- Redguard Wine Rack, Bolted
     [119970] = { { itemPrice = 1400 }, { pack = packs.CRAGKITCHEN } }, -- Redguard Round Table
-    [117891] = { { itemPrice = 250 }, { pack = packs.CRAGKITCHEN }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Redguard Armchair, Lattice
-    [117892] = { { itemPrice = 230 }, { pack = packs.CRAGBED }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Redguard Chair, Lattice
+    [117891] = { { itemPrice = 250 }, { pack = packs.CRAGKITCHEN }, { houses = {} } }, -- Redguard Armchair, Lattice
+    [117892] = { { itemPrice = 230 }, { pack = packs.CRAGBED }, { houses = {} } }, -- Redguard Chair, Lattice
     [118264] = { { itemPrice = 65 }, { houses = { 11456 } } }, -- Tuffet, Faded Yellow
     [118252] = { itemPrice = 25 }, -- Pillow, Faded Yellow Floral
     [118248] = { itemPrice = 25 }, -- Pillow, Faded Yellow
@@ -1860,30 +1860,30 @@ FurC.CrownStore[ver.HOMESTEAD] = {
     [118125] = { itemPrice = 95 }, -- Plaque, Large
     [118137] = { itemPrice = 70 }, -- Podium, Engraved
     [118111] = { itemPrice = 50 }, -- Steak, Display
-    [118112] = { { itemPrice = 25 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Teapot, Common
+    [118112] = { { itemPrice = 25 }, { houses = {} } }, -- Teapot, Common
     [117925] = { { itemPrice = 30 }, { houses = { 1310, 5169 } } }, -- Rough Cot, Military
     [117962] = { { itemPrice = 30 }, { houses = { 1311 } } }, -- Rough Bedroll, Rolled
-    [117927] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Barrel, Sturdy
-    [117932] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Tray, Sturdy
-    [117933] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Bin, Sturdy
-    [117934] = { { itemPrice = 15 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Carton, Sturdy
-    [117935] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Pouch, Burlap
-    [117938] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Sack, Burlap
-    [117936] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Pouch, Coarse Cloth
-    [117948] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Candle, Tealight
-    [117949] = { { itemPrice = 10 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Candle, Pillar
+    [117927] = { { itemPrice = 15 }, { houses = {} } }, -- Rough Barrel, Sturdy
+    [117932] = { { itemPrice = 15 }, { houses = {} } }, -- Rough Tray, Sturdy
+    [117933] = { { itemPrice = 15 }, { houses = {} } }, -- Rough Bin, Sturdy
+    [117934] = { { itemPrice = 15 }, { houses = {} } }, -- Rough Carton, Sturdy
+    [117935] = { { itemPrice = 10 }, { houses = {} } }, -- Rough Pouch, Burlap
+    [117938] = { { itemPrice = 10 }, { houses = {} } }, -- Rough Sack, Burlap
+    [117936] = { { itemPrice = 10 }, { houses = {} } }, -- Rough Pouch, Coarse Cloth
+    [117948] = { { itemPrice = 10 }, { houses = {} } }, -- Rough Candle, Tealight
+    [117949] = { { itemPrice = 10 }, { houses = {} } }, -- Rough Candle, Pillar
     [120997] = { { itemPrice = 120 }, { houses = { 1094 } } }, -- Banner, Tattered Blue
     [117944] = { itemPrice = 5 }, -- Rough Fork, Common
     [117946] = { itemPrice = 5 }, -- Rough Knife, Butter
     [117947] = { { itemPrice = 5 }, { houses = { 1078 } } }, -- Rough Spoon, Common
-    [117951] = { { itemPrice = 35 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Rough Torch, Basic
-    [121049] = { { pack = packs.CRAGKNICKS }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Parcels, Wrapped
-    [120417] = { { pack = packs.CRAGKNICKS }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Redguard Barrel, Corded
+    [117951] = { { itemPrice = 35 }, { houses = {} } }, -- Rough Torch, Basic
+    [121049] = { { pack = packs.CRAGKNICKS }, { houses = {} } }, -- Parcels, Wrapped
+    [120417] = { { pack = packs.CRAGKNICKS }, { houses = {} } }, -- Redguard Barrel, Corded
     [115698] = { itemPrice = 1100 }, -- Khajiit Statue, Guardian
-    [94098] = { { itemPrice = 95 }, { category = SI_FURC_SRC_LVLUP }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Imperial Bed, Single
+    [94098] = { { itemPrice = 95 }, { category = SI_FURC_SRC_LVLUP }, { houses = {} } }, -- Imperial Bed, Single
     [87709] = { { itemPrice = 65 }, { category = SI_FURC_SRC_LVLUP } }, -- Imperial Brazier, Spiked
-    [118143] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of Tree, Refined
-    [118141] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of Cottage, Refined
-    [118139] = { { itemPrice = 410 }, { note = SI_FURC_SRC_MISCHOUSE } }, -- Painting of Valley, Refined
+    [118143] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of Tree, Refined
+    [118141] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of Cottage, Refined
+    [118139] = { { itemPrice = 410 }, { houses = {} } }, -- Painting of Valley, Refined
   },
 }

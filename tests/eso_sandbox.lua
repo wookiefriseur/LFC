@@ -11,7 +11,8 @@ local function makeSandbox()
       if v ~= nil then
         return v
       end
-      if key:match("^SI_") then
+      -- the client's own constants a data file may name: a string id, a currency, a game constant
+      if key:match("^SI_") or key:match("^CURT_") or key:match("^FURC_") then
         if not stringIds[key] then
           nextStringId = nextStringId + 1
           stringIds[key] = nextStringId

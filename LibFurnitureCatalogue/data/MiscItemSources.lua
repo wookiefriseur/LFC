@@ -1,6 +1,6 @@
 -- Data: MiscItemSources, that don't have their own file (yet)
 --
--- `Query.GetMiscItemSource` builds the source line on demand from the same ids the bake used to resolve.
+-- `LFC.API.GetSourceDetails` publishes these ids as a record, and the consumer renders the line from it.
 --
 -- The bucket a row sits in names its source, and that decides the category word.
 -- Every field is optional:

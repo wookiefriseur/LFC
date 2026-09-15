@@ -6,7 +6,7 @@
 -- - `place`: PlaceIds value
 -- - `itemPrice`: price value with `currency`, and the `contents` it unpacks into
 --
--- It is expanded into one row per book, `Query.GetMiscItemSource` renders the "part of <container>" line on demand
+-- It is expanded into one row per book, and the item is shown as `partOf` the container
 -- Basically all books are bought, not found, so they land in `src.VENDOR`
 FurC.BookCollections = FurC.BookCollections or {}
 

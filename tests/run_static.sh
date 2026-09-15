@@ -31,15 +31,23 @@ for tool in "$LUAC" "$LUA"; do
 done
 
 echo "== syntax check (luac -p) =="
-find "$ROOT" -name '*.lua' -not -path '*/.git/*' -print0 \
+FILES=$(find -H "$ROOT" -name '*.lua' -not -path '*/.git/*' | wc -l)
+[ "$FILES" -gt 0 ] || { echo "run_static.sh: no .lua files under $ROOT" >&2; exit 2; }
+find -H "$ROOT" -name '*.lua' -not -path '*/.git/*' -print0 \
   | xargs -0 -n1 "$LUAC" -p
-echo "  ok"
+echo "  ok: $FILES files"
 
 echo "== constants validation =="
 "$LUA" "$HERE/validate_constants.lua" "$ROOT/LibFurnitureCatalogue"
 
+echo "== locale validation =="
+"$LUA" "$HERE/validate_locale.lua" "$ROOT/LibFurnitureCatalogue" "$LUAC"
+
 echo "== data validation =="
 "$LUA" "$HERE/validate_data.lua" "$ROOT/LibFurnitureCatalogue" "$LUAC"
+
+echo "== record field validation =="
+"$LUA" "$HERE/validate_record_fields.lua" "$ROOT/LibFurnitureCatalogue"
 
 echo "== public API surface =="
 "$LUA" "$HERE/validate_api_surface.lua" "$ROOT/LibFurnitureCatalogue"

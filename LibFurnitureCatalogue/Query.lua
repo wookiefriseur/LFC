@@ -897,6 +897,10 @@ local function detailsOf(record)
   if source.crate then
     parts[#parts + 1] = plain(resolveCrate(source.crate))
   end
+  -- an empty list means it comes furnished with a house, but we don't know which
+  if source.houses and #source.houses == 0 then
+    parts[#parts + 1] = plain(GetString(SI_FURC_SRC_MISCHOUSE))
+  end
   for _, houseId in ipairs(source.houses or {}) do
     parts[#parts + 1] = plain(GetCollectibleName(houseId))
   end

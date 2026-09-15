@@ -1,15 +1,13 @@
 -- Static data validator for LibFurnitureCatalogue:
 --   * every vocabulary symbol is defined in Constants
 --   * a de-baked data file stays de-baked
+--   * a row value is an id, not text, except on the two fields named below
 --   * a data file reads no global the library does not provide
 -- Called by run_static.sh
---
--- TODO: no duplicate item IDs, each entry matches expected schema.
---       Needs the data files to actually load, which needs the locale files + Format.lua
---       Do it once the rows carry records instead of strings
 
 local here = ((arg and arg[0]) or ""):match("^(.*[/\\])") or ""
 local makeSandbox = dofile(here .. "eso_sandbox.lua")
+local globalNames = dofile(here .. "lua_globals.lua")
 
 local root = (arg and arg[1]) or "../LibFurnitureCatalogue"
 local luac = (arg and arg[2]) or "luac"
@@ -18,6 +16,8 @@ local failures = {}
 local function fail(message)
   failures[#failures + 1] = message
 end
+
+local literals = 0
 
 local function readFile(path)
   local handle = io.open(path, "r")
@@ -52,6 +52,45 @@ for line in manifest:gmatch("[^\r\n]+") do
 end
 assert(#dataFiles > 0, "no data files listed in " .. manifestPath)
 
+-- A row states ids, so that a consumer renders them in the player's language. Two
+-- fields may hold a bare string, and nothing else may:
+--   note      what no vocabulary names - a player guild, prose about where a mob drops
+--   itemDate  the luxury furnisher's last-seen date, YYYY-MM-DD
+local STRING_FIELDS = {
+  note = true,
+  itemDate = true,
+}
+
+local allowedFields = {}
+for field in pairs(STRING_FIELDS) do
+  allowedFields[#allowedFields + 1] = field
+end
+table.sort(allowedFields)
+allowedFields = table.concat(allowedFields, " and ")
+
+---A line with its trailing comment dropped, so text inside a comment is not a value
+---@param line string
+---@return string
+local function stripComment(line)
+  local index, quote = 1, nil
+  while index <= #line do
+    local char = line:sub(index, index)
+    if quote then
+      if char == "\\" then
+        index = index + 1
+      elseif char == quote then
+        quote = nil
+      end
+    elseif char == '"' or char == "'" then
+      quote = char
+    elseif char == "-" and line:sub(index + 1, index + 1) == "-" then
+      return line:sub(1, index - 1)
+    end
+    index = index + 1
+  end
+  return line
+end
+
 -- A name a data file never declared is a nil
 local KNOWN_GLOBALS = {
   FurC = true,
@@ -62,30 +101,6 @@ local KNOWN_GLOBALS = {
   table = true,
   type = true,
 }
-
----Every global a chunk reads or writes, taken from the bytecode listing
----@param path string
----@return table|nil names, string|nil err
-local function globalNames(path)
-  local pipe = io.popen('"' .. luac .. '" -p -l "' .. path .. '" 2>&1')
-  if not pipe then
-    return nil, "cannot run " .. luac
-  end
-  local listing = pipe:read("*a")
-  pipe:close()
-  if listing == "" then
-    return nil, "no bytecode listing for " .. path
-  end
-  local names = {}
-  -- 5.1 lists `GETGLOBAL 0 -1 ; name`, 5.2+ lists `GETTABUP 0 0 -1 ; _ENV "name"`
-  for name in listing:gmatch("[GS]ETGLOBAL[^;\n]*;%s+([%a_][%w_]*)") do
-    names[name] = true
-  end
-  for name in listing:gmatch('_ENV%s+"([%a_][%w_]*)"') do
-    names[name] = true
-  end
-  return names
-end
 
 for _, rel in ipairs(dataFiles) do
   local text = readFile(root .. "/" .. rel)
@@ -106,6 +121,29 @@ for _, rel in ipairs(dataFiles) do
           markup:sub(1, 80)
         )
       )
+    end
+
+    do
+      local number = 0
+      for line in (text .. "\n"):gmatch("([^\n]*)\n") do
+        number = number + 1
+        for field, value in stripComment(line):gmatch('([%a_][%w_]*)%s*=%s*"([^"]*)"') do
+          if STRING_FIELDS[field] then
+            literals = literals + 1
+          else
+            fail(
+              string.format(
+                '%s:%d: %s = "%s" is text where the row contract wants an id - only %s may hold a string',
+                rel,
+                number,
+                field,
+                value,
+                allowedFields
+              )
+            )
+          end
+        end
+      end
     end
 
     -- table keeps the LAST value written for a key, so an item id used twice with the same block drops the previous row (reusing an id is fine, but the same table using it twice is not)
@@ -165,7 +203,7 @@ for _, rel in ipairs(dataFiles) do
       )
     end
 
-    local globals, err = globalNames(root .. "/" .. rel)
+    local globals, err = globalNames(root .. "/" .. rel, luac)
     if not globals then
       fail(rel .. ": " .. err)
     else
@@ -217,4 +255,4 @@ if #failures > 0 then
   end
   os.exit(1)
 end
-print(string.format("  ok: %d data files", #dataFiles))
+print(string.format("  ok: %d data files, %d string values on %s", #dataFiles, literals, allowedFields))
