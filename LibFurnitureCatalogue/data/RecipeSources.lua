@@ -16,7 +16,7 @@
 --          (writ vendor rows name none, because FurC.Rolis/FurC.Faustina already do)
 --          TODO: make this more generic so we don't have to think of special cases and exceptions
 --
---   quest row   { quest = true, daily = <boolean>, locations = { <ZoneIds>, ... } }
+--   quest row   { quest = true, category = <string id, like SI_FURC_SRC_QUEST_DAILY>, locations = { <ZoneIds>, ... } }
 --   event row   { event = <EventIds> }, for a recipe that only drops during an event
 --NOTE: Event-only recipe drops not encountered in the wild yet, except for maybe during Writhing Wall. But shortly after the recipes were made available as regular container drops. A recipe that drops normally the rest of the year needs no row at all. Whether the furnishing itself also dropped is a separate question, and its answer goes in EventItems
 --
@@ -51,7 +51,7 @@ local daily_reward_elswhere = {
   source = src.QUEST,
   version = ver.KITTY,
   quest = true,
-  daily = true,
+  category = SI_FURC_SRC_QUEST_DAILY,
   locations = { zoneIds.NELSWEYR, zoneIds.SELSWEYR },
 }
 

@@ -10,11 +10,11 @@ local zones = LFC.Internal.Constants.ZoneIds
 
 -- Furnishings obtained via pickpocketing / stealing (Justice system)
 local stealable = { category = SI_FURC_SRC_STEAL }
-local stealable_guard = { npcClass = npcClasses.CLASS_GUARD }
-local stealable_scholars = { npcClass = npcClasses.CLASS_SCHOLAR }
+local stealable_guard = { npcClass = { npcClasses.CLASS_GUARD } }
+local stealable_scholars = { npcClass = { npcClasses.CLASS_SCHOLAR } }
 local stealable_nerds = { npcClass = { npcClasses.CLASS_MAGE, npcClasses.CLASS_SCHOLAR } }
-local stealable_thief = { npcClass = npcClasses.CLASS_THIEF }
-local stealable_noble = { npcClass = npcClasses.CLASS_NOBLE }
+local stealable_thief = { npcClass = { npcClasses.CLASS_THIEF } }
+local stealable_noble = { npcClass = { npcClasses.CLASS_NOBLE } }
 local stealable_swamp = { location = zones.MURKMIRE }
 local stealable_elsewhere = { locations = { zones.NELSWEYR, zones.SELSWEYR } }
 local pickpocket_necrom = { locations = { zones.TELVANNI, zones.APOCRYPHA } }
@@ -23,13 +23,13 @@ local pickpocket_weald = { location = zones.WEALD }
 local pickpocket_solstice = { location = zones.SOLSTICE }
 local pickpocket_glenumbra = { location = zones.GLENUMBRA }
 
--- Kinds of container that can be stolen from. A list is alternatives, "A or B"
-local elsweyr_wardrobes = { location = zones.NELSWEYR, containerKind = SI_FURC_SRC_WARDROBE }
+-- Kinds of container that can be stolen from. Always a list; several are alternatives, "A or B"
+local elsweyr_wardrobes = { location = zones.NELSWEYR, containerKind = { SI_FURC_SRC_WARDROBE } }
 local elsweyr_cabinets = {
   location = zones.NELSWEYR,
   containerKind = { SI_FURC_SRC_CABINET, SI_FURC_SRC_WARDROBE },
 }
-local cwc_safeboxes = { location = zones.CWC, containerKind = SI_FURC_SRC_SAFEBOX }
+local cwc_safeboxes = { location = zones.CWC, containerKind = { SI_FURC_SRC_SAFEBOX } }
 
 -- Season One
 FurC.Justice[ver.THIEVES] = {
@@ -158,7 +158,7 @@ FurC.Justice[ver.ALTMER] = {
 -- 5 Clockwork City
 FurC.Justice[ver.CLOCKWORK] = {
   [src.STEAL_CONTAINER] = {
-    [134403] = { location = zones.HEWSBANE, containerKind = SI_FURC_SRC_WARDROBE }, -- Spool, Red Thread
+    [134403] = { location = zones.HEWSBANE, containerKind = { SI_FURC_SRC_WARDROBE } }, -- Spool, Red Thread
     [134410] = cwc_safeboxes, -- Clockwork Crank, Miniature
     [134411] = cwc_safeboxes, -- Clockwork Gear Shaft, Miniature
     [134412] = cwc_safeboxes, -- Clockwork Piston, Miniature
@@ -195,7 +195,7 @@ FurC.Justice[ver.MORROWIND] = {
 -- 2 Homestead
 FurC.Justice[ver.HOMESTEAD] = {
   [src.PICKPOCKET] = {
-    [117939] = { npcClass = npcClasses.CLASS_WOODWORKER }, -- Rough Axe, Practical
+    [117939] = { npcClass = { npcClasses.CLASS_WOODWORKER } }, -- Rough Axe, Practical
     [118206] = stealable_thief, -- Gaming die
     [118489] = stealable_scholars, -- Papers, Stack
     [118528] = stealable, -- Signed Contract
@@ -212,7 +212,7 @@ FurC.Justice[ver.HOMESTEAD] = {
     [118713] = stealable_guard, -- Bounty Sheet: Khajiiti Man
     [118716] = stealable_guard, -- Bounty Sheet: Orc Woman
     [118717] = stealable_guard, -- Bounty Sheet: Orc Man
-    [121055] = { npcClass = npcClasses.CLASS_DRUNKARD }, -- Breton Mug, Full
+    [121055] = { npcClass = { npcClasses.CLASS_DRUNKARD } }, -- Breton Mug, Full
   },
 
   [src.STEAL_CONTAINER] = {

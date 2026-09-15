@@ -230,7 +230,7 @@ end
 ---| 6 # CURT_CROWN_GEMS (Crown Gems)
 ---| 7 # CURT_CROWNS (Crowns)
 ---| 8 # CURT_STYLE_STONES (Style Mimic Stones)
----| 9 # CURT_EVENT_TICKETS (Event Tickets)
+---| 9 # CURT_TRADE_BARS (Trade Bars)
 ---| 10 # CURT_UNDAUNTED_KEYS (Undaunted Keys)
 ---| 11 # CURT_ENDEAVOR_SEALS (Seals of Endeavor)
 ---| 12 # CURT_ARCHIVAL_FORTUNES (Infinite Archive)
@@ -254,7 +254,7 @@ CURT_CROWNS = 7
 ---@type CurrencyType
 CURT_STYLE_STONES = 8
 ---@type CurrencyType
-CURT_EVENT_TICKETS = 9
+CURT_TRADE_BARS = 9
 ---@type CurrencyType
 CURT_UNDAUNTED_KEYS = 10
 ---@type CurrencyType

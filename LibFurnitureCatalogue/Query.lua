@@ -256,8 +256,9 @@ local function voucherEntry(versionData, recipeKey, blueprintId)
 end
 
 local function strVoucher(vendor, entry)
-  -- `info` is an achievement id, `partOf` is a folio the recipe comes in
-  local info = (entry.info and formatAchievement(entry.info)) or (entry.partOf and strPartOf(entry.partOf))
+  -- `achievement` is a requirement, `partOf` is a folio the recipe comes in
+  local info = (entry.achievement and formatAchievement(entry.achievement))
+    or (entry.partOf and strPartOf(entry.partOf))
   local price = entry.itemPrice
   return strFurnisher(vendor, loc.ANY_CAPITAL, price, CURT_WRIT_VOUCHERS, info)
 end
@@ -465,6 +466,10 @@ local function getEventDropSource(recipeKey, recipeArray)
         local item = items[recipeKey]
         if nil ~= item then
           local named = srcName ~= eventDrop and srcName or nil
+          -- a key that is not an NPC is a container
+          if named and nil == npcByName[srcName] then
+            named = getItemLink(getItemId(named))
+          end
           if item.itemPrice or npcByName[srcName] then
             local currency = item.currency or (named == npc.EVENT and CURT_TRADE_BARS or CURT_MONEY)
             return strFurnisher(named or eventName, eventName, item.itemPrice, currency, vendorInfo(item))
@@ -519,7 +524,10 @@ local function addQualifier(parts, value, resolve)
       alternatives[#alternatives + 1] = resolved
     end
   end
-  if #alternatives > 0 then
+  -- One alternative means it's just one value
+  if #alternatives == 1 then
+    parts[#parts + 1] = strSrc("src", alternatives[1])
+  elseif #alternatives > 1 then
     parts[#parts + 1] = strSrc("other", unpack(alternatives))
   end
 end
@@ -529,10 +537,6 @@ end
 ---@param row table
 ---@return string
 local function renderMiscSource(source, row)
-  if row.reward then
-    return string.format("%s %s", formatAchievement(row.reward, true), strSrc("loc", resolveZone(row.location)))
-  end
-
   if row.itemPack then
     return zo_strformat(GetString(SI_FURC_SRC_TOMESPACK), GetString(row.itemPack))
   end
@@ -588,6 +592,9 @@ local function renderMiscSource(source, row)
   addQualifier(notes, row.npcClass, resolveNpcClass)
   addQualifier(notes, row.containerKind, resolveNote)
   addQualifier(notes, row.note, resolveNote)
+  if row.achievement then
+    notes[#notes + 1] = formatAchievement(row.achievement)
+  end
   if row.container then
     notes[#notes + 1] = getItemLink(row.container)
   end
@@ -742,7 +749,6 @@ end
 this.GetMiscItemSource = getMiscItemSource
 
 local strSrcQuest = GetString(SI_FURC_SRC_QUEST)
-local strSrcQuestDaily = GetString(SI_FURC_SRC_QUEST_DAILY)
 
 ---Render a FurC.RecipeSources row. The row carries ids, see data/RecipeSources.lua
 ---@param row table
@@ -753,7 +759,7 @@ local function renderRecipeSource(row)
     for i, zoneId in ipairs(row.locations or {}) do
       zoneNames[i] = resolveZone(zoneId)
     end
-    return strGeneric(row.daily and strSrcQuestDaily or strSrcQuest, nil, nil, unpack(zoneNames))
+    return strGeneric((row.category and GetString(row.category)) or strSrcQuest, nil, nil, unpack(zoneNames))
   end
 
   -- we use `src` instead of `loc`, or we'd get "Event: in SomeEvent"
@@ -1084,8 +1090,8 @@ local function voucherRecord(rec, recipeKey, blueprintId)
   end
   rec.source.vendor = vendor
   rec.source.place = placeIds.ANY_CAPITAL
-  -- one slot, and a voucher row carries either the achievement it needs or the folio it comes in
-  rec.source.achievement = entry.info
+  -- one slot, voucher row has either the achievement it needs or the folio it comes in
+  rec.source.achievement = entry.achievement
   rec.source.partOf = entry.partOf
   if entry.itemPrice then
     rec.cost = { currency = CURT_WRIT_VOUCHERS, amount = entry.itemPrice }
@@ -1099,9 +1105,9 @@ local function eventRecord(rec, recipeKey)
         local item = items[recipeKey]
         if nil ~= item then
           if srcName ~= eventDrop then
-            -- a source that is not an NPC is a container item link
+            -- a source that is not an NPC is a container
             rec.source.vendor = npcByName[srcName]
-            rec.source.note = rec.source.vendor == nil and srcName or nil
+            rec.source.container = rec.source.vendor == nil and getItemId(srcName) or nil
           end
           rec.source.event = eventByName[eventName]
           -- a row is sold when it names a price or an NPC holds it, and only then does its detail reach a line
@@ -1247,7 +1253,6 @@ local MISC_ROW_FIELDS = {
   "event",
   "quest",
   "achievement",
-  "reward",
   "collectible",
   "skillLine",
   "skillRank",
@@ -1258,7 +1263,6 @@ local MISC_ROW_FIELDS = {
   "container",
   "containerKind",
   "npcClass",
-  "npcGroup",
   "leads",
   "rarity",
 }
@@ -1317,7 +1321,7 @@ local function recipeSourceRecord(rec, row)
   local source = rec.source
   if row.quest then
     -- a quest row names no quest, only that it is one and where: { quest = true, locations = { ... } }
-    source.category = row.daily and SI_FURC_SRC_QUEST_DAILY or SI_FURC_SRC_QUEST
+    source.category = row.category or SI_FURC_SRC_QUEST
     source.locations = row.locations
     return
   end

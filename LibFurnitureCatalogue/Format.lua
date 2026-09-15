@@ -346,19 +346,14 @@ function this.FormatEvent(...)
 end
 
 local fmtAch = GetString(SI_FURC_REQUIRES_ACHIEVEMENT)
-local fmtReward = GetString(SI_FURC_STRING_REWARD_FOR)
 local anyAchievement = sFormat("<<a:1>>", GetString(SI_FURC_ACHIEVEMENT_UNKNOWN))
 ---Format an achievement string from a requirement id or description
 ---@param req number|string
----@param isReward? boolean defaults to false
 ---@return string
-local function formatAchievement(req, isReward)
+local function formatAchievement(req)
   assert(type(req) == "string" or type(req) == "number", "requirement must be a string or number")
 
   local fmt = fmtAch
-  if isReward then
-    fmt = fmtReward
-  end
   if type(req) == "string" then
     -- probably description, format as is
     return sFormat(fmt, req)

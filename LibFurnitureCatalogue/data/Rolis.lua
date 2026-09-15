@@ -71,7 +71,7 @@ FurC.FurnishingFolios[219721] = { -- West Weald 1
 }
 
 FurC.Faustina[ver.BASE43] = {
-  [203600] = { itemPrice = 800, info = 3985 }, -- Scribing Altar
+  [203600] = { itemPrice = 800, achievement = 3985 }, -- Scribing Altar
 }
 
 -- 30 Scions of Ithelia
@@ -94,10 +94,10 @@ FurC.FurnishingFolios[214255] = { -- Tomehold
 
 -- 29 Secrets of the Telvanni
 FurC.Faustina[ver.ENDLESS] = {
-  [203556] = { itemPrice = 1500, info = 1801 }, -- Grand Master Jewelry Station
-  [203555] = { itemPrice = 1500, info = 1801 }, -- Grand Master Blacksmithing Station
-  [203553] = { itemPrice = 1500, info = 1801 }, -- Grand Master Clothing Station
-  [203554] = { itemPrice = 1500, info = 1801 }, -- Grand Master Woodworking Station
+  [203556] = { itemPrice = 1500, achievement = 1801 }, -- Grand Master Jewelry Station
+  [203555] = { itemPrice = 1500, achievement = 1801 }, -- Grand Master Blacksmithing Station
+  [203553] = { itemPrice = 1500, achievement = 1801 }, -- Grand Master Clothing Station
+  [203554] = { itemPrice = 1500, achievement = 1801 }, -- Grand Master Woodworking Station
 }
 
 -- 27 Based
@@ -325,7 +325,7 @@ FurC.Faustina[ver.ALTMER] = {
 -- 6 Dragon Bones
 FurC.Faustina[ver.DRAGONS] = {
   [134675] = { itemPrice = 500 }, -- Outfit station
-  [139391] = { itemPrice = 10, info = 1801 }, -- Master Crafter's Banner, Hanging
+  [139391] = { itemPrice = 10, achievement = 1801 }, -- Master Crafter's Banner, Hanging
 }
 
 -- 5 Clockwork City

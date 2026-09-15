@@ -427,7 +427,6 @@ end
 ---@field note (integer|string|table)|nil adds details to a source. Locale string id, a bare literal, structured table, or a list of alternatives
 ---@field category integer|nil locale string id naming what kind of source this is, when the row names its own rather than taking the source type's word
 ---@field achievement integer|nil achievement id. `0` when it requires an achievement but the id is unknown
----@field reward integer|nil achievement id the item is handed out for, as opposed to `achievement`, which gates a purchase
 ---@field quest integer|nil quest id, resolve with GetQuestName
 ---@field skillLine integer|nil skill line id, resolve with GetSkillLineNameById. On a vendor record it tells which guild sells it and asking what the Thieves Guild sells is asking for Legerdemain skills
 ---@field skillRank integer|nil required rank in that skill line. nil means no rank required
@@ -442,7 +441,6 @@ end
 ---@field container integer|nil item id of the container it is found in
 ---@field containerKind (integer|integer[])|nil locale string id(s) naming a kind of container, resolve with GetString
 ---@field npcClass (integer|integer[])|nil monster social class string id(s), the game's own, resolve with GetString
----@field npcGroup (integer|integer[])|nil locale string id(s) for a group of enemies, resolve with GetString
 ---@field leads true|nil the antiquity is assembled from several leads; the player's codex has the count
 ---@field rarity integer|nil locale string id naming how rare the source is, resolve with GetString
 

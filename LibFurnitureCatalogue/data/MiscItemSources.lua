@@ -11,15 +11,15 @@
 --   locations  ZoneIds values, for ONE source that covers several of them (group of dungeons, neighbouring zones, pub dung in a zone)
 --   event      EventIds value. event is the category word and event name goes where a location would
 --   note       source details: the mob or harvesting node it comes from (a list of notes is a list of alternatives, "A or B")
---   npcClass   NpcClassIds value, the class of NPC carrying it (a list is alternatives, same as `note`)
---   containerKind  string id naming a kind of container it is found in (safebox, wardrobe (a list is alternatives))
+--   npcClass   list of NpcClassIds values, the class of NPC carrying it (several are alternatives, same as `note`)
+--   containerKind  list of string ids naming a kind of container it is found in (safebox, wardrobe; several are alternatives)
 --   container  item id of the box it comes in
 --   partOf     item id of the container the row unpacks from (renders as "part of <container>")
 --   vendor     NpcIds value, who sells it
 --   rarity     how rare the drop is: SI_FURC_RARITY_RARE or SI_FURC_RARITY_EXTREMELYRARE --TODO: drop this?
 --   leads      true when an antiquity is assembled from multiple leads
 --   quest      quest id
---   reward     achievement id, for an item handed out for earning it
+--   achievement  id of required achievement
 --   itemPack   TomesPacks value
 --   itemPrice  what it costs, with `currency`
 --
@@ -541,8 +541,12 @@ FurC.MiscItemSources[ver.TIDES] = {}
 FurC.MiscItemSources[ver.DEADL] = {
   [src.DROP] = {
     [166960] = { location = zones.WSKYRIM, note = SI_FURC_SRC_STONEHUSK }, -- Target Stone Husk (from item 166466: "Stone Husk Fragment"; TODO: use fragment itemlink, it already contains the info.. no need to translate that stuff)
-    [163432] = { reward = 2669, location = zones.WSKYRIM }, -- Music Box, Merry Mead Maker ; Achievement
     [166027] = { location = zones.BLACKREACH_GMC, note = "chaurus mobs" }, -- Chaurus Egg, Dormant
+  },
+
+  [src.QUEST] = {
+    -- the quest is what rewards it, the achievement is required to get the quest
+    [163432] = { quest = 6482, achievement = 2669, location = zones.WSKYRIM }, -- Music Box, Merry Mead Maker
   },
 
   [src.DUNGEON] = {

@@ -110,7 +110,7 @@ for _, rel in ipairs(dataFiles) do
 
     -- table keeps the LAST value written for a key, so an item id used twice with the same block drops the previous row (reusing an id is fine, but the same table using it twice is not)
     do
-      local depth, keysAtDepth = 0, {}
+      local depth, keysAtDepth, entriesAtDepth = 0, {}, {}
       local number = 0
       for line in (text .. "\n"):gmatch("([^\n]*)\n") do
         number = number + 1
@@ -132,6 +132,18 @@ for _, rel in ipairs(dataFiles) do
             keysAtDepth[depth][item] = number
           end
         end
+        local entry = line:match("^%s*(%d+)%s*,")
+        if entry then
+          entriesAtDepth[depth] = entriesAtDepth[depth] or {}
+          local first = entriesAtDepth[depth][entry]
+          if first then
+            fail(
+              string.format("%s:%d: item %s is already listed at line %d in the same table", rel, number, entry, first)
+            )
+          else
+            entriesAtDepth[depth][entry] = number
+          end
+        end
         local opens = select(2, line:gsub("{", ""))
         local closes = select(2, line:gsub("}", ""))
         if opens > closes then
@@ -139,6 +151,7 @@ for _, rel in ipairs(dataFiles) do
         elseif closes > opens then
           for _ = 1, closes - opens do
             keysAtDepth[depth] = nil
+            entriesAtDepth[depth] = nil
             depth = (depth > 0 and depth - 1) or 0
           end
         end
