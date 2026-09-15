@@ -814,7 +814,6 @@ FurC.CrownStore[ver.DRAGON2] = {
     [156773] = { { itemPrice = 180 }, { pack = packs.HEART } }, -- Rug, Love-Blessed
     [156774] = { { itemPrice = 180 }, { pack = packs.HEART } }, -- Tapestry, Love-Blessed
     [156778] = { { itemPrice = 85 }, { pack = packs.HEART } }, -- Flower, Dibella's Promise
-    [134971] = { { itemPrice = 100 }, { pack = packs.HEART } }, -- Candles, Votive Group
   },
 }
 
@@ -1150,7 +1149,7 @@ FurC.CrownStore[ver.DRAGONS] = {
     [134887] = { { itemPrice = 2000 }, { pack = packs.HUBTREASURE } }, -- Ra Gada Guardian Statue, Lion Ibis
     [134888] = { { itemPrice = 2000 }, { pack = packs.HUBTREASURE } }, -- Ra Gada Guardian Statue, Winged Bull
     [134889] = { { itemPrice = 2000 }, { pack = packs.HUBTREASURE } }, -- Ra Gada Guardian Statue, Riding Camel
-    [134971] = { { itemPrice = 400 }, { pack = packs.HEART }, { houses = { 4794 } } }, -- Candles, Votive Group
+    [134971] = { { itemPrice = 100 }, { pack = packs.HEART }, { houses = { 4794 } } }, -- Candles, Votive Group
     [134848] = { { itemPrice = 1500 }, { pack = packs.DIBELLA }, { pack = packs.OASIS } }, -- Blue Butterfly Flock
     [134899] = { { itemPrice = 45 }, { pack = packs.DIBELLA } }, -- Flower Spray, Crimson Daisies
     [134901] = { { itemPrice = 45 }, { pack = packs.DIBELLA }, { houses = { 13882 } } }, -- Flower Spray, Starlight Daisies

@@ -643,7 +643,6 @@ FurC.Recipes[ver.ENDLESS] = {
   198547, -- Diagram: Necrom Sconce, Brass
   198548, -- Praxis: Necrom Brazier, Tall Stone
   198549, -- Praxis: Apocrypha Bookcase, Large Spiked Filled
-  198094, -- Praxis: Telvanni Doorframe, Round
   198479, -- Blueprint: Necrom Lamp Post, Wood
   198480, -- Pattern: Apocrypha Book Pile, Large Twisted
   198481, -- Praxis: Apocrypha Bookcase, Corner
@@ -1387,14 +1386,7 @@ FurC.Recipes[ver.STONET] = {
 FurC.Recipes[ver.SKYRIM] = {
   121091, -- Stool, carved
 
-  152237, -- Praxis: Elsweyr Sarcophagus, Ancient
   152238, -- Praxis: Elsweyr Sarcophagus Lid, Ancient
-  153723, -- Elsweyr Platform, Ancient Square
-  153724, -- Elsweyr Shrine, Ancient Small
-  153725, -- Elsweyr Shrine, Ancient Multilevel
-  153726, -- Elsweyr Platform, Ancient Rectangular
-  153727, -- Elsweyr Shrine, Ancient Large
-  153728, -- Elsweyr Tower, Ancient Huge
 
   166727, -- Pattern: Vampiric Carpet, Grand Sigil
   166728, -- Pattern: Vampiric Runner, Grand
@@ -1684,8 +1676,6 @@ FurC.Recipes[ver.SCALES] = {
 FurC.Recipes[ver.KITTY] = {
   121203, -- Praxis: Khajiit Brazier, Enchanted
 
-  139525, -- Alinor Sconce, Lantern
-  139535, -- Alinor Streetlight, Wrought Iron
   151972, -- Elsweyr Bookshelf, Ancient Stone Full
   151973, -- Elsweyr Plinth, Ancient Stone
   151974, -- Elsweyr Pillar, Ancient Stone
@@ -1857,7 +1847,6 @@ FurC.Recipes[ver.WOTL] = {
 
 -- 9 Wolfhunter
 FurC.Recipes[ver.WEREWOLF] = {
-  141896, -- Sketch: Figurine, The Dragon's Glare
   139486, -- Sketch: Alinor Ancestor Clock, Celestial
   141905, -- Praxis: Alinor Gaming Table, Punctilious Conflict
   141906, -- Formula: Artist's Palette, Pigment
@@ -1865,10 +1854,6 @@ FurC.Recipes[ver.WEREWOLF] = {
   141904, -- Blueprint: Alinor Bookshelf, Grand Full
   141902, -- Diagram: Relic Vault, Impenetrable
   141903, -- Pattern: Alinor Bed, Levitating
-  141897, -- Praxis: Obelisk, Lord Hircine Ritual
-  141898, -- Praxis: Ritual Stone, Hircine
-  141899, -- Praxis: Sacrificial Altar, Hircine
-  141900, -- Blueprint: Ritual Fetish, Hircine
 }
 
 -- 8 Murkmire
@@ -2126,10 +2111,7 @@ FurC.Recipes[ver.ALTMER] = {
 
 -- 6 Dragon Bones
 FurC.Recipes[ver.DRAGONS] = {
-  127101, -- Velothi Brazier, Temple
-  127102, -- Praxis: Tribunal Tablet of Almalexia
   134999, -- Praxis: Table, Blackmarrow Slab
-  127054, -- Pattern: Redoran Table Runner, Gilded Ochre
   134998, -- Pattern: Jester's Pavillon, Open
   134987, -- Blueprint: Hlaalu Gaming Table, Foxes & Felines
   134986, -- Design: Miniature Garden, Bottled
@@ -2156,7 +2138,6 @@ FurC.Recipes[ver.CLOCKWORK] = {
   134490, -- Diagram: Clockwork Crate, Wide
   134476, -- Formula: Fabricant Tree, Gnarled Cypress
   134504, -- Diagram: Clockwork Drafting Table, Raised
-  132188, -- Praxis: Ayleid Bookshelf, Cluttered
   134477, -- Formula: Fabricant Trees, Clustered Maple
   134518, -- Diagram: Clockwork Coffer, Robust
   134515, -- Diagram: Clockwork Wardrobe, Precision Engineered

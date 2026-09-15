@@ -380,19 +380,6 @@ FurC.Rumours[ver.WEREWOLF] = {
 -- 7 Summerset Isles
 FurC.Rumours[ver.ALTMER] = {
   -- [134287] = rumourSource, -- Projector TBD ; removed @BASE44?
-  [132197] = rumourSource, -- Death Skeleton, Shrouded
-  [132166] = rumourSource, -- Death Skeleton, Robed
-  [130195] = rumourSource, -- Target Iron Atronach
-  [130194] = rumourSource, -- Target Stone Atronach
-  [130193] = rumourSource, -- Robust Target Minotaur Handler
-  [120882] = rumourSource, -- Tombstone, Small
-  [120881] = rumourSource, -- Tombstone, Engraved, Order of the Hour
-  [120880] = rumourSource, -- Tombstone, Engraved, Decorative
-  [120874] = rumourSource, -- Daedric Coffin, Lid
-  [120872] = rumourSource, -- Daedric Pike, Daedroth Head
-  [120858] = rumourSource, -- Yokudan Tapestry
-  [120857] = rumourSource, -- Yokudan Sarcophagus Lid
-  [120856] = rumourSource, -- Yokudan Sarcophagus
 }
 
 -- 5 Clockwork City

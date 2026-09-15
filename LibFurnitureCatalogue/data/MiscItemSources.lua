@@ -818,7 +818,6 @@ FurC.MiscItemSources[ver.MORROWIND] = {
   [src.HARVEST] = {
     [125631] = plants_vvardenfell, -- Plants, Ash Frond
     [125544] = plants_vvardenfell, -- Fern, Strong Dusky
-    [131420] = plants_vvardenfell, -- Plants, Ash Frond
     [125553] = plants_vvardenfell, -- Flowers, Netch Cabbage Stalks
     [125551] = plants_vvardenfell, -- Flowers, Netch Cabbage
     [125552] = plants_vvardenfell, -- Flowers, Netch Cabbage Patch
