@@ -9,8 +9,7 @@ local LFC = LibFurnitureCatalogue
 local npc = LFC.Internal.Constants.NPC
 local src = LFC.Internal.Constants.ItemSources
 local npcIds = LFC.Internal.Constants.NpcIds
-local placeIds = LFC.Internal.Constants.PlaceIds
-local zoneIds = LFC.Internal.Constants.ZoneIds
+local vendorLocations = LFC.Internal.Constants.VendorLocations
 local npcByName = LFC.Internal.Constants.NpcByName
 local eventByName = LFC.Internal.Constants.EventByName
 
@@ -363,6 +362,34 @@ local function setLocation(rec, id)
   rec.source.place = id
 end
 
+
+--- Where the vendor is
+---@param id integer NpcIds value
+local function setVendorLocation(rec, id)
+  local source = rec.source
+  if source.location or source.locations or source.place then
+    return
+  end
+  local zones
+  for _, entry in ipairs(vendorLocations[id] or {}) do
+    local locationId = entry.location or entry.place
+    if isZoneId[locationId] then
+      zones = zones or {}
+      zones[#zones + 1] = locationId
+    elseif nil == source.place then
+      source.place = locationId
+    end
+  end
+  if nil == zones then
+    return
+  end
+  if 1 == #zones then
+    source.location = zones[1]
+  else
+    source.locations = zones
+  end
+end
+
 local function achievementVendorRecord(rec, recipeKey, version)
   local function findIn(versionData)
     if not versionData then
@@ -418,7 +445,7 @@ local function luxuryRecord(rec, recipeKey, version)
     return
   end
   rec.source.vendor = npcIds.LUXF
-  rec.source.location = zoneIds.COLDH
+  setVendorLocation(rec, npcIds.LUXF)
   if itemData.itemPrice then
     rec.cost = { currency = CURT_MONEY, amount = itemData.itemPrice }
   end
@@ -492,7 +519,7 @@ local function voucherRecord(rec, recipeKey, blueprintId)
     return
   end
   rec.source.vendor = vendor
-  rec.source.place = placeIds.ANY_CAPITAL
+  setVendorLocation(rec, vendor)
   -- one slot, voucher row has either the achievement it needs or the folio it comes in
   rec.source.achievement = entry.achievement
   rec.source.partOf = entry.partOf

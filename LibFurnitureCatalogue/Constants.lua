@@ -412,6 +412,19 @@ this.NpcIds = {
   ENEMY_ECHATERE = SI_FURC_NPC_ECHATERE,
 }
 
+-- Default vendor locations
+--
+-- A vendor's location belongs to a vendor, not to the item (LuxuryFurnisher and writ-vendor items carry no location on their rows because their place is the same across all items)
+--
+-- An item can name its own location to override the default
+--
+-- Each vendor holds a LIST, because a vendor can stand in more than one place, and each entry names a `location` (game zone) or a `place`
+this.VendorLocations = {
+  [this.NpcIds.LUXF] = { { location = this.ZoneIds.COLDH } },
+  [this.NpcIds.ROLIS] = { { place = this.PlaceIds.ANY_CAPITAL } },
+  [this.NpcIds.FAUSTINA] = { { place = this.PlaceIds.ANY_CAPITAL } },
+}
+
 -- Social classes (pickpocketing), rendered singular
 -- NOTE: Extra lookup table for better testing, and because we don't own those strings (nil str would drop the whole row)
 local SOCIAL_CLASS_STRINGS = {
