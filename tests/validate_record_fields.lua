@@ -211,7 +211,9 @@ for _, field in ipairs(fields) do
 
   local plural = PLURAL_TWINS[field]
   if shapes[field .. "s"] and not plural then
-    fail(string.format("`%s` has the plural twin `%ss`, which is the convention this check exists to stop", field, field))
+    fail(
+      string.format("`%s` has the plural twin `%ss`, which is the convention this check exists to stop", field, field)
+    )
   end
 end
 
