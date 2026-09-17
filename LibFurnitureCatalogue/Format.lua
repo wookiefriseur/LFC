@@ -78,7 +78,7 @@ this.stripTxt = stripTxt
 --[[
 TODO #REFACTOR
   right now we are calling this function even with stripColor=true,
-    and stripColor is passed from `FurC.GetItemDescription` to `FurC.getXYZSource`, then as `ret` to `this.colourise`, so in some cases colourise actually means "do nothing"
+    and stripColor is passed from `GetItemDescription` down to `this.colourise`, so in some cases colourise actually means "do nothing"
 ]]
 local function colourise(txt, colourCode, ret)
   txt = tostring(txt)

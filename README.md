@@ -37,6 +37,10 @@ Both PublishToESOUI and `build.sh --publish` support an optional `dry_run` flag,
 - `scripts/furc_utils.py`: version, manifest and changelog helpers used by the workflows
 
 
+## API documentation
+
+You can use the header of [./LibFurnitureCatalogue/Api.lua](`LibFurnitureCatalogue/Api.lua`) as reference. 
+
 ## Website
 
 https://wookiefriseur.github.io/LFC/ - API docs and, later, the webinterface for contributors.

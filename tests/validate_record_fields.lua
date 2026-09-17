@@ -23,8 +23,10 @@ local MULTI_SHAPE = {
 -- A row field the published record does not carry, and what reads it
 local DATA_ONLY = {
   contents = "the item ids a container unpacks into",
+  location = "the zone, published inside the `locations` placement list",
+  place = "somewhere the game has no zone for, published inside the `locations` placement list",
   currency = "the currency `itemPrice` is paid in",
-  itemDate = "the luxury furnisher's last-seen date, published as availability.lastSeen",
+  itemDate = "the luxury furnisher's last-seen date, published as record.lastSeen",
   itemPrice = "the price, published as cost.amount",
   pack = "one furnishing pack, published as the `packs` list",
   source = "the source type of a row that states its own",
@@ -34,6 +36,7 @@ local DATA_ONLY = {
 -- `location` beside `locations` is the plural twin the convention forbids (if both exist, the list wins)
 local PLURAL_TWINS = {
   location = "locations",
+  place = "locations",
 }
 
 local function readFile(path)

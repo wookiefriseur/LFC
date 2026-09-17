@@ -8,13 +8,109 @@ LFC.Internal.Build = this
 local db = LFC.Internal.DB
 local src = LFC.Internal.Constants.ItemSources
 local SOURCE_PRIORITY = LFC.Internal.Constants.SOURCE_PRIORITY
-local compat = LFC.Internal.Compat
 local apiEvents = LFC.Internal.Constants.ApiEvents
 local lifecycle = LFC.Internal.Lifecycle
 local state = lifecycle.State
 
 local getItemId = LFC.Internal.Format.GetItemId
 local getItemLink = LFC.Internal.Format.GetItemLink
+
+--[[
+  A row's `sources` is a bitmask: bit (source 1) is set when the row has that source.
+
+  Bit positions come from ItemSources, numbered in declaration order. Inserting a source in the middle renumbers everything below it, so the mask is built per session.
+
+  Highest source currently in use is 30, and a Lua 5.1 number holds an exact integer up to 2^53, so there is room to spare.
+]]
+local MAX_SOURCE = 0
+for _, id in pairs(src) do
+  if id > MAX_SOURCE then
+    MAX_SOURCE = id
+  end
+end
+
+local function bitFor(source)
+  return 2 ^ (source - 1)
+end
+
+---@param mask integer|nil
+---@param source integer
+---@return boolean
+local function hasSource(mask, source)
+  if not mask or mask == 0 or not source then
+    return false
+  end
+  local bit = bitFor(source)
+  return mask % (bit + bit) >= bit
+end
+this.HasSource = hasSource
+
+---@return integer mask unchanged when the source was already there
+local function addSource(mask, source)
+  mask = mask or 0
+  if hasSource(mask, source) then
+    return mask
+  end
+  return mask + bitFor(source)
+end
+this.AddSource = addSource
+
+---@return integer mask unchanged when the source was not there
+local function removeSource(mask, source)
+  if not hasSource(mask, source) then
+    return mask or 0
+  end
+  return mask - bitFor(source)
+end
+this.RemoveSource = removeSource
+
+---Iterate a mask's sources, lowest id first
+---@param mask integer|nil
+---@return fun(): integer|nil
+local function eachSource(mask)
+  local source = 0
+  return function()
+    while source < MAX_SOURCE do
+      source = source + 1
+      if hasSource(mask, source) then
+        return source
+      end
+    end
+  end
+end
+this.EachSource = eachSource
+
+---Mask -> the `[id] = true` set shape the API hands out
+---@param mask integer|nil
+---@return table<integer, boolean>
+local function sourceSet(mask)
+  local set = {}
+  for source in eachSource(mask) do
+    set[source] = true
+  end
+  return set
+end
+this.SourceSet = sourceSet
+
+---Set -> mask. Takes a mask through unchanged, so a caller may pass either
+---@param sources table<integer, boolean>|integer|nil
+---@return integer
+local function sourceMask(sources)
+  if sources == nil then
+    return 0
+  end
+  if type(sources) == "number" then
+    return sources
+  end
+  local mask = 0
+  for source, present in pairs(sources) do
+    if present then
+      mask = addSource(mask, source)
+    end
+  end
+  return mask
+end
+this.SourceMask = sourceMask
 
 --- Maps recipe id onto furnishing it crafts
 --- Plain furnishings pass through unchanged
@@ -54,9 +150,10 @@ local function furnishingCategory(itemId)
 end
 this.FurnishingCategory = furnishingCategory
 
+---@param sources integer a source mask
 local function primarySource(sources)
   local best, bestRank
-  for s in pairs(sources) do
+  for s in eachSource(sources) do
     local rank = SOURCE_PRIORITY[s] or math.huge
     if not bestRank or rank < bestRank or (rank == bestRank and s < best) then
       best, bestRank = s, rank
@@ -71,10 +168,6 @@ this.PrimarySource = primarySource
 -- `pairs` does not see these fields, so a shallow copy of a row does not carry them
 local rowMeta = {
   __index = function(row, key)
-    if key == "origin" then
-      local sources = rawget(row, "sources")
-      return sources and primarySource(sources) or nil
-    end
     if key == "furnCategory" then
       return (furnishingCategory(rawget(row, "id")))
     end
@@ -106,13 +199,10 @@ local function flushDatabaseChange()
 end
 
 -- Fields a row actually keeps. `origin` is an input here, not a field
--- a caller says which source it found, the row records it in `sources`, and origin is derived (primary source)
 -- Anything not named here can already be looked up by the game
 local STORED_FIELDS = {
   version = true,
   blueprint = true,
-  recipeListIndex = true,
-  recipeIndex = true,
 }
 
 -- partial update or full overwrite
@@ -132,38 +222,23 @@ local function addDatabaseEntry(recipeKey, partial)
     end
   end
 
-  local sources = stored.sources or {}
-  stored.sources = sources
+  local sources = stored.sources or 0
   if partial.sources then
-    for s in pairs(partial.sources) do
-      sources[s] = true
+    -- a caller may hand over either shape
+    for s in eachSource(sourceMask(partial.sources)) do
+      sources = addSource(sources, s)
     end
   end
   if partial.origin ~= nil then
-    sources[partial.origin] = true
+    sources = addSource(sources, partial.origin)
   end
   -- RUMOUR is fallback: datamined but unknown src
   -- Sometimes we have leftover rumour items in DB
   -- We should auto drop rumour category if a src exists
-  if sources[src.RUMOUR] then
-    for s in pairs(sources) do
-      if s ~= src.RUMOUR then
-        sources[src.RUMOUR] = nil
-        break
-      end
-    end
+  if sources ~= bitFor(src.RUMOUR) then
+    sources = removeSource(sources, src.RUMOUR)
   end
-  local injected = stored.compatSources or 0
-  if partial.origin ~= nil and compat.IsInjected(injected, partial.origin) then
-    -- a scan naming it outright means it is genuinely a source, not an injected one
-    injected = injected - (2 ^ (partial.origin - 1))
-  end
-  injected = compat.CloseOverAncestors(sources, injected)
-  --
-  -- Used when versions are changed / split. Not written when there is nothing to record
-  if injected ~= 0 or stored.compatSources ~= nil then
-    stored.compatSources = injected ~= 0 and injected or nil
-  end
+  stored.sources = sources
 
   markDatabaseChanged()
 end
@@ -257,7 +332,7 @@ local function parseBlueprint(blueprintLink) -- saves to DB, returns recipeArray
   end
 
   local stored = db[recipeKey]
-  if stored ~= nil and stored.blueprint ~= nil and stored.sources and stored.sources[src.CRAFTING] then
+  if stored ~= nil and stored.blueprint ~= nil and hasSource(stored.sources, src.CRAFTING) then
     -- Already carries everything a blueprint contributes (otherwise we would just wastefully rewrite the data while happily bumping revision and invalidating cache)
     return stored, recipeKey
   end
@@ -311,7 +386,6 @@ for _, splitData in ipairs(splitFiles) do
   end
 end
 
-compat.MirrorAncestorBuckets(FurC.MiscItemSources, legacyMirror)
 
 ---@param blocking? boolean scan inline instead of yielding through LibAsync
 local function scanFromFiles(blocking)
@@ -541,13 +615,10 @@ local function scanFromFiles(blocking)
       local itemId = getItemId(itemLink)
       -- derive craftingSkill from blueprint
       local existing = parseBlueprint(blueprintLink) or parseFurnitureItem(itemLink) or db[itemId]
-      local recipeListIndex, recipeIndex = GetItemLinkGrantedRecipeIndices(blueprintLink)
       addDatabaseEntry(itemId, {
         origin = src.RUMOUR,
         version = (existing and existing.version) or ver.HOMESTEAD,
         blueprint = (blueprintId ~= itemId) and blueprintId or nil,
-        recipeListIndex = recipeListIndex,
-        recipeIndex = recipeIndex,
       })
     end
   end

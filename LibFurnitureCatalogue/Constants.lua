@@ -420,7 +420,7 @@ this.NpcIds = {
 --
 -- Each vendor holds a LIST, because a vendor can stand in more than one place, and each entry names a `location` (game zone) or a `place`
 this.VendorLocations = {
-  [this.NpcIds.LUXF] = { { location = this.ZoneIds.COLDH } },
+  [this.NpcIds.LUXF] = { { location = this.ZoneIds.COLDH }, { location = this.ZoneIds.CRAGLORN } },
   [this.NpcIds.ROLIS] = { { place = this.PlaceIds.ANY_CAPITAL } },
   [this.NpcIds.FAUSTINA] = { { place = this.PlaceIds.ANY_CAPITAL } },
 }

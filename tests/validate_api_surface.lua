@@ -49,7 +49,7 @@ internal.Query = {
   GetMiscItemPrice = stub(),
   GetMats = stub(),
 }
-internal.Build = { EnsureDB = stub() }
+internal.Build = { EnsureDB = stub(), SourceSet = stub() }
 
 loadInto(env, root .. "/Api.lua")
 
@@ -72,12 +72,22 @@ if #header == 0 then
   fail("Api.lua has no header comment block")
 end
 
--- Parse luadoc string to extract endpoint names
-local listed = {}
-for _, line in ipairs(header) do
-  local name = line:match("^%-%-   ([%w_.]+)")
-  if name then
-    listed[name] = true
+-- Parse luadoc string to extract endpoint names ("Removed in <version>" heading means everything under it names something that must NOT exist)
+local listed, removed = {}, {}
+do
+  local intoRemoved = false
+  for _, line in ipairs(header) do
+    if line:match("^%-%-%s*Removed in ") then
+      intoRemoved = true
+    end
+    local name = line:match("^%-%-   ([%w_.]+)")
+    if name then
+      if intoRemoved then
+        removed[name] = true
+      else
+        listed[name] = true
+      end
+    end
   end
 end
 
@@ -87,18 +97,32 @@ for name in pairs(env.LibFurnitureCatalogue.API) do
   end
 end
 
--- The legacy flat aliases are surface too, and the header lists them by name
-for name in headerText:gmatch("FurC%.([%w_]+)") do
-  if env.FurC[name] == nil then
-    fail(string.format("the header names FurC.%s, which does not exist", name))
+-- A flat alias the header still lists as live has to exist and one it lists as removed must not
+for _, line in ipairs(header) do
+  local removedLine = false
+  for name in line:gmatch("FurC%.([%w_]+)") do
+    removedLine = removedLine or removed["FurC." .. name]
+    if removed["FurC." .. name] then
+      if env.FurC[name] ~= nil then
+        fail(string.format("the header says FurC.%s was removed, but it still exists", name))
+      end
+    elseif not removedLine and env.FurC[name] == nil then
+      fail(string.format("the header names FurC.%s, which does not exist", name))
+    end
   end
 end
 
--- no line may promise an endpoint that is not there
+-- no line may promise an endpoint that is not there, or keep one it says is gone
 for name in pairs(listed) do
   local looksLikeMember = name:match("^%u") and name:match("%l") and not name:match("%.")
   if looksLikeMember and env.LibFurnitureCatalogue.API[name] == nil then
     fail(string.format("the header lists %s, which is not on the API", name))
+  end
+end
+for name in pairs(removed) do
+  local looksLikeMember = name:match("^%u") and name:match("%l") and not name:match("%.")
+  if looksLikeMember and env.LibFurnitureCatalogue.API[name] ~= nil then
+    fail(string.format("the header says %s was removed, but it is still on the API", name))
   end
 end
 

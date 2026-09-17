@@ -36,22 +36,16 @@ local ensureDB = LFC.Internal.Build.EnsureDB
 local parseFurnitureItem = LFC.Internal.Build.ParseFurnitureItem
 local parseBlueprint = LFC.Internal.Build.ParseBlueprint
 local primarySource = LFC.Internal.Build.PrimarySource
-local isInjected = LFC.Internal.Compat.IsInjected
+local eachSource = LFC.Internal.Build.EachSource
+local hasSource = LFC.Internal.Build.HasSource
+local sourceMask = LFC.Internal.Build.SourceMask
 
----The row's top-ranked source
----A stored row derives this through its metatable
+---The row's best-ranked source, for ordering records and picking the line that describes an item
 ---@param recipeArray FurCEntry|table
 ---@return integer? origin
 local function originOf(recipeArray)
-  if not recipeArray then
-    return nil
-  end
-  local origin = recipeArray.origin
-  if origin ~= nil then
-    return origin
-  end
-  local sources = recipeArray.sources
-  return sources and primarySource(sources) or nil
+  local sources = recipeArray and recipeArray.sources
+  return (sources and primarySource(sourceMask(sources))) or nil
 end
 this.OriginOf = originOf
 local SOURCE_PRIORITY = LFC.Internal.Constants.SOURCE_PRIORITY
@@ -108,14 +102,23 @@ local function find(itemOrBlueprintLink)
 end
 this.Find = find
 
+---Which crafting-station recipe a blueprint grants
+---@param recipeArray FurCEntry
+---@return integer? listIndex nil when the client cannot resolve the link as a recipe
+---@return integer? index
+local function grantedRecipeIndices(recipeArray)
+  local blueprintId = recipeArray and (recipeArray.blueprint or recipeArray.id)
+  if not blueprintId then
+    return nil, nil
+  end
+  return GetItemLinkGrantedRecipeIndices(getItemLink(blueprintId))
+end
+this.GrantedRecipeIndices = grantedRecipeIndices
+
 local function getIngredients(itemLink, recipeArray)
   recipeArray = recipeArray or find(itemLink)
   local ingredients = {}
   if not recipeArray or next(recipeArray) == nil then
-    return ingredients
-  end
-  -- for non valid blueprints "ingredients" just returns "1x Fish". We have to catch it before it passes the fish.
-  if not (recipeArray.blueprint or (recipeArray.recipeListIndex and recipeArray.recipeIndex)) then
     return ingredients
   end
   if recipeArray.blueprint then
@@ -127,16 +130,15 @@ local function getIngredients(itemLink, recipeArray)
       ingredients[ingredientLink] = qty
     end
   else
-    local _, name, numIngredients = GetRecipeInfo(recipeArray.recipeListIndex, recipeArray.recipeIndex)
+    -- for non valid blueprints "ingredients" just returns "1x Fish". We have to catch it before it passes the fish.
+    local listIndex, index = grantedRecipeIndices(recipeArray)
+    if not (listIndex and index) then
+      return ingredients
+    end
+    local _, name, numIngredients = GetRecipeInfo(listIndex, index)
     for ingredientIndex = 1, numIngredients do
-      local name, _, qty =
-        GetRecipeIngredientItemInfo(recipeArray.recipeListIndex, recipeArray.recipeIndex, ingredientIndex)
-      local ingredientLink = GetRecipeIngredientItemLink(
-        recipeArray.recipeListIndex,
-        recipeArray.recipeIndex,
-        ingredientIndex,
-        LINK_STYLE_DEFAULT
-      )
+      local name, _, qty = GetRecipeIngredientItemInfo(listIndex, index, ingredientIndex)
+      local ingredientLink = GetRecipeIngredientItemLink(listIndex, index, ingredientIndex, LINK_STYLE_DEFAULT)
       ingredients[ingredientLink] = qty
     end
   end
@@ -145,10 +147,7 @@ end
 this.GetIngredients = getIngredients
 
 local function makeMaterial(recipeKey, recipeArray, tryPlaintext, forcePlaintext)
-  if
-    nil == recipeArray
-    or (nil == recipeArray.blueprint and nil == recipeArray.recipeIndex and nil == recipeArray.recipeListIndex)
-  then
+  if nil == recipeArray or not (recipeArray.blueprint or grantedRecipeIndices(recipeArray)) then
     return "couldn't get material list, please re-scan character knowledge"
   end
   local ret = ""
@@ -190,6 +189,8 @@ local function resolveNote(value)
   end
   return GetString(value)
 end
+-- Published through the API
+this.ResolveNote = resolveNote
 
 -- Writ Voucher recipes referenced by blueprint id, so every lookup has to try blueprint as well as id
 local function voucherEntry(versionData, recipeKey, blueprintId)
@@ -337,8 +338,11 @@ local function getCraftingSkillType(recipeKey, recipeArray)
 
   if 0 == craftingSkillType and recipeArray.blueprint then
     craftingSkillType = GetItemLinkRecipeCraftingSkillType(getItemLink(recipeArray.blueprint))
-  elseif 0 == craftingSkillType and recipeArray.recipeListIndex and recipeArray.recipeIndex then
-    _, _, _, _, _, _, craftingSkillType = GetRecipeInfo(recipeArray.recipeListIndex, recipeArray.recipeIndex)
+  elseif 0 == craftingSkillType then
+    local listIndex, index = grantedRecipeIndices(recipeArray)
+    if listIndex and index then
+      _, _, _, _, _, _, craftingSkillType = GetRecipeInfo(listIndex, index)
+    end
   end
 
   return craftingSkillType
@@ -449,7 +453,7 @@ local function luxuryRecord(rec, recipeKey, version)
   if itemData.itemPrice then
     rec.cost = { currency = CURT_MONEY, amount = itemData.itemPrice }
   end
-  rec.availability.lastSeen = itemData.itemDate
+  rec.lastSeen = itemData.itemDate
 end
 
 local function pvpRecord(rec, recipeKey, version)
@@ -491,8 +495,7 @@ local function pvpRecord(rec, recipeKey, version)
   end
 end
 
-local function voucherRecord(rec, recipeKey, blueprintId)
-  local version = rec.availability.version
+local function voucherRecord(rec, recipeKey, blueprintId, version)
   local vendor = npcIds.ROLIS
   local entry = voucherEntry(FurC.Rolis[version], recipeKey, blueprintId)
   if not entry then
@@ -632,26 +635,18 @@ local function crownOfferKind(offer)
   end
 end
 
----Records for a FurC.CrownStore row: 1 offer or a list of offers
----@param rec table the record the caller prepared, for its type and version
+---The record for a FurC.CrownStore row: 1 offer or a list of offers
+---@param rec table the record the caller prepared, for its type
 ---@param row table
----@return table[]? records in the order the row states them, nil when the row names no offer
+---@return table[]? records one record, nil when the row names no offer
 local function crownRecords(rec, row)
   local offers = row[1] ~= nil and row or { row }
-  local records, byKind = {}, {}
+  local record, named = { source = { type = rec.source.type } }, false
   for i = 1, #offers do
     local offer = offers[i]
     local kind = crownOfferKind(offer)
     if kind then
-      local record = byKind[kind]
-      if not record then
-        record = {
-          source = { type = rec.source.type },
-          availability = { version = rec.availability.version },
-        }
-        byKind[kind] = record
-        records[#records + 1] = record
-      end
+      named = true
       if kind == "itemPrice" then
         record.cost = record.cost or { currency = offer.currency or CURT_CROWNS, amount = offer.itemPrice }
       elseif kind == "pack" then
@@ -663,7 +658,7 @@ local function crownRecords(rec, row)
       end
     end
   end
-  return (#records > 0 and records) or nil
+  return (named and { record }) or nil
 end
 
 local function crownRecord(rec, recipeKey, recipeArray, source)
@@ -763,7 +758,7 @@ local RECORD_BUILDERS = {
     pvpRecord(rec, recipeKey, recipeArray.version)
   end,
   [src.ROLIS] = function(rec, recipeKey, recipeArray)
-    voucherRecord(rec, recipeKey, recipeArray.blueprint)
+    voucherRecord(rec, recipeKey, recipeArray.blueprint, recipeArray.version)
   end,
   [src.FESTIVAL_DROP] = function(rec, recipeKey)
     eventRecord(rec, recipeKey)
@@ -776,11 +771,40 @@ local RECORD_BUILDERS = {
   end,
 }
 
----Schema-shaped source records, ranked by priority
----`cost` is one record or absent, never a list (2 currencies is modelled as two sources)
+---Folds the place fields on `source` into `locations`, the one spelling records publish
+---
+---  row spelling (input) -> published record (result)
+---               { location = zones.CYRO } ->
+--- locations = { { location = zones.CYRO } }
+---
+---               { place = places.ANY_CAPITAL } ->
+--- locations = { { place = places.ANY_CAPITAL } }
+---
+--- { locations = { zones.COLDH, zones.CRAGLORN } } ->
+---   locations = { { location = zones.COLDH }, { location = zones.CRAGLORN } }
+--- 
+--- { location = zones.SUMMERSET, place = places.LILANDRIL } ->
+---  locations = { { location = zones.SUMMERSET, place = places.LILANDRIL } }
+---
+---The last row is ONE place inside a zone (not two placements)
+---Converting here rather than in each builder keeps the rows lean, and an AddOn never has to ask how many places there are before it knows which field to read
+---@param source table the record's origin, mutated in place: authored spellings out, `locations` in
+local function normalisePlacements(source)
+  local placements = {}
+  for _, zoneId in ipairs(source.locations or {}) do
+    placements[#placements + 1] = { location = zoneId }
+  end
+  if source.location or source.place then
+    placements[#placements + 1] = { location = source.location, place = source.place }
+  end
+  source.location, source.place = nil, nil
+  source.locations = (#placements > 0) and placements or nil
+end
+
 ---A source type whose row states several ways to obtain the item yields one record each, kept together in rank order
+---`cost` is one record or absent, never a list (2 currencies is modelled as two sources)
 ---@param itemOrLink string|integer
----@return LFCSourceRecord[] records one per real source, compat-injected ones excluded
+---@return LFCSourceRecord[] records one per source the row names, ranked best first
 local function getSourceRecords(itemOrLink)
   local recipeArray, resolvedKey = findWithKey(itemOrLink)
   local sources = recipeArray and recipeArray.sources
@@ -790,12 +814,9 @@ local function getSourceRecords(itemOrLink)
   -- The key find resolved: a blueprint link resolves to the crafted item's entry, and every data table below is keyed by that item
   local recipeKey = resolvedKey or getItemId(itemOrLink)
 
-  local compatSources = recipeArray.compatSources
   local ranked = {}
-  for s in pairs(sources) do
-    if not isInjected(compatSources, s) then
-      ranked[#ranked + 1] = s
-    end
+  for s in eachSource(sources) do
+    ranked[#ranked + 1] = s
   end
   table.sort(ranked, function(a, b)
     return (SOURCE_PRIORITY[a] or math.huge) < (SOURCE_PRIORITY[b] or math.huge)
@@ -803,7 +824,7 @@ local function getSourceRecords(itemOrLink)
 
   local records = {}
   for _, s in ipairs(ranked) do
-    local rec = { source = { type = s }, availability = { version = recipeArray.version } }
+    local rec = { source = { type = s } }
     local several
     -- same rule the source line follows: a row that names this source answers for it
     local row = recipeRow(recipeKey, recipeArray)
@@ -816,9 +837,11 @@ local function getSourceRecords(itemOrLink)
     end
     if type(several) == "table" then
       for _, one in ipairs(several) do
+        normalisePlacements(one.source)
         records[#records + 1] = one
       end
     else
+      normalisePlacements(rec.source)
       records[#records + 1] = rec
     end
   end
@@ -869,14 +892,13 @@ end
 ---@return string
 local function whereOf(source)
   local places = {}
-  for _, zoneId in ipairs(source.locations or {}) do
-    places[#places + 1] = plain(resolveZone(zoneId))
-  end
-  if source.location then
-    places[#places + 1] = plain(resolveZone(source.location))
-  end
-  if source.place then
-    places[#places + 1] = plain(resolvePlace(source.place))
+  for _, placement in ipairs(source.locations or {}) do
+    if placement.location then
+      places[#places + 1] = plain(resolveZone(placement.location))
+    end
+    if placement.place then
+      places[#places + 1] = plain(resolvePlace(placement.place))
+    end
   end
   if source.event then
     places[#places + 1] = plain(resolveEvent(source.event))
@@ -940,7 +962,7 @@ local function detailsOf(record)
   if source.rarity then
     parts[#parts + 1] = plain(GetString(source.rarity))
   end
-  local lastSeen = record.availability and record.availability.lastSeen
+  local lastSeen = record.lastSeen
   if lastSeen then
     parts[#parts + 1] = tostring(lastSeen)
   end

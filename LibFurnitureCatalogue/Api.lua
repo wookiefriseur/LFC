@@ -2,16 +2,31 @@
 --
 -- Start here. The whole surface is on the API table from load; OnReady tells you when the DB behind it is populated:
 --
+--   if not (LibFurnitureCatalogue and LibFurnitureCatalogue.API) then return end
 --   local LFC = LibFurnitureCatalogue.API
+--
 --   LFC.OnReady(function()
---     myAddon:BuildWhateverNeedsTheDB()
+--     d(LFC.GetEntryCount() .. " furnishings")
 --   end)
 --
+-- `LFC` in every example here is that local - the only global is `LibFurnitureCatalogue`
 -- One OnReady is enough: wrap the first use so you don't query an empty DB, then reach LFC from anywhere
+--
+-- Is the library there?
+-- Probe `LibFurnitureCatalogue.API`. The `FurC` global is the add-on's, not ours, and it exists
+-- whether or not this library loaded - so testing it answers a different question
+--
+-- Is it ready, and if not, is it coming?
+-- IsReady answers false both while the build runs and after it failed. GetState separates them:
+-- BUILDING will finish, FAILED will not until somebody rebuilds, and a waiter registered while
+-- FAILED is refused rather than queued. Branch on GetState if you tell a player to wait
 --
 -- Returns:
 -- Every call hands out a fresh copy, yours to keep and to mutate. State and Events are the exceptions: one shared table each, read-only
 -- Mostly ids. Resolve them with GetZoneNameById, GetString, etc.
+-- Our own strings carry ESO control characters ("Luxury Furnisher^Nd,from"), so put GetString
+-- through zo_strformat("<<1>>", ...) or the suffix reaches the screen. Two of them are formats
+-- rather than names and take the thing they describe as <<1>>: `bundle` and `itemPack`
 -- Numeric source and version values shift between releases, so if you need to persist references in your addon, use the string keys / enums
 --
 -- Before the DB is ready:
@@ -45,8 +60,8 @@
 --
 -- One item
 --   Has                   is this item in the DB
---   GetEntry              record copy. Promised: sources, origin, version, blueprint. Anything else on it is subject to change
---   GetSourceDetails      one record per source, ranked, with cost and availability (the structured and slow answer)
+--   GetEntry              record copy. Promised: id, sources, version, blueprint. Anything else on it is subject to change
+--   GetSourceDetails      one record per source, ranked, with its places and cost (the structured and slow answer)
 --   GetIngredients        what a craftable item is made of (empty table if not craftable)
 --
 -- The whole DB
@@ -54,7 +69,8 @@
 --   GetEntryCount         just asks how many, without building that list
 --
 -- Vocabularies - so nobody transcribes an enum
---   GetSourceTypes   [FC] source key -> id, for comparing
+--   GetSourceTypes   [FC] source key -> id, for comparing. The keys are the `ItemSources` names in
+--                         Constants.lua; iterate the table rather than transcribing them
 --   GetSourceTypeInfo     id -> stable key and English label, for exporting
 --   GetDataVersions       update key -> id, for comparing
 --   GetDataVersionKeys    id -> the one canonical update key (LATEST is an alias and does not come back out)
@@ -62,18 +78,19 @@
 --
 -- Deprecated - we'll call the guards if you keep using those
 --   GetSources            old name and shape of GetSourceDetails, where cost is a list (LibPrice currently needs it)
---   SourceType            shared source enum table. Use GetSourceTypes for a copy of your own
 --   GetItemDescription [FC] rudimentary rendered source text: no grammar and no presentation (use `GetSourceDetails` and write your own)
 --   GetMiscItemPrice      a price extracted back out of formatted string. Use GetSourceDetails
---   FurC.Find        [FC] mutable internal row, and {} on a miss, where GetEntry copies and returns nil. Not the same call, so switching to GetEntry is not a rename
---   FurC.GetItemId        flat alias
---   FurC.GetItemLink      flat alias
---   FurC.GetIngredients   flat alias
---   FurC.GetItemDescription [FC]  flat alias
---   FurC.GetMats     [FC] renders the ingredient list as a string. No namespaced
---                         twin, so moving off it means calling GetIngredients
---                         and formatting the map yourself, not just re-spelling
 --   FURC_* globals        source and version enums under their old names in Constants.lua. Use GetSourceTypes and GetDataVersions
+--
+-- These no longer exist, replace them if you call those:
+--   SourceType            shared source enum table -> GetSourceTypes, which hands out a copy
+--   FurC.Find             handed out the mutable internal row, and {} on a miss -> GetEntry, which
+--                         copies and answers nil. Not the same call, so it is not a rename
+--   FurC.GetItemId        -> GetItemId
+--   FurC.GetItemLink      -> GetItemLink
+--   FurC.GetIngredients   -> GetIngredients
+--   FurC.GetItemDescription -> GetItemDescription
+--   FurC.GetMats          had no namespaced twin: call GetIngredients and format the map yourself
 --
 -- Not public: everything under LibFurnitureCatalogue.Internal
 
@@ -86,10 +103,10 @@ local state = lifecycle.State
 local fmt, query = internal.Format, internal.Query
 local getItemId, getItemLink = fmt.GetItemId, fmt.GetItemLink
 local find, getSourceRecords = query.Find, query.GetSourceRecords
-local originOf = query.OriginOf
 local getIngredients, getItemDescription = query.GetIngredients, query.GetItemDescription
 local getMiscItemPrice = query.GetMiscItemPrice
 local ensureDB = internal.Build.EnsureDB
+local sourceSet = internal.Build.SourceSet
 
 -- ---------------------------------------------------------------------------
 -- Lifecycle
@@ -371,7 +388,7 @@ end
 ---@param itemOrLink string|integer
 ---@return boolean found
 ---```lua
----LFC.Has(134686)   --> true
+---LFC.Has(203600)   --> true
 ---LFC.Has(99123456) --> false
 ---```
 function api.Has(itemOrLink)
@@ -384,19 +401,15 @@ end
 ---@return FurCEntry? entry deep copy, nil when the item is not in the DB
 ---@see LibFurnitureCatalogue.API.GetSourceDetails for vendor, price and version per source
 ---
----`sources` carries backwards compatibility members.
---- Some sources were split into finer ones and the coarse one is added back so nothing breaks:
----   fine-grained DUNGEON also answers to the coarse DROP. `compatSources` is the subset that exists only for that reason, treat it as deprecated.
---- It is a bitmask, absent when nothing was injected, and the bit positions follow the enum, so they move when the enum does (don't store bitmasks, they change)
---- Real sources are the ones GetSourceDetails returns a record for, which is exactly `sources` minus the injected members
+---`sources` names exactly the sources the data states. Coarse ancestors are no longer added to it,
+---so every member has a record in GetSourceDetails and the two answers cannot disagree
 ---
----Every call deep-copies the row, so hold the result rather than calling it per frame
+---Every call copies the row, so hold the result rather than calling it per frame
 ---```lua
 ---local src = LFC.GetSourceTypes()
 ---local entry = LFC.GetEntry(203600)
 ---
----entry.origin  --> 6, top-ranked source, see GetSourceTypes
----entry.version --> 32, see GetDataVersions
+---entry.version --> 32, GetDataVersionKeys()[32] == "BASE43"
 ---
 ----- sources is a SET of source types, so membership is just 1 lookup
 ---entry.sources --> { [6] = true, [7] = true, [13] = true }
@@ -410,24 +423,29 @@ function api.GetEntry(itemOrLink)
     return nil
   end
   local copy = ZO_DeepTableCopy(entry)
-  -- Compatibility, origin is derived on the stored row
-  copy.origin = originOf(entry)
+  -- The row holds `sources` as a bitmask to keep ~8500 subtables out of the database
+  copy.sources = sourceSet(entry.sources)
   return copy
 end
+
+---One place a source covers: a game zone, somewhere the game has no zone for, or a place inside a zone
+---@class LFCPlacement
+---@field location integer|nil game zone id, resolve with GetZoneNameById
+---@field place integer|nil locale string id, resolve with GetString then zo_strformat
 
 ---Where one source of an item comes from
 ---
 ---A field that can name several things of one kind is a list (`houses`, `packs`, `locations`), everything else is one id
+---
+---Id `0` means "has a requirement, but we cannot name it" (`achievement`, `crate` and `quest`)
 ---@class LFCSourceOrigin
 ---@field type integer source type, see GetSourceTypes
 ---@field vendor integer|nil locale string id, resolve with GetString
----@field location integer|nil game zone id, resolve with GetZoneNameById
----@field locations integer[]|nil game zone ids, when one source covers several zones. Set instead of `location`
----@field place integer|nil locale string id for somewhere the game has no zone for, resolve with GetString. With `location` it is a place inside that zone, on its own it's all the record knows
+---@field locations LFCPlacement[]|nil every place this source covers, best-known first. Always a list, even for one place - there is no singular spelling
 ---@field note (integer|string|table)|nil adds details to a source. Locale string id, a bare literal, structured table, or a list of alternatives
 ---@field category integer|nil locale string id naming what kind of source this is, when the row names its own rather than taking the source type's word
 ---@field achievement integer|nil achievement id. `0` when it requires an achievement but the id is unknown
----@field quest integer|nil quest id, resolve with GetQuestName
+---@field quest integer|nil quest id, resolve with GetQuestName. `0` when a quest is required but the id is unknown
 ---@field skillLine integer|nil skill line id, resolve with GetSkillLineNameById. On a vendor record it tells which guild sells it and asking what the Thieves Guild sells is asking for Legerdemain skills
 ---@field skillRank integer|nil required rank in that skill line. nil means no rank required
 ---@field event integer|nil locale string id, resolve with GetString
@@ -449,24 +467,31 @@ end
 ---@field currency integer ESO currency constant
 ---@field amount integer
 
----When one source was current (`lastSeen` is set on luxury furnisher records only)
----@class LFCSourceAvailability
----@field version integer game version, see GetDataVersions
----@field lastSeen string|nil YYYY-MM-DD
-
----One source of one item: where it comes from, what it costs, when it was current
+---One source of one item: where it comes from, what it costs, when it was last seen
+---
+---The writ vendor record of the Scribing Altar (203600), complete:
+---```lua
+---{ source = {
+---    type = 13, -- ROLIS
+---    vendor = SI_FURC_TRADERS_FAUSTINA, -- "Faustina Curio"
+---    achievement = 3985, -- "Inheritor of the Scholarium"
+---    locations = { {place = SI_FURC_LOC_ANY_CAPITAL} } -- "any capital city", no zoneId names it
+---  },
+---  cost = { currency = 4, amount = 800 } -- CURT_WRIT_VOUCHERS
+---}
+---```
 ---@class LFCSourceRecord
 ---@field source LFCSourceOrigin
----@field cost LFCSourceCost|nil nil when the source has no price
----@field availability LFCSourceAvailability
+---@field cost LFCSourceCost|nil nil when the source has no price. Carried today by VENDOR, LUXURY, ROLIS, PVP, BAZAAR, CROWN, EDITOR, FESTIVAL_DROP and CRAFTING records. A drop or a quest reward never has one
+---@field lastSeen string|nil YYYY-MM-DD, luxury furnisher records only
 
 ---Every source of an item, one record per source, ranked best-first (slow)
 ---
 ---Resolve at render time. Compare against `SI_FURC_*`
 ---
----A record may carry `location`, `place`, or both. Both means the place is inside the zone: name the zone, then the place
+---`locations` is always a list of placements, one per place the source covers. A placement naming a zone and a place is one place, not two (means a zone with a place inside it)
 ---@param itemOrLink string|integer item link, blueprint link, or itemId
----@return LFCSourceRecord[] records empty only when the item is not in the DB. Every stored item has at least one source
+---@return LFCSourceRecord[] records empty when the item is not in the DB or when the DB is not built yet (use IsReady to tell the two apart)
 ---```lua
 ---local src = LFC.GetSourceTypes()
 ---
@@ -474,11 +499,12 @@ end
 ---for _, record in ipairs(LFC.GetSourceDetails(203600)) do
 ---  record.source.type              --> 6, then 13, then 7
 ---  GetString(record.source.vendor) --> "Faustina Curio" on the writ vendor one
----  record.availability.version     --> 32, see GetDataVersions
 ---
----  -- a zone, or place (somewhere the game has no zone for)
----  GetZoneNameById(record.source.location) --> "Wrothgar", nil on the writ vendor one
----  GetString(record.source.place)          --> "in any capital city" on that one
+---  -- every place the source covers; a zone, or a place the game has no zone for, or both
+---  for _, placement in ipairs(record.source.locations or {}) do
+---    GetZoneNameById(placement.location)              --> "Infinite Archive", nil on the writ vendor one
+---    zo_strformat("<<1>>", GetString(placement.place)) --> "any capital city" on that one
+---  end
 ---
 ---  if record.cost then
 ---    record.cost.currency --> 12, then 4, then 2
@@ -494,6 +520,8 @@ function api.GetSourceDetails(itemOrLink)
 end
 
 ---Ingredient list for a recipe
+---
+---Reads the recipe from the game, not from our DB.
 ---@param itemOrLink string|integer item link, blueprint link, or itemId. Ignored when recipeArray is given
 ---@param recipeArray? FurCEntry entry from GetEntry; looked up when omitted
 ---@return table<string, integer> ingredients map of ingredient link -> quantity
@@ -501,7 +529,7 @@ end
 ---local mats = LFC.GetIngredients(itemId, LFC.GetEntry(itemId))
 ---
 ----- keyed by ingredient LINK not by item id (it's what the game gives us)
--- quantity in pairs(mats) do
+---for ingredientLink, quantity in pairs(mats) do
 ---  d(quantity .. "x " .. GetItemLinkName(ingredientLink)) --> "6x Rough Oak"
 ---end
 ---
@@ -522,7 +550,7 @@ end
 ---Starts the build async, so first call after load returns an empty list (check IsReady, or ask from OnReady)
 ---@return integer[] itemIds
 ---```lua
----#LFC.GetItemIds() --> 8528
+---#LFC.GetItemIds() --> 8529
 ---```
 function api.GetItemIds()
   ensureDB()
@@ -542,7 +570,7 @@ local countRevision, countMemo
 ---Starts the build, does not wait for it, and answers 0 until it finishes: Check IsReady first
 ---@return integer count
 ---```lua
----LFC.GetEntryCount() --> 8528
+---LFC.GetEntryCount() --> 8529
 ---```
 function api.GetEntryCount()
   ensureDB()
@@ -645,18 +673,17 @@ local categoryMemo
 ---@return table<integer, { name: string, parent: integer, order: integer }> categories
 ---```lua
 ---local categories = LFC.GetFurnitureCategories()
----local dataId = GetItemLinkFurnitureDataId(LFC.GetItemLink(120385))
+---local dataId = GetItemLinkFurnitureDataId(LFC.GetItemLink(134686))
 ---local categoryId, subcategoryId = GetFurnitureDataCategoryInfo(dataId)
 ---
----categoryId                      --> 4
----subcategoryId                   --> 62
----categories[4]                   --> { name = "Library", parent = 0, order = 3 }
----categories[62].parent           --> 4
+---categoryId            --> 10
+---subcategoryId         --> 96
+---categories[10].name   --> "Workshop"
+---categories[96].name   --> "Tools"
+---categories[96].parent --> 10
 ---
------ right: an id comparison, same answer in every language
----if categoryId == 4 then end
------ wrong: breaks on a German client
----if categories[categoryId].name == "Library" then end
+----- use an id comparison, same answer in every language
+---if categoryId == 10 then end
 ---```
 function api.GetFurnitureCategories()
   if not categoryMemo then
@@ -700,8 +727,8 @@ end
 ---@param opts? { dateFormat?: string } ignored
 ---@return string description localised, empty when the item is not in the DB
 ---```lua
----LFC.GetItemDescription(134686, LFC.GetEntry(134686), true)
------>  "Luxury Furnisher: Coldharbour (2,000) - 2026-04-10"
+---LFC.GetItemDescription(223880, LFC.GetEntry(223880), true)
+----->  "Luxury Furnisher: Coldharbour, Craglorn (6,000) - 2026-06-12"
 ---```
 function api.GetItemDescription(recipeKey, recipeArray, stripColor, opts)
   return getItemDescription(recipeKey, recipeArray, stripColor)
@@ -739,30 +766,4 @@ function api.GetSources(itemOrLink)
   return records
 end
 
----Source enum table
----@deprecated Use GetSourceTypes(), which hands out a fresh copy. This one is
----shared, so treat it as read-only.
-api.SourceType = api.GetSourceTypes()
-
--- Legacy flat aliases for third-party AddOns
--- The deprecated enum globals are in Constants.lua, all marked
-
----@deprecated Use LibFurnitureCatalogue.API.GetItemId
-FurC.GetItemId = api.GetItemId
-
----@deprecated Use LibFurnitureCatalogue.API.GetItemLink
-FurC.GetItemLink = api.GetItemLink
-
----@deprecated Use LibFurnitureCatalogue.API.GetIngredients
-FurC.GetIngredients = api.GetIngredients
-
----@deprecated Uses the deprecated LibFurnitureCatalogue.API.GetItemDescription, which leaves when it moves to main AddOn
-FurC.GetItemDescription = api.GetItemDescription
-
----@deprecated Use LibFurnitureCatalogue.API.GetEntry. Unlike GetEntry, this
----returns the mutable internal row and an empty table on a miss.
-FurC.Find = internal.Query.Find
-
----@deprecated Use LibFurnitureCatalogue.API.GetIngredients and format the
----ingredient map in the consumer.
-FurC.GetMats = internal.Query.GetMats
+-- Any deprecated enum globals are in Constants.lua, all marked
