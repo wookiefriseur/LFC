@@ -61,7 +61,7 @@ local PREFIX = "|c72DB00LFC|r: "
 
 -- Markup the chat window will not render
 local CHAT_STRIP = {
-  "|u%d+:%d+.+|u",
+  "|u%d+:%d+.-|u",
 }
 
 ---Chat-safe single line: item links and colours survive, the rest does not. Turns newlines into spaces

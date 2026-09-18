@@ -50,12 +50,19 @@ https://wookiefriseur.github.io/LFC/ - API docs and, later, the webinterface for
 
 ## Tests
 
-- `tests/run_static.sh`: syntax (WIP)
-- `tests/validate_data.lua`: duplication + schema (WIP)
+
+`tests/run_static.sh` runs the whole static suite and stops at the first fail (for a pipeline):
+
+- syntax check: `luac -p` over every `.lua` in the repo
+- `tests/validate_constants.lua`: no duplicate ids, no gaps, every key resolvable both ways
+- `tests/validate_locale.lua`: every `SI_` string declared, used and translated
+- `tests/validate_data.lua`: data files, duplication and the shape each row has to have
+- `tests/validate_record_fields.lua`: every field of every published row, against the declared record shape
+- `tests/validate_api_surface.lua`: API and the header in `Api.lua` name the same endpoints --TODO: make optional, if too many false positives
+
+Some tests can only be run ingame and are part of FC (because that one has the Taneth test suite).
 
 
 ## Local setup
 
 `lua` and `luac` (or symlinks) go in `bin/`, which is gitignored. `../bin` next to the repo also works. Override with `LUAC` and `LUA`, in the environment or in `.env` at the repo root (tools and tests both read those). See `scripts/env.example`.
-
-Data validation script is doing nothing for now.

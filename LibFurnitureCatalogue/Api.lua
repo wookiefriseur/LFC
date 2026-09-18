@@ -203,7 +203,11 @@ function internal.PublishReady(revision)
   local waiters = lifecycle.readyWaiters
   lifecycle.readyWaiters = {}
   for callback, queued in pairs(waiters) do
-    invokeCallback("OnReady", callback, type(queued) == "table" and queued.arg or nil, revision)
+    local arg
+    if type(queued) == "table" then
+      arg = queued.arg
+    end
+    invokeCallback("OnReady", callback, arg, revision)
   end
 end
 

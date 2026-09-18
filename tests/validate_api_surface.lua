@@ -72,20 +72,27 @@ if #header == 0 then
   fail("Api.lua has no header comment block")
 end
 
--- Parse luadoc string to extract endpoint names ("Removed in <version>" heading means everything under it names something that must NOT exist)
+-- Parse luadoc string to extract endpoint names. The header groups them under headings. Heading does not have a well-defined structure, so the match is trying to be less strict (indented 3 spaces are interpreted as entries, their continuation 4+ spaes, anything else carrying text is interpreted as a heading)
+local function namesRemoval(text)
+  local lowered = text:lower()
+  return lowered:find("removed", 1, true) ~= nil or lowered:find("no longer exist", 1, true) ~= nil
+end
+
 local listed, removed = {}, {}
 do
   local intoRemoved = false
   for _, line in ipairs(header) do
-    if line:match("^%-%-%s*Removed in ") then
-      intoRemoved = true
-    end
     local name = line:match("^%-%-   ([%w_.]+)")
     if name then
       if intoRemoved then
         removed[name] = true
       else
         listed[name] = true
+      end
+    elseif not line:match("^%-%-%s%s%s%s") then
+      local text = line:match("^%-%-%s*(.-)%s*$") or ""
+      if text ~= "" then
+        intoRemoved = namesRemoval(text)
       end
     end
   end

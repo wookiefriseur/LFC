@@ -47,8 +47,8 @@ end
 local STRIP_PATTERNS = {
   "|c%x%x%x%x%x%x", -- <colour>
   "|r", -- </colour>
-  "|u%d+:%d+.+|u", -- <number/>
-  "|t%d+.+|t", -- <texture/>
+  "|u%d+:%d+.-|u", -- <number/>
+  "|t%d+.-|t", -- <texture/>
 }
 -- Patterns to remove any control and gender suffix to get the clean name, necessary when we have no control over the raw string
 local STRIP_CONTROL = {

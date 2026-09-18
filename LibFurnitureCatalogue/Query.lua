@@ -37,7 +37,6 @@ local parseFurnitureItem = LFC.Internal.Build.ParseFurnitureItem
 local parseBlueprint = LFC.Internal.Build.ParseBlueprint
 local primarySource = LFC.Internal.Build.PrimarySource
 local eachSource = LFC.Internal.Build.EachSource
-local hasSource = LFC.Internal.Build.HasSource
 local sourceMask = LFC.Internal.Build.SourceMask
 
 ---The row's best-ranked source, for ordering records and picking the line that describes an item
@@ -581,14 +580,6 @@ local SOURCE_CURRENCY_MAP = {
   [src.GUILDSTORE] = CURT_MONEY,
   [src.EDITOR] = CURT_CROWNS,
 }
--- Markup a price string may carry: colour, control chars, textures, item links
-local PRICE_STRIP_PATTERNS = {
-  "|c%x%x%x%x%x%x",
-  "|r",
-  "|u.-|u",
-  "|t.-|t",
-  "|H.-|h.-|h",
-}
 --- Extract a numeric price from baked strings
 -- TODO: if performance allows it we should get raw values from DB.. no need to "extract"
 local function extractPrice(entry, source)
@@ -782,7 +773,7 @@ local RECORD_BUILDERS = {
 ---
 --- { locations = { zones.COLDH, zones.CRAGLORN } } ->
 ---   locations = { { location = zones.COLDH }, { location = zones.CRAGLORN } }
---- 
+---
 --- { location = zones.SUMMERSET, place = places.LILANDRIL } ->
 ---  locations = { { location = zones.SUMMERSET, place = places.LILANDRIL } }
 ---
@@ -856,7 +847,7 @@ this.GetSourceRecords = getSourceRecords
 ---@return integer? currency ESO currency constant
 ---@return integer? amount
 local function getMiscItemPrice(itemId, version, source)
-  local entry = lookupBakedData(itemId, version, source)
+  local entry = findMiscRow(itemId, version, source)
   return extractPrice(entry, source)
 end
 this.GetMiscItemPrice = getMiscItemPrice
@@ -1027,6 +1018,14 @@ local function describeSource(recipeKey, recipeArray, source, stripColor)
 end
 this.DescribeSource = describeSource
 
+---Is it a recipe rather than the furnishing itself
+---@param itemOrLink string|integer
+---@return boolean
+local function isBlueprintArgument(itemOrLink)
+  local link = (tonumber(itemOrLink) == itemOrLink and getItemLink(itemOrLink)) or itemOrLink
+  return type(link) == "string" and #link > 0 and IsItemLinkFurnitureRecipe(link)
+end
+
 ---Single-string description for the item's primary origin (by ranking)
 ---@param recipeKey string|integer item link or id
 ---@param recipeArray? FurCEntry looked up via Find if omitted
@@ -1036,6 +1035,8 @@ local function getItemDescription(recipeKey, recipeArray, stripColor)
   local resolvedKey
   if nil == recipeArray then
     recipeArray, resolvedKey = findWithKey(recipeKey)
+  elseif isBlueprintArgument(recipeKey) then
+    resolvedKey = select(2, findWithKey(recipeKey))
   end
   if nil == next(recipeArray) then
     return ""
