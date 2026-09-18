@@ -133,6 +133,33 @@ for name in pairs(removed) do
   end
 end
 
+-- The landing pad has to stay callable
+local landingPad = { Find = "table", GetItemDescription = "string", GetIngredients = "table", GetMats = "string" }
+for name, answers in pairs(landingPad) do
+  local endpoint = env.FurC[name]
+  if type(endpoint) ~= "function" then
+    fail(string.format("FurC.%s is %s, and a consumer calling it errors", name, type(endpoint)))
+  else
+    local ok, answer = pcall(endpoint, 134686, {}, true)
+    if not ok then
+      fail(string.format("FurC.%s raised: %s", name, tostring(answer)))
+    elseif type(answer) ~= answers then
+      fail(string.format("FurC.%s answers %s, the old contract missed with %s", name, type(answer), answers))
+    elseif answers == "table" and next(answer) ~= nil then
+      fail(string.format("FurC.%s answers data, it reads the DB again", name))
+    elseif answers == "string" and answer ~= "" then
+      fail(string.format("FurC.%s answers text, it reads the DB again", name))
+    end
+  end
+end
+
+-- and the two that only translate an id or a link stay the API's own
+for _, name in ipairs({ "GetItemId", "GetItemLink" }) do
+  if env.FurC[name] ~= env.LibFurnitureCatalogue.API[name] then
+    fail(string.format("FurC.%s is not the API's %s", name, name))
+  end
+end
+
 if #failures > 0 then
   print("API SURFACE VALIDATION FAILED:")
   table.sort(failures)

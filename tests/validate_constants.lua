@@ -111,6 +111,77 @@ do
   end
 end
 
+-- A published number keeps its meaning
+--
+-- The aliases below each table are deliberately not pinned: `LATEST` is defined to move with every release
+local COUNTER_TABLES = {
+  ITEM_SOURCES = "ItemSources",
+  VERSIONING = "Versioning",
+}
+
+do
+  local handle = io.open(path, "r")
+  assert(handle, "cannot read " .. path)
+  local text = handle:read("*a")
+  handle:close()
+
+  local seen = {}
+  for _, tableName in pairs(COUNTER_TABLES) do
+    seen[tableName] = {}
+  end
+
+  local number = 0
+  for line in (text .. "\n"):gmatch("([^\n]*)\n") do
+    number = number + 1
+    -- The trailing comment is matched separately so that a member with none is still seen
+    local key, idType, tail = line:match('^%s*([%a_][%w_]*)%s*=%s*getNextIdFor%("([A-Z_]+)"%)%s*,(.*)$')
+    local published = key and (tail:match("^%s*%-%-%s*(%d+)") or "") or nil
+    if key then
+      local tableName = COUNTER_TABLES[idType]
+      if not tableName then
+        fail(string.format("%s:%d: %s counts against the unknown id type %q", "Constants.lua", number, key, idType))
+      elseif published == "" then
+        fail(
+          string.format(
+            "Constants.lua:%d: %s.%s states no number, so nothing records what it was published as",
+            number,
+            tableName,
+            key
+          )
+        )
+      else
+        local ids = constants[tableName] or {}
+        local actual = ids[key]
+        local claimed = tonumber(published)
+        if actual ~= claimed then
+          fail(
+            string.format(
+              "%s.%s is %s and says %d: a published number moved, which renames every consumer's stored value",
+              tableName,
+              key,
+              tostring(actual),
+              claimed
+            )
+          )
+        end
+        local first = seen[tableName][claimed]
+        if first then
+          fail(string.format("%s.%s and %s.%s both claim %d", tableName, key, tableName, first, claimed))
+        else
+          seen[tableName][claimed] = key
+        end
+      end
+    end
+  end
+
+  -- A table that stopped using the counter would otherwise pass by matching nothing
+  for idType, tableName in pairs(COUNTER_TABLES) do
+    if not next(seen[tableName]) then
+      fail(string.format("no %s member counts against %q, so nothing here is pinned", tableName, idType))
+    end
+  end
+end
+
 if #failures > 0 then
   print("CONSTANTS VALIDATION FAILED:")
   table.sort(failures)

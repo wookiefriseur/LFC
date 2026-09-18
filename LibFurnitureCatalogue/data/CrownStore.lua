@@ -1264,7 +1264,7 @@ FurC.CrownStore[ver.DRAGONS] = {
 
 FurC.CrownStore[ver.CLOCKWORK] = {
   [src.CROWN] = {
-    [134473] = { crate = crateIds.FIRE_ATRO }, -- Tapestry,  Malacath
+    [134473] = { crate = crateIds.FIRE_ATRO }, -- Tapestry, Malacath
     [134475] = { crate = crateIds.FIRE_ATRO }, -- Statue of Malacath, Orc-Father
     [134474] = { crate = crateIds.FIRE_ATRO }, -- Banner, Malacath
     [134258] = { pack = packs.MALACATH }, -- Prayer to the Furious One

@@ -1,5 +1,10 @@
 -- Data: EventItems
-
+--
+-- One shape, four levels:
+--
+--   FurC.EventItems[ver.<version>][events.<event>][<source>][itemId] = { <fields> }
+--
+-- `<source>` is who hands the item over: `NPC`, `Containers` or `Constants.EVENT_DROP` when the event itself drops it
 FurC.EventItems = FurC.EventItems or {}
 
 local LFC = LibFurnitureCatalogue

@@ -226,6 +226,91 @@ for field, reason in pairs(DATA_ONLY) do
   end
 end
 
+-- The event tables have one shape, and every level of it is present
+--
+-- `[version][event][source][itemId] = { fields }
+do
+  local events = env.FurC.EventItems
+  if type(events) ~= "table" then
+    fail("FurC.EventItems is missing, so the event shape is unchecked")
+  else
+    local versions, rows = 0, 0
+    for version, byEvent in pairs(events) do
+      versions = versions + 1
+      if type(byEvent) ~= "table" then
+        fail(string.format("EventItems[%s] is %s, expected a table of events", tostring(version), type(byEvent)))
+      else
+        for event, bySource in pairs(byEvent) do
+          if type(bySource) ~= "table" then
+            fail(
+              string.format(
+                "EventItems[%s][%s] is %s, expected a table of sources",
+                tostring(version),
+                tostring(event),
+                type(bySource)
+              )
+            )
+          else
+            for source, byItem in pairs(bySource) do
+              -- An item id here means the row skipped the source level
+              if type(source) == "number" and source > 1000 then
+                fail(
+                  string.format(
+                    "EventItems[%s][%s][%s] is keyed by an item id, so the row names no source",
+                    tostring(version),
+                    tostring(event),
+                    tostring(source)
+                  )
+                )
+              elseif type(byItem) ~= "table" then
+                fail(
+                  string.format(
+                    "EventItems[%s][%s][%s] is %s, expected a table of rows",
+                    tostring(version),
+                    tostring(event),
+                    tostring(source),
+                    type(byItem)
+                  )
+                )
+              else
+                for itemId, row in pairs(byItem) do
+                  rows = rows + 1
+                  if type(itemId) ~= "number" then
+                    fail(
+                      string.format(
+                        "EventItems[%s][%s][%s] is keyed by %s, expected an item id",
+                        tostring(version),
+                        tostring(event),
+                        tostring(source),
+                        type(itemId)
+                      )
+                    )
+                  end
+                  if type(row) ~= "table" then
+                    fail(
+                      string.format(
+                        "EventItems[%s][%s][%s][%s] is %s, and a row is a table - an empty one when it states nothing",
+                        tostring(version),
+                        tostring(event),
+                        tostring(source),
+                        tostring(itemId),
+                        type(row)
+                      )
+                    )
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    if versions == 0 or rows == 0 then
+      fail(string.format("the event walk saw %d versions and %d rows, so it checked nothing", versions, rows))
+    end
+  end
+end
+
 if #failures > 0 then
   print("RECORD FIELD VALIDATION FAILED:")
   table.sort(failures)

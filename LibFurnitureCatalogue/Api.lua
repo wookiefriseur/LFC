@@ -84,13 +84,14 @@
 --
 -- These no longer exist, replace them if you call those:
 --   SourceType            shared source enum table -> GetSourceTypes, which hands out a copy
---   FurC.Find             handed out the mutable internal row, and {} on a miss -> GetEntry, which
---                         copies and answers nil. Not the same call, so it is not a rename
---   FurC.GetItemId        -> GetItemId
---   FurC.GetItemLink      -> GetItemLink
---   FurC.GetIngredients   -> GetIngredients
---   FurC.GetItemDescription -> GetItemDescription
---   FurC.GetMats          had no namespaced twin: call GetIngredients and format the map yourself
+--
+-- Deprecated FurC global for AddOns that called it directly. Still callable, but most return the "nothing found" response:
+--   FurC.Find             answers {} -> use GetEntry, which copies and answers nil on a miss
+--   FurC.GetItemDescription answers "" -> use GetItemDescription
+--   FurC.GetIngredients   answers {} -> use GetIngredients
+--   FurC.GetMats          answers "" -> use GetIngredients, and format the map yourself
+--   FurC.GetItemId        translates -> GetItemId
+--   FurC.GetItemLink      translates -> GetItemLink
 --
 -- Not public: everything under LibFurnitureCatalogue.Internal
 
@@ -771,3 +772,54 @@ function api.GetSources(itemOrLink)
 end
 
 -- Any deprecated enum globals are in Constants.lua, all marked
+
+-- ---------------------------------------------------------------------------
+-- Legacy FurC entry points
+-- So the names stay callable and answer the miss value of their old contract. No data comes back through FurC any more, migrate to the API above for that!
+---------------------------------------------------------------------------
+
+FurC = FurC or {}
+
+local legacyNoted = {}
+local function noteLegacyCall(name, replacement)
+  if legacyNoted[name] then
+    return
+  end
+  legacyNoted[name] = true
+  internal.GetLogger():Warn("FurC.%s no longer answers, use LibFurnitureCatalogue.API.%s", name, replacement)
+end
+
+---@deprecated Use GetEntry, which copies the row and answers nil on a miss
+---@return table entry always empty: the internal row is not handed out here any more
+function FurC.Find()
+  noteLegacyCall("Find", "GetEntry")
+  return {}
+end
+
+---@deprecated Use GetItemDescription
+---@return string description always empty
+function FurC.GetItemDescription()
+  noteLegacyCall("GetItemDescription", "GetItemDescription")
+  return ""
+end
+
+---@deprecated Use GetIngredients
+---@return table ingredients always empty
+function FurC.GetIngredients()
+  noteLegacyCall("GetIngredients", "GetIngredients")
+  return {}
+end
+
+---@deprecated Use GetIngredients and format the ingredient map yourself
+---@return string mats always empty: this one rendered the ingredient list as text
+function FurC.GetMats()
+  noteLegacyCall("GetMats", "GetIngredients")
+  return ""
+end
+
+-- Pure translation, no DB behind it, so these two answer for real
+---@deprecated Use LibFurnitureCatalogue.API.GetItemId
+FurC.GetItemId = api.GetItemId
+
+---@deprecated Use LibFurnitureCatalogue.API.GetItemLink
+FurC.GetItemLink = api.GetItemLink
