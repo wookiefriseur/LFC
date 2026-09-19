@@ -789,8 +789,8 @@ local function noteLegacyCall(name, replacement)
   internal.GetLogger():Warn("FurC.%s no longer answers, use LibFurnitureCatalogue.API.%s", name, replacement)
 end
 
----@deprecated Use GetEntry, which copies the row and answers nil on a miss
----@return table entry always empty: the internal row is not handed out here any more
+---@deprecated Use GetEntry
+---@return table entry always empty
 function FurC.Find()
   noteLegacyCall("Find", "GetEntry")
   return {}
@@ -810,14 +810,14 @@ function FurC.GetIngredients()
   return {}
 end
 
----@deprecated Use GetIngredients and format the ingredient map yourself
----@return string mats always empty: this one rendered the ingredient list as text
+---@deprecated Use GetIngredients, and format the map yourself
+---@return string mats always empty
 function FurC.GetMats()
   noteLegacyCall("GetMats", "GetIngredients")
   return ""
 end
 
--- Pure translation, no DB behind it, so these two answer for real
+-- no DB behind these two
 ---@deprecated Use LibFurnitureCatalogue.API.GetItemId
 FurC.GetItemId = api.GetItemId
 

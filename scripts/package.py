@@ -73,21 +73,41 @@ def package_addon(name: str, exclude_filename: str):
 
   # copy files
   addon_dir = os.path.normpath(os.path.join(BUILD_DIR, addon_name))
-  counter = 0
+  expected = set() # relative paths that should end up under addon_dir
+  failures = [] # (source, error) pairs
   for source, packaged in files_to_copy:
+    # skip excluded filenames
+    if os.path.basename(source) == exclude_filename: continue
+    source = os.path.normpath(source)
+    packaged = os.path.normpath(packaged)
+    expected.add(packaged)
     try:
-      # skip excluded filenames
-      if os.path.basename(source) == exclude_filename: continue
-      source = os.path.normpath(source)
       target = os.path.normpath(os.path.join(addon_dir, packaged))
       os.makedirs(os.path.dirname(target), exist_ok=True) # Create target directory
       shutil.copy(source, target)
-      counter += 1
-    except Exception as ex: # continue on error
-      print(f"skipped file: {ex}")
-      continue
+    except Exception as ex:
+      failures.append((source, ex))
 
-  print(f"added {counter}/{len(files_to_copy)} files")
+  if failures:
+    for source, ex in failures:
+      print(f"failed to copy: {source}: {ex}")
+    FU.crash_and_burn(f"{len(failures)} file(s) failed to copy, aborting packaging")
+
+  # a copy can report success and land nothing, so compare the tree against the list
+  actual = set()
+  for root, _, files in os.walk(addon_dir):
+    for file in files:
+      actual.add(os.path.normpath(os.path.relpath(os.path.join(root, file), addon_dir)))
+
+  if actual != expected:
+    missing = sorted(expected - actual)
+    extra = sorted(actual - expected)
+    detail = []
+    if missing: detail.append(f"missing from package: {missing}")
+    if extra: detail.append(f"unexpected in package: {extra}")
+    FU.crash_and_burn(f"packaged files do not match what was copied ({'; '.join(detail)})")
+
+  print(f"added {len(expected)}/{len(files_to_copy)} files")
 
   # zip it
   archive = f"{addon_name}-{addon_version}.zip"

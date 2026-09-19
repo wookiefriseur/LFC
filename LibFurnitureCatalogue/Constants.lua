@@ -116,10 +116,6 @@ for name, value in pairs(this.ItemSources) do
   this.SourceNames[value] = name
 end
 
----@deprecated Renamed to STEAL_CONTAINER, same id. Currently required by FC 7.0.0.
---- TODO: Delete at next main version update
-this.ItemSources.CONTAINER = this.ItemSources.STEAL_CONTAINER
-
 ---@alias FurCItemSource integer # FurC.Constants.ItemSources values
 
 -- Ranking for multi-source

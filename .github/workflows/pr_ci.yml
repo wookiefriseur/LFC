@@ -49,3 +49,25 @@ jobs:
             unzip -l "$ZIP"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  static-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install Lua 5.1
+        run: sudo apt-get update && sudo apt-get install -y lua5.1
+      - name: Run static suite
+        env:
+          LUA: /usr/bin/lua5.1
+          LUAC: /usr/bin/luac5.1
+        run: tests/run_static.sh
+
+  python-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-python-env
+      - name: Run Python tests
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
