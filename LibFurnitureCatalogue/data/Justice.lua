@@ -47,6 +47,7 @@ FurC.Justice[ver.THIEVES] = {
     [225027] = pickpocket_glenumbra, -- Cheese Crumbs, Echatere
     [225016] = pickpocket_glenumbra, -- Ore, Display
     [225015] = pickpocket_glenumbra, -- Amber Chunk, Display
+	[225184] = pickpocket_glenumbra, -- Pipe, Stately
   },
 }
 
