@@ -61,7 +61,11 @@ FurC.LuxuryFurnisher[ver.THIEVES] = {
   },
   [223893] = { -- Plants, Sunset Pitcher Patch
     itemPrice = 4000,
-    itemDate = "2026-09-11",
+	itemDate = "2026-09-11",
+  },
+  [223894] = { -- Flowers, Blue Moth
+    itemPrice = 3000,
+	itemDate = "2026-09-18",
   },
 }
 
@@ -293,7 +297,7 @@ FurC.LuxuryFurnisher[ver.FALLBAN] = {
   },
   [212578] = { -- Grass, Wispy Plume Cluster
     itemPrice = 450,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [212580] = { -- Apocrypha Brazier, Stone Marker
     itemPrice = 18000,
@@ -497,7 +501,7 @@ FurC.LuxuryFurnisher[ver.SCIONS] = {
   },
   [203591] = { -- Flowers, Dibella's Tears
     itemPrice = 2000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [203590] = { -- Flowers, Snowspray
     itemPrice = 10000,
@@ -769,7 +773,7 @@ FurC.LuxuryFurnisher[ver.SCRIBE] = {
   },
   [193792] = { -- Plant, Galen Palm Cluster
     itemPrice = 2000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [193804] = { -- High Elf Wine Pot
     itemPrice = 18000,
@@ -1225,7 +1229,7 @@ FurC.LuxuryFurnisher[ver.FLAMES] = {
   },
   [171825] = { -- Mushroom, Large Glowtendril
     itemPrice = 20000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [171824] = { -- Mushroom, Tufted Cap
     itemPrice = 5000,
@@ -1481,7 +1485,7 @@ FurC.LuxuryFurnisher[ver.DRAGON2] = {
   },
   [156653] = { -- Plant, Luminescent Valeflower
     itemPrice = 2500,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [156652] = { -- Garlas Alpinia, Branching
     itemPrice = 2000,
@@ -1873,7 +1877,7 @@ FurC.LuxuryFurnisher[ver.SLAVES] = {
   },
   [145475] = { -- Plant, Soulsplinter Weed
     itemPrice = 12500,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [145474] = { -- Plant, Flytrap
     itemPrice = 4000,
@@ -2028,7 +2032,7 @@ FurC.LuxuryFurnisher[ver.DRAGONS] = {
   },
   [134830] = { -- Flowers, Blue Starbloom
     itemPrice = 15000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [134829] = { -- Fern, Woody Slough
     itemPrice = 3000,
@@ -2716,15 +2720,15 @@ FurC.LuxuryFurnisher[ver.HOMESTEAD] = {
   },
   [120889] = { -- Glow Bush, Purple
     itemPrice = 20000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [120888] = { -- Bat Bloom
     itemPrice = 15000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [120887] = { -- Fan Bush
     itemPrice = 1000,
-    itemDate = "2025-08-22",
+    itemDate = "2026-09-18",
   },
   [120886] = { -- White Hosta
     itemPrice = 3000,
