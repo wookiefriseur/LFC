@@ -33,7 +33,7 @@ Speaking of boring: if you're really bored you can find the full changelog [URL=
 
 RELEASE_NOTE_DELIM = "[//]:"
 
-def publish_to_esoui(optional_params: dict = None):
+def publish_to_esoui(optional_params: dict | None = None):
   optional_params = optional_params or {}
   manifest = FU.get_manifest_data(ADDON_MANIFEST_FILE)
 

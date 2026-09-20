@@ -42,7 +42,11 @@ def extract_strings(lines: list) -> dict:
   """
 
   # SI_FURC_STRING_WASSOLDBY = "Was sold by <<1>> in <<2>> (<<3>>) <<4>>",
-  RE_STRING_PAIR = re.compile(r'^\s*(?P<KEY>[A-Z][A-Z0-9_]*)\s*=\s*(?P<VAL>.+?)\s*,?(\s*--.+)?\s*$')
+  # A quoted value is taken whole, or a `--` inside it reads as the start of a trailing Lua comment and the rest of the string is dropped
+  RE_STRING_PAIR = re.compile(
+    r'^\s*(?P<KEY>[A-Z][A-Z0-9_]*)\s*=\s*'
+    r'(?P<VAL>"(?:[^"\\]|\\.)*"|.+?)'
+    r'\s*,?(\s*--.+)?\s*$')
 
   str_map = {}
   for line in lines:

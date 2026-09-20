@@ -29,8 +29,21 @@ bin="$cache_dir/stylua-$version"
 # Fetch pinned binary if cached one is missing or has wrong version
 if ! "$bin" --version 2>/dev/null | grep -qF "$version"; then
   echo "stylua.sh: fetching StyLua v$version ..." >&2
+  case "$(uname -s)" in
+    Linux)              os="linux" ;;
+    Darwin)             os="macos" ;;
+    MINGW*|MSYS*|CYGWIN*) os="windows" ;;
+    *) echo "stylua.sh: no StyLua build for $(uname -s), install it yourself and put it in \$PATH" >&2; exit 1 ;;
+  esac
+  case "$(uname -m)" in
+    x86_64|amd64)   arch="x86_64" ;;
+    aarch64|arm64)  arch="aarch64" ;;
+    *) echo "stylua.sh: no StyLua build for $(uname -m)" >&2; exit 1 ;;
+  esac
+  [ "$os" = "windows" ] && arch="x86_64"
+
   tmp="$(mktemp -d)"
-  url="https://github.com/JohnnyMorganz/StyLua/releases/download/v${version}/stylua-linux-x86_64.zip"
+  url="https://github.com/JohnnyMorganz/StyLua/releases/download/v${version}/stylua-${os}-${arch}.zip"
   if ! curl -fsSL -o "$tmp/stylua.zip" "$url"; then
     rm -rf "$tmp"
     echo "stylua.sh: download failed (offline?). No formatting done." >&2
@@ -38,7 +51,9 @@ if ! "$bin" --version 2>/dev/null | grep -qF "$version"; then
   fi
   unzip -oq "$tmp/stylua.zip" -d "$tmp"
   mkdir -p "$cache_dir"
-  install -m 0755 "$tmp/stylua" "$bin"
+  unpacked="$tmp/stylua"
+  [ "$os" = "windows" ] && unpacked="$tmp/stylua.exe"
+  install -m 0755 "$unpacked" "$bin"
   rm -rf "$tmp"
 fi
 

@@ -9,6 +9,7 @@ import sys
 import urllib.request
 
 from tempfile import NamedTemporaryFile
+from typing import NoReturn
 
 """
 Utilities module for GitHub actions and general use.
@@ -55,8 +56,9 @@ RE_MANIFEST_FIELD = re.compile(r"^##\s*(?P<KEY>\w+):\s*(?P<VALUE>.+)$")
 RE_CL_SPLIT = re.compile(r"(?=\n\d+\s?[\w\.\(\)\-]*)")
 """just for splitting changelog"""
 
-RE_CL_VERSION_HEADER = re.compile(r"^\d+[\.\d]*.*$", re.MULTILINE)
-"""Headers like: 1.2.3 (2020-12-12)"""
+RE_CL_VERSION_HEADER = re.compile(r"\A\d+(?:\.\d+)+(?:[ \t]*\([^)\n]*\))?[ \t]*(?:\r?\n|\Z)")
+"""Headers like: 1.2.3 (2020-12-12), and only as the notes' first line
+"""
 
 def get_manifest_data(manifest_file: str) -> dict:
   """Extracts data from manifest file.
@@ -189,10 +191,10 @@ def extract_header(note: str, delim: str="[//]:") -> str:
 
 CL_FILE = 'CHANGELOG'
 
-def update_changelog(notes_file:str, header: str, cl_file: str=CL_FILE):
+def update_changelog(notes_file: str | None, header: str, cl_file: str=CL_FILE):
   # Empty/missing file = nothing to mention, no error
   change = ''
-  if os.path.exists(notes_file):
+  if notes_file and os.path.exists(notes_file):
     with open(notes_file, 'r', encoding='utf-8') as f:
       change = f.read().strip()
   if change:
@@ -348,6 +350,8 @@ def semver_to_int(version: str) -> int:
   if not version: raise ValueError("Version required")
 
   parts = version.split('.')
+  if len(parts) > 3:
+    raise ValueError(f"{version}: expected major.minor.patch, got {len(parts)} components")
   major = int(parts[0])
   minor = int(parts[1]) if len(parts) > 1 else 0
   patch = int(parts[2]) if len(parts) > 2 else 0
@@ -475,7 +479,7 @@ RE_MF_VERSION_LINE = re.compile(r"(?P<PREFIX>^##\s*Version:\s*).*$", re.MULTILIN
 RE_MF_ADDONVERSION_LINE = re.compile(r"(?P<PREFIX>^##\s*AddOnVersion:\s*).*$", re.MULTILINE | re.IGNORECASE)
 RE_MAINLUA_VERSION_LINE = re.compile(rf'(?P<PREFIX>^local\s+MAJOR,\s*MINOR\s*=\s*"{ADDON_NAME}",\s*)(?P<VERSION>\d+).*$', re.MULTILINE)
 
-def replace_versions(new_semver: str, output_file: str=None):
+def replace_versions(new_semver: str, output_file: str | None=None):
   new_intver = semver_to_int(new_semver) # throws error if invalid
   new_semver = int_to_semver(new_intver)
   changes = []
@@ -512,7 +516,7 @@ def replace_versions(new_semver: str, output_file: str=None):
 
 EXIT_FAILURE = -1
 
-def crash_and_burn(msg: str=''):
+def crash_and_burn(msg: str='') -> NoReturn:
   """Performs some crashing and/or burning
 
   raises SystemExit

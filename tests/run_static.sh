@@ -49,6 +49,9 @@ echo "== data validation =="
 echo "== record field validation =="
 "$LUA" "$HERE/validate_record_fields.lua" "$ROOT/LibFurnitureCatalogue"
 
+echo "== source model validation =="
+"$LUA" "$HERE/validate_source_model.lua" "$ROOT/LibFurnitureCatalogue"
+
 echo "== public API surface =="
 "$LUA" "$HERE/validate_api_surface.lua" "$ROOT/LibFurnitureCatalogue"
 

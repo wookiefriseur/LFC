@@ -365,7 +365,6 @@ local function setLocation(rec, id)
   rec.source.place = id
 end
 
-
 --- Where the vendor is
 ---@param id integer NpcIds value
 local function setVendorLocation(rec, id)
@@ -728,8 +727,11 @@ local function recipeSourceRecord(rec, row)
   end
 end
 
--- A builder fills the record it is handed, or returns a list of records when there are several sources
-local RECORD_BUILDERS = {
+local MISC = "misc" -- a bucket in the [version][source][itemId] files, read by miscRecord
+local UNMODELLED = "unmodelled" -- the type is the whole record
+local FILTER = "filter" -- not a source on any row
+
+local SOURCE_MODEL = {
   [src.CROWN] = function(rec, recipeKey, recipeArray)
     return crownRecord(rec, recipeKey, recipeArray, src.CROWN)
   end,
@@ -760,7 +762,37 @@ local RECORD_BUILDERS = {
       recipeSourceRecord(rec, row)
     end
   end,
+
+  -- fallback source
+  [src.RUMOUR] = UNMODELLED,
+
+  -- not real sources but filters
+  [src.NONE] = FILTER,
+  [src.FAVE] = FILTER,
+  [src.CRAFTING_KNOWN] = FILTER,
+  [src.CRAFTING_UNKNOWN] = FILTER,
+  [src.OTHER] = FILTER,
+
+  -- misc
+  [src.WRIT_VENDOR] = MISC,
+  [src.DROP] = MISC,
+  [src.JUSTICE] = MISC,
+  [src.FISHING] = MISC,
+  [src.GUILDSTORE] = MISC,
+  [src.BAZAAR] = MISC,
+  [src.TOMES] = MISC,
+  [src.TELVAR] = MISC,
+  [src.COLL_MERCH] = MISC,
+  [src.ANTIQUITY] = MISC,
+  [src.DUNGEON] = MISC,
+  [src.HARVEST] = MISC,
+  [src.CHEST] = MISC,
+  [src.QUEST] = MISC,
+  [src.PICKPOCKET] = MISC,
+  [src.STEAL_CONTAINER] = MISC,
 }
+this.SourceModel = SOURCE_MODEL
+this.SourceModelKinds = { MISC = MISC, UNMODELLED = UNMODELLED, FILTER = FILTER }
 
 ---Folds the place fields on `source` into `locations`, the one spelling records publish
 ---
@@ -822,9 +854,14 @@ local function getSourceRecords(itemOrLink)
     if row and row.source == s then
       recipeSourceRecord(rec, row)
     else
-      -- every other source keeps its rows in the misc-shaped files, so that is the default
-      local build = RECORD_BUILDERS[s] or miscRecord
-      several = build(rec, recipeKey, recipeArray, s)
+      local model = SOURCE_MODEL[s]
+      if type(model) == "function" then
+        several = model(rec, recipeKey, recipeArray, s)
+      elseif model == MISC or model == nil then
+        -- an undeclared type is read like a misc
+        several = miscRecord(rec, recipeKey, recipeArray, s)
+      end
+      -- UNMODELLED and FILTER have nothing to read: the type is the record
     end
     if type(several) == "table" then
       for _, one in ipairs(several) do

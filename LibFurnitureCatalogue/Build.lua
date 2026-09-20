@@ -386,7 +386,6 @@ for _, splitData in ipairs(splitFiles) do
   end
 end
 
-
 ---@param blocking? boolean scan inline instead of yielding through LibAsync
 local function scanFromFiles(blocking)
   lifecycle.task = lifecycle.task or (LibAsync and LibAsync:Create("LibFurnitureCatalogue_ScanDataFiles"))

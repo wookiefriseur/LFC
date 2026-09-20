@@ -24,6 +24,7 @@ PROP_LIVE_VERSION = 'version'
 PROP_LIVE_CHANGELOG = 'changelog'
 PROP_LIVE_COMPATIBLE = 'compatible'
 PROP_LIVE_UPDATEFILE = 'updatefile'
+REQUEST_TIMEOUT = (10, 120)
 
 def get_headers(require_token: bool = True) -> dict:
   """Only use token when it's required. Abort if noken
@@ -44,7 +45,7 @@ def get_addon_details(addon_id: int=ADDON_ID) -> dict[str, typing.Any]:
     - LIVE_CHANGELOG
   """
   endpoint_details = f"{API_BASE}/details/{addon_id}.json"
-  response = requests.get(endpoint_details, headers=get_headers())
+  response = requests.get(endpoint_details, headers=get_headers(), timeout=REQUEST_TIMEOUT)
   response.raise_for_status()
   response_json = response.json()[0]
 
@@ -77,16 +78,19 @@ def send_update_request(data: dict, archivename: str, test: bool = False) -> dic
   if not data or not archivename: raise ValueError("got no body to send")
 
   # make sure the request is in the desired format
-  form_data = {
+  # a field is (filename, value) or (filename, value, content type), so the tuples differ in length
+  form_data: dict[str, tuple] = {
     PROP_LIVE_ID: (None, data[PROP_LIVE_ID]),
     PROP_LIVE_VERSION: (None, data[PROP_LIVE_VERSION]),
-    PROP_LIVE_CHANGELOG: (None, data[PROP_LIVE_CHANGELOG]),
-    PROP_LIVE_COMPATIBLE: (None, data[PROP_LIVE_COMPATIBLE]),
-    # application/zip fails, fallback to generic stream
-    PROP_LIVE_UPDATEFILE: (archivename, data[PROP_LIVE_UPDATEFILE], 'application/octet-stream')
   }
+  # changelog is optional for the API, so send it only when there is one
+  if data.get(PROP_LIVE_CHANGELOG) is not None:
+    form_data[PROP_LIVE_CHANGELOG] = (None, data[PROP_LIVE_CHANGELOG])
+  form_data[PROP_LIVE_COMPATIBLE] = (None, data[PROP_LIVE_COMPATIBLE])
+  # application/zip fails, fallback to generic stream
+  form_data[PROP_LIVE_UPDATEFILE] = (archivename, data[PROP_LIVE_UPDATEFILE], 'application/octet-stream')
 
-  response = requests.post(endpoint_update, headers=get_headers(), files=form_data)
+  response = requests.post(endpoint_update, headers=get_headers(), files=form_data, timeout=REQUEST_TIMEOUT)
   response.raise_for_status()
 
   # The test API returns invalid JSON like [{COMPATIBILITY LISTS}]{REAL TESTRESPONSE}
@@ -113,28 +117,26 @@ def get_compatible(apiversion: str) -> str:
 
   Returns:
       str: returns comma separated Patch versions like 8.0,8.1,8.2
+
+  Raises:
+      ValueError: No APIVersion given
+      requests.exceptions.RequestException: Request or response failed
   """
   endpoint = f"{API_BASE}/compatible.json"
   if not apiversion: raise ValueError('No APIVersion given, AddOn manifest might be broken!')
 
-  try:
-    response = requests.get(endpoint, headers=get_headers())
-    response.raise_for_status()
-    response_json = response.json()
+  response = requests.get(endpoint, headers=get_headers(), timeout=REQUEST_TIMEOUT)
+  response.raise_for_status()
+  response_json = response.json()
 
-    # Take largest APIVersion if multiple like '101050 101051'
-    max_compatibility = max(apiversion.split(' '))
-    compatible_with = []
+  # Take largest APIVersion if multiple like '101050 101051'
+  max_compatibility = max(int(version) for version in apiversion.split())
+  compatible_with = []
 
-    for entry in response_json:
-      if max_compatibility >= entry['interface']:
-        compatible_with.append(entry['id'])
-    return ','.join(compatible_with)
-
-  except requests.exceptions.JSONDecodeError as ex:
-    print(f"Could not process JSON response: {ex}")
-  except requests.exceptions.RequestException as ex:
-    print(f"Received error from server: {ex}")
+  for entry in response_json:
+    if max_compatibility >= int(entry['interface']):
+      compatible_with.append(entry['id'])
+  return ','.join(compatible_with)
 
 
 if __name__ == '__main__':
