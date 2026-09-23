@@ -629,33 +629,73 @@ end
 ---@param rec table the record the caller prepared, for its type
 ---@param row table
 ---@return table[]? records one record, nil when the row names no offer
-local function crownRecords(rec, row)
+local function crownRecords(rec, row, bucket)
   local offers = row[1] ~= nil and row or { row }
-  local record, named = { source = { type = rec.source.type } }, false
+  local records, editor = {}, false
   for i = 1, #offers do
     local offer = offers[i]
     local kind = crownOfferKind(offer)
-    if kind then
-      named = true
+    local channel = LFC.Internal.Build.CrownOfferSource(offer, bucket)
+    editor = editor or channel == src.EDITOR
+    if (kind or offer.source) and channel == rec.source.type then
+      local record = { source = { type = channel } }
       if kind == "itemPrice" then
-        record.cost = record.cost or { currency = offer.currency or CURT_CROWNS, amount = offer.itemPrice }
+        record.cost = { currency = offer.currency or CURT_CROWNS, amount = offer.itemPrice }
       elseif kind == "pack" then
-        local packs = record.source.packs or {}
-        record.source.packs = packs
-        packs[#packs + 1] = offer.pack
-      else
-        record.source[kind] = record.source[kind] or offer[kind]
+        record.source.packs = { offer.pack }
+      elseif kind then
+        record.source[kind] = offer[kind]
       end
+      records[#records + 1] = record
     end
   end
-  return (named and { record }) or nil
+  if bucket == src.EDITOR and not editor and rec.source.type == src.EDITOR then
+    records[#records + 1] = { source = { type = src.EDITOR } }
+  end
+  return records
 end
 
 local function crownRecord(rec, recipeKey, recipeArray, source)
-  local row = findMiscRow(recipeKey, recipeArray.version, source)
-  if type(row) == "table" then
-    return crownRecords(rec, row)
+  local records = {}
+  local versions = {}
+  for version in pairs(FurC.CrownStore or {}) do
+    versions[#versions + 1] = version
   end
+  table.sort(versions)
+
+  if recipeArray.version then
+    table.insert(versions, 1, recipeArray.version)
+  end
+  local seen = {}
+  for _, bucket in ipairs({ src.EDITOR, src.CROWN }) do
+    for _, version in ipairs(versions) do
+      local data = FurC.CrownStore[version]
+      local row = data and data[bucket] and data[bucket][recipeKey]
+      if row then
+        for _, record in ipairs(crownRecords(rec, row, bucket)) do
+          local parts = { tostring(record.source.type) }
+          for _, field in ipairs({ "packs", "bundle", "crate", "houses", "note", "category" }) do
+            local value = record.source[field]
+            if value ~= nil then
+              parts[#parts + 1] = field
+                .. ":"
+                .. (type(value) == "table" and table.concat(value, ",") or tostring(value))
+            end
+          end
+          if record.cost then
+            parts[#parts + 1] = record.cost.currency .. ":" .. record.cost.amount
+          end
+          local key = table.concat(parts, "|")
+          if not seen[key] then
+            seen[key] = true
+            records[#records + 1] = record
+          end
+        end
+        break
+      end
+    end
+  end
+  return records
 end
 
 -- What a row in the [version][source][itemId] files states about its source

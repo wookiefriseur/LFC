@@ -304,7 +304,7 @@ FurC.CrownStore[ver.SCIONS] = {
   },
 
   [src.EDITOR] = {
-    [204434] = { { itemPrice = 320 }, { houses = { 14078, 12270 } } }, -- Breton Rowboat
+    [204434] = { { itemPrice = 320, source = src.EDITOR }, { houses = { 14078, 12270 } } }, -- Breton Rowboat
     [204433] = { { itemPrice = 45 }, { houses = { 12270 } } }, -- Lily Pads, Flowering Patch
     [204432] = { { itemPrice = 20 }, { houses = { 12270 } } }, -- Lily Pads, Flowering Cluster
     [204431] = { { itemPrice = 60 }, { houses = { 12270 } } }, -- Tree, Young Gentle Weeping Willow

@@ -32,7 +32,6 @@ local UNREAD = {
   SI_FURC_SRC_EDITOR_TAG = "consumer renders it",
   SI_FURC_SRC_ITEMBUNDLE = "consumer renders it",
   SI_FURC_SRC_ITEMPACK = "consumer renders it",
-  SI_FURC_SRC_RUMOUR_RECIPE = "consumer renders it",
   SI_FURC_SRC_SCAMBOX = "consumer renders it",
   SI_FURC_SRC_TOMESPACK = "consumer renders it",
   SI_FURC_STRING_WEEKEND_AROUND = "consumer renders it",

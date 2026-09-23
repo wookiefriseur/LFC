@@ -3,7 +3,7 @@
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
   SI_FURC_EVENT_IC = "Imperial City Celebration",
-  -- 136 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 135 ENTRIES UNTRANSLATED/IDENTICAL
   SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
   SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
@@ -107,7 +107,6 @@ local strings = {
   SI_FURC_SRC_QUEST_DAILY = "daily quests^p,from",
   SI_FURC_SRC_RNDMOB = "random mobs^p,from",
   SI_FURC_SRC_RUMOUR_ITEM = "This item has been datamined, but not seen in-game",
-  SI_FURC_SRC_RUMOUR_RECIPE = "This recipe has been datamined, but not seen in-game",
   SI_FURC_SRC_SAFEBOX = "safeboxes^P,from",
   SI_FURC_SRC_SCAMBOX = "Crown Crate^n,from",
   SI_FURC_SRC_SCRYING = "scrying^N,from",

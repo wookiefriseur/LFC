@@ -42,7 +42,6 @@ local strings = {
   SI_FURC_SRC_QUEST_DAILY = "quêtes quotidiennes^p,de",
   SI_FURC_SRC_RNDMOB = "monstres aléatoires^p,de",
   SI_FURC_SRC_RUMOUR_ITEM = "Cet objet a été dataminé, mais pas vu dans le jeu",
-  SI_FURC_SRC_RUMOUR_RECIPE = "Cette recette a été dataminée, mais pas vue dans le jeu",
   SI_FURC_SRC_SAFEBOX = "Extrêmement rarement dans les Cassetes",
   SI_FURC_SRC_SCAMBOX = "Caisses à Couronne^n,de",
   SI_FURC_SRC_SCRYING = "A partir des Pistes ",

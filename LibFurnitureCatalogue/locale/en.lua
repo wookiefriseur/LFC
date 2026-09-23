@@ -113,7 +113,6 @@ local strings = {
   SI_FURC_SRC_QUEST_DAILY = "daily quests^p,from",
   SI_FURC_SRC_RNDMOB = "random mobs^p,from",
   SI_FURC_SRC_RUMOUR_ITEM = "This item has been datamined, but not seen in-game",
-  SI_FURC_SRC_RUMOUR_RECIPE = "This recipe has been datamined, but not seen in-game",
   SI_FURC_SRC_SAFEBOX = "safeboxes^P,from",
   SI_FURC_SRC_SCAMBOX = "Crown Crate^n,from",
   SI_FURC_SRC_SCRYING = "scrying^N,from",

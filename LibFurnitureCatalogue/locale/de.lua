@@ -76,7 +76,6 @@ local strings = {
   SI_FURC_SRC_QUEST_DAILY = "tägliche Quests^pt,von",
   SI_FURC_SRC_RNDMOB = "zufälliger Gegner^m,von",
   SI_FURC_SRC_RUMOUR_ITEM = "Dieser Gegenstand wurde in der Datenbank gefunden, aber nicht im Spiel gesehen.",
-  SI_FURC_SRC_RUMOUR_RECIPE = "Dieses Rezept wurde in der Datenbank gefunden, aber nicht im Spiel gesehen.",
   SI_FURC_SRC_SAFEBOX = "Wertkassetten^P,aus",
   SI_FURC_SRC_SCAMBOX = "Kronen-Kiste^f,aus",
   SI_FURC_SRC_SCRYING = "Ausgrabungen^P,durch",

@@ -205,6 +205,19 @@ local STORED_FIELDS = {
   blueprint = true,
 }
 
+local function crownOfferSource(offer, bucket)
+  if offer.source ~= nil then
+    assert(offer.source == src.CROWN or offer.source == src.EDITOR, "invalid Crown offer source")
+    assert(
+      not (offer.pack or offer.bundle or offer.crate or offer.houses or offer.note or offer.category),
+      "purchase channel belongs on a direct Crown offer"
+    )
+    return offer.source
+  end
+  return offer.itemPrice ~= nil and bucket or src.CROWN
+end
+this.CrownOfferSource = crownOfferSource
+
 -- partial update or full overwrite
 local function addDatabaseEntry(recipeKey, partial)
   if not (recipeKey and partial and next(partial) ~= nil) then
@@ -522,10 +535,14 @@ local function scanFromFiles(blocking)
   local function scanCrownStore()
     for versionNumber, versionData in pairs(FurC.CrownStore) do
       for origin, originData in pairs(versionData) do
-        for itemId in pairs(originData) do
+        for itemId, row in pairs(originData) do
           local itemLink = getItemLink(itemId)
           if IsItemLinkPlaceableFurniture(itemLink) or GetItemLinkItemType(itemLink) == ITEMTYPE_FURNISHING then
             addDatabaseEntry(itemId, { origin = origin, version = versionNumber })
+            local offers = row[1] ~= nil and row or { row }
+            for _, offer in ipairs(offers) do
+              addDatabaseEntry(itemId, { origin = crownOfferSource(offer, origin) })
+            end
           else
             logDebug("scanCrownStore: Error when scanning item ID %s (origin %s)", itemId, origin)
           end

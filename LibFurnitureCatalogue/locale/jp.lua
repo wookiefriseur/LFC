@@ -77,7 +77,6 @@ local strings = {
   SI_FURC_SRC_QUEST_DAILY = "デイリークエスト^p,from",
   SI_FURC_SRC_RNDMOB = "あらゆる敵^p,from",
   SI_FURC_SRC_RUMOUR_ITEM = "データ上はアイテムが確認されているが、ゲーム内では未確認",
-  SI_FURC_SRC_RUMOUR_RECIPE = "データ上はレシピが確認されているが、ゲーム内では未確認",
   SI_FURC_SRC_SAFEBOX = "金庫^P,from",
   SI_FURC_SRC_SCAMBOX = "クラウン木枠箱^n,from",
   SI_FURC_SRC_SCRYING = "古遺物^N,from",
