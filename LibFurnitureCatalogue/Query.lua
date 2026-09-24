@@ -805,6 +805,7 @@ local SOURCE_MODEL = {
 
   -- fallback source
   [src.RUMOUR] = UNMODELLED,
+  [src.IGNORED] = UNMODELLED,
 
   -- not real sources but filters
   [src.NONE] = FILTER,
@@ -942,6 +943,9 @@ local SOURCE_LABEL = LFC.Internal.Constants.SourceLabels
 ---@param source table
 ---@return string
 local function whatOf(source)
+  if source.type == src.IGNORED then
+    return GetString(SI_FURC_SRC_IGNORED)
+  end
   if source.vendor then
     return plain(resolveNpc(source.vendor))
   end

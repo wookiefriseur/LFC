@@ -43,7 +43,7 @@ You can use the header of [./LibFurnitureCatalogue/Api.lua](`LibFurnitureCatalog
 
 ## Website
 
-https://wookiefriseur.github.io/LFC/ - API docs and, later, the webinterface for contributors.
+https://wookiefriseur.github.io/LFC/ - browse the catalogue and contribute data corrections.
 
 - served straight from `docs/` on `main`
 

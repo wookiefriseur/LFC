@@ -108,6 +108,7 @@ this.ItemSources = {
   QUEST = getNextIdFor("ITEM_SOURCES"), -- 28
   PICKPOCKET = getNextIdFor("ITEM_SOURCES"), -- 29
   STEAL_CONTAINER = getNextIdFor("ITEM_SOURCES"), -- 30
+  IGNORED = getNextIdFor("ITEM_SOURCES"), -- 31
 }
 
 -- value -> name
@@ -122,6 +123,7 @@ end
 do
   local src = this.ItemSources
   this.SOURCE_PRIORITY = {
+    [src.IGNORED] = 0, -- deliberate exclusion overrides acquisition sources
     [src.CRAFTING] = 10,
     -- purchased (in-game currencies)
     [src.VENDOR] = 20,
@@ -163,6 +165,7 @@ end
 do
   local src = this.ItemSources
   this.SourceLabels = {
+    [src.IGNORED] = "Ignored",
     [src.NONE] = "Unknown",
     [src.FAVE] = "Favourite",
     [src.CRAFTING] = "Crafting",

@@ -13,3 +13,4 @@ __pycache__/
 .package/
 release-preview/
 *.zip
+/tests/web/node_modules/

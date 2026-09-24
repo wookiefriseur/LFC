@@ -15,6 +15,7 @@ Constants.lua
 Format.lua
 
 data\Rumours.lua
+data\IgnoredItems.lua
 
 data\CrownStore.lua
 data\MiscItemSources.lua

@@ -112,6 +112,7 @@ local strings = {
   SI_FURC_SRC_QUEST = "quest^n,from",
   SI_FURC_SRC_QUEST_DAILY = "daily quests^p,from",
   SI_FURC_SRC_RNDMOB = "random mobs^p,from",
+  SI_FURC_SRC_IGNORED = "FurnitureCatalogue does not track this item on purpose",
   SI_FURC_SRC_RUMOUR_ITEM = "This item has been datamined, but not seen in-game",
   SI_FURC_SRC_SAFEBOX = "safeboxes^P,from",
   SI_FURC_SRC_SCAMBOX = "Crown Crate^n,from",

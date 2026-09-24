@@ -20,7 +20,7 @@ local getItemLink = LFC.Internal.Format.GetItemLink
 
   Bit positions come from ItemSources, numbered in declaration order. Inserting a source in the middle renumbers everything below it, so the mask is built per session.
 
-  Highest source currently in use is 30, and a Lua 5.1 number holds an exact integer up to 2^53, so there is room to spare.
+  Lua 5.1 number holds an exact integer up to 2^53, so there is room to spare.
 ]]
 local MAX_SOURCE = 0
 for _, id in pairs(src) do
@@ -250,6 +250,9 @@ local function addDatabaseEntry(recipeKey, partial)
   -- We should auto drop rumour category if a src exists
   if sources ~= bitFor(src.RUMOUR) then
     sources = removeSource(sources, src.RUMOUR)
+  end
+  if LFC.Internal.IgnoredItems[recipeKey] then
+    sources = bitFor(src.IGNORED)
   end
   stored.sources = sources
 
@@ -673,6 +676,11 @@ local function scanFromFiles(blocking)
     scanRolis,
     scanFestivalFiles,
     scanRumours,
+    function()
+      for itemId in pairs(LFC.Internal.IgnoredItems) do
+        addDatabaseEntry(itemId, { origin = src.IGNORED, version = LFC.Internal.Constants.Versioning.NONE })
+      end
+    end,
     finish,
   }
 
