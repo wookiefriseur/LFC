@@ -1,0 +1,2125 @@
+{
+  "schema_version": 2,
+  "source_types": [
+    "achievement_vendor",
+    "pvp_vendor",
+    "writ_vendor",
+    "luxury",
+    "event_drop",
+    "event_vendor",
+    "crown_crate",
+    "crown_store",
+    "recipe",
+    "drop",
+    "quest_reward",
+    "dungeon_drop",
+    "housing",
+    "companion",
+    "guild_gift",
+    "tome_pack",
+    "rumour",
+    "ignored"
+  ],
+  "source_type_contracts": {
+    "ignored": { "required": [], "optional": ["note"] },
+    "achievement_vendor": {
+      "required": [
+        "vendor"
+      ],
+      "optional": [
+        "locations",
+        "achievement",
+        "quest",
+        "skill_line",
+        "skill_rank",
+        "note"
+      ]
+    },
+    "pvp_vendor": {
+      "required": [
+        "vendor"
+      ],
+      "optional": [
+        "locations",
+        "achievement",
+        "note"
+      ]
+    },
+    "writ_vendor": {
+      "required": [
+        "vendor"
+      ],
+      "optional": [
+        "skill_line",
+        "skill_rank",
+        "locations",
+        "achievement",
+        "note"
+      ]
+    },
+    "luxury": {
+      "required": [
+        "vendor"
+      ],
+      "optional": [
+        "locations",
+        "note"
+      ]
+    },
+    "event_drop": {
+      "required": [
+        "event"
+      ],
+      "optional": [
+        "container",
+        "achievement",
+        "quest",
+        "collectible",
+        "note"
+      ]
+    },
+    "event_vendor": {
+      "required": [
+        "event"
+      ],
+      "optional": [
+        "vendor",
+        "container",
+        "achievement",
+        "quest",
+        "collectible",
+        "note"
+      ]
+    },
+    "crown_crate": {
+      "required": [
+        "crate"
+      ],
+      "optional": [
+        "note"
+      ]
+    },
+    "crown_store": {
+      "required": [],
+      "optional": [
+        "packs",
+        "bundle",
+        "subtype",
+        "note"
+      ]
+    },
+    "recipe": {
+      "required": [],
+      "optional": [
+        "note"
+      ]
+    },
+    "rumour": {
+      "required": [],
+      "optional": [
+        "note"
+      ]
+    },
+    "drop": {
+      "required": [],
+      "optional": [
+        "subtype",
+        "locations",
+        "npc_class",
+        "npc_group",
+        "leads",
+        "note"
+      ]
+    },
+    "quest_reward": {
+      "required": [],
+      "optional": [
+        "subtype",
+        "quest",
+        "locations",
+        "achievement",
+        "note"
+      ]
+    },
+    "dungeon_drop": {
+      "required": [
+        "locations"
+      ],
+      "optional": [
+        "subtype",
+        "note"
+      ]
+    },
+    "housing": {
+      "required": [],
+      "optional": [
+        "houses",
+        "note"
+      ]
+    },
+    "companion": {
+      "required": [
+        "companion"
+      ],
+      "optional": [
+        "quest",
+        "note"
+      ]
+    },
+    "guild_gift": {
+      "required": [
+        "note"
+      ],
+      "optional": []
+    },
+    "tome_pack": {
+      "required": [
+        "note"
+      ],
+      "optional": []
+    }
+  },
+  "locations": [
+    {
+      "symbol": "ALIKR",
+      "zone": 104
+    },
+    {
+      "symbol": "APOCRYPHA",
+      "zone": 1413
+    },
+    {
+      "symbol": "ARTAEUM",
+      "zone": 1027
+    },
+    {
+      "symbol": "AURIDON",
+      "zone": 381
+    },
+    {
+      "symbol": "BALFOYEN",
+      "zone": 281
+    },
+    {
+      "symbol": "BANG",
+      "zone": 92
+    },
+    {
+      "symbol": "BETNIKH",
+      "zone": 535
+    },
+    {
+      "symbol": "BLACKREACH_GMC",
+      "zone": 1161
+    },
+    {
+      "symbol": "BLACKWOOD",
+      "zone": 1261
+    },
+    {
+      "symbol": "BLEAK",
+      "zone": 280
+    },
+    {
+      "symbol": "COLDH",
+      "zone": 347
+    },
+    {
+      "symbol": "CRAGLORN",
+      "zone": 888
+    },
+    {
+      "symbol": "CWC",
+      "zone": 980
+    },
+    {
+      "symbol": "CYRO",
+      "zone": 181
+    },
+    {
+      "symbol": "DEADLANDS",
+      "zone": 1286
+    },
+    {
+      "symbol": "DESHAAN",
+      "zone": 57
+    },
+    {
+      "symbol": "DUNG_DOM",
+      "zone": 1081
+    },
+    {
+      "symbol": "DUNG_FL",
+      "zone": 1009
+    },
+    {
+      "symbol": "DUNG_FV",
+      "zone": 1080
+    },
+    {
+      "symbol": "DUNG_IA",
+      "zone": 1436
+    },
+    {
+      "symbol": "DUNG_MHK",
+      "zone": 1052
+    },
+    {
+      "symbol": "DUNG_MOS",
+      "zone": 1055
+    },
+    {
+      "symbol": "DUNG_NYMIC",
+      "zone": 1420
+    },
+    {
+      "symbol": "DUNG_SCP",
+      "zone": 1010
+    },
+    {
+      "symbol": "DUNG_SCRIV",
+      "zone": 1390
+    },
+    {
+      "symbol": "EASTMARCH",
+      "zone": 101
+    },
+    {
+      "symbol": "FARGRAVE",
+      "zone": 1282
+    },
+    {
+      "symbol": "GALEN",
+      "zone": 1383
+    },
+    {
+      "symbol": "GLENUMBRA",
+      "zone": 3
+    },
+    {
+      "symbol": "GOLDCOAST",
+      "zone": 823
+    },
+    {
+      "symbol": "GRAHTWOOD",
+      "zone": 383
+    },
+    {
+      "symbol": "GREENSHADE",
+      "zone": 108
+    },
+    {
+      "symbol": "HEWSBANE",
+      "zone": 816
+    },
+    {
+      "symbol": "HIGHISLE",
+      "zone": 1318
+    },
+    {
+      "symbol": "IMPCITY",
+      "zone": 584
+    },
+    {
+      "symbol": "KHENARTHI",
+      "zone": 537
+    },
+    {
+      "symbol": "MALABAL",
+      "zone": 58
+    },
+    {
+      "symbol": "MURKMIRE",
+      "zone": 726
+    },
+    {
+      "symbol": "NELSWEYR",
+      "zone": 1086
+    },
+    {
+      "symbol": "NMARKET",
+      "zone": 1559
+    },
+    {
+      "symbol": "PDUNG_VVARDENFELL_FW",
+      "zone": 919
+    },
+    {
+      "symbol": "REACH",
+      "zone": 1207
+    },
+    {
+      "symbol": "REAPER",
+      "zone": 382
+    },
+    {
+      "symbol": "RIFT",
+      "zone": 103
+    },
+    {
+      "symbol": "RIVENSPIRE",
+      "zone": 20
+    },
+    {
+      "symbol": "SCHOLAR",
+      "zone": 1463
+    },
+    {
+      "symbol": "SELSWEYR",
+      "zone": 1133
+    },
+    {
+      "symbol": "SHADOWFEN",
+      "zone": 117
+    },
+    {
+      "symbol": "SOLSTICE",
+      "zone": 1502
+    },
+    {
+      "symbol": "STONEFALLS",
+      "zone": 41
+    },
+    {
+      "symbol": "STORMHAVEN",
+      "zone": 19
+    },
+    {
+      "symbol": "STROSMKAI",
+      "zone": 534
+    },
+    {
+      "symbol": "SUMMERSET",
+      "zone": 1011
+    },
+    {
+      "symbol": "TELVANNI",
+      "zone": 1414
+    },
+    {
+      "symbol": "VVARDENFELL",
+      "zone": 849
+    },
+    {
+      "symbol": "WEALD",
+      "zone": 1443
+    },
+    {
+      "symbol": "WROTHGAR",
+      "zone": 684
+    },
+    {
+      "symbol": "WSKYRIM",
+      "zone": 1160
+    }
+  ],
+  "places": [
+    {
+      "symbol": "ANY",
+      "si": "SI_FURC_LOC_ANY",
+      "name": "anywhere"
+    },
+    {
+      "symbol": "ANY_CAPITAL",
+      "si": "SI_FURC_LOC_ANY_CAPITAL",
+      "name": "any capital city"
+    },
+    {
+      "symbol": "ANY_CITY",
+      "si": "SI_FURC_LOC_ANY_CITY",
+      "name": "any city"
+    },
+    {
+      "symbol": "GUILD_FIGHTERS",
+      "si": "SI_FURC_GUILD_FIGHTERS",
+      "name": "the Fighters' guild"
+    },
+    {
+      "symbol": "GUILD_MAGES",
+      "si": "SI_FURC_GUILD_MAGES",
+      "name": "the Mages' guild"
+    },
+    {
+      "symbol": "LILANDRIL",
+      "si": "SI_FURC_LOC_LILANDRIL",
+      "name": "Lilandril"
+    },
+    {
+      "symbol": "MURKMIRE_LIL",
+      "si": "SI_FURC_LOC_MURKMIRE_LIL",
+      "name": "Lilmoth"
+    },
+    {
+      "symbol": "PLACE_ORSINIUM",
+      "si": "SI_FURC_LOC_PLACE_ORSINIUM",
+      "name": "Orsinium"
+    },
+    {
+      "symbol": "REACH_MARKARTH_MM",
+      "si": "SI_FURC_LOC_REACH_MARKARTH_MM",
+      "name": "Markarth Mercantile"
+    },
+    {
+      "symbol": "SELSWEYR_DHA",
+      "si": "SI_FURC_LOC_SELSWEYR_DHA",
+      "name": "Dragonhold Armoury"
+    },
+    {
+      "symbol": "SELSWEYR_SENCHAL_MARKET",
+      "si": "SI_FURC_LOC_SELSWEYR_SENCHAL_MARKET",
+      "name": "Senchal, Marketplace"
+    },
+    {
+      "symbol": "SHADOWFEN_CORIMONT",
+      "si": "SI_FURC_LOC_SHADOWFEN_CORIMONT",
+      "name": "Alten Corimont"
+    },
+    {
+      "symbol": "STONEFALLS_EBONHEART",
+      "si": "SI_FURC_LOC_STONEFALLS_EBONHEART",
+      "name": "Ebonheart"
+    },
+    {
+      "symbol": "STORMHAVEN_WAY_MERCH",
+      "si": "SI_FURC_LOC_STORMHAVEN_WAY_MERCH",
+      "name": "Stormhaven, Wayrest, Merchant district"
+    },
+    {
+      "symbol": "SUMMERSET_ALINOR",
+      "si": "SI_FURC_LOC_SUMMERSET_ALINOR",
+      "name": "Alinor"
+    },
+    {
+      "symbol": "SUMMERSET_ALINOR_RIVERSIDE",
+      "si": "SI_FURC_LOC_SUMMERSET_ALINOR_RIVERSIDE",
+      "name": "Riverside Market"
+    },
+    {
+      "symbol": "TELVANNI_NECROM_FRF",
+      "si": "SI_FURC_TELVANNI_NECROM_FRF",
+      "name": "Necrom, Final Rest Furnishings"
+    },
+    {
+      "symbol": "UNDAUNTED",
+      "si": "SI_FURC_LOC_UNDAUNTED",
+      "name": "Undaunted Enclaves"
+    },
+    {
+      "symbol": "VVARDENFELL_ALDRUHN",
+      "si": "SI_FURC_LOC_VVARDENFELL_ALDRUHN",
+      "name": "Ald'ruhn"
+    },
+    {
+      "symbol": "VVARDENFELL_SURAN",
+      "si": "SI_FURC_LOC_VVARDENFELL_SURAN",
+      "name": "Suran"
+    },
+    {
+      "symbol": "VVARDENFELL_VIVEC",
+      "si": "SI_FURC_LOC_VVARDENFELL_VIVEC",
+      "name": "Vivec City"
+    },
+    {
+      "symbol": "VVARDENFELL_VIVEC_GQ",
+      "si": "SI_FURC_LOC_VVARDENFELL_VIVEC_GQ",
+      "name": "Gladiator's Quarters"
+    },
+    {
+      "symbol": "VVARDENFELL_VIVEC_SDI",
+      "si": "SI_FURC_LOC_VVARDENFELL_VIVEC_SDI",
+      "name": "Saint Delyn Inn"
+    },
+    {
+      "symbol": "WSKYRIM_SOLI_DH",
+      "si": "SI_FURC_LOC_WSKYRIM_SOLI_DH",
+      "name": "Solitude, Dragon's Hearth"
+    }
+  ],
+  "vendors": [
+    {
+      "symbol": "AF",
+      "si": "SI_FURC_TRADERS_AF",
+      "name": "Achievement Furnisher"
+    },
+    {
+      "symbol": "ALCHEMISTS",
+      "si": "SI_FURC_TRADERS_ALCHEMISTS",
+      "name": "alchemists"
+    },
+    {
+      "symbol": "BGF",
+      "si": "SI_FURC_TRADERS_BGF",
+      "name": "Battlegrounds Furnishers"
+    },
+    {
+      "symbol": "BLACKSMITHS",
+      "si": "SI_FURC_TRADERS_BLACKSMITHS",
+      "name": "blacksmiths"
+    },
+    {
+      "symbol": "CAF",
+      "si": "SI_FURC_TRADERS_CAF",
+      "name": "Capital Achievement Furnisher"
+    },
+    {
+      "symbol": "CARPENTERS",
+      "si": "SI_FURC_TRADERS_CARPENTERS",
+      "name": "carpenters"
+    },
+    {
+      "symbol": "CLOTHIERS",
+      "si": "SI_FURC_TRADERS_CLOTHIERS",
+      "name": "clothiers"
+    },
+    {
+      "symbol": "COLL_MERCH",
+      "si": "SI_FURC_TRADERS_COLL_MERCH",
+      "name": "Collectibles Merchant"
+    },
+    {
+      "symbol": "COOKS",
+      "si": "SI_FURC_TRADERS_COOKS",
+      "name": "cooks"
+    },
+    {
+      "symbol": "ENCHANTERS",
+      "si": "SI_FURC_TRADERS_ENCHANTERS",
+      "name": "enchanters"
+    },
+    {
+      "symbol": "ENEMY_AUTOMATON",
+      "si": "SI_FURC_NPC_AUTOMATON",
+      "name": "automaton"
+    },
+    {
+      "symbol": "ENEMY_ECHATERE",
+      "si": "SI_FURC_NPC_ECHATERE",
+      "name": "Echatere"
+    },
+    {
+      "symbol": "EVENT",
+      "si": "SI_FURC_TRADERS_EVENT",
+      "name": "Impresario"
+    },
+    {
+      "symbol": "FAUSTINA",
+      "si": "SI_FURC_TRADERS_FAUSTINA",
+      "name": "Faustina Curio"
+    },
+    {
+      "symbol": "FIGHTERS_STEWARD",
+      "si": "SI_FURC_GUILD_FIGHTERS_STEWARD",
+      "name": "Hall Steward"
+    },
+    {
+      "symbol": "HGF",
+      "si": "SI_FURC_TRADERS_HGF",
+      "name": "Home Goods Furnisher"
+    },
+    {
+      "symbol": "HOLIDAY",
+      "si": "SI_FURC_TRADERS_HOLIDAY",
+      "name": "Holiday Furnisher"
+    },
+    {
+      "symbol": "LUXF",
+      "si": "SI_FURC_TRADERS_LUXF",
+      "name": "Luxury Furnisher"
+    },
+    {
+      "symbol": "MAGES_MYSTIC",
+      "si": "SI_FURC_GUILD_MAGES_MYSTIC",
+      "name": "Mystic"
+    },
+    {
+      "symbol": "NM",
+      "si": "SI_FURC_TRADERS_NM",
+      "name": "Night Market Vendors"
+    },
+    {
+      "symbol": "PSIJIC_NALIRSEWEN",
+      "si": "SI_FURC_GUILD_PSIJIC_NALIRSEWEN",
+      "name": "Nalirsewen"
+    },
+    {
+      "symbol": "ROLIS",
+      "si": "SI_FURC_TRADERS_ROLIS",
+      "name": "Rolis Hlaalu"
+    },
+    {
+      "symbol": "THIEVES_MERCH",
+      "si": "SI_FURC_GUILD_THIEVES_MERCH",
+      "name": "Outlaw Refuge, Merchant"
+    },
+    {
+      "symbol": "UNDAUNTED_QM",
+      "si": "SI_FURC_GUILD_UNDAUNTED_QM",
+      "name": "Quartermaster"
+    }
+  ],
+  "npc_classes": [
+    {
+      "symbol": "CLASS_ALCHEMIST",
+      "si": "SI_MONSTERSOCIALCLASS2"
+    },
+    {
+      "symbol": "CLASS_ARTISAN",
+      "si": "SI_MONSTERSOCIALCLASS3"
+    },
+    {
+      "symbol": "CLASS_ASSASSIN",
+      "si": "SI_MONSTERSOCIALCLASS4"
+    },
+    {
+      "symbol": "CLASS_BARD",
+      "si": "SI_MONSTERSOCIALCLASS5"
+    },
+    {
+      "symbol": "CLASS_BEGGAR",
+      "si": "SI_MONSTERSOCIALCLASS6"
+    },
+    {
+      "symbol": "CLASS_CHEF",
+      "si": "SI_MONSTERSOCIALCLASS7"
+    },
+    {
+      "symbol": "CLASS_CIVIL_SERVANT",
+      "si": "SI_MONSTERSOCIALCLASS8"
+    },
+    {
+      "symbol": "CLASS_CLOTHIER",
+      "si": "SI_MONSTERSOCIALCLASS9"
+    },
+    {
+      "symbol": "CLASS_COMMONER",
+      "si": "SI_MONSTERSOCIALCLASS10"
+    },
+    {
+      "symbol": "CLASS_CRAFTER",
+      "si": "SI_MONSTERSOCIALCLASS11"
+    },
+    {
+      "symbol": "CLASS_CULTIST",
+      "si": "SI_MONSTERSOCIALCLASS12"
+    },
+    {
+      "symbol": "CLASS_DAEDRA",
+      "si": "SI_MONSTERSOCIALCLASS47"
+    },
+    {
+      "symbol": "CLASS_DRUNKARD",
+      "si": "SI_MONSTERSOCIALCLASS13"
+    },
+    {
+      "symbol": "CLASS_FARMER",
+      "si": "SI_MONSTERSOCIALCLASS14"
+    },
+    {
+      "symbol": "CLASS_FIGHTER",
+      "si": "SI_MONSTERSOCIALCLASS15"
+    },
+    {
+      "symbol": "CLASS_FISHER",
+      "si": "SI_MONSTERSOCIALCLASS16"
+    },
+    {
+      "symbol": "CLASS_GATHERER",
+      "si": "SI_MONSTERSOCIALCLASS17"
+    },
+    {
+      "symbol": "CLASS_GHOST",
+      "si": "SI_MONSTERSOCIALCLASS18"
+    },
+    {
+      "symbol": "CLASS_GUARD",
+      "si": "SI_MONSTERSOCIALCLASS19"
+    },
+    {
+      "symbol": "CLASS_HEALER",
+      "si": "SI_MONSTERSOCIALCLASS20"
+    },
+    {
+      "symbol": "CLASS_HUNTER",
+      "si": "SI_MONSTERSOCIALCLASS21"
+    },
+    {
+      "symbol": "CLASS_LABORER",
+      "si": "SI_MONSTERSOCIALCLASS22"
+    },
+    {
+      "symbol": "CLASS_MAGE",
+      "si": "SI_MONSTERSOCIALCLASS23"
+    },
+    {
+      "symbol": "CLASS_MERCHANT",
+      "si": "SI_MONSTERSOCIALCLASS24"
+    },
+    {
+      "symbol": "CLASS_NOBLE",
+      "si": "SI_MONSTERSOCIALCLASS25"
+    },
+    {
+      "symbol": "CLASS_NUDE",
+      "si": "SI_MONSTERSOCIALCLASS26"
+    },
+    {
+      "symbol": "CLASS_ORDINATOR",
+      "si": "SI_MONSTERSOCIALCLASS27"
+    },
+    {
+      "symbol": "CLASS_OUTLAW",
+      "si": "SI_MONSTERSOCIALCLASS28"
+    },
+    {
+      "symbol": "CLASS_PILGRIM",
+      "si": "SI_MONSTERSOCIALCLASS29"
+    },
+    {
+      "symbol": "CLASS_PRIEST",
+      "si": "SI_MONSTERSOCIALCLASS30"
+    },
+    {
+      "symbol": "CLASS_PRISONER",
+      "si": "SI_MONSTERSOCIALCLASS31"
+    },
+    {
+      "symbol": "CLASS_PROVISIONER",
+      "si": "SI_MONSTERSOCIALCLASS32"
+    },
+    {
+      "symbol": "CLASS_SAILOR",
+      "si": "SI_MONSTERSOCIALCLASS33"
+    },
+    {
+      "symbol": "CLASS_SCHOLAR",
+      "si": "SI_MONSTERSOCIALCLASS34"
+    },
+    {
+      "symbol": "CLASS_SERVANT",
+      "si": "SI_MONSTERSOCIALCLASS35"
+    },
+    {
+      "symbol": "CLASS_SKELETON",
+      "si": "SI_MONSTERSOCIALCLASS36"
+    },
+    {
+      "symbol": "CLASS_SLAVE",
+      "si": "SI_MONSTERSOCIALCLASS37"
+    },
+    {
+      "symbol": "CLASS_SMITH",
+      "si": "SI_MONSTERSOCIALCLASS38"
+    },
+    {
+      "symbol": "CLASS_SOLDIER",
+      "si": "SI_MONSTERSOCIALCLASS39"
+    },
+    {
+      "symbol": "CLASS_STUDENT",
+      "si": "SI_MONSTERSOCIALCLASS40"
+    },
+    {
+      "symbol": "CLASS_THIEF",
+      "si": "SI_MONSTERSOCIALCLASS41"
+    },
+    {
+      "symbol": "CLASS_VAMPIRE",
+      "si": "SI_MONSTERSOCIALCLASS42"
+    },
+    {
+      "symbol": "CLASS_WARRIOR",
+      "si": "SI_MONSTERSOCIALCLASS43"
+    },
+    {
+      "symbol": "CLASS_WATCHMEN",
+      "si": "SI_MONSTERSOCIALCLASS44"
+    },
+    {
+      "symbol": "CLASS_WEREWOLF",
+      "si": "SI_MONSTERSOCIALCLASS45"
+    },
+    {
+      "symbol": "CLASS_WOODWORKER",
+      "si": "SI_MONSTERSOCIALCLASS46"
+    }
+  ],
+  "npc_groups": [
+    {
+      "symbol": "ENEMY_RND",
+      "si": "SI_FURC_SRC_RNDMOB",
+      "name": "random mobs"
+    }
+  ],
+  "events": [
+    {
+      "symbol": "ANNIVERSARY",
+      "si": "SI_FURC_EVENT_ANNIVERSARY",
+      "name": "Anniversary Jubilee"
+    },
+    {
+      "symbol": "BLACKWOOD",
+      "si": "SI_FURC_EVENT_BLACKWOOD",
+      "name": "Bounties of Blackwood"
+    },
+    {
+      "symbol": "CRIME",
+      "si": "SI_FURC_EVENT_CRIME",
+      "name": "Crime Wave"
+    },
+    {
+      "symbol": "ELSWEYR",
+      "si": "SI_FURC_EVENT_ELSWEYR",
+      "name": "Season of the Dragon"
+    },
+    {
+      "symbol": "HEARTS",
+      "si": "SI_FURC_EVENT_HEARTS",
+      "name": "Hearts Week"
+    },
+    {
+      "symbol": "HOLLOWJACK",
+      "si": "SI_FURC_EVENT_HOLLOWJACK",
+      "name": "Sinister Hollowjack"
+    },
+    {
+      "symbol": "IC",
+      "si": "SI_FURC_EVENT_IC",
+      "name": "Imperial City Celebration 2020"
+    },
+    {
+      "symbol": "JESTER",
+      "si": "SI_FURC_EVENT_JESTER",
+      "name": "Jester's Festival"
+    },
+    {
+      "symbol": "MAYHEM",
+      "si": "SI_FURC_EVENT_MAYHEM",
+      "name": "Whitestrake's Mayhem"
+    },
+    {
+      "symbol": "NEWLIFE",
+      "si": "SI_FURC_EVENT_NEWLIFE",
+      "name": "New Life Festival"
+    },
+    {
+      "symbol": "NIGHTMARKET",
+      "si": "SI_FURC_EVENT_NIGHTMARKET",
+      "name": "Night Market"
+    },
+    {
+      "symbol": "ORSINIUM",
+      "si": "SI_FURC_EVENT_ORSINIUM",
+      "name": "Orsinium Celebration 2019"
+    },
+    {
+      "symbol": "UNDAUNTED",
+      "si": "SI_FURC_EVENT_UNDAUNTED",
+      "name": "Undaunted Celebration"
+    },
+    {
+      "symbol": "WITCHES",
+      "si": "SI_FURC_EVENT_WITCHES",
+      "name": "Witches Festival"
+    },
+    {
+      "symbol": "WRITHING",
+      "si": "SI_FURC_EVENT_WRITHING",
+      "name": "Writhing Wall"
+    },
+    {
+      "symbol": "ZENITHAR",
+      "si": "SI_FURC_EVENT_ZENITHAR",
+      "name": "Zeal of Zenithar"
+    }
+  ],
+  "containers": [
+    {
+      "symbol": "ASHLANDER_COFFER",
+      "item": 126030
+    },
+    {
+      "symbol": "BLACKWOOD_FOLIO",
+      "item": 190121
+    },
+    {
+      "symbol": "BOONBOX",
+      "item": 121526
+    },
+    {
+      "symbol": "CRAFTER_FOLIO",
+      "item": 171568
+    },
+    {
+      "symbol": "DARKELF_FOLIO",
+      "item": 171571
+    },
+    {
+      "symbol": "DEADLANDS_FOLIO",
+      "item": 194429
+    },
+    {
+      "symbol": "DRAGONHOLD_FOLIO",
+      "item": 171778
+    },
+    {
+      "symbol": "EBONHEART_FOLIO",
+      "item": 171573
+    },
+    {
+      "symbol": "ELSWEYRCOFFER",
+      "item": 175580
+    },
+    {
+      "symbol": "ELSWEYR_FOLIO",
+      "item": 171574
+    },
+    {
+      "symbol": "GALEN_FOLIO",
+      "item": 204499
+    },
+    {
+      "symbol": "HIGHISLE_FOLIO",
+      "item": 198597
+    },
+    {
+      "symbol": "JESTERBOX",
+      "item": 194414
+    },
+    {
+      "symbol": "JUBILEEBOX",
+      "item": 134797
+    },
+    {
+      "symbol": "LEGIONZEROBOX",
+      "item": 167210
+    },
+    {
+      "symbol": "MARKARTH_FOLIO",
+      "item": 184192
+    },
+    {
+      "symbol": "MORROWIND_FOLIO",
+      "item": 171569
+    },
+    {
+      "symbol": "NECROM_FOLIO",
+      "item": 211090
+    },
+    {
+      "symbol": "NEWLIFEBOX",
+      "item": 96390
+    },
+    {
+      "symbol": "PLUNDERSKULL",
+      "item": 84521
+    },
+    {
+      "symbol": "POUCH",
+      "item": 214263
+    },
+    {
+      "symbol": "SKYRIM_FOLIO",
+      "item": 171808
+    },
+    {
+      "symbol": "SOLSTICE_FOLIO",
+      "item": 226916
+    },
+    {
+      "symbol": "SUMMERSET_FOLIO",
+      "item": 171572
+    },
+    {
+      "symbol": "TOMEHOLD_FOLIO",
+      "item": 214255
+    },
+    {
+      "symbol": "TRIBAL_TREASURE_CRATE",
+      "item": 145568
+    },
+    {
+      "symbol": "UNDAUNTEDBOX",
+      "item": 171267
+    },
+    {
+      "symbol": "WEALD2_FOLIO",
+      "item": 223978
+    },
+    {
+      "symbol": "WEALD_FOLIO",
+      "item": 219721
+    },
+    {
+      "symbol": "ZENITHARPARCEL",
+      "item": 187701
+    }
+  ],
+  "book_containers": [
+    {
+      "symbol": "NOTHING_EYES",
+      "item": 145596
+    },
+    {
+      "symbol": "REPRINT_ALIKR",
+      "item": 120381
+    },
+    {
+      "symbol": "REPRINT_AURIDON",
+      "item": 120401
+    },
+    {
+      "symbol": "REPRINT_BANGKORAI",
+      "item": 120380
+    },
+    {
+      "symbol": "REPRINT_BIOGRAPHIES",
+      "item": 120385
+    },
+    {
+      "symbol": "REPRINT_COLDHARBOUR",
+      "item": 120405
+    },
+    {
+      "symbol": "REPRINT_DAEDRIC_PRINCES",
+      "item": 120384
+    },
+    {
+      "symbol": "REPRINT_DESHAAN",
+      "item": 120399
+    },
+    {
+      "symbol": "REPRINT_DIVINES",
+      "item": 120386
+    },
+    {
+      "symbol": "REPRINT_DUNGEON_LORE",
+      "item": 120387
+    },
+    {
+      "symbol": "REPRINT_DWEMER",
+      "item": 120388
+    },
+    {
+      "symbol": "REPRINT_EASTMARCH",
+      "item": 120398
+    },
+    {
+      "symbol": "REPRINT_EYEVEA",
+      "item": 120383
+    },
+    {
+      "symbol": "REPRINT_GLENUMBRA",
+      "item": 120377
+    },
+    {
+      "symbol": "REPRINT_GRAHTWOOD",
+      "item": 120402
+    },
+    {
+      "symbol": "REPRINT_GREENSHADE",
+      "item": 120403
+    },
+    {
+      "symbol": "REPRINT_LEGENDS_OF_NIRN",
+      "item": 120389
+    },
+    {
+      "symbol": "REPRINT_LITERATURE",
+      "item": 120390
+    },
+    {
+      "symbol": "REPRINT_MAGIC_MAGICKA",
+      "item": 120391
+    },
+    {
+      "symbol": "REPRINT_MALABAL_TOR",
+      "item": 120397
+    },
+    {
+      "symbol": "REPRINT_MYTHS_MUNDUS",
+      "item": 120392
+    },
+    {
+      "symbol": "REPRINT_OBLIVION_LORE",
+      "item": 120393
+    },
+    {
+      "symbol": "REPRINT_POETRY_SONG",
+      "item": 120394
+    },
+    {
+      "symbol": "REPRINT_REAPERS_MARCH",
+      "item": 120404
+    },
+    {
+      "symbol": "REPRINT_RIFT",
+      "item": 120400
+    },
+    {
+      "symbol": "REPRINT_RIVENSPIRE",
+      "item": 120379
+    },
+    {
+      "symbol": "REPRINT_SHADOWFEN",
+      "item": 120382
+    },
+    {
+      "symbol": "REPRINT_STONEFALLS",
+      "item": 120396
+    },
+    {
+      "symbol": "REPRINT_STORMHAVEN",
+      "item": 120378
+    },
+    {
+      "symbol": "REPRINT_TAMRIEL_HISTORY",
+      "item": 120395
+    },
+    {
+      "symbol": "TEMPLE_DOCTRINE",
+      "item": 126792
+    },
+    {
+      "symbol": "TRUTH_IN_SEQUENCE",
+      "item": 134547
+    }
+  ],
+  "crates": [
+    {
+      "symbol": "UNKNOWN",
+      "crate": 0,
+      "season": null,
+      "name": null
+    },
+    {
+      "symbol": "KINDRED",
+      "crate": 64,
+      "season": "2025-12",
+      "name": "Hidden Kindred"
+    },
+    {
+      "symbol": "ANU_PAD",
+      "crate": 67,
+      "season": "2026-06",
+      "name": "Anu vs. Padomay"
+    },
+    {
+      "symbol": "DB",
+      "crate": 60,
+      "season": "2024-12",
+      "name": "Dark Brotherhood"
+    },
+    {
+      "symbol": "MIRROR",
+      "crate": 61,
+      "season": "2025-03",
+      "name": "Mirrormoor"
+    },
+    {
+      "symbol": "WAVE",
+      "crate": 66,
+      "season": "2026-06",
+      "name": "Warrior Wave"
+    },
+    {
+      "symbol": "AKA_ALDU",
+      "crate": 63,
+      "season": "2025-09",
+      "name": "Akatosh vs. Alduin"
+    },
+    {
+      "symbol": "CARNAVAL",
+      "crate": 62,
+      "season": "2025-06",
+      "name": "Carnaval"
+    },
+    {
+      "symbol": "ORSINIUM",
+      "crate": 65,
+      "season": "2026-03",
+      "name": "Moons Over Orsinium"
+    },
+    {
+      "symbol": "DIAMOND",
+      "crate": 59,
+      "season": "2024-07",
+      "name": "Diamond Anniversary"
+    },
+    {
+      "symbol": "LAMP",
+      "crate": 58,
+      "season": "2024-04",
+      "name": "Order of the Lamp"
+    },
+    {
+      "symbol": "ALLMAKER",
+      "crate": 57,
+      "season": "2023-12",
+      "name": "All-Maker"
+    },
+    {
+      "symbol": "ARMIGER",
+      "crate": 55,
+      "season": "2023-09",
+      "name": "Buoyant Armiger"
+    },
+    {
+      "symbol": "FEATHER",
+      "crate": 54,
+      "season": "2023-06",
+      "name": "Unfeathered"
+    },
+    {
+      "symbol": "RAGE",
+      "crate": 53,
+      "season": "2023-04",
+      "name": "Ragebound"
+    },
+    {
+      "symbol": "STONELORE",
+      "crate": 52,
+      "season": "2022-12",
+      "name": "Stonelore"
+    },
+    {
+      "symbol": "WRAITH",
+      "crate": 51,
+      "season": "2022-09",
+      "name": "Wraithtide"
+    },
+    {
+      "symbol": "DARK",
+      "crate": 50,
+      "season": "2022-06",
+      "name": "Dark Chivalry"
+    },
+    {
+      "symbol": "SUNKEN",
+      "crate": 49,
+      "season": "2022-04",
+      "name": "Sunken Trove"
+    },
+    {
+      "symbol": "CELESTIAL",
+      "crate": 48,
+      "season": "2021-12",
+      "name": "Celestial"
+    },
+    {
+      "symbol": "HARLEQUIN",
+      "crate": 47,
+      "season": "2021-09",
+      "name": "Grim Harlequin"
+    },
+    {
+      "symbol": "IRON_ATRO",
+      "crate": 46,
+      "season": "2021-06",
+      "name": "Iron Atronach"
+    },
+    {
+      "symbol": "AYLEID",
+      "crate": 45,
+      "season": "2021-03",
+      "name": "Ayleid"
+    },
+    {
+      "symbol": "POTENTATE",
+      "crate": 44,
+      "season": "2020-12",
+      "name": "Akaviri Potentate"
+    },
+    {
+      "symbol": "SOVNGARDE",
+      "crate": 41,
+      "season": "2020-09",
+      "name": "Sovngarde"
+    },
+    {
+      "symbol": "NIGHTFALL",
+      "crate": 39,
+      "season": "2020-06",
+      "name": "Nightfall"
+    },
+    {
+      "symbol": "GLOOMSPORE",
+      "crate": 37,
+      "season": "2020-04",
+      "name": "Gloomspore"
+    },
+    {
+      "symbol": "FROST_ATRO",
+      "crate": 30,
+      "season": "2020-01",
+      "name": "Frost Atronach"
+    },
+    {
+      "symbol": "NEWMOON",
+      "crate": 27,
+      "season": "2019-09",
+      "name": "New Moon"
+    },
+    {
+      "symbol": "BAANDARI",
+      "crate": 21,
+      "season": "2019-07",
+      "name": "Baandari Pedlar"
+    },
+    {
+      "symbol": "DRAGONSCALE",
+      "crate": 24,
+      "season": "2019-04",
+      "name": "Dragonscale"
+    },
+    {
+      "symbol": "XANMEER",
+      "crate": 12,
+      "season": "2018-12",
+      "name": "Xanmeer"
+    },
+    {
+      "symbol": "HOLLOWJACK",
+      "crate": 10,
+      "season": "2018-09",
+      "name": "Hollowjack"
+    },
+    {
+      "symbol": "PSIJIC",
+      "crate": 9,
+      "season": "2018-06",
+      "name": "Psijic Vault"
+    },
+    {
+      "symbol": "SCALECALLER",
+      "crate": 8,
+      "season": "2018-03",
+      "name": "Scalecaller"
+    },
+    {
+      "symbol": "FIRE_ATRO",
+      "crate": 6,
+      "season": "2017-11",
+      "name": "Flame Atronach"
+    },
+    {
+      "symbol": "REAPER",
+      "crate": 5,
+      "season": "2017-09",
+      "name": "Reaper's Harvest"
+    },
+    {
+      "symbol": "DWEMER",
+      "crate": 4,
+      "season": "2017-07",
+      "name": "Dwarven"
+    },
+    {
+      "symbol": "WILD_HUNT",
+      "crate": 2,
+      "season": "2017-04",
+      "name": "Wild Hunt"
+    }
+  ],
+  "packs": [
+    {
+      "symbol": "ALCHEMIST",
+      "item": 197984,
+      "name": "Furnishing Pack: Mad Alchemist"
+    },
+    {
+      "symbol": "AMBITIONS",
+      "item": 197988,
+      "name": "Furnishing Pack: Daedric Ambitions"
+    },
+    {
+      "symbol": "AQUATIC",
+      "item": 197990,
+      "name": "Furnishing Pack: Aquatic Splendor"
+    },
+    {
+      "symbol": "ASTULA",
+      "item": 197994,
+      "name": "Furnishing Pack: Shad Astula Scholars"
+    },
+    {
+      "symbol": "AYLEID",
+      "item": 197959,
+      "name": "Furniture Pack: Ayleid"
+    },
+    {
+      "symbol": "AZURA",
+      "item": 197956,
+      "name": "Furnishing Pack: Azura"
+    },
+    {
+      "symbol": "COLDHARBOUR",
+      "item": 197964,
+      "name": "Furnishing Pack: Coldharbour Arcanaeum"
+    },
+    {
+      "symbol": "COMBAT",
+      "item": 214259,
+      "name": "Furnishing Pack: Combat Training"
+    },
+    {
+      "symbol": "COVEN",
+      "item": 197960,
+      "name": "Furnishing Pack: Witches' Coven"
+    },
+    {
+      "symbol": "CRAGBED",
+      "item": 197941,
+      "name": "Craglorn Multicultural Bedroom Pack"
+    },
+    {
+      "symbol": "CRAGKITCHEN",
+      "item": 197940,
+      "name": "Craglorn Multicultural Kitchen Pack"
+    },
+    {
+      "symbol": "CRAGKNICKS",
+      "item": 197943,
+      "name": "Craglorn Multicultural Knick-Knacks Pack"
+    },
+    {
+      "symbol": "CRAGPARLOUR",
+      "item": 197942,
+      "name": "Craglorn Multicultural Parlor Pack"
+    },
+    {
+      "symbol": "CURIO",
+      "item": 203179,
+      "name": "Furnishing Pack: Apocryphal Curiosities"
+    },
+    {
+      "symbol": "DARIEN",
+      "item": 225202,
+      "name": "Furnishing Pack: Darien's Delights"
+    },
+    {
+      "symbol": "DEEPMIRE",
+      "item": 197976,
+      "name": "Furnishing Pack: Deepmire Expedition"
+    },
+    {
+      "symbol": "DIBELLA",
+      "item": 197966,
+      "name": "Furnishing Pack: Dibella's Garden"
+    },
+    {
+      "symbol": "DRUIDIC",
+      "item": 198668,
+      "name": "Furnishing Pack: Druidic Gatherings"
+    },
+    {
+      "symbol": "DWARVEN",
+      "item": 212354,
+      "name": "Furnishing Pack: Dwarven Training Dummies"
+    },
+    {
+      "symbol": "FARGRAVE",
+      "item": 197989,
+      "name": "Furnishing Pack: Fargrave Bazaar"
+    },
+    {
+      "symbol": "FORGE",
+      "item": 197977,
+      "name": "Furnishing Pack: Forge-Lord's Great Works"
+    },
+    {
+      "symbol": "HAUNTED",
+      "item": 211094,
+      "name": "Furnishing Pack: Haunted Housewares"
+    },
+    {
+      "symbol": "HEART",
+      "item": 197982,
+      "name": "Furnishing Pack: Heart's Day Retreat"
+    },
+    {
+      "symbol": "HOLLOWJACK",
+      "item": 197973,
+      "name": "Furnishing Pack: Sinister Hollowjack Items"
+    },
+    {
+      "symbol": "HUBTREASURE",
+      "item": 197965,
+      "name": "Furnishing Pack: Hubalajad's Final Treasure"
+    },
+    {
+      "symbol": "JESTER",
+      "item": 204435,
+      "name": "Furnishing Pack: Jester's Festival Stagecraft"
+    },
+    {
+      "symbol": "KHAJIIT",
+      "item": 197981,
+      "name": "Furnishing Pack: Khajiiti Life"
+    },
+    {
+      "symbol": "LOOM",
+      "item": 214260,
+      "name": "Furnishing Pack: Heart of the Loom"
+    },
+    {
+      "symbol": "MALACATH",
+      "item": 197963,
+      "name": "Furnishing Pack: Malacath's Chosen"
+    },
+    {
+      "symbol": "MAORMER",
+      "item": 197993,
+      "name": "Furnishing Pack: Maormer Boarding Party"
+    },
+    {
+      "symbol": "MEPHALA",
+      "item": 197968,
+      "name": "Furnishing Pack: Trappings of Mephala Worship"
+    },
+    {
+      "symbol": "MERMAID",
+      "item": 197987,
+      "name": "Furnishing Pack: Steam Bath Serenity"
+    },
+    {
+      "symbol": "MOLAG",
+      "item": 197961,
+      "name": "Furnishing Pack: Molag Bal"
+    },
+    {
+      "symbol": "MOONBISHOP",
+      "item": 197979,
+      "name": "Furnishing Pack: Moon-Bishop's Sanctuary"
+    },
+    {
+      "symbol": "MOONPATH",
+      "item": 219746,
+      "name": "Furnishing Pack: Moonlit Pathways"
+    },
+    {
+      "symbol": "NECROM",
+      "item": 198324,
+      "name": "Furnishing Pack: Necrom Garden"
+    },
+    {
+      "symbol": "NEREID",
+      "item": 217656,
+      "name": "Furnishing Pack: Water Dancer Nereid"
+    },
+    {
+      "symbol": "NEWLIFE2018",
+      "item": 197974,
+      "name": "Furnishing Pack: New Life Festival"
+    },
+    {
+      "symbol": "NOBLEBATH",
+      "item": 197972,
+      "name": "Summerset Noble's Bathing Pack"
+    },
+    {
+      "symbol": "NOBLEKIT",
+      "item": 197970,
+      "name": "Summerset Noble's Kitchen Pack"
+    },
+    {
+      "symbol": "NOBLEPARLOUR",
+      "item": 197971,
+      "name": "Summerset Noble's Parlor Pack"
+    },
+    {
+      "symbol": "OASIS",
+      "item": 197980,
+      "name": "Furnishing Pack: Moons-Blessed Oasis"
+    },
+    {
+      "symbol": "PIPES",
+      "item": 197957,
+      "name": "Furnishing Pack: Dwarven Pipes"
+    },
+    {
+      "symbol": "SANGUINE",
+      "item": 219745,
+      "name": "Furnishing Pack: Sanguine's Festival"
+    },
+    {
+      "symbol": "SOTHA",
+      "item": 197962,
+      "name": "Furnishing Pack: The Clockwork God's Domain"
+    },
+    {
+      "symbol": "SWAMP",
+      "item": 197975,
+      "name": "Furnishing Pack: Shadow and Stone"
+    },
+    {
+      "symbol": "THEATER",
+      "item": 217655,
+      "name": "Furnishing Pack: Community Theater"
+    },
+    {
+      "symbol": "TOYMAKER",
+      "item": 224366,
+      "name": "Furnishing Pack: Toymaker's Trove"
+    },
+    {
+      "symbol": "TREES",
+      "item": 197954,
+      "name": "Trees of Tamriel Garden Pack"
+    },
+    {
+      "symbol": "TYRANTS",
+      "item": 197967,
+      "name": "Furnishing Pack: Tyrants of the Merethic Era"
+    },
+    {
+      "symbol": "VAMPIRE",
+      "item": 197983,
+      "name": "Furnishing Pack: Vampiric Libations"
+    },
+    {
+      "symbol": "VIVEC",
+      "item": 197958,
+      "name": "Furnishing Pack: Lord Vivec"
+    },
+    {
+      "symbol": "WINDOWS",
+      "item": 197986,
+      "name": "Furnishing Pack: Windows of the Divines"
+    },
+    {
+      "symbol": "WINTER",
+      "item": 223659,
+      "name": "Furnishing Pack: Winter's Feast"
+    },
+    {
+      "symbol": "WRITHING",
+      "item": 223665,
+      "name": "Furnishing Pack: Writhing Fortress"
+    },
+    {
+      "symbol": "ZENI",
+      "item": 197985,
+      "name": "Furnishing Pack: Chapel of Zenithar"
+    }
+  ],
+  "bundles": [
+    {
+      "symbol": "DWEMER",
+      "si": "SI_FURC_ITEMPACK_DWEMER",
+      "name": "Dwemer"
+    },
+    {
+      "symbol": "EBONY",
+      "si": "SI_FURC_ITEMPACK_EBONY",
+      "name": "Ebony Blade Style"
+    },
+    {
+      "symbol": "FIRSTBLADE",
+      "si": "SI_FURC_ITEMPACK_FIRSTBLADE",
+      "name": "Firstblade Style"
+    },
+    {
+      "symbol": "JYGGALAG",
+      "si": "SI_FURC_ITEMPACK_JYGGALAG",
+      "name": "Sword of Jyggalag Style"
+    },
+    {
+      "symbol": "RAZOR",
+      "si": "SI_FURC_ITEMPACK_RAZOR",
+      "name": "Mehrunes' Razor"
+    },
+    {
+      "symbol": "STABLE",
+      "si": "SI_FURC_ITEMPACK_STABLE",
+      "name": "Steadfast Stablemaster Bundle"
+    }
+  ],
+  "skill_lines": [
+    {
+      "symbol": "FIGHTERS",
+      "skill_line": 45
+    },
+    {
+      "symbol": "LEGERDEMAIN",
+      "skill_line": 111
+    },
+    {
+      "symbol": "MAGES",
+      "skill_line": 44
+    },
+    {
+      "symbol": "PSIJIC",
+      "skill_line": 130
+    },
+    {
+      "symbol": "UNDAUNTED",
+      "skill_line": 55
+    }
+  ],
+  "companions": [
+    {
+      "symbol": "AZANDAR"
+    },
+    {
+      "symbol": "EMBER"
+    },
+    {
+      "symbol": "ISOBEL"
+    },
+    {
+      "symbol": "SHARP_AS_NIGHT"
+    },
+    {
+      "symbol": "TANLORIN"
+    },
+    {
+      "symbol": "ZERITH_VAR"
+    }
+  ],
+  "versions": [
+    {
+      "symbol": "NONE",
+      "ordinal": 1,
+      "name": "(no patch)"
+    },
+    {
+      "symbol": "HOMESTEAD",
+      "ordinal": 2,
+      "name": "Homestead U13"
+    },
+    {
+      "symbol": "MORROWIND",
+      "ordinal": 3,
+      "name": "Morrowind U14"
+    },
+    {
+      "symbol": "REACH",
+      "ordinal": 4,
+      "name": "Horns of the Reach U15"
+    },
+    {
+      "symbol": "CLOCKWORK",
+      "ordinal": 5,
+      "name": "Clockwork City U16"
+    },
+    {
+      "symbol": "DRAGONS",
+      "ordinal": 6,
+      "name": "Dragon Bones U17"
+    },
+    {
+      "symbol": "ALTMER",
+      "ordinal": 7,
+      "name": "Summerset U18"
+    },
+    {
+      "symbol": "SLAVES",
+      "ordinal": 8,
+      "name": "Murkmire U19"
+    },
+    {
+      "symbol": "WEREWOLF",
+      "ordinal": 9,
+      "name": "Wolfhunter U20"
+    },
+    {
+      "symbol": "WOTL",
+      "ordinal": 10,
+      "name": "Wrathstone U21"
+    },
+    {
+      "symbol": "KITTY",
+      "ordinal": 11,
+      "name": "Elsweyr U22"
+    },
+    {
+      "symbol": "SCALES",
+      "ordinal": 12,
+      "name": "Scalebreaker U23"
+    },
+    {
+      "symbol": "DRAGON2",
+      "ordinal": 13,
+      "name": "Dragonhold U24"
+    },
+    {
+      "symbol": "HARROW",
+      "ordinal": 14,
+      "name": "Harrowstorm U25"
+    },
+    {
+      "symbol": "SKYRIM",
+      "ordinal": 15,
+      "name": "Greymoor U26"
+    },
+    {
+      "symbol": "STONET",
+      "ordinal": 16,
+      "name": "Stonethorn U27"
+    },
+    {
+      "symbol": "MARKAT",
+      "ordinal": 17,
+      "name": "Markarth U28"
+    },
+    {
+      "symbol": "FLAMES",
+      "ordinal": 18,
+      "name": "Flames of Ambition U29"
+    },
+    {
+      "symbol": "BLACKW",
+      "ordinal": 19,
+      "name": "Blackwood U30"
+    },
+    {
+      "symbol": "WAKE",
+      "ordinal": 20,
+      "name": "Waking Flame U31"
+    },
+    {
+      "symbol": "DEADL",
+      "ordinal": 21,
+      "name": "Deadlands U32"
+    },
+    {
+      "symbol": "TIDES",
+      "ordinal": 22,
+      "name": "Ascending Tide U33"
+    },
+    {
+      "symbol": "BRETON",
+      "ordinal": 23,
+      "name": "High Isle U34"
+    },
+    {
+      "symbol": "DEPTHS",
+      "ordinal": 24,
+      "name": "Lost Depths U35"
+    },
+    {
+      "symbol": "DRUID",
+      "ordinal": 25,
+      "name": "Firesong U36"
+    },
+    {
+      "symbol": "SCRIBE",
+      "ordinal": 26,
+      "name": "Scribes of Fate U37"
+    },
+    {
+      "symbol": "NECROM",
+      "ordinal": 27,
+      "name": "Necrom U38"
+    },
+    {
+      "symbol": "BASED",
+      "ordinal": 28,
+      "name": "Base Game Patch U39"
+    },
+    {
+      "symbol": "ENDLESS",
+      "ordinal": 29,
+      "name": "Secrets of the Telvanni U40"
+    },
+    {
+      "symbol": "SCIONS",
+      "ordinal": 30,
+      "name": "Scions of Ithelia U41"
+    },
+    {
+      "symbol": "WEALD",
+      "ordinal": 31,
+      "name": "Gold Road U42"
+    },
+    {
+      "symbol": "BASE43",
+      "ordinal": 32,
+      "name": "Home Tours U43"
+    },
+    {
+      "symbol": "BASE44",
+      "ordinal": 33,
+      "name": "Golden Pursuits U44"
+    },
+    {
+      "symbol": "FALLBAN",
+      "ordinal": 34,
+      "name": "Fallen Banners (U45)"
+    },
+    {
+      "symbol": "WORMS",
+      "ordinal": 35,
+      "name": "Seasons of the Worm Cult (U46)"
+    },
+    {
+      "symbol": "SHADOWS",
+      "ordinal": 36,
+      "name": "Feast of Shadows (U47)"
+    },
+    {
+      "symbol": "WORMS2",
+      "ordinal": 37,
+      "name": "Seasons of the Worm Cult Part 2 (U48)"
+    },
+    {
+      "symbol": "ZERO",
+      "ordinal": 38,
+      "name": "Season Zero (U49)"
+    },
+    {
+      "symbol": "THIEVES",
+      "ordinal": 39,
+      "name": "Season One (U50)"
+    }
+  ],
+  "source_priority": [
+    "CRAFTING",
+    "VENDOR",
+    "WRIT_VENDOR",
+    "ROLIS",
+    "TOMES",
+    "PVP",
+    "TELVAR",
+    "COLL_MERCH",
+    "DUNGEON",
+    "HARVEST",
+    "CHEST",
+    "QUEST",
+    "PICKPOCKET",
+    "STEAL_CONTAINER",
+    "DROP",
+    "JUSTICE",
+    "FISHING",
+    "ANTIQUITY",
+    "LUXURY",
+    "FESTIVAL_DROP",
+    "EDITOR",
+    "BAZAAR",
+    "CROWN",
+    "OTHER",
+    "GUILDSTORE",
+    "RUMOUR"
+  ],
+  "item_sources": [
+    "NONE",
+    "FAVE",
+    "CRAFTING",
+    "CRAFTING_KNOWN",
+    "CRAFTING_UNKNOWN",
+    "VENDOR",
+    "PVP",
+    "WRIT_VENDOR",
+    "CROWN",
+    "RUMOUR",
+    "LUXURY",
+    "OTHER",
+    "ROLIS",
+    "DROP",
+    "JUSTICE",
+    "FISHING",
+    "GUILDSTORE",
+    "FESTIVAL_DROP",
+    "BAZAAR",
+    "TOMES",
+    "TELVAR",
+    "COLL_MERCH",
+    "EDITOR",
+    "ANTIQUITY",
+    "DUNGEON",
+    "HARVEST",
+    "CHEST",
+    "QUEST",
+    "PICKPOCKET",
+    "STEAL_CONTAINER"
+  ],
+  "crown_store_subtypes": [
+    "housing_editor"
+  ],
+  "drop_subtypes": [
+    "chest",
+    "safebox",
+    "fish",
+    "steal",
+    "pickpocket",
+    "harvest",
+    "mob",
+    "scryable",
+    "tales_of_tribute",
+    "dark_brotherhood",
+    "lorebook",
+    "wardrobe",
+    "cabinet"
+  ],
+  "dungeon_drop_subtypes": [
+    "chest"
+  ],
+  "quest_reward_subtypes": [
+    "daily"
+  ],
+  "currencies": [
+    "GOLD",
+    "AP",
+    "TEL_VAR",
+    "WRIT_VOUCHERS",
+    "EVENT_TICKETS",
+    "CROWNS",
+    "CROWN_GEMS",
+    "SEALS",
+    "UNDAUNTED_KEYS",
+    "ARCHIVAL_FORTUNES",
+    "TRADE_BARS"
+  ],
+  "currency_defaults": {
+    "default": "GOLD",
+    "writ_vendor": "WRIT_VOUCHERS",
+    "pvp_vendor": "AP",
+    "crown_store": "CROWNS",
+    "crown_crate": "CROWN_GEMS"
+  },
+  "source_field_vocabularies": {
+    "bundle": "bundles",
+    "companion": "companions",
+    "container": "containers",
+    "crate": "crates",
+    "event": "events",
+    "npc_class": "npc_classes",
+    "npc_group": "npc_groups",
+    "packs": "packs",
+    "skill_line": "skill_lines",
+    "vendor": "vendors"
+  },
+  "id_unknown": {
+    "value": 0,
+    "fields": [
+      "achievement",
+      "quest"
+    ],
+    "means": "gated, but the id is not recorded"
+  },
+  "vendor_locations": {
+    "FAUSTINA": [
+      {
+        "place": "ANY_CAPITAL"
+      }
+    ],
+    "LUXF": [
+      {
+        "location": "COLDH"
+      },
+      {
+        "location": "CRAGLORN"
+      }
+    ],
+    "ROLIS": [
+      {
+        "place": "ANY_CAPITAL"
+      }
+    ]
+  },
+  "rarities": [
+    "common",
+    "rare",
+    "extremely_rare"
+  ]
+}

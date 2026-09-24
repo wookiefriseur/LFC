@@ -1,0 +1,478 @@
+{"id":160541,"name":"Outfit Station, Clockwork","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portabletabledye001"}
+{"id":161204,"name":"Anvil of Old Orsinium","quality":5,"cat":25,"sub":104,"theme":9,"icon":"housing_uni_inc_antaviloforsinium001"}
+{"id":161205,"name":"Void-Crystal Anomaly","quality":5,"cat":12,"sub":161,"theme":1,"icon":"housing_uni_inc_antblackfragmentoflyg001"}
+{"id":161206,"name":"Branch of Falinesti","quality":5,"cat":9,"sub":93,"theme":5,"icon":"housing_uni_inc_antbranchoffalinesti001"}
+{"id":161207,"name":"Hollowbone Wind Chimes","quality":4,"cat":6,"sub":99,"theme":5,"icon":"housing_uni_inc_anthollowbonewindchimes001"}
+{"id":161208,"name":"Rune-Carved Mammoth Skull","quality":5,"cat":9,"sub":89,"theme":8,"icon":"housing_uni_inc_antmammothskull001"}
+{"id":161209,"name":"Nest of Shadows","quality":5,"cat":7,"sub":107,"theme":4,"icon":"housing_uni_inc_antnestofshadows001"}
+{"id":161210,"name":"Prismatic Sunbird Feather","quality":5,"cat":11,"sub":126,"theme":3,"icon":"housing_uni_inc_antprismaticfeather001"}
+{"id":161211,"name":"Remnant of the False Tower","quality":5,"cat":12,"sub":161,"theme":14,"icon":"housing_uni_inc_antremnantofthefalsetower001"}
+{"id":161212,"name":"Silvenari Sap-Stone","quality":4,"cat":11,"sub":126,"theme":5,"icon":"housing_uni_inc_antsilvenarisapstone001"}
+{"id":161213,"name":"Sorcerer-King's Blade","quality":5,"cat":7,"sub":107,"theme":14,"icon":"housing_uni_inc_antsorcererkingblade001"}
+{"id":161214,"name":"Spellscar Shard","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_uni_inc_antspellscarshard001"}
+{"id":161215,"name":"Yokudan Skystone Scabbard","quality":4,"cat":9,"sub":91,"theme":10,"icon":"housing_uni_inc_antyokudanskystonescabbard001"}
+{"id":161216,"name":"Tri-Angled Truth Altar","quality":4,"cat":7,"sub":107,"theme":6,"icon":"housing_uni_inc_triangledtruthaltar001"}
+{"id":163428,"name":"Music Box, The Shadows Stir","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxgreyhost001"}
+{"id":163429,"name":"Music Box, Enigmas of the Elder Way","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_psijicmusicbox001"}
+{"id":163431,"name":"Music Box, Dreams and Memories","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxaldmerisymphonia001"}
+{"id":163432,"name":"Music Box, The Merry Meadmaker","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxbardscollege001"}
+{"id":163704,"name":"Kingmaker's Trove","quality":5,"cat":2,"sub":49,"theme":2,"icon":"housing_uni_inc_antkingsmakertrove001"}
+{"id":163705,"name":"Warcaller's Painted Drum","quality":5,"cat":3,"sub":55,"theme":9,"icon":"housing_uni_inc_antwarcallerspainteddrum001"}
+{"id":163706,"name":"Dwemer Star Chart","quality":5,"cat":4,"sub":64,"theme":12,"icon":"housing_uni_inc_antdwemerstarchart001"}
+{"id":163707,"name":"Antique Map of Glenumbra","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsglenumbrascroll001"}
+{"id":163708,"name":"Antique Map of Stormhaven","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsstormhavenscroll001"}
+{"id":163709,"name":"Antique Map of Rivenspire","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsrivenspirescroll001"}
+{"id":163710,"name":"Antique Map of Alik'r Desert","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsalikrscroll001"}
+{"id":163711,"name":"Antique Map of Bangkorai","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsbangkoraiscroll001"}
+{"id":163712,"name":"Antique Map of Stonefalls","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsstonefallsscroll002"}
+{"id":163713,"name":"Antique Map of Deshaan","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsdeshaanscroll002"}
+{"id":163714,"name":"Antique Map of Shadowfen","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsshadowfenscroll001"}
+{"id":163715,"name":"Antique Map of Eastmarch","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropseastmarchscroll002"}
+{"id":163716,"name":"Antique Map of The Rift","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropstheriftscroll002"}
+{"id":163717,"name":"Antique Map of Auridon","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsauridonscroll001"}
+{"id":163718,"name":"Antique Map of Grahtwood","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsgrahtwoodscroll001"}
+{"id":163719,"name":"Antique Map of Greenshade","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsgreenshadescroll001"}
+{"id":163720,"name":"Antique Map of Malabal Tor","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsmalabaltorscroll001"}
+{"id":163721,"name":"Antique Map of Reaper's March","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsreapersmarchscroll001"}
+{"id":163722,"name":"Antique Map of Tamriel","quality":3,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropstamrielscroll001"}
+{"id":163723,"name":"Antique Map of Wrothgar","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropswrothgarscroll001"}
+{"id":163724,"name":"Antique Map of Vvardenfell","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsvvardenfellscroll001"}
+{"id":163725,"name":"Antique Map of Summerset","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropssummersetscroll001"}
+{"id":163726,"name":"Antique Map of Murkmire","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsmurkmirescroll001"}
+{"id":163727,"name":"Antique Map of Northern Elsweyr","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropselsweyrscroll001"}
+{"id":163728,"name":"Antique Map of Southern Elsweyr","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropssouthelsweyrscroll001"}
+{"id":165568,"name":"Ancient Nord Gate","quality":5,"cat":13,"sub":163,"theme":8,"icon":"housing_skr_duc_door001"}
+{"id":165569,"name":"Soul-Sworn Thrall","quality":5,"cat":25,"sub":190,"theme":1,"icon":"item_soulswornthrall"}
+{"id":165578,"name":"Basin of Loss","quality":5,"cat":25,"sub":190,"theme":17,"icon":"housing_skr_str_housingvampirefountain001"}
+{"id":165579,"name":"Vampiric Carpet, Grand Sigil","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug001","blueprint":166727}
+{"id":165580,"name":"Vampiric Runner, Grand","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug002","blueprint":166728}
+{"id":165581,"name":"Vampiric Carpet, Large","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug003","blueprint":166729}
+{"id":165582,"name":"Vampiric Carpet, Sigil","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug004","blueprint":166730}
+{"id":165583,"name":"Vampiric Rug, Circular Sigil","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug005","blueprint":166731}
+{"id":165584,"name":"Vampiric Carpet, Standard","quality":3,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug006","blueprint":166732}
+{"id":165585,"name":"Vampiric Sideboard, Racks","quality":4,"cat":8,"sub":84,"theme":17,"icon":"housing_skr_fur_vampirewinerack001","blueprint":166733}
+{"id":165586,"name":"Vampiric Sideboard, Shelves","quality":3,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_vampirebookcaseshort001","blueprint":166734}
+{"id":165587,"name":"Vampiric Bookcase, Short","quality":3,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_vampirelabbookcase001","blueprint":166735}
+{"id":165588,"name":"Vampiric Bookcase, Short Filled","quality":4,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_housingvampirelabbookcasefilled001","blueprint":166736}
+{"id":165589,"name":"Vampiric Bookcase, Arched","quality":3,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_vampirebookcase001","blueprint":166737}
+{"id":165590,"name":"Vampiric Bookcase, Arched Filled","quality":4,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_housingvampirebookcasefilled001","blueprint":166738}
+{"id":165591,"name":"Vampiric Bookcase, Tall","quality":3,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_vampirebookcase002","blueprint":166739}
+{"id":165592,"name":"Vampiric Bookcase, Tall Filled","quality":4,"cat":4,"sub":60,"theme":17,"icon":"housing_skr_fur_housingvampirebookcasefilled002","blueprint":166740}
+{"id":165593,"name":"Vampiric Chair, Fanged","quality":4,"cat":5,"sub":132,"theme":17,"icon":"housing_skr_fur_vampirelabchair001","blueprint":166741}
+{"id":165594,"name":"Vampiric Armchair, Ornate","quality":4,"cat":5,"sub":132,"theme":17,"icon":"housing_skr_fur_vampirechair002","blueprint":166742}
+{"id":165595,"name":"Vampiric Pew, Ornate","quality":4,"cat":5,"sub":134,"theme":17,"icon":"housing_skr_fur_vampirebenchlong001","blueprint":166743}
+{"id":165596,"name":"Vampiric Table, Square Low","quality":3,"cat":5,"sub":66,"theme":17,"icon":"housing_skr_fur_vampiretableshort001","blueprint":166744}
+{"id":165598,"name":"Vampiric Table, Small","quality":3,"cat":5,"sub":66,"theme":17,"icon":"housing_skr_fur_vampiresmalltable001","blueprint":166745}
+{"id":165599,"name":"Vampiric Table, Grand","quality":4,"cat":5,"sub":66,"theme":17,"icon":"housing_skr_fur_vampiretablelarge001","blueprint":166746}
+{"id":165600,"name":"Vampiric Sideboard, Long","quality":3,"cat":5,"sub":66,"theme":17,"icon":"housing_skr_fur_vampiretabletrestle001","blueprint":166747}
+{"id":165601,"name":"Vampiric Table, Circular","quality":4,"cat":5,"sub":66,"theme":17,"icon":"housing_skr_fur_vampiretableroundlarge001","blueprint":166748}
+{"id":165602,"name":"Vampiric Desk, Polished","quality":4,"cat":4,"sub":61,"theme":17,"icon":"housing_skr_fur_vampiredesk001","blueprint":166749}
+{"id":165603,"name":"Vampiric Dresser, Polished","quality":4,"cat":2,"sub":146,"theme":17,"icon":"housing_skr_fur_vampiredresser001","blueprint":166750}
+{"id":165604,"name":"Vampiric Cabinet, Wall","quality":4,"cat":8,"sub":83,"theme":17,"icon":"housing_skr_fur_vampireshelf002","blueprint":166751}
+{"id":165605,"name":"Vampiric Mirror, Standing","quality":4,"cat":2,"sub":50,"theme":17,"icon":"housing_skr_fur_vampiremirrorfloor001","blueprint":166752}
+{"id":165606,"name":"Vampiric Wall Mirror","quality":4,"cat":2,"sub":50,"theme":17,"icon":"housing_skr_fur_vampiremirrorwall001","blueprint":166753}
+{"id":165607,"name":"Vampiric Divider, Ornate","quality":4,"cat":2,"sub":47,"theme":17,"icon":"housing_skr_fur_vampireroomdivider001","blueprint":166754}
+{"id":165608,"name":"Vampiric Trunk, Ornate Metal","quality":3,"cat":2,"sub":49,"theme":17,"icon":"housing_skr_con_vampirechest001","blueprint":166755}
+{"id":165609,"name":"Vampiric Trunk, Polished Wood","quality":3,"cat":2,"sub":49,"theme":17,"icon":"housing_skr_con_vampirechest002","blueprint":166756}
+{"id":165610,"name":"Vampiric Wardrobe, Ornate","quality":4,"cat":2,"sub":48,"theme":17,"icon":"housing_skr_fur_vampirearmoire001","blueprint":166757}
+{"id":165611,"name":"Vampiric Cabinet, Ornate","quality":4,"cat":8,"sub":83,"theme":17,"icon":"housing_skr_fur_vampirearmoire002","blueprint":166758}
+{"id":165612,"name":"Vampiric Bed, Canopy","quality":4,"cat":2,"sub":46,"theme":17,"icon":"housing_skr_fur_vampirebed001","blueprint":166759}
+{"id":165613,"name":"Vampiric Bed, Full","quality":4,"cat":2,"sub":46,"theme":17,"icon":"housing_skr_fur_vampirebed002","blueprint":166760}
+{"id":165614,"name":"Vampiric Bed, Single","quality":3,"cat":2,"sub":46,"theme":17,"icon":"housing_skr_fur_vampirebed005","blueprint":166761}
+{"id":165615,"name":"Vampiric Drapes, Tall","quality":3,"cat":3,"sub":52,"theme":17,"icon":"housing_skr_inc_vampiredrape001","blueprint":166762}
+{"id":165616,"name":"Vampiric Drapes, Tall Arch","quality":3,"cat":3,"sub":52,"theme":17,"icon":"housing_skr_inc_vampiredrape003","blueprint":166763}
+{"id":165617,"name":"Vampiric Drapes, Pulled Back","quality":3,"cat":3,"sub":52,"theme":17,"icon":"housing_skr_inc_vampiredrape004","blueprint":166764}
+{"id":165618,"name":"Vampiric Lightpost, Amber Single","quality":4,"cat":11,"sub":122,"theme":17,"icon":"housing_skr_lsb_vampirelightpostb001","blueprint":166765}
+{"id":165619,"name":"Vampiric Lightpost, Amber Double","quality":4,"cat":11,"sub":122,"theme":17,"icon":"housing_skr_lsb_vampirelightpostb002","blueprint":166766}
+{"id":165620,"name":"Vampiric Lamp, Amber Triple","quality":3,"cat":11,"sub":120,"theme":17,"icon":"housing_skr_inc_vampirelablamp001","blueprint":166767}
+{"id":165621,"name":"Vampiric Lamp, Amber Tall","quality":3,"cat":11,"sub":120,"theme":17,"icon":"housing_skr_inc_vampirelablampstanding001","blueprint":166768}
+{"id":165622,"name":"Vampiric Sconce, Amber","quality":3,"cat":11,"sub":123,"theme":17,"icon":"housing_skr_inc_vampirelablampwallmounted002","blueprint":166769}
+{"id":165623,"name":"Vampiric Chandelier, Amber Fanged","quality":4,"cat":11,"sub":125,"theme":17,"icon":"housing_skr_inc_vampirelabchandelier003","blueprint":166770}
+{"id":165624,"name":"Vampiric Brazier, Taloned","quality":4,"cat":11,"sub":124,"theme":17,"icon":"housing_skr_inc_vampirebrazier001","blueprint":166771}
+{"id":165625,"name":"Vampiric Goblet, Fluted","quality":3,"cat":8,"sub":144,"theme":17,"icon":"housing_skr_inc_vampiregoblets001","blueprint":166772}
+{"id":165626,"name":"Vampiric Goblet, Full","quality":3,"cat":8,"sub":144,"theme":17,"icon":"housing_skr_inc_vampiregoblets002","blueprint":166773}
+{"id":165627,"name":"Vampiric Lectern, Polished","quality":3,"cat":4,"sub":61,"theme":17,"icon":"housing_skr_fur_vampirebookpodium001","blueprint":166774}
+{"id":165628,"name":"Solitude Chandelier, Horns","quality":3,"cat":11,"sub":125,"theme":8,"icon":"housing_skr_inc_hornchandelierlong001","blueprint":166775}
+{"id":165629,"name":"Solitude Chandelier, Steel","quality":4,"cat":11,"sub":125,"theme":8,"icon":"housing_skr_lsb_candlelabra001","blueprint":166776}
+{"id":165630,"name":"Solitude Sconce, Wolf's-Head Lantern","quality":4,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_lanternhanging001","blueprint":166777}
+{"id":165631,"name":"Solitude Sconce, Lantern","quality":4,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_lanternhanging002","blueprint":166778}
+{"id":165632,"name":"Solitude Lantern, Hanging","quality":4,"cat":11,"sub":121,"theme":8,"icon":"housing_skr_lsb_lanternhanging003","blueprint":166779}
+{"id":165633,"name":"Solitude Sconce, Wrought Iron","quality":3,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_lanternwall001","blueprint":166780}
+{"id":165634,"name":"Solitude Sconce, Candle","quality":2,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_sconce001","blueprint":166781}
+{"id":165635,"name":"Solitude Sconce, Candle Embellished","quality":3,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_sconce002","blueprint":166782}
+{"id":165636,"name":"Solitude Sconce, Torch","quality":3,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_lsb_torch001","blueprint":166783}
+{"id":165637,"name":"Solitude Sconce, Horn","quality":2,"cat":11,"sub":123,"theme":8,"icon":"housing_skr_inc_hornsconce001","blueprint":166784}
+{"id":165638,"name":"Solitude Lantern, Table","quality":3,"cat":11,"sub":121,"theme":8,"icon":"housing_skr_lsb_lanterntable001","blueprint":166785}
+{"id":165639,"name":"Solitude Candlestick, Horn","quality":2,"cat":11,"sub":129,"theme":8,"icon":"housing_skr_inc_horncandle001","blueprint":166786}
+{"id":165640,"name":"Solitude Rug, Cowhide","quality":3,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_housingpeltrug001","blueprint":166787}
+{"id":165641,"name":"Solitude Rug, Snow Bear","quality":3,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_housingpeltrug002","blueprint":166788}
+{"id":165642,"name":"Solitude Carpet, Grand Wolf's-Head Border","quality":4,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi001","blueprint":166789}
+{"id":165643,"name":"Solitude Runner, Grand Wolf's-Head Border","quality":4,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi002","blueprint":166790}
+{"id":165644,"name":"Solitude Carpet, Plush","quality":4,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi003","blueprint":166791}
+{"id":165645,"name":"Solitude Carpet, Wolf's-Head Border","quality":4,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi004","blueprint":166792}
+{"id":165646,"name":"Solitude Rug, Knotwork","quality":3,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi005","blueprint":166793}
+{"id":165647,"name":"Solitude Carpet, Small Plush","quality":3,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_rughi006","blueprint":166794}
+{"id":165648,"name":"Solitude Carpet, Large Plain","quality":2,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_ruglo001","blueprint":166795}
+{"id":165649,"name":"Solitude Rug, Plain","quality":2,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_ruglo002","blueprint":166796}
+{"id":165650,"name":"Solitude Carpet, Inset Square","quality":2,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_ruglo003","blueprint":166797}
+{"id":165651,"name":"Solitude Carpet, Plush Worn","quality":2,"cat":3,"sub":53,"theme":8,"icon":"housing_skr_inc_ruglo004","blueprint":166798}
+{"id":165652,"name":"Solitude Armchair, High-Backed Noble","quality":4,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_thronefancylarge001","blueprint":166799}
+{"id":165653,"name":"Solitude Armchair, Noble","quality":4,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chairlargefancy001","blueprint":166800}
+{"id":165654,"name":"Solitude Armchair, Ornate","quality":4,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chairlargefancy002","blueprint":166801}
+{"id":165655,"name":"Solitude Armchair, Ornate Low","quality":4,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chairsmallfancy001","blueprint":166802}
+{"id":165656,"name":"Solitude Barstool, Wicker","quality":3,"cat":10,"sub":135,"theme":8,"icon":"housing_skr_fur_barstool001","blueprint":166803}
+{"id":165657,"name":"Solitude Barstool, Wood","quality":2,"cat":10,"sub":135,"theme":8,"icon":"housing_skr_fur_barstool002","blueprint":166804}
+{"id":165658,"name":"Solitude Footstool, Wood","quality":2,"cat":10,"sub":135,"theme":8,"icon":"housing_skr_fur_footstool001","blueprint":166805}
+{"id":165659,"name":"Solitude Armchair, Wicker","quality":3,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chair001","blueprint":166806}
+{"id":165660,"name":"Solitude Armchair, Wood","quality":2,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chair002","blueprint":166807}
+{"id":165661,"name":"Solitude Chair, Wicker","quality":3,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chair003","blueprint":166808}
+{"id":165662,"name":"Solitude Chair, Wood","quality":2,"cat":5,"sub":132,"theme":8,"icon":"housing_skr_fur_chair004","blueprint":166809}
+{"id":165663,"name":"Solitude Pew, Sturdy Long","quality":3,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench001","blueprint":166810}
+{"id":165664,"name":"Solitude Bench, Sturdy Long","quality":2,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench002","blueprint":166811}
+{"id":165665,"name":"Solitude Pew, Sturdy","quality":3,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench003","blueprint":166812}
+{"id":165666,"name":"Solitude Bench, Sturdy","quality":2,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench004","blueprint":166813}
+{"id":165667,"name":"Solitude Bench, Rustic Long","quality":2,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench005","blueprint":166814}
+{"id":165668,"name":"Solitude Bench, Rustic","quality":2,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_bench006","blueprint":166815}
+{"id":165669,"name":"Solitude Pew, Ornate Long","quality":4,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_benchfancy001","blueprint":166816}
+{"id":165670,"name":"Solitude Pew, Noble Long","quality":4,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_benchfancy002","blueprint":166817}
+{"id":165671,"name":"Solitude Pew, Ornate","quality":4,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_benchfancy003","blueprint":166818}
+{"id":165672,"name":"Solitude Pew, Noble","quality":4,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_benchfancy004","blueprint":166819}
+{"id":165673,"name":"Solitude Bench, Polished","quality":3,"cat":5,"sub":134,"theme":8,"icon":"housing_skr_fur_benchfancy005","blueprint":166820}
+{"id":165674,"name":"Solitude Table, Rustic","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tablerectangle001","blueprint":166821}
+{"id":165675,"name":"Solitude Table, Rustic Large","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tablerectanglelarge001","blueprint":166822}
+{"id":165676,"name":"Solitude Table, Round","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableroundlarge001","blueprint":166823}
+{"id":165677,"name":"Solitude Table, Round Small","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableroundsmall001","blueprint":166824}
+{"id":165678,"name":"Solitude Nightstand, Round","quality":2,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_tableroundsmall002","blueprint":166825}
+{"id":165679,"name":"Solitude Table, Square Low","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableshort001","blueprint":166826}
+{"id":165680,"name":"Solitude Table, Square","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tablesquare001","blueprint":166827}
+{"id":165681,"name":"Solitude Nightstand, Square","quality":2,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_tablesquaresmall001","blueprint":166828}
+{"id":165682,"name":"Solitude Sideboard, Rustic","quality":2,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tabletrestle001","blueprint":166829}
+{"id":165683,"name":"Solitude Wardrobe, Rustic","quality":3,"cat":2,"sub":48,"theme":8,"icon":"housing_skr_fur_armoir001","blueprint":166830}
+{"id":165684,"name":"Solitude Nightstand, Drawers","quality":2,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_dresser001","blueprint":166831}
+{"id":165685,"name":"Solitude Dresser, Rustic","quality":3,"cat":2,"sub":146,"theme":8,"icon":"housing_skr_fur_dresser002","blueprint":166832}
+{"id":165686,"name":"Solitude Nightstand, Cabinet","quality":2,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_endtable001","blueprint":166833}
+{"id":165687,"name":"Solitude Trough, Empty","quality":2,"cat":10,"sub":95,"theme":8,"icon":"housing_skr_fur_crate001","blueprint":166834}
+{"id":165688,"name":"Solitude Table, Grand Noble","quality":4,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tablelargefancy001","blueprint":166835}
+{"id":165689,"name":"Solitude Table, Circular Ornate","quality":4,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableroundlargefancy001","blueprint":166836}
+{"id":165690,"name":"Solitude Table, Circular Ornate Small","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableroundsmallfancy001","blueprint":166837}
+{"id":165691,"name":"Solitude Table, Square Ornate Low","quality":4,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tableshortfancy001","blueprint":166838}
+{"id":165692,"name":"Solitude Table, Square Ornate","quality":4,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tablesmallfancy001","blueprint":166839}
+{"id":165693,"name":"Solitude Trestle, Ornate","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tabletrestlefancy002","blueprint":166840}
+{"id":165694,"name":"Solitude Trestle, Ornate Large","quality":3,"cat":5,"sub":66,"theme":8,"icon":"housing_skr_fur_tabletrestlefancy001","blueprint":166841}
+{"id":165695,"name":"Solitude Desk, Ornate","quality":4,"cat":4,"sub":61,"theme":8,"icon":"housing_skr_fur_deskfancy001","blueprint":166842}
+{"id":165696,"name":"Solitude Wardrobe, Noble","quality":4,"cat":2,"sub":48,"theme":8,"icon":"housing_skr_fur_armoirfancy001","blueprint":166843}
+{"id":165697,"name":"Solitude Chest of Drawers, Noble","quality":4,"cat":2,"sub":146,"theme":8,"icon":"housing_skr_fur_endtablefancy001","blueprint":166844}
+{"id":165698,"name":"Solitude Chest of Drawers, Wide Noble","quality":4,"cat":2,"sub":146,"theme":8,"icon":"housing_skr_fur_endtablefancy002","blueprint":166845}
+{"id":165699,"name":"Solitude Nightstand, Noble Drawers","quality":3,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_endtablefancy004","blueprint":166846}
+{"id":165700,"name":"Solitude Nightstand, Noble","quality":3,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_endtablefancy005","blueprint":166847}
+{"id":165701,"name":"Solitude Nightstand, Noble Cabinet","quality":3,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_endtablefancy006","blueprint":166848}
+{"id":165702,"name":"Solitude Cabinet, Ornate Wall","quality":3,"cat":8,"sub":83,"theme":8,"icon":"housing_skr_fur_cabinetfancy001","blueprint":166849}
+{"id":165703,"name":"Solitude Wine Rack, Noble Full","quality":4,"cat":8,"sub":84,"theme":8,"icon":"housing_skr_fur_housingfancywinerackfilled001","blueprint":166850}
+{"id":165704,"name":"Solitude Mirror, Noble Full-Length","quality":4,"cat":2,"sub":50,"theme":8,"icon":"housing_skr_fur_mirrorfancy001","blueprint":166851}
+{"id":165705,"name":"Solitude Wall Mirror, Noble","quality":4,"cat":2,"sub":50,"theme":8,"icon":"housing_skr_inc_mirrorhang001","blueprint":166852}
+{"id":165706,"name":"Solitude Wall Mirror, Ornate","quality":4,"cat":2,"sub":50,"theme":8,"icon":"housing_skr_inc_mirrorhang002","blueprint":166853}
+{"id":165707,"name":"Solitude Hand Mirror, Elegant","quality":3,"cat":2,"sub":50,"theme":8,"icon":"housing_skr_inc_mirrorhand001","blueprint":166854}
+{"id":165708,"name":"Solitude Hand Mirror, Ornate","quality":3,"cat":2,"sub":50,"theme":8,"icon":"housing_skr_inc_mirrorhand002","blueprint":166855}
+{"id":165709,"name":"Solitude Censer, Wolf-Head","quality":4,"cat":7,"sub":105,"theme":8,"icon":"housing_skr_inc_incenseburner001","blueprint":166856}
+{"id":165710,"name":"Solitude Censer, Pagoda","quality":4,"cat":7,"sub":105,"theme":8,"icon":"housing_skr_inc_incenseburner002","blueprint":166857}
+{"id":165711,"name":"Solitude Travel Chest, Practical","quality":3,"cat":2,"sub":49,"theme":8,"icon":"housing_skr_con_chest001","blueprint":166858}
+{"id":165712,"name":"Solitude Strongbox, Iron Hunt Relief","quality":4,"cat":2,"sub":49,"theme":8,"icon":"housing_skr_con_chest002","blueprint":166859}
+{"id":165713,"name":"Solitude Trunk, Knotwork","quality":3,"cat":2,"sub":49,"theme":8,"icon":"housing_skr_con_chest003","blueprint":166860}
+{"id":165714,"name":"Solitude Strongbox, Iron Bands","quality":4,"cat":2,"sub":49,"theme":8,"icon":"housing_skr_con_chest004","blueprint":166861}
+{"id":165715,"name":"Solitude Jewelry Box, Wolf's-Head","quality":3,"cat":3,"sub":56,"theme":8,"icon":"housing_skr_con_smallbox001","blueprint":166862}
+{"id":165716,"name":"Solitude Jewelry Box, Copper and Agate","quality":3,"cat":3,"sub":56,"theme":8,"icon":"housing_skr_con_smallbox002","blueprint":166863}
+{"id":165717,"name":"Solitude Bookcase, Rustic Cabinet","quality":2,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_armoir002","blueprint":166864}
+{"id":165718,"name":"Solitude Cabinet, Rustic Filled","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingarmoirfilled002","blueprint":166865}
+{"id":165719,"name":"Solitude Bookcase, Rustic","quality":2,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelf001","blueprint":166866}
+{"id":165720,"name":"Solitude Bookcase, Rustic Filled","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffilled001","blueprint":166867}
+{"id":165721,"name":"Solitude Bookcase, Narrow Rustic","quality":2,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelf002","blueprint":166868}
+{"id":165722,"name":"Solitude Bookcase, Narrow Rustic Filled","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffilled002","blueprint":166869}
+{"id":165723,"name":"Solitude Bookcase, Noble Cabinet","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_armoirfancy002","blueprint":166870}
+{"id":165724,"name":"Solitude Bookcase, Noble Cabinet Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingarmoirfancyfilled002","blueprint":166871}
+{"id":165725,"name":"Solitude Bookcase, Noble","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy001","blueprint":166872}
+{"id":165726,"name":"Solitude Bookcase, Noble Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled001","blueprint":166873}
+{"id":165727,"name":"Solitude Bookcase, Narrow Noble","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy002","blueprint":166874}
+{"id":165728,"name":"Solitude Bookcase, Narrow Noble Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled002","blueprint":166875}
+{"id":165729,"name":"Solitude Bookcase, Backless","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy003","blueprint":166876}
+{"id":165730,"name":"Solitude Bookcase, Backless Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled003","blueprint":166877}
+{"id":165731,"name":"Solitude Bookcase, Narrow Backless","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy004","blueprint":166878}
+{"id":165732,"name":"Solitude Bookcase, Narrow Open Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled004","blueprint":166879}
+{"id":165733,"name":"Solitude Cabinet, Narrow Noble","quality":3,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy006","blueprint":166880}
+{"id":165734,"name":"Solitude Cabinet, Narrow Noble Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled006","blueprint":166881}
+{"id":165735,"name":"Solitude Display Shelf, Noble","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_bookshelffancy005","blueprint":166882}
+{"id":165736,"name":"Solitude Dresser, Rustic Shelves","quality":2,"cat":2,"sub":146,"theme":8,"icon":"housing_skr_fur_bookshelf003","blueprint":166883}
+{"id":165737,"name":"Solitude Nightstand, Rustic Shelves","quality":2,"cat":2,"sub":145,"theme":8,"icon":"housing_skr_fur_bookshelf004","blueprint":166884}
+{"id":165738,"name":"Solitude Counter, Rustic Bar","quality":2,"cat":5,"sub":67,"theme":8,"icon":"housing_skr_fur_bar001","blueprint":166885}
+{"id":165739,"name":"Solitude Counter, Rustic Bar Corner","quality":2,"cat":5,"sub":67,"theme":8,"icon":"housing_skr_fur_bar002","blueprint":166886}
+{"id":165740,"name":"Solitude Bed, Noble Double","quality":4,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_doublebedfancy002","blueprint":166887}
+{"id":165741,"name":"Solitude Bed, Rustic Bearskin Double","quality":3,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_beddouble004","blueprint":166888}
+{"id":165742,"name":"Solitude Bed, Rustic Cowhide Double","quality":3,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_beddouble006","blueprint":166889}
+{"id":165743,"name":"Solitude Bed, Noble Single","quality":4,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_singlebedfancy001","blueprint":166890}
+{"id":165744,"name":"Solitude Bed, Rustic Bearskin Single","quality":3,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_bedsingle004","blueprint":166891}
+{"id":165745,"name":"Solitude Bed, Rustic Cowhide Single","quality":3,"cat":2,"sub":46,"theme":8,"icon":"housing_skr_fur_bedsingle006","blueprint":166892}
+{"id":165746,"name":"Solitude Skewer, Twisted Iron","quality":3,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_largeskewer001","blueprint":166893}
+{"id":165747,"name":"Solitude Hammer, Simple","quality":2,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_toolhammer001","blueprint":166894}
+{"id":165748,"name":"Solitude Hand-Drill, Simple","quality":3,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_toolhanddrill001","blueprint":166895}
+{"id":165749,"name":"Solitude Scraper, Simple","quality":2,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_toolscraper001","blueprint":166896}
+{"id":165750,"name":"Solitude Wedge Pick, Simple","quality":2,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_toolspreader001","blueprint":166897}
+{"id":165751,"name":"Solitude Patching Kit, Well-Worn","quality":3,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_toolrepairkit001","blueprint":166898}
+{"id":165752,"name":"Solitude Game, Warrior and the Wolf","quality":4,"cat":3,"sub":56,"theme":8,"icon":"housing_skr_inc_game002","blueprint":166899}
+{"id":165753,"name":"Solitude Rain Barrel, Empty","quality":2,"cat":8,"sub":84,"theme":8,"icon":"housing_skr_inc_waterbarrel001","blueprint":166900}
+{"id":165754,"name":"Solitude Bucket, Empty","quality":2,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_waterbucket001","blueprint":166901}
+{"id":165755,"name":"Solitude Pot, Large Ceramic","quality":3,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_largepot001","blueprint":166902}
+{"id":165756,"name":"Solitude Vase, Large Sealed","quality":3,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_largepot002","blueprint":166903}
+{"id":165757,"name":"Solitude Urn, Ceramic","quality":2,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_ceramicbowl001","blueprint":166904}
+{"id":165758,"name":"Solitude Pot, Wide Metal","quality":3,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_smallpot001","blueprint":166905}
+{"id":165759,"name":"Solitude Pot, Narrow Metal","quality":3,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_smallpot002","blueprint":166906}
+{"id":165760,"name":"Solitude Pot, Stout Metal","quality":3,"cat":8,"sub":80,"theme":8,"icon":"housing_skr_inc_smallpot003","blueprint":166907}
+{"id":165761,"name":"Solitude Cauldron, Metal Empty","quality":2,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_fancymetalbowl001","blueprint":166908}
+{"id":165762,"name":"Solitude Serving Bowl, Metal","quality":3,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_smallpot004","blueprint":166909}
+{"id":165763,"name":"Solitude Serving Dish, Metal","quality":4,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_kitchenbowl001","blueprint":166910}
+{"id":165764,"name":"Solitude Serving Bowl, Verdigris","quality":3,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_foodbowlberries002","blueprint":166911}
+{"id":165765,"name":"Solitude Serving Bowl, Wood","quality":2,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_kitchenbowl002","blueprint":166912}
+{"id":165766,"name":"Solitude Serving Dish, Wood","quality":2,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_kitchenplates001","blueprint":166913}
+{"id":165767,"name":"Solitude Serving Tray, Wood","quality":3,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_kitchenbowllong001","blueprint":166914}
+{"id":165768,"name":"Solitude Serving Basket, Wicker","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_foodboweals001","blueprint":166915}
+{"id":165769,"name":"Solitude Picnic Basket, Wicker","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_ovalbasket002","blueprint":166916}
+{"id":165770,"name":"Solitude Basket, Wicker Handles","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_roundbasket001","blueprint":166917}
+{"id":165771,"name":"Solitude Basket, Wicker Wide","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_roundbasket002","blueprint":166918}
+{"id":165772,"name":"Solitude Basket, Centerpiece","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_squarebasket001","blueprint":166919}
+{"id":165773,"name":"Solitude Basket, Ornate","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_rndsqrbasket001","blueprint":166920}
+{"id":165774,"name":"Solitude Backpack, Basket","quality":3,"cat":8,"sub":87,"theme":8,"icon":"housing_skr_inc_backpackbasket001","blueprint":166921}
+{"id":165775,"name":"Solitude Cauldron, Hanging","quality":2,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_medhangingpot001","blueprint":166922}
+{"id":165776,"name":"Solitude Cauldron, Flat-Bottomed","quality":3,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_lghangingpot001","blueprint":166923}
+{"id":165777,"name":"Solitude Melting Pot, Double Boiler","quality":3,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_meltingpot001","blueprint":166924}
+{"id":165778,"name":"Solitude Frying Pan, Long-Handled","quality":3,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_fryingpan001","blueprint":166925}
+{"id":165779,"name":"Solitude Frying Pan, Wood Handle","quality":2,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_fryingpan002","blueprint":166926}
+{"id":165780,"name":"Solitude Frying Pan, Trivet","quality":3,"cat":8,"sub":151,"theme":8,"icon":"housing_skr_inc_fryingpan003","blueprint":166927}
+{"id":165781,"name":"Solitude Bowl, Winter Onions","quality":4,"cat":8,"sub":154,"theme":8,"icon":"housing_skr_inc_foodbowlonion001","blueprint":166928}
+{"id":165782,"name":"Solitude Tray, Fresh Eel","quality":4,"cat":8,"sub":155,"theme":8,"icon":"housing_skr_inc_foodplateeals001","blueprint":166929}
+{"id":165783,"name":"Solitude Bowl, Mushrooms","quality":3,"cat":8,"sub":154,"theme":8,"icon":"housing_skr_inc_foodmushroom001","blueprint":166930}
+{"id":165784,"name":"Solitude Bowl, Berries","quality":3,"cat":8,"sub":154,"theme":8,"icon":"housing_skr_inc_foodbowlberries001","blueprint":166931}
+{"id":165785,"name":"Solitude Meal, Rustic","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_kitchenplates002","blueprint":166932}
+{"id":165786,"name":"Solitude Tray, Stockfish","quality":3,"cat":8,"sub":155,"theme":8,"icon":"housing_skr_inc_foodplatefish001","blueprint":166933}
+{"id":165787,"name":"Solitude Platter, Ribs","quality":4,"cat":8,"sub":155,"theme":8,"icon":"housing_skr_inc_foodribs001","blueprint":166934}
+{"id":165788,"name":"Solitude Serving Pot, Hearty Stew","quality":4,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_foodsoupmeat001","blueprint":166935}
+{"id":165789,"name":"Solitude Dinner Bowl, Hearty Stew","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_soupbowl001","blueprint":166936}
+{"id":165790,"name":"Solitude Serving Pot, Vegetable Soup","quality":4,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_foodsoupveg001","blueprint":166937}
+{"id":165791,"name":"Solitude Dinner Bowl, Vegetable Soup","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_soupbowl002","blueprint":166938}
+{"id":165792,"name":"Solitude Camping Pot, Fish Stew","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_campfireframe001","blueprint":166939}
+{"id":165793,"name":"Solitude Gravy Boat, Metal","quality":3,"cat":8,"sub":81,"theme":8,"icon":"housing_skr_inc_metalbowl002","blueprint":166940}
+{"id":165794,"name":"Solitude Breakfast, Full","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_platefoodbreakfast001","blueprint":166941}
+{"id":165795,"name":"Solitude Breakfast, Eggs and Ham","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_platefoodbreakfast002","blueprint":166942}
+{"id":165796,"name":"Solitude Breakfast, Sausages and Ham","quality":3,"cat":8,"sub":85,"theme":8,"icon":"housing_skr_inc_platefoodbreakfast003","blueprint":166943}
+{"id":165797,"name":"Solitude Bread, Floral Pattern","quality":3,"cat":8,"sub":156,"theme":8,"icon":"housing_skr_inc_smallbreadloaf002","blueprint":166944}
+{"id":165798,"name":"Solitude Bread, Rustic Sliced","quality":2,"cat":8,"sub":156,"theme":8,"icon":"housing_skr_inc_smallbreadcut001","blueprint":166945}
+{"id":165799,"name":"Solitude Bread, Partial Loaf","quality":2,"cat":8,"sub":156,"theme":8,"icon":"housing_skr_inc_medbreadhalfloaf001","blueprint":166946}
+{"id":165800,"name":"Solitude Bread, Rustic Loaf","quality":3,"cat":8,"sub":156,"theme":8,"icon":"housing_skr_inc_smallbreadloaf001","blueprint":166947}
+{"id":165801,"name":"Solitude Bread, Long","quality":3,"cat":8,"sub":156,"theme":8,"icon":"housing_skr_inc_medbreadloaf001","blueprint":166948}
+{"id":165802,"name":"Solitude Goblet, Covered","quality":4,"cat":8,"sub":144,"theme":8,"icon":"housing_skr_inc_gobletcup001","blueprint":166949}
+{"id":165803,"name":"Solitude Goblet, Knotwork","quality":3,"cat":8,"sub":144,"theme":8,"icon":"housing_skr_inc_gobletcup002","blueprint":166950}
+{"id":165804,"name":"Solitude Goblet, Noble","quality":3,"cat":8,"sub":144,"theme":8,"icon":"housing_skr_inc_gobletcup003","blueprint":166951}
+{"id":165805,"name":"Solitude Stein, Rustic","quality":2,"cat":8,"sub":144,"theme":8,"icon":"housing_skr_inc_steincup001","blueprint":166952}
+{"id":165806,"name":"Solitude Drinking Horn, Ivory","quality":3,"cat":8,"sub":144,"theme":8,"icon":"housing_skr_inc_horncup001","blueprint":166953}
+{"id":165807,"name":"Solitude Drying Rack, Stockfish","quality":3,"cat":8,"sub":84,"theme":8,"icon":"housing_skr_inc_hangingfish001","blueprint":166954}
+{"id":165808,"name":"Solitude Smoking Rack, Sausage","quality":4,"cat":8,"sub":84,"theme":8,"icon":"housing_skr_inc_meatwallrack001","blueprint":166955}
+{"id":165809,"name":"Firelogs, White Pine","quality":2,"cat":10,"sub":97,"theme":8,"icon":"housing_skr_inc_logpilecut001"}
+{"id":165810,"name":"Logs, Twice-Split","quality":3,"cat":10,"sub":97,"theme":8,"icon":"housing_tre_skr_whitepinelogpile002"}
+{"id":165811,"name":"Solitude Fence, Stick","quality":1,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_stickfencestraight001"}
+{"id":165812,"name":"Solitude Fence, Stick Triple","quality":2,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_stickfencestraight003"}
+{"id":165813,"name":"Solitude Wagon Wheel, Heavy","quality":2,"cat":10,"sub":97,"theme":8,"icon":"housing_skr_csb_wagonwheel001"}
+{"id":165814,"name":"Tree, Young Winter Pine","quality":2,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_scotspinesnow005"}
+{"id":165815,"name":"Tree, Winter Pine","quality":3,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_scotspinesnow006"}
+{"id":165816,"name":"Tree, Young Aspen","quality":2,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_aspen001"}
+{"id":165817,"name":"Log, Fallen Winter Pine","quality":2,"cat":12,"sub":165,"theme":8,"icon":"housing_tre_skr_scotspinestump004"}
+{"id":165818,"name":"Tree, White Pine","quality":3,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_whitepinesnowy008"}
+{"id":165819,"name":"Sapling, White Pine","quality":2,"cat":12,"sub":141,"theme":8,"icon":"housing_tre_skr_whitepinesnowy009"}
+{"id":165820,"name":"Fern, Sting-Vine","quality":1,"cat":12,"sub":149,"theme":8,"icon":"housing_veg_skr_sumac001"}
+{"id":165821,"name":"Shrub, Wild Basil","quality":2,"cat":12,"sub":110,"theme":8,"icon":"housing_veg_skr_shrub005"}
+{"id":165822,"name":"Plant Cluster, Haafingar Underbrush","quality":2,"cat":12,"sub":109,"theme":8,"icon":"housing_veg_skr_fernplantcluster001"}
+{"id":165823,"name":"Tree, Young Mountain Mahogany","quality":2,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_mountainmahoganysnowy002"}
+{"id":165824,"name":"Tree, Mountain Mahogany","quality":2,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_mahogany005"}
+{"id":165825,"name":"Tree, Twisted Mountain Mahogany","quality":3,"cat":12,"sub":108,"theme":8,"icon":"housing_tre_skr_mountainmahoganysnowy013"}
+{"id":165826,"name":"Fields of Plenty Painting, Wood","quality":3,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_woodframepainting001"}
+{"id":165827,"name":"Eternal Moment Painting, Wood","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_woodframepainting004"}
+{"id":165828,"name":"Life in Repose Painting, Wood","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_woodframepainting006"}
+{"id":165829,"name":"Before the Trade Gathering Painting, Wood","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_woodframepainting007"}
+{"id":165830,"name":"Elsweyr Vista Painting, Wood","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_woodframepainting009"}
+{"id":165831,"name":"Catnap Painting, Gold","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_metalframepainting002"}
+{"id":165832,"name":"Elsweyr Landscape Painting, Gold","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_metalframepainting003"}
+{"id":165833,"name":"Elsweyr Dome Architecture Painting, Gold","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_metalframepainting005"}
+{"id":165834,"name":"A Simple Five-Claw Life Painting, Gold","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_metalframepainting008"}
+{"id":165835,"name":"Painting of Khajiiti Arch, Gold","quality":4,"cat":9,"sub":54,"theme":7,"icon":"housing_els_inc_metalframepainting010"}
+{"id":165836,"name":"A Warm Welcome Awaits Painting, Wood","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_woodframepainting001"}
+{"id":165837,"name":"Jarl of Morthal Painting, Wood","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_woodframepainting002"}
+{"id":165838,"name":"Painting of Nord Ship, Wood","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_woodframepainting005"}
+{"id":165839,"name":"Ursine Wandering Painting, Wood","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_woodframepainting006"}
+{"id":165840,"name":"The Bridge of Dragon Painting, Wood","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_woodframepainting009"}
+{"id":165841,"name":"Silent Solitude Painting, Silver","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_metalframepainting003"}
+{"id":165842,"name":"Dockside Painting, Silver","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_metalframepainting004"}
+{"id":165843,"name":"River's Journey Painting, Silver","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_metalframepainting007"}
+{"id":165844,"name":"The Light Within Painting, Silver","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_metalframepainting008"}
+{"id":165845,"name":"Painting of the Arch, Silver","quality":4,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_metalframepainting010"}
+{"id":165846,"name":"Solitude Streetlight, Single","quality":4,"cat":11,"sub":122,"theme":8,"icon":"housing_skr_lsb_lightpost001","blueprint":166956}
+{"id":165847,"name":"Solitude Streetlight, Paired","quality":4,"cat":11,"sub":122,"theme":8,"icon":"housing_skr_lsb_lightpost002","blueprint":166957}
+{"id":165848,"name":"Font of Auri-El","quality":5,"cat":13,"sub":117,"theme":1,"icon":"housing_uni_inc_antfontofauriel001"}
+{"id":165849,"name":"Echoes of Aldmeris","quality":5,"cat":9,"sub":54,"theme":3,"icon":"housing_uni_inc_antechoesofaldmeris001"}
+{"id":165850,"name":"Mnemonic Star-Sphere","quality":4,"cat":9,"sub":92,"theme":16,"icon":"housing_uni_inc_antmnemonicsphere001"}
+{"id":165851,"name":"Sixth House Ritual Table","quality":4,"cat":5,"sub":66,"theme":6,"icon":"housing_uni_inc_antsixthhouseritualtable001"}
+{"id":165852,"name":"St. Nerevar, Moon-and-Star","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_uni_inc_antstnerevarmoonandstar001"}
+{"id":165853,"name":"Moons-Blessed Ceremonial Pool","quality":5,"cat":7,"sub":107,"theme":7,"icon":"housing_uni_inc_antmoonsblessedceremonialpool001"}
+{"id":165854,"name":"Nisswo's Soul Tender","quality":4,"cat":7,"sub":107,"theme":4,"icon":"housing_uni_inc_antnisswosoultender001"}
+{"id":165855,"name":"Noble Knight's Rest","quality":4,"cat":7,"sub":75,"theme":2,"icon":"housing_uni_inc_antnobleknightsrest001"}
+{"id":165856,"name":"Sacred Chalice of Ysgramor","quality":4,"cat":7,"sub":107,"theme":8,"icon":"housing_uni_inc_antsacredchaliceofysgramor001"}
+{"id":165857,"name":"Brazier of Frozen Flame","quality":4,"cat":11,"sub":126,"theme":8,"icon":"housing_uni_inc_antbrazieroffrozenflame001"}
+{"id":165858,"name":"Coil of Satakal","quality":5,"cat":3,"sub":55,"theme":10,"icon":"housing_uni_inc_antcoilofsatakal001"}
+{"id":165859,"name":"The Dutiful Guar","quality":4,"cat":6,"sub":70,"theme":6,"icon":"housing_uni_inc_antdutifulguar001"}
+{"id":165860,"name":"Eight-Star Chandelier","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_uni_inc_anteightstarchandelier001"}
+{"id":165861,"name":"Golden Idol of Morihaus","quality":5,"cat":9,"sub":89,"theme":11,"icon":"housing_uni_inc_antgoldenidolofmorihaus001"}
+{"id":165862,"name":"Moth Priest's Cleansing Bowl","quality":4,"cat":7,"sub":107,"theme":11,"icon":"housing_uni_inc_antmothpriestscleansingbowl001"}
+{"id":165863,"name":"St. Alessia, Paravant","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_uni_inc_antstalessiaparavant001"}
+{"id":165864,"name":"Blessed Dais of Almalexia","quality":5,"cat":7,"sub":107,"theme":6,"icon":"housing_uni_inc_antdaismothermorrowind001"}
+{"id":165865,"name":"Beacon of Tower Zero","quality":5,"cat":11,"sub":122,"theme":3,"icon":"housing_uni_inc_antbeacontowerzero001"}
+{"id":165866,"name":"Ashen Infernace Gate","quality":4,"cat":13,"sub":163,"theme":13,"icon":"housing_uni_inc_antasheninfernacegate001"}
+{"id":165867,"name":"Cat's Eye Prism","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_inc_antcatseye001"}
+{"id":165868,"name":"Moonlight Mirror","quality":5,"cat":2,"sub":50,"theme":7,"icon":"housing_uni_inc_antmoonlightmirror001"}
+{"id":165869,"name":"Maormeri Serpent Shrine","quality":4,"cat":7,"sub":107,"theme":1,"icon":"housing_uni_inc_antmaormeriserpentshrine001"}
+{"id":165870,"name":"Daedric Pillar of Torment","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_uni_inc_antdaedricpillaroftorment001"}
+{"id":165871,"name":"Carved Whale Totem","quality":5,"cat":9,"sub":92,"theme":8,"icon":"housing_uni_inc_antcarvedskywhale001"}
+{"id":165872,"name":"Stained Glass of Lunar Phases","quality":5,"cat":9,"sub":92,"theme":7,"icon":"housing_uni_inc_antstainedglasslunarphases001"}
+{"id":165873,"name":"Meridian Sconce","quality":5,"cat":11,"sub":125,"theme":13,"icon":"housing_uni_inc_antmeridiansconce001"}
+{"id":165874,"name":"Jeweled Skull of Ayleid Kings","quality":4,"cat":7,"sub":75,"theme":14,"icon":"housing_uni_inc_antjeweledayelskull001"}
+{"id":165875,"name":"Ayleid Lightwell","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_uni_inc_antayleidlightwell001"}
+{"id":165876,"name":"Ruby Dragon Skull","quality":5,"cat":7,"sub":107,"theme":8,"icon":"housing_uni_inc_rubydragon001"}
+{"id":165878,"name":"Dwarven Puzzle Box","quality":4,"cat":3,"sub":56,"theme":12,"icon":"housing_uni_inc_antdwarvenpuzzlebox001"}
+{"id":165990,"name":"Mammoth Cheese, Pungent","quality":5,"cat":8,"sub":155,"theme":15,"icon":"housing_gen_exc_mammothcheesesack003"}
+{"id":165991,"name":"Statue, Vampiric Sovereign","quality":5,"cat":6,"sub":70,"theme":17,"icon":"housing_skr_inc_housingvampirelordstatue001"}
+{"id":165992,"name":"Antique Map of Western Skyrim","quality":2,"cat":4,"sub":64,"theme":1,"icon":"quest_skr_inc_mappropsskyrimquestscroll001"}
+{"id":165993,"name":"Antique Map of Coldharbour","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropscoldharborscroll001"}
+{"id":165994,"name":"Antique Map of Craglorn","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropscraglornscroll001"}
+{"id":165995,"name":"Antique Map of Cyrodiil","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropscyrodiilscroll001"}
+{"id":165996,"name":"Antique Map of the Gold Coast","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsgoldcoastscroll001"}
+{"id":165997,"name":"Antique Map of Hew's Bane","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropshewsbanescroll001"}
+{"id":165998,"name":"Tapestry of a Failed Incarnate, The Fool","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dae_lsb_incarnatestapestries003"}
+{"id":165999,"name":"Tapestry of a Failed Incarnate, The Warseeker","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dae_lsb_incarnatestapestries002"}
+{"id":166000,"name":"Flower Patch, Hawkmoth Cabbage","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_skr_nicotiana005"}
+{"id":166001,"name":"Plant, Murkmire Snakevine","quality":4,"cat":12,"sub":109,"theme":4,"icon":"housing_veg_fan_mrksnakeplant001"}
+{"id":166002,"name":"Dark Elf Tomb Marker, Sarano","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_exc_tombmarkerredsarano001"}
+{"id":166003,"name":"Dark Elf Tomb Marker, Velas","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_exc_ttombmarkerdrevelas001"}
+{"id":166004,"name":"Geode, Amethyst","quality":4,"cat":12,"sub":161,"theme":1,"icon":"housing_gen_exc_geodemarker001"}
+{"id":166005,"name":"Geode, Green Garnet","quality":4,"cat":12,"sub":161,"theme":1,"icon":"housing_gen_exc_geodemarker003"}
+{"id":166006,"name":"Ancient Nedic Prayer Wheel, Four-Faced","quality":5,"cat":7,"sub":107,"theme":8,"icon":"housing_cra_imc_prayerwheelpiece001"}
+{"id":166007,"name":"Ancient Nedic Prayer Wheel Frame, Engraved","quality":4,"cat":7,"sub":107,"theme":8,"icon":"housing_cra_inc_prayerwheel001"}
+{"id":166009,"name":"Vampiric Rug, Triangular Sigil","quality":4,"cat":3,"sub":53,"theme":17,"icon":"housing_skr_inc_vampirerug007","blueprint":166958}
+{"id":166010,"name":"Elsweyr Gateway, Stone Arch","quality":3,"cat":13,"sub":163,"theme":7,"icon":"housing_els_waf_wallsmediumgate001"}
+{"id":166011,"name":"Elsweyr Gate, Garden","quality":5,"cat":13,"sub":163,"theme":7,"icon":"housing_els_waf_wallsmediumgatebars001"}
+{"id":166012,"name":"Cactus, Tall Lunar Fan","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_els_moonplanttall004"}
+{"id":166013,"name":"Ebony Fox Totem","quality":4,"cat":9,"sub":92,"theme":8,"icon":"housing_uni_inc_antebonyfoxtotem001"}
+{"id":166014,"name":"Shrine of Boethra","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_uni_inc_antshrineofboethra001"}
+{"id":166015,"name":"Sweet Khenarthi's Song","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_uni_inc_antsweetkhenarthisong001"}
+{"id":166016,"name":"Ice Statue, Cowering Wretch","quality":3,"cat":7,"sub":75,"theme":1,"icon":"housing_cav_ice_frozenguys002"}
+{"id":166017,"name":"Witch Pike, Quiescent","quality":4,"cat":7,"sub":107,"theme":15,"icon":"housing_uni_exc_witchpikecenter001"}
+{"id":166018,"name":"Doll, Heiruna","quality":3,"cat":7,"sub":106,"theme":1,"icon":"housing_uni_inc_enchanteddoll001"}
+{"id":166019,"name":"Replica Throne of Windhelm","quality":5,"cat":9,"sub":93,"theme":8,"icon":"housing_skr_str_windhelmthrone001"}
+{"id":166020,"name":"Greymoor Keep Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":17,"icon":"housing_skr_lsb_bannergreymoorsmall002"}
+{"id":166021,"name":"Karthwatch Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":8,"icon":"housing_skr_lsb_bannerkarthaldsmall001"}
+{"id":166022,"name":"Morthal Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":8,"icon":"housing_skr_lsb_bannermorthalsmall001"}
+{"id":166023,"name":"Solitude Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":8,"icon":"housing_skr_lsb_bannersolitudesmall001"}
+{"id":166024,"name":"Kyne's Aegis Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":8,"icon":"housing_nor_lsb_templebannerkyneorange001"}
+{"id":166025,"name":"Nord Basket Trap, Fishing","quality":3,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_fishbasket001"}
+{"id":166026,"name":"Nord Boat, Fishing","quality":5,"cat":6,"sub":71,"theme":8,"icon":"housing_nor_csb_fishingboat003"}
+{"id":166027,"name":"Chaurus Egg, Dormant","quality":4,"cat":7,"sub":75,"theme":1,"icon":"housing_skr_exc_chaurusqueen001"}
+{"id":166029,"name":"Vampiric Fountain, Bat Swarm","quality":5,"cat":6,"sub":74,"theme":17,"icon":"housing_skr_str_housingvampirefountain002"}
+{"id":166030,"name":"Greymoor Tapestry, Harrowstorm","quality":5,"cat":3,"sub":52,"theme":17,"icon":"housing_gen_inc_grayhosttapestry001"}
+{"id":166044,"name":"Watering Trough, Full","quality":3,"cat":6,"sub":99,"theme":1,"icon":"housing_sum_crff_blacksmithtrough001"}
+{"id":166434,"name":"The Heartland","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_uni_inc_antheartland001"}
+{"id":166435,"name":"Seat of the Snow Prince","quality":4,"cat":9,"sub":93,"theme":1,"icon":"housing_uni_inc_antseatofsnowprince001"}
+{"id":166436,"name":"Tusks of the Orc-Father","quality":4,"cat":13,"sub":163,"theme":9,"icon":"housing_uni_inc_anttuskoforcfather001"}
+{"id":166437,"name":"Stillness Everlasting Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting001"}
+{"id":166438,"name":"Red Mist Blooming Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting002"}
+{"id":166439,"name":"Depths of Darkness Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting003"}
+{"id":166440,"name":"Light as Art Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting004"}
+{"id":166441,"name":"Gargoyle Guardians Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting005"}
+{"id":166442,"name":"The Deception of Light Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting006"}
+{"id":166443,"name":"Contrasts Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting007"}
+{"id":166444,"name":"Luminescence Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting008"}
+{"id":166445,"name":"The Keep Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting009"}
+{"id":166446,"name":"Still Life in Death Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting010"}
+{"id":166447,"name":"Boon Companion, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting011"}
+{"id":166448,"name":"The Scion Strides Forth Painting, Brass","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting012"}
+{"id":166449,"name":"Scion's Throne Painting, Wood","quality":4,"cat":9,"sub":54,"theme":17,"icon":"housing_skr_inc_vampirepainting013"}
+{"id":166450,"name":"Solitude Display Shelf, Noble Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_skr_fur_housingbookshelffancyfilled005","blueprint":166959}
+{"id":166451,"name":"Riven King's Throne","quality":4,"cat":9,"sub":93,"theme":2,"icon":"housing_uni_inc_antrivenkingsthrone001"}
+{"id":166452,"name":"Vampiric Column, Ancient","quality":4,"cat":6,"sub":69,"theme":17,"icon":"housing_skr_str_vamproomcolumnsingle002"}
+{"id":166463,"name":"Map of Western Skyrim, Hanging","quality":4,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsskyrim001"}
+{"id":166471,"name":"Tall Papa's Lamp","quality":4,"cat":7,"sub":105,"theme":10,"icon":"housing_uni_inc_anttallpapalamp001"}
+{"id":166472,"name":"Morwha's Blessing","quality":5,"cat":6,"sub":70,"theme":10,"icon":"housing_uni_inc_antmorwhasblessing001"}
+{"id":166473,"name":"Greensong Gathering Circle","quality":4,"cat":7,"sub":107,"theme":5,"icon":"housing_uni_inc_antgreensonggathering001"}
+{"id":166474,"name":"Altar of Celestial Convergence","quality":5,"cat":7,"sub":106,"theme":8,"icon":"housing_uni_inc_antaltarcelestial001"}
+{"id":166960,"name":"Target Stone Husk","quality":5,"cat":25,"sub":98,"theme":1,"icon":"item_targetstonehusk"}
+{"id":167006,"name":"Music Box, Hymn of Five-Hundred Axes","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_ysgramormusicbox001"}
+{"id":167007,"name":"Music Box, Subterranean Sonata","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxblackreach001"}
+{"id":167230,"name":"Alkosh's Hourglass, Replica","quality":5,"cat":7,"sub":107,"theme":7,"icon":"housing_els_duc_sealkoshhourglasshalfsize001"}
+{"id":167231,"name":"Celestial Nimbus","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_veg_hsg_celestialnebula004"}
+{"id":167289,"name":"Tree, Lowland White Pine","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_whitepine008"}
+{"id":167290,"name":"Tree, Great Lowland White Pine","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_whitepine006"}
+{"id":167291,"name":"Tree, Towering Royal Pine","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_skr_scotspine008"}
+{"id":167292,"name":"Rocks, Large Jagged Set","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_skr_smpile004"}
+{"id":167293,"name":"Shrub, Long Amber Bayberry","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_skr_bayberryshrub006"}
+{"id":167294,"name":"Boulder, Jagged Stone","quality":1,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_skr_sm002"}
+{"id":167295,"name":"Tree, Great Snowy White Pine","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_whitepinesnowy006"}
+{"id":167296,"name":"Tree, Giant Snowy White Pine","quality":2,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_skr_whitepinesnowy004"}
+{"id":167297,"name":"Trees, Young Snowy White Pine Cluster","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_skr_whitepinebushsnowy004"}
+{"id":167298,"name":"Dwarven Sconce, Polished Barred","quality":4,"cat":11,"sub":123,"theme":12,"icon":"housing_skr_lsb_markwallsconcerounda001"}
+{"id":167299,"name":"Dwarven Chandelier, Polished Braced","quality":4,"cat":11,"sub":125,"theme":12,"icon":"housing_skr_lsb_markchandelierd001"}
+{"id":167300,"name":"Dwarven Lantern, Polished Wall","quality":4,"cat":11,"sub":123,"theme":12,"icon":"housing_skr_lsb_marklampwallon001"}
+{"id":167301,"name":"Dwarven Lamppost, Polished Powered","quality":4,"cat":11,"sub":122,"theme":12,"icon":"housing_skr_lsb_marklamposton001"}
+{"id":167302,"name":"Solitude Brazier, Metal","quality":3,"cat":11,"sub":124,"theme":8,"icon":"housing_skr_lsb_brazier001"}
+{"id":167304,"name":"Solitude Pillar Base, Wood","quality":3,"cat":6,"sub":69,"theme":8,"icon":"housing_skr_str_basewoodpillar001","blueprint":167361}
+{"id":167306,"name":"Tree, Towering Snowy White Pine","quality":2,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_skr_whitepinesnowy005"}
+{"id":167310,"name":"Castle Thorn Gargoyle","quality":5,"cat":6,"sub":70,"theme":8,"icon":"housing_skr_str_vampgargoylelarge001"}
+{"id":167311,"name":"Solitude Wall, Low Stone","quality":2,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_solwalllowstraight002","blueprint":167354}
+{"id":167312,"name":"Solitude Wall, Low Curved Stone","quality":2,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_solwalllowcurve002","blueprint":167355}
+{"id":167313,"name":"Solitude Wall, Stone","quality":2,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_solwallmediumstraight002","blueprint":167356}
+{"id":167314,"name":"Solitude Wall, Curved Stone","quality":3,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_solwallmediumcurve002","blueprint":167362}
+{"id":167315,"name":"Solitude Post, Stone Wall","quality":3,"cat":13,"sub":164,"theme":8,"icon":"housing_skr_waf_solwallmediumpost001","blueprint":167363}
+{"id":167316,"name":"Solitude Archway, Stone","quality":3,"cat":13,"sub":163,"theme":8,"icon":"housing_skr_waf_solwallmediumgate001","blueprint":167364}
+{"id":167317,"name":"Solitude Gate, Wood","quality":4,"cat":13,"sub":163,"theme":8,"icon":"housing_skr_waf_solwallmediumgatedoor001","blueprint":167371}
+{"id":167318,"name":"Solitude Stall, Covered Merchant","quality":3,"cat":13,"sub":114,"theme":8,"icon":"housing_skr_csb_merchantstand001","blueprint":167365}
+{"id":167319,"name":"Solitude Stall, Merchant","quality":2,"cat":13,"sub":138,"theme":8,"icon":"housing_skr_csb_merchantstand002","blueprint":167357}
+{"id":167320,"name":"Solitude Cart, Work","quality":3,"cat":6,"sub":71,"theme":8,"icon":"housing_skr_csb_cart001","blueprint":167366}
+{"id":167321,"name":"Solitude Wagon, Sturdy","quality":4,"cat":6,"sub":71,"theme":8,"icon":"housing_skr_csb_wagon002","blueprint":167372}
+{"id":167322,"name":"Solitude Fireplace, Ornate","quality":4,"cat":13,"sub":117,"theme":8,"icon":"housing_skr_str_solitudefireplacehi001","blueprint":167373}
+{"id":167323,"name":"Solitude Fireplace, Kitchen","quality":4,"cat":13,"sub":117,"theme":8,"icon":"housing_skr_str_solitudefireplacekitchen001","blueprint":167374}
+{"id":167324,"name":"Solitude Shed, Wood Lean-To","quality":2,"cat":13,"sub":117,"theme":8,"icon":"housing_skr_str_villagesideshed003","blueprint":167358}
+{"id":167325,"name":"Solitude Tent, Open","quality":4,"cat":13,"sub":114,"theme":8,"icon":"housing_skr_cmp_tentmerchant002","blueprint":167375}
+{"id":167326,"name":"Solitude Tent, Enclosed","quality":4,"cat":13,"sub":114,"theme":8,"icon":"housing_skr_cmp_tentlarge001","blueprint":167376}
+{"id":167327,"name":"Solitude Foot Bridge, Wood-Planked","quality":3,"cat":13,"sub":138,"theme":8,"icon":"housing_skr_str_bridgefoot001","blueprint":167367}
+{"id":167328,"name":"Solitude Platform, Square Wooden","quality":3,"cat":13,"sub":138,"theme":8,"icon":"housing_skr_str_woodenplatform001","blueprint":167368}
+{"id":167329,"name":"Solitude Well, Covered","quality":3,"cat":6,"sub":72,"theme":8,"icon":"housing_skr_str_villagewelllarge002","blueprint":167369}
+{"id":167330,"name":"Solitude Walkway, Stone","quality":2,"cat":13,"sub":138,"theme":8,"icon":"housing_skr_waf_sidewalk001","blueprint":167359}
+{"id":167331,"name":"Solitude Stairway, Stone","quality":2,"cat":13,"sub":117,"theme":8,"icon":"housing_skr_waf_sidewalkstairs002","blueprint":167360}
+{"id":167332,"name":"The Mage's Staff Painting, Gold","quality":5,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_housingmetalframepainting001"}
+{"id":167333,"name":"Solitude Platform, Ornate Tile","quality":3,"cat":13,"sub":138,"theme":8,"icon":"housing_skr_str_housingplatform001","blueprint":167370}
+{"id":167334,"name":"Stone Garden Tank, Rootbound","quality":5,"cat":10,"sub":159,"theme":12,"icon":"housing_skr_duc_nrcontainercombined001"}
+{"id":167335,"name":"Solitude Door, Arched Wooden","quality":4,"cat":13,"sub":163,"theme":8,"icon":"housing_skr_str_solitudedoor001","blueprint":167377}
+{"id":167336,"name":"Vampiric Chandelier, Azure Wrought-Iron","quality":5,"cat":11,"sub":125,"theme":17,"icon":"housing_skr_inc_vampirelabchandelier001","blueprint":167378}
+{"id":167337,"name":"Solitude Loom, Warp-Weighted","quality":5,"cat":10,"sub":96,"theme":8,"icon":"housing_skr_inc_loom001","blueprint":167379}
+{"id":167338,"name":"Solitude Game, Blood-on-the-Snow","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_skr_inc_game001","blueprint":167380}
+{"id":167339,"name":"Ancient Nord Monolith, Head","quality":5,"cat":6,"sub":70,"theme":8,"icon":"housing_rok_skr_carvednordhead001","blueprint":167381}
+{"id":167340,"name":"Winter Cardinal Painting, In Progress","quality":5,"cat":9,"sub":54,"theme":8,"icon":"housing_skr_inc_unfinishedpainting002","blueprint":167382}
+{"id":167341,"name":"Solitude Smoking Rack, Fish","quality":5,"cat":8,"sub":84,"theme":8,"icon":"housing_skr_inc_fishwallrack001","blueprint":167383}
+{"id":167342,"name":"Blackreach Geode, Iridescent","quality":5,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_skr_giantgeode005","blueprint":167384}
+{"id":167343,"name":"Stone, Nirncrux-Laden","quality":4,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_uni_earthbonesmall002"}
+{"id":167344,"name":"Reachfolk Banner, Moonburst","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_uni_lsb_reachbanners003"}
+{"id":167345,"name":"Fern, Cyan Cluster","quality":3,"cat":12,"sub":149,"theme":1,"icon":"housing_tre_trp_hrccyatheacooperiglow003"}
+{"id":167346,"name":"Vines, Flowering Wyrdbloom","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_flr_wyrdflowercluster04"}
+{"id":167347,"name":"Orcish Figurine, Mammoth","quality":4,"cat":9,"sub":92,"theme":9,"icon":"housing_orc_inc_wtgceramicanimal001"}
+{"id":167348,"name":"Orcish Figurine, Bear","quality":4,"cat":9,"sub":92,"theme":9,"icon":"housing_orc_inc_wtgceramicanimal002"}
+{"id":167349,"name":"Warning Totem, Skulls","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_gen_exc_ogretotemstand002"}
+{"id":167350,"name":"Minecart, Skeletal Remains","quality":4,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_csb_minecartbones001"}
+{"id":167351,"name":"Crocodile Skeleton, Complete","quality":4,"cat":9,"sub":91,"theme":1,"icon":"housing_cre_exc_alligatorskeletonhousing001"}
+{"id":167352,"name":"Pelt, Fox","quality":3,"cat":9,"sub":91,"theme":8,"icon":"housing_nor_duc_totempiece004"}
+{"id":167428,"name":"Music Box, Mother Morrowind's Sacred Lullaby","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_almalexiamusicbox001"}
+{"id":167429,"name":"Music Box, Never Fall, Never Die","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxundaunted001"}
+{"id":167933,"name":"Dwarven Beam Emitter, Medium","quality":5,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_str_markdwemercrystalpillarsmall001"}
+{"id":167934,"name":"Dwarven Orrery, Scholastic","quality":5,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_inc_marktableorrey001"}
+{"id":167935,"name":"Dwarven Work Lamp, Powered Floor","quality":5,"cat":11,"sub":120,"theme":12,"icon":"housing_skr_lsb_markdwelamp001"}
+{"id":169117,"name":"Target Bloodknight","quality":5,"cat":25,"sub":98,"theme":1,"icon":"targetdummy_bloodknight"}

@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/EXAMPLE-ORG/FurnitureCatalogue-DB/research/issue-flow/diff-line.schema.json",
+  "title": "FurnitureCatalogue-DB diff line",
+  "description": "One JSON object per line inside the issue-body diff block. The action's input contract. Op-discriminated: each `op` has its own required-field set. See research/U_issue_flow_contract.md and AF_schema_recommendation.md §7.",
+  "type": "object",
+  "required": ["v", "op"],
+  "properties": {
+    "v": {
+      "description": "Diff-format version. Currently always 1.",
+      "type": "integer",
+      "const": 1
+    },
+    "op": {
+      "description": "Operation. `add-enum` targets enums.json and carries no id/category (AF §7.3).",
+      "type": "string",
+      "enum": ["update", "add", "delete", "add-enum"]
+    }
+  },
+  "oneOf": [
+    {
+      "title": "update",
+      "additionalProperties": false,
+      "required": ["v", "op", "category", "fields"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "update" },
+        "reference": { "$ref": "#/$defs/discoveryReference" },
+        "id": { "$ref": "#/$defs/id" },
+        "blueprint": { "$ref": "#/$defs/blueprint" },
+        "category": { "$ref": "#/$defs/category" },
+        "fields": {
+          "description": "The subset of top-level record keys that changed, with their new values. A null value means the key was removed.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "enum": [
+              "source",
+              "cost",
+              "availability",
+              "rarity",
+              "name_overrides",
+              "notes",
+              "description"
+            ]
+          }
+        },
+        "match": { "$ref": "#/$defs/match" }
+      },
+      "anyOf": [
+        { "required": ["id"] },
+        { "required": ["blueprint"] }
+      ]
+    },
+    {
+      "title": "delete",
+      "additionalProperties": false,
+      "required": ["v", "op", "category"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "delete" },
+        "id": { "$ref": "#/$defs/id" },
+        "blueprint": { "$ref": "#/$defs/blueprint" },
+        "category": { "$ref": "#/$defs/category" },
+        "match": { "$ref": "#/$defs/match" }
+      },
+      "anyOf": [
+        { "required": ["id"] },
+        { "required": ["blueprint"] }
+      ]
+    },
+    {
+      "title": "add",
+      "additionalProperties": false,
+      "required": ["v", "op", "category", "record"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "add" },
+        "reference": { "$ref": "#/$defs/discoveryReference" },
+        "id": { "$ref": "#/$defs/id" },
+        "blueprint": { "$ref": "#/$defs/blueprint" },
+        "category": { "$ref": "#/$defs/category" },
+        "record": {
+          "description": "The complete new record. Validated separately against the full record schema (O_db_schema). The action cross-checks record.id against the line-level id.",
+          "type": "object",
+          "required": ["source", "cost", "availability"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "blueprint": { "$ref": "#/$defs/blueprint" },
+            "source": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": { "type": "string" }
+              }
+            },
+            "cost": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["currency", "amount"],
+                "properties": {
+                  "currency": { "type": "string" },
+                  "amount": { "type": "integer", "minimum": 0 }
+                },
+                "additionalProperties": false
+              }
+            },
+            "availability": {
+              "type": "object",
+              "required": ["version"],
+              "properties": {
+                "version": { "type": "string" }
+              }
+            }
+          },
+          "anyOf": [
+            { "required": ["id"] },
+            { "required": ["blueprint"] }
+          ]
+        }
+      },
+      "anyOf": [
+        { "required": ["id"] },
+        { "required": ["blueprint"] }
+      ]
+    },
+    {
+      "title": "add-enum",
+      "additionalProperties": false,
+      "required": ["v", "op", "enum", "value"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "add-enum" },
+        "enum": {
+          "description": "The enums.json key the new value is added to (e.g. \"vendors\").",
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value": {
+          "description": "The new enum symbol (uppercase identifier).",
+          "type": "string",
+          "minLength": 1
+        },
+        "meta": { "$ref": "#/$defs/enumMeta" }
+      },
+      "allOf": [
+        { "$ref": "#/$defs/metaFor/vendors" },
+        { "$ref": "#/$defs/metaFor/locations" },
+        { "$ref": "#/$defs/metaFor/places" },
+        { "$ref": "#/$defs/metaFor/versions" },
+        { "$ref": "#/$defs/metaFor/crates" },
+        { "$ref": "#/$defs/metaFor/packs" },
+        { "$ref": "#/$defs/metaFor/bundles" },
+        { "$ref": "#/$defs/metaFor/containers" },
+        { "$ref": "#/$defs/metaFor/events" },
+        { "$ref": "#/$defs/metaFor/npc_classes" },
+        { "$ref": "#/$defs/metaFor/skill_lines" },
+        { "$ref": "#/$defs/metaFor/companions" },
+        { "$ref": "#/$defs/metaFor/currencies" }
+      ]
+    }
+  ],
+  "$defs": {
+    "discoveryReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "locale",
+        "apiVersion",
+        "meta"
+      ],
+      "properties": {
+        "format": {
+          "const": "furniture-discovery-v1"
+        },
+        "locale": {
+          "type": "string",
+          "pattern": "^[a-z]{2,8}$"
+        },
+        "apiVersion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "name",
+            "icon",
+            "quality",
+            "cat",
+            "sub",
+            "theme"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "quality": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "cat": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "sub": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "theme": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "icon": {
+              "type": "string",
+              "pattern": "^/esoui/art/icons/.*\\.[dD][dD][sS]$"
+            }
+          }
+        }
+      }
+    },
+    "enumMeta": {
+      "description": "The rest of an OBJECT-valued vocabulary's entry, so a new value arrives complete rather than as a bare symbol. Under the v2 schema that is most vocabularies, not just `versions` (AM §4). Which keys an entry wants depends on which vocabulary `enum` names; `metaFor` below states that per vocabulary. The editor omits a blank optional field rather than sending it empty, so an absent optional key is normal and `meta` itself is absent when nothing was filled in.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "si": {
+          "description": "The locale key the entry's name resolves from (LFC locale/en.lua).",
+          "type": "string",
+          "pattern": "^SI_[A-Z0-9_]+$"
+        },
+        "name": {
+          "description": "The English label - what en.lua says for the SI key, or the marketing name for a patch, crate or pack.",
+          "type": "string",
+          "minLength": 1
+        },
+        "zone": {
+          "description": "The game zoneId GetZoneNameById() resolves. A game ZONE only.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "ordinal": {
+          "description": "A version's sort ordinal (Constants.Versioning order). Must not collide with an existing version's ordinal.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "crate": {
+          "description": "The GetCrownCrateName(N) id. Not monotonic with the season date.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "season": {
+          "description": "The crate's season as \"YYYY-MM\". Absent means TBA.",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}$"
+        },
+        "item": {
+          "description": "An itemId: the furnishing-pack container, or the box a furnishing drops from.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "skill_line": {
+          "description": "The game's skill-line id (Constants.SkillLineIds).",
+          "type": "integer",
+          "minimum": 1
+        },
+        "def": {
+          "description": "The companion's definition id (Constants.CompanionIds).",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "metaFor": {
+      "description": "One conditional per vocabulary: which keys its entry may carry and which it must. This table and the editor's own ENUM_KINDS state the same fact, and tools/test_diff_schema.mjs is what stops them drifting.",
+      "vendors": {
+        "if": { "properties": { "enum": { "const": "vendors" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si"], "propertyNames": { "enum": ["si", "name"] } } } }
+      },
+      "locations": {
+        "if": { "properties": { "enum": { "const": "locations" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["zone"], "propertyNames": { "enum": ["zone"] } } } }
+      },
+      "places": {
+        "if": { "properties": { "enum": { "const": "places" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si"], "propertyNames": { "enum": ["si", "name"] } } } }
+      },
+      "versions": {
+        "if": { "properties": { "enum": { "const": "versions" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["ordinal", "name"], "propertyNames": { "enum": ["ordinal", "name"] } } } }
+      },
+      "crates": {
+        "if": { "properties": { "enum": { "const": "crates" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["crate", "name"], "propertyNames": { "enum": ["crate", "season", "name"] } } } }
+      },
+      "packs": {
+        "if": { "properties": { "enum": { "const": "packs" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["item", "name"], "propertyNames": { "enum": ["item", "name"] } } } }
+      },
+      "bundles": {
+        "if": { "properties": { "enum": { "const": "bundles" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si"], "propertyNames": { "enum": ["si", "name"] } } } }
+      },
+      "containers": {
+        "if": { "properties": { "enum": { "const": "containers" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["item"], "propertyNames": { "enum": ["item"] } } } }
+      },
+      "events": {
+        "if": { "properties": { "enum": { "const": "events" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si", "name"], "propertyNames": { "enum": ["si", "name"] } } } }
+      },
+      "npc_classes": {
+        "if": { "properties": { "enum": { "const": "npc_classes" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si"], "propertyNames": { "enum": ["si"] } } } }
+      },
+      "skill_lines": {
+        "if": { "properties": { "enum": { "const": "skill_lines" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["skill_line"], "propertyNames": { "enum": ["skill_line"] } } } }
+      },
+      "companions": {
+        "if": { "properties": { "enum": { "const": "companions" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["def"], "propertyNames": { "enum": ["def", "name"] } } } }
+      },
+      "currencies": {
+        "description": "A flat string list: the value IS the entry, and a meta object would be a second encoding of it.",
+        "if": { "properties": { "enum": { "const": "currencies" } }, "required": ["enum"] },
+        "then": { "not": { "required": ["meta"] } }
+      }
+    },
+    "id": {
+      "description": "In-game itemId. The record key within the category file.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "blueprint": {
+      "description": "In-game recipe/blueprint itemId. Optional when a furnishing id is present.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "category": {
+      "description": "Which data/<category>.jsonl file the record lives in — equal to source.type (AF §6). Validated against the set of files present in the repo, not a fixed enum.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "match": {
+      "description": "Required when (id, category) matches more than one record (AF §7.1): the canonical source object of the targeted record, used to disambiguate. Optional otherwise.",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" }
+      }
+    }
+  }
+}

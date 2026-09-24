@@ -1,0 +1,120 @@
+{"id":134909,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134910,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134911,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134912,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134913,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134914,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FL"},{"location":"DUNG_SCP"}]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":141847,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_MHK"},{"location":"DUNG_MOS"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":141848,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_MHK"},{"location":"DUNG_MOS"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":141849,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_MHK"},{"location":"DUNG_MOS"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":141850,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_MHK"},{"location":"DUNG_MOS"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":141851,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_MHK"},{"location":"DUNG_MOS"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":147639,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_DOM"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":147640,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_DOM"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":147641,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_DOM"}]},"cost":[],"availability":{"version":"WEREWOLF"}}
+{"id":147642,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
+{"id":147643,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
+{"id":147644,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
+{"id":194419,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194420,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194421,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194422,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194423,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194439,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194440,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194441,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194442,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194443,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194444,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194445,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194446,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194447,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194448,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194449,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194450,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194451,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194452,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194453,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194454,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194455,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194456,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194458,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194459,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194460,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":197917,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
+{"id":197918,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
+{"id":197919,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
+{"id":197920,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
+{"id":197921,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
+{"id":203204,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203206,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203207,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203208,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203209,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203210,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203211,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203408,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203409,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203410,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203411,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203412,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203413,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203414,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203415,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203416,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203417,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203418,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203419,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203420,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203421,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203422,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203423,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203424,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203425,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203426,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203427,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203428,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203429,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203430,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203431,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203432,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203433,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203434,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203435,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203436,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203437,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203438,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203439,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203440,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203441,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203442,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203443,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203444,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203445,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203446,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203447,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203448,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203449,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203450,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203451,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203452,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203453,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203454,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203455,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203456,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203457,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203458,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203459,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203460,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203461,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203462,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203463,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203464,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203465,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203466,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203467,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203468,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203469,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203470,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203471,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":203472,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_IA"}]},"cost":[],"availability":{"version":"ENDLESS"}}

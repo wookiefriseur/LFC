@@ -1,0 +1,665 @@
+{"id":190938,"name":"Music Box, Blessings of Stone","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_standingstonemusicbox001"}
+{"id":190939,"name":"Music Box, Dawnbreaker's Forging","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_meridiadawnbreakermusicbox001"}
+{"id":190940,"name":"Music Box, Songbird's Paradise","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_iridglassgardenmusicbox001"}
+{"id":190941,"name":"Music Box, Direnni's Swan","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_mechanicalswanmusicbox001"}
+{"id":190942,"name":"Music Box, Mad God's Garden","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_sheogorathmusicbox001"}
+{"id":190945,"name":"Tree, Seasons of Y'ffre","quality":5,"cat":12,"sub":108,"theme":1,"icon":"housing_uni_exc_seasonstree001"}
+{"id":190946,"name":"Earthen Root Essence","quality":5,"cat":11,"sub":126,"theme":1,"icon":"u36_crown_crate_1"}
+{"id":190947,"name":"Druidic Arch, Floral","quality":5,"cat":13,"sub":163,"theme":1,"icon":"housing_rok_sys_druidicarch001"}
+{"id":190950,"name":"Rose Petal Cascade","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u36_crown_crate_3"}
+{"id":190951,"name":"Target Spriggan, Robust","quality":5,"cat":25,"sub":98,"theme":1,"icon":"housing_targetdummy_spriggan"}
+{"id":191159,"name":"Druidic Statue, Planter","quality":4,"cat":6,"sub":70,"theme":2,"icon":"housing_rok_sys_drustatue002","blueprint":192514}
+{"id":191160,"name":"Druidic Sculpture, Sphere","quality":4,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_drumonolithstickballlarge001","blueprint":192515}
+{"id":191161,"name":"Druidic Meditation Stones, Tall","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_drustonestacknomoss001","blueprint":192516}
+{"id":191162,"name":"Druidic Gourd Candles, Stone","quality":3,"cat":11,"sub":129,"theme":2,"icon":"housing_sys_exc_drumonolithgourd001","blueprint":192517}
+{"id":191163,"name":"Druidic Hearth, Stone","quality":4,"cat":11,"sub":127,"theme":2,"icon":"housing_sys_fur_housingdrustoneoven002","blueprint":192518}
+{"id":191164,"name":"Druidic Bench, Ivy Stone","quality":3,"cat":5,"sub":134,"theme":2,"icon":"housing_sys_fur_drustonebench002","blueprint":192519}
+{"id":191165,"name":"Druidic Bench, Ivy Curved Stone","quality":4,"cat":5,"sub":134,"theme":2,"icon":"housing_sys_fur_drustonebenchcurved003","blueprint":192520}
+{"id":191166,"name":"Druidic Bench, Curved Stone","quality":3,"cat":5,"sub":134,"theme":2,"icon":"housing_sys_fur_drustonebenchcurved001","blueprint":192521}
+{"id":191167,"name":"Druidic Chair, Stone","quality":2,"cat":5,"sub":132,"theme":2,"icon":"housing_sys_fur_drustonechair001","blueprint":192522}
+{"id":191168,"name":"Druidic End Table, Ivy Stone","quality":3,"cat":3,"sub":59,"theme":2,"icon":"housing_sys_fur_drustoneendtable001","blueprint":192523}
+{"id":191169,"name":"Druidic Bookcase, Tall Stone","quality":3,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_drustoneshelvestall001","blueprint":192524}
+{"id":191170,"name":"Druidic Bookcase, Short Stone","quality":2,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_drustoneshelves001","blueprint":192525}
+{"id":191171,"name":"Druidic Dresser, Open Stone","quality":3,"cat":2,"sub":146,"theme":2,"icon":"housing_sys_fur_drustonedresser001","blueprint":192526}
+{"id":191172,"name":"Druidic Bed, Ivy Stone Single","quality":3,"cat":2,"sub":46,"theme":2,"icon":"housing_sys_fur_drustonetable003","blueprint":192527}
+{"id":191173,"name":"Druidic Bed, Ivy Stone Double","quality":4,"cat":2,"sub":46,"theme":2,"icon":"housing_sys_fur_drustonebedsingle002","blueprint":192528}
+{"id":191174,"name":"High Isle Censer, Metal","quality":4,"cat":7,"sub":105,"theme":2,"icon":"housing_sys_inc_incenseburner001","blueprint":192529}
+{"id":191175,"name":"Druidic Chair, Wood","quality":2,"cat":5,"sub":132,"theme":2,"icon":"housing_sys_fur_druchairlow001","blueprint":192530}
+{"id":191176,"name":"Druidic Table, Wood","quality":2,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_tablemidround001","blueprint":192531}
+{"id":191177,"name":"Druidic Bed, Wood Single","quality":3,"cat":2,"sub":46,"theme":2,"icon":"housing_sys_fur_drubedlow002","blueprint":192532}
+{"id":191178,"name":"Druidic Bookcase, Tall Wood","quality":3,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_drubookshelflow001","blueprint":192533}
+{"id":191179,"name":"Druidic Cage, Ivy Wood","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_sys_exc_drustickbox002","blueprint":192534}
+{"id":191180,"name":"Druidic Trunk, Stone","quality":4,"cat":2,"sub":49,"theme":2,"icon":"housing_sys_exc_drustonechestlg001","blueprint":192535}
+{"id":191181,"name":"Druidic Dresser, Ivy Open Stone","quality":3,"cat":2,"sub":146,"theme":2,"icon":"housing_sys_fur_drustonedressersm001","blueprint":192536}
+{"id":191182,"name":"Druidic Table, Stone","quality":3,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_drustonetableround001","blueprint":192537}
+{"id":191183,"name":"Druidic Nightstand, Stone","quality":2,"cat":2,"sub":145,"theme":2,"icon":"housing_sys_fur_drustonetableend001","blueprint":192538}
+{"id":191184,"name":"High Isle Teapot, Copper","quality":4,"cat":8,"sub":151,"theme":2,"icon":"housing_sys_inc_clutterteapot_001","blueprint":192539}
+{"id":191185,"name":"High Isle Nightstand, Dainty Wood","quality":2,"cat":2,"sub":145,"theme":2,"icon":"housing_sys_fur_tablehightall001","blueprint":192540}
+{"id":191186,"name":"High Isle Nightstand, Wood","quality":3,"cat":2,"sub":145,"theme":2,"icon":"housing_sys_fur_endtablehighround001","blueprint":192541}
+{"id":191187,"name":"High Isle Dresser, Wood","quality":4,"cat":2,"sub":146,"theme":2,"icon":"housing_sys_fur_dresserhigh002","blueprint":192542}
+{"id":191188,"name":"High Isle Fountain, Wall","quality":4,"cat":6,"sub":74,"theme":2,"icon":"housing_sys_str_fountainwall001","blueprint":192543}
+{"id":191189,"name":"Druidic Tapestry, Woven","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_sys_inc_druwallhanging001","blueprint":192544}
+{"id":191190,"name":"Druidic Wall Stone, Fertility","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_sys_inc_drustoneplaque001","blueprint":192545}
+{"id":191191,"name":"Druidic Wall Stone, Spirits","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_sys_inc_drustoneplaque002","blueprint":192546}
+{"id":191192,"name":"Druidic Wall Stone, Flame","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_sys_inc_drustoneplaque003","blueprint":192547}
+{"id":191193,"name":"Druidic Pillow, Woven","quality":2,"cat":2,"sub":51,"theme":2,"icon":"housing_sys_inc_drupillow002","blueprint":192548}
+{"id":191194,"name":"Firesong Throne, Lava","quality":5,"cat":9,"sub":93,"theme":2,"icon":"housing_sys_fur_drulavathrone001","blueprint":192549}
+{"id":191195,"name":"Firesong Chair, Lava","quality":3,"cat":5,"sub":132,"theme":2,"icon":"housing_sys_fur_drulavachair001","blueprint":192550}
+{"id":191196,"name":"Firesong Bookcase, Short Lava","quality":4,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_drulavashelves001","blueprint":192551}
+{"id":191197,"name":"Firesong Bookcase, Tall Lava","quality":4,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_drulavashelvestall001","blueprint":192552}
+{"id":191198,"name":"Firesong Lava Shelf, Tall","quality":3,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_drulavatable001","blueprint":192553}
+{"id":191199,"name":"Druidic Wind Chimes, Stone","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_druwindchimes001","blueprint":192554}
+{"id":191200,"name":"Druidic Chandelier, Firesong","quality":4,"cat":11,"sub":125,"theme":2,"icon":"housing_sys_exc_druflamechandelier002","blueprint":192555}
+{"id":191201,"name":"Druidic Gourd Candle, Hanging","quality":3,"cat":11,"sub":129,"theme":2,"icon":"housing_sys_exc_drugourdhanginglong001","blueprint":192556}
+{"id":191202,"name":"Druidic Wind Chimes, Gourd","quality":4,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_drugourdhanginglong002","blueprint":192557}
+{"id":191203,"name":"Druidic Gourd Bird Feeder","quality":2,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_drugourdbirdfeeder001","blueprint":192558}
+{"id":191204,"name":"Druidic Incense Burner, Clay","quality":4,"cat":7,"sub":105,"theme":2,"icon":"housing_sys_inc_druincenseburner001","blueprint":192559}
+{"id":191205,"name":"Druidic Pot, Clay","quality":3,"cat":8,"sub":80,"theme":2,"icon":"housing_sys_inc_druterrapot001","blueprint":192560}
+{"id":191206,"name":"Druidic Game, Marble Maze","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_drumarblegame001","blueprint":192561}
+{"id":191207,"name":"Druidic Bowl, Clay","quality":2,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_druterrabowllarge001","blueprint":192562}
+{"id":191208,"name":"Druidic Mug, Clay","quality":2,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_druterramug001","blueprint":192563}
+{"id":192393,"name":"Tree, Large Galen Beech","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_carobcliffroots001"}
+{"id":192394,"name":"Sapling, Galen Beech","quality":1,"cat":12,"sub":141,"theme":1,"icon":"housing_tre_sys_carob006"}
+{"id":192395,"name":"Flowers, Sunflower Patch","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_sunflowerfield005"}
+{"id":192396,"name":"Flowers, Sunflower Cluster","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_sunflowerfield004"}
+{"id":192397,"name":"Tree, Large Galen Pine","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_umbrellapine003"}
+{"id":192398,"name":"Plant, Galen Agave","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_agave001"}
+{"id":192399,"name":"Flowers, Galen Sea Daffodil","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_seadaffodil011"}
+{"id":192400,"name":"Druidic Planter, Sunflowers","quality":3,"cat":12,"sub":109,"theme":2,"icon":"housing_sys_exc_housingdrustonesunflowerplanter001"}
+{"id":192401,"name":"The Chimera Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrychimerasmall001"}
+{"id":192402,"name":"The Chimera Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrychimeralarge001"}
+{"id":192403,"name":"Forest Wraith Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryforestwraithsmall001"}
+{"id":192404,"name":"Forest Wraith Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryforestwraithlarge001"}
+{"id":192405,"name":"Maormer Tent, Raid Leader's","quality":4,"cat":13,"sub":114,"theme":1,"icon":"housing_mao_cmp_systentlargesingle001"}
+{"id":192406,"name":"Maormer Ship's Prow, Serpentine","quality":5,"cat":6,"sub":70,"theme":1,"icon":"housing_mao_csb_dragontotem001"}
+{"id":192407,"name":"Maormer Tent, Raider's","quality":3,"cat":13,"sub":114,"theme":1,"icon":"housing_mao_cmp_tentsmall001"}
+{"id":192408,"name":"Maormer Trunk, Carved","quality":3,"cat":2,"sub":49,"theme":1,"icon":"housing_mao_con_chest001"}
+{"id":192409,"name":"Maormer Cookfire","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_mao_exc_firepit001"}
+{"id":192410,"name":"Maormer Chair, Carved","quality":3,"cat":5,"sub":132,"theme":1,"icon":"housing_mao_fur_chair001"}
+{"id":192411,"name":"Druidic Statue, Left Hand","quality":3,"cat":6,"sub":70,"theme":2,"icon":"housing_rok_sys_drumonolithrighthand001"}
+{"id":192412,"name":"Maormer Curtain, Serpentine Cloth","quality":4,"cat":3,"sub":52,"theme":1,"icon":"housing_mao_fur_dividerwallsmall001"}
+{"id":192413,"name":"Maormer Table, Carved","quality":3,"cat":5,"sub":66,"theme":1,"icon":"housing_mao_fur_roundtable001"}
+{"id":192414,"name":"Maormer Armchair, Carved","quality":4,"cat":5,"sub":132,"theme":1,"icon":"housing_mao_fur_thronechair001"}
+{"id":192415,"name":"Druidic Statue, Right Hand","quality":3,"cat":6,"sub":70,"theme":2,"icon":"housing_rok_sys_drumonolithlefthand001"}
+{"id":192416,"name":"Druid Ritual Stone","quality":4,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_drumonolithfire001"}
+{"id":192417,"name":"Flower Trap, Tamed","quality":4,"cat":12,"sub":112,"theme":1,"icon":"housing_sys_exc_flowertrap001"}
+{"id":192418,"name":"Maormer Mug, Serpentine","quality":2,"cat":8,"sub":144,"theme":1,"icon":"housing_mao_inc_mug001"}
+{"id":192419,"name":"Druidic Throne, Floral Stone","quality":5,"cat":9,"sub":93,"theme":2,"icon":"housing_sys_fur_drustonethrone003"}
+{"id":192420,"name":"Maormer Rug, Serpentine","quality":3,"cat":3,"sub":53,"theme":1,"icon":"housing_mao_inc_rugroundsmall001"}
+{"id":192421,"name":"The Druid King's Ivy Throne","quality":5,"cat":9,"sub":93,"theme":2,"icon":"housing_sys_fur_ivykeepthrone001"}
+{"id":192422,"name":"Maormer Half-Rug","quality":2,"cat":3,"sub":53,"theme":1,"icon":"housing_mao_inc_rugroundsmallhalf002"}
+{"id":192423,"name":"Maormer Runner, Amethyst Waves","quality":4,"cat":3,"sub":53,"theme":1,"icon":"housing_mao_inc_rugsquarelong001"}
+{"id":192424,"name":"Systres Trinket Box, Painted","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_lockboxsmall001"}
+{"id":192425,"name":"Maormer Teapot, Serpentine","quality":4,"cat":8,"sub":151,"theme":1,"icon":"housing_mao_inc_teapot001"}
+{"id":192426,"name":"Ascendant Knight Banner","quality":4,"cat":3,"sub":58,"theme":2,"icon":"housing_sys_lsb_ascendantbanner002"}
+{"id":192427,"name":"Maormer Lamp, Serpentine","quality":3,"cat":11,"sub":120,"theme":1,"icon":"housing_mao_lsb_candleholdergls001"}
+{"id":192428,"name":"Eerie Sconce, Emerald","quality":4,"cat":11,"sub":123,"theme":2,"icon":"housing_sys_lsb_hiddendoorwallsconce001"}
+{"id":192429,"name":"Maormer Sconce, Serpentine","quality":3,"cat":11,"sub":123,"theme":1,"icon":"housing_mao_lsb_wallsconcegls001"}
+{"id":192430,"name":"Vulk'esh Egg","quality":4,"cat":9,"sub":91,"theme":2,"icon":"housing_uni_inc_antvulkeshegg001"}
+{"id":192431,"name":"Antique Map of Galen","quality":2,"cat":4,"sub":64,"theme":2,"icon":"housing_gen_inc_mappropsgalenscroll001"}
+{"id":192432,"name":"Shipbuilders Crafting Station","quality":5,"cat":25,"sub":104,"theme":2,"icon":"housing_gen_crf_shipwoodworkingstation001"}
+{"id":192564,"name":"Firesong Spring, Basalt","quality":5,"cat":7,"sub":106,"theme":2,"icon":"housing_sys_str_housingdruintlavakingring001"}
+{"id":192565,"name":"Lava Spout","quality":5,"cat":14,"sub":167,"theme":2,"icon":"housing_rok_sys_lavafissurehousing001"}
+{"id":192566,"name":"Tree, Small Palm","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_trp_hrc_cyatheacooperi003"}
+{"id":192567,"name":"Fuchsia Hosta","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_greenhostaflower001"}
+{"id":192568,"name":"Fargrave Stall, Bone Merchant","quality":5,"cat":13,"sub":185,"theme":13,"icon":"housing_bad_exc_farmerchantstalldragonbone001"}
+{"id":192569,"name":"Alchemy Shelves, Filled","quality":3,"cat":10,"sub":97,"theme":13,"icon":"housing_bad_inc_housingfarwallvampalchemy001"}
+{"id":192570,"name":"Decorative Wall Drape, Mauve","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_sys_exc_joustingbuntinghoriz001"}
+{"id":192571,"name":"Grahtwood Banner, Hanging Inn","quality":3,"cat":3,"sub":58,"theme":5,"icon":"housing_bos_lsb_nexusbannersinn001"}
+{"id":192572,"name":"Inn Sign, Hanging","quality":3,"cat":3,"sub":58,"theme":2,"icon":"housing_bre_lsb_signinn001"}
+{"id":192573,"name":"Clockwork Illuminator, Spot","quality":4,"cat":11,"sub":120,"theme":16,"icon":"housing_cwc_lsb_irspot002"}
+{"id":192574,"name":"Banner, Boethiah Standard","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_cra_lsb_bannersboethia002"}
+{"id":192575,"name":"Nedic Banner, Blood","quality":3,"cat":3,"sub":58,"theme":8,"icon":"housing_cra_lsb_nedicbannerblood001"}
+{"id":192576,"name":"Druidic Totem, Animal","quality":3,"cat":7,"sub":106,"theme":8,"icon":"housing_nor_duc_animaltotems003"}
+{"id":192577,"name":"Orsinium Statue Base","quality":3,"cat":6,"sub":69,"theme":9,"icon":"housing_orc_exc_basestatue001"}
+{"id":192578,"name":"Orsinium Well, Snowy Grated","quality":4,"cat":6,"sub":72,"theme":9,"icon":"housing_orc_str_snowwtgwellgrate001"}
+{"id":192579,"name":"Common Crate, Fabric Bolts","quality":3,"cat":10,"sub":95,"theme":1,"icon":"housing_red_exc_varmarketclothrollset001"}
+{"id":192580,"name":"Redguard Archway, Four-Column","quality":5,"cat":13,"sub":185,"theme":10,"icon":"housing_red_str_rampstandalone001"}
+{"id":192581,"name":"Reachfolk Banner, Ice Witch","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_uni_exc_icereachwitchbanner003"}
+{"id":192582,"name":"Vines, Nirncrux","quality":4,"cat":12,"sub":112,"theme":1,"icon":"housing_uni_str_cruxvinesm002"}
+{"id":192583,"name":"Clockwork Planter, Brassbloom","quality":4,"cat":12,"sub":111,"theme":16,"icon":"housing_cwc_exc_housinggoldenkarnetboxplanter001"}
+{"id":193783,"name":"Hand of Almalexia Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhandofalmalexia001"}
+{"id":193784,"name":"Hand of Almalexia Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhandofalmalexiasmall001"}
+{"id":193785,"name":"Mercymother Elite Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrymercymothersmarauder001"}
+{"id":193786,"name":"Mercymother Elite Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrymercymothersmaraudersmall001"}
+{"id":193789,"name":"Gonfalon Bay Dockside Bell","quality":4,"cat":3,"sub":55,"theme":10,"icon":"housing_red_exc_varharborbell001"}
+{"id":193790,"name":"Festering Coral, Crimson-Orange","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_rok_sys_wyrdcoral002"}
+{"id":193791,"name":"Palm, Blooming Tropical","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_u36mediumleafy005"}
+{"id":193792,"name":"Plant, Galen Palm Cluster","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_u36smallleafy004"}
+{"id":193793,"name":"Reach Chandelier, Hagraven","quality":5,"cat":11,"sub":125,"theme":1,"icon":"housing_uni_lsb_hagravenchandelier001"}
+{"id":193794,"name":"Target Hagraven, Robust","quality":5,"cat":25,"sub":98,"theme":1,"icon":"houseguest_hagraventargetdummy"}
+{"id":193795,"name":"Rite of the Harrowforged","quality":5,"cat":11,"sub":126,"theme":1,"icon":"u37_furnishing_riteoftheharrowforged"}
+{"id":193796,"name":"Orb of the Spirit Queen","quality":5,"cat":11,"sub":126,"theme":1,"icon":"u37_furnishing_welwaorb"}
+{"id":193797,"name":"Wrothgar Puzzle Cube, Mountains","quality":4,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitch001"}
+{"id":193798,"name":"Wrothgar Puzzle Cube, Hunter","quality":4,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitch002"}
+{"id":193799,"name":"Falmer Hut, Long","quality":4,"cat":13,"sub":185,"theme":8,"icon":"housing_skr_str_fmrhut002"}
+{"id":193800,"name":"Falmer Tent, Conical","quality":3,"cat":13,"sub":185,"theme":8,"icon":"housing_skr_str_fmrtent002"}
+{"id":193801,"name":"Ayleid Partition, Arched","quality":4,"cat":13,"sub":164,"theme":14,"icon":"housing_ayl_duc_doordroom001"}
+{"id":193802,"name":"Ayleid Constellation Stele, The Steed","quality":4,"cat":7,"sub":106,"theme":14,"icon":"housing_ayl_duc_constellationpanelsmallsteed001"}
+{"id":193803,"name":"Tree, Large Pink Maple","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sum_japanesemaple005"}
+{"id":193804,"name":"High Elf Wine Pot","quality":4,"cat":8,"sub":151,"theme":1,"icon":"housing_sum_exc_housingwinestovecombo001"}
+{"id":193805,"name":"Yokudan Sarcophagus Base, Gilded","quality":5,"cat":7,"sub":75,"theme":10,"icon":"housing_red_duc_sarcophagusbodybottom001"}
+{"id":193806,"name":"Redguard Window, Iron Lattice","quality":4,"cat":11,"sub":126,"theme":10,"icon":"housing_red_inc_anseiwardback001"}
+{"id":193807,"name":"Resonance Crystal, Cerulean","quality":5,"cat":11,"sub":126,"theme":2,"icon":"housing_sys_inc_resonancecrystal001","blueprint":194392}
+{"id":193808,"name":"Druidic Throne, Y'ffre's Bloom","quality":5,"cat":9,"sub":93,"theme":2,"icon":"housing_uni_exc_druidgrowingchair001","blueprint":194393}
+{"id":193809,"name":"Druidic Oven, Stone","quality":5,"cat":25,"sub":104,"theme":2,"icon":"housing_sys_fur_drustoneoven001","blueprint":194394}
+{"id":193810,"name":"Mage Tapestry, Aurbic Phoenix","quality":5,"cat":3,"sub":52,"theme":2,"icon":"housing_sys_inc_magetowertapestry001","blueprint":194395}
+{"id":193811,"name":"Stone, Lava-Etched","quality":5,"cat":7,"sub":107,"theme":2,"icon":"housing_sys_str_drufsrune002","blueprint":194396}
+{"id":193812,"name":"Statue, Bronze Tentacle","quality":5,"cat":6,"sub":99,"theme":2,"icon":"housing_sys_exc_tentacle001","blueprint":194397}
+{"id":193813,"name":"Druidic Bridge, Living","quality":5,"cat":13,"sub":117,"theme":2,"icon":"housing_tre_sys_livingbridgesmall001","blueprint":194398}
+{"id":193814,"name":"Dark Elf Archway, Stone","quality":4,"cat":13,"sub":163,"theme":6,"icon":"housing_dun_waf_wallssmallentrance001"}
+{"id":193815,"name":"Craglorn Podium, Filled","quality":3,"cat":4,"sub":61,"theme":8,"icon":"housing_cra_fur_podium003"}
+{"id":193817,"name":"Shad Astula Scholar, Left","quality":5,"cat":6,"sub":70,"theme":1,"icon":"housing_uni_exc_leftpriest001"}
+{"id":193818,"name":"Shad Astula Scholar, Right","quality":5,"cat":6,"sub":70,"theme":1,"icon":"housing_uni_exc_rightpriest001"}
+{"id":193819,"name":"Druidic Nook Wall, Long Stone","quality":3,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_housingdruhutinterioralcove002","blueprint":194365}
+{"id":193820,"name":"Druidic Stairway, Stone","quality":3,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_housingdruplatformstairs001","blueprint":194366}
+{"id":193821,"name":"Druidic Chimney, Stone","quality":4,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_drucliffdwellingchimneybottom001","blueprint":194367}
+{"id":193822,"name":"Druidic Pillar, Stone","quality":3,"cat":6,"sub":69,"theme":2,"icon":"housing_sys_waf_druwallmedpost001","blueprint":194368}
+{"id":193823,"name":"Druidic Doorway, Stone","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_housingdruhutdoorcollar001","blueprint":194369}
+{"id":193824,"name":"Druidic Wall, Long Stone","quality":3,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_housingdruhutinteriorwall002","blueprint":194370}
+{"id":193825,"name":"Druidic Door, Wood","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_housingdruhutdoor001","blueprint":194371}
+{"id":193826,"name":"Druidic Nook Wall, Stone","quality":3,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_housingdruhutinterioralcove001","blueprint":194372}
+{"id":193827,"name":"Druidic Wall, Stone","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_housingdruhutinteriorwall001","blueprint":194373}
+{"id":193828,"name":"Druidic Fence, Stone","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_waf_druwallmedstraight001","blueprint":194374}
+{"id":193829,"name":"Druidic Fence, Stone End","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_waf_druwallmedstraightruin001","blueprint":194375}
+{"id":193830,"name":"Druidic Fence, Curved Stone","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_waf_druwallmedcurve002","blueprint":194376}
+{"id":193831,"name":"Druidic Dolmen, Stone","quality":3,"cat":7,"sub":107,"theme":2,"icon":"housing_sys_run_druruinstandingstone003","blueprint":194377}
+{"id":193832,"name":"Eldertide Torus, Stone","quality":4,"cat":7,"sub":107,"theme":2,"icon":"housing_sys_run_druruinstandingstone005","blueprint":194378}
+{"id":193833,"name":"Stonelore Tale Pillar, Cliff Stone","quality":3,"cat":7,"sub":107,"theme":2,"icon":"housing_sys_run_drustonecolumn001","blueprint":194379}
+{"id":193834,"name":"Druidic Platform, Stone Edge","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_druplatformstraight001","blueprint":194380}
+{"id":193835,"name":"Druidic Platform, Stone","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_druplatformmiddle001","blueprint":194381}
+{"id":193836,"name":"Druidic Platform, Curved Stone Edge","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_druplatformcorner001","blueprint":194382}
+{"id":193837,"name":"Druidic Platform, Logs","quality":2,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_drubalconystraightplatform001","blueprint":194383}
+{"id":193838,"name":"Druidic Post","quality":2,"cat":6,"sub":69,"theme":2,"icon":"housing_sys_str_druintlog002","blueprint":194384}
+{"id":193839,"name":"Druidic Post, Arch","quality":2,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_druintlogarch001","blueprint":194385}
+{"id":193840,"name":"Firesong Sculpture, Arch","quality":4,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith001","blueprint":194386}
+{"id":193841,"name":"Firesong Sculpture, Y'ffelon's Claw","quality":4,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith004","blueprint":194387}
+{"id":193842,"name":"Firesong Sculpture, Chimera's Tail","quality":3,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith005","blueprint":194388}
+{"id":193843,"name":"Firesong Sculpture, Brood Hen","quality":4,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith002","blueprint":194389}
+{"id":193844,"name":"Firesong Sculpture, Archdruid's Staff","quality":3,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith006","blueprint":194390}
+{"id":193845,"name":"Firesong Sculpture, Menhir","quality":3,"cat":7,"sub":107,"theme":2,"icon":"housing_rok_sys_lavamonolith003","blueprint":194391}
+{"id":194359,"name":"Replica Jubilee Cake 2023","quality":5,"cat":8,"sub":156,"theme":1,"icon":"u37_cake_memento"}
+{"id":194399,"name":"Music Box, Unfathomable Knowledge","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_hermaeusmoramusicbox001"}
+{"id":194400,"name":"Galen Dogwood, Large","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_bluedogwood001"}
+{"id":194401,"name":"Galen Dogwood, Medium Cluster","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_tre_sys_bluedogwood016"}
+{"id":194402,"name":"Harbor Netting, Hanging Wall","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockwallhanga001"}
+{"id":194403,"name":"Harbor Netting, Buoy Cluster","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockwallhang001"}
+{"id":194404,"name":"Harbor Line, Loose","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_harborropesloose001"}
+{"id":194405,"name":"Harbor Line, Coiled","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_harborropespilemed001"}
+{"id":194406,"name":"Harbor Rope, Coiled Buoy","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_ropebundle002"}
+{"id":194407,"name":"Harbor Rope, Hanging","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_ropelinehorizontal004"}
+{"id":194408,"name":"Systres Brewing Still, Copper","quality":4,"cat":8,"sub":151,"theme":1,"icon":"housing_sys_inc_clutterstill_001"}
+{"id":194409,"name":"Potted Tree, Systres Pine","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_sys_inc_planterpine_001"}
+{"id":194410,"name":"Stonelore Tale Pillar, Slanted Stone","quality":4,"cat":12,"sub":152,"theme":2,"icon":"housing_sys_run_druruinstandingstone004"}
+{"id":194411,"name":"Stonelore Tale Pillar, Rounded Stone","quality":4,"cat":12,"sub":152,"theme":2,"icon":"housing_sys_run_druruinstandingstone008"}
+{"id":194419,"name":"Scrivener's Hall Vault Door","quality":5,"cat":13,"sub":163,"theme":1,"icon":"housing_uni_duc_hermaeusmoravaultdoor001"}
+{"id":194420,"name":"Nesting Stones, Green","quality":3,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_apc_inferniumooze005"}
+{"id":194421,"name":"Nesting Boulder, Green","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_apc_inferniumooze006"}
+{"id":194422,"name":"Hermaeus Mora Banner, Extra Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner001"}
+{"id":194423,"name":"Hermaeus Mora Banner, Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner005"}
+{"id":194439,"name":"The Journal of Emperor Leovic","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194440,"name":"Tome of Daedric Portals","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194441,"name":"Graccus' Journal, Volume I","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":194442,"name":"Journal of Culanwe","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":194443,"name":"Daedra Dossier: The Titans","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194444,"name":"Persistence of Daedric Veneration","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194445,"name":"Boethiah and Her Avatars","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194446,"name":"Bisnensel: Our Ancient Roots","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194447,"name":"Stonefire Ritual Tome","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194448,"name":"Glorious Upheaval","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194449,"name":"In Dreams We Awaken","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194450,"name":"Thwarting the Daedra: Dagon's Cult","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194451,"name":"A Memory Book, Part 3","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194452,"name":"A Memory Book, Part 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194453,"name":"A Memory Book, Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":194454,"name":"The Waters of Oblivion","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194455,"name":"Havocrel: Strangers from Oblivion","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194456,"name":"Invocation of Hircine","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194458,"name":"Lord Hollowjack's Dream Realm","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194459,"name":"Dream of a Thousand Dreamers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194460,"name":"Apocrypha, Apocrypha","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194534,"name":"Dock Bell, Mounted","quality":4,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockbell001"}
+{"id":194536,"name":"Dock Buoys, Mounted","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockwallbouys002"}
+{"id":194538,"name":"Cargo Netting, Large","quality":3,"cat":10,"sub":95,"theme":1,"icon":"housing_gen_dck_hangingcargonet002"}
+{"id":194539,"name":"Rough Hammock, Pole-Strung","quality":3,"cat":2,"sub":46,"theme":1,"icon":"housing_gen_inc_hammock002"}
+{"id":196204,"name":"Blackwood Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_waf_leywalllowmilemarker001"}
+{"id":196205,"name":"Systres Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":2,"icon":"housing_sys_str_milemarker001"}
+{"id":196206,"name":"Daedric Post, Spike","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedspikepost001"}
+{"id":196207,"name":"Daedric Turret, Flame Tower","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_duc_dedflametowerturret001"}
+{"id":196208,"name":"Sarcophagus, Stone Base","quality":3,"cat":7,"sub":76,"theme":13,"icon":"housing_cld_cem_tombopen001"}
+{"id":196209,"name":"Sarcophagus, Stone Lid","quality":3,"cat":7,"sub":76,"theme":13,"icon":"housing_cld_cem_tomblid001"}
+{"id":196210,"name":"Necrom Coffin","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_exc_neccoffin001"}
+{"id":196211,"name":"Apocrypha Statue, Lurker","quality":4,"cat":6,"sub":70,"theme":13,"icon":"housing_apc_exc_libstatuemonster001"}
+{"id":196212,"name":"Apocrypha Statue, Mouth of Mora","quality":4,"cat":6,"sub":70,"theme":13,"icon":"housing_apc_exc_libstatuemonster002"}
+{"id":196213,"name":"Door, Dark Brotherhood Sanctuary","quality":5,"cat":13,"sub":163,"theme":1,"icon":"housing_col_str_dbhdoor001"}
+{"id":196214,"name":"Order of the Hour Rug, Winged","quality":4,"cat":3,"sub":53,"theme":1,"icon":"housing_col_inc_dbhrugakatoshroundhourglass001"}
+{"id":197481,"name":"Necrom Bookcase, Elegant Tall","quality":3,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_necbookcasehigh001","blueprint":197549}
+{"id":197482,"name":"Necrom Bookcase, Elegant Grand","quality":4,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_necbookstoreshelfhigh002","blueprint":197550}
+{"id":197483,"name":"Necrom Wardrobe, Elegant","quality":3,"cat":2,"sub":48,"theme":6,"icon":"housing_tlv_fur_neccabinet001","blueprint":197551}
+{"id":197484,"name":"Necrom End Table, Elegant","quality":3,"cat":3,"sub":59,"theme":6,"icon":"housing_tlv_fur_necendtablehigh001","blueprint":197552}
+{"id":197485,"name":"Necrom Chest, Elegant","quality":3,"cat":2,"sub":49,"theme":6,"icon":"housing_tlv_fur_necchesthigh001","blueprint":197553}
+{"id":197486,"name":"Necrom Bed, Elegant Double","quality":4,"cat":2,"sub":46,"theme":6,"icon":"housing_tlv_fur_necbedhigh001","blueprint":197554}
+{"id":197487,"name":"Necrom Bed, Elegant Single","quality":3,"cat":2,"sub":46,"theme":6,"icon":"housing_tlv_fur_necbedhigh002","blueprint":197555}
+{"id":197488,"name":"Necrom Divider, Elegant","quality":3,"cat":2,"sub":47,"theme":6,"icon":"housing_tlv_fur_necwalldividerhigh001","blueprint":197556}
+{"id":197489,"name":"Necrom Mirror, Elegant Standing","quality":4,"cat":2,"sub":50,"theme":6,"icon":"housing_tlv_fur_necmirror001","blueprint":197557}
+{"id":197490,"name":"Necrom Shelf, Elegant","quality":2,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_necwallshelfhigh002","blueprint":197558}
+{"id":197491,"name":"Necrom Chair, Elegant","quality":3,"cat":5,"sub":132,"theme":6,"icon":"housing_tlv_fur_necchairhigh001","blueprint":197559}
+{"id":197492,"name":"Necrom Bench, Elegant","quality":4,"cat":5,"sub":134,"theme":6,"icon":"housing_tlv_fur_necbenchhigh001","blueprint":197560}
+{"id":197493,"name":"Necrom Counter, Corner","quality":2,"cat":5,"sub":67,"theme":6,"icon":"housing_tlv_fur_neccounterhigh002","blueprint":197561}
+{"id":197494,"name":"Necrom Counter, Cabinet","quality":2,"cat":5,"sub":67,"theme":6,"icon":"housing_tlv_fur_neccounterhigh001","blueprint":197562}
+{"id":197495,"name":"Necrom Table, Elegant Dining","quality":3,"cat":5,"sub":66,"theme":6,"icon":"housing_tlv_fur_nectable002","blueprint":197563}
+{"id":197496,"name":"Necrom Firepit, Elegant","quality":4,"cat":11,"sub":127,"theme":6,"icon":"housing_tlv_lsb_necbrazierhighlarge001","blueprint":197564}
+{"id":197497,"name":"Necrom Lamppost, Elegant","quality":3,"cat":11,"sub":122,"theme":6,"icon":"housing_tlv_lsb_neccandlestandtall001","blueprint":197565}
+{"id":197498,"name":"Necrom Sconce, Elegant","quality":3,"cat":11,"sub":123,"theme":6,"icon":"housing_tlv_lsb_necwallscone001","blueprint":197566}
+{"id":197499,"name":"Necrom Lamp, Elegant","quality":2,"cat":11,"sub":120,"theme":6,"icon":"housing_tlv_lsb_neccandle001","blueprint":197567}
+{"id":197500,"name":"Necrom Lamp, Elegant Standing","quality":3,"cat":11,"sub":120,"theme":6,"icon":"housing_tlv_lsb_neccandle003","blueprint":197568}
+{"id":197501,"name":"Necrom Vase, Elegant Rounded Floral","quality":4,"cat":3,"sub":57,"theme":6,"icon":"housing_tlv_inc_necvaseroundtall001a","blueprint":197569}
+{"id":197502,"name":"Necrom Vase, Elegant Square Floral","quality":3,"cat":3,"sub":57,"theme":6,"icon":"housing_tlv_inc_necvasesquaretall001a","blueprint":197570}
+{"id":197503,"name":"Necrom Bowl, Elegant","quality":3,"cat":8,"sub":80,"theme":6,"icon":"housing_tlv_inc_necvaseroundsmall001","blueprint":197571}
+{"id":197504,"name":"Necrom Hanging Flowers, Elegant","quality":4,"cat":3,"sub":57,"theme":6,"icon":"housing_tlv_inc_housingnecwallhookplanterhanging001","blueprint":197572}
+{"id":197505,"name":"Necrom Wind Chimes, Elegant","quality":3,"cat":6,"sub":99,"theme":6,"icon":"housing_tlv_exc_necwindchime002","blueprint":197573}
+{"id":197506,"name":"Necrom Memorial, Large","quality":3,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_cem_necgravestone001","blueprint":197574}
+{"id":197507,"name":"Necrom Memorial, Small","quality":2,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_cem_necgravestone004","blueprint":197575}
+{"id":197508,"name":"Necrom Ossuary, Plated","quality":4,"cat":7,"sub":78,"theme":6,"icon":"housing_tlv_cem_necosuaries001","blueprint":197576}
+{"id":197509,"name":"Necrom Urn, Malachite","quality":3,"cat":7,"sub":78,"theme":6,"icon":"housing_tlv_inc_necurnslow001","blueprint":197577}
+{"id":197510,"name":"Necrom Incense, Mushroom Offering","quality":4,"cat":7,"sub":105,"theme":6,"icon":"housing_tlv_inc_necincenseburner001","blueprint":197578}
+{"id":197511,"name":"Telvanni Bed, Fungal Double","quality":4,"cat":2,"sub":46,"theme":6,"icon":"housing_tlv_fur_bed001","blueprint":197579}
+{"id":197512,"name":"Telvanni Dresser, Small Fungal","quality":3,"cat":2,"sub":146,"theme":6,"icon":"housing_tlv_fur_dressersmall002","blueprint":197580}
+{"id":197513,"name":"Telvanni Wardrobe, Fungal","quality":4,"cat":2,"sub":48,"theme":6,"icon":"housing_tlv_fur_armoirehigh001","blueprint":197581}
+{"id":197514,"name":"Telvanni Mirror, Fungal","quality":4,"cat":2,"sub":50,"theme":6,"icon":"housing_tlv_fur_mirror001","blueprint":197582}
+{"id":197515,"name":"Telvanni Nightstand, Fungal","quality":3,"cat":2,"sub":145,"theme":6,"icon":"housing_tlv_fur_dressersmall001","blueprint":197583}
+{"id":197516,"name":"Telvanni Bookcase, Tall Fungal","quality":3,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_dresserhighlarge001","blueprint":197584}
+{"id":197517,"name":"Telvanni Dresser, Large Fungal","quality":4,"cat":2,"sub":146,"theme":6,"icon":"housing_tlv_fur_bookcasehigh001","blueprint":197585}
+{"id":197518,"name":"Telvanni Chest, Fungal","quality":3,"cat":2,"sub":49,"theme":6,"icon":"housing_tlv_fur_highchestsmall001","blueprint":197586}
+{"id":197519,"name":"Telvanni Table, Round Fungal","quality":3,"cat":5,"sub":66,"theme":6,"icon":"housing_tlv_fur_tableround001","blueprint":197587}
+{"id":197520,"name":"Telvanni Box, Fungal","quality":3,"cat":3,"sub":56,"theme":6,"icon":"housing_tlv_fur_smallbox002","blueprint":197588}
+{"id":197521,"name":"Telvanni Planter, Fungal","quality":3,"cat":12,"sub":109,"theme":6,"icon":"housing_tlv_fur_housinghighplanter001","blueprint":197589}
+{"id":197522,"name":"Telvanni Chair, Fungal","quality":3,"cat":5,"sub":132,"theme":6,"icon":"housing_tlv_fur_chair001","blueprint":197590}
+{"id":197523,"name":"Telvanni Stool, Fungal","quality":3,"cat":10,"sub":135,"theme":6,"icon":"housing_tlv_fur_ottoman001","blueprint":197591}
+{"id":197524,"name":"Telvanni Candles, Fungal Group","quality":2,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_lsb_candelabra001","blueprint":197592}
+{"id":197525,"name":"Telvanni Water Jug, Fungal","quality":4,"cat":9,"sub":91,"theme":6,"icon":"housing_tlv_inc_clutterjug001","blueprint":197593}
+{"id":197526,"name":"Telvanni Soup, Hearty Mushroom","quality":2,"cat":8,"sub":85,"theme":6,"icon":"housing_tlv_inc_smallbowlfilled001","blueprint":197594}
+{"id":197527,"name":"Telvanni Meal, Fish Dinner","quality":3,"cat":8,"sub":85,"theme":6,"icon":"housing_tlv_inc_foodplatter001","blueprint":197595}
+{"id":197528,"name":"Telvanni Mug, Fungal","quality":3,"cat":8,"sub":144,"theme":6,"icon":"housing_tlv_inc_mug001","blueprint":197596}
+{"id":197529,"name":"Telvanni Teapot, Fungal","quality":4,"cat":8,"sub":151,"theme":6,"icon":"housing_tlv_inc_teapot001","blueprint":197597}
+{"id":197530,"name":"Telvanni Teacup, Fungal","quality":2,"cat":8,"sub":144,"theme":6,"icon":"housing_tlv_inc_smallcup001","blueprint":197598}
+{"id":197531,"name":"Telvanni Meal, Kebab Lunch","quality":3,"cat":8,"sub":85,"theme":6,"icon":"housing_tlv_inc_foodplated001","blueprint":197599}
+{"id":197532,"name":"Telvanni Chandelier, Fungal","quality":4,"cat":11,"sub":125,"theme":6,"icon":"housing_tlv_lsb_housinghangingceilingcandelabra001","blueprint":197600}
+{"id":197533,"name":"Telvanni Sconce, Fungal Wall","quality":3,"cat":11,"sub":123,"theme":6,"icon":"housing_tlv_lsb_wallsconce002","blueprint":197601}
+{"id":197534,"name":"Telvanni Candle, Fungal Standing","quality":3,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_lsb_floorsconce002","blueprint":197602}
+{"id":197535,"name":"Telvanni Meal, Fruit Breakfast","quality":2,"cat":8,"sub":85,"theme":6,"icon":"housing_tlv_inc_housingsquashplate001","blueprint":197603}
+{"id":197536,"name":"Apocrypha Bookcase, Tall Marble","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_bookshelfmedium001","blueprint":197604}
+{"id":197537,"name":"Apocrypha Desk, Marble","quality":3,"cat":4,"sub":61,"theme":13,"icon":"housing_apc_fur_deskmedium001","blueprint":197605}
+{"id":197538,"name":"Apocrypha Candlestick, Twisted","quality":3,"cat":11,"sub":129,"theme":13,"icon":"housing_apc_lsb_libcandlestand005","blueprint":197606}
+{"id":197539,"name":"Apocrypha Sconce, Cylindrical","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_apc_lsb_liblantern001","blueprint":197607}
+{"id":197540,"name":"Apocrypha Sconce, Spiral","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_apc_lsb_liblantern003","blueprint":197608}
+{"id":197541,"name":"Apocrypha Chair, Marble","quality":3,"cat":5,"sub":132,"theme":13,"icon":"housing_apc_fur_chairmedium001","blueprint":197609}
+{"id":197542,"name":"Apocrypha Nightstand, Marble","quality":3,"cat":2,"sub":145,"theme":13,"icon":"housing_apc_fur_nightstandmedium001","blueprint":197610}
+{"id":197543,"name":"Apocrypha Bed, Marble Twin","quality":3,"cat":2,"sub":46,"theme":13,"icon":"housing_apc_fur_bedmedium002","blueprint":197611}
+{"id":197544,"name":"Book Stack, Trio","quality":2,"cat":4,"sub":62,"theme":13,"icon":"housing_apc_inc_libbookstack001","blueprint":197612}
+{"id":197545,"name":"Book Pile, Large","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_apc_inc_libbookstack004","blueprint":197613}
+{"id":197546,"name":"Necrom Carpet, Large","quality":4,"cat":3,"sub":53,"theme":6,"icon":"housing_tlv_inc_necrug006","blueprint":197614}
+{"id":197547,"name":"Necrom Carpet, Medium","quality":3,"cat":3,"sub":53,"theme":6,"icon":"housing_tlv_inc_necrug004","blueprint":197615}
+{"id":197548,"name":"Necrom Runner, Small","quality":2,"cat":3,"sub":53,"theme":6,"icon":"housing_tlv_inc_necrug002","blueprint":197616}
+{"id":197619,"name":"Meridian Mote","quality":5,"cat":11,"sub":126,"theme":1,"icon":"u38_housing_meridialights"}
+{"id":197620,"name":"Throne of the Lich","quality":5,"cat":9,"sub":93,"theme":1,"icon":"housing_uni_fur_lichethrone001"}
+{"id":197621,"name":"Household Shrine, Meridian","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_apc_inc_meridiastatuetteholder001"}
+{"id":197622,"name":"Constellation Projection Apparatus","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_apc_inc_constellationprojector001"}
+{"id":197623,"name":"Statue, Hermaeus Mora","quality":5,"cat":6,"sub":70,"theme":1,"icon":"housing_uni_exc_hermaeusmorastatue001"}
+{"id":197624,"name":"Apocryphal Shifting Sculpture","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_uni_inc_shiftinginksculpture001"}
+{"id":197625,"name":"Music Box, Oath of the Keepers","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_necfunerarymusicbox001"}
+{"id":197626,"name":"Necrom Bookcase, Elegant Tall Filled","quality":4,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_housingnecbookcasehigh001","blueprint":197629}
+{"id":197627,"name":"Necrom Bookcase, Elegant Grand Filled","quality":4,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_housingnecbookstoreshelfhigh002","blueprint":197630}
+{"id":197628,"name":"Apocrypha Bookcase, Tall Marble Filled","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_housingbookshelfmedium001","blueprint":197631}
+{"id":197633,"name":"Tree, Large Gnarled Laurel","quality":3,"cat":12,"sub":108,"theme":6,"icon":"housing_tre_dec_vrdlaureltree004"}
+{"id":197634,"name":"Mushroom, Dual Mauve Dusk","quality":2,"cat":12,"sub":143,"theme":6,"icon":"housing_veg_fug_pinkknight001"}
+{"id":197635,"name":"Mushroom, Gilled Mauve Dusk","quality":3,"cat":12,"sub":143,"theme":6,"icon":"housing_veg_fug_pinkknight004"}
+{"id":197636,"name":"Plants, Guar Cabbage Cluster","quality":3,"cat":12,"sub":109,"theme":6,"icon":"housing_veg_flr_vrdsymplocarpus005"}
+{"id":197637,"name":"Plants, Lava Pitcher Patch","quality":3,"cat":12,"sub":109,"theme":6,"icon":"housing_veg_flr_vrdpitcherflowers003"}
+{"id":197638,"name":"Mushroom, Tall Russet Chanterelle","quality":2,"cat":12,"sub":143,"theme":6,"icon":"housing_veg_fug_giantchanterelle005"}
+{"id":197639,"name":"Apocrypha Tree, Spore","quality":4,"cat":12,"sub":108,"theme":13,"icon":"housing_veg_apc_sporetree008"}
+{"id":197640,"name":"Apocrypha Tree, Fossilized","quality":2,"cat":12,"sub":108,"theme":13,"icon":"housing_tre_apc_fossiltree021"}
+{"id":197641,"name":"Apocrypha Plant, Suckerleaf","quality":3,"cat":12,"sub":110,"theme":13,"icon":"housing_veg_apc_spikeplant006"}
+{"id":197642,"name":"Apocrypha Plant, Anemone Cluster","quality":3,"cat":12,"sub":110,"theme":13,"icon":"housing_veg_apc_purpleanemone003"}
+{"id":197643,"name":"Boulder, Apocrypha Fossil","quality":3,"cat":12,"sub":152,"theme":13,"icon":"housing_rok_apc_fossilrockmed005"}
+{"id":197644,"name":"Telvanni Spoon, Wooden","quality":3,"cat":8,"sub":82,"theme":6,"icon":"housing_tlv_inc_spoon001"}
+{"id":197645,"name":"Telvanni Fork, Wooden","quality":3,"cat":8,"sub":82,"theme":6,"icon":"housing_tlv_inc_fork001"}
+{"id":197646,"name":"Telvanni Knife, Wooden","quality":3,"cat":8,"sub":82,"theme":6,"icon":"housing_tlv_inc_knife001"}
+{"id":197647,"name":"Telvanni Knife, Bread","quality":2,"cat":8,"sub":82,"theme":6,"icon":"housing_tlv_inc_breadknife001"}
+{"id":197692,"name":"Necrom Chandelier, Elegant","quality":4,"cat":11,"sub":125,"theme":6,"icon":"housing_tlv_lsb_necchandelier003","blueprint":197693}
+{"id":197694,"name":"Necrom Banner, Medium Patterned","quality":4,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerhighc002","blueprint":197756}
+{"id":197695,"name":"Necrom Banner, Narrow Patterned","quality":4,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerhighd003","blueprint":197757}
+{"id":197696,"name":"Necrom Banner, Medium Bronze-Stitched","quality":4,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerlowc002","blueprint":197758}
+{"id":197697,"name":"Necrom Banner, Medium Sage-Stitched","quality":3,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerlowg002","blueprint":197759}
+{"id":197700,"name":"Apocrypha Fossil, Bones Large","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_rok_apc_fossil004"}
+{"id":197701,"name":"Apocrypha Fossil, Nautilus","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_rok_apc_nautilus003"}
+{"id":197702,"name":"Apocrypha Fossil, Worm","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_tre_apc_fossiltree012"}
+{"id":197703,"name":"Apocrypha Fossil, Arch","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_tre_apc_fossiltree014"}
+{"id":197705,"name":"Telvanni Alchemy Station","quality":5,"cat":25,"sub":104,"theme":6,"icon":"housing_uni_fur_tlvalchemystation001"}
+{"id":197706,"name":"Trifold Mirror of Alternatives","quality":5,"cat":2,"sub":50,"theme":13,"icon":"housing_apc_fur_trifoldmirror001"}
+{"id":197707,"name":"Apocryphal Well","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_uni_inc_inkywell001"}
+{"id":197708,"name":"Cliff Strider Skeleton Stand","quality":4,"cat":9,"sub":91,"theme":6,"icon":"housing_uni_inc_cliffstriderdisplay001"}
+{"id":197709,"name":"Tribunal Window, Stained Glass","quality":4,"cat":11,"sub":126,"theme":6,"icon":"housing_uni_inc_anttribunalu38stainedglass001"}
+{"id":197710,"name":"Mushroom Classification Book","quality":4,"cat":4,"sub":62,"theme":6,"icon":"housing_uni_inc_mushroombook001"}
+{"id":197711,"name":"Antique Map of the Telvanni Peninsula","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropstelvann001"}
+{"id":197712,"name":"Antique Map of Apocrypha","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsapocrypha001"}
+{"id":197713,"name":"Tribunal Rug","quality":3,"cat":3,"sub":53,"theme":6,"icon":"housing_tlv_inc_necrug003","blueprint":197714}
+{"id":197715,"name":"Necrom Stele, Ceremonial","quality":5,"cat":7,"sub":106,"theme":6,"icon":"housing_tlv_fur_necstele001"}
+{"id":197716,"name":"Crystalline Mind Barrier, Replica","quality":4,"cat":12,"sub":152,"theme":13,"icon":"housing_uni_str_crystalmindwall001"}
+{"id":197717,"name":"Apocrypha Altar, Lighted","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_apc_exc_housingaltarinterior001"}
+{"id":197718,"name":"Necrom Archway","quality":4,"cat":13,"sub":163,"theme":6,"icon":"housing_tlv_str_housingnechighdoorframe001"}
+{"id":197719,"name":"Apocrypha Courtyard Pool","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_apc_inc_scryingpool001"}
+{"id":197720,"name":"Hermaeus Mora Banner","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_apc_lsb_sombanner003"}
+{"id":197721,"name":"The Lord of Fate and Knowledge Frieze","quality":4,"cat":9,"sub":92,"theme":13,"icon":"housing_uni_exc_housinghermaeusmorafrieze001"}
+{"id":197722,"name":"Apocrypha Portal Seal, Replica","quality":4,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_inc_portalseal001"}
+{"id":197723,"name":"Apocrypha Stalk, Scryeball","quality":4,"cat":12,"sub":111,"theme":13,"icon":"housing_veg_apc_eyeballplant003"}
+{"id":197724,"name":"Tales of Tribute Kit, Travel","quality":4,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_inc_tottravelbox001"}
+{"id":197725,"name":"Replica Fateweaver Key","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_uni_exc_housingfateweaverkey001"}
+{"id":197726,"name":"Dormant Tyranite Calx","quality":4,"cat":9,"sub":91,"theme":6,"icon":"housing_uni_inc_housingpliatitestand001"}
+{"id":197728,"name":"Necrom Candle, Large Square","quality":2,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_inc_necmiscofferingscandles001","blueprint":197760}
+{"id":197729,"name":"Necrom Candle, Small Square","quality":2,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_inc_necmiscofferingscandles002","blueprint":197761}
+{"id":197730,"name":"Wood Carving, Cat","quality":4,"cat":3,"sub":56,"theme":6,"icon":"housing_tlv_inc_necmiscofferingscat001","blueprint":197762}
+{"id":197731,"name":"Wood Carving, Dog","quality":4,"cat":3,"sub":56,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsdog001","blueprint":197763}
+{"id":197732,"name":"Wood Carving, Kwama","quality":4,"cat":3,"sub":56,"theme":6,"icon":"housing_tlv_inc_necmiscofferingskwama001","blueprint":197764}
+{"id":197733,"name":"Funerary Offering, Ribbon","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsribbon003","blueprint":197765}
+{"id":197734,"name":"Stone Carving, Hand","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstone001","blueprint":197766}
+{"id":197735,"name":"Stone Carving, Bird","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstone002","blueprint":197767}
+{"id":197736,"name":"Stone Carving, Orb","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstone003","blueprint":197768}
+{"id":197737,"name":"Stone Carving, Hooks","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstone004","blueprint":197769}
+{"id":197738,"name":"Stone Carving, Tribunal","quality":2,"cat":9,"sub":92,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstone005","blueprint":197770}
+{"id":197739,"name":"Wood Carving, Strider","quality":4,"cat":3,"sub":56,"theme":6,"icon":"housing_tlv_inc_necmiscofferingsstrider001","blueprint":197771}
+{"id":197740,"name":"Necrom Banner, Small Patterned","quality":3,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerhighe004","blueprint":197772}
+{"id":197741,"name":"Necrom Banner, Long Patterned","quality":4,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerhighf002","blueprint":197773}
+{"id":197742,"name":"Necrom Banner, Narrow Bronze-Stitched","quality":3,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerlowd003","blueprint":197774}
+{"id":197743,"name":"Necrom Banner, Small Sage-Stitched","quality":3,"cat":3,"sub":58,"theme":6,"icon":"housing_tlv_lsb_necbannerlowg003","blueprint":197775}
+{"id":197744,"name":"Vaermina Pillar, Mind Terror","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_rok_apc_housingvaepillar001","blueprint":197784}
+{"id":197745,"name":"Book Pile, Vertical Levitating","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_exc_bobbingbooks002","blueprint":197785}
+{"id":197746,"name":"Book Pile, Spiral Levitating","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_exc_bobbingbooks002","blueprint":197786}
+{"id":197747,"name":"Book Pile, Circle Levitating","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_exc_floatingbooks003","blueprint":197787}
+{"id":197748,"name":"Peryite Vat, Plague","quality":3,"cat":8,"sub":84,"theme":13,"icon":"housing_apc_inc_peryvat001","blueprint":197788}
+{"id":197749,"name":"Necrom Still Life Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe001"}
+{"id":197750,"name":"Telvanni Mushroom Spire Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe002"}
+{"id":197751,"name":"Sunset Fleet Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe005"}
+{"id":197752,"name":"Mycoturge's Retreat Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe006"}
+{"id":197753,"name":"Telvanni Peninsula Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe007"}
+{"id":197754,"name":"Offerings to the Dead Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe009"}
+{"id":197755,"name":"Shadow Over Necrom Painting","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe010"}
+{"id":197779,"name":"Letter from Azandar","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libscroll002"}
+{"id":197780,"name":"Letter from Sharp","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libpaper001"}
+{"id":197781,"name":"The City of Necrom Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe011"}
+{"id":197782,"name":"Alleyway Still Life Painting","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe014"}
+{"id":197783,"name":"Pilgrimage Triptych Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe017"}
+{"id":197821,"name":"Spellscar Bridge","quality":5,"cat":13,"sub":117,"theme":1,"icon":"housing_uni_exc_housingu39spellscarbridge001"}
+{"id":197822,"name":"Redoran Sconce, Beetle","quality":5,"cat":11,"sub":123,"theme":6,"icon":"housing_chl_lsb_redbeetlesconce001"}
+{"id":197823,"name":"Necrom Podium, Buoyant Armiger","quality":5,"cat":4,"sub":61,"theme":6,"icon":"housing_uni_fur_buoyantarmbookholder"}
+{"id":197824,"name":"Harrowstorm Mists","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u39_furnishing_harrowstormmists"}
+{"id":197825,"name":"Statue, The Thirty-Fourth Sermon","quality":5,"cat":6,"sub":70,"theme":1,"icon":"housing_tlv_exc_statuevivec001"}
+{"id":197826,"name":"Music Box, Witchmother's Bubbling Brew","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxwitchmother001"}
+{"id":197829,"name":"Music Box, Glyphic Secrets","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_glyphicmusicbox001"}
+{"id":197832,"name":"Necrom Gazebo","quality":5,"cat":13,"sub":185,"theme":6,"icon":"housing_tlv_str_necgazebo001"}
+{"id":197833,"name":"Statue, Telvanni Spellwright","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_tlv_exc_magistratestatues002"}
+{"id":197834,"name":"Statue, Telvanni Magister","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_tlv_exc_magistratestatues003"}
+{"id":197835,"name":"Mushrooms, Tall Chanterelle Cluster","quality":2,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_giantchanterelle004"}
+{"id":197836,"name":"Mushroom, Tall Green Morel","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_tlvmorel001"}
+{"id":197837,"name":"Mushrooms, Tall Green Morel Cluster","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_tlvmorel004"}
+{"id":197838,"name":"Mushrooms, Ambershine Patch","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fug_hrcbiolumshroom011"}
+{"id":197839,"name":"Mushrooms, Ambershine Ring","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fug_hrcbiolumshroom018"}
+{"id":197840,"name":"Necrom Brazier, Elegant Stone","quality":4,"cat":11,"sub":124,"theme":6,"icon":"housing_tlv_lsb_standingbrazier002"}
+{"id":197846,"name":"Apocrypha Podium, Candlelit","quality":5,"cat":4,"sub":61,"theme":13,"icon":"housing_apc_fur_bookpedestal001","blueprint":197849}
+{"id":197847,"name":"Apocrypha Specimen Jar, Large Empty","quality":5,"cat":9,"sub":91,"theme":13,"icon":"housing_apc_inc_specimenjarlarge001","blueprint":197850}
+{"id":197848,"name":"Apocrypha Lamp, Floor","quality":4,"cat":11,"sub":120,"theme":13,"icon":"housing_apc_lsb_libcandlestandlarge001","blueprint":197851}
+{"id":197916,"name":"Archival Light Diffuser, Small","quality":4,"cat":11,"sub":126,"theme":13,"icon":"u40_furniture_multicolororb"}
+{"id":197917,"name":"Ode to Vaermina","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":197918,"name":"Deal with a Daedric Prince","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":197919,"name":"The Legend of Fathoms Drift","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":197920,"name":"The Doom of the Hushed","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":197921,"name":"Peryite's Salvation","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":198002,"name":"Hedge, Dense Low Long Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges006"}
+{"id":198003,"name":"Hedge, Dense Low Corner Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges008"}
+{"id":198004,"name":"Hedge, Dense Low Extensive Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges007"}
+{"id":198005,"name":"Hedge, Dense Low Angled Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges009"}
+{"id":198006,"name":"Daedric Mirror, Nightmarish","quality":5,"cat":2,"sub":50,"theme":13,"icon":"housing_dae_fur_vaerminamirror001","blueprint":198059}
+{"id":198007,"name":"Dark Elf Tent, Multiroom","quality":5,"cat":13,"sub":114,"theme":6,"icon":"housing_dun_cmp_militarytentslarge001","blueprint":198060}
+{"id":198008,"name":"Dwarven Door, Bronze","quality":5,"cat":13,"sub":163,"theme":12,"icon":"housing_dwe_run_brdoor001","blueprint":198061}
+{"id":198009,"name":"Necrom Cart, Funerary","quality":5,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_csb_neccarriagecoffindeco001","blueprint":198062}
+{"id":198010,"name":"Necrom Crematory, Furnace","quality":5,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_exc_necfuneralpyre001","blueprint":198063}
+{"id":198011,"name":"Telvanni Lantern, Luminous Mushroom","quality":5,"cat":11,"sub":121,"theme":6,"icon":"housing_tlv_lsb_lantern001","blueprint":198064}
+{"id":198012,"name":"Indoril Chandelier, Vine-Covered","quality":5,"cat":11,"sub":125,"theme":6,"icon":"housing_uni_lsb_gornechandelierglow001","blueprint":198065}
+{"id":198013,"name":"Necrom Column, Tall Elegant","quality":3,"cat":6,"sub":69,"theme":6,"icon":"housing_tlv_duc_nechighdivider001","blueprint":198066}
+{"id":198014,"name":"Necrom Floor, Patterned","quality":4,"cat":13,"sub":138,"theme":6,"icon":"housing_tlv_duc_housingnechighfloor002","blueprint":198067}
+{"id":198015,"name":"Necrom Floor, Trimmed","quality":4,"cat":13,"sub":138,"theme":6,"icon":"housing_tlv_duc_housingnechighfloortrim003","blueprint":198068}
+{"id":198016,"name":"Necrom Window, Leaded Interior","quality":4,"cat":11,"sub":126,"theme":6,"icon":"housing_tlv_str_housingnecintwindowhigh001","blueprint":198069}
+{"id":198017,"name":"Necrom Ceiling, Domed","quality":4,"cat":13,"sub":138,"theme":6,"icon":"housing_tlv_duc_housingnechighroomceilingdome001","blueprint":198070}
+{"id":198018,"name":"Necrom Doorway, Tall","quality":4,"cat":13,"sub":163,"theme":6,"icon":"housing_tlv_duc_housingnechighroomwalldoor003","blueprint":198071}
+{"id":198019,"name":"Necrom Door, Tall","quality":4,"cat":13,"sub":163,"theme":6,"icon":"housing_tlv_duc_nechighsmallsingledoor001","blueprint":198072}
+{"id":198020,"name":"Necrom Wall, Tall Ornate","quality":4,"cat":13,"sub":164,"theme":6,"icon":"housing_tlv_duc_housingnechighwallmiddle004","blueprint":198073}
+{"id":198021,"name":"Necrom Wall, Tall Simple","quality":3,"cat":13,"sub":164,"theme":6,"icon":"housing_tlv_duc_housingnechighwallmiddlelow001","blueprint":198074}
+{"id":198022,"name":"Necrom Railing","quality":3,"cat":13,"sub":164,"theme":6,"icon":"housing_tlv_duc_housingnechighwallmiddlerailing002","blueprint":198075}
+{"id":198023,"name":"Necrom Roof, Gable","quality":2,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_str_housingneccityroofceiling002","blueprint":198076}
+{"id":198024,"name":"Necrom Platform, Stone","quality":2,"cat":13,"sub":138,"theme":6,"icon":"housing_tlv_str_housingneccitywalkway002","blueprint":198077}
+{"id":198025,"name":"Necrom Column, Stone","quality":2,"cat":6,"sub":69,"theme":6,"icon":"housing_tlv_str_neccitywalkwayrailpost001","blueprint":198078}
+{"id":198026,"name":"Necrom Stairway, Stone","quality":3,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_str_neccitywalkwaystairs004","blueprint":198079}
+{"id":198027,"name":"Necrom Stairs, Outer Corner Stone","quality":3,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_str_neccitywalkwaystairs006","blueprint":198080}
+{"id":198028,"name":"Necrom Stairs, Inner Corner Stone","quality":2,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_str_neccitywalkwaystairs007","blueprint":198081}
+{"id":198029,"name":"Necrom Ramp, Wood","quality":2,"cat":13,"sub":138,"theme":6,"icon":"housing_tlv_str_neccitywalkwaystairsramp001","blueprint":198082}
+{"id":198030,"name":"Necrom Door, Large Metal","quality":3,"cat":13,"sub":163,"theme":6,"icon":"housing_tlv_str_nechighdoor001","blueprint":198083}
+{"id":198031,"name":"Necrom Roof, Tiled","quality":3,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_str_housingnecmodrooftile001","blueprint":198084}
+{"id":198032,"name":"Necrom Monolith, Stone","quality":4,"cat":7,"sub":107,"theme":6,"icon":"housing_tlv_str_necmonolith04","blueprint":198085}
+{"id":198033,"name":"Necrom Funerary Recess, Stone","quality":3,"cat":13,"sub":185,"theme":6,"icon":"housing_tlv_str_housingnecmonolithbasehalf001","blueprint":198086}
+{"id":198034,"name":"Necrom Window, Framed Exterior","quality":3,"cat":11,"sub":126,"theme":6,"icon":"housing_tlv_str_housingnecwindowhigh001","blueprint":198087}
+{"id":198035,"name":"Necrom Window, Unframed Exterior","quality":3,"cat":11,"sub":126,"theme":6,"icon":"housing_tlv_str_necwindowlow001","blueprint":198088}
+{"id":198036,"name":"Necrom Archway, Stone","quality":3,"cat":13,"sub":163,"theme":6,"icon":"housing_tlv_waf_housingneccitywallsshortgate001","blueprint":198089}
+{"id":198037,"name":"Necrom Wall, Stone","quality":3,"cat":13,"sub":164,"theme":6,"icon":"housing_tlv_waf_housingneccitywallsshortinner002","blueprint":198090}
+{"id":198038,"name":"Necrom Wall, Corner Stone","quality":3,"cat":13,"sub":164,"theme":6,"icon":"housing_tlv_waf_housingneccitywallsshortinnercorner001","blueprint":198091}
+{"id":198039,"name":"Necrom Roof, Domed","quality":4,"cat":13,"sub":117,"theme":6,"icon":"housing_tlv_waf_housingneccitywallsdome001","blueprint":198092}
+{"id":198040,"name":"Telvanni Door, Round","quality":3,"cat":13,"sub":163,"theme":6,"icon":"housing_vrd_str_housingtelsimpledoor001","blueprint":198093}
+{"id":198041,"name":"Telvanni Doorframe, Round","quality":3,"cat":13,"sub":163,"theme":6,"icon":"housing_vrd_str_telsimpledoorframe002","blueprint":198094}
+{"id":198042,"name":"Glass Crystal, Opaque Cluster","quality":3,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_uni_housingvrdglasscrystal014"}
+{"id":198043,"name":"Plants, Gnisis Pitcher Cluster","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_flr_mrknorthernpitchercluster002"}
+{"id":198044,"name":"Mushroom, Gray Spike Cluster","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_vrdxylaria004"}
+{"id":198045,"name":"Nedic Banner, Ancestral","quality":4,"cat":3,"sub":58,"theme":8,"icon":"housing_cra_lsb_nedicbannerspirit001"}
+{"id":198046,"name":"Nedic Banner, Forest","quality":4,"cat":3,"sub":58,"theme":8,"icon":"housing_cra_lsb_nedicbannerwood001"}
+{"id":198047,"name":"Coldharbour Column, Molag Bal Rotating","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_coh_inc_column001"}
+{"id":198048,"name":"Markarth Barrier, Low","quality":4,"cat":13,"sub":164,"theme":12,"icon":"housing_dwe_duc_markdropgate001"}
+{"id":198049,"name":"Elsweyr Door, Lunar Reverence","quality":5,"cat":13,"sub":163,"theme":7,"icon":"housing_els_run_facademoondoor001"}
+{"id":198050,"name":"Trapdoor, Dragonguard","quality":4,"cat":13,"sub":163,"theme":7,"icon":"housing_els_str_housingsetrapdoor001"}
+{"id":198051,"name":"Dwarven Puzzle Cube, Mage Ascendant","quality":4,"cat":7,"sub":106,"theme":12,"icon":"housing_skr_duc_dwemerpuzzleswitch002"}
+{"id":198052,"name":"Dwarven Lamp, Reachfolk Adorned","quality":4,"cat":11,"sub":120,"theme":15,"icon":"housing_skr_lsb_markreachlamp002"}
+{"id":198053,"name":"Dais, Bloodmage Crystal","quality":5,"cat":7,"sub":106,"theme":1,"icon":"housing_sys_exc_housingralzarscrystal001"}
+{"id":198054,"name":"Necrom Funerary Pyre, Logs","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_tlv_exc_necpyre001"}
+{"id":198055,"name":"Necrom Funerary Offering, Mushrooms","quality":3,"cat":7,"sub":106,"theme":6,"icon":"housing_tlv_exc_necpyremushrooms002"}
+{"id":198056,"name":"Necrom Urn, Blue Elegant","quality":4,"cat":7,"sub":78,"theme":6,"icon":"housing_tlv_inc_necurnsmiddle002"}
+{"id":198057,"name":"Reach Totem, Twig Raven","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_uni_exc_icereachwitchraven001"}
+{"id":198058,"name":"Reach Totem, Twig Symbol","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_uni_exc__icereachwitchsymbol001"}
+{"id":198096,"name":"Daedric Sarcophagus, Metal","quality":5,"cat":7,"sub":76,"theme":13,"icon":"housing_uni_fur_deadlandssarcophagus001"}
+{"id":198103,"name":"Tree, Ancient Dead Oak","quality":3,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spooky001"}
+{"id":198104,"name":"Tree, Old Dead Oak","quality":3,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spooky002"}
+{"id":198105,"name":"Tree, Large Ancient Dead Oak","quality":3,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spooky005"}
+{"id":198106,"name":"Tree, Dead Oak Sapling","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spookysapling002"}
+{"id":198107,"name":"Trees, Dead Oak Sapling Cluster","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spookysapling003"}
+{"id":198108,"name":"Tree, Twisted Dead Oak Sapling","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spookysapling004"}
+{"id":198109,"name":"Trees, Dead Oak Sapling Duo","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_spookysapling005"}
+{"id":198325,"name":"Vision of Mora","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_inc_hermaeusmoraswitch001"}
+{"id":198371,"name":"Necrom Lamp Post, Wood","quality":3,"cat":11,"sub":122,"theme":6,"icon":"housing_tlv_lsb_housingneclightpost003","blueprint":198479}
+{"id":198372,"name":"Apocrypha Ink Bottle, Black","quality":3,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkbottle001"}
+{"id":198373,"name":"Apocrypha Ink Bottle, Green","quality":3,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkbottle002"}
+{"id":198374,"name":"Apocrypha Ink Vat, Black","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkcontainerlarge001"}
+{"id":198375,"name":"Apocrypha Ink Vat, Green","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkcontainerlarge002"}
+{"id":198376,"name":"Apocrypha Ink Vat, Small","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkcontainersmall001"}
+{"id":198377,"name":"Apocrypha Ink Jar, Black","quality":3,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkjar001"}
+{"id":198378,"name":"Apocrypha Ink Jar, Green","quality":3,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkjar002"}
+{"id":198379,"name":"Apocrypha Inkwell","quality":3,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_inkwell001"}
+{"id":198380,"name":"Apocrypha Ink Pestle, Black","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_mortarpestle001"}
+{"id":198381,"name":"Apocrypha Ink Pestle, Green","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_apc_inc_mortarpestle002"}
+{"id":198382,"name":"Apocrypha Specimen Jar, Brains","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarbrains001"}
+{"id":198383,"name":"Apocrypha Specimen Jar, Centipede","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarcentipedes002"}
+{"id":198384,"name":"Apocrypha Specimen Jar, Nascent Creatia","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjardaedrababy002"}
+{"id":198385,"name":"Apocrypha Specimen Jar, Abyssal Eel","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjareel001"}
+{"id":198386,"name":"Apocrypha Specimen Jar, Eyes","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjareyes001"}
+{"id":198387,"name":"Apocrypha Specimen Jar, Scorpion","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarscorpion001"}
+{"id":198388,"name":"Apocrypha Specimen Jar, Tomeshell Viscera","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarscroll002"}
+{"id":198389,"name":"Apocrypha Specimen Jar, Spider","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarspider002"}
+{"id":198390,"name":"Apocrypha Specimen Jar, Leech","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_apc_inc_specimenjarworm001"}
+{"id":198393,"name":"Apocrypha Book Pile, Large Twisted","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_duc_housinglibstalactite002","blueprint":198480}
+{"id":198394,"name":"Apocrypha Bookcase, Corner","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_duc_stonecornerinner001","blueprint":198481}
+{"id":198395,"name":"Apocrypha Stele, Tentacles","quality":4,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_exc_stonestele001","blueprint":198482}
+{"id":198396,"name":"Apocrypha Stele, Arched","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_exc_stonestele002","blueprint":198483}
+{"id":198397,"name":"Apocrypha Stele, Wide Arched","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_exc_stonestele003","blueprint":198484}
+{"id":198398,"name":"Apocrypha Stele, Tablet","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_apc_exc_stonetablet003","blueprint":198485}
+{"id":198399,"name":"Apocrypha Bed, Intricate Double","quality":4,"cat":2,"sub":46,"theme":13,"icon":"housing_apc_fur_bedhigh001","blueprint":198486}
+{"id":198400,"name":"Apocrypha Bed, Spiked Double","quality":3,"cat":2,"sub":46,"theme":13,"icon":"housing_apc_fur_bedmedium001","blueprint":198487}
+{"id":198401,"name":"Apocrypha Bench, Intricate","quality":3,"cat":5,"sub":134,"theme":13,"icon":"housing_apc_fur_benchhigh001","blueprint":198488}
+{"id":198402,"name":"Apocrypha Bench, Spiked","quality":2,"cat":5,"sub":134,"theme":13,"icon":"housing_apc_fur_benchmedium001","blueprint":198489}
+{"id":198403,"name":"Floating Apocrypha Bookcase, Tall","quality":5,"cat":4,"sub":60,"theme":1,"icon":"housing_apc_fur_housingbookcasefloating001","blueprint":198490}
+{"id":198404,"name":"Floating Apocrypha Bookcase, Nautilus","quality":5,"cat":4,"sub":60,"theme":1,"icon":"housing_apc_fur_housingbookcasefloating002","blueprint":198491}
+{"id":198405,"name":"Floating Apocrypha Bookcase, Shell","quality":5,"cat":4,"sub":60,"theme":1,"icon":"housing_apc_fur_housingbookcasefloating003","blueprint":198492}
+{"id":198406,"name":"Floating Apocrypha Bookcase, Roots","quality":5,"cat":4,"sub":60,"theme":1,"icon":"housing_apc_fur_housingbookcasefloating004","blueprint":198493}
+{"id":198407,"name":"Floating Apocrypha Bookcase, Short","quality":5,"cat":4,"sub":60,"theme":1,"icon":"housing_apc_fur_housingbookcasefloating005","blueprint":198494}
+{"id":198408,"name":"Apocrypha Bookcase, Large Intricate","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_wardrobehigh001","blueprint":198495}
+{"id":198409,"name":"Apocrypha Chair, Intricate","quality":4,"cat":5,"sub":132,"theme":13,"icon":"housing_apc_fur_chairhigh001","blueprint":198496}
+{"id":198410,"name":"Apocrypha Desk, Intricate","quality":3,"cat":4,"sub":61,"theme":13,"icon":"housing_apc_fur_deskhigh001","blueprint":198497}
+{"id":198411,"name":"Apocrypha Divider, Intricate","quality":4,"cat":2,"sub":47,"theme":13,"icon":"housing_apc_fur_dividerhigh001","blueprint":198498}
+{"id":198412,"name":"Apocrypha Divider, Spiked","quality":3,"cat":2,"sub":47,"theme":13,"icon":"apc_fur_dividermedium001","blueprint":198499}
+{"id":198413,"name":"Apocrypha Dresser, Intricate","quality":3,"cat":2,"sub":146,"theme":13,"icon":"housing_apc_fur_dresserhigh001","blueprint":198500}
+{"id":198414,"name":"Apocrypha Dresser, Spiked","quality":2,"cat":2,"sub":146,"theme":13,"icon":"housing_apc_fur_dressermedium001","blueprint":198501}
+{"id":198415,"name":"Apocrypha Bookcase, Large","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_libbookcasewallmiddle001","blueprint":198502}
+{"id":198416,"name":"Apocrypha Mirror, Spiked","quality":4,"cat":2,"sub":50,"theme":13,"icon":"housing_apc_fur_mirrormedium001","blueprint":198503}
+{"id":198417,"name":"Apocrypha Nightstand, Intricate","quality":3,"cat":2,"sub":145,"theme":13,"icon":"housing_apc_fur_nightstandhigh001","blueprint":198504}
+{"id":198418,"name":"Apocrypha Stool, Intricate","quality":3,"cat":10,"sub":135,"theme":13,"icon":"housing_apc_fur_stoolhigh001","blueprint":198505}
+{"id":198419,"name":"Apocrypha Stool, Spiked","quality":2,"cat":10,"sub":135,"theme":13,"icon":"housing_apc_fur_stoolmedium001","blueprint":198506}
+{"id":198420,"name":"Apocrypha Table, Intricate","quality":3,"cat":5,"sub":66,"theme":13,"icon":"housing_apc_fur_tablehigh001","blueprint":198507}
+{"id":198421,"name":"Apocrypha Table, Spiked","quality":2,"cat":5,"sub":66,"theme":13,"icon":"housing_apc_fur_tablemedium001","blueprint":198508}
+{"id":198422,"name":"Apocrypha Bookcase, Intricate","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_bookshelfhigh001","blueprint":198509}
+{"id":198423,"name":"Apocrypha Wardrobe, Intricate","quality":4,"cat":2,"sub":48,"theme":13,"icon":"housing_apc_fur_wardrobehigh002","blueprint":198510}
+{"id":198424,"name":"Apocrypha Bookcase, Large Intricate Filled","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_housingwardrobehigh001","blueprint":198511}
+{"id":198425,"name":"Apocrypha Bookcase, Spiked","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_wardrobemedium001","blueprint":198512}
+{"id":198426,"name":"Apocrypha Wardrobe, Spiked","quality":4,"cat":2,"sub":48,"theme":13,"icon":"housing_apc_fur_wardrobemedium002","blueprint":198513}
+{"id":198427,"name":"Apocrypha Book Pile, Short","quality":2,"cat":4,"sub":62,"theme":13,"icon":"housing_apc_inc_libbookstack002","blueprint":198514}
+{"id":198428,"name":"Apocrypha Book Pile, Medium","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_apc_inc_libbookstack005","blueprint":198515}
+{"id":198429,"name":"Paper Making Frame","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_apc_inc_papermakingboard002","blueprint":198516}
+{"id":198430,"name":"Vat, Paper Pulp","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_apc_inc_papermakingcauldron001","blueprint":198517}
+{"id":198431,"name":"Pulp Masher, Paper Making","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_apc_inc_papermakingpestal001","blueprint":198518}
+{"id":198432,"name":"Awl, Bookbinding","quality":2,"cat":10,"sub":96,"theme":13,"icon":"housing_apc_inc_papermakingspindle001","blueprint":198519}
+{"id":198433,"name":"Spindle, Bookbinding Thread","quality":2,"cat":10,"sub":96,"theme":13,"icon":"housing_apc_inc_papermakingyarnroll001","blueprint":198520}
+{"id":198434,"name":"Apocrypha Light Diffusers, Bowl","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_apc_lsb_libbowllight001","blueprint":198521}
+{"id":198435,"name":"Apocrypha Lamp, Desk","quality":3,"cat":11,"sub":120,"theme":13,"icon":"housing_apc_lsb_libcandlestand001","blueprint":198522}
+{"id":198436,"name":"Apocrypha Lamp, Large","quality":4,"cat":11,"sub":120,"theme":13,"icon":"housing_apc_lsb_libcandlestandlarge002","blueprint":198523}
+{"id":198437,"name":"Apocrypha Chandelier, Diffusers","quality":5,"cat":11,"sub":125,"theme":13,"icon":"housing_apc_lsb_libchandelier001","blueprint":198524}
+{"id":198438,"name":"Apocrypha Sconce, Diffuser","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_apc_lsb_liblantern002","blueprint":198525}
+{"id":198439,"name":"Apocrypha Sconce, Intricate","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_apc_lsb_libwallsconce001","blueprint":198526}
+{"id":198440,"name":"Apocrypha Book Piles, Floating","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_apc_str_libbooksfloating001","blueprint":198527}
+{"id":198441,"name":"Necrom Cart, Merchant","quality":4,"cat":6,"sub":71,"theme":6,"icon":"housing_tlv_csb_neccarriagemerchant001","blueprint":198528}
+{"id":198442,"name":"Necrom Wind Chimes, Stone","quality":3,"cat":6,"sub":99,"theme":6,"icon":"housing_tlv_exc_necwindchime004","blueprint":198529}
+{"id":198443,"name":"Necrom Dresser, Elegant","quality":4,"cat":2,"sub":146,"theme":6,"icon":"housing_tlv_fur_necdresserhigh001","blueprint":198530}
+{"id":198444,"name":"Necrom Dresser, Elegant Short","quality":3,"cat":2,"sub":146,"theme":6,"icon":"housing_tlv_fur_necdresserhigh003","blueprint":198531}
+{"id":198445,"name":"Necrom Stool, Padded","quality":2,"cat":10,"sub":135,"theme":6,"icon":"housing_tlv_fur_necstoolhigh001","blueprint":198532}
+{"id":198446,"name":"Necrom Table, Elegant Round","quality":4,"cat":5,"sub":66,"theme":6,"icon":"housing_tlv_fur_nectablehighround001","blueprint":198533}
+{"id":198447,"name":"Necrom Shelf, Elegant Small","quality":2,"cat":4,"sub":60,"theme":6,"icon":"housing_tlv_fur_necwallshelfhigh001","blueprint":198534}
+{"id":198448,"name":"Necrom Planter, Large","quality":4,"cat":12,"sub":109,"theme":6,"icon":"housing_tlv_inc_necchestlarge001a","blueprint":198535}
+{"id":198449,"name":"Necrom Planter, Small","quality":3,"cat":12,"sub":109,"theme":6,"icon":"housing_tlv_inc_necchestsmall001a","blueprint":198536}
+{"id":198450,"name":"Necrom Incense Burner, Delicate Brass","quality":4,"cat":7,"sub":105,"theme":6,"icon":"housing_tlv_inc_necincenseburner002","blueprint":198537}
+{"id":198451,"name":"Necrom Incense Burner, Squat Brass","quality":4,"cat":7,"sub":105,"theme":6,"icon":"housing_tlv_inc_necincenseburner004","blueprint":198538}
+{"id":198452,"name":"Necrom Planter, Hanging Round","quality":4,"cat":12,"sub":109,"theme":6,"icon":"housing_tlv_inc_housingnecwallhookplanterhanging002","blueprint":198539}
+{"id":198453,"name":"Necrom Carpet, Ruby","quality":3,"cat":3,"sub":53,"theme":6,"icon":"housing_tlv_inc_necrug005","blueprint":198540}
+{"id":198454,"name":"Necrom Planter, Tall","quality":3,"cat":12,"sub":109,"theme":6,"icon":"housing_tlv_inc_necvasesquarelarge001a","blueprint":198541}
+{"id":198455,"name":"Necrom Vase, Small Square Floral","quality":2,"cat":3,"sub":57,"theme":6,"icon":"housing_tlv_inc_necvasesquaresmall001a","blueprint":198542}
+{"id":198456,"name":"Pumpkin, Sliced Green","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_tlv_inc_pumpkincut001","blueprint":198543}
+{"id":198457,"name":"Necrom Candle, Elegant","quality":2,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_lsb_neccandle002","blueprint":198544}
+{"id":198458,"name":"Necrom Candle, Tall","quality":3,"cat":11,"sub":129,"theme":6,"icon":"housing_tlv_lsb_neccandle006","blueprint":198545}
+{"id":198459,"name":"Necrom Lamp Post, Metal","quality":4,"cat":11,"sub":122,"theme":6,"icon":"housing_tlv_lsb_neclightpost001","blueprint":198546}
+{"id":198460,"name":"Necrom Sconce, Brass","quality":4,"cat":11,"sub":123,"theme":6,"icon":"housing_tlv_lsb_necwallsconcehigh001","blueprint":198547}
+{"id":198461,"name":"Necrom Brazier, Tall Stone","quality":4,"cat":11,"sub":124,"theme":6,"icon":"housing_tlv_lsb_standingbrazier001","blueprint":198548}
+{"id":198462,"name":"Apocrypha Bookcase, Large Spiked Filled","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_apc_fur_housingwardrobemediumwbooks001","blueprint":198549}
+{"id":198463,"name":"Apocrypha Boulder","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_apc_fossilrockmed003"}
+{"id":198464,"name":"Apocrypha Plant, Chromatic Succulent","quality":3,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_apc_chromaticspikeplant004"}
+{"id":198465,"name":"Apocrypha Plant, Feather Fern Cluster","quality":2,"cat":12,"sub":149,"theme":1,"icon":"housing_veg_apc_featherplant007"}
+{"id":198466,"name":"Apocrypha Plant, Ink-Grass","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_apc_inkgrass004"}
+{"id":198467,"name":"Apocrypha Tree, Blue Spore","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_veg_apc_shroomtree002"}
+{"id":198468,"name":"Apocrypha Tree, Teal Spiral","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_veg_apc_spiralplant003"}
+{"id":198469,"name":"Apocrypha Tree, Branched Green Spore","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_veg_apc_sporetree003"}
+{"id":198470,"name":"Apocrypha Coral, Teal Tube","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_apc_tubecoral004"}
+{"id":198471,"name":"Mushroom, Russet Chanterelle Pair","quality":2,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_giantchanterelle003"}
+{"id":198472,"name":"Mushrooms, Gilled Dusk Cluster","quality":2,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_pinkknight007"}
+{"id":198473,"name":"Mushroom, Tall Green Morel Pair","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_tlvmorel005"}
+{"id":198474,"name":"Stairway, Reclaimed Wood","quality":2,"cat":13,"sub":117,"theme":1,"icon":"housing_apc_str_scaffoldbalconystairshalf001"}
+{"id":198475,"name":"Post, Reclaimed Wood","quality":1,"cat":6,"sub":69,"theme":1,"icon":"housing_apc_str_scaffoldbeam001"}
+{"id":198476,"name":"Bridge, Reclaimed Wood","quality":3,"cat":13,"sub":117,"theme":1,"icon":"housing_apc_str_scaffoldbridge001"}
+{"id":198477,"name":"Platform, Reclaimed Wood Square","quality":2,"cat":13,"sub":138,"theme":1,"icon":"housing_apc_str_housingscaffoldplatform001"}
+{"id":198478,"name":"Platform, Reclaimed Wood Triangle","quality":2,"cat":13,"sub":138,"theme":1,"icon":"housing_apc_str_housingscaffoldplatform002"}
+{"id":198555,"name":"Shrub, Moonlit Ivy","quality":3,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_vin_deadivyblueglow001"}
+{"id":198557,"name":"Vine, Small Moonlit Ivy Drape","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow003"}
+{"id":198558,"name":"Vine, Medium Moonlit Ivy Swath","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow005"}
+{"id":198559,"name":"Vine, Large Moonlit Ivy Drape","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow006"}
+{"id":198560,"name":"Vine, Large Moonlit Ivy Swath","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow007"}
+{"id":198561,"name":"Vine, Wide Moonlit Ivy Drape","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow008"}
+{"id":198566,"name":"Khajiiti Arch, Rising","quality":4,"cat":13,"sub":163,"theme":7,"icon":"housing_kha_waf_housingwallsgatesand001"}
+{"id":198567,"name":"Breton Well, Storm Grey","quality":4,"cat":6,"sub":72,"theme":2,"icon":"housing_bre_str_housingwellupper006"}
+{"id":198568,"name":"Stone Relief, Yokudan","quality":4,"cat":9,"sub":89,"theme":10,"icon":"housing_red_duc_yokudansecretdoor001"}
+{"id":198569,"name":"Dark Elf Altar, Ceremonial","quality":4,"cat":7,"sub":107,"theme":6,"icon":"housing_dun_cem_housingnecaltar001"}
+{"id":198570,"name":"Painted Stone Frog","quality":4,"cat":6,"sub":70,"theme":4,"icon":"housing_arg_duc_stonefrog001"}
+{"id":198571,"name":"Shrine to Dibella","quality":4,"cat":13,"sub":185,"theme":1,"icon":"housing_nib_str_dbhakatoshshrine001"}
+{"id":198572,"name":"Clockwork Wall Gears","quality":4,"cat":9,"sub":89,"theme":16,"icon":"housing_cwc_str_inlayedmachineryglassts001"}
+{"id":198573,"name":"High Elf Altar, Crystal","quality":4,"cat":11,"sub":126,"theme":3,"icon":"housing_sum_str_aldcrystalkeyholder001"}
+{"id":198574,"name":"Khajiiti Water Vessel, Large","quality":4,"cat":7,"sub":137,"theme":7,"icon":"housing_els_exc_seempyreanholderlarge001"}
+{"id":198575,"name":"Khajiiti Well","quality":4,"cat":6,"sub":72,"theme":7,"icon":"housing_kha_str_welllarge001"}
+{"id":198576,"name":"Shelf, Black Soul Gems","quality":4,"cat":7,"sub":199,"theme":13,"icon":"housing_bad_inc_fargemshelf001"}
+{"id":198646,"name":"Druidic Drying Rack, Wide","quality":2,"cat":8,"sub":153,"theme":2,"icon":"housing_sys_exc_drudryingrack001"}
+{"id":198647,"name":"Druidic Drying Rack, Tall","quality":2,"cat":8,"sub":153,"theme":2,"icon":"housing_sys_exc_drudryingrack002"}
+{"id":198648,"name":"Druidic Rack, Hide Stretcher","quality":2,"cat":8,"sub":86,"theme":2,"icon":"housing_sys_exc_druhangingfurstand001"}
+{"id":198649,"name":"Druidic Smoking Rack, Fish","quality":2,"cat":8,"sub":86,"theme":2,"icon":"housing_sys_exc_drufishdryingrack001"}
+{"id":198650,"name":"Druidic Brazier, Leaning","quality":2,"cat":11,"sub":124,"theme":2,"icon":"housing_gen_lsb_torchstand002"}
+{"id":198651,"name":"Druidic Brazier, Standing","quality":2,"cat":11,"sub":124,"theme":2,"icon":"housing_gen_lsb_torchstand001"}
+{"id":198652,"name":"Druidic Bowl, Stone","quality":1,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_drustonebowl001"}
+{"id":198653,"name":"Druidic Goblet, Stone","quality":1,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_drustonecup001"}
+{"id":198654,"name":"Druidic Plate, Stone","quality":1,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_drustoneplate001"}
+{"id":198655,"name":"Druidic Covered Dish, Stone","quality":3,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_drustonepot002"}
+{"id":198656,"name":"Druidic Plates, Clay Stack","quality":2,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_druterraplatepile001"}
+{"id":198657,"name":"Druidic Plate, Clay","quality":2,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_druterraplate001"}
+{"id":198658,"name":"Druidic Pot, Wide Clay","quality":3,"cat":8,"sub":80,"theme":2,"icon":"housing_sys_inc_druterrapot009"}
+{"id":198659,"name":"Druidic Kettle, Clay","quality":3,"cat":8,"sub":151,"theme":2,"icon":"housing_sys_inc_druterrapot005"}
+{"id":198660,"name":"Druidic Pitcher, Clay","quality":3,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_druterrapot008"}
+{"id":198661,"name":"Druidic Pot, Stout Clay","quality":3,"cat":8,"sub":80,"theme":2,"icon":"housing_sys_inc_druterrapot004"}
+{"id":198662,"name":"Flowers, Orange Daylily Cluster","quality":1,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_orangedaylily004"}
+{"id":198663,"name":"Fern Plant, Low Lush","quality":1,"cat":12,"sub":149,"theme":1,"icon":"housing_veg_sys_swordfern004"}
+{"id":198664,"name":"Galen Dogwood, Small","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_tre_sys_bluedogwood014"}
+{"id":198665,"name":"Plant, Emerald Heart Begonia","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_rexbegonia001"}
+{"id":198666,"name":"Galen Dogwood, Twisted","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_bluedogwood002"}
+{"id":198667,"name":"Galen Dogwood, Curved","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_bluedogwood004"}
+{"id":198669,"name":"Breton Statue, Chimera","quality":5,"cat":6,"sub":70,"theme":2,"icon":"housing_uni_exc_chimerastatue001"}
+{"id":198670,"name":"Druidic Hut, Conical Stone","quality":4,"cat":13,"sub":185,"theme":2,"icon":"housing_sys_run_housingdruruinmound001"}
+{"id":198671,"name":"Druid King's Sentinel","quality":4,"cat":6,"sub":70,"theme":2,"icon":"housing_rok_sys_drumonolith002"}
+{"id":198672,"name":"Vines, Verdant Ivy Runner","quality":3,"cat":12,"sub":112,"theme":2,"icon":"housing_veg_vin_greenivy001"}
+{"id":198673,"name":"Scholarium Door, Study","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_uni_exc_smallscribingdoorgeneric001"}
+{"id":198674,"name":"Galen Dogwood, Tall","quality":3,"cat":12,"sub":108,"theme":2,"icon":"housing_tre_sys_bluedogwood006"}
+{"id":198747,"name":"Druidic Statue, Ancient Augur","quality":3,"cat":6,"sub":70,"theme":2,"icon":"housing_rok_sys_housingdruidrockreliefmed001"}
+{"id":199109,"name":"Boulder, Clear Ice","quality":5,"cat":12,"sub":152,"theme":1,"icon":"u40_furniture_icewall"}
+{"id":199110,"name":"Snowfall, Gentle","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u40_furniture_snowdrift"}
+{"id":199111,"name":"Fountain, Kyne's Radiance","quality":5,"cat":6,"sub":74,"theme":1,"icon":"housing_uni_exc_starmirrorpool001"}
+{"id":199112,"name":"Chandelier, Kyne's Radiance","quality":5,"cat":11,"sub":125,"theme":1,"icon":"housing_chl_inc_antlerchandelier001"}
+{"id":199113,"name":"Music Box, New Life Snow Symphony","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_snowglobemusicbox001"}
+{"id":199114,"name":"Seeker Aspirant Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryseekeraspirantsmall001"}
+{"id":199115,"name":"Seeker Aspirant Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryseekeraspirant001"}
+{"id":199116,"name":"Chromatic Reservoir Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrychromaticreservoirsmall001"}
+{"id":199117,"name":"Chromatic Reservoir Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrychromaticreservoirsmall001"}
+{"id":199118,"name":"Apocryphal Clothier Station","quality":5,"cat":25,"sub":104,"theme":13,"icon":"housing_apc_inc_fateweaverloom001"}
+{"id":199119,"name":"Infinite Tome","quality":5,"cat":4,"sub":62,"theme":13,"icon":"housing_uni_inc_hermaeusmorabook001"}
+{"id":199120,"name":"Framed Vision","quality":5,"cat":9,"sub":89,"theme":13,"icon":"icon_missing"}
+{"id":199121,"name":"Inky Incense Burner","quality":5,"cat":7,"sub":105,"theme":13,"icon":"icon_missing"}
+{"id":199122,"name":"Redguard Bottle, Glowing","quality":4,"cat":8,"sub":80,"theme":10,"icon":"housing_red_inc_glassbottle001"}
+{"id":199123,"name":"Cabinet of Curiosities","quality":4,"cat":9,"sub":91,"theme":6,"icon":"icon_missing"}
+{"id":199124,"name":"Green ink ceiling light","quality":4,"cat":11,"sub":123,"theme":13,"icon":"icon_missing"}
+{"id":199125,"name":"Inky Waterup Table","quality":4,"cat":5,"sub":66,"theme":13,"icon":"icon_missing"}
+{"id":199126,"name":"Forged Black Book","quality":4,"cat":4,"sub":62,"theme":13,"icon":"housing_uni_inc_blackbook001"}
+{"id":199127,"name":"Petrified Watcher","quality":3,"cat":9,"sub":91,"theme":13,"icon":"housing_uni_exc_petrifiedwatcher001"}
+{"id":199128,"name":"Watchful Light","quality":3,"cat":11,"sub":126,"theme":13,"icon":"u40_furniture_moreeyelight"}
+{"id":199129,"name":"Apocrypha Fossil, Ribcage","quality":3,"cat":7,"sub":75,"theme":1,"icon":"housing_rok_apc_fossil005"}
+{"id":199130,"name":"Apocrypha Fossil, Slug","quality":3,"cat":7,"sub":75,"theme":1,"icon":"housing_rok_apc_fossil006"}
+{"id":199131,"name":"Apocrypha Fossil, Wall Beast","quality":3,"cat":6,"sub":99,"theme":1,"icon":"housing_rok_apc_tabletrock004"}
+{"id":199132,"name":"Apocrypha Fossil, Tree","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_apc_fossiltree004"}
+{"id":199133,"name":"Target Daedra, Seeker","quality":5,"cat":25,"sub":98,"theme":13,"icon":"u40_furniture_seekertargetdummy"}
+{"id":199134,"name":"Apocrypha Waterfall, Inky","quality":5,"cat":6,"sub":74,"theme":13,"icon":"housing_rok_apc_housingendlessinkwaterfall001"}
+{"id":199135,"name":"Apocrypha Pool, Inky","quality":4,"cat":7,"sub":107,"theme":13,"icon":"u40_furniture_apocryphapool_inky"}
+{"id":199136,"name":"Apocrypha Stalks, Scryeball Patch","quality":4,"cat":12,"sub":111,"theme":13,"icon":"housing_veg_apc_eyeballplant006"}
+{"id":199890,"name":"Archival Light Diffuser, Large","quality":5,"cat":11,"sub":126,"theme":13,"icon":"u40_furniture_multicolororb"}
+{"id":199932,"name":"Scrying Brazier, Short","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_uni_exc_unquenchablebrazier002"}
+{"id":199933,"name":"Scrying Brazier, Tall","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_uni_exc_unquenchablebrazier001"}

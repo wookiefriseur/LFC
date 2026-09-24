@@ -1,0 +1,348 @@
+{"id":170171,"name":"Dwarven Liminal Diffusion","quality":5,"cat":11,"sub":126,"theme":12,"icon":"furnishing_dwarvenglow"}
+{"id":171333,"name":"Dwarven Potted Plant, Polished Vase","quality":3,"cat":12,"sub":109,"theme":12,"icon":"housing_skr_inc_marklargevase003a","blueprint":171481}
+{"id":171334,"name":"Dwarven Lamp, Cylinder Cage","quality":4,"cat":11,"sub":120,"theme":12,"icon":"housing_skr_lsb_markhanginglanterns002","blueprint":171482}
+{"id":171335,"name":"Dwarven Lamp, Conal Frustum Cage","quality":4,"cat":11,"sub":120,"theme":12,"icon":"housing_skr_lsb_markhanginglanterns001","blueprint":171483}
+{"id":171336,"name":"Dwarven Brazier, Square Polished","quality":4,"cat":11,"sub":124,"theme":12,"icon":"housing_skr_lsb_markbrazier002","blueprint":171484}
+{"id":171337,"name":"Dwarven Candlestick, Polished","quality":2,"cat":11,"sub":129,"theme":12,"icon":"housing_skr_lsb_markcandle003","blueprint":171485}
+{"id":171338,"name":"Dwarven Table Lamp, Polished Dome","quality":3,"cat":11,"sub":120,"theme":12,"icon":"housing_skr_lsb_marklamp001","blueprint":171486}
+{"id":171339,"name":"Reachmen Chandelier, Gnarled","quality":4,"cat":11,"sub":125,"theme":15,"icon":"housing_skr_lsb_markreachchandelier001","blueprint":171487}
+{"id":171340,"name":"Reachmen Chandelier, Shaded","quality":3,"cat":11,"sub":125,"theme":15,"icon":"housing_skr_lsb_markreachchandelier002","blueprint":171488}
+{"id":171341,"name":"Dwarven Wall Lamp, Reachfolk Adorned","quality":3,"cat":11,"sub":123,"theme":12,"icon":"housing_skr_lsb_markreachwalllamp001","blueprint":171489}
+{"id":171342,"name":"Dwarven Bench, Ornate Granite","quality":3,"cat":5,"sub":134,"theme":12,"icon":"housing_skr_fur_markbench001","blueprint":171490}
+{"id":171343,"name":"Dwarven Pew, Ornate Polished","quality":4,"cat":5,"sub":134,"theme":12,"icon":"housing_skr_fur_markbench004","blueprint":171491}
+{"id":171344,"name":"Dwarven Corner Bench, Ornate Polished","quality":4,"cat":5,"sub":134,"theme":12,"icon":"housing_skr_fur_markbench008","blueprint":171492}
+{"id":171345,"name":"Dwarven Chair, Ornate Polished","quality":3,"cat":5,"sub":132,"theme":12,"icon":"housing_skr_fur_markchair001","blueprint":171493}
+{"id":171346,"name":"Dwarven Bed, Reach Furs","quality":3,"cat":2,"sub":46,"theme":12,"icon":"housing_skr_fur_markbedsingle005","blueprint":171494}
+{"id":171347,"name":"Dwarven Bed, Reach Furs Double","quality":4,"cat":2,"sub":46,"theme":12,"icon":"housing_skr_fur_markbeddouble002","blueprint":171495}
+{"id":171348,"name":"Dwarven Bed, Reach Furs Canopy","quality":4,"cat":2,"sub":46,"theme":12,"icon":"housing_skr_fur_markbeddouble007","blueprint":171496}
+{"id":171349,"name":"Dwarven Divider, Ornate Granite","quality":3,"cat":2,"sub":47,"theme":12,"icon":"housing_skr_fur_markdividingscreena001","blueprint":171497}
+{"id":171350,"name":"Dwarven Divider, Ornate Polished","quality":4,"cat":2,"sub":47,"theme":12,"icon":"housing_skr_fur_markdividingscreenb002","blueprint":171498}
+{"id":171351,"name":"Dwarven Mirror, Polished","quality":3,"cat":2,"sub":50,"theme":12,"icon":"housing_skr_inc_markmirror001","blueprint":171499}
+{"id":171352,"name":"Dwarven Cage, Polished Specimen","quality":3,"cat":10,"sub":96,"theme":12,"icon":"housing_skr_inc_marksmallcage001","blueprint":171500}
+{"id":171353,"name":"Dwarven Relief, Connected Circles","quality":4,"cat":9,"sub":92,"theme":12,"icon":"housing_skr_inc_markwallart001","blueprint":171501}
+{"id":171354,"name":"Dwarven Relief, Tracks","quality":3,"cat":9,"sub":92,"theme":12,"icon":"housing_skr_inc_markwallart002","blueprint":171502}
+{"id":171355,"name":"Dwarven Amphora, Ornate Polished","quality":4,"cat":8,"sub":80,"theme":12,"icon":"housing_skr_inc_marklargevase005","blueprint":171503}
+{"id":171356,"name":"Dwarven Pot, Polished","quality":3,"cat":8,"sub":80,"theme":12,"icon":"housing_skr_inc_markvase002","blueprint":171504}
+{"id":171357,"name":"Dwarven Kettle, Ornate Polished","quality":4,"cat":8,"sub":151,"theme":12,"icon":"housing_skr_inc_markkitchenpitcher005","blueprint":171505}
+{"id":171358,"name":"Dwarven Mug, Polished","quality":2,"cat":8,"sub":144,"theme":12,"icon":"housing_skr_inc_markkitchencuplarge002","blueprint":171506}
+{"id":171359,"name":"Dwarven Plate, Polished","quality":2,"cat":8,"sub":81,"theme":12,"icon":"housing_skr_inc_markkitchenemptyplate002","blueprint":171507}
+{"id":171360,"name":"Dwarven Cooking Implements, Hanging","quality":3,"cat":8,"sub":151,"theme":12,"icon":"housing_skr_inc_markkitchencookingutensilset001","blueprint":171508}
+{"id":171361,"name":"Dwarven Strainer, Kitchen","quality":3,"cat":8,"sub":151,"theme":12,"icon":"housing_skr_inc_markkitchenstrainerlarge001","blueprint":171509}
+{"id":171362,"name":"Dwarven Dinner Bowl, Hearty Stew","quality":3,"cat":8,"sub":85,"theme":12,"icon":"housing_skr_inc_markkitchenbowlmedium002","blueprint":171510}
+{"id":171363,"name":"Dwarven Serving Dish, Vegetable Soup","quality":4,"cat":8,"sub":85,"theme":12,"icon":"housing_skr_inc_markkitchenbowlservinglarge001","blueprint":171511}
+{"id":171364,"name":"Dwarven Plate, Full Breakfast","quality":3,"cat":8,"sub":85,"theme":12,"icon":"housing_skr_inc_markkitchenplatemedium001","blueprint":171512}
+{"id":171365,"name":"Dwarven Counter, Granite","quality":4,"cat":5,"sub":67,"theme":12,"icon":"housing_skr_fur_markbarcounter001","blueprint":171513}
+{"id":171366,"name":"Dwarven Desk, Ornate Polished","quality":4,"cat":4,"sub":61,"theme":12,"icon":"housing_skr_fur_markdesk001","blueprint":171514}
+{"id":171367,"name":"Dwarven Table, Grand Polished","quality":4,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_marktablelarge001","blueprint":171515}
+{"id":171368,"name":"Dwarven Table, Granite","quality":3,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_marktablerectangle001","blueprint":171516}
+{"id":171369,"name":"Dwarven Sideboard, Granite Polished","quality":4,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_marktabletall001","blueprint":171517}
+{"id":171370,"name":"Dwarven Table, Granite Kitchen","quality":3,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_marktableroundlarge002","blueprint":171518}
+{"id":171371,"name":"Dwarven Low Table, Ornate Polished","quality":4,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_marktableshort001","blueprint":171519}
+{"id":171372,"name":"Dwarven End Table, Columnar Granite","quality":3,"cat":5,"sub":66,"theme":12,"icon":"housing_skr_fur_markendtable002","blueprint":171520}
+{"id":171373,"name":"Dwarven Nightstand, Granite","quality":3,"cat":2,"sub":145,"theme":12,"icon":"housing_skr_fur_markdresser001","blueprint":171521}
+{"id":171374,"name":"Dwarven Dresser, Granite","quality":3,"cat":2,"sub":146,"theme":12,"icon":"housing_skr_fur_markdresser003","blueprint":171522}
+{"id":171375,"name":"Dwarven Trunk, Ornate Polished","quality":4,"cat":2,"sub":49,"theme":12,"icon":"housing_skr_con_markchest003","blueprint":171523}
+{"id":171376,"name":"Dwarven Wall Cabinet, Granite","quality":3,"cat":8,"sub":83,"theme":12,"icon":"housing_skr_fur_markcabinet002","blueprint":171524}
+{"id":171377,"name":"Dwarven Corner Shelf, Granite","quality":2,"cat":4,"sub":60,"theme":12,"icon":"housing_skr_fur_markshelf003","blueprint":171525}
+{"id":171378,"name":"Dwarven Wardrobe, Ornate Polished","quality":4,"cat":2,"sub":48,"theme":12,"icon":"housing_skr_fur_markarmoir001","blueprint":171526}
+{"id":171379,"name":"Dwarven Bookcase, Granite","quality":3,"cat":4,"sub":60,"theme":12,"icon":"housing_skr_fur_markbookshelf001","blueprint":171527}
+{"id":171380,"name":"Dwarven Bookcase, Granite Filled","quality":4,"cat":4,"sub":60,"theme":12,"icon":"housing_skr_fur_markbookshelfhousing001","blueprint":171528}
+{"id":171381,"name":"Reachmen Pergola, Ivy","quality":3,"cat":13,"sub":185,"theme":15,"icon":"housing_skr_ext_rchfortoverhang001","blueprint":171529}
+{"id":171382,"name":"Reachmen Pergola, Ivy Overhang","quality":3,"cat":13,"sub":185,"theme":15,"icon":"housing_skr_ext_rchfortoverhang002"}
+{"id":171383,"name":"Dwarven Broom, Restored","quality":2,"cat":10,"sub":96,"theme":12,"icon":"housing_skr_inc_markbrush002"}
+{"id":171384,"name":"Dwarven Loaf Pan, Rectangular","quality":2,"cat":8,"sub":151,"theme":12,"icon":"housing_skr_inc_markkitchenservingpanlarge001"}
+{"id":171385,"name":"Dwarven Plate, Salvaged Decorative","quality":1,"cat":10,"sub":97,"theme":12,"icon":"housing_skr_ext_markmetalplate001"}
+{"id":171386,"name":"Reachfolk Banner, Markarth","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_skr_ext_rchfortbanner002"}
+{"id":171387,"name":"Nighthollow Banner","quality":4,"cat":3,"sub":58,"theme":17,"icon":"housing_skr_lsb_markknighthollowvampiresigilsmall001"}
+{"id":171388,"name":"Dwarven Tonal Cascade","quality":4,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_inc_marktonalcascade001"}
+{"id":171389,"name":"Dwarven Crystal Receptacle","quality":4,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_str_markiintretractpillar001"}
+{"id":171390,"name":"Reachwitch Protective Totem","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_skr_exc_markalchemytotem001"}
+{"id":171391,"name":"Reach Effigy of Turnabout","quality":4,"cat":7,"sub":107,"theme":15,"icon":"housing_skr_ext_rchforteffigy001"}
+{"id":171392,"name":"Falmer Totem of Dominance","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_skr_str_fmrtotemlarge001"}
+{"id":171393,"name":"Tree, Reach Totem","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_skr_ext_rchforteffigy002"}
+{"id":171394,"name":"Dwarven Stand, Void Crystal","quality":5,"cat":11,"sub":126,"theme":12,"icon":"housing_skr_inc_voidpocketshard001"}
+{"id":171395,"name":"Dwarven Beacon, Aetheric","quality":5,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_lsb_markaethericbeacon001"}
+{"id":171396,"name":"Dwarven Tonal Manacle","quality":4,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_inc_markmanacle001"}
+{"id":171397,"name":"Stone Garden Tank, Vacant","quality":4,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_nrcontainereleccombined001"}
+{"id":171398,"name":"Stone Garden Vat, Alchemized Bristleback","quality":5,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_largetankbristleback001"}
+{"id":171399,"name":"Stone Garden Vat, Alchemized Chaurus","quality":5,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_largetankchaurus001"}
+{"id":171400,"name":"Stone Garden Vat, Alchemized Durzog","quality":5,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_largetankdurzog001"}
+{"id":171401,"name":"Stone Garden Vat, Vacant","quality":4,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_largetankempty001"}
+{"id":171402,"name":"Stone Garden Circulator, Rootbound","quality":4,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_nrpowergeneratorcombined001"}
+{"id":171403,"name":"Stone Garden Casket, Alchemized Bloodknight","quality":5,"cat":10,"sub":159,"theme":17,"icon":"housing_skr_duc_vampirelabchamberbloodknight001"}
+{"id":171404,"name":"Dwarven Minecart, Ornate","quality":5,"cat":6,"sub":71,"theme":12,"icon":"housing_skr_csb_marktraincart001","blueprint":171801}
+{"id":171405,"name":"Solitude Yarn Rack, Colorful","quality":5,"cat":10,"sub":97,"theme":8,"icon":"housing_skr_inc_loomspools001","blueprint":171802}
+{"id":171406,"name":"Solitude Well, Noble","quality":5,"cat":6,"sub":72,"theme":8,"icon":"housing_skr_str_solitudewell001","blueprint":171803}
+{"id":171407,"name":"Solitude Hearth, Rounded Tall","quality":5,"cat":13,"sub":117,"theme":8,"icon":"housing_skr_str_solitudefireplacelow001","blueprint":171804}
+{"id":171408,"name":"Vampiric Cauldron, Distilled Coagulant","quality":5,"cat":10,"sub":96,"theme":17,"icon":"housing_skr_inc_vampirelabfennscauldron001","blueprint":171805}
+{"id":171409,"name":"Provisioning Station, Solitude Grill","quality":5,"cat":25,"sub":104,"theme":8,"icon":"housing_skr_inc_firepit002","blueprint":171806}
+{"id":171410,"name":"Dwarven Crystal Sconce, Mirror","quality":5,"cat":11,"sub":126,"theme":12,"icon":"housing_skr_inc_markmirrorbowl002","blueprint":171807}
+{"id":171411,"name":"Clockwork Lens Assembly, Frozen","quality":4,"cat":10,"sub":170,"theme":16,"icon":"housing_cwc_lsb_lensprojector001"}
+{"id":171412,"name":"Clockwork Switch, Rotary","quality":4,"cat":10,"sub":170,"theme":16,"icon":"housing_cwc_exc_vrdsentryswitch001"}
+{"id":171413,"name":"Mages Guild Sign, Large","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_bre_lsb_smlsignguildmages001"}
+{"id":171414,"name":"Fighters Guild Sign, Large","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_bre_lsb_smlsignguildffighters001"}
+{"id":171415,"name":"Changing Room, Curtained","quality":3,"cat":2,"sub":47,"theme":1,"icon":"housing_gen_crf_transmogbooth001"}
+{"id":171416,"name":"Telvanni Specimen Jar, Glass Dome","quality":3,"cat":9,"sub":91,"theme":6,"icon":"housing_vrd_inc_telalchemyprops007"}
+{"id":171417,"name":"Orcish Seal, Owl","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol007"}
+{"id":171418,"name":"Orcish Seal, Anvil","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol003"}
+{"id":171419,"name":"Riekling Shelter, Painted Megaliths","quality":3,"cat":13,"sub":114,"theme":15,"icon":"housing_gen_exc_rkrrrockhovela002"}
+{"id":171420,"name":"Riekling Rack, Giant Bone","quality":3,"cat":13,"sub":113,"theme":15,"icon":"housing_gen_exc_rkrracka001"}
+{"id":171421,"name":"Ayleid Pillar, Large Empty","quality":4,"cat":6,"sub":99,"theme":14,"icon":"housing_ayl_duc_pedestalb001"}
+{"id":171422,"name":"Ayleid Constellation Stele, The Apprentice","quality":4,"cat":7,"sub":106,"theme":14,"icon":"housing_ayl_duc_constellationpanelsmallapprentice001"}
+{"id":171423,"name":"Alinor Trellis, Blue Wisteria","quality":4,"cat":12,"sub":111,"theme":3,"icon":"housing_sum_exc_trellis002"}
+{"id":171424,"name":"Bush, Rhododendron","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_tre_sum_rhododendron001"}
+{"id":171425,"name":"Redguard Carpets, Rolled","quality":3,"cat":3,"sub":53,"theme":10,"icon":"housing_red_exc_varmarketrugset002"}
+{"id":171426,"name":"Redguard Brazier, Ritual","quality":4,"cat":11,"sub":124,"theme":10,"icon":"housing_red_str_clwayshrinedungeon001"}
+{"id":171428,"name":"Vampiric Stained Glass","quality":5,"cat":11,"sub":126,"theme":17,"icon":"housing_uni_inc_antvampirestainedglasswindow001"}
+{"id":171429,"name":"Red Eagle Cave Painting","quality":4,"cat":9,"sub":92,"theme":15,"icon":"housing_uni_inc_antredeaglerock001"}
+{"id":171431,"name":"Antique Map of the Reach","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsthereachscroll001"}
+{"id":171542,"name":"Music Box, Farewell to Nenalata","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_ayleidmusicbox001"}
+{"id":171543,"name":"Music Box, Feast of All Flames","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxmorrowindvolcanic001"}
+{"id":171544,"name":"Comet, Aetherial","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_aetherialcomet_02"}
+{"id":171545,"name":"Ayleid Gate, Large","quality":5,"cat":13,"sub":163,"theme":14,"icon":"housing_ayl_duc_housingdoorbroom001"}
+{"id":171546,"name":"Ayleid Relief, Blessed Life-Tree","quality":5,"cat":9,"sub":92,"theme":14,"icon":"housing_ayl_duc_housingdoorstonehall001"}
+{"id":171601,"name":"Replica Jubilee Cake 2021","quality":5,"cat":8,"sub":156,"theme":1,"icon":"memento_jubileecake2021"}
+{"id":171755,"name":"Markarth Floor, Circular","quality":3,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markrugmediumround001","blueprint":171781}
+{"id":171756,"name":"Markarth Floor, Square","quality":3,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markrugmediumsquare001","blueprint":171782}
+{"id":171757,"name":"Markarth Floor, Large Oval","quality":4,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markruglargeround001","blueprint":171783}
+{"id":171758,"name":"Markarth Floor, Large Square","quality":4,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markruglargesquare001","blueprint":171784}
+{"id":171759,"name":"Markarth Floor, Large Rectangle","quality":4,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markruglargesquare003","blueprint":171785}
+{"id":171760,"name":"Markarth Wall, Wide Stone","quality":2,"cat":13,"sub":164,"theme":12,"icon":"housing_skr_waf_markwallmedstraight002","blueprint":171786}
+{"id":171761,"name":"Markarth Post, Stone Wall","quality":2,"cat":6,"sub":69,"theme":12,"icon":"housing_skr_waf_markwallmedcap001","blueprint":171787}
+{"id":171762,"name":"Markarth Pillar, Stone","quality":3,"cat":6,"sub":69,"theme":12,"icon":"housing_skr_str_markintpillarmed002","blueprint":171788}
+{"id":171763,"name":"Markarth Door, Double","quality":4,"cat":13,"sub":163,"theme":12,"icon":"housing_skr_str_markdoor001","blueprint":171789}
+{"id":171764,"name":"Markarth Fireplace, Stone","quality":4,"cat":13,"sub":117,"theme":12,"icon":"housing_skr_str_markintfireplace001","blueprint":171790}
+{"id":171765,"name":"Markarth Wall, Windowed Stone","quality":3,"cat":13,"sub":164,"theme":12,"icon":"housing_skr_str_markwindow002","blueprint":171791}
+{"id":171766,"name":"Markarth Platform, Square","quality":3,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_str_markintplatformlarge002","blueprint":171792}
+{"id":171767,"name":"Markarth Platform, Bordered Square","quality":4,"cat":13,"sub":138,"theme":12,"icon":"housing_dwe_duc_markplatformsquare001","blueprint":171793}
+{"id":171768,"name":"Markarth Platform, Circular","quality":2,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_str_markplatformround002","blueprint":171794}
+{"id":171769,"name":"Markarth Stairway, Narrow Stone","quality":2,"cat":13,"sub":117,"theme":12,"icon":"housing_skr_str_markstairssmall002","blueprint":171795}
+{"id":171770,"name":"Markarth Stairway, Wide Stone","quality":3,"cat":13,"sub":117,"theme":12,"icon":"housing_skr_str_markintstairs001","blueprint":171796}
+{"id":171771,"name":"Markarth Walkway, Stone","quality":2,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_str_marklibrarywalkway001","blueprint":171797}
+{"id":171772,"name":"Markarth Walkway, Metal Trim","quality":4,"cat":13,"sub":138,"theme":12,"icon":"housing_dwe_duc_markrampnarrow001","blueprint":171798}
+{"id":171773,"name":"Markarth Archway, Stone","quality":3,"cat":13,"sub":163,"theme":12,"icon":"housing_skr_str_markwalkwaycap001","blueprint":171799}
+{"id":171774,"name":"Markarth Tower, Stone","quality":4,"cat":13,"sub":185,"theme":12,"icon":"housing_skr_str_marktower001","blueprint":171800}
+{"id":171775,"name":"Fountain of the Fiery Drake","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_skr_duc_markblackdrakefountainhead001"}
+{"id":171776,"name":"Basalt Pillar, Glowing","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_rok_bad_basaltpillar001"}
+{"id":171817,"name":"Ayleid Chandelier, Caged","quality":4,"cat":11,"sub":125,"theme":14,"icon":"housing_ayl_duc_housinglanternhangingc001"}
+{"id":171819,"name":"Tree, Towering Cork Oak","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_dec_gccorkoak002"}
+{"id":171820,"name":"Redguard Urn, Wrapped Golden","quality":4,"cat":3,"sub":57,"theme":10,"icon":"housing_red_inc_vargoldvase001"}
+{"id":171821,"name":"Redguard Amphora, Golden","quality":4,"cat":3,"sub":57,"theme":10,"icon":"housing_red_inc_vargoldvaselarge001"}
+{"id":171822,"name":"Harbor Winch, Treadwheel","quality":4,"cat":10,"sub":170,"theme":1,"icon":"housing_vrd_str_hlaharborpulley001"}
+{"id":171823,"name":"Coral Formation, Branching Red","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphredcoral001"}
+{"id":171824,"name":"Mushroom, Tufted Cap","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_skr_mycenamushroom005"}
+{"id":171825,"name":"Mushroom, Large Glowtendril","quality":4,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_skr_gianttendrilmushroom005"}
+{"id":171826,"name":"Brazier, Stone Cold-Flame","quality":5,"cat":11,"sub":124,"theme":3,"icon":"housing_sum_str_wayshrinedungeon001"}
+{"id":171827,"name":"Brazier, Dragon-Headed Cold-Flame","quality":5,"cat":11,"sub":124,"theme":8,"icon":"housing_nor_str_wayshrinetorch001"}
+{"id":171828,"name":"Vampiric Table, Exsanguination","quality":5,"cat":7,"sub":77,"theme":17,"icon":"housing_skr_fur_vampirelabtablesstrapless002"}
+{"id":171829,"name":"Laboratory Instruments","quality":4,"cat":7,"sub":77,"theme":17,"icon":"housing_skr_inc_vampirelabtoolkit001"}
+{"id":171830,"name":"Mausoleum Bookcase, Filled","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_coh_inc_housingbookcase001"}
+{"id":171831,"name":"Mad Architect's Medallion, Diamond","quality":3,"cat":9,"sub":92,"theme":13,"icon":"housing_coh_inc_floordiamond001"}
+{"id":171832,"name":"Dark Elf Statue, St. Olms","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_vrd_exc_statuestolms001"}
+{"id":171833,"name":"Dark Elf Statue, St. Delyn","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_vrd_exc_statuestdelyn001"}
+{"id":171834,"name":"Tree, Charred Vvardenfell Pine","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_vrdlimberpine001"}
+{"id":171835,"name":"Tree, Charred Leaning Vvardenfell Pine","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_vrdlimberpine002"}
+{"id":171836,"name":"Tree, Charred Slim Vvardenfell Pine","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_ded_vrdlimberpine003"}
+{"id":171857,"name":"Aetherial Well","quality":5,"cat":25,"sub":198,"theme":14,"icon":"housing_ayl_exc_housingcombination001"}
+{"id":171875,"name":"Target Harrowing Reaper, Trial","quality":5,"cat":25,"sub":98,"theme":1,"icon":"target_harrowreaper"}
+{"id":171932,"name":"Daedric Sconce, Torch","quality":3,"cat":11,"sub":123,"theme":13,"icon":"housing_dae_lsb_torch001"}
+{"id":171933,"name":"Daedric Candles, Tall Stand","quality":3,"cat":11,"sub":129,"theme":13,"icon":"housing_dae_lsb_candelabrar001"}
+{"id":171934,"name":"Daedric Brazier, Plinth","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_dae_lsb_brazier003"}
+{"id":171940,"name":"Statue of Sheogorath, Shivering Isles Sovereign","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_vrd_exc_statuesheogorath001"}
+{"id":171943,"name":"Music Box, The Liberation of Leyawiin","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxleyawiin001"}
+{"id":171944,"name":"Music Box, The Mirefrog's Hymn","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxmurkmire001"}
+{"id":171945,"name":"Deadlands Sconce, Horned","quality":5,"cat":11,"sub":123,"theme":13,"icon":"housing_bad_lsb_dedwallsconce001"}
+{"id":171946,"name":"Deadlands Cage, Bladed","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedcage001"}
+{"id":171947,"name":"Deadlands Chandelier, Bladed","quality":5,"cat":11,"sub":125,"theme":13,"icon":"housing_bad_lsb_dedchandelier001"}
+{"id":175135,"name":"Statue, Prince of Ambition","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_bad_exc_housingdedmehrunesdagonstatue001"}
+{"id":175578,"name":"Banner, Meridia","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermeridiasmall001"}
+{"id":175583,"name":"Leyawiin Cupboard, Sturdy","quality":3,"cat":8,"sub":83,"theme":11,"icon":"housing_bad_fur_leylowwallcabinet001","blueprint":175915}
+{"id":175584,"name":"Leyawiin Cupboard, Formal","quality":4,"cat":8,"sub":83,"theme":11,"icon":"housing_bad_fur_leycabinetshort002","blueprint":175916}
+{"id":175585,"name":"Leyawiin Wall Shelf, Carved","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_leywallshelf002","blueprint":175917}
+{"id":175586,"name":"Leyawiin Counter, Corner","quality":3,"cat":5,"sub":67,"theme":11,"icon":"housing_bad_fur_leycountercorner001","blueprint":175918}
+{"id":175587,"name":"Leyawiin Counter, Long","quality":3,"cat":5,"sub":67,"theme":11,"icon":"housing_bad_fur_leycounterlong001","blueprint":175919}
+{"id":175588,"name":"Leyawiin Cabinet, Sturdy","quality":3,"cat":8,"sub":83,"theme":11,"icon":"housing_bad_fur_leylowcabinet001","blueprint":175920}
+{"id":175589,"name":"Leyawiin Cupboard, Formal Display","quality":4,"cat":8,"sub":83,"theme":11,"icon":"housing_bad_fur_leycabinet001","blueprint":175921}
+{"id":175590,"name":"Leyawiin Armoire, Formal","quality":4,"cat":2,"sub":48,"theme":11,"icon":"housing_bad_fur_leycabinet002","blueprint":175922}
+{"id":175591,"name":"Leyawiin Wardrobe, Formal","quality":4,"cat":2,"sub":48,"theme":11,"icon":"housing_bad_fur_leycabinet003","blueprint":175923}
+{"id":175592,"name":"Leyawiin Bookcase, Short","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_leybookcase001","blueprint":175924}
+{"id":175593,"name":"Leyawiin Bookcase, Tall","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_leybookcasetall001","blueprint":175925}
+{"id":175594,"name":"Leyawiin Bookcase, Tall Filled","quality":4,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_housingleybookcasetallfilled001","blueprint":175926}
+{"id":175595,"name":"Leyawiin Bookcase, Narrow","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_leybookcasetall002","blueprint":175927}
+{"id":175596,"name":"Leyawiin Bookcase, Narrow Filled","quality":4,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_housingleybookcasetallfilled002","blueprint":175928}
+{"id":175597,"name":"Leyawiin Bookcase, Grand Filled","quality":4,"cat":4,"sub":60,"theme":11,"icon":"housing_bad_fur_leylargebookshelves002","blueprint":175929}
+{"id":175598,"name":"Leyawiin Bed, Formal Double","quality":4,"cat":2,"sub":46,"theme":11,"icon":"housing_bad_fur_leybedlarge001","blueprint":175930}
+{"id":175599,"name":"Leyawiin Bed, Formal Single","quality":4,"cat":2,"sub":46,"theme":11,"icon":"housing_bad_fur_leybedsmall002","blueprint":175931}
+{"id":175600,"name":"Leyawiin Bed, Sturdy Single","quality":3,"cat":2,"sub":46,"theme":11,"icon":"housing_bad_fur_leylowbedsmall001","blueprint":175932}
+{"id":175601,"name":"Leyawiin Tapestry, Floral","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_leycathedraltapestry001","blueprint":175933}
+{"id":175602,"name":"Leyawiin Banner, Abstract","quality":2,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrysmall008","blueprint":175934}
+{"id":175603,"name":"Leyawiin Tapestry, Lone Vessel","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrysmall004","blueprint":175935}
+{"id":175604,"name":"Leyawiin Tapestry, Twin Vessels","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrysmall009","blueprint":175936}
+{"id":175605,"name":"Leyawiin Tapestry, Fleet","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrylarge009","blueprint":175937}
+{"id":175606,"name":"Leyawiin Carpet, Grand Carmine Octad","quality":4,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyrughi001","blueprint":175938}
+{"id":175607,"name":"Leyawiin Rug, Carmine Octad","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyrughi002","blueprint":175939}
+{"id":175608,"name":"Leyawiin Carpet, Misty Octad","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyrughi004","blueprint":175940}
+{"id":175609,"name":"Leyawiin Carpet, Large Misty Octad","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyrughi003","blueprint":175941}
+{"id":175610,"name":"Leyawiin Carpet, Large Carmine Octad","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyrughi005","blueprint":175942}
+{"id":175611,"name":"Leyawiin End Table, Formal Round","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leytableroundsmall001","blueprint":175943}
+{"id":175612,"name":"Leyawiin Table, Formal Square Low","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leytablesquareshort001","blueprint":175944}
+{"id":175613,"name":"Leyawiin Table, Sturdy Square","quality":2,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leylowtablesquarelarge001","blueprint":175945}
+{"id":175614,"name":"Leyawiin Table, Sturdy Round","quality":2,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leylowtableroundlarge001","blueprint":175946}
+{"id":175615,"name":"Leyawiin Table, Formal","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leytablerectsmall001","blueprint":175947}
+{"id":175616,"name":"Leyawiin Table, Sturdy Grand","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leylowtablerectlarge001","blueprint":175948}
+{"id":175617,"name":"Leyawiin Table, Formal Grand","quality":4,"cat":5,"sub":66,"theme":11,"icon":"housing_bad_fur_leytablerectlarge001","blueprint":175949}
+{"id":175618,"name":"Leyawiin Nightstand, Sturdy","quality":2,"cat":2,"sub":145,"theme":11,"icon":"housing_bad_fur_leylowbedstand001","blueprint":175950}
+{"id":175619,"name":"Leyawiin Nightstand, Formal","quality":3,"cat":2,"sub":145,"theme":11,"icon":"housing_bad_fur_leytableend001","blueprint":175951}
+{"id":175620,"name":"Leyawiin Desk, Formal","quality":4,"cat":4,"sub":61,"theme":11,"icon":"housing_bad_fur_leydesk001","blueprint":175952}
+{"id":175621,"name":"Leyawiin Chair, Slatted","quality":2,"cat":5,"sub":132,"theme":11,"icon":"housing_bad_fur_leylowchair001","blueprint":175953}
+{"id":175622,"name":"Leyawiin Armchair, Cushioned","quality":4,"cat":5,"sub":132,"theme":11,"icon":"housing_bad_fur_leychair001","blueprint":175954}
+{"id":175623,"name":"Leyawiin Armchair, Backless","quality":3,"cat":5,"sub":132,"theme":11,"icon":"housing_bad_fur_leybenchsmall001a","blueprint":175955}
+{"id":175624,"name":"Leyawiin Bench, Cushioned","quality":4,"cat":5,"sub":134,"theme":11,"icon":"housing_bad_fur_leybenchlarge001","blueprint":175956}
+{"id":175625,"name":"Leyawiin Bench, Sturdy","quality":2,"cat":5,"sub":134,"theme":11,"icon":"housing_bad_fur_leylowbenchlarge001","blueprint":175957}
+{"id":175626,"name":"Leyawiin Bench, Cushioned Wide","quality":4,"cat":5,"sub":134,"theme":11,"icon":"housing_bad_fur_leybenchlarge002","blueprint":175958}
+{"id":175627,"name":"Leyawiin Bench, Formal Wide","quality":3,"cat":5,"sub":134,"theme":11,"icon":"housing_bad_fur_leybenchlarge002a","blueprint":175959}
+{"id":175628,"name":"Leyawiin Jewelry Box, Gilded","quality":4,"cat":3,"sub":56,"theme":11,"icon":"housing_bad_inc_leybox001","blueprint":175960}
+{"id":175629,"name":"Leyawiin Jewelry Box, Iron Octopus","quality":4,"cat":3,"sub":56,"theme":11,"icon":"housing_bad_inc_leybox002","blueprint":175961}
+{"id":175630,"name":"Leyawiin Trunk, Ornate","quality":4,"cat":2,"sub":49,"theme":11,"icon":"housing_bad_fur_chest001","blueprint":175962}
+{"id":175631,"name":"Leyawiin Trunk, Carved Octad","quality":3,"cat":2,"sub":49,"theme":11,"icon":"housing_bad_fur_chest002","blueprint":175963}
+{"id":175632,"name":"Leyawiin Trunk, Floral Gilded","quality":4,"cat":2,"sub":49,"theme":11,"icon":"housing_bad_fur_chest003","blueprint":175964}
+{"id":175633,"name":"Leyawiin Streetlight, Carved Waves","quality":3,"cat":11,"sub":122,"theme":11,"icon":"housing_bad_lsb_leylightpostc001","blueprint":175965}
+{"id":175634,"name":"Leyawiin Lamppost, Floral Gilded","quality":4,"cat":11,"sub":122,"theme":11,"icon":"housing_bad_lsb_leylightpostb002","blueprint":175966}
+{"id":175635,"name":"Leyawiin Sconce, Gilded Lantern","quality":4,"cat":11,"sub":123,"theme":11,"icon":"housing_bad_lsb_leyhanginglantern001","blueprint":175967}
+{"id":175636,"name":"Leyawiin Sconce, Lantern","quality":3,"cat":11,"sub":123,"theme":11,"icon":"housing_bad_lsb_leyhanginglantern002","blueprint":175968}
+{"id":175637,"name":"Leyawiin Lantern, Stationary","quality":2,"cat":11,"sub":121,"theme":11,"icon":"housing_bad_lsb_leylantern001","blueprint":175969}
+{"id":175638,"name":"Leyawiin Lamp, Stationary","quality":3,"cat":11,"sub":120,"theme":11,"icon":"housing_bad_lsb_leytablelamp001","blueprint":175970}
+{"id":175639,"name":"Leyawiin Brazier, Short Iron Serpent","quality":3,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_lsb_leybrazier005","blueprint":175971}
+{"id":175640,"name":"Leyawiin Brazier, Tall Copper Serpent","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_lsb_leybrazier003","blueprint":175972}
+{"id":175641,"name":"Leyawiin Brazier, Iron","quality":3,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_lsb_leybraziermedium002","blueprint":175973}
+{"id":175642,"name":"Leyawiin Brazier, Copper","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_lsb_leybraziermedium003","blueprint":175974}
+{"id":175643,"name":"Leyawiin Lamp, Oil Double","quality":4,"cat":11,"sub":120,"theme":11,"icon":"housing_bad_lsb_leylantern003","blueprint":175975}
+{"id":175644,"name":"Leyawiin Lamp, Oil","quality":4,"cat":11,"sub":120,"theme":11,"icon":"housing_bad_lsb_leylantern004","blueprint":175976}
+{"id":175645,"name":"Leyawiin Firepit, Stone","quality":3,"cat":11,"sub":127,"theme":11,"icon":"housing_bad_lsb_leyfirepit001","blueprint":175977}
+{"id":175646,"name":"Leyawiin Chandelier, Grand Brass","quality":4,"cat":11,"sub":125,"theme":11,"icon":"housing_bad_lsb_leychandelier001","blueprint":175978}
+{"id":175647,"name":"Leyawiin Chandelier, Brass","quality":4,"cat":11,"sub":125,"theme":11,"icon":"housing_bad_lsb_leychandelier002","blueprint":175979}
+{"id":175648,"name":"Leyawiin Chandelier, Twin Lanterns","quality":3,"cat":11,"sub":125,"theme":11,"icon":"housing_bad_lsb_leychandelier003","blueprint":175980}
+{"id":175649,"name":"Leyawiin Divider, Sturdy","quality":2,"cat":2,"sub":47,"theme":11,"icon":"housing_bad_fur_leylowdivider001","blueprint":175981}
+{"id":175650,"name":"Leyawiin Divider, Octopus","quality":4,"cat":2,"sub":47,"theme":11,"icon":"housing_bad_fur_screen002","blueprint":175982}
+{"id":175651,"name":"Leyawiin Well, Covered","quality":4,"cat":6,"sub":72,"theme":11,"icon":"housing_bad_str_leywell001","blueprint":175983}
+{"id":175652,"name":"Leyawiin Clothesline, Pulleys","quality":3,"cat":8,"sub":153,"theme":11,"icon":"housing_bad_exc_clothesline002","blueprint":175984}
+{"id":175653,"name":"Leyawiin Laundry, Stack","quality":3,"cat":8,"sub":153,"theme":11,"icon":"housing_bad_inc_leyfoldedclothes003","blueprint":175985}
+{"id":175654,"name":"Leyawiin Wall Mirror, Silver","quality":4,"cat":2,"sub":50,"theme":11,"icon":"housing_bad_inc_leymirror002","blueprint":175986}
+{"id":175655,"name":"Leyawiin Wall Mirror, Lacquered Frame","quality":3,"cat":2,"sub":50,"theme":11,"icon":"housing_bad_inc_leymirror003","blueprint":175987}
+{"id":175656,"name":"Leyawiin Basket, Hamper Tall","quality":3,"cat":8,"sub":87,"theme":11,"icon":"housing_bad_inc_leybasket001","blueprint":175988}
+{"id":175657,"name":"Leyawiin Basket, Hamper Wide","quality":3,"cat":8,"sub":87,"theme":11,"icon":"housing_bad_inc_leybasket002","blueprint":175989}
+{"id":175658,"name":"Leyawiin Basket, Open","quality":2,"cat":8,"sub":87,"theme":11,"icon":"housing_bad_inc_leybasket004","blueprint":175990}
+{"id":175659,"name":"Leyawiin Censer, Iron Stand","quality":4,"cat":7,"sub":105,"theme":11,"icon":"housing_bad_inc_leyincenseburner001","blueprint":175991}
+{"id":175660,"name":"Leyawiin Censer, Serpents","quality":4,"cat":7,"sub":105,"theme":11,"icon":"housing_bad_inc_leyincenseburner002","blueprint":175992}
+{"id":175661,"name":"Leyawiin Pitcher, Cracked","quality":2,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leykitchenlopot001","blueprint":175993}
+{"id":175662,"name":"Leyawiin Pitcher, Elegant","quality":4,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leykitchenlopot002","blueprint":175994}
+{"id":175663,"name":"Leyawiin Amphora, Elegant","quality":4,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leykitchenlopot003","blueprint":175995}
+{"id":175664,"name":"Leyawiin Pot, Domed","quality":2,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leyplantpot002","blueprint":175996}
+{"id":175665,"name":"Leyawiin Pot, Waves","quality":3,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leyplantpot003","blueprint":175997}
+{"id":175666,"name":"Leyawiin Pot, Wide","quality":2,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leyplantpot006","blueprint":175998}
+{"id":175667,"name":"Leyawiin Vase, Table","quality":2,"cat":8,"sub":80,"theme":11,"icon":"housing_bad_inc_leyplantpot007","blueprint":175999}
+{"id":175668,"name":"Leyawiin Potted Plant, Aspen Sapling","quality":3,"cat":12,"sub":109,"theme":11,"icon":"housing_bad_inc_housingleyplantpotaspentree001","blueprint":176000}
+{"id":175669,"name":"Leyawiin Hand Mirror, Silver","quality":4,"cat":2,"sub":50,"theme":11,"icon":"housing_bad_inc_leyhandmirror001","blueprint":176001}
+{"id":175670,"name":"Leyawiin Hand Mirror, Lacquered","quality":3,"cat":2,"sub":50,"theme":11,"icon":"housing_bad_inc_leyhandmirror002","blueprint":176002}
+{"id":175671,"name":"Leyawiin Mug, Milk","quality":3,"cat":8,"sub":144,"theme":11,"icon":"housing_bad_inc_leykitchenfoodgravy001","blueprint":176003}
+{"id":175672,"name":"Leyawiin Teacup, Full","quality":2,"cat":8,"sub":144,"theme":11,"icon":"housing_bad_inc_leykitchenhicup001","blueprint":176004}
+{"id":175673,"name":"Leyawiin Kylix, Silver","quality":3,"cat":8,"sub":144,"theme":11,"icon":"housing_bad_inc_leykitchenhicup002","blueprint":176005}
+{"id":175674,"name":"Leyawiin Tomatoes, Vine","quality":2,"cat":8,"sub":154,"theme":11,"icon":"housing_bad_inc_leykitchenfoodtomatovine001","blueprint":176006}
+{"id":175675,"name":"Leyawiin Corncobs, Triple","quality":2,"cat":8,"sub":154,"theme":11,"icon":"housing_bad_inc_leykitchenfoodcorn001","blueprint":176007}
+{"id":175676,"name":"Leyawiin Lettuce, Leaf","quality":2,"cat":8,"sub":154,"theme":11,"icon":"housing_bad_inc_leykitchenfoodlettuce001","blueprint":176008}
+{"id":175677,"name":"Leyawiin Serving Pot, Lobster Stew","quality":4,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenservingpot001","blueprint":176009}
+{"id":175678,"name":"Leyawiin Bowl, Lobster Stew","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenhibowl002","blueprint":176010}
+{"id":175679,"name":"Leyawiin Meal, Vegetables","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenhiplate003","blueprint":176011}
+{"id":175680,"name":"Leyawiin Meal, Octopus","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenhiplate005","blueprint":176012}
+{"id":175681,"name":"Leyawiin Meal, Squid","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenloplate005","blueprint":176013}
+{"id":175682,"name":"Leyawiin Gravy Boat, Silver","quality":3,"cat":8,"sub":81,"theme":11,"icon":"housing_bad_inc_leykitchenfoodmilk001","blueprint":176014}
+{"id":175683,"name":"Leyawiin Pie, Octopus","quality":4,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenfoodpie001","blueprint":176015}
+{"id":175684,"name":"Leyawiin Meal, Clams","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenloplate003","blueprint":176016}
+{"id":175685,"name":"Leyawiin Meal, Lobster","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenloplate004","blueprint":176017}
+{"id":175686,"name":"Leyawiin Plate, Set","quality":2,"cat":8,"sub":81,"theme":11,"icon":"housing_bad_inc_leykitchenloplateempty003","blueprint":176018}
+{"id":175687,"name":"Leyawiin Plate, Utensils","quality":2,"cat":8,"sub":81,"theme":11,"icon":"housing_bad_inc_leykitchenloplateempty001","blueprint":176019}
+{"id":175688,"name":"Leyawiin Plates, Stack","quality":3,"cat":8,"sub":81,"theme":11,"icon":"housing_bad_inc_leykitchenloplateempty004","blueprint":176020}
+{"id":175689,"name":"Leyawiin Platter, Seafood","quality":3,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenplatter001","blueprint":176021}
+{"id":175690,"name":"Leyawiin Wagon, Covered","quality":4,"cat":6,"sub":71,"theme":11,"icon":"housing_bad_csb_leywagon003","blueprint":176022}
+{"id":175691,"name":"Leyawiin Canopy, Merchant","quality":2,"cat":13,"sub":114,"theme":11,"icon":"housing_bad_csb_leymerchantcanopy002","blueprint":176023}
+{"id":175692,"name":"Leyawiin Counter, Wide Merchant","quality":4,"cat":5,"sub":67,"theme":11,"icon":"housing_bad_csb_leymerchantstallopen003","blueprint":176024}
+{"id":175693,"name":"Leyawiin Merchant Stall, Portable","quality":4,"cat":6,"sub":71,"theme":11,"icon":"housing_bad_csb_leymerchantcartopen001","blueprint":176025}
+{"id":175694,"name":"Leyawiin Ox Cart, Sturdy","quality":3,"cat":6,"sub":71,"theme":11,"icon":"housing_bad_csb_leycart001","blueprint":176026}
+{"id":175695,"name":"Leyawiin Shrine of the Eight","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_str_leycathedralalter002"}
+{"id":175696,"name":"Leyawiin Tapestry, Divines Horizontal","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrylarge001"}
+{"id":175697,"name":"Leyawiin Tapestry, Divines Vertical","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrylarge005"}
+{"id":175698,"name":"Zenithar, God of Work and Commerce","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_bad_exc_statuezenithar001"}
+{"id":175699,"name":"Stained Glass of Zenithar","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindow001"}
+{"id":175700,"name":"Deadlands Chandelier, Caged","quality":4,"cat":11,"sub":125,"theme":13,"icon":"housing_bad_lsb_deepscronlantern001"}
+{"id":175701,"name":"Xi-Tsei Stone Idol","quality":3,"cat":7,"sub":107,"theme":4,"icon":"housing_uni_exc_xanmeeroverlookstoneidol001"}
+{"id":175702,"name":"Entwined Snakes, Crystal Holder","quality":4,"cat":7,"sub":107,"theme":4,"icon":"housing_bad_inc_argsnakecrystalholder001"}
+{"id":175703,"name":"Banner, Tattered Mehrunes Dagon","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_dedmehronesdagonbanner001"}
+{"id":175704,"name":"Inert Oblivion Gate","quality":5,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_exc_dedprotogatewhole001"}
+{"id":175705,"name":"Deadlands Pillar, Tall Inscribed","quality":4,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_duc_dedpillar001"}
+{"id":175706,"name":"Seal of the Ambitions","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_uni_exc_ambitionsartifactslarge001"}
+{"id":175707,"name":"Banner of Leyawiin","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_bad_lsb_leyleyawiinbannermedium001"}
+{"id":175708,"name":"Deadlands Tormentor, Chained","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_str_sombrenchainpillar001"}
+{"id":175709,"name":"Deadlands Podium of Ruination","quality":4,"cat":4,"sub":61,"theme":13,"icon":"housing_bad_exc_dedpedestal001"}
+{"id":175710,"name":"Deadlands Bookcase, Ashen","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_bad_fur_dedlowbookshelf001","blueprint":176027}
+{"id":175711,"name":"Deadlands Wardrobe, Ashen","quality":3,"cat":2,"sub":48,"theme":13,"icon":"housing_bad_fur_dedlowarmoire001","blueprint":176028}
+{"id":175712,"name":"Deadlands Urn, Inscribed","quality":3,"cat":7,"sub":78,"theme":13,"icon":"housing_bad_inc_dedurn001","blueprint":176029}
+{"id":175713,"name":"Deadlands Chair, Ashen","quality":3,"cat":5,"sub":132,"theme":13,"icon":"housing_bad_fur_dedlowchair001","blueprint":176030}
+{"id":175714,"name":"Deadlands Table, Ashen","quality":3,"cat":5,"sub":66,"theme":13,"icon":"housing_bad_fur_dedlowsmalltable001","blueprint":176031}
+{"id":175715,"name":"Deadlands Table, Ashen Wide","quality":3,"cat":5,"sub":66,"theme":13,"icon":"housing_bad_fur_dedlowlargetable002","blueprint":176032}
+{"id":175716,"name":"Deadlands Brazier, Bladed","quality":3,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedpillarbrazierfire005","blueprint":176033}
+{"id":175717,"name":"Deadlands Brazier, Bladed Pillar","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedpillarbrazierfire004","blueprint":176034}
+{"id":175718,"name":"Deadlands Brazier, Bladed Cage","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedpillarbrazierfire002","blueprint":176035}
+{"id":175719,"name":"Deadlands Brazier, Bladed Tall","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedpillarbrazierfire001","blueprint":176036}
+{"id":175720,"name":"Leyawiin Wheel, Splintered Axle","quality":2,"cat":10,"sub":97,"theme":11,"icon":"housing_bad_csb_leywagonwheel001"}
+{"id":175721,"name":"Leyawiin Trousers, Strewn","quality":1,"cat":8,"sub":153,"theme":11,"icon":"housing_bad_inc_leyflatdrapedpants001"}
+{"id":175722,"name":"Leyawiin Socks, Pair","quality":1,"cat":8,"sub":153,"theme":11,"icon":"housing_bad_inc_leyflatdrapedsocks001"}
+{"id":175723,"name":"Leyawiin Carpet, Threadbare","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyruglo001"}
+{"id":175724,"name":"Leyawiin Rug, Worn","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyruglo002"}
+{"id":175725,"name":"Leyawiin Carpet, Small Worn","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_bad_inc_leyruglo003"}
+{"id":175727,"name":"Leyawiin Palisade, Reinforced","quality":3,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_exc_leypalisadewallfull002"}
+{"id":175728,"name":"Z'en Idol","quality":4,"cat":7,"sub":107,"theme":1,"icon":"housing_uni_inc_antzenidol001"}
+{"id":175729,"name":"Kothringi Tidal Canoe","quality":5,"cat":6,"sub":71,"theme":1,"icon":"housing_uni_exc_antkothringicanoe001"}
+{"id":175760,"name":"Banner, Anvil","quality":3,"cat":3,"sub":58,"theme":11,"icon":"housing_col_lsb_dbhbanneranvil003"}
+{"id":175761,"name":"Imperial Curtains, Heavy","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_col_inc_dbhcurtains001"}
+{"id":175762,"name":"Dwarven Hatch, Sealed","quality":4,"cat":10,"sub":170,"theme":12,"icon":"housing_dwe_inc_spiderhatchwall001"}
+{"id":175763,"name":"Dwarven Urn, Masks","quality":4,"cat":7,"sub":78,"theme":12,"icon":"housing_dwe_inc_conjurationcoffer001"}
+{"id":175764,"name":"Egg, Gruesome","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_cre_exc_spiderdaedraegg001"}
+{"id":175765,"name":"Tapestry of a Failed Incarnate, The Brute","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dae_lsb_incarnatestapestries001"}
+{"id":175766,"name":"Mushroom, Glowing Trumpet","quality":3,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_skr_nidiformiswave005"}
+{"id":175767,"name":"Flowers, Reed Mace","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bad_reedmace002"}
+{"id":175768,"name":"Dragonguard Brazier, Empty","quality":5,"cat":7,"sub":137,"theme":11,"icon":"housing_els_lsb_sebraizerdragonguard001"}
+{"id":175769,"name":"Lunar Reflector, Dormant","quality":5,"cat":7,"sub":107,"theme":7,"icon":"housing_els_duc_moonreflector001"}
+{"id":175770,"name":"Tree, Branching Blackwood Pine","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_bad_sslashpine005"}
+{"id":175771,"name":"Tree, Bent Blackwood Elm","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_bad_southernoak004"}
+{"id":175772,"name":"Tree, Forked Blackwood Elm","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_bad_southernoak005"}
+{"id":175773,"name":"Leyawiin Windowbox, Yellow Daisies","quality":3,"cat":12,"sub":111,"theme":11,"icon":"housing_bad_str_leydetachableplantershousing001"}
+{"id":175774,"name":"Leyawiin Windowbox, Irises","quality":3,"cat":12,"sub":111,"theme":11,"icon":"housing_bad_str_leydetachableplantershousing002"}
+{"id":178442,"name":"Idylls of Gideon Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_woodframepainting001"}
+{"id":178443,"name":"Path of Eternity Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodframepainting004"}
+{"id":178444,"name":"A Study in Structure Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodframepainting005"}
+{"id":178445,"name":"Leyawiin at Night Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodframepainting008"}
+{"id":178446,"name":"Fire-Shaped Shadows Painting, Silver","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leymetalframepainting004"}
+{"id":178447,"name":"Music in Repose Painting, Silver","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leymetalframepainting009"}
+{"id":178448,"name":"Undying Light Painting, Silver","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leymetalframepainting010"}
+{"id":178449,"name":"The Legacy of Kaladas Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodpaintinglarge003"}
+{"id":178450,"name":"Harvest's Gifts Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodpaintinglarge004"}
+{"id":178451,"name":"Reverence's Mandate Painting, Wood","quality":4,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leywoodpaintinglarge005"}
+{"id":178459,"name":"Antique Map of Blackwood","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsleyawiinscroll001"}
+{"id":178471,"name":"Guild Banner, Aetherius Art","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbanneraetherius001"}
+{"id":178472,"name":"Guild Banner, Dauntless Bananas","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannerdauntlessbananas001"}
+{"id":178473,"name":"Guild Banner, The Disenfranchised","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannerdisenfranchised001"}
+{"id":178474,"name":"Guild Banner, Goldleaf Acquisitions","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannergoldleaf001"}
+{"id":178475,"name":"Guild Banner, Museum","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannermuseum001"}
+{"id":178476,"name":"Guild Banner, Nomads of Nirn","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannernomadsnirn001"}
+{"id":178477,"name":"Nedic Bookcase, Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_cra_fur_bookshelvescombo005"}
+{"id":178497,"name":"The Sonnet of Aetherius Art","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178498,"name":"A Tale of the Dauntless Bananas","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":178499,"name":"Goldleaf Acquisitions, Manager's Notes","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":178500,"name":"Museum Guild Letter","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178501,"name":"The Nomads of Nirn","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178502,"name":"An Ode to the Disenfranchised","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paper001"}
+{"id":178521,"name":"Music Box, Invitation to Chaos","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxdreadcellar001"}
+{"id":178522,"name":"Music Box, Silver Rose","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxsilverrose001"}
+{"id":178694,"name":"Target Ogrim","quality":5,"cat":25,"sub":98,"theme":1,"icon":"target_greenarmoredogrim"}
+{"id":178799,"name":"Ruby Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_torchbug_red"}
+{"id":178800,"name":"Amethyst Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_torchbug_purple"}

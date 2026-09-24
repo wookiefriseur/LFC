@@ -1,0 +1,478 @@
+{"id":150774,"name":"Banner of Vaermina","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannervaerminasmall001"}
+{"id":150775,"name":"Banner of Jyggalag","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannerjyggalagsmall001"}
+{"id":151589,"name":"Baandari Lunar Compass","quality":5,"cat":3,"sub":56,"theme":7,"icon":"housing_lunarcompass_icon"}
+{"id":151611,"name":"The Mane, Moons-Blessed","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_housingstatuemane001"}
+{"id":151612,"name":"Pile of Dubious Riches","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_gen_inc_baandaricoinpile001"}
+{"id":151625,"name":"Door, Akatosh Chancel","quality":5,"cat":13,"sub":163,"theme":7,"icon":"housing_els_duc_housingakatoshchanceldoor001"}
+{"id":151626,"name":"Elsweyr Bookcase, Ancient Stone Full","quality":4,"cat":4,"sub":60,"theme":7,"icon":"housing_els_run_housingbookshelves001","blueprint":151972}
+{"id":151627,"name":"Elsweyr Plinth, Ancient Stone","quality":2,"cat":13,"sub":138,"theme":7,"icon":"housing_els_duc_roomfreestandingcolumnbased001","blueprint":151973}
+{"id":151628,"name":"Elsweyr Pillar, Ancient Stone","quality":3,"cat":6,"sub":69,"theme":7,"icon":"housing_els_duc_roomfreestandingcolumn001","blueprint":151974}
+{"id":151629,"name":"Elsweyr Monument, Ancient Stone Broken","quality":4,"cat":6,"sub":69,"theme":7,"icon":"housing_els_duc_mooncraterpillar001","blueprint":151975}
+{"id":151630,"name":"Elsweyr Plate, Rough","quality":2,"cat":8,"sub":81,"theme":7,"icon":"housing_els_inc_plate001","blueprint":151976}
+{"id":151631,"name":"Elsweyr Meal, Roasted Chicken Pieces","quality":2,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_platewithfood001","blueprint":151977}
+{"id":151632,"name":"Elsweyr Bowl, Deep Ceramic","quality":3,"cat":8,"sub":81,"theme":7,"icon":"housing_els_inc_bowl001","blueprint":151978}
+{"id":151633,"name":"Elsweyr Meal, Hearty Noodles","quality":3,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_bowlwithfood001","blueprint":151979}
+{"id":151634,"name":"Elsweyr Fish, Displayed","quality":3,"cat":8,"sub":155,"theme":7,"icon":"housing_els_exc_fish001","blueprint":151980}
+{"id":151635,"name":"Elsweyr Plate, Umber Ceramic","quality":4,"cat":8,"sub":81,"theme":7,"icon":"housing_els_inc_plate002","blueprint":151981}
+{"id":151636,"name":"Elsweyr Meal, Whole Roasted Chicken","quality":4,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_platewithfoodb002","blueprint":151982}
+{"id":151637,"name":"Elsweyr Bowl, Shallow Ceramic","quality":3,"cat":8,"sub":81,"theme":7,"icon":"housing_els_inc_bowl002","blueprint":151983}
+{"id":151638,"name":"Elsweyr Meal, Root Vegetables","quality":3,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_bowlwithfood002","blueprint":151984}
+{"id":151639,"name":"Elsweyr Bowl, Simple","quality":2,"cat":8,"sub":81,"theme":7,"icon":"housing_els_inc_bowl003","blueprint":151985}
+{"id":151640,"name":"Elsweyr Meal, Sweet Stew","quality":2,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_bowlwithfood003","blueprint":151986}
+{"id":151641,"name":"Elsweyr Steamer, Ceramic","quality":3,"cat":8,"sub":151,"theme":7,"icon":"housing_ls_inc_bowlgroup001","blueprint":151987}
+{"id":151642,"name":"Elsweyr Pot, Stoneware","quality":2,"cat":8,"sub":151,"theme":7,"icon":"housing_els_inc_noodlebowl001","blueprint":151988}
+{"id":151643,"name":"Elsweyr Rolling Pin, Well-Worn","quality":2,"cat":8,"sub":151,"theme":7,"icon":"housing_els_inc_flourroller001"}
+{"id":151644,"name":"Elsweyr Cup of Rice, Gilded","quality":3,"cat":8,"sub":154,"theme":7,"icon":"housing_els_inc_cupwithfood001","blueprint":151989}
+{"id":151645,"name":"Elsweyr Sugar Bowl, Gilded","quality":3,"cat":8,"sub":156,"theme":7,"icon":"housing_els_inc_cup002","blueprint":151990}
+{"id":151646,"name":"Elsweyr Gravy Boat, Gilded","quality":3,"cat":8,"sub":85,"theme":7,"icon":"housing_els_inc_gravyspoutwithfood001","blueprint":151991}
+{"id":151647,"name":"Elsweyr Steaming Pot, Ceramic","quality":4,"cat":8,"sub":151,"theme":7,"icon":"housing_els_inc_foodsteamer001","blueprint":151992}
+{"id":151648,"name":"Elsweyr Bucket, Wooden","quality":2,"cat":10,"sub":96,"theme":7,"icon":"housing_els_inc_kitchenbucket001","blueprint":151993}
+{"id":151649,"name":"Elsweyr Spice Display, Turmeric Yellow","quality":2,"cat":8,"sub":84,"theme":7,"icon":"housing_els_exc_housingmerchantspices001","blueprint":151994}
+{"id":151650,"name":"Elsweyr Spice Display, Matcha Green","quality":2,"cat":8,"sub":84,"theme":7,"icon":"housing_els_exc_housingmerchantspices002","blueprint":151995}
+{"id":151651,"name":"Elsweyr Spice Display, Saffron Red","quality":2,"cat":8,"sub":84,"theme":7,"icon":"housing_els_exc_housingmerchantspices003","blueprint":151996}
+{"id":151652,"name":"Elsweyr Pot, Tall","quality":4,"cat":8,"sub":80,"theme":7,"icon":"housing_els_inc_largepot001","blueprint":151997}
+{"id":151653,"name":"Elsweyr Pot, Cerulean","quality":3,"cat":8,"sub":80,"theme":7,"icon":"housing_els_inc_mediumpot001","blueprint":151998}
+{"id":151654,"name":"Elsweyr Pot, Floral","quality":3,"cat":8,"sub":80,"theme":7,"icon":"housing_els_inc_mediumpot002","blueprint":151999}
+{"id":151655,"name":"Elsweyr Pot, Waves","quality":2,"cat":8,"sub":80,"theme":7,"icon":"housing_els_inc_smallpot001","blueprint":152000}
+{"id":151656,"name":"Elsweyr Pot, Ornate","quality":2,"cat":8,"sub":80,"theme":7,"icon":"housing_els_inc_smallpot002","blueprint":152001}
+{"id":151657,"name":"Elsweyr Sugar Pipe, Gilded","quality":4,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_hookah002","blueprint":152002}
+{"id":151658,"name":"Elsweyr Sand Meditation Ring, Large","quality":3,"cat":12,"sub":136,"theme":7,"icon":"housing_rok_els_sandringhousing001","blueprint":152003}
+{"id":151659,"name":"Elsweyr Sand Meditation Ring, Small","quality":2,"cat":12,"sub":136,"theme":7,"icon":"housing_rok_els_sandringhousing002","blueprint":152004}
+{"id":151660,"name":"Elsweyr Altar, Ancient Stone","quality":3,"cat":7,"sub":107,"theme":7,"icon":"housing_els_duc_sunspirecandleholder001","blueprint":152005}
+{"id":151661,"name":"Elsweyr Incense Burner, Tall Brass","quality":3,"cat":7,"sub":105,"theme":7,"icon":"housing_els_inc_incenseburner001","blueprint":152006}
+{"id":151662,"name":"Elsweyr Incense Burner, Branched Brass","quality":4,"cat":7,"sub":105,"theme":7,"icon":"housing_els_inc_incenseburner002","blueprint":152007}
+{"id":151663,"name":"Elsweyr Vessel, Umber Embellished","quality":3,"cat":9,"sub":92,"theme":7,"icon":"housing_els_inc_smallbox001","blueprint":152008}
+{"id":151664,"name":"Elsweyr Bed, Blue Four-Poster","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedhigh002","blueprint":152009}
+{"id":151665,"name":"Elsweyr Bed, Yellow Four-Poster","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedhighmessy002","blueprint":152010}
+{"id":151666,"name":"Elsweyr Bed, Quilted Single","quality":3,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedlow001","blueprint":152011}
+{"id":151667,"name":"Elsweyr Bed, Quilted Double","quality":3,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedlow002","blueprint":152012}
+{"id":151668,"name":"Elsweyr Bed, Rumpled Quilted Single","quality":3,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedlowmessy001","blueprint":152013}
+{"id":151669,"name":"Elsweyr Bed, Rumpled Quilted Double","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedlowmessy002","blueprint":152014}
+{"id":151670,"name":"Elsweyr Bed, Elegant Single","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedmed001","blueprint":152015}
+{"id":151671,"name":"Elsweyr Bed, Elegant Double","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedmed002","blueprint":152016}
+{"id":151672,"name":"Elsweyr Bed, Rumpled Elegant Single","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedmedmessy001","blueprint":152017}
+{"id":151673,"name":"Elsweyr Bed, Rumpled Elegant Double","quality":4,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_bedmedmessy002","blueprint":152018}
+{"id":151674,"name":"Elsweyr Stall Counter, Single","quality":3,"cat":5,"sub":67,"theme":7,"icon":"housing_els_exc_merchantcontainer001","blueprint":152019}
+{"id":151675,"name":"Elsweyr Stall Counter, Triple","quality":4,"cat":5,"sub":67,"theme":7,"icon":"housing_els_exc_merchantcontainer004","blueprint":152020}
+{"id":151676,"name":"Elsweyr Curtains, Wide Maroon","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_clothbeddivider001","blueprint":152021}
+{"id":151677,"name":"Elsweyr Curtains, Flat Panel Maroon","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_drapes001","blueprint":152022}
+{"id":151678,"name":"Elsweyr Curtains, Tied-Back Blue","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_drapes002","blueprint":152023}
+{"id":151679,"name":"Elsweyr Fabric, Hanging","quality":3,"cat":10,"sub":97,"theme":7,"icon":"housing_els_exc_merchantrackfabric004","blueprint":152024}
+{"id":151680,"name":"Elsweyr Fabric, Hanging Cluster","quality":3,"cat":10,"sub":97,"theme":7,"icon":"housing_els_exc_merchantrackfabric005","blueprint":152025}
+{"id":151681,"name":"Hakoshae Banner, Blue","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_els_lsb_akaviribanner001","blueprint":152026}
+{"id":151682,"name":"Hakoshae Banner, Triple Insignia","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_els_lsb_akaviribanner002","blueprint":152027}
+{"id":151683,"name":"Hakoshae Banner, Square","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_els_lsb_akaviribanner003","blueprint":152028}
+{"id":151684,"name":"Elsweyr Tent, Open","quality":4,"cat":13,"sub":114,"theme":7,"icon":"housing_els_exc_tent001","blueprint":152029}
+{"id":151685,"name":"Elsweyr Column, Stone Support","quality":3,"cat":6,"sub":69,"theme":7,"icon":"housing_els_str_palacechapelcolumn001","blueprint":152030}
+{"id":151686,"name":"Elsweyr Spire, Decorative","quality":3,"cat":6,"sub":69,"theme":7,"icon":"housing_els_run_pointedpillar001","blueprint":152031}
+{"id":151687,"name":"Elsweyr Couch, Wooden","quality":3,"cat":3,"sub":133,"theme":7,"icon":"housing_els_fur_bench002","blueprint":152032}
+{"id":151689,"name":"Elsweyr Armchair, Elegant Wooden","quality":4,"cat":5,"sub":132,"theme":7,"icon":"housing_els_fur_chairhigh001","blueprint":152033}
+{"id":151690,"name":"Elsweyr Throne, Elegant Wooden","quality":4,"cat":5,"sub":132,"theme":7,"icon":"housing_els_fur_throne001","blueprint":152034}
+{"id":151691,"name":"Elsweyr Armchair, Low-Backed Wooden","quality":3,"cat":5,"sub":132,"theme":7,"icon":"housing_els_fur_chairlow001","blueprint":152035}
+{"id":151692,"name":"Elsweyr Armchair, Low-Backed Elegant","quality":4,"cat":5,"sub":132,"theme":7,"icon":"housing_els_fur_chairmed001","blueprint":152036}
+{"id":151693,"name":"Elsweyr Barstool, Elegant Wooden","quality":4,"cat":10,"sub":135,"theme":7,"icon":"housing_els_fur_stool001","blueprint":152037}
+{"id":151694,"name":"Elsweyr Barstool, Wooden","quality":3,"cat":10,"sub":135,"theme":7,"icon":"housing_els_fur_stool002","blueprint":152038}
+{"id":151695,"name":"Elsweyr Bench, Wooden","quality":2,"cat":5,"sub":134,"theme":7,"icon":"housing_els_fur_writingbench001","blueprint":152039}
+{"id":151696,"name":"Elsweyr Bookcase, Wooden","quality":3,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_lowbookcase001","blueprint":152040}
+{"id":151697,"name":"Elsweyr Bookcase, Wooden Full","quality":4,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_housinglowbookcase001","blueprint":152041}
+{"id":151698,"name":"Elsweyr Bookshelf, Elegant Wooden","quality":3,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_medbookcase001","blueprint":152042}
+{"id":151699,"name":"Elsweyr Bookcase, Elegant Wooden Full","quality":4,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_housingmedbookcase001","blueprint":152043}
+{"id":151700,"name":"Elsweyr Bookcase, Short Elegant","quality":3,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_widebookcase001","blueprint":152044}
+{"id":151701,"name":"Elsweyr Bookcase, Short Elegant Full","quality":4,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_housingwidebookcase001","blueprint":152045}
+{"id":151702,"name":"Elsweyr Cupboard, Elegant Wooden","quality":4,"cat":8,"sub":83,"theme":7,"icon":"housing_els_fur_lowbookcase002","blueprint":152046}
+{"id":151703,"name":"Elsweyr Wardrobe, Wide Elegant Wooden","quality":4,"cat":2,"sub":48,"theme":7,"icon":"housing_els_fur_highcabinet001","blueprint":152047}
+{"id":151704,"name":"Elsweyr Wardrobe, Elegant Wooden","quality":4,"cat":2,"sub":48,"theme":7,"icon":"housing_els_fur_medbookcase002","blueprint":152048}
+{"id":151705,"name":"Elsweyr Trunk, Floral","quality":4,"cat":2,"sub":49,"theme":7,"icon":"housing_els_fur_chest001","blueprint":152049}
+{"id":151706,"name":"Elsweyr Trunk, Peaked Floral","quality":4,"cat":2,"sub":49,"theme":7,"icon":"housing_els_fur_chest002","blueprint":152050}
+{"id":151707,"name":"Elsweyr Trunk, Peaked Embellished","quality":4,"cat":2,"sub":49,"theme":7,"icon":"housing_els_fur_chest003","blueprint":152051}
+{"id":151708,"name":"Elsweyr Chest, Red Gilded","quality":4,"cat":2,"sub":49,"theme":7,"icon":"housing_els_fur_chest004","blueprint":152052}
+{"id":151709,"name":"Elsweyr Cabinet, Wall","quality":3,"cat":8,"sub":83,"theme":7,"icon":"housing_els_fur_wallshelf001","blueprint":152053}
+{"id":151710,"name":"Elsweyr Shelf, Elegant Wall","quality":3,"cat":4,"sub":60,"theme":7,"icon":"housing_els_fur_wallshelf003","blueprint":152054}
+{"id":151711,"name":"Elsweyr Cabinet, Elegant Wooden","quality":3,"cat":8,"sub":83,"theme":7,"icon":"housing_els_fur_merchantcentercounter00","blueprint":152055}
+{"id":151712,"name":"Elsweyr Cabinet, Wide Elegant Wooden","quality":4,"cat":5,"sub":67,"theme":7,"icon":"housing_els_fur_merchantcenterlongcounter001","blueprint":152056}
+{"id":151713,"name":"Elsweyr Room-Divider, Elegant","quality":4,"cat":2,"sub":47,"theme":7,"icon":"housing_els_fur_screen001","blueprint":152057}
+{"id":151714,"name":"Elsweyr Winerack, Cane Mead","quality":4,"cat":8,"sub":84,"theme":7,"icon":"housing_els_fur_housingwinerack001","blueprint":152058}
+{"id":151715,"name":"Elsweyr Nightstand, Wooden","quality":3,"cat":2,"sub":145,"theme":7,"icon":"housing_els_fur_endtablelow001","blueprint":152059}
+{"id":151716,"name":"Elsweyr Desk, Wooden","quality":3,"cat":4,"sub":61,"theme":7,"icon":"housing_els_fur_desk001","blueprint":152060}
+{"id":151717,"name":"Elsweyr Table, Square","quality":3,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_tablelowsmall001","blueprint":152061}
+{"id":151718,"name":"Elsweyr Table, Wide","quality":3,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_tablelowlarge001","blueprint":152062}
+{"id":151719,"name":"Elsweyr Table, Low","quality":3,"cat":5,"sub":66,"theme":7,"icon":"housing_ls_fur_tableshortmed001","blueprint":152063}
+{"id":151720,"name":"Elsweyr Table, Low Square","quality":3,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_tableshortsmall001","blueprint":152064}
+{"id":151721,"name":"Elsweyr Desk, Elegant Wooden","quality":4,"cat":4,"sub":61,"theme":7,"icon":"housing_els_fur_desk002","blueprint":152065}
+{"id":151722,"name":"Elsweyr Table, Long Wooden","quality":4,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_talltablemed001","blueprint":152066}
+{"id":151723,"name":"Elsweyr Nightstand, Octagonal Wooden","quality":4,"cat":2,"sub":145,"theme":7,"icon":"housing_els_fur_endtablemed001","blueprint":152067}
+{"id":151724,"name":"Elsweyr Nightstand, Elegant Wooden","quality":4,"cat":2,"sub":145,"theme":7,"icon":"housing_els_fur_endtablehigh001","blueprint":152068}
+{"id":151725,"name":"Elsweyr Table, Elegant Wooden","quality":4,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_tablehighsmall001","blueprint":152069}
+{"id":151726,"name":"Elsweyr Table, Wide Elegant Wooden","quality":4,"cat":5,"sub":66,"theme":7,"icon":"housing_els_fur_tablehighmed001","blueprint":152070}
+{"id":151727,"name":"Elsweyr Writing Desk, Elegant Wooden","quality":4,"cat":4,"sub":61,"theme":7,"icon":"housing_els_fur_writingdesk001","blueprint":152071}
+{"id":151728,"name":"Elsweyr Brazier, Ribbed","quality":3,"cat":11,"sub":124,"theme":7,"icon":"housing_els_lsb_brazier001","blueprint":152072}
+{"id":151729,"name":"Elsweyr Brazier, Embellished","quality":3,"cat":11,"sub":124,"theme":7,"icon":"housing_els_lsb_brazier002","blueprint":152073}
+{"id":151730,"name":"Elsweyr Brazier, Tall","quality":4,"cat":11,"sub":124,"theme":7,"icon":"housing_els_lsb_brazier003","blueprint":152074}
+{"id":151731,"name":"Elsweyr Brazier, Massive","quality":4,"cat":11,"sub":124,"theme":7,"icon":"housing_els_lsb_brazierlarge001","blueprint":152075}
+{"id":151732,"name":"Elsweyr Lightpost, Ancient Stone","quality":3,"cat":11,"sub":122,"theme":7,"icon":"housing_els_lsb_ruinlamppost001","blueprint":152076}
+{"id":151733,"name":"Elsweyr Streetlight, Inlaid Stone","quality":3,"cat":11,"sub":122,"theme":7,"icon":"housing_els_str_wallpostlight001","blueprint":152077}
+{"id":151734,"name":"Elsweyr Lightpost, Ancient Tall","quality":4,"cat":11,"sub":122,"theme":7,"icon":"housing_els_str_wallpostlight002","blueprint":152078}
+{"id":151735,"name":"Elsweyr Lightpost, Ancient Sturdy","quality":4,"cat":11,"sub":122,"theme":7,"icon":"housing_els_str_wallpostlight003","blueprint":152079}
+{"id":151736,"name":"Elsweyr Candle, Column","quality":4,"cat":11,"sub":129,"theme":7,"icon":"housing_els_lsb_floorlamp001","blueprint":152080}
+{"id":151737,"name":"Elsweyr Lantern, Hanging Twist","quality":3,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_lantern001","blueprint":152081}
+{"id":151738,"name":"Elsweyr Lantern, Metal Ring","quality":3,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_lantern002","blueprint":152082}
+{"id":151739,"name":"Elsweyr Candle, Saucer","quality":2,"cat":11,"sub":129,"theme":7,"icon":"housing_els_lsb_candleholder001","blueprint":152083}
+{"id":151740,"name":"Elsweyr Sconce, Candle Elegant","quality":3,"cat":11,"sub":123,"theme":7,"icon":"housing_els_lsb_sconce001","blueprint":152084}
+{"id":151741,"name":"Elsweyr Sconce, Candle Engraved","quality":3,"cat":11,"sub":123,"theme":7,"icon":"housing_els_lsb_sconce002","blueprint":152085}
+{"id":151742,"name":"Elsweyr Sconce, Candle Carved","quality":3,"cat":11,"sub":123,"theme":7,"icon":"housing_els_lsb_sconce003","blueprint":152086}
+{"id":151743,"name":"Elsweyr Sconce, Candle Shielded","quality":3,"cat":11,"sub":123,"theme":7,"icon":"housing_els_lsb_sconce004","blueprint":152087}
+{"id":151744,"name":"Elsweyr Lantern, Twist","quality":3,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_tablelamp001","blueprint":152088}
+{"id":151745,"name":"Hakoshae Lantern, Linked Rings","quality":4,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_akavirilantern001","blueprint":152089}
+{"id":151746,"name":"Hakoshae Lantern, Blue","quality":4,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_akavirilantern002","blueprint":152090}
+{"id":151747,"name":"Hakoshae Lantern, Crimson","quality":4,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_akavirilantern003","blueprint":152091}
+{"id":151748,"name":"Elsweyr Carpet, Botanical Grand","quality":4,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_ruglarge001","blueprint":152092}
+{"id":151749,"name":"Elsweyr Carpet, Chaotic Symmetry","quality":3,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugmedium001","blueprint":152093}
+{"id":151750,"name":"Elsweyr Carpet, Sandflowers","quality":4,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugmedium002","blueprint":152094}
+{"id":151751,"name":"Elsweyr Rug, Sandflowers","quality":4,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_ruground001","blueprint":152095}
+{"id":151752,"name":"Elsweyr Half-Rug, Sandflowers","quality":3,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_ruground002","blueprint":152096}
+{"id":151753,"name":"Elsweyr Runner, Autumn Vines","quality":3,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugsmall001","blueprint":152097}
+{"id":151754,"name":"Elsweyr Carpet, Gold-Ruby","quality":2,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugsmall002","blueprint":152098}
+{"id":151755,"name":"Elsweyr Carpet, Gold-Emerald","quality":2,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugsmall003","blueprint":152099}
+{"id":151756,"name":"Elsweyr Runner, Lavish Floral","quality":3,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugsmall004","blueprint":152100}
+{"id":151757,"name":"Elsweyr Carpet, Blossoms on Blue","quality":4,"cat":3,"sub":53,"theme":7,"icon":"housing_els_inc_rugsmall005","blueprint":152101}
+{"id":151758,"name":"Elsweyr Tapestry, Water Flowers","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestry001","blueprint":152102}
+{"id":151759,"name":"Elsweyr Tapestry, Amber Vines","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestry002","blueprint":152103}
+{"id":151760,"name":"Elsweyr Tapestry, Verdant Blossom","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestry003","blueprint":152104}
+{"id":151761,"name":"Elsweyr Tapestry, Ruby-Maroon","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestry004","blueprint":152105}
+{"id":151762,"name":"Hakoshae Hook, Block","quality":3,"cat":6,"sub":69,"theme":7,"icon":"housing_els_lsb_akavirihook001","blueprint":152106}
+{"id":151763,"name":"Hakoshae Pillar, Wooden Hooked","quality":3,"cat":6,"sub":69,"theme":7,"icon":"housing_els_lsb_akaviripost001","blueprint":152107}
+{"id":151764,"name":"Elsweyr Post, Masonry Wall","quality":2,"cat":6,"sub":69,"theme":7,"icon":"housing_els_waf_wallsmediumdivider001","blueprint":152108}
+{"id":151765,"name":"Elsweyr Wall, Curved Masonry","quality":2,"cat":13,"sub":164,"theme":7,"icon":"housing_els_waf_wallsmediumcurved002","blueprint":152109}
+{"id":151766,"name":"Elsweyr Wall, Short Masonry","quality":2,"cat":13,"sub":164,"theme":7,"icon":"housing_els_waf_wallsmedium002","blueprint":152110}
+{"id":151767,"name":"Elsweyr Wall, Wide Masonry","quality":2,"cat":13,"sub":164,"theme":7,"icon":"housing_els_waf_wallsmedium001","blueprint":152111}
+{"id":151768,"name":"Elsweyr Fountain, Four Lions","quality":4,"cat":6,"sub":74,"theme":7,"icon":"housing_els_str_fountainset002","blueprint":152112}
+{"id":151769,"name":"Elsweyr Platform, Stepped","quality":3,"cat":13,"sub":138,"theme":7,"icon":"housing_els_duc_roomraisedwalkwaycorner003","blueprint":152113}
+{"id":151770,"name":"Elsweyr Floor, Masonry","quality":3,"cat":13,"sub":138,"theme":7,"icon":"housing_els_str_housingporchstairs001","blueprint":152114}
+{"id":151771,"name":"Elsweyr Stairs, Masonry","quality":3,"cat":13,"sub":117,"theme":7,"icon":"housing_els_str_walkstairs002","blueprint":152115}
+{"id":151772,"name":"Elsweyr Foot Bridge, Masonry","quality":3,"cat":13,"sub":117,"theme":7,"icon":"housing_els_duc_roombridge001","blueprint":152116}
+{"id":151773,"name":"Elsweyr Platform, Wooden Large","quality":2,"cat":13,"sub":138,"theme":7,"icon":"housing_els_str_merchantdeck001","blueprint":152117}
+{"id":151774,"name":"Elsweyr Platform, Wooden Small","quality":2,"cat":13,"sub":138,"theme":7,"icon":"housing_els_str_aqueductcanalcover001","blueprint":152118}
+{"id":151775,"name":"Elsweyr Wall, Rough Wooden","quality":2,"cat":13,"sub":164,"theme":7,"icon":"housing_els_str_wallwood001","blueprint":152119}
+{"id":151777,"name":"Statue, Yolnahkriin","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_duc_sunspirealtar001"}
+{"id":151778,"name":"Statue, Lokkestiiz","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_duc_sunspirealtar002"}
+{"id":151779,"name":"Moon Gate","quality":5,"cat":13,"sub":163,"theme":7,"icon":"housing_els_run_moongatesmall001"}
+{"id":151780,"name":"Banner, Rimmen","quality":3,"cat":3,"sub":58,"theme":7,"icon":"housing_els_lsb_rimmenbannersmall001"}
+{"id":151781,"name":"Banner, Anequina","quality":3,"cat":3,"sub":58,"theme":7,"icon":"housing_els_lsb_anequinabannersmall002"}
+{"id":151782,"name":"Khajiit Burial Mound","quality":2,"cat":7,"sub":76,"theme":7,"icon":"housing_els_exc_burialmound001"}
+{"id":151783,"name":"Replica Dragon Horn, Large","quality":5,"cat":9,"sub":92,"theme":1,"icon":"housing_els_exc_akavaridragonhorn001"}
+{"id":151784,"name":"Replica Dragon Horn, Small","quality":4,"cat":9,"sub":92,"theme":1,"icon":"housing_els_exc_akavaridragonhorn002"}
+{"id":151785,"name":"Wrathstone, Replica","quality":5,"cat":3,"sub":56,"theme":1,"icon":"housing_els_inc_mymophonidgravure001"}
+{"id":151786,"name":"Moon Temple Pad","quality":4,"cat":13,"sub":138,"theme":7,"icon":"housing_els_exc_moontempleteleportpad001"}
+{"id":151787,"name":"Khajiit Lion Crest","quality":4,"cat":11,"sub":123,"theme":7,"icon":"housing_els_duc_traplioncrest001"}
+{"id":151788,"name":"Khajiit Wagon, Ruined","quality":2,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcartrn002"}
+{"id":151789,"name":"Khajiit Wagon, Merchant","quality":2,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcartsmallrn002"}
+{"id":151790,"name":"Akaviri Table, Stone","quality":4,"cat":5,"sub":66,"theme":1,"icon":"housing_els_inc_akavaritablets002"}
+{"id":151791,"name":"Column, Fatal Warning","quality":3,"cat":7,"sub":106,"theme":7,"icon":"housing_els_exc_skullcolumnhousing001"}
+{"id":151792,"name":"Tojay-Raht Statue, Monk","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_statuetojayraht001"}
+{"id":151796,"name":"Riverhold Defense Spikes, Piled","quality":2,"cat":13,"sub":117,"theme":1,"icon":"housing_els_exc_dragonspikesbundle001"}
+{"id":151797,"name":"Riverhold Defense Spikes, Tripod","quality":3,"cat":13,"sub":164,"theme":1,"icon":"housing_els_exc_dragonspikesgroup001"}
+{"id":151798,"name":"Riverhold Defense Spikes, Roof-Mounted","quality":3,"cat":13,"sub":164,"theme":1,"icon":"housing_els_exc_dragonspikesroof001"}
+{"id":151799,"name":"Projection Stone, Moons","quality":4,"cat":7,"sub":107,"theme":7,"icon":"housing_els_inc_projectionstone001"}
+{"id":151800,"name":"Cage, Small Animal","quality":3,"cat":10,"sub":96,"theme":7,"icon":"housing_els_inc_birdcage002"}
+{"id":151801,"name":"Barrel, Riverhold","quality":3,"cat":10,"sub":95,"theme":7,"icon":"housing_els_exc_riverholdbarrela001"}
+{"id":151802,"name":"Crate, Riverhold","quality":3,"cat":10,"sub":95,"theme":7,"icon":"housing_els_exc_riverholdcratec001"}
+{"id":151803,"name":"Elsweyr Wagon Wheel, Ironshod","quality":2,"cat":10,"sub":97,"theme":7,"icon":"housing_els_csb_cartwheel001"}
+{"id":151804,"name":"Elsweyr Pillar, Rough Wooden","quality":1,"cat":6,"sub":69,"theme":7,"icon":"housing_els_str_merchantcoverpole001"}
+{"id":151805,"name":"Elsweyr Rack, Poles","quality":2,"cat":13,"sub":113,"theme":7,"icon":"housing_els_str_merchantrack001"}
+{"id":151806,"name":"Rubble Pile, Ancient Stone","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_els_run_rubblepilemed001"}
+{"id":151807,"name":"Rock Field, Ancient Stone","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_els_run_rubblestones001"}
+{"id":151808,"name":"Tree, Fan Palm","quality":1,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_lalapalm001"}
+{"id":151809,"name":"Trees, Fan Palm Cluster","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_lalapalm003"}
+{"id":151810,"name":"Tree, Branched Succulent","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_candelabra006"}
+{"id":151811,"name":"Tree, Tall Iroko","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_irokohousing004"}
+{"id":151812,"name":"Tree, Engulfing Termite Mound","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_zebrawood011"}
+{"id":151813,"name":"Sapling, Desert Acacia","quality":1,"cat":12,"sub":141,"theme":1,"icon":"housing_tre_els_acaciasaplinghousing003"}
+{"id":151814,"name":"Tree, Desert Acacia","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acaciahousing003"}
+{"id":151815,"name":"Flowers, Desert Sunrise","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_cicatrice001"}
+{"id":151816,"name":"Plant, Flowering Thorned Succulent","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_euphorbia009"}
+{"id":151817,"name":"Flowers, Daedra Thorn","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_devilsthorn003"}
+{"id":151818,"name":"Shrub, Yellow Necklacepod","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_els_yellowsophora001"}
+{"id":151819,"name":"Flower Patch, Prairie-Fire","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_castilleja006"}
+{"id":151820,"name":"Desert Grass, Tall","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_elephantgrass006"}
+{"id":151821,"name":"Desert Grass, Patch","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_elephantgrass009"}
+{"id":151822,"name":"Vines, Dragonfire Ivy Swath","quality":2,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_els_redivy010"}
+{"id":151823,"name":"Vines, Dragonfire Ivy Climber","quality":2,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_els_redivy001"}
+{"id":151824,"name":"Lunar Tapestry, The Open Path","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestrymoonpath001"}
+{"id":151825,"name":"Lunar Tapestry, The Gathering","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestrymoondancer001"}
+{"id":151826,"name":"Lunar Tapestry, The Dance","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestrymoondancer002"}
+{"id":151827,"name":"Lunar Tapestry, The Gate","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestrymoondancer003"}
+{"id":151828,"name":"Lunar Tapestry, The Demon","quality":4,"cat":3,"sub":52,"theme":7,"icon":"housing_els_inc_tapestrymoondancer004"}
+{"id":151829,"name":"Suthay Statue, Nimble Bishop","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_reliefsuthay001"}
+{"id":151830,"name":"Elsweyr Divider, Elegant Wooden","quality":4,"cat":2,"sub":47,"theme":7,"icon":"housing_els_fur_screen002"}
+{"id":151831,"name":"Elsweyr Sugar Pipe, Ceremonial","quality":4,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_hookah001"}
+{"id":151832,"name":"Elsweyr Ceremonial Lantern, Jone","quality":3,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_sunspirebluelight001"}
+{"id":151833,"name":"Elsweyr Ceremonial Lantern, Jode","quality":3,"cat":11,"sub":121,"theme":7,"icon":"housing_els_lsb_sunspireredlight001"}
+{"id":151834,"name":"Tree, Desert Acacia Shade","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acacia002"}
+{"id":151835,"name":"Cathay-Raht Statue, Warrior","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_statuecathayraht001"}
+{"id":151836,"name":"Tojay Statue, Dancer","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_statuetojay001"}
+{"id":151837,"name":"Ohmes-Raht Statue, Trickster","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_statueohmesraht001"}
+{"id":151838,"name":"Elsweyr Fountain, Moons-Blessed","quality":5,"cat":6,"sub":74,"theme":7,"icon":"housing_els_str_fountainset001"}
+{"id":151839,"name":"Elsweyr Couch, Elegant Wooden","quality":4,"cat":3,"sub":133,"theme":7,"icon":"housing_els_fur_bench001","blueprint":152120}
+{"id":151840,"name":"Plant, Desert Fan","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_desertfan001"}
+{"id":151841,"name":"Plant, Tall Desert Fan","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_desertfan004"}
+{"id":151842,"name":"Plant, Cask Palm","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_zamiapalm001"}
+{"id":151843,"name":"Cactus, Flowering Cluster","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_succulentwflowerscluster004"}
+{"id":151844,"name":"Cactus, Bilberry","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_geometrizans001"}
+{"id":151845,"name":"Elsweyr Potted Cactus, Flowering","quality":4,"cat":12,"sub":111,"theme":7,"icon":"housing_els_inc_pottedcactus001"}
+{"id":151846,"name":"Elsweyr Potted Plant, Cask Palm","quality":2,"cat":12,"sub":109,"theme":7,"icon":"housing_els_inc_largepottedplant001"}
+{"id":151847,"name":"Plant, Flowering Desert Aloe","quality":2,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_aloeflowering002"}
+{"id":151848,"name":"Trees, Sunset Palm Cluster","quality":1,"cat":12,"sub":108,"theme":1,"icon":"housing_veg_els_redleaves002"}
+{"id":151849,"name":"Cactus, Lily Flower","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_els_succulentwflowers004"}
+{"id":151850,"name":"Tree, Anequina Bonsai","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_veg_els_euphorbia003"}
+{"id":151851,"name":"Boulder, Lunar Spine","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_els_moonrock001"}
+{"id":151852,"name":"Boulder, Lunar Spire","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_els_medvariant003"}
+{"id":151853,"name":"Cactus, Lunar Fan","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_els_moonplanttall006"}
+{"id":151854,"name":"Cactus, Banded Lunar Multihued Trio","quality":4,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_zebraplantcluster001"}
+{"id":151855,"name":"Elsweyr Sarcophagus, Lunar Champion","quality":3,"cat":7,"sub":76,"theme":7,"icon":"housing_els_str_sarcophagus002"}
+{"id":151856,"name":"Elsweyr Sarcophagus Lid, Lunar Champion","quality":4,"cat":7,"sub":76,"theme":7,"icon":"housing_els_str_sarcophagus003"}
+{"id":151857,"name":"Elsweyr Gazebo, Ancient Stone","quality":5,"cat":13,"sub":185,"theme":7,"icon":"housing_els_run_gazebo001"}
+{"id":151858,"name":"Elsweyr Altar, Dark Moons","quality":4,"cat":7,"sub":107,"theme":7,"icon":"housing_els_duc_phoomaltar001"}
+{"id":151859,"name":"Alinor Greenhouse, Summer","quality":5,"cat":13,"sub":185,"theme":3,"icon":"housing_sum_str_altgreenhouse001"}
+{"id":151860,"name":"Sapling, Blue Wisteria","quality":4,"cat":12,"sub":141,"theme":3,"icon":"housing_tre_sum_wisteria004"}
+{"id":151861,"name":"Tree, Purple Wisteria","quality":4,"cat":12,"sub":108,"theme":3,"icon":"housing_tre_sum_wisteriapink001"}
+{"id":151862,"name":"Tree, Blue Wisteria","quality":4,"cat":12,"sub":108,"theme":3,"icon":"housing_tre_sum_wisteria002"}
+{"id":151863,"name":"Alinor Windmill, Decorative","quality":5,"cat":13,"sub":185,"theme":3,"icon":"housing_sum_str_altwindmill001"}
+{"id":151864,"name":"Alinor Maple, Diminutive","quality":3,"cat":12,"sub":108,"theme":3,"icon":"housing_tre_sum_japanesemaplered002"}
+{"id":151865,"name":"Alinor Maple, Purple","quality":3,"cat":12,"sub":108,"theme":3,"icon":"housing_tre_sum_japanesemaple004"}
+{"id":151866,"name":"Alinor Maple, Sinuous","quality":4,"cat":12,"sub":108,"theme":3,"icon":"housing_tre_sum_japanesemapleorange001"}
+{"id":151867,"name":"Hakoshae Lanterns, Festival","quality":4,"cat":11,"sub":121,"theme":1,"icon":"housing_els_lsb_akaviristring001"}
+{"id":151868,"name":"Hakoshae Banners, Festival","quality":3,"cat":3,"sub":58,"theme":1,"icon":"housing_els_lsb_akaviristring002"}
+{"id":151869,"name":"Elsweyr Wagon, Covered","quality":3,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcartsmall001"}
+{"id":151870,"name":"Elsweyr Wagon, Pedlar","quality":4,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcart001"}
+{"id":151871,"name":"Elsweyr Dais, Temple","quality":3,"cat":13,"sub":138,"theme":7,"icon":"housing_els_str_palacechapelbase001"}
+{"id":151872,"name":"Boulder, Towering Lunar Spire","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_els_largevariant002"}
+{"id":151873,"name":"Boulder, Lunar Crag","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_els_medvariant001"}
+{"id":151874,"name":"Elsweyr Shrine, Ancient Stone","quality":3,"cat":7,"sub":107,"theme":7,"icon":"housing_els_run_smallshrine001"}
+{"id":151875,"name":"Elsweyr Bridge, Ancient Stone","quality":4,"cat":13,"sub":138,"theme":7,"icon":"housing_els_str_canalbridge001"}
+{"id":151876,"name":"Elsweyr Tent, Caravan","quality":3,"cat":13,"sub":114,"theme":7,"icon":"housing_els_exc_tent002"}
+{"id":151877,"name":"Elsweyr Canopy, Bazaar","quality":3,"cat":13,"sub":114,"theme":7,"icon":"housing_els_str_merchanttent002"}
+{"id":151878,"name":"Elsweyr Canopy, Peaked","quality":3,"cat":13,"sub":114,"theme":7,"icon":"housing_els_str_merchantstall002"}
+{"id":151879,"name":"Cactus, Lunar Tendrils","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_els_moonplanttall007"}
+{"id":151880,"name":"Cactus, Lunar Branching","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_els_moonplanttall001"}
+{"id":151881,"name":"Cactus, Lunar Branching Tall","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_els_moonplanttall003"}
+{"id":151882,"name":"Cactus, Banded Lunar Violet Trio","quality":4,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_zebraplantcluster002"}
+{"id":151883,"name":"Tree, Towering Iroko","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_els_iroko001"}
+{"id":151884,"name":"Tree, Giant Ficus","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_els_jungleficus002"}
+{"id":151885,"name":"Tree, Massive Ficus","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_els_jungleficus004"}
+{"id":151886,"name":"Elsweyr Fan, Handheld","quality":2,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_handfan001"}
+{"id":151887,"name":"Elsweyr Brush, Body","quality":2,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_hairbrush001"}
+{"id":151888,"name":"Elsweyr Brush, Head","quality":1,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_hairbrush002"}
+{"id":151889,"name":"Elsweyr Comb, Grooming","quality":1,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_comb001"}
+{"id":151890,"name":"Elsweyr Hand Mirror, Bronze Oval","quality":4,"cat":2,"sub":50,"theme":7,"icon":"housing_els_inc_handmirror001"}
+{"id":151891,"name":"Elsweyr Hand Mirror, Rectangular","quality":3,"cat":2,"sub":50,"theme":7,"icon":"housing_els_inc_handmirror002"}
+{"id":151892,"name":"Elsweyr Fragrance Bottle, Moons-Blessed","quality":4,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_perfumetrinket001"}
+{"id":151893,"name":"Elsweyr Fragrance Bottle, Moonlit Tryst","quality":3,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_perfumetrinket002"}
+{"id":151894,"name":"Elsweyr Mirror, Carved Wall","quality":3,"cat":2,"sub":50,"theme":7,"icon":"housing_els_inc_wallmirror001"}
+{"id":151895,"name":"Elsweyr Cloth, Rolled","quality":1,"cat":10,"sub":97,"theme":7,"icon":"housing_els_exc_clothrolls001"}
+{"id":151897,"name":"Elsweyr Fabric, Display","quality":1,"cat":10,"sub":97,"theme":7,"icon":"housing_els_exc_clothstack001"}
+{"id":151898,"name":"Elsweyr Pillow, Gold-Ruby Roll","quality":2,"cat":2,"sub":51,"theme":7,"icon":"housing_els_inc_longroundpillow001"}
+{"id":151899,"name":"Elsweyr Pillow, Night Blues Wide","quality":2,"cat":2,"sub":51,"theme":7,"icon":"housing_els_inc_rectanglepillow001"}
+{"id":151900,"name":"Elsweyr Pillow, Gold-Ruby Throw","quality":2,"cat":2,"sub":51,"theme":7,"icon":"housing_els_inc_squarepillow001"}
+{"id":151901,"name":"Elsweyr Bowl, Moon-Sugar","quality":1,"cat":8,"sub":156,"theme":7,"icon":"housing_els_inc_ingredientbowl001"}
+{"id":151902,"name":"Elsweyr Sarcophagus, Ancient","quality":3,"cat":7,"sub":76,"theme":7,"icon":"housing_els_run_sarcophaguscasket001","blueprint":152237}
+{"id":151903,"name":"Elsweyr Sarcophagus Lid, Ancient","quality":3,"cat":7,"sub":76,"theme":7,"icon":"housing_els_run_sarcophaguslid001","blueprint":152238}
+{"id":151904,"name":"Glowgrass, Patch","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fan_mphxlgblueglowbush001"}
+{"id":151905,"name":"Rock, Wide Flat Slate","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_els_flatrock001"}
+{"id":151906,"name":"Robust Target Dro-m'Athra","quality":5,"cat":25,"sub":98,"theme":7,"icon":"dromathratargetdummy"}
+{"id":151909,"name":"Music Box, A Clash of Fang and Flame","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxscalesong001"}
+{"id":151910,"name":"Music Box, Dancing Among the Flowers Fine","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxsweetblossom001"}
+{"id":151911,"name":"Rock, Flat Slate","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_els_flatrock002"}
+{"id":151912,"name":"Stepping Stones, Slate","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_els_flatrock003"}
+{"id":151913,"name":"Rock, Slate","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_els_smallvariant006"}
+{"id":151914,"name":"Tree, Desert Acacia Tall","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acacia001"}
+{"id":151915,"name":"Daedric Key, Coldharbour","quality":4,"cat":3,"sub":56,"theme":13,"icon":"housing_uni_con_keylrg001"}
+{"id":151944,"name":"Daedric Sconce, Coldharbour","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_coh_inc_sconce001"}
+{"id":151945,"name":"Plant, Spore Pod","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_cft_veg_sporepod001"}
+{"id":151946,"name":"Flower, Coda","quality":3,"cat":11,"sub":126,"theme":1,"icon":"housing_cft_veg_codaflower001"}
+{"id":151947,"name":"Dark Elf Ash Garden, Communal","quality":4,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_ashpitcircular001"}
+{"id":151948,"name":"Dark Elf Urn, Bronze Burial","quality":4,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_tomburn002"}
+{"id":151949,"name":"Hlaalu Path Marker, Almsivi","quality":4,"cat":11,"sub":126,"theme":6,"icon":"housing_vrd_str_hlamilemarker001"}
+{"id":151950,"name":"Khajiit Path Marker, Lion","quality":5,"cat":11,"sub":126,"theme":7,"icon":"housing_kha_str_milemaker001"}
+{"id":151951,"name":"Nedic Orb, Ritual","quality":4,"cat":11,"sub":126,"theme":8,"icon":"housing_cra_lsb_brazierorb001"}
+{"id":151952,"name":"Nedic Stand, Ritual","quality":3,"cat":9,"sub":91,"theme":8,"icon":"housing_cra_lsb_brazierwithorb001"}
+{"id":151953,"name":"Reikling Totem, Skull","quality":2,"cat":7,"sub":106,"theme":15,"icon":"housing_gen_exc_rkrgoblintotemskull001"}
+{"id":151954,"name":"Reachmen Banner, Bull","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_uni_lsb_reachbanners001"}
+{"id":151968,"name":"Map of Elsweyr, Hanging","quality":4,"cat":4,"sub":64,"theme":7,"icon":"housing_gen_inc_mappropselsweyr001"}
+{"id":152141,"name":"Orcish Brazier, Bordered","quality":4,"cat":11,"sub":124,"theme":9,"icon":"housing_orc_lsb_wtgbrazier001"}
+{"id":152142,"name":"Orcish Sconce, Bordered","quality":4,"cat":11,"sub":123,"theme":9,"icon":"housing_orc_lsb_wtgdungeonsconce001"}
+{"id":152143,"name":"Orcish Sconce, Scrolled","quality":4,"cat":11,"sub":123,"theme":9,"icon":"housing_orc_lsb_wtgsconce001"}
+{"id":152144,"name":"Orcish Mirror, Peaked","quality":4,"cat":2,"sub":50,"theme":9,"icon":"housing_orc_fur_wtgmirror001"}
+{"id":152145,"name":"Orcish Tapestry, War","quality":4,"cat":3,"sub":52,"theme":9,"icon":"housing_orc_inc_wtgtapestrylarge001"}
+{"id":152146,"name":"Orcish Chandelier, Spiked","quality":4,"cat":11,"sub":125,"theme":9,"icon":"housing_orc_lsb_wtgdungeonchandelier001"}
+{"id":152148,"name":"Orcish Tapestry, Hunt","quality":4,"cat":3,"sub":52,"theme":9,"icon":"housing_orc_inc_wtgtapestrylarge002"}
+{"id":152149,"name":"Orcish Brazier, Pillar","quality":4,"cat":11,"sub":124,"theme":9,"icon":"housing_orc_lsb_wtglamppost001"}
+{"id":152257,"name":"Banner of Mephala","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermephalasmall001"}
+{"id":152258,"name":"Banner of Boethiah","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannerboethiahsmall001"}
+{"id":152259,"name":"Banner of Mehrunes Dagon","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermehronesdagonsmall001"}
+{"id":153552,"name":"Imperial Tapestry, Arkay","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_imp_inc_tapestryakatoshlargea003"}
+{"id":153553,"name":"Imperial Dresser, Scrollwork","quality":4,"cat":2,"sub":146,"theme":11,"icon":"housing_nib_fur_dressershort001"}
+{"id":153554,"name":"Imperial Mirror, Standing","quality":4,"cat":2,"sub":50,"theme":11,"icon":"housing_nib_fur_mirror001"}
+{"id":153555,"name":"Imperial Nightstand, Scrollwork","quality":4,"cat":2,"sub":145,"theme":11,"icon":"housing_nib_fur_nightstand001"}
+{"id":153556,"name":"Imperial Divider, Folding","quality":4,"cat":2,"sub":47,"theme":11,"icon":"housing_nib_fur_screen001"}
+{"id":153557,"name":"Imperial Footlocker, Scrollwork","quality":4,"cat":2,"sub":49,"theme":11,"icon":"housing_nib_fur_trunk001"}
+{"id":153558,"name":"Imperial Wardrobe, Scrollwork","quality":4,"cat":2,"sub":48,"theme":11,"icon":"housing_nib_fur_wardrobe001"}
+{"id":153559,"name":"Imperial Bed, Canopy","quality":4,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedcanopy001"}
+{"id":153560,"name":"Imperial Shrine of the Bay","quality":4,"cat":7,"sub":107,"theme":11,"icon":"housing_nib_str_cathedralaltar001"}
+{"id":153561,"name":"Daedric Chandelier, Ritual","quality":4,"cat":11,"sub":125,"theme":13,"icon":"housing_dae_lsb_chandelier001"}
+{"id":153562,"name":"Daedric Brazier, Standing","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_dae_lsb_candelabrar002"}
+{"id":153563,"name":"Target Bone Goliath, Reanimated","quality":5,"cat":25,"sub":98,"theme":1,"icon":"housing_targetdummy_bonegoliath_01"}
+{"id":153630,"name":"Shadow Tendril Patch","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_fx_shadowtendrils"}
+{"id":153631,"name":"Emerald Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"crafting_fishing_torchbug"}
+{"id":153632,"name":"Sapphire Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_torchbug_blue"}
+{"id":153633,"name":"Music Box, The Ghosts of Frostfall","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxwitch001"}
+{"id":153634,"name":"Music Box, Diamond Melody","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboximperial001"}
+{"id":153650,"name":"Crystal Sconce, Green","quality":5,"cat":11,"sub":126,"theme":14,"icon":"housing_ayl_duc_housingcrystalsconce001"}
+{"id":153651,"name":"Elsweyr Gate, Masterwork","quality":5,"cat":13,"sub":163,"theme":7,"icon":"housing_els_waf_wallscitymediumportcullisgate001","blueprint":153729}
+{"id":153652,"name":"Elsweyr Chaise Lounge, Upholstered","quality":5,"cat":3,"sub":133,"theme":7,"icon":"housing_els_fur_chaise001","blueprint":153730}
+{"id":153653,"name":"Elsweyr Cart, Masterwork","quality":5,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcartopen002","blueprint":153731}
+{"id":153654,"name":"Elsweyr Statue, Shrine Lion","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_run_shrinelion001","blueprint":153732}
+{"id":153655,"name":"Elsweyr Incense, Fragrant","quality":5,"cat":7,"sub":105,"theme":7,"icon":"housing_els_inc_incenseburner003","blueprint":153733}
+{"id":153656,"name":"Provisioning Station, Elsweyr Grill","quality":5,"cat":25,"sub":104,"theme":7,"icon":"housing_els_fur_tablegrill001","blueprint":153734}
+{"id":153657,"name":"Elsweyr Cage, Filigree","quality":5,"cat":10,"sub":96,"theme":7,"icon":"housing_els_inc_birdcage001","blueprint":153735}
+{"id":153658,"name":"Moon-Sugar, Row","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_crp_moonsugar006"}
+{"id":153659,"name":"Moon-Sugar, Cluster","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_crp_moonsugar002"}
+{"id":153660,"name":"Elsweyr Cart, Moons-Blessed","quality":4,"cat":6,"sub":71,"theme":7,"icon":"housing_els_csb_merchantcarthousing001"}
+{"id":153661,"name":"Straw Pile","quality":2,"cat":10,"sub":97,"theme":1,"icon":"housing_gen_exc_strawpile001"}
+{"id":153662,"name":"Tool, Plow","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_plough001"}
+{"id":153663,"name":"Tool, Sickle","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_sickle001"}
+{"id":153664,"name":"Tool, Pitchfork","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_pitchfork001"}
+{"id":153665,"name":"Tool, Hoe","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_hoe001"}
+{"id":153666,"name":"Tool, Two-Person Crosscut Saw","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_lrgsaw001"}
+{"id":153667,"name":"Moon-Sugar, Harvested Large","quality":4,"cat":10,"sub":97,"theme":1,"icon":"housing_veg_crp_moonsugarharvested002"}
+{"id":153668,"name":"Moon-Sugar, Harvested Small","quality":3,"cat":10,"sub":97,"theme":1,"icon":"housing_veg_crp_moonsugarharvested001"}
+{"id":153669,"name":"Elsweyr Well, Simple Arched","quality":4,"cat":6,"sub":72,"theme":7,"icon":"housing_kha_str_wellmediumsand001"}
+{"id":153670,"name":"Elsweyr Platform, Ancient Square","quality":3,"cat":13,"sub":138,"theme":7,"icon":"housing_els_run_seplatform001","blueprint":153723}
+{"id":153671,"name":"Elsweyr Platform, Ancient Rectangular","quality":4,"cat":13,"sub":138,"theme":7,"icon":"housing_els_run_seplatformwide001","blueprint":153726}
+{"id":153672,"name":"Elsweyr Shrine, Ancient Large","quality":4,"cat":7,"sub":107,"theme":7,"icon":"housing_els_run_seshrine001","blueprint":153727}
+{"id":153673,"name":"Elsweyr Shrine, Ancient Small","quality":3,"cat":7,"sub":107,"theme":7,"icon":"housing_els_run_sesmallshrine002","blueprint":153724}
+{"id":153674,"name":"Elsweyr Tower, Ancient Huge","quality":4,"cat":13,"sub":117,"theme":7,"icon":"housing_els_run_setower001","blueprint":153728}
+{"id":153675,"name":"Daedric Altar, Four Alcoves","quality":3,"cat":7,"sub":107,"theme":13,"icon":"housing_coh_inc_pedestalshort001"}
+{"id":153676,"name":"Daedric Sarcophagus, Stone","quality":3,"cat":7,"sub":76,"theme":13,"icon":"housing_coh_inc_sarcophagus001"}
+{"id":153677,"name":"Trees, Shade Palm Cluster","quality":2,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_els_royalpalmhousing001"}
+{"id":153678,"name":"Trees, Towering Palm Cluster","quality":2,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_els_royalpalmhousing002"}
+{"id":153679,"name":"Tree, Anequine Acacia Arching","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acaciasouthern003"}
+{"id":153680,"name":"Plant Cluster, Tenmar Dija","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_crontonredcluster001"}
+{"id":153681,"name":"Plant Cluster, Palmetto","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_palmetto005"}
+{"id":153682,"name":"Plant, Tropical Bush","quality":1,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_tropicalbush007"}
+{"id":153683,"name":"Plant Cluster, Zahmia","quality":2,"cat":12,"sub":149,"theme":1,"icon":"housing_veg_els_zamiapalm006"}
+{"id":153684,"name":"Plant Cluster, Keet Fern","quality":1,"cat":12,"sub":149,"theme":1,"icon":"housing_veg_els_kiteferncluster002"}
+{"id":153685,"name":"Tree, Azureblight Acacia","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acaciacorrupted005"}
+{"id":153686,"name":"Plant Cluster, Azureblight Scaleleaf","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_els_corruptionplant005"}
+{"id":153687,"name":"Vine, Azureblight Strangler","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_els_corruption001"}
+{"id":153688,"name":"Tree, Anequine Acacia Forking","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_els_acaciasouthernhousing005"}
+{"id":153689,"name":"Fern, Cyan","quality":3,"cat":12,"sub":149,"theme":1,"icon":"housing_tre_trp_hrccyatheacooperiglow002"}
+{"id":153690,"name":"Flower Cluster, Wyrdbloom","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_flr_wyrdflowercluster01"}
+{"id":153691,"name":"Orsinium Sarcophagus, Honor's Rest","quality":5,"cat":7,"sub":107,"theme":9,"icon":"housing_orc_duc_honorsrestrgsarcophagus001"}
+{"id":153692,"name":"Orsinium Well, Covered","quality":4,"cat":6,"sub":72,"theme":9,"icon":"housing_orc_str_snowwtgwelllarge001"}
+{"id":153693,"name":"Tree, Treehenge Green Lady","quality":5,"cat":12,"sub":108,"theme":5,"icon":"housing_tre_fan_treehenge_tree001"}
+{"id":153694,"name":"Tree, Murkmire Ossuary","quality":5,"cat":7,"sub":106,"theme":4,"icon":"housing_tre_fan_mrksithisshrine001"}
+{"id":153695,"name":"Titan Skull, Colossal","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_cre_exc_titanskeleton003"}
+{"id":153696,"name":"Taxidermy, Bird of Prey","quality":3,"cat":8,"sub":86,"theme":1,"icon":"housing_nor_duc_totempiece001"}
+{"id":153697,"name":"Clockwork Telescope, Stargazers","quality":5,"cat":10,"sub":96,"theme":16,"icon":"housing_red_exc_telescope001"}
+{"id":153698,"name":"Clockwork Orrery, Simple","quality":5,"cat":10,"sub":170,"theme":16,"icon":"housing_cwc_str_wayshrinedungeon001"}
+{"id":153699,"name":"Banner, Furnishings","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_bannerhousingfurnishingvendor002"}
+{"id":153700,"name":"Banner, Packs","quality":3,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_bannervendormerchantmed001"}
+{"id":153701,"name":"Clockwork Changing Room, Curtained","quality":4,"cat":2,"sub":47,"theme":16,"icon":"housing_cwc_crf_transmogbooth001"}
+{"id":153702,"name":"Clockwork Pot, Crystals","quality":4,"cat":10,"sub":97,"theme":16,"icon":"housing_cwc_crf_gembox001"}
+{"id":153703,"name":"Elsweyr Shrine, Ancient Multilevel","quality":3,"cat":7,"sub":107,"theme":7,"icon":"housing_els_run_seshrinern001","blueprint":153725}
+{"id":153750,"name":"Hemo Helot, Benign","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_hemohelot"}
+{"id":153751,"name":"Volendrung Replica","quality":5,"cat":9,"sub":91,"theme":13,"icon":"housing_volendrung_icon"}
+{"id":153814,"name":"Dragon's Treasure Trove","quality":5,"icon":"housing_els_inc_dragonloot001"}
+{"id":153841,"name":"Rewoven Khajiiti Tapestry","quality":1,"icon":"icon_missing"}
+{"id":153887,"name":"Dragonguard Banner","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_els_lsb_bannerdragonguardmedium001"}
+{"id":156553,"name":"Music Box, That Breezy Night in Bruma","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_heartsdaymusicbox001"}
+{"id":156554,"name":"Music Box, A Frost Melt Melody","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_newlifemusicbox001"}
+{"id":156644,"name":"Books, Towering Pile","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_cra_inc_bookpile005"}
+{"id":156645,"name":"Statue, Kaalgrontiid's Ascent","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_duc_sestatuedemonspire001"}
+{"id":156646,"name":"Ra Gada Statue, Seated Lion Ibis","quality":5,"cat":6,"sub":70,"theme":10,"icon":"housing_red_run_varstatues001"}
+{"id":156647,"name":"Ra Gada Throne, Stone","quality":5,"cat":9,"sub":93,"theme":10,"icon":"housing_red_inc_varyokudanthrone001"}
+{"id":156648,"name":"Ra Gada Funerary Statue, Miniature Ibis","quality":4,"cat":7,"sub":107,"theme":10,"icon":"housing_red_run_varheronstatuesml001"}
+{"id":156649,"name":"Redguard Tent, Rounded Blue","quality":5,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset005"}
+{"id":156650,"name":"Platform, Floating Dock","quality":3,"cat":13,"sub":138,"theme":1,"icon":"housing_gen_dck_dockfloating001"}
+{"id":156651,"name":"Anchor, Hanging","quality":4,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_csb_anchor001"}
+{"id":156652,"name":"Garlas Alpinia, Branching","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_fan_giantginger004"}
+{"id":156653,"name":"Plant, Luminescent Valeflower","quality":3,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fan_valplantgreen001"}
+{"id":156654,"name":"Alinor Shrine, Magnus","quality":5,"cat":7,"sub":107,"theme":3,"icon":"housing_sum_str_magnusshrine001"}
+{"id":156655,"name":"Alinor Shrine, Phynaster","quality":5,"cat":7,"sub":107,"theme":3,"icon":"housing_sum_str_phynastershrine001"}
+{"id":156656,"name":"Pedestal, Dark Stone","quality":3,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_duc_scalecallerorbstand001"}
+{"id":156657,"name":"Azure Plasm Cage, Hanging","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_coh_inc_hanginglantern000"}
+{"id":156658,"name":"Orcish Seal, Wolf","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol005"}
+{"id":156659,"name":"Orcish Seal, Hammer","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol006"}
+{"id":156660,"name":"Orcish Seal, Malacath","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol001"}
+{"id":156661,"name":"Orcish Seal, Battle-Axe","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol002"}
+{"id":156662,"name":"Riekling Banner, Wolf Pelt","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_gen_exc_rkrdecorativehidedsnow001"}
+{"id":156663,"name":"Riekling Banner, Boar Pelt","quality":3,"cat":3,"sub":58,"theme":15,"icon":"housing_gen_exc_rkrdecorativehidebsnow001"}
+{"id":156664,"name":"Ayleid Pillar, Small Empty","quality":4,"cat":6,"sub":99,"theme":14,"icon":"housing_ayl_duc_ayleidnetworkcrystal001"}
+{"id":156665,"name":"Ayleid Constellation Stele, The Serpent","quality":4,"cat":7,"sub":106,"theme":14,"icon":"housing_ayl_duc_constellationpanelsmallserpent001"}
+{"id":156667,"name":"Gate, Spiked Iron","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_coh_inc_gatedouble001"}
+{"id":156668,"name":"Skeletal Remains, Slumped Over","quality":4,"cat":7,"sub":75,"theme":1,"icon":"housing_coh_inc_skeletonsitting001"}
+{"id":156669,"name":"Target Frost Atronach","quality":5,"cat":25,"sub":98,"theme":13,"icon":"housing_targetdummy_frostatronach_01"}
+{"id":156677,"name":"Vines, Verdant Ivy Climber","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_greenivy004"}
+{"id":156678,"name":"Vines, Verdant Ivy Swath","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_greenivy005"}
+{"id":156752,"name":"Aeonstone Formation, Large","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_rok_els_darkempyrean017"}
+{"id":156753,"name":"Khenarthi's Windbells","quality":5,"cat":3,"sub":55,"theme":7,"icon":"housing_els_exc_sebellstandsmall001"}
+{"id":156754,"name":"Dragonguard Sarcophagus","quality":4,"cat":7,"sub":76,"theme":7,"icon":"housing_imp_cem_sarcophagusdragonguard001"}
+{"id":156755,"name":"Vine, Moonlit Cove","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_vin_deadivyblueglow002"}
+{"id":156756,"name":"Khenarthic Bell","quality":5,"cat":3,"sub":55,"theme":7,"icon":"housing_els_exc_sebellstandlarge001"}
+{"id":156757,"name":"New Moon Cult Banner, Large","quality":4,"cat":3,"sub":58,"theme":7,"icon":"housing_els_lsb_bannermooncultlarge001"}
+{"id":156758,"name":"New Moon Cult Banner","quality":4,"cat":3,"sub":58,"theme":7,"icon":"housing_els_lsb_bannermooncultmedium001"}
+{"id":156759,"name":"Painted Rock, Swirls","quality":3,"cat":12,"sub":152,"theme":7,"icon":"housing_rok_els_blackheightspaint009"}
+{"id":156760,"name":"Painted Rock, Life's Glory","quality":3,"cat":12,"sub":152,"theme":7,"icon":"housing_rok_els_blackheightspaint001"}
+{"id":156761,"name":"Painted Rock, Heart's Ease","quality":3,"cat":12,"sub":152,"theme":7,"icon":"housing_rok_els_blackheightspaint006"}
+{"id":156762,"name":"Map of Southern Elsweyr, Hanging","quality":4,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropssouthelsweyr001"}
+{"id":156763,"name":"Senchal Banner","quality":4,"cat":3,"sub":58,"theme":7,"icon":"housing_els_lsb_senchalbannersmall002"}
+{"id":156764,"name":"Bouquet, Small Dibella's","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_uni_inc_romanticvase002"}
+{"id":156765,"name":"Chair, Love-Blessed","quality":4,"cat":5,"sub":132,"theme":1,"icon":"housing_uni_fur_heartsdaychair001"}
+{"id":156766,"name":"Petals, Blanket","quality":3,"cat":3,"sub":53,"theme":1,"icon":"housing_veg_flr_petalcarpet003"}
+{"id":156767,"name":"Sweetroll Platter","quality":5,"cat":8,"sub":156,"theme":1,"icon":"housing_uni_inc_sweetrollplatter001"}
+{"id":156768,"name":"Love's Flame Candlestick","quality":4,"cat":11,"sub":129,"theme":1,"icon":"housing_uni_lsb_candlesticks001"}
+{"id":156769,"name":"Kitten Moppet, Heart's Promise","quality":5,"cat":3,"sub":56,"theme":1,"icon":"housing_uni_inc_stuffedanimal001"}
+{"id":156770,"name":"Kitten Moppet, Love-Blessed","quality":5,"cat":3,"sub":56,"theme":1,"icon":"housing_uni_inc_stuffedanimal002"}
+{"id":156771,"name":"Table, Love-Blessed","quality":4,"cat":5,"sub":66,"theme":1,"icon":"housing_uni_fur_heartsdaytable001"}
+{"id":156772,"name":"Petals, Large Blanket","quality":4,"cat":3,"sub":53,"theme":1,"icon":"housing_veg_flr_petalcarpet002"}
+{"id":156773,"name":"Rug, Love-Blessed","quality":3,"cat":3,"sub":53,"theme":1,"icon":"housing_uni_inc_heartsdayrug001"}
+{"id":156774,"name":"Tapestry, Love-Blessed","quality":3,"cat":3,"sub":52,"theme":1,"icon":"housing_uni_inc_heartsdaytapestry001"}
+{"id":156775,"name":"Bed, Petal-Strewn Double","quality":5,"cat":2,"sub":46,"theme":1,"icon":"housing_uni_fur_heartsdaybed001"}
+{"id":156776,"name":"Bouquet, Large Dibella's","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_uni_inc_romanticvase003"}
+{"id":156777,"name":"Bouquet, Medium Dibella's","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_uni_inc_romanticvase001"}
+{"id":156778,"name":"Flower, Dibella's Promise","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_flr_romanticflower001"}
+{"id":159436,"name":"Dwarven Miniature Sun, Portable","quality":5,"cat":11,"sub":125,"theme":12,"icon":"housing_dwe_duc_housinglanternhangingsmall001"}
+{"id":159437,"name":"Painting of Blackreach, Rough","quality":5,"cat":9,"sub":54,"theme":1,"icon":"housing_uni_inc_housingpaintinggloomspore001"}
+{"id":159438,"name":"Fungus, Gloomspore Ghost","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_skr_nidiformiswavehousing004"}
+{"id":159439,"name":"Statue, Pride of Alkosh Hero","quality":5,"cat":6,"sub":70,"theme":7,"icon":"housing_els_exc_sestatueprideofalkosh001"}
+{"id":159440,"name":"Elsweyr Gong, Ornate","quality":5,"cat":3,"sub":55,"theme":7,"icon":"housing_els_inc_gong001","blueprint":159498}
+{"id":159441,"name":"Elsweyr Bed, Senche-Raht","quality":5,"cat":2,"sub":46,"theme":7,"icon":"housing_els_fur_housingbedhigh001","blueprint":159499}
+{"id":159442,"name":"Elsweyr Well, Covered","quality":5,"cat":6,"sub":72,"theme":7,"icon":"housing_els_str_well001","blueprint":159500}
+{"id":159443,"name":"Khajiit Sigil, Moon Cycle","quality":5,"cat":7,"sub":106,"theme":7,"icon":"housing_kha_run_platformpedestal001","blueprint":159501}
+{"id":159444,"name":"Elsweyr Mortar and Pestle, Engraved","quality":5,"cat":10,"sub":96,"theme":7,"icon":"housing_els_inc_pestlemortar001","blueprint":159502}
+{"id":159445,"name":"Elsweyr Bread Basket, Feast-Day","quality":5,"cat":8,"sub":156,"theme":7,"icon":"housing_els_inc_strainerbowlwithfood001","blueprint":159503}
+{"id":159446,"name":"Elsweyr Game, Swan Stones","quality":5,"cat":3,"sub":56,"theme":7,"icon":"housing_els_inc_gameboard001","blueprint":159504}
+{"id":159447,"name":"Imperial Statue, Legion Champion","quality":4,"cat":6,"sub":70,"theme":11,"icon":"housing_els_exc_seimperialstatuemedium001"}
+{"id":159448,"name":"Breton Statue, Arkay","quality":4,"cat":6,"sub":70,"theme":2,"icon":"housing_bre_cem_housingsculpture001"}
+{"id":159449,"name":"Hourglass Stand, Round","quality":4,"cat":7,"sub":106,"theme":11,"icon":"housing_uni_duc_dbhhourglass001"}
+{"id":159450,"name":"Hourglass Pedestal, Square","quality":4,"cat":7,"sub":106,"theme":11,"icon":"housing_uni_duc_pedestalhourglass001"}
+{"id":159451,"name":"Hourglass Banner, Akatosh","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_col_inc_dbhtapestryakatoshhourglasssm001"}
+{"id":159452,"name":"Gray Reliquary","quality":5,"cat":7,"sub":76,"theme":1,"icon":"housing_skr_inc_bloodstormurn001"}
+{"id":159453,"name":"Icereach Coven Totem, Emblem","quality":4,"cat":3,"sub":58,"theme":15,"icon":"housing_uni_exc_icereachwitchbanner002"}
+{"id":159454,"name":"Dwarven Crucible, Heavy","quality":4,"cat":10,"sub":96,"theme":12,"icon":"housing_dwe_duc_housingsmeltersmalla001"}
+{"id":159455,"name":"Dwarven Spider Legs, Inoperative","quality":3,"cat":10,"sub":97,"theme":12,"icon":"housing_dwe_inc_spiderlegpile001"}
+{"id":159456,"name":"Orsinium Well, Open","quality":4,"cat":6,"sub":72,"theme":9,"icon":"housing_orc_str_housingwtgwellmed001"}
+{"id":159457,"name":"Tree, Dagger Bark","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_des_joshuatree001"}
+{"id":159458,"name":"Tree, Broad Wrothgar Pine","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_eve_wrothgarpinehousing003"}
+{"id":159459,"name":"Trees, Paired Wrothgar Pine","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_eve_wrothgarpinehousing001"}
+{"id":159460,"name":"Tree, Slim Wrothgar Pine","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_eve_wrothgarpinehousing006"}
+{"id":159461,"name":"Shrubs, Desert Scrub","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_bangkoraiscrubcluster003"}
+{"id":159462,"name":"Redguard Fence, Wooden","quality":2,"cat":13,"sub":164,"theme":10,"icon":"housing_red_str_housingvarhouselowrailingst003"}
+{"id":159464,"name":"Replica Jubilee Cake 2016","quality":5,"cat":8,"sub":156,"theme":1,"icon":"store_cake_01"}
+{"id":159465,"name":"Replica Jubilee Cake 2017","quality":5,"cat":8,"sub":156,"theme":1,"icon":"collectable_memento_2ndanniversarycake"}
+{"id":159466,"name":"Replica Jubilee Cake 2018","quality":5,"cat":8,"sub":156,"theme":1,"icon":"collectable_memento_3ndanniversarycake"}
+{"id":159467,"name":"Replica Jubilee Cake 2019","quality":5,"cat":8,"sub":156,"theme":1,"icon":"collectible_memento_jubileecake2019"}
+{"id":159470,"name":"Replica Jubilee Cake 2020","quality":5,"cat":8,"sub":156,"theme":1,"icon":"momento_jubileecake2020_02"}
+{"id":159496,"name":"Tree, Ancient Bristlecone","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_eve_wrothgarbristleconepine003"}
+{"id":159596,"name":"Music Box, The Mad Harlequin's Reverie","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxjester001"}
+{"id":159598,"name":"Music Box, Dreams of Yokuda","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxyokudan001"}

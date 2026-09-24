@@ -1,0 +1,852 @@
+{
+  "2": {
+    "name": "Suite",
+    "parent": 0,
+    "order": 2
+  },
+  "3": {
+    "name": "Parlor",
+    "parent": 0,
+    "order": 2
+  },
+  "4": {
+    "name": "Library",
+    "parent": 0,
+    "order": 2
+  },
+  "5": {
+    "name": "Dining",
+    "parent": 0,
+    "order": 2
+  },
+  "6": {
+    "name": "Courtyard",
+    "parent": 0,
+    "order": 2
+  },
+  "7": {
+    "name": "Undercroft",
+    "parent": 0,
+    "order": 2
+  },
+  "8": {
+    "name": "Hearth",
+    "parent": 0,
+    "order": 2
+  },
+  "9": {
+    "name": "Gallery",
+    "parent": 0,
+    "order": 2
+  },
+  "10": {
+    "name": "Workshop",
+    "parent": 0,
+    "order": 2
+  },
+  "11": {
+    "name": "Lighting",
+    "parent": 0,
+    "order": 2
+  },
+  "12": {
+    "name": "Conservatory",
+    "parent": 0,
+    "order": 2
+  },
+  "13": {
+    "name": "Structures",
+    "parent": 0,
+    "order": 2
+  },
+  "14": {
+    "name": "Miscellaneous",
+    "parent": 0,
+    "order": 2
+  },
+  "16": {
+    "name": "Mounts",
+    "parent": 0,
+    "order": 2
+  },
+  "24": {
+    "name": "Horses",
+    "parent": 16,
+    "order": 0
+  },
+  "25": {
+    "name": "Services",
+    "parent": 0,
+    "order": 1
+  },
+  "30": {
+    "name": "Big Cats",
+    "parent": 16,
+    "order": 0
+  },
+  "31": {
+    "name": "Banking Assistants",
+    "parent": 25,
+    "order": 0
+  },
+  "32": {
+    "name": "Merchant Assistants",
+    "parent": 25,
+    "order": 0
+  },
+  "33": {
+    "name": "Non-Combat Pets",
+    "parent": 0,
+    "order": 2
+  },
+  "38": {
+    "name": "Daedric",
+    "parent": 33,
+    "order": 0
+  },
+  "41": {
+    "name": "Creepy Crawlies",
+    "parent": 33,
+    "order": 0
+  },
+  "42": {
+    "name": "Flying Pets",
+    "parent": 33,
+    "order": 0
+  },
+  "46": {
+    "name": "Bedding",
+    "parent": 2,
+    "order": 0
+  },
+  "47": {
+    "name": "Dividers",
+    "parent": 2,
+    "order": 0
+  },
+  "48": {
+    "name": "Wardrobes",
+    "parent": 2,
+    "order": 0
+  },
+  "49": {
+    "name": "Trunks",
+    "parent": 2,
+    "order": 0
+  },
+  "50": {
+    "name": "Mirrors",
+    "parent": 2,
+    "order": 0
+  },
+  "51": {
+    "name": "Pillows",
+    "parent": 2,
+    "order": 0
+  },
+  "52": {
+    "name": "Tapestries",
+    "parent": 3,
+    "order": 0
+  },
+  "53": {
+    "name": "Rugs and Carpets",
+    "parent": 3,
+    "order": 0
+  },
+  "54": {
+    "name": "Paintings",
+    "parent": 9,
+    "order": 10
+  },
+  "55": {
+    "name": "Instruments",
+    "parent": 3,
+    "order": 0
+  },
+  "56": {
+    "name": "Knick-Knacks",
+    "parent": 3,
+    "order": 0
+  },
+  "57": {
+    "name": "Vases",
+    "parent": 3,
+    "order": 0
+  },
+  "58": {
+    "name": "Banners",
+    "parent": 3,
+    "order": 0
+  },
+  "59": {
+    "name": "Tea Tables",
+    "parent": 3,
+    "order": 0
+  },
+  "60": {
+    "name": "Shelves",
+    "parent": 4,
+    "order": 0
+  },
+  "61": {
+    "name": "Desks",
+    "parent": 4,
+    "order": 0
+  },
+  "62": {
+    "name": "Literature",
+    "parent": 4,
+    "order": 0
+  },
+  "63": {
+    "name": "Supplies",
+    "parent": 4,
+    "order": 0
+  },
+  "64": {
+    "name": "Maps",
+    "parent": 4,
+    "order": 0
+  },
+  "66": {
+    "name": "Tables",
+    "parent": 5,
+    "order": 0
+  },
+  "67": {
+    "name": "Counters",
+    "parent": 5,
+    "order": 0
+  },
+  "69": {
+    "name": "Posts and Pillars",
+    "parent": 6,
+    "order": 0
+  },
+  "70": {
+    "name": "Statues",
+    "parent": 6,
+    "order": 0
+  },
+  "71": {
+    "name": "Vehicles",
+    "parent": 6,
+    "order": 0
+  },
+  "72": {
+    "name": "Wells",
+    "parent": 6,
+    "order": 0
+  },
+  "74": {
+    "name": "Fountains",
+    "parent": 6,
+    "order": 0
+  },
+  "75": {
+    "name": "Remains",
+    "parent": 7,
+    "order": 0
+  },
+  "76": {
+    "name": "Grave Goods",
+    "parent": 7,
+    "order": 0
+  },
+  "77": {
+    "name": "Torture",
+    "parent": 7,
+    "order": 0
+  },
+  "78": {
+    "name": "Urns",
+    "parent": 7,
+    "order": 0
+  },
+  "80": {
+    "name": "Pottery",
+    "parent": 8,
+    "order": 0
+  },
+  "81": {
+    "name": "Dishes",
+    "parent": 8,
+    "order": 0
+  },
+  "82": {
+    "name": "Utensils",
+    "parent": 8,
+    "order": 0
+  },
+  "83": {
+    "name": "Cabinetry",
+    "parent": 8,
+    "order": 0
+  },
+  "84": {
+    "name": "Stockroom",
+    "parent": 8,
+    "order": 0
+  },
+  "85": {
+    "name": "Meals",
+    "parent": 8,
+    "order": 0
+  },
+  "86": {
+    "name": "Game",
+    "parent": 8,
+    "order": 0
+  },
+  "87": {
+    "name": "Baskets and Bags",
+    "parent": 8,
+    "order": 0
+  },
+  "89": {
+    "name": "Mounted Decor",
+    "parent": 9,
+    "order": 10
+  },
+  "90": {
+    "name": "Undaunted Busts",
+    "parent": 9,
+    "order": 10
+  },
+  "91": {
+    "name": "Display",
+    "parent": 9,
+    "order": 10
+  },
+  "92": {
+    "name": "Art",
+    "parent": 9,
+    "order": 10
+  },
+  "93": {
+    "name": "Thrones",
+    "parent": 9,
+    "order": 10
+  },
+  "95": {
+    "name": "Cargo",
+    "parent": 10,
+    "order": 0
+  },
+  "96": {
+    "name": "Tools",
+    "parent": 10,
+    "order": 0
+  },
+  "97": {
+    "name": "Materials",
+    "parent": 10,
+    "order": 0
+  },
+  "98": {
+    "name": "Training Dummies",
+    "parent": 25,
+    "order": 0
+  },
+  "99": {
+    "name": "Yard Ornaments",
+    "parent": 6,
+    "order": 0
+  },
+  "104": {
+    "name": "Crafting Stations",
+    "parent": 25,
+    "order": 0
+  },
+  "105": {
+    "name": "Incense",
+    "parent": 7,
+    "order": 0
+  },
+  "106": {
+    "name": "Symbolic Decor",
+    "parent": 7,
+    "order": 0
+  },
+  "107": {
+    "name": "Sacred Pieces",
+    "parent": 7,
+    "order": 0
+  },
+  "108": {
+    "name": "Trees",
+    "parent": 12,
+    "order": 0
+  },
+  "109": {
+    "name": "Plants",
+    "parent": 12,
+    "order": 0
+  },
+  "110": {
+    "name": "Shrubs",
+    "parent": 12,
+    "order": 0
+  },
+  "111": {
+    "name": "Flowers",
+    "parent": 12,
+    "order": 0
+  },
+  "112": {
+    "name": "Vines",
+    "parent": 12,
+    "order": 0
+  },
+  "113": {
+    "name": "Racks",
+    "parent": 13,
+    "order": 0
+  },
+  "114": {
+    "name": "Tents",
+    "parent": 13,
+    "order": 0
+  },
+  "115": {
+    "name": "Blocks",
+    "parent": 13,
+    "order": 0
+  },
+  "116": {
+    "name": "Planks",
+    "parent": 13,
+    "order": 0
+  },
+  "117": {
+    "name": "Building Components",
+    "parent": 13,
+    "order": 0
+  },
+  "120": {
+    "name": "Lamps",
+    "parent": 11,
+    "order": 0
+  },
+  "121": {
+    "name": "Lanterns",
+    "parent": 11,
+    "order": 0
+  },
+  "122": {
+    "name": "Lightposts",
+    "parent": 11,
+    "order": 0
+  },
+  "123": {
+    "name": "Sconces",
+    "parent": 11,
+    "order": 0
+  },
+  "124": {
+    "name": "Braziers",
+    "parent": 11,
+    "order": 0
+  },
+  "125": {
+    "name": "Chandeliers",
+    "parent": 11,
+    "order": 0
+  },
+  "126": {
+    "name": "Enchanted Lights",
+    "parent": 11,
+    "order": 0
+  },
+  "127": {
+    "name": "Fires",
+    "parent": 11,
+    "order": 0
+  },
+  "129": {
+    "name": "Candles",
+    "parent": 11,
+    "order": 0
+  },
+  "130": {
+    "name": "Aquatic",
+    "parent": 12,
+    "order": 0
+  },
+  "132": {
+    "name": "Chairs",
+    "parent": 5,
+    "order": 0
+  },
+  "133": {
+    "name": "Sofas and Couches",
+    "parent": 3,
+    "order": 0
+  },
+  "134": {
+    "name": "Benches",
+    "parent": 5,
+    "order": 0
+  },
+  "135": {
+    "name": "Stools",
+    "parent": 10,
+    "order": 0
+  },
+  "136": {
+    "name": "Stones and Pebbles",
+    "parent": 12,
+    "order": 0
+  },
+  "137": {
+    "name": "Basins",
+    "parent": 7,
+    "order": 0
+  },
+  "138": {
+    "name": "Platforms",
+    "parent": 13,
+    "order": 0
+  },
+  "141": {
+    "name": "Saplings",
+    "parent": 12,
+    "order": 0
+  },
+  "142": {
+    "name": "Hedges",
+    "parent": 12,
+    "order": 0
+  },
+  "143": {
+    "name": "Mushrooms",
+    "parent": 12,
+    "order": 0
+  },
+  "144": {
+    "name": "Drinkware",
+    "parent": 8,
+    "order": 0
+  },
+  "145": {
+    "name": "Nightstands",
+    "parent": 2,
+    "order": 0
+  },
+  "146": {
+    "name": "Dressers",
+    "parent": 2,
+    "order": 0
+  },
+  "148": {
+    "name": "Honors and Awards",
+    "parent": 9,
+    "order": 10
+  },
+  "149": {
+    "name": "Ferns",
+    "parent": 12,
+    "order": 0
+  },
+  "150": {
+    "name": "Giant Trees",
+    "parent": 12,
+    "order": 0
+  },
+  "151": {
+    "name": "Cookware",
+    "parent": 8,
+    "order": 0
+  },
+  "152": {
+    "name": "Boulders and Large Rocks",
+    "parent": 12,
+    "order": 0
+  },
+  "153": {
+    "name": "Laundry",
+    "parent": 8,
+    "order": 0
+  },
+  "154": {
+    "name": "Produce",
+    "parent": 8,
+    "order": 0
+  },
+  "155": {
+    "name": "Meats and Cheeses",
+    "parent": 8,
+    "order": 0
+  },
+  "156": {
+    "name": "Breads and Desserts",
+    "parent": 8,
+    "order": 0
+  },
+  "157": {
+    "name": "Undaunted Trophies",
+    "parent": 9,
+    "order": 10
+  },
+  "159": {
+    "name": "Pipes and Mechanisms",
+    "parent": 10,
+    "order": 0
+  },
+  "160": {
+    "name": "Mundus Stones",
+    "parent": 25,
+    "order": 0
+  },
+  "161": {
+    "name": "Crystals",
+    "parent": 12,
+    "order": 0
+  },
+  "162": {
+    "name": "Creatures",
+    "parent": 14,
+    "order": 0
+  },
+  "163": {
+    "name": "Doorways",
+    "parent": 13,
+    "order": 0
+  },
+  "164": {
+    "name": "Walls and Fences",
+    "parent": 13,
+    "order": 0
+  },
+  "165": {
+    "name": "Dead Wood",
+    "parent": 12,
+    "order": 0
+  },
+  "167": {
+    "name": "Environment",
+    "parent": 14,
+    "order": 0
+  },
+  "168": {
+    "name": "General",
+    "parent": 14,
+    "order": 0
+  },
+  "170": {
+    "name": "Machinery",
+    "parent": 10,
+    "order": 0
+  },
+  "171": {
+    "name": "Ice and Snow",
+    "parent": 12,
+    "order": 0
+  },
+  "172": {
+    "name": "Storage",
+    "parent": 25,
+    "order": 0
+  },
+  "176": {
+    "name": "Bathing Goods",
+    "parent": 2,
+    "order": 0
+  },
+  "177": {
+    "name": "Nix-Oxen",
+    "parent": 16,
+    "order": 0
+  },
+  "178": {
+    "name": "Guar & Kagoutis",
+    "parent": 16,
+    "order": 0
+  },
+  "179": {
+    "name": "Camels",
+    "parent": 16,
+    "order": 0
+  },
+  "180": {
+    "name": "Exotic",
+    "parent": 33,
+    "order": 0
+  },
+  "181": {
+    "name": "Domestic",
+    "parent": 33,
+    "order": 0
+  },
+  "182": {
+    "name": "Music Boxes",
+    "parent": 25,
+    "order": 0
+  },
+  "183": {
+    "name": "Traps",
+    "parent": 25,
+    "order": 0
+  },
+  "184": {
+    "name": "ESO Plus",
+    "parent": 9,
+    "order": 0
+  },
+  "185": {
+    "name": "Buildings",
+    "parent": 13,
+    "order": 0
+  },
+  "186": {
+    "name": "Lunar Champion Tablets",
+    "parent": 25,
+    "order": 0
+  },
+  "187": {
+    "name": "Special",
+    "parent": 25,
+    "order": 0
+  },
+  "188": {
+    "name": "Inventory",
+    "parent": 33,
+    "order": 0
+  },
+  "189": {
+    "name": "Houseguests",
+    "parent": 25,
+    "order": 1
+  },
+  "190": {
+    "name": "Vampire Utility",
+    "parent": 25,
+    "order": 0
+  },
+  "191": {
+    "name": "Multi-Rider",
+    "parent": 16,
+    "order": 0
+  },
+  "192": {
+    "name": "Wolves",
+    "parent": 16,
+    "order": 0
+  },
+  "193": {
+    "name": "Deer",
+    "parent": 16,
+    "order": 0
+  },
+  "194": {
+    "name": "Dwemer Spiders",
+    "parent": 16,
+    "order": 0
+  },
+  "195": {
+    "name": "Senche-Raht",
+    "parent": 16,
+    "order": 0
+  },
+  "196": {
+    "name": "Toys",
+    "parent": 16,
+    "order": 0
+  },
+  "197": {
+    "name": "Bears",
+    "parent": 16,
+    "order": 0
+  },
+  "198": {
+    "name": "Recovery",
+    "parent": 25,
+    "order": 0
+  },
+  "199": {
+    "name": "Soul Gems",
+    "parent": 7,
+    "order": 0
+  },
+  "200": {
+    "name": "Armory Assistants",
+    "parent": 25,
+    "order": 0
+  },
+  "201": {
+    "name": "Deconstruction Assistants",
+    "parent": 25,
+    "order": 0
+  },
+  "202": {
+    "name": "Ornaugs",
+    "parent": 16,
+    "order": 0
+  },
+  "203": {
+    "name": "Time of Day Control",
+    "parent": 25,
+    "order": 0
+  },
+  "204": {
+    "name": "Elephants",
+    "parent": 16,
+    "order": 0
+  },
+  "206": {
+    "name": "Special",
+    "parent": 16,
+    "order": 0
+  },
+  "207": {
+    "name": "Weather Control",
+    "parent": 25,
+    "order": 0
+  },
+  "208": {
+    "name": "Durzogs",
+    "parent": 16,
+    "order": 0
+  },
+  "209": {
+    "name": "Vvardvarks",
+    "parent": 16,
+    "order": 0
+  },
+  "210": {
+    "name": "Brekkas",
+    "parent": 16,
+    "order": 0
+  },
+  "211": {
+    "name": "Indriks",
+    "parent": 16,
+    "order": 0
+  },
+  "212": {
+    "name": "Rams",
+    "parent": 16,
+    "order": 0
+  },
+  "213": {
+    "name": "Quasigriffs",
+    "parent": 16,
+    "order": 0
+  },
+  "214": {
+    "name": "Welwas",
+    "parent": 16,
+    "order": 0
+  },
+  "215": {
+    "name": "Ursauks",
+    "parent": 16,
+    "order": 0
+  },
+  "216": {
+    "name": "Tharrikers",
+    "parent": 16,
+    "order": 0
+  }
+}

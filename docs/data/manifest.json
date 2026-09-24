@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "generated_from": {
+    "library": "LFC/LibFurnitureCatalogue",
+    "generator": "tools/lfc2jsonl",
+    "data_files": [
+      "AchievementVendors.lua",
+      "Antiquity.lua",
+      "Books.lua",
+      "CrownStore.lua",
+      "EventItems.lua",
+      "Fishing.lua",
+      "HomeGoodsFurnisher.lua",
+      "Justice.lua",
+      "LuxuryFurnisher.lua",
+      "MiscItemSources.lua",
+      "PvP.lua",
+      "RecipeSources.lua",
+      "Recipes.lua",
+      "Rolis.lua",
+      "RumourRecipes.lua",
+      "Rumours.lua"
+    ]
+  },
+  "files": [
+    {
+      "name": "achievement_vendor.jsonl",
+      "type": "achievement_vendor",
+      "records": 1434,
+      "digest": "a907cf5267f8f90a"
+    },
+    {
+      "name": "pvp_vendor.jsonl",
+      "type": "pvp_vendor",
+      "records": 84,
+      "digest": "091f905dff6fda54"
+    },
+    {
+      "name": "writ_vendor.jsonl",
+      "type": "writ_vendor",
+      "records": 160,
+      "digest": "0d5564cc3cbb8e6f"
+    },
+    {
+      "name": "luxury.jsonl",
+      "type": "luxury",
+      "records": 664,
+      "digest": "4e3eff45a67c3bed"
+    },
+    {
+      "name": "event_drop.jsonl",
+      "type": "event_drop",
+      "records": 83,
+      "digest": "6a0cadfd2860a01f"
+    },
+    {
+      "name": "event_vendor.jsonl",
+      "type": "event_vendor",
+      "records": 94,
+      "digest": "5362e749307862e6"
+    },
+    {
+      "name": "crown_crate.jsonl",
+      "type": "crown_crate",
+      "records": 144,
+      "digest": "91c3b63fb001010e"
+    },
+    {
+      "name": "crown_store.jsonl",
+      "type": "crown_store",
+      "records": 1690,
+      "digest": "5dfef4576d408fd0"
+    },
+    {
+      "name": "recipe.jsonl",
+      "type": "recipe",
+      "records": 3359,
+      "digest": "2a9876139ce959f3"
+    },
+    {
+      "name": "drop.jsonl",
+      "type": "drop",
+      "records": 699,
+      "digest": "85abc3cff643989c"
+    },
+    {
+      "name": "quest_reward.jsonl",
+      "type": "quest_reward",
+      "records": 41,
+      "digest": "e30d384c4ab36758"
+    },
+    {
+      "name": "dungeon_drop.jsonl",
+      "type": "dungeon_drop",
+      "records": 120,
+      "digest": "b59436239338f7de"
+    },
+    {
+      "name": "housing.jsonl",
+      "type": "housing",
+      "records": 659,
+      "digest": "b3bac02989ba6bb8"
+    },
+    {
+      "name": "companion.jsonl",
+      "type": "companion",
+      "records": 6,
+      "digest": "18b408f948438d13"
+    },
+    {
+      "name": "guild_gift.jsonl",
+      "type": "guild_gift",
+      "records": 12,
+      "digest": "e95984bb4338904b"
+    },
+    {
+      "name": "tome_pack.jsonl",
+      "type": "tome_pack",
+      "records": 19,
+      "digest": "1dee0720b780d787"
+    },
+    {
+      "name": "rumour.jsonl",
+      "type": "rumour",
+      "records": 400,
+      "digest": "88377833e91058c2"
+    },
+    {
+      "name": "ignored.jsonl",
+      "type": "ignored",
+      "records": 1,
+      "digest": "f2a038dab9fbb843"
+    }
+  ],
+  "digest": "091029a642c0d4dd",
+  "counts": {
+    "records": 9669,
+    "ids": 11913,
+    "files": 18,
+    "rows_seen": 8790,
+    "module_records": 9669,
+    "dedup_dropped": 0,
+    "rumour_dropped": 1,
+    "separator_rejected": 0,
+    "by_type": {
+      "achievement_vendor": 1434,
+      "pvp_vendor": 84,
+      "writ_vendor": 160,
+      "luxury": 664,
+      "event_drop": 83,
+      "event_vendor": 94,
+      "crown_crate": 144,
+      "crown_store": 1690,
+      "recipe": 3359,
+      "drop": 699,
+      "quest_reward": 41,
+      "dungeon_drop": 120,
+      "housing": 659,
+      "companion": 6,
+      "guild_gift": 12,
+      "tome_pack": 19,
+      "rumour": 400,
+      "ignored": 1
+    }
+  }
+}

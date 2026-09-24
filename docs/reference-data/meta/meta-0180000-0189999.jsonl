@@ -1,0 +1,489 @@
+{"id":181435,"name":"Steam of Repose","quality":5,"cat":14,"sub":167,"theme":15,"icon":"housing_saunamist_smoke_02"}
+{"id":181438,"name":"Mad God's Monarch Flock","quality":5,"cat":14,"sub":167,"theme":13,"icon":"housing_msc_madgods_flock"}
+{"id":181478,"name":"Stained Glass of Kynareth","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowkynareth001"}
+{"id":181479,"name":"Stained Glass of Mara","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowmara001"}
+{"id":181480,"name":"Stained Glass of Stendarr","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowstendarr001"}
+{"id":181481,"name":"Stained Glass of Dibella","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowdibella001"}
+{"id":181482,"name":"Stained Glass of Arkay","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowarkay001"}
+{"id":181483,"name":"Stained Glass of Akatosh","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowakatosh001"}
+{"id":181484,"name":"Stained Glass of Julianos","quality":5,"cat":11,"sub":126,"theme":11,"icon":"housing_nib_str_hscathedralwindowjulianos001"}
+{"id":181485,"name":"Statue, Mermaid of Anvil","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_nib_exc_dbhselkiestatue001"}
+{"id":181486,"name":"Leyawiin Fountain, Round","quality":5,"cat":6,"sub":74,"theme":11,"icon":"housing_bad_str_leyfountainsmall001"}
+{"id":181487,"name":"Grim Harlequin Chandelier","quality":5,"cat":11,"sub":125,"theme":13,"icon":"housing_uni_lsb_harlequinchandelier001"}
+{"id":181488,"name":"Statue, Saint Kaladas","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_bad_exc_leystatuestkaladas001"}
+{"id":181489,"name":"Vampiric Lamp, Azure Tall","quality":4,"cat":11,"sub":122,"theme":17,"icon":"housing_skr_inc_vampirelablampstanding002"}
+{"id":181490,"name":"Vampiric Lightpost, Azure Single","quality":4,"cat":11,"sub":122,"theme":17,"icon":"housing_skr_lsb_vampirelightposta001"}
+{"id":181491,"name":"Vampiric Lightpost, Azure Double","quality":4,"cat":11,"sub":122,"theme":17,"icon":"housing_skr_lsb_vampirelightposta002"}
+{"id":181492,"name":"Vampiric Flask Stand, Double","quality":3,"cat":10,"sub":96,"theme":17,"icon":"housing_skr_inc_vampirelabbeakerstand005"}
+{"id":181493,"name":"Vampiric Container, Congealed Liquid","quality":3,"cat":10,"sub":96,"theme":17,"icon":"housing_skr_inc_vampirelabjar008"}
+{"id":181494,"name":"Vampiric Container, Yellow Liquid","quality":2,"cat":7,"sub":75,"theme":17,"icon":"housing_skr_inc_vampirelabflask001"}
+{"id":181495,"name":"Vampiric Lamp, Azure Triple","quality":3,"cat":11,"sub":120,"theme":17,"icon":"housing_skr_inc_vampirelablamp002","blueprint":181549}
+{"id":181496,"name":"Vampiric Candlestick","quality":3,"cat":11,"sub":129,"theme":17,"icon":"housing_skr_inc_vampirelabcandlestick001","blueprint":181550}
+{"id":181497,"name":"Vampiric Sconce, Azure","quality":3,"cat":11,"sub":123,"theme":17,"icon":"housing_skr_inc_vampirelablampwallmounted001","blueprint":181551}
+{"id":181498,"name":"Vampiric Alchemy Rack, Tubes","quality":3,"cat":10,"sub":96,"theme":17,"icon":"housing_skr_inc_vampirelabtesttubes001","blueprint":181552}
+{"id":181499,"name":"Vampiric Lab Jar, Large","quality":3,"cat":7,"sub":75,"theme":17,"icon":"housing_skr_inc_vampirelabjar001","blueprint":181553}
+{"id":181500,"name":"Vampiric Lab Jar, Small","quality":2,"cat":7,"sub":75,"theme":17,"icon":"housing_skr_inc_vampirelabjar004","blueprint":181554}
+{"id":181501,"name":"Vampiric Lab Jar, Red Gelatinous","quality":2,"cat":7,"sub":75,"theme":17,"icon":"housing_skr_inc_vampirelabjar002","blueprint":181555}
+{"id":181502,"name":"Deadlands Torture Rack","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedtorturerack002","blueprint":181556}
+{"id":181503,"name":"Leyawiin Divider, Carved Starfish","quality":5,"cat":2,"sub":47,"theme":11,"icon":"housing_bad_fur_screen001","blueprint":181557}
+{"id":181504,"name":"Leyawiin Tapestry, Hunting Party","quality":5,"cat":3,"sub":52,"theme":11,"icon":"housing_bad_inc_tapestrylarge003","blueprint":181558}
+{"id":181505,"name":"Leyawiin Hearth, Carved Wood","quality":5,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_str_leyfireplace002","blueprint":181559}
+{"id":181506,"name":"Leyawiin Bowl, Squid Special","quality":5,"cat":8,"sub":85,"theme":11,"icon":"housing_bad_inc_leykitchenservingbowl001","blueprint":181560}
+{"id":181507,"name":"Blackwood Cottage Painting, Unframed","quality":5,"cat":9,"sub":54,"theme":11,"icon":"housing_bad_inc_leyunfinishedpainting001","blueprint":181561}
+{"id":181508,"name":"Leyawiin Lightpost, Ornate","quality":5,"cat":11,"sub":122,"theme":11,"icon":"housing_bad_lsb_leylightpostb001","blueprint":181562}
+{"id":181509,"name":"Agonymium Stone, Inert","quality":4,"cat":7,"sub":107,"theme":13,"icon":"housing_uni_exc_valkyntephrawardstone002"}
+{"id":181510,"name":"Silver Rose Banner","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_uni_lsb_knightssilverrosebannersmall001"}
+{"id":181511,"name":"Leyawiin Turret, Castle","quality":4,"cat":13,"sub":185,"theme":11,"icon":"housing_bad_waf_housingleycastleturret001","blueprint":181565}
+{"id":181512,"name":"Leyawiin Wall, Castle Door Arch","quality":3,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_waf_housingleycastlewalldoorwayint003","blueprint":181566}
+{"id":181513,"name":"Leyawiin Door, Castle","quality":4,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_waf_housingleycastledoorint001","blueprint":181567}
+{"id":181514,"name":"Leyawiin Hearth, Masonry","quality":4,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_str_leyfireplace001","blueprint":181568}
+{"id":181515,"name":"Leyawiin Column, Castle","quality":3,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_waf_housingleycastlepillarint001","blueprint":181569}
+{"id":181516,"name":"Leyawiin Alcove, Castle","quality":3,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_str_leycellarendcap001","blueprint":181570}
+{"id":181517,"name":"Leyawiin Wall, Windowed Castle","quality":3,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_waf_housingleycastlewallwindowint001","blueprint":181571}
+{"id":181518,"name":"Leyawiin Stairway, Wooden","quality":3,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_str_leycellarstairs003","blueprint":181572}
+{"id":181519,"name":"Leyawiin Doorway, Wooden Frame","quality":3,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_str_leydoorwayint002","blueprint":181573}
+{"id":181520,"name":"Leyawiin Door, Wooden","quality":3,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_str_ley_doormed002","blueprint":181574}
+{"id":181521,"name":"Leyawiin Gate, Wooden Garden","quality":3,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_waf_housingleywallmedgatedoor001","blueprint":181575}
+{"id":181522,"name":"Leyawiin Wall, Wooden Half","quality":3,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_str_leywall003","blueprint":181576}
+{"id":181523,"name":"Leyawiin Wall, Wainscoted","quality":4,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_str_housingleywallint001","blueprint":181577}
+{"id":181524,"name":"Leyawiin Platform, Huge Square","quality":3,"cat":13,"sub":138,"theme":11,"icon":"housing_bad_waf_housingleycastleplatformint001","blueprint":181578}
+{"id":181525,"name":"Leyawiin Platform, Wide Steps","quality":2,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_waf_housingleycastleplatformstairsint002","blueprint":181579}
+{"id":181526,"name":"Leyawiin Post, Stone Garden","quality":2,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_waf_housingleywalllowpost001","blueprint":181580}
+{"id":181527,"name":"Leyawiin Wall, Straight Garden","quality":2,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_waf_housingleywalllowstraight001","blueprint":181581}
+{"id":181528,"name":"Leyawiin Wall, Curved Garden","quality":2,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_waf_housingleywalllowcurve002","blueprint":181582}
+{"id":181529,"name":"Leyawiin Archway, Garden","quality":3,"cat":13,"sub":163,"theme":11,"icon":"housing_bad_waf_housingleywallmedgate001","blueprint":181583}
+{"id":181530,"name":"Leyawiin Platform, Large Square","quality":3,"cat":13,"sub":138,"theme":11,"icon":"housing_bad_waf_housingleycastleplatformint002","blueprint":181584}
+{"id":181531,"name":"Leyawiin Platform, Narrow Steps","quality":3,"cat":13,"sub":117,"theme":11,"icon":"housing_bad_waf_housingleycastleplatformstairsint001","blueprint":181585}
+{"id":181532,"name":"Leyawiin Fountain, Round Grand","quality":5,"cat":6,"sub":74,"theme":11,"icon":"housing_bad_str_leyfountaincircle001"}
+{"id":181533,"name":"Mummy, Scroll Guardian","quality":4,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_mummy007"}
+{"id":181534,"name":"Funerary Urn, Broken","quality":3,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_tomburnbroken003"}
+{"id":181535,"name":"Mummy, Bound","quality":4,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_mummy005"}
+{"id":181536,"name":"Blue Crystal Cluster, Medium","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_cav_min_crystalformations_004"}
+{"id":181537,"name":"Geode, Citrine","quality":4,"cat":12,"sub":161,"theme":1,"icon":"housing_gen_exc_geodemarker002"}
+{"id":181538,"name":"Nedic Altar, Worn","quality":3,"cat":13,"sub":117,"theme":8,"icon":"housing_cra_inc_alter001"}
+{"id":181539,"name":"Nedic Archway, Worn","quality":4,"cat":13,"sub":117,"theme":8,"icon":"housing_cra_inc_platformarch001"}
+{"id":181540,"name":"Nedic Skull Relief, Half","quality":5,"cat":7,"sub":106,"theme":8,"icon":"housing_cra_inc_doorhalf001"}
+{"id":181541,"name":"Reach Standard, Weathered","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_uni_lsb_reachbanners002"}
+{"id":181542,"name":"Crow Totem, Gruesome","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_vrd_lsb_witchesfestivalbannertotem001"}
+{"id":181543,"name":"Harpy Totem, Feathered","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_gen_exc_harpyscarecrow001"}
+{"id":181547,"name":"Leyawiin Fountain, Corner","quality":4,"cat":6,"sub":74,"theme":11,"icon":"housing_bad_str_leyfountaincorner001"}
+{"id":181587,"name":"Tree, Charred Oak","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlands012"}
+{"id":181588,"name":"Tree, Old Charred Oak","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlands013"}
+{"id":181589,"name":"Tree, Young Charred Oak","quality":1,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlands008"}
+{"id":181590,"name":"Tree, Tall Charred Pine","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlands006"}
+{"id":181591,"name":"Tree, Short Charred Pine","quality":1,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlands002"}
+{"id":181592,"name":"Tree, Deadlands Pine","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_bad_deadlandthorn003"}
+{"id":181593,"name":"Log, Charred Oak","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_bad_deadlandstump002"}
+{"id":181594,"name":"Rock, Volcanic Boulder","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_vol_vrdsml004"}
+{"id":181595,"name":"Plant, Harrada Root","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_bad_deadlandsharradaroot003"}
+{"id":181596,"name":"Plant Cluster, Maroon Aloe","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_bad_deadlandsredaloecluster001"}
+{"id":181597,"name":"Bush, Sharp Underbrush","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bad_redthistle005"}
+{"id":181598,"name":"Bush, Low Redleaf Cluster","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_mphredscrub001"}
+{"id":181599,"name":"Leyawiin Fountain, Tall","quality":3,"cat":6,"sub":74,"theme":11,"icon":"housing_bad_str_leyfountainpillar001"}
+{"id":181600,"name":"Rock, Gabbro Boulder","quality":1,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_bad_small001"}
+{"id":181601,"name":"Rock, Wide Gabbro Slab","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_bad_small004"}
+{"id":181602,"name":"Bush, Low Greenleaf Cluster","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bad_green001"}
+{"id":181603,"name":"Plant, White Flowered Lily Pads","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_bad_waterlettuce002"}
+{"id":181604,"name":"Bush, Snow Lillies","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bad_whiteflowerivy012"}
+{"id":181605,"name":"Rock, Gabbro Set","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_bad_smcluster002"}
+{"id":181606,"name":"Rock, Gabbro Boulder Cluster","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_bad_smcluster001"}
+{"id":181607,"name":"Tree, Elder Blackwood Beech","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_beech001"}
+{"id":181608,"name":"Tree, Blackwood Beech","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_beech004"}
+{"id":181609,"name":"Tree, Blackwood Beech Cluster","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_skr_beech005"}
+{"id":181610,"name":"Vines, Snow Lillies Swath","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_bad_whiteflowerivy003"}
+{"id":181611,"name":"Vines, Snow Lillies Climber","quality":2,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_bad_whiteflowerivy004"}
+{"id":181636,"name":"Music Box, Fargrave Daydreams","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_sys_inc_fargravemusicbox001"}
+{"id":181637,"name":"Music Box, Time's Architect","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_clockworkmusicbox001"}
+{"id":181643,"name":"Warrior's Flame","quality":5,"cat":11,"sub":127,"theme":13,"icon":"housing_celestialflame_red"}
+{"id":182207,"name":"Celestial Vortex","quality":5,"cat":14,"sub":167,"theme":1,"icon":"hsg_galaxy_01"}
+{"id":182213,"name":"Fargrave Canopy","quality":2,"cat":13,"sub":114,"theme":13,"icon":"housing_bad_str_farcanopysmallclean001"}
+{"id":182214,"name":"Fargrave Flags, String","quality":2,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_housingfarhangingfabricbridge001"}
+{"id":182215,"name":"Fargrave Pennants, Long String","quality":2,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_farbannerline005"}
+{"id":182216,"name":"Fargrave Pennants, String","quality":1,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_farbannerline004"}
+{"id":182217,"name":"Fargrave Clutter, Papers","quality":1,"cat":4,"sub":62,"theme":13,"icon":"housing_bad_inc_dedpapers001"}
+{"id":182218,"name":"Fargrave Flag, Regular","quality":1,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_farhangingfabric004"}
+{"id":182219,"name":"Fargrave Flag, Short","quality":1,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_farhangingfabric001"}
+{"id":182220,"name":"Fargrave Flag, Long","quality":1,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_exc_farhangingfabric003"}
+{"id":182221,"name":"Fargrave Bench, Stone","quality":3,"cat":5,"sub":134,"theme":13,"icon":"housing_bad_fur_farbench001","blueprint":182937}
+{"id":182222,"name":"Fargrave Counter, Merchant","quality":3,"cat":5,"sub":67,"theme":13,"icon":"housing_bad_exc_farmerchantstall001","blueprint":182938}
+{"id":182223,"name":"Fargrave Stall, Large Merchant","quality":3,"cat":13,"sub":185,"theme":13,"icon":"housing_bad_exc_farmerchantstall003","blueprint":182939}
+{"id":182224,"name":"Deadlands Bookcase, Large Ashen","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_bad_fur_dedlargebookshelves004","blueprint":182940}
+{"id":182225,"name":"Fargrave Book Stack, Levitating","quality":4,"cat":4,"sub":62,"theme":13,"icon":"housing_bad_inc_farfloatingbookstack003","blueprint":182941}
+{"id":182226,"name":"Fargrave Gems, Levitating","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_inc_farfloatingsoulgems001","blueprint":182942}
+{"id":182227,"name":"Fargrave Fish Pile, Deadlands Trout","quality":2,"cat":8,"sub":155,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodfish002","blueprint":182943}
+{"id":182228,"name":"Fargrave Ham","quality":2,"cat":8,"sub":155,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodham001","blueprint":182944}
+{"id":182229,"name":"Fargrave Sausages","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodsausage001","blueprint":182945}
+{"id":182230,"name":"Mushrooms, Glowing Shelf","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_els_glowcavemushroom004"}
+{"id":182231,"name":"Fargrave Bread, Round Loaves","quality":3,"cat":8,"sub":156,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodbread001","blueprint":182946}
+{"id":182232,"name":"Fargrave Bread, Baguettes","quality":3,"cat":8,"sub":156,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodbaguette001","blueprint":182947}
+{"id":182233,"name":"Fargrave Bread and Sweetrolls","quality":4,"cat":8,"sub":156,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodbreadrolls001","blueprint":182948}
+{"id":182234,"name":"Fargrave Meats","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodham002","blueprint":182949}
+{"id":182235,"name":"Deadlands Brazier, Large Etched","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedexteriorbrazier002","blueprint":182950}
+{"id":182236,"name":"Deadlands Candelabra, Tall Caged","quality":4,"cat":11,"sub":129,"theme":13,"icon":"housing_bad_lsb_dedcandelabraglasscover001","blueprint":182951}
+{"id":182237,"name":"Deadlands Candelabra, Tall","quality":4,"cat":11,"sub":129,"theme":13,"icon":"housing_bad_lsb_dedcandelabra003","blueprint":182952}
+{"id":182238,"name":"Deadlands Crystal Brazier","quality":3,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_lsb_dedorblight001","blueprint":182953}
+{"id":182239,"name":"Deadlands Candleholder, Etched","quality":4,"cat":11,"sub":129,"theme":13,"icon":"housing_bad_lsb_dedtablelamp001","blueprint":182954}
+{"id":182240,"name":"Deadlands Sconce, Large","quality":3,"cat":11,"sub":123,"theme":13,"icon":"housing_bad_lsb_dedsconcelarge001","blueprint":182955}
+{"id":182241,"name":"Deadlands Wall Spikes","quality":2,"cat":11,"sub":123,"theme":13,"icon":"housing_bad_fur_dedwallspikes002","blueprint":182956}
+{"id":182242,"name":"Deadlands Gems, Levitating","quality":4,"cat":7,"sub":199,"theme":13,"icon":"housing_bad_str_dedbirthingmachinegemssmall001","blueprint":182957}
+{"id":182243,"name":"Deadlands Curtains, Open","quality":3,"cat":3,"sub":52,"theme":13,"icon":"housing_bad_inc_dedcurtains002","blueprint":182958}
+{"id":182244,"name":"Deadlands Tapestry","quality":3,"cat":3,"sub":52,"theme":13,"icon":"housing_bad_inc_dedtapestry008","blueprint":182959}
+{"id":182245,"name":"Deadlands Curtains, Closed","quality":3,"cat":3,"sub":52,"theme":13,"icon":"housing_bad_inc_dedcurtains001","blueprint":182960}
+{"id":182246,"name":"Deadlands Tapestry, Long","quality":3,"cat":3,"sub":52,"theme":13,"icon":"housing_bad_inc_dedtapestry006","blueprint":182961}
+{"id":182247,"name":"Deadlands Chair, Etched","quality":3,"cat":5,"sub":132,"theme":13,"icon":"housing_bad_fur_dedhighchair001","blueprint":182962}
+{"id":182248,"name":"Deadlands Armoire, Etched","quality":4,"cat":2,"sub":48,"theme":13,"icon":"housing_bad_fur_dedhigharmoire001","blueprint":182963}
+{"id":182249,"name":"Deadlands Bookcase, Etched","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_bad_fur_dedhighbookshelf001","blueprint":182964}
+{"id":182250,"name":"Deadlands Torture Table, Etched","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_fur_dedtorturetable001","blueprint":182965}
+{"id":182251,"name":"Deadlands Bench, Etched Wide","quality":3,"cat":5,"sub":134,"theme":13,"icon":"housing_bad_fur_dedbench001","blueprint":182966}
+{"id":182252,"name":"Deadlands Tenderizer","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedtenderizer001","blueprint":182967}
+{"id":182253,"name":"Deadlands Table, Long Etched","quality":4,"cat":5,"sub":66,"theme":13,"icon":"housing_bad_fur_dedhighlargetable001","blueprint":182968}
+{"id":182254,"name":"Deadlands Table, Etched","quality":3,"cat":5,"sub":66,"theme":13,"icon":"housing_bad_fur_dedhighsmalltable001","blueprint":182969}
+{"id":182255,"name":"Deadlands Lightning Rod, Crescent","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_sllightningrod005","blueprint":182970}
+{"id":182256,"name":"Deadlands Lightning Rod, Spike","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_sllightningrod002","blueprint":182971}
+{"id":182257,"name":"Fargrave Terrarium, Flower","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase008","blueprint":182972}
+{"id":182258,"name":"Fargrave Terrarium, Claws","quality":3,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farcreatureclaws001"}
+{"id":182259,"name":"Fargrave Terrarium, Small Gas Blossom","quality":3,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase007","blueprint":182973}
+{"id":182260,"name":"Fargrave Terrarium, Scuttlebloom","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase004","blueprint":182974}
+{"id":182261,"name":"Fargrave Terrarium, Large Gas Blossom","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase005","blueprint":182975}
+{"id":182262,"name":"Deadlands Carpet, Large","quality":4,"cat":3,"sub":53,"theme":13,"icon":"housing_bad_inc_dedrughi006","blueprint":182976}
+{"id":182263,"name":"Deadlands Rug","quality":3,"cat":3,"sub":53,"theme":13,"icon":"housing_bad_inc_dedrughi002","blueprint":182977}
+{"id":182264,"name":"Deadlands Rug, Small","quality":3,"cat":3,"sub":53,"theme":13,"icon":"housing_bad_inc_dedruglo003","blueprint":182978}
+{"id":182265,"name":"Deadlands Wall, Tall","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_duc_dedwallfilller001","blueprint":182979}
+{"id":182266,"name":"Deadlands Archway, Large","quality":3,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_duc_dedhallcolumns001","blueprint":182980}
+{"id":182267,"name":"Deadlands Portcullis","quality":3,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_waf_dedsmallgateportcullis001","blueprint":182981}
+{"id":182268,"name":"Deadlands Column, Heavy","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_duc_dedplaceablecolumn001","blueprint":182982}
+{"id":182269,"name":"Deadlands Column, Heavy Roofed","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_duc_housingdedroomfreestandingcolumn001","blueprint":182983}
+{"id":182270,"name":"Deadlands Floor, Large Square","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_duc_housingdedfloor001","blueprint":182984}
+{"id":182271,"name":"Deadlands Stairway, Inner Corner","quality":2,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_duc_dedroomraisedwalkwaycornervar002","blueprint":182985}
+{"id":182272,"name":"Deadlands Stairway, Outer Corner","quality":2,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_duc_dedroomraisedwalkwaycornervar001","blueprint":182986}
+{"id":182273,"name":"Deadlands Stairway","quality":2,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_duc_dedroomraisedwalkway002","blueprint":182987}
+{"id":182274,"name":"Deadlands Stairway, Wide","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_duc_dedroomraisedwalkway001","blueprint":182988}
+{"id":182275,"name":"Deadlands Door","quality":4,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_duc_deddoor001","blueprint":182989}
+{"id":182276,"name":"Deadlands Archway","quality":4,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_waf_dedwallmedgate001","blueprint":182990}
+{"id":182277,"name":"Deadlands Post, Short Wall","quality":2,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_waf_dedwallpost001","blueprint":182991}
+{"id":182278,"name":"Deadlands Wall, Short","quality":2,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_waf_dedwalllowstraight002","blueprint":182992}
+{"id":182279,"name":"Deadlands Ceiling","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_duc_housingdedroomceiling001","blueprint":182993}
+{"id":182280,"name":"Fargrave Relic Case","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_inc_dedreliccase001"}
+{"id":182281,"name":"Fargrave Fountain","quality":4,"cat":6,"sub":74,"theme":13,"icon":"housing_bad_str_farfountain001"}
+{"id":182282,"name":"Fargrave Water Globules, Levitating","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_inc_farfloatingwaterbubbles001"}
+{"id":182283,"name":"Fargrave Terrarium, Lantern Flower","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase002"}
+{"id":182284,"name":"Fargrave Bread Loaves, Round","quality":3,"cat":8,"sub":156,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodflatbread001"}
+{"id":182285,"name":"Book Wall, Levitating","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_bad_inc_farwallfloatingbooks001"}
+{"id":182286,"name":"Fargrave Terrarium, Snakevine","quality":3,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase001"}
+{"id":182287,"name":"Fargrave Terrarium, Watcher","quality":3,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farcreaturewatcher001","blueprint":182994}
+{"id":182288,"name":"Fargrave Terrarium, Massive Gas Blossom","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_inc_farterrariumcase003"}
+{"id":182289,"name":"Deadlands Wall, Etched","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_waf_dedwallsigil001"}
+{"id":182290,"name":"Deadlands Grate, Large","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_duc_dedchannelslotgrateb002"}
+{"id":182291,"name":"Deadlands Window, Fireglass","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_duc_housingdedwindow001"}
+{"id":182292,"name":"Deadlands Base, Tower","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_dedtowerbasea001"}
+{"id":182293,"name":"Deadlands Stairway, Tower","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_dedtowerbridgejoint004"}
+{"id":182294,"name":"Deadlands Platform, Tower","quality":4,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_str_dedwalkwaylargeplatform001"}
+{"id":182295,"name":"Deadlands Firepit, Large","quality":4,"cat":11,"sub":127,"theme":13,"icon":"housing_bad_str_housingdedbirthingmachineprototype001"}
+{"id":182296,"name":"Fargrave Bread, Various Loaves","quality":3,"cat":8,"sub":156,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodbread002","blueprint":182995}
+{"id":182297,"name":"Fargrave Box of Fruit","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_bad_inc_farhousingdaedmarketproduceset001","blueprint":182996}
+{"id":182298,"name":"Fargrave Fish Pile, Marinated Trout","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodfish001","blueprint":182997}
+{"id":182299,"name":"Fargrave Tomato Bunch","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodtomatopile001","blueprint":182998}
+{"id":182300,"name":"Fargrave Corn, Bunch","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_bad_inc_farhousingdaedfoodcorn001","blueprint":182999}
+{"id":182301,"name":"Fargrave Box of Grapes","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_bad_inc_farhousingdaedmarketproduce001","blueprint":183000}
+{"id":182302,"name":"Daedric Enchanting Station","quality":5,"cat":25,"sub":104,"theme":13,"icon":"housing_bad_inc_dedenchantingtable001"}
+{"id":182303,"name":"Dagon's Scalding Gibbet","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedtorturedevice001"}
+{"id":182304,"name":"Tree, Charred Dagonic","quality":4,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_deadlandtotem004"}
+{"id":182305,"name":"Deadlands Window, Stormglass","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_duc_housingdedslwindow001"}
+{"id":182306,"name":"Daedric Altar, Mehrunes Dagon","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_exc_housingdagonaltar001"}
+{"id":182307,"name":"Deadlands Lightning Rod, Etched","quality":5,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingsllightningrod006"}
+{"id":182308,"name":"Deadlands Wind Gate Pinion","quality":4,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_exc_housingwindgate001"}
+{"id":182309,"name":"Deadlands Buttress, Large","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_str_dedbirthingmachinepart004"}
+{"id":182310,"name":"Deadlands Buttress","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_str_dedbirthingmachinepartsmall004"}
+{"id":182311,"name":"Deadlands Platform, Octagonal","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_str_dedplatform002"}
+{"id":182312,"name":"Deadlands Displacer, Inactive","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_str_dedteleportpadsmall001"}
+{"id":182313,"name":"Portal Key Replica","quality":4,"cat":3,"sub":56,"theme":13,"icon":"housing_uni_inc_prologueportalkey001"}
+{"id":182314,"name":"Deadlands Wall, Wide","quality":4,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_duc_housingdedwall001","blueprint":183001}
+{"id":182315,"name":"Sulfur Pool","quality":4,"cat":12,"sub":152,"theme":13,"icon":"housing_rok_bad_sulfurpoolheavy002"}
+{"id":182316,"name":"Leyawiin Wall, Castle","quality":3,"cat":13,"sub":164,"theme":11,"icon":"housing_bad_waf_leycastlewallint002","blueprint":183002}
+{"id":182612,"name":"Deadlands Bookcase, Large Cluttered","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_bad_fur_dedlargebookshelves001","blueprint":183003}
+{"id":182613,"name":"Bush, Flowering Ivy","quality":3,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_vin_ivy_magicflowers01"}
+{"id":182614,"name":"Vine, Flowering Wyrdbloom Strand","quality":3,"cat":12,"sub":112,"theme":1,"icon":"housing_veg_flr_wyrdflowercluster03"}
+{"id":182615,"name":"Pedestal, Etched Stone","quality":3,"cat":13,"sub":138,"theme":1,"icon":"housing_cra_inc_apexstonepedestal001"}
+{"id":182616,"name":"Orcish Banner, Iron","quality":4,"cat":3,"sub":58,"theme":9,"icon":"housing_orc_lsb_ironorcbanner001"}
+{"id":182617,"name":"Unidentified Fargrave Bones","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_bad_inc_fardragonbones001"}
+{"id":182618,"name":"Nord Stone, Marked","quality":3,"cat":12,"sub":152,"theme":8,"icon":"housing_nor_exc_runestone001"}
+{"id":182619,"name":"Clockwork Altar, Devotional","quality":4,"cat":9,"sub":91,"theme":16,"icon":"housing_cwc_inc_devotionalaltar002"}
+{"id":182620,"name":"Clockwork Door, Arched","quality":5,"cat":13,"sub":163,"theme":16,"icon":"housing_cwc_str_doorsmallopen001"}
+{"id":182621,"name":"Mystic's Banner","quality":3,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_bannervendorarcanistsmall001"}
+{"id":182622,"name":"Grahtwood Fighters Guild Banner","quality":4,"cat":3,"sub":58,"theme":5,"icon":"housing_bos_lsb_nexusbannersfighters001"}
+{"id":182623,"name":"Rugs, Rolled","quality":3,"cat":3,"sub":53,"theme":1,"icon":"housing_cre_exc_minrugset001"}
+{"id":182624,"name":"Clockwork Coffer, Vertical","quality":3,"cat":2,"sub":49,"theme":16,"icon":"housing_cwc_inc_coffer001"}
+{"id":182625,"name":"Orcish Seal, Torch","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol008"}
+{"id":182626,"name":"Orcish Seal, Mountains","quality":3,"cat":7,"sub":106,"theme":9,"icon":"housing_orc_duc_wtgpuzzleswitchsymbol004"}
+{"id":182627,"name":"Hovel, Rock","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_gen_exc_rkrrockhovelb001"}
+{"id":182628,"name":"Riekr Tent, Snowy","quality":3,"cat":13,"sub":114,"theme":1,"icon":"housing_uni_cmp_reikertentsnow001"}
+{"id":182629,"name":"Ayleid Brazier, Stone","quality":4,"cat":11,"sub":124,"theme":14,"icon":"housing_ayl_duc_wayshrine001"}
+{"id":182630,"name":"Ayleid Constellation Stele, The Lord","quality":4,"cat":7,"sub":106,"theme":14,"icon":"housing_ayl_duc_constellationpanelsmalllord001"}
+{"id":182631,"name":"Redguard Seal","quality":3,"cat":7,"sub":106,"theme":10,"icon":"housing_red_cmp_seal001"}
+{"id":182632,"name":"Redguard Brazier, Stone Marker","quality":4,"cat":11,"sub":122,"theme":10,"icon":"housing_red_str_milemarker001"}
+{"id":182912,"name":"Deadlands Pillar, Tall","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_str_dedsmallpillar001"}
+{"id":182913,"name":"Fargrave Container Plants, Small","quality":3,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingfarboxplanter001"}
+{"id":182914,"name":"Fargrave Container Plants","quality":3,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingfarboxplanter002"}
+{"id":182915,"name":"Fargrave Container Plants, Long","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingfarboxplanter003"}
+{"id":182916,"name":"Fargrave Container Plant, Large Square","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingfarboxplanter004"}
+{"id":182917,"name":"Fargrave Container Plants, Large Round","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_housingfarboxplanter005"}
+{"id":182918,"name":"Boulder, Weathered Fargrave","quality":3,"cat":12,"sub":152,"theme":13,"icon":"housing_rok_bad_farsmall003"}
+{"id":182919,"name":"Rocks, Fargrave Cluster","quality":3,"cat":12,"sub":152,"theme":13,"icon":"housing_rok_bad_farsmallcluster002"}
+{"id":182920,"name":"Fargrave Bench, Long Stone","quality":3,"cat":5,"sub":134,"theme":13,"icon":"housing_bad_fur_farbench002","blueprint":183004}
+{"id":182921,"name":"Fargrave Canopy, Large","quality":3,"cat":13,"sub":114,"theme":13,"icon":"housing_bad_str_farcanopymedclean001"}
+{"id":182922,"name":"Vines, Thornpinch","quality":3,"cat":12,"sub":112,"theme":13,"icon":"housing_veg_bad_slthorns005"}
+{"id":182925,"name":"Rocks, Deadlands Cluster","quality":3,"cat":12,"sub":152,"theme":13,"icon":"housing_rok_bad_slporoussm005"}
+{"id":182929,"name":"Plant, Hynvik","quality":3,"cat":12,"sub":109,"theme":13,"icon":"housing_veg_bad_stormsucculent002"}
+{"id":182930,"name":"Plant, Pixas","quality":3,"cat":12,"sub":109,"theme":13,"icon":"housing_veg_bad_stormsucculent006"}
+{"id":182931,"name":"Tree, Charred Deadlands","quality":3,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck001"}
+{"id":182932,"name":"Tree, Charred Large Twisted Deadlands","quality":4,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck002"}
+{"id":182933,"name":"Tree, Charred Large Deadlands","quality":4,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck004"}
+{"id":182934,"name":"Log, Charred Deadlands","quality":3,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck008"}
+{"id":182935,"name":"Stump, Charred Deadlands","quality":3,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck010"}
+{"id":183196,"name":"Antique Map of the Deadlands","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsdeadlandsscroll001"}
+{"id":183200,"name":"Music Box: Wonders of the Shoals","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_coralmusicbox001"}
+{"id":183201,"name":"Music Box: Bleak Beacon Shanty","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxspookylighthouse001"}
+{"id":183202,"name":"Deadlands Wall, Short Curved","quality":2,"cat":13,"sub":164,"theme":1,"icon":"housing_bad_waf_dedwalllowcurve001","blueprint":183203}
+{"id":183852,"name":"Deadlands Column, Slender","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_duc_dedroomwallfreecolumns001","blueprint":183853}
+{"id":183856,"name":"Target Mudcrab, Robust Coral","quality":5,"cat":25,"sub":98,"theme":1,"icon":"targetdummy_mudcrab"}
+{"id":183891,"name":"Jellyfish Bloom, Heliotrope","quality":5,"cat":14,"sub":162,"theme":1,"icon":"u33_housing_jellyfish_purple"}
+{"id":183892,"name":"Minnow School","quality":5,"cat":14,"sub":162,"theme":1,"icon":"u33_housing_minnow_shoal"}
+{"id":183893,"name":"Bubbles of Aeration","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u33_housing_bubble_field"}
+{"id":183894,"name":"Nedic Chest, Bubbling","quality":4,"cat":3,"sub":56,"theme":1,"icon":"u33_housing_bubble_chest"}
+{"id":183902,"name":"Replica Jubilee Cake 2022","quality":5,"cat":8,"sub":156,"theme":1,"icon":"memento_jubileecake2022_02"}
+{"id":184071,"name":"Aquarium, Abecean Coral","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_inc_housingu33t4crateaquarium001"}
+{"id":184072,"name":"Aquarium, Large Abecean Coral","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_inc_housingu33t5crateaquarium001"}
+{"id":184075,"name":"Fargrave Balcony","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farbalconystraight001","blueprint":184129}
+{"id":184076,"name":"Fargrave Canopy, Massive","quality":3,"cat":13,"sub":114,"theme":13,"icon":"housing_bad_str_farcanopylargeclean003","blueprint":184130}
+{"id":184077,"name":"Fargrave Colonnade Pillar, Tall","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_str_farcolonnadefiller001","blueprint":184131}
+{"id":184078,"name":"Fargrave Wall, Exterior","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_str_farcollonadewall004","blueprint":184132}
+{"id":184079,"name":"Fargrave Colonnade Hall","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farcolonnade001","blueprint":184133}
+{"id":184080,"name":"Fargrave Platform, Square","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_str_farcolonnadeplatform001","blueprint":184134}
+{"id":184081,"name":"Fargrave Colonnade Roof, Barrel","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_fardome003","blueprint":184135}
+{"id":184082,"name":"Fargrave Door","quality":3,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_str_farhousehighdoor001","blueprint":184136}
+{"id":184083,"name":"Fargrave Stairway, Stone","quality":2,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farhousehighporch001","blueprint":184137}
+{"id":184084,"name":"Fargrave Wall, Interior","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_str_farintwall003","blueprint":184138}
+{"id":184085,"name":"Fargrave Doorway, Stone Frame","quality":4,"cat":13,"sub":163,"theme":13,"icon":"housing_bad_str_farintwalldoorwaycapped001","blueprint":184139}
+{"id":184086,"name":"Fargrave Defensive Spike, Corner","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farroofspikescorner001","blueprint":184140}
+{"id":184087,"name":"Fargrave Defensive Spike, Straight","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farroofspikesmiddle001","blueprint":184141}
+{"id":184088,"name":"Fargrave Defensive Spike, Curved","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farroofspikesrcurve001","blueprint":184142}
+{"id":184089,"name":"Fargrave Bridge, Rope","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farropebridgelong001","blueprint":184143}
+{"id":184090,"name":"Fargrave Stairway, Wide Stone","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_farwalkwaystairs003","blueprint":184144}
+{"id":184091,"name":"Fargrave Facade, Huge","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_bad_str_housingfarwallkwaymiddle001","blueprint":184145}
+{"id":184092,"name":"Fargrave Window, Medallion","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_str_farwindowhighintcapped002","blueprint":184146}
+{"id":184093,"name":"Fargrave Post, Garden Wall","quality":2,"cat":6,"sub":69,"theme":13,"icon":"housing_bad_waf_farwallsmallpost","blueprint":184147}
+{"id":184094,"name":"Fargrave Wall, Garden","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_bad_waf_farwallsmallstraight001","blueprint":184148}
+{"id":184095,"name":"Deadlands Puzzle Cube","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_exc_dedpuzzlebox001","blueprint":184149}
+{"id":184096,"name":"Deadlands Throne","quality":5,"cat":9,"sub":93,"theme":13,"icon":"housing_bad_fur_dedthrone001","blueprint":184150}
+{"id":184097,"name":"Deadlands Tapestry, Mehrunes Dagon","quality":5,"cat":3,"sub":52,"theme":13,"icon":"housing_bad_inc_fardagontapestry001","blueprint":184151}
+{"id":184098,"name":"Fargrave Water Globules, Static","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_inc_farwallfloatingwater001","blueprint":184152}
+{"id":184099,"name":"Fargrave Window, Grand Medallion","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_str_farwindowhighcapped003","blueprint":184153}
+{"id":184100,"name":"Alinor Easel, Carved","quality":5,"cat":9,"sub":91,"theme":3,"icon":"housing_sum_inc_artisteasel001","blueprint":184154}
+{"id":184101,"name":"High Elf Castle Painting, In Progress","quality":5,"cat":9,"sub":92,"theme":3,"icon":"housing_sum_inc_paintingwoodunfinished003","blueprint":219660}
+{"id":184102,"name":"Blackwood Provisioning Station","quality":5,"cat":25,"sub":104,"theme":4,"icon":"housing_uni_exc_housingu33provisioningsnakecampfire001","blueprint":184156}
+{"id":184103,"name":"Red Algae Coral Formation, Tree Antler","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_tre_sys_livingcoraltree001"}
+{"id":184104,"name":"Red Algae Coral Formation, Waving Hands","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_tre_sys_livingcoraltree002"}
+{"id":184105,"name":"Green Algae Coral Formation, Tree Capped","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_tre_sys_livingcoraltree003"}
+{"id":184106,"name":"Kelp Stalk, Plain","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_kelp001"}
+{"id":184107,"name":"Kelp Stalk, Tall","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_kelp004"}
+{"id":184108,"name":"Kelp Grouping, Thin","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_kelp006"}
+{"id":184109,"name":"Kelp Grouping, Robust","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_kelp007"}
+{"id":184110,"name":"Verdant Anemone, Strong","quality":4,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_forestanemonehousing001"}
+{"id":184111,"name":"Lilac Anemone, Sprout","quality":4,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_forestanemonehousing002"}
+{"id":184112,"name":"Lilac Coral, Strong","quality":4,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_forestcoralhousing001"}
+{"id":184126,"name":"Waterfall Fountain, Round","quality":5,"cat":6,"sub":74,"theme":3,"icon":"housing_uni_exc_housingu33t5waterfall001"}
+{"id":184127,"name":"Tranquility Pond, Botanical","quality":5,"cat":6,"sub":74,"theme":3,"icon":"housing_uni_exc_housingu33t4pond001"}
+{"id":184175,"name":"Statue, Ancestor-King Auri-El","quality":5,"cat":6,"sub":70,"theme":14,"icon":"housing_ayl_run_housingdbhstatuegarlasmalatar001"}
+{"id":184193,"name":"Alinor Trellis, Purple Wisteria","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_sum_exc_trellis004"}
+{"id":184194,"name":"Alinor Maple, Red","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sum_japanesemaplered004"}
+{"id":184195,"name":"Yokudan Sarcophagus Lid, Gilded","quality":5,"cat":7,"sub":75,"theme":10,"icon":"housing_red_duc_sarcophagusbodytop001"}
+{"id":184196,"name":"Redguard Canopy, Striped","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset002"}
+{"id":184197,"name":"Canopy, Netted","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_exc_harborcanopyfreestandingsmall001"}
+{"id":184198,"name":"Coral Formation, Branching Red Cluster","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphredcoralcluster002"}
+{"id":184199,"name":"Mushroom, Twisted Tufted Cap","quality":3,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_skr_mycenamushroom002"}
+{"id":184200,"name":"Mushroom, Giant Glowtendril","quality":4,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_skr_gianttendrilmushroom019"}
+{"id":184201,"name":"Elsweyr Brazier, Cold-Flame Column","quality":4,"cat":11,"sub":124,"theme":7,"icon":"housing_els_str_sewayshrinedungeon001"}
+{"id":184202,"name":"Altmer Brazier, Cold-Flame Column","quality":4,"cat":11,"sub":124,"theme":3,"icon":"housing_alt_str_wayshrinetorch001"}
+{"id":184203,"name":"Gryphon Nest","quality":3,"cat":6,"sub":99,"theme":1,"icon":"housing_cre_str_griffinnest002"}
+{"id":184204,"name":"Eerie Lantern, Hanging","quality":4,"cat":11,"sub":121,"theme":2,"icon":"housing_bre_lsb_lanternhanginginterior002"}
+{"id":184205,"name":"Sand Drift, Oceanic","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_red_duc_sanddune001"}
+{"id":184242,"name":"Nedic Brazier, Cold-Flame","quality":4,"cat":11,"sub":126,"theme":8,"icon":"housing_cra_lsb_brazierunlit001"}
+{"id":184243,"name":"Nedic Brazier, Cold-Flame Pillar","quality":4,"cat":11,"sub":126,"theme":8,"icon":"housing_cra_duc_powertotem001"}
+{"id":184244,"name":"Nedic Sconce, Torch","quality":3,"cat":11,"sub":123,"theme":8,"icon":"housing_cra_lsb_sconce004"}
+{"id":184245,"name":"Nedic Chandelier, Swords","quality":4,"cat":11,"sub":125,"theme":8,"icon":"housing_cra_lsb_chandelier001"}
+{"id":184246,"name":"Nedic Bench, Carved","quality":3,"cat":5,"sub":134,"theme":8,"icon":"housing_cra_fur_bench001"}
+{"id":184247,"name":"Brittle-Vein Coral, Cluster","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphcavecoral003"}
+{"id":184248,"name":"Stones, Coral Cluster","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_rok_sum_coralsm004"}
+{"id":184249,"name":"Elkhorn Coral, Branching","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphelkhorncoral002"}
+{"id":184250,"name":"Nedic Banner, Ancient","quality":2,"cat":3,"sub":58,"theme":8,"icon":"housing_cra_lsb_banners002"}
+{"id":187660,"name":"Mages Guild Stained Glass","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_sys_str_windowmagesguildhousing001"}
+{"id":187661,"name":"Mage's Flame","quality":5,"cat":11,"sub":127,"theme":1,"icon":"u34_housing_mages_flame"}
+{"id":187662,"name":"House Dufort Chandelier","quality":5,"cat":11,"sub":125,"theme":1,"icon":"housing_sys_lsb_chandelierblue001"}
+{"id":187663,"name":"Blue Fang Shark, Mounted","quality":5,"cat":9,"sub":89,"theme":1,"icon":"housing_uni_inc_shark001"}
+{"id":187664,"name":"Target Deadlands Harvester, Trial","quality":5,"cat":25,"sub":98,"theme":1,"icon":"target_deadlandsharvester"}
+{"id":187665,"name":"Statue, Kynareth's Blessings","quality":5,"cat":6,"sub":70,"theme":14,"icon":"housing_sys_exc_statuekynarethhousing001"}
+{"id":187666,"name":"Music Box, Steadfast Armistice","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxsteadfast001"}
+{"id":187667,"name":"Music Box, High Isle Duel","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_systresmusicbox001"}
+{"id":187779,"name":"Boulder, Small Limestone","quality":1,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_sys_limestonesmall002"}
+{"id":187780,"name":"Boulder, Large Mossy Limestone","quality":1,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_sys_junglelimestonemedhousing007"}
+{"id":187781,"name":"Tree, Tall Conical Cypress","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_eve_u34italiancypress003"}
+{"id":187782,"name":"Tree, Forked Cypress","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_eve_u34italiancypress012"}
+{"id":187783,"name":"Flowers, Daylily Cluster","quality":3,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_sys_bluedaylily006"}
+{"id":187784,"name":"Shrub Cluster, Gorse","quality":3,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_sys_goldengorse002"}
+{"id":187785,"name":"Vampiric Table, Flat Exsanguination","quality":5,"cat":7,"sub":77,"theme":17,"icon":"housing_skr_fur_vampirelabtables001"}
+{"id":187786,"name":"Rubble Pile, Skeletal Remains","quality":3,"cat":7,"sub":75,"theme":1,"icon":"housing_coh_inc_housingskullpile001"}
+{"id":187787,"name":"Mausoleum Pillar, Tall","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_coh_inc_pedestaltall001"}
+{"id":187788,"name":"Skull Candles, Triple","quality":4,"cat":11,"sub":129,"theme":1,"icon":"housing_gen_exc_dedskullcandle001"}
+{"id":187789,"name":"Daedric Statue, Mephala","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_inc_mephallabust001"}
+{"id":187790,"name":"Statue, Stendarr","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_uni_exc_stendarr001"}
+{"id":187791,"name":"Anvil Banner, Large","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_col_lsb_dbhbanneranvil002"}
+{"id":187792,"name":"Imperial Archway, Cemetery","quality":4,"cat":13,"sub":117,"theme":11,"icon":"housing_imp_cem_fenceportal001"}
+{"id":187793,"name":"Blackreach Gate, Large","quality":5,"cat":13,"sub":163,"theme":12,"icon":"housing_dwe_duc_blackreachgate001"}
+{"id":187794,"name":"Dwarven Crystal Brazier, Amber","quality":5,"cat":11,"sub":126,"theme":12,"icon":"housing_dwe_duc_housinglanternmediumyellowcrystal001"}
+{"id":187795,"name":"Deadlands Cage, Short","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedcage002"}
+{"id":187796,"name":"Deadlands Brazier, Four-Flame","quality":5,"cat":11,"sub":124,"theme":13,"icon":"housing_bad_inc_deadcenser001"}
+{"id":187797,"name":"High Isle Lantern, Table","quality":3,"cat":11,"sub":121,"theme":2,"icon":"housing_sys_lsb_lantern001","blueprint":188192}
+{"id":187798,"name":"High Isle Sundial","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_sundial001"}
+{"id":187799,"name":"Antique Map of High Isle","quality":2,"cat":4,"sub":64,"theme":2,"icon":"housing_gen_inc_mappropssystresscroll001"}
+{"id":187800,"name":"Draoife Storystone","quality":4,"cat":6,"sub":69,"theme":2,"icon":"housing_sys_run_drugreenmancolumn001"}
+{"id":187801,"name":"Sea Elf Galleon Helm","quality":5,"cat":10,"sub":96,"theme":2,"icon":"housing_uni_exc_antiquitygoldenshipswheel001"}
+{"id":187802,"name":"Druidic Provisioning Station","quality":5,"cat":25,"sub":104,"theme":2,"icon":"housing_uni_inc_antdruidcookingtablehousing001"}
+{"id":187803,"name":"Tales of Tribute Banner","quality":3,"cat":3,"sub":58,"theme":2,"icon":"housing_gen_lsb_tributebannerflat001"}
+{"id":187804,"name":"Tribute Trophy, Orichalcum","quality":3,"cat":9,"sub":148,"theme":1,"icon":"housing_uni_inc_tottrophy001"}
+{"id":187805,"name":"Tribute Trophy, Ebony","quality":3,"cat":9,"sub":148,"theme":1,"icon":"housing_uni_inc_tottrophy002"}
+{"id":187806,"name":"Tribute Trophy, Quicksilver","quality":4,"cat":9,"sub":148,"theme":1,"icon":"housing_uni_inc_tottrophy003"}
+{"id":187807,"name":"Tribute Trophy, Voidsteel","quality":4,"cat":9,"sub":148,"theme":1,"icon":"housing_uni_inc_tottrophy004"}
+{"id":187808,"name":"Tribute Trophy, Rubedite","quality":5,"cat":9,"sub":148,"theme":1,"icon":"housing_uni_inc_tottrophy005"}
+{"id":187809,"name":"High Isle Door, Ornate Crypt","quality":4,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_cem_door001"}
+{"id":187810,"name":"High Isle Mausoleum, Ancient Marble","quality":4,"cat":13,"sub":185,"theme":2,"icon":"housing_sys_cem_mausoleum001"}
+{"id":187811,"name":"Replica Maormer Lightning-Rod","quality":4,"cat":7,"sub":106,"theme":2,"icon":"housing_sys_exc_lightningrod001"}
+{"id":187812,"name":"Replica Bloodmage's Crystal Heart","quality":5,"cat":7,"sub":106,"theme":2,"icon":"housing_sys_exc_ralzarscrystalheart001"}
+{"id":187813,"name":"Replica Invitation Medallion","quality":4,"cat":9,"sub":91,"theme":2,"icon":"housing_uni_inc_delegatetoken001"}
+{"id":187814,"name":"Flowers, Butterweed","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bad_butterweed006"}
+{"id":187815,"name":"High Isle Oar, Gondola","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_sys_inc_oar001"}
+{"id":187816,"name":"High Isle Bed, Canopy Full","quality":3,"cat":2,"sub":46,"theme":2,"icon":"housing_sys_fur_bedhigh001","blueprint":188145}
+{"id":187817,"name":"High Isle Bed, Single","quality":2,"cat":2,"sub":46,"theme":2,"icon":"housing_sys_fur_bedlow002","blueprint":188146}
+{"id":187818,"name":"High Isle Wardrobe, Compass Rose","quality":4,"cat":2,"sub":48,"theme":2,"icon":"housing_sys_fur_cabinethigh001","blueprint":188147}
+{"id":187819,"name":"High Isle Wardrobe, Rustic","quality":2,"cat":2,"sub":48,"theme":2,"icon":"housing_sys_fur_cabinetlow001","blueprint":188148}
+{"id":187820,"name":"High Isle Counter, Rustic","quality":2,"cat":5,"sub":67,"theme":2,"icon":"housing_sys_fur_counterlow001","blueprint":188149}
+{"id":187821,"name":"High Isle Bench, Padded","quality":3,"cat":5,"sub":134,"theme":2,"icon":"housing_sys_fur_benchhigh001","blueprint":188150}
+{"id":187822,"name":"High Isle Chair, Ornate","quality":3,"cat":5,"sub":132,"theme":2,"icon":"housing_sys_fur_chairhigh003","blueprint":188151}
+{"id":187823,"name":"High Isle Table, Ornate","quality":3,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_tablehighmedplain001","blueprint":188152}
+{"id":187824,"name":"High Isle Table, Compass Rose","quality":4,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_tablehighlarge001","blueprint":188153}
+{"id":187825,"name":"High Isle Tea Table, Round Wheel","quality":4,"cat":3,"sub":59,"theme":2,"icon":"housing_sys_fur_tablehighround001","blueprint":188154}
+{"id":187826,"name":"High Isle Table, Sturdy","quality":3,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_tablemidmed001","blueprint":188155}
+{"id":187827,"name":"High Isle Counter, Sturdy","quality":3,"cat":5,"sub":67,"theme":2,"icon":"housing_sys_fur_countermidlong001","blueprint":188156}
+{"id":187828,"name":"High Isle Stool, Sturdy","quality":3,"cat":10,"sub":135,"theme":2,"icon":"housing_sys_fur_stoolmid001","blueprint":188157}
+{"id":187829,"name":"High Isle Chair, Sturdy","quality":3,"cat":5,"sub":132,"theme":2,"icon":"housing_sys_fur_chairmid001","blueprint":188158}
+{"id":187830,"name":"High Isle Bench, Sturdy","quality":3,"cat":5,"sub":134,"theme":2,"icon":"housing_sys_fur_benchmid001","blueprint":188159}
+{"id":187831,"name":"High Isle Stool, Cushioned","quality":4,"cat":10,"sub":135,"theme":2,"icon":"housing_sys_fur_stoolhigh001","blueprint":188160}
+{"id":187832,"name":"High Isle Stool, Rustic","quality":2,"cat":10,"sub":135,"theme":2,"icon":"housing_sys_fur_stoollow001","blueprint":188161}
+{"id":187833,"name":"High Isle Table, Rustic","quality":2,"cat":5,"sub":66,"theme":2,"icon":"housing_sys_fur_tablelowlarge001","blueprint":188162}
+{"id":187834,"name":"High Isle Dresser, Rustic","quality":2,"cat":2,"sub":146,"theme":2,"icon":"housing_sys_fur_dresserlow001","blueprint":188163}
+{"id":187835,"name":"High Isle Basket, Woven","quality":2,"cat":8,"sub":87,"theme":2,"icon":"housing_sys_inc_basket001","blueprint":188164}
+{"id":187836,"name":"High Isle Trunk, Ornate","quality":4,"cat":2,"sub":49,"theme":2,"icon":"housing_sys_fur_chesthigh001","blueprint":188165}
+{"id":187837,"name":"High Isle Trunk, Sturdy","quality":3,"cat":2,"sub":49,"theme":2,"icon":"housing_sys_fur_chestmid001","blueprint":188166}
+{"id":187838,"name":"High Isle Nightstand, Ornate","quality":3,"cat":2,"sub":145,"theme":2,"icon":"housing_sys_fur_endtablehigh001","blueprint":188167}
+{"id":187839,"name":"High Isle Bookcase, Carved Filled","quality":3,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_housingbookcasehigh001","blueprint":188168}
+{"id":187840,"name":"High Isle Bookcase, Wide Carved Filled","quality":4,"cat":4,"sub":60,"theme":2,"icon":"housing_sys_fur_housingbookcaselargethin002","blueprint":188169}
+{"id":187841,"name":"High Isle Brazier, Bowl","quality":2,"cat":11,"sub":124,"theme":2,"icon":"housing_sys_lsb_brazier001","blueprint":188170}
+{"id":187842,"name":"High Isle Brazier, Standing","quality":3,"cat":11,"sub":124,"theme":2,"icon":"housing_sys_lsb_brazier004","blueprint":188171}
+{"id":187843,"name":"High Isle Streetlight, Paired","quality":3,"cat":11,"sub":122,"theme":2,"icon":"housing_sys_lsb_lightpost003","blueprint":188172}
+{"id":187844,"name":"High Isle Sconce, Ornate","quality":4,"cat":11,"sub":123,"theme":2,"icon":"housing_sys_lsb_wallsconce001","blueprint":188173}
+{"id":187845,"name":"High Isle Sconce, Glass","quality":3,"cat":11,"sub":123,"theme":2,"icon":"housing_sys_lsb_wallsconceglass002","blueprint":188174}
+{"id":187846,"name":"High Isle Serving Platter, Silver","quality":4,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_clutterplatehi_003","blueprint":188175}
+{"id":187847,"name":"High Isle Plate, Compass Rose Setting","quality":3,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_clutterplatesettinghi_001","blueprint":188176}
+{"id":187848,"name":"High Isle Crab, Steamed","quality":3,"cat":8,"sub":85,"theme":2,"icon":"housing_sys_inc_crab001","blueprint":188177}
+{"id":187849,"name":"High Isle Crab, Steamed Pile","quality":4,"cat":8,"sub":85,"theme":2,"icon":"housing_sys_inc_crabdozen001","blueprint":188178}
+{"id":187850,"name":"High Isle Mussel, Steamed Pile","quality":3,"cat":8,"sub":85,"theme":2,"icon":"housing_sys_inc_musselpile001","blueprint":188179}
+{"id":187851,"name":"High Isle Dresser, Carved","quality":4,"cat":2,"sub":146,"theme":2,"icon":"housing_sys_fur_dresserhigh001","blueprint":188180}
+{"id":187852,"name":"High Isle End Table, Carved","quality":3,"cat":3,"sub":59,"theme":2,"icon":"housing_sys_fur_tablehighsquare001","blueprint":188181}
+{"id":187853,"name":"High Isle Carpet, Ballroom","quality":3,"cat":3,"sub":53,"theme":2,"icon":"housing_sys_inc_brerug001","blueprint":188182}
+{"id":187854,"name":"High Isle Rug, Octagonal","quality":2,"cat":3,"sub":53,"theme":2,"icon":"housing_sys_inc_brerug006","blueprint":188183}
+{"id":187855,"name":"High Isle Herb Rack, Ladder","quality":3,"cat":8,"sub":84,"theme":2,"icon":"housing_sys_inc_herbsladder001","blueprint":188184}
+{"id":187856,"name":"Tree, Conical Cypress","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_eve_u34italiancypress004"}
+{"id":187857,"name":"High Isle Divider, Ornate","quality":4,"cat":2,"sub":47,"theme":2,"icon":"housing_sys_fur_dividerhigh001","blueprint":188185}
+{"id":187858,"name":"High Isle Mirror, Standing","quality":4,"cat":2,"sub":50,"theme":2,"icon":"housing_sys_fur_mirrorhigh001","blueprint":188186}
+{"id":187859,"name":"High Isle Wall Mirror, Gilded","quality":4,"cat":2,"sub":50,"theme":2,"icon":"housing_sys_inc_wallmirror003","blueprint":188187}
+{"id":187860,"name":"High Isle Vase, Gilded","quality":3,"cat":3,"sub":57,"theme":2,"icon":"housing_sys_inc_vase_003"}
+{"id":187861,"name":"High Isle Hourglass, Compass Rose","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_hourglass002"}
+{"id":187862,"name":"Book Stack, Well-Read","quality":2,"cat":4,"sub":62,"theme":2,"icon":"housing_sys_inc_books002","blueprint":188188}
+{"id":187863,"name":"High Isle Goblet, Empty","quality":2,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_cluttercup_001","blueprint":188189}
+{"id":187864,"name":"High Isle Cup, Full","quality":2,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_cupsmallwine001","blueprint":188190}
+{"id":187865,"name":"Flowers, Butterweed Cluster","quality":3,"cat":12,"sub":111,"theme":2,"icon":"housing_veg_bad_butterweed007"}
+{"id":187866,"name":"Gonfalon Bay Banner","quality":4,"cat":3,"sub":58,"theme":2,"icon":"housing_sys_lsb_gonfalonbanner003"}
+{"id":187867,"name":"Dreadsail Door, Grand","quality":5,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_dreadsaildoor001"}
+{"id":187868,"name":"Ascendant Silence Painting, Metal","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_metalframepainting002"}
+{"id":187869,"name":"Noble Still Life Painting, Metal","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_metalframepainting004"}
+{"id":187870,"name":"Gifts of the Sun Painting, Metal","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_metalframepainting005"}
+{"id":187871,"name":"High Isle Seahome Painting, Metal","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_metalframepainting006"}
+{"id":187872,"name":"Light's Warning Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodframepainting003"}
+{"id":187873,"name":"Abecean Bounty Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodframepainting009"}
+{"id":187874,"name":"Masted Behemoth Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodframepainting010"}
+{"id":187875,"name":"Tor Draioch Towers Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodpaintinglarge002"}
+{"id":187876,"name":"Gonfalon Colossus Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodpaintinglarge005"}
+{"id":187877,"name":"Gates of Gonfalon Bay Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodpaintinglarge006"}
+{"id":187922,"name":"Antique Map of Fargrave","quality":2,"cat":4,"sub":64,"theme":13,"icon":"housing_gen_inc_mappropsfargravescroll001"}
+{"id":188201,"name":"Letter from Ember","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_uni_inc_scrollunsealed002"}
+{"id":188202,"name":"Letter from Isobel","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_cwc_crf_scroll001"}
+{"id":188272,"name":"Blackfeather Knight Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryblackfeatherknightsmall001"}
+{"id":188273,"name":"Blackfeather Knight Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryblackfeatherknightlarge001"}
+{"id":188274,"name":"Hagraven Matron Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhagravenmatronsmall001"}
+{"id":188275,"name":"Hagraven Matron Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhagravenmatronlarge001"}
+{"id":188276,"name":"Hlaalu Councilor Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhlaalucouncilorsmall001"}
+{"id":188277,"name":"Hlaalu Councilor Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhlaalucouncilorlarge001"}
+{"id":188278,"name":"Knight Commander Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryknightcommandersmall001"}
+{"id":188279,"name":"Knight Commander Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryknightcommanderlarge001"}
+{"id":188280,"name":"Prowling Shadow Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryprowlingshadowsmall001"}
+{"id":188281,"name":"Prowling Shadow Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryprowlingshadowlarge001"}
+{"id":188282,"name":"Pyandonean War Fleet Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrypyandoneanwarfleetsmall001"}
+{"id":188283,"name":"Pyandonean War Fleet Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestrypyandoneanwarfleetlarge001"}
+{"id":188284,"name":"Serpentguard Rider Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryserpentguardridersmall001"}
+{"id":188285,"name":"Serpentguard Rider Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryserpentguardriderlarge001"}
+{"id":188341,"name":"Red Diamond Stained Glass","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_sys_str_housingreddiamondwindow001"}
+{"id":188342,"name":"Bat Swarm, Domesticated","quality":5,"cat":14,"sub":162,"theme":1,"icon":"u35_furnishing_bats"}
+{"id":188343,"name":"Moonlight Path Bridge","quality":5,"cat":13,"sub":117,"theme":1,"icon":"housing_rok_els_jodebridgehousing001"}
+{"id":188344,"name":"Y'ffre's Falling Leaves, Autumn","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u35_furnishing_fallingleaves"}
+{"id":189463,"name":"Statue, Bendu Olo","quality":5,"cat":6,"sub":70,"theme":2,"icon":"housing_str_exc_statuebenduolo001"}
+{"id":189464,"name":"Music Box, Deeproot Dirge","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_earthenrootmusicbox001"}
+{"id":189465,"name":"Music Box, Gonfalon Galliard","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_dancermusicbox001"}
+{"id":189466,"name":"Potted Trees, Stonelore Dogwood","quality":5,"cat":12,"sub":108,"theme":2,"icon":"housing_sys_inc_housingvasebluedogwood001","blueprint":190074}
+{"id":189467,"name":"High Isle Beacon, Unlit","quality":5,"cat":10,"sub":96,"theme":2,"icon":"housing_sys_str_lighthousetorch001","blueprint":190075}
+{"id":189468,"name":"High Isle Tapestry, Seaside Tourney","quality":5,"cat":3,"sub":52,"theme":2,"icon":"housing_sys_inc_tapestry001","blueprint":190076}
+{"id":189469,"name":"High Isle Hearth, Tilework","quality":5,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_fireplace001","blueprint":190077}
+{"id":189470,"name":"High Isle Hourglass, Gold","quality":5,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_hourglass001","blueprint":190078}
+{"id":189471,"name":"Shark Jaw, Massive","quality":5,"cat":9,"sub":91,"theme":2,"icon":"housing_sys_inc_sharkjawbone001","blueprint":190079}
+{"id":189472,"name":"High Isle Caravel, Miniature","quality":5,"cat":9,"sub":92,"theme":2,"icon":"housing_gen_csb_pirateshipbottle001","blueprint":190080}
+{"id":189473,"name":"Elkhorn Coral, Verdant Sapling","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_elkhorncavecoral003"}
+{"id":189474,"name":"Vvardenfell Anemone, Basket","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_fug_vrdstinkhorn002"}
+{"id":189475,"name":"Mummy, Skyward Gazing","quality":4,"cat":7,"sub":75,"theme":6,"icon":"housing_vrd_duc_mummy002"}
+{"id":189476,"name":"Velothi Altar, Small","quality":3,"cat":7,"sub":106,"theme":6,"icon":"housing_vrd_duc_sconce002"}
+{"id":189477,"name":"Elsweyr Window, Ritual","quality":4,"cat":13,"sub":117,"theme":7,"icon":"housing_els_duc_housingseroomwindow001"}
+{"id":189478,"name":"Elsweyr Moon Reflection Tower, Base","quality":5,"cat":13,"sub":117,"theme":7,"icon":"housing_kha_run_housingmoontower001"}
+{"id":189479,"name":"Bloodmage Crystal, Oval","quality":3,"cat":7,"sub":106,"theme":1,"icon":"housing_sys_exc_ralzarscrystalpiece002"}
+{"id":189480,"name":"Bloodmage Crystal, Oblong","quality":3,"cat":7,"sub":106,"theme":1,"icon":"housing_str_exc_ralzarscrystalpiece005"}
+{"id":189481,"name":"Bone Sculpture, Circular","quality":3,"cat":7,"sub":106,"theme":1,"icon":"housing_gen_inc_dedskelewalldeco004"}
+{"id":189482,"name":"Bone Sconce, Arm","quality":3,"cat":11,"sub":123,"theme":1,"icon":"housing_gen_inc_housingskelewalldeco001"}
+{"id":189483,"name":"High Isle Stairway, Large Castle","quality":3,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_waf_castlefoundationstairs001","blueprint":190081}
+{"id":189484,"name":"High Isle Walkway, Straight Castle","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_waf_castlefoundationstraightthin001","blueprint":190082}
+{"id":189485,"name":"High Isle Walkway, Curved Castle","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_waf_castlefoundationcornerthin001","blueprint":190083}
+{"id":189486,"name":"High Isle Wall, Thin Castle","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_waf_castlefoundationdivider003","blueprint":190084}
+{"id":189487,"name":"High Isle Turret, Conical Castle","quality":4,"cat":13,"sub":185,"theme":2,"icon":"housing_sys_waf_castleturret001","blueprint":190085}
+{"id":189488,"name":"High Isle Stairway, Tilework","quality":4,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_housingstairsstraight001","blueprint":190086}
+{"id":189489,"name":"High Isle Pillar, Ornate","quality":3,"cat":6,"sub":69,"theme":2,"icon":"housing_sys_str_inthousemedblockpillar001","blueprint":190087}
+{"id":189490,"name":"High Isle Wall, Half-Timber","quality":2,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_inthousemedblockwall001","blueprint":190088}
+{"id":189491,"name":"High Isle Doorway, Half-Timber","quality":2,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_inthousemedblockdoorway001","blueprint":190089}
+{"id":189492,"name":"High Isle Doorway, Plaster","quality":2,"cat":13,"sub":163,"theme":2,"icon":"housing_str_str_inthouselowdoorwall001","blueprint":190090}
+{"id":189493,"name":"High Isle Archway, Carved","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_inthousemedblockhall001","blueprint":190091}
+{"id":189494,"name":"High Isle Railing, Carved","quality":3,"cat":13,"sub":164,"theme":2,"icon":"housing_sys_str_inthousemedrailingstraight001","blueprint":190092}
+{"id":189495,"name":"High Isle Railing Post, Carved","quality":3,"cat":6,"sub":69,"theme":2,"icon":"housing_sys_str_inthousemedrailingpost001","blueprint":190093}
+{"id":189496,"name":"High Isle Door, Turquoise","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_housinghousedoor002","blueprint":190094}
+{"id":189497,"name":"High Isle Door, Sturdy","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_housinghousedoorhigh001","blueprint":190095}
+{"id":189498,"name":"High Isle Trapdoor, Turquoise","quality":3,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_housinglighthousetrapdoor001","blueprint":190096}
+{"id":189499,"name":"High Isle Window, Turquoise","quality":3,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_housinghousemedwindow001","blueprint":190097}
+{"id":189500,"name":"High Isle Walkway, Balcony","quality":3,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_housingbalcony001","blueprint":190098}
+{"id":189501,"name":"High Isle Platform, Wooden Rectangle","quality":2,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_inthousemedblockceiling001","blueprint":190099}
+{"id":189502,"name":"High Isle Platform, Tilework","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_housingfloorceiling001","blueprint":190100}
+{"id":189503,"name":"High Isle Platform, Wooden Square","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_sys_str_inthouselowtowerfloor001","blueprint":190101}
+{"id":189504,"name":"Deeproot's Undying Bloom","quality":5,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_u35lotusflowerhousing001"}
+{"id":189505,"name":"Reinforced Dwarfglass Window, Massive","quality":5,"cat":13,"sub":117,"theme":12,"icon":"housing_dwe_duc_housingglasswall001"}

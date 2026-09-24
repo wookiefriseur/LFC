@@ -1,0 +1,559 @@
+{"id":220266,"name":"Worm Cult Bed, Canopy Full","quality":4,"cat":2,"sub":46,"theme":13,"icon":"housing_wrm_fur_u48bedhigh002","blueprint":223566}
+{"id":220267,"name":"Worm Cult Bed, Full","quality":3,"cat":2,"sub":46,"theme":13,"icon":"housing_wrm_fur_bedmedium003","blueprint":223567}
+{"id":220268,"name":"Worm Cult Bed, Single","quality":2,"cat":2,"sub":46,"theme":13,"icon":"housing_wrm_fur_lowbed002","blueprint":223568}
+{"id":220269,"name":"Worm Cult Buffet","quality":3,"cat":5,"sub":67,"theme":13,"icon":"housing_wrm_fur_buffethigh001","blueprint":223569}
+{"id":220270,"name":"Worm Cult Nightstand, Drawer","quality":2,"cat":2,"sub":145,"theme":13,"icon":"housing_wrm_fur_sidetablehigh001","blueprint":223570}
+{"id":220271,"name":"Worm Cult Decor, Crystal Skeleton","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_wrm_duc_pillarcrystal001","blueprint":223571}
+{"id":220272,"name":"Worm Cult Decor, Skeleton","quality":3,"cat":9,"sub":89,"theme":13,"icon":"housing_wrm_duc_pillarcrystal004","blueprint":223572}
+{"id":220273,"name":"Worm Cult Table, Wooden","quality":2,"cat":5,"sub":66,"theme":13,"icon":"housing_wrm_fur_barricadetable001","blueprint":223573}
+{"id":220274,"name":"Worm Cult Bookcase, Filled","quality":3,"cat":4,"sub":60,"theme":13,"icon":"housing_wrm_fur_housingbookcasehigh001","blueprint":223574}
+{"id":220275,"name":"Worm Cult Bookcase, Wide Filled","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_wrm_fur_housingbookcasehigh002","blueprint":223575}
+{"id":220276,"name":"Worm Cult Trunk, Large","quality":4,"cat":2,"sub":49,"theme":13,"icon":"housing_wrm_fur_largechesthigh001","blueprint":223576}
+{"id":220277,"name":"Worm Cult Dresser, Short","quality":3,"cat":2,"sub":146,"theme":13,"icon":"housing_wrm_fur_displaytablehigh001","blueprint":223577}
+{"id":220278,"name":"Worm Cult Divider, Iron","quality":4,"cat":2,"sub":47,"theme":13,"icon":"housing_wrm_fur_dividerhigh001","blueprint":223578}
+{"id":220279,"name":"Worm Cult Divider, Wooden","quality":3,"cat":2,"sub":47,"theme":13,"icon":"housing_wrm_fur_dividermedium001","blueprint":223579}
+{"id":220280,"name":"Worm Cult Trunk, Medium","quality":3,"cat":2,"sub":49,"theme":13,"icon":"housing_wrm_fur_chesthigh001","blueprint":223580}
+{"id":220281,"name":"Worm Cult Bookcase, Wooden Filled","quality":2,"cat":4,"sub":60,"theme":13,"icon":"housing_wrm_fur_housinglowbookcase001","blueprint":223581}
+{"id":220282,"name":"Worm Cult Chest, Skull","quality":2,"cat":2,"sub":49,"theme":13,"icon":"housing_wrm_fur_skullchest001","blueprint":223582}
+{"id":220283,"name":"Worm Cult Table, Grand","quality":4,"cat":5,"sub":66,"theme":13,"icon":"housing_wrm_fur_tablehighlarge001","blueprint":223583}
+{"id":220284,"name":"Worm Cult Table, Small","quality":3,"cat":5,"sub":66,"theme":13,"icon":"housing_wrm_fur_tablehighsmall001","blueprint":223584}
+{"id":220285,"name":"Worm Cult Mirror, Metal","quality":3,"cat":2,"sub":50,"theme":13,"icon":"housing_wrm_fur_wallmirrorhigh001","blueprint":223585}
+{"id":220286,"name":"Worm Cult Shelf, Leather","quality":2,"cat":4,"sub":60,"theme":13,"icon":"housing_wrm_fur_wallshelfhigh001","blueprint":223586}
+{"id":220287,"name":"Worm Cult Rug, Red","quality":3,"cat":3,"sub":53,"theme":13,"icon":"housing_wrm_inc_ruglarge002","blueprint":223587}
+{"id":220289,"name":"Worm Cult Rug, Large Teal","quality":4,"cat":3,"sub":53,"theme":13,"icon":"housing_wrm_inc_rugxl001","blueprint":223589}
+{"id":220290,"name":"Worm Cult Chest, Small","quality":2,"cat":2,"sub":49,"theme":13,"icon":"housing_wrm_inc_smallbox003","blueprint":223590}
+{"id":220291,"name":"Worm Cult Brazier, Cold-Flame","quality":3,"cat":11,"sub":124,"theme":13,"icon":"housing_wrm_lsb_brazierhigh001","blueprint":223591}
+{"id":220292,"name":"Worm Cult Chandelier, Caged Cold-Flame","quality":3,"cat":11,"sub":125,"theme":13,"icon":"housing_wrm_lsb_chandelier001","blueprint":223592}
+{"id":220293,"name":"Worm Cult Chandelier, Bone Cold-Flame","quality":4,"cat":11,"sub":125,"theme":13,"icon":"housing_wrm_lsb_chandelier003","blueprint":223593}
+{"id":220294,"name":"Worm Cult Lamp, Floor Cold-Flame","quality":4,"cat":11,"sub":120,"theme":13,"icon":"housing_wrm_lsb_floorlamp001","blueprint":223594}
+{"id":220295,"name":"Worm Cult Candelabra, Cold-Flame","quality":3,"cat":11,"sub":129,"theme":13,"icon":"housing_wrm_lsb_floorlamp002","blueprint":223595}
+{"id":220296,"name":"Worm Cult Lamp, Table Cold-Flame","quality":2,"cat":11,"sub":120,"theme":13,"icon":"housing_wrm_lsb_lamp002","blueprint":223596}
+{"id":220298,"name":"Worm Cult Sconce, Caged Cold-Flame","quality":3,"cat":11,"sub":123,"theme":13,"icon":"housing_wrm_lsb_lamphanging002","blueprint":223598}
+{"id":220299,"name":"Worm Cult Lightpost, Caged Cold-Flame","quality":4,"cat":11,"sub":122,"theme":13,"icon":"housing_wrm_lsb_lamppost001","blueprint":223599}
+{"id":220301,"name":"Worm Cult Sconce, Cold-Flame Torch","quality":3,"cat":11,"sub":123,"theme":13,"icon":"housing_wrm_lsb_sconce004","blueprint":223601}
+{"id":220302,"name":"Battlefield Marker, Flag Spear","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_uni_exc_battlefieldflagpole001","blueprint":223602}
+{"id":220303,"name":"Worm Cult Lever, Metal Gate","quality":3,"cat":10,"sub":159,"theme":13,"icon":"housing_wrm_exc_gatelever001","blueprint":223603}
+{"id":220304,"name":"Worm Cult Crane, Mining","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_miningcrane001","blueprint":223604}
+{"id":220305,"name":"Worm Cult Mill, Grinding","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_miningmill001","blueprint":223605}
+{"id":220306,"name":"Worm Cult Barrel, Closed","quality":2,"cat":8,"sub":84,"theme":13,"icon":"housing_wrm_fur_barrel001","blueprint":223606}
+{"id":220307,"name":"Worm Cult Bench, Padded","quality":3,"cat":5,"sub":134,"theme":13,"icon":"housing_wrm_fur_benchhigh001","blueprint":223607}
+{"id":220308,"name":"Worm Cult Bench, Padded Backed","quality":4,"cat":5,"sub":134,"theme":13,"icon":"housing_wrm_fur_benchhigh002","blueprint":223608}
+{"id":220309,"name":"Worm Cult Chair, Padded","quality":3,"cat":5,"sub":132,"theme":13,"icon":"housing_wrm_fur_chairhigh003","blueprint":223609}
+{"id":220310,"name":"Worm Cult Stool, Round","quality":3,"cat":10,"sub":135,"theme":13,"icon":"housing_wrm_fur_highstool002","blueprint":223610}
+{"id":220311,"name":"Worm Cult Bench, Wooden","quality":2,"cat":5,"sub":134,"theme":13,"icon":"housing_wrm_fur_lowbench001","blueprint":223611}
+{"id":220312,"name":"Worm Cult Chair, Padded Double-Backed","quality":4,"cat":5,"sub":132,"theme":13,"icon":"housing_wrm_fur_lowchair002","blueprint":223612}
+{"id":220313,"name":"Worm Cult Chair, Wooden","quality":2,"cat":5,"sub":132,"theme":13,"icon":"housing_wrm_fur_lowchairsmall002","blueprint":223613}
+{"id":220314,"name":"Worm Cult Stool, Wooden","quality":2,"cat":10,"sub":135,"theme":13,"icon":"housing_wrm_fur_lowstoolsquare001","blueprint":223614}
+{"id":220315,"name":"Worm Cult Book Stack, Trio","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_wrm_fur_necromancerbooks003","blueprint":223615}
+{"id":220316,"name":"Worm Cult Books, Row","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_wrm_fur_necromancerbooks005","blueprint":223616}
+{"id":220317,"name":"Worm Cult Books, Long Row","quality":4,"cat":4,"sub":62,"theme":13,"icon":"housing_wrm_fur_necromancerbooks007","blueprint":223617}
+{"id":220319,"name":"Worm Cult Stool, Padded","quality":3,"cat":10,"sub":135,"theme":13,"icon":"housing_wrm_fur_stoolhigh001","blueprint":223619}
+{"id":220321,"name":"Worm Cult Specimen Jar, Brain","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_wrm_inc_brainjar001","blueprint":223621}
+{"id":220322,"name":"Worm Cult Apparatus, Condenser","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_inc_chemistrybottles_01","blueprint":223622}
+{"id":220324,"name":"Worm Cult Specimen, Skull","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_wrm_inc_skullrelic001","blueprint":223624}
+{"id":220325,"name":"Worm Cult Specimen Jar, Spider","quality":3,"cat":7,"sub":75,"theme":13,"icon":"housing_wrm_inc_spiderjar001","blueprint":223625}
+{"id":220326,"name":"Tide-Born Tool Rack, Fishing","quality":3,"cat":10,"sub":96,"theme":4,"icon":"housing_sol_exc_argfishingpropsrack001","blueprint":223626}
+{"id":220327,"name":"Tide-Born Drying Rack, Fish","quality":4,"cat":8,"sub":84,"theme":4,"icon":"housing_sol_exc_arghangingfishrack001","blueprint":223627}
+{"id":220328,"name":"Tide-Born Trap, Fish","quality":2,"cat":10,"sub":96,"theme":4,"icon":"housing_sol_exc_arglargefishingtrap001","blueprint":223628}
+{"id":220329,"name":"Tide-Born Ornament, Painted Coral","quality":3,"cat":3,"sub":56,"theme":4,"icon":"housing_sol_inc_argtableornament002","blueprint":223629}
+{"id":220330,"name":"Stone-Nest Seed Doll, Fish","quality":4,"cat":3,"sub":56,"theme":4,"icon":"housing_arg_inc_mrkseeddollfish001","blueprint":223630}
+{"id":220331,"name":"Stone-Nest Seed Doll, Frog","quality":4,"cat":3,"sub":56,"theme":4,"icon":"housing_arg_inc_mrkseeddollfrog001","blueprint":223631}
+{"id":220332,"name":"Stone-Nest Bed, Stone","quality":3,"cat":2,"sub":46,"theme":4,"icon":"housing_sol_fur_ducbed001","blueprint":223632}
+{"id":220333,"name":"Stone-Nest Chair, Carved Stone","quality":3,"cat":5,"sub":132,"theme":4,"icon":"housing_sol_fur_ducchair001","blueprint":223633}
+{"id":220334,"name":"Stone-Nest Armchair, Carved Stone","quality":2,"cat":5,"sub":132,"theme":4,"icon":"housing_sol_fur_ducchair002","blueprint":223634}
+{"id":220335,"name":"Stone-Nest Table, Carved Stone","quality":2,"cat":5,"sub":66,"theme":4,"icon":"housing_sol_fur_ductable001","blueprint":223635}
+{"id":220336,"name":"Stone-Nest Sculpture, Xanmeer Idol Head","quality":4,"cat":3,"sub":56,"theme":4,"icon":"housing_sol_inc_argidolhead001","blueprint":223636}
+{"id":220337,"name":"Stone-Nest Basket, Woven Round","quality":2,"cat":8,"sub":87,"theme":4,"icon":"housing_sol_inc_argonianbasket001","blueprint":223637}
+{"id":220338,"name":"Argonian Tablet,  Vos-Toh of Dance","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housing_sol_inc_vostohsithiscrests001","blueprint":223638}
+{"id":220339,"name":"Argonian Tablet, Vos-Toh of Song","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housing_sol_inc_vostohsithiscrests002","blueprint":223639}
+{"id":220340,"name":"Argonian Tablet, Vos-Toh of Death","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housingsol_inc_vostohsithiscrests003","blueprint":223640}
+{"id":220341,"name":"Stone-Nest Decor, Bismuth Carved Stone","quality":4,"cat":9,"sub":89,"theme":4,"icon":"housing_sol_lsb_ducbismuthwalldecor001","blueprint":223641}
+{"id":220342,"name":"Stone-Nest Sconce, Xanmeer Snake","quality":3,"cat":11,"sub":123,"theme":4,"icon":"housing_sol_lsb_ducheadsconce001","blueprint":223642}
+{"id":220343,"name":"Stone-Nest Sconce, Xanmeer","quality":2,"cat":11,"sub":123,"theme":4,"icon":"housing_sol_lsb_ducsquaresconce001","blueprint":223643}
+{"id":220344,"name":"Stone-Nest Brazier, Carved Stone","quality":3,"cat":11,"sub":124,"theme":4,"icon":"housing_sol_lsb_ductallsconce001","blueprint":223644}
+{"id":220345,"name":"Wine Glass Harp, Sanguine","quality":5,"cat":3,"sub":55,"theme":13,"icon":"housing_uni_inc_u46sanguineglassharp001","blueprint":223645}
+{"id":220346,"name":"Amethyst Crystals, Small Purple Patch","quality":3,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_sol_amethyst004"}
+{"id":220347,"name":"Amethyst Crystals, Purple Patch","quality":4,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_sol_amethyst005"}
+{"id":220348,"name":"Amethyst Crystals, Small Teal Patch","quality":4,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_sol_blueamethyst003"}
+{"id":220349,"name":"Amethyst Crystals, Teal Cluster","quality":3,"cat":12,"sub":161,"theme":1,"icon":"housing_rok_sol_blueamethyst006"}
+{"id":220350,"name":"Stones, Limestone Cluster","quality":2,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_sol_rubblesm001"}
+{"id":220351,"name":"Southern Sea Trilobite Shell, Large","quality":3,"cat":6,"sub":99,"theme":1,"icon":"housing_rok_sol_shellsmall005"}
+{"id":220352,"name":"Platform, Cut Stone","quality":2,"cat":13,"sub":138,"theme":1,"icon":"housing_rok_sol_writhingplaneplatform001"}
+{"id":220353,"name":"Driftwood, Spindly","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_sol_driftwood005"}
+{"id":220354,"name":"Tree, Flowering Red Poinsettia","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sol_poinsettia002"}
+{"id":220355,"name":"Tree, Sturdy Tamanu","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sol_tamanu004"}
+{"id":220356,"name":"Plant Cluster, Tamanu","quality":4,"cat":12,"sub":109,"theme":1,"icon":"housing_tre_sol_tamanucanopy001"}
+{"id":220357,"name":"Mammoth Grass, Patch","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sol_elephantgrass005"}
+{"id":220358,"name":"Sapling, Magenta Summertide","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_veg_sol_wildbougainvillea004"}
+{"id":220359,"name":"Saplings, Magenta Summertide Cluster","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_veg_sol_wildbougainvillea006"}
+{"id":220360,"name":"Sapling, Violet Branched Summertide","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_veg_sol_wildbougainvilleapurple001"}
+{"id":220361,"name":"Sapling, Violet Leaning Summertide","quality":3,"cat":12,"sub":141,"theme":1,"icon":"housing_veg_sol_wildbougainvilleapurple003"}
+{"id":220362,"name":"Debris Pile, Sea-Tossed Flotsam","quality":2,"cat":12,"sub":165,"theme":4,"icon":"housing_sol_str_argdebris001"}
+{"id":220363,"name":"Dwarven Lamp, Reachfolk Crow Skull","quality":3,"cat":11,"sub":120,"theme":15,"icon":"housing_skr_lsb_markreachlamp001"}
+{"id":220364,"name":"Reach Deer Skull, Wall Mount","quality":3,"cat":9,"sub":89,"theme":15,"icon":"housing_skr_exc_rchdeerskull002"}
+{"id":220365,"name":"Tree, Dragonblood","quality":4,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_fan_socotra003"}
+{"id":220366,"name":"Plant Cluster, Jungle Assortment","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_u36largeplantclusters003"}
+{"id":220367,"name":"Orcish Floor, Square","quality":3,"cat":13,"sub":138,"theme":9,"icon":"housing_orc_duc_housingdungeonfloor001"}
+{"id":220368,"name":"Orcish Brazier, Short Snowswept Column","quality":4,"cat":11,"sub":124,"theme":9,"icon":"housing_orc_lsb_housingsnowwtglamppostshort001"}
+{"id":220369,"name":"Horse Skeleton, Display","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_horseskeletonposed001"}
+{"id":223123,"name":"Paper Lantern, Purple","quality":5,"cat":11,"sub":121,"theme":7,"icon":"housing_uni_lsb_purplepaperlantern001"}
+{"id":223124,"name":"Paper Lantern, Red","quality":5,"cat":11,"sub":121,"theme":7,"icon":"housing_uni_lsb_redtieredpaperlantern001"}
+{"id":223125,"name":"Skull, Whale","quality":4,"cat":7,"sub":75,"theme":1,"icon":"housing_rok_sys_whaleskull001"}
+{"id":223126,"name":"Stormhaven Potted Plant, Poinsettia","quality":3,"cat":12,"sub":111,"theme":2,"icon":"housing_sys_inc_housingpoinsettiabush001"}
+{"id":223127,"name":"New Life Festive Fir, Giant","quality":5,"cat":7,"sub":106,"theme":2,"icon":"housing_tre_eve_housingholidayfir001"}
+{"id":223128,"name":"New Life Dessert Banquet","quality":4,"cat":8,"sub":156,"theme":2,"icon":"housing_uni_inc_housingdesertbundle001"}
+{"id":223129,"name":"New Life Feast Banquet","quality":4,"cat":8,"sub":85,"theme":2,"icon":"housing_uni_inc_housingfeastbundle001"}
+{"id":223130,"name":"New Life Garland, Long","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_inc_housingu48newlifegarland001"}
+{"id":223132,"name":"Indrik Statue, Brass","quality":5,"cat":6,"sub":70,"theme":2,"icon":"housing_uni_exc_smallguardianindrik001"}
+{"id":223133,"name":"New Life Candle, Floating","quality":3,"cat":11,"sub":129,"theme":2,"icon":"housing_gen_lsb_candlestraightsticktalllowanimated001"}
+{"id":223134,"name":"Statue, Arch-Deacon of Worms","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_wrm_exc_housingfailedreaperrelic001"}
+{"id":223135,"name":"Worm King's Throne, Base Replica","quality":4,"cat":13,"sub":138,"theme":13,"icon":"housing_wrm_exc_housingwraithforgesarcophagus001"}
+{"id":223136,"name":"Writhing Fortress Pylon, Massive","quality":4,"cat":6,"sub":69,"theme":13,"icon":"housing_wrm_waf_bosspylon001"}
+{"id":223137,"name":"Worm Cult Banner, Post","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_wrm_lsb_bannerpost001"}
+{"id":223138,"name":"Worm Cult Banner, Hanging","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_wrm_lsb_bannerhanging001"}
+{"id":223139,"name":"Worm Cult Shrine","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_wrm_exc_molagbalshrine003"}
+{"id":223140,"name":"Worm Cult Relic, Panel","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_wrm_exc_housingrelicstatue001"}
+{"id":223141,"name":"Coldharbour Sconce","quality":5,"cat":11,"sub":126,"theme":13,"icon":"icon_missing"}
+{"id":223142,"name":"Black Soul Gems, Spiky Cluster","quality":4,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_uni_housingu47blacksoulgemclusterfx001"}
+{"id":223143,"name":"Black Soul Gems, Patch","quality":4,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_uni_housingu47blacksoulgemcluster008"}
+{"id":223144,"name":"Black Soul Gems, Giant Cluster","quality":5,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_uni_housingu47blacksoulgemcrystal009"}
+{"id":223145,"name":"Writhing Wall, Segment","quality":5,"cat":14,"sub":167,"theme":13,"icon":"u48_worm_cult_vfx_2"}
+{"id":223146,"name":"Writhing Wall, Soulstream","quality":5,"cat":14,"sub":167,"theme":13,"icon":"u48_worm_cult_vfx_1"}
+{"id":223147,"name":"Stone-Nest Pillar, Temple","quality":4,"cat":6,"sub":70,"theme":4,"icon":"housing_sol_run_housingargstella001"}
+{"id":223148,"name":"Stone-Nest Gazebo","quality":4,"cat":13,"sub":185,"theme":4,"icon":"housing_sol_str_argraidergazebosmall001"}
+{"id":223149,"name":"Stone-Nest Counterweight","quality":3,"cat":10,"sub":170,"theme":4,"icon":"housing_uni_duc_xorhistcounterweight001"}
+{"id":223150,"name":"Stone-Nest Pendulum","quality":4,"cat":10,"sub":170,"theme":4,"icon":"housing_uni_duc_housingxorhistpendulum001"}
+{"id":223151,"name":"Vitrified Soul Crystal","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_uni_exc_u47vitrifiedsoulcrystal001"}
+{"id":223152,"name":"Molag Bal Statue, Fractured Arm","quality":3,"cat":6,"sub":70,"theme":13,"icon":"housing_vrd_exc_statuemolagbalarm001"}
+{"id":223153,"name":"Molag Bal Statue, Fractured Head","quality":4,"cat":6,"sub":70,"theme":13,"icon":"housing_vrd_exc_statuemolagbalhead001"}
+{"id":223154,"name":"Coldharbour Soul Furnace","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_wrm_exc_miningfurnace001"}
+{"id":223155,"name":"Daedric Gate, Coldharbour","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_wrm_exc_housingwraithforgegatehalf001"}
+{"id":223156,"name":"Reaper, Pattern Template","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_wrm_exc_molagbalshrinelarge002"}
+{"id":223157,"name":"Worm Cult Bucket, Bismuth Samples","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_miningbucket001"}
+{"id":223158,"name":"Worm Cult Hammer, Mining","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_mininghammer001"}
+{"id":223159,"name":"Worm Cult Pickaxe, Mining","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_pickaxe001"}
+{"id":223160,"name":"Worm Cult Carving, Eye","quality":3,"cat":7,"sub":106,"theme":13,"icon":"housing_wrm_inc_eyestone001"}
+{"id":223161,"name":"Worm Cult Tongs, Metal","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_inc_tongs001"}
+{"id":223162,"name":"Kelp Shelf, Small Brown","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sol_floatingkelpplane001"}
+{"id":223163,"name":"Kelp Shelf, Medium Brown","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sol_floatingkelpplane002"}
+{"id":223164,"name":"Kelp, Small Brown Pile","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sol_kelppile001"}
+{"id":223165,"name":"Kelp, Long Brown Pile","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sol_kelppile005"}
+{"id":223166,"name":"Knife, Fishing","quality":3,"cat":10,"sub":96,"theme":4,"icon":"housing_sol_exc_arglargefishingknife001"}
+{"id":223167,"name":"Argonian Paddle, Wooden","quality":3,"cat":10,"sub":96,"theme":4,"icon":"housing_sol_exc_argoar001"}
+{"id":223168,"name":"Stone, Smooth Limestone","quality":2,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_sol_rubblesm005"}
+{"id":223169,"name":"Stones, Jagged Granite Cluster","quality":2,"cat":12,"sub":136,"theme":1,"icon":"housing_wrm_run_rubblepile008"}
+{"id":223170,"name":"Plant, Corrupted Flowering Fanik Goc","quality":4,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sol_fanikgoccorrupted001"}
+{"id":223171,"name":"Plant, Corrupted Fanik Goc","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sol_fanikgoccorrupted002"}
+{"id":223172,"name":"Leaf Pile, Thatch Palm","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_sol_keythatchpalmdeadpile001"}
+{"id":223173,"name":"Leaf Pile, Royal Palm","quality":2,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_sol_u48royalpalmdeadpile002"}
+{"id":223174,"name":"Cook's Still Life Painting, Unfinished","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_bad_inc_leyunfinishedpainting002"}
+{"id":223175,"name":"Nord Shed Painting, Unfinished","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_skr_inc_u48unfinishedpainting001"}
+{"id":223176,"name":"Leg Armor, Arrow-Damaged","quality":5,"cat":7,"sub":107,"theme":11,"icon":"housing_uni_exc_battlefieldbatteredgreave001"}
+{"id":223177,"name":"Skull, Extinct Seabeast","quality":3,"cat":7,"sub":75,"theme":1,"icon":"housing_wrm_exc_skull001"}
+{"id":223178,"name":"Worm Cult Winch, Chain","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_chainwinder002"}
+{"id":223179,"name":"Worm Cult Rack, Ballista","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_ballistaammorack002"}
+{"id":223180,"name":"Worm Cult Ballista, Decommissioned","quality":4,"cat":10,"sub":96,"theme":13,"icon":"housing_wrm_exc_ballista002"}
+{"id":223181,"name":"Worm Cult Armchair, Padded","quality":4,"cat":5,"sub":132,"theme":13,"icon":"housing_wrm_fur_chairmedium001"}
+{"id":223182,"name":"Black Soul Gems, Massive Spire","quality":4,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_uni_housingu47blacksoulgemclustermed001"}
+{"id":223183,"name":"Replica Soul Flayer","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_wrm_exc_housingreapersoulflayeractive001"}
+{"id":223184,"name":"Writhing Fortress Pylon, Massive Crystal","quality":3,"cat":11,"sub":126,"theme":13,"icon":"housing_wrm_waf_housingbosspyloncrystal001"}
+{"id":223185,"name":"Writhing Fortress Platform, Tiered","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_wrm_str_housingwayshrineplatform001","blueprint":223899}
+{"id":223661,"name":"Worm King's Sarcophagus, Necropolis Replica","quality":5,"cat":7,"sub":75,"theme":13,"icon":"housing_wrm_inc_mannimarcosarcophagus001"}
+{"id":223662,"name":"Ashbound Hall Aspect Lock, Replica","quality":5,"cat":10,"sub":96,"theme":13,"icon":"housing_uni_inc_molagbalconsolehousing001"}
+{"id":223663,"name":"Worm Cult Banner, Hanging Red","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_wrm_lsb_bannerhanging002"}
+{"id":223664,"name":"Worm Cult Tent, Cultist's","quality":5,"cat":13,"sub":114,"theme":13,"icon":"housing_wrm_cmp_tent003"}
+{"id":223732,"name":"Target Worm Colossus","quality":5,"cat":25,"sub":98,"theme":1,"icon":"housing_u48_wormcolossustargetdummy"}
+{"id":223735,"name":"Music Box, Duel of the Seablades","quality":5,"cat":25,"sub":182,"theme":10,"icon":"housing_uni_inc_musicboxyokudanship001"}
+{"id":223736,"name":"Warrior Wave Door, Glinting Talon","quality":5,"cat":13,"sub":163,"theme":10,"icon":"housing_uni_str_duskbornquasigraffbasreliefdoor001"}
+{"id":223737,"name":"Warrior Wave Bed, Winged","quality":5,"cat":2,"sub":46,"theme":10,"icon":"housing_uni_fur_u49ragadadaybed001"}
+{"id":223738,"name":"Warrior Wave Platform, Yathian Turquoise","quality":5,"cat":13,"sub":138,"theme":10,"icon":"housing_uni_fur_u49turquoisefloorpatform001"}
+{"id":223739,"name":"Warrior Wave Illustrated Tome","quality":5,"cat":4,"sub":62,"theme":10,"icon":"housing_uni_inc_yokudanlorebook001"}
+{"id":223740,"name":"Warrior Wave Lamp, Small","quality":5,"cat":11,"sub":121,"theme":10,"icon":"housing_uni_lsb_scrimshawshelllamp003"}
+{"id":223741,"name":"Warrior Wave Lamp, Medium","quality":5,"cat":11,"sub":121,"theme":10,"icon":"housing_uni_lsb_scrimshawshelllamp001"}
+{"id":223742,"name":"Warrior Wave Lamp, Large","quality":5,"cat":11,"sub":121,"theme":10,"icon":"housing_uni_lsb_scrimshawshelllamp002"}
+{"id":223743,"name":"Almalexia, Mother Morrowind","quality":5,"cat":6,"sub":70,"theme":6,"icon":"housing_uni_exc_almalexiastatue001"}
+{"id":223744,"name":"Toymaker's Diorama, Racing","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_fur_toycarousel001"}
+{"id":223745,"name":"Toymaker's Mobile, Animals","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_toymakermobile001"}
+{"id":223746,"name":"Mudcrab Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushiesmudcrab001"}
+{"id":223747,"name":"Jerboa Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushiesjerboa001"}
+{"id":223748,"name":"Lion Cub Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushieslioncub001"}
+{"id":223749,"name":"Guar Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushiesguar001"}
+{"id":223750,"name":"Vvardvark Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushiesvvardvark001"}
+{"id":223751,"name":"Bantam Guar Moppet, Tan","quality":5,"cat":3,"sub":56,"theme":8,"icon":"housing_uni_inc_plushiesbantamguar001"}
+{"id":223752,"name":"Worm Cult Ceiling, Spiked Molding","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_duc_housingceilingcornerout001","blueprint":223872}
+{"id":223753,"name":"Worm Cult Ceiling, Spiked Vault","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_duc_housingceilingcornerin001","blueprint":223873}
+{"id":223754,"name":"Worm Cult Staircase, Double","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_waf_housingfoundationwithstairs001","blueprint":223874}
+{"id":223755,"name":"Worm Cult Staircase, Wide","quality":4,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_duc_housingbridgestairs003","blueprint":223895}
+{"id":223756,"name":"Worm Cult Staircase, Thin","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_waf_foundationstairskinnyhalf001","blueprint":223896}
+{"id":223757,"name":"Worm Cult Platform, Stone","quality":2,"cat":13,"sub":138,"theme":13,"icon":"housing_wrm_duc_floorplatformfiller001","blueprint":223897}
+{"id":223758,"name":"Worm Cult Platform, Spiked","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_wrm_waf_foundationstraight001","blueprint":223898}
+{"id":223759,"name":"Replica Jubilee Cake Slice 2026","quality":5,"cat":8,"sub":156,"theme":1,"icon":"housing_gen_inc_2026jubilleecakepiece001"}
+{"id":223760,"name":"Worm Cult Doorway, Bone","quality":3,"cat":13,"sub":163,"theme":13,"icon":"housing_wrm_duc_roomwalldoorway002","blueprint":223900}
+{"id":223761,"name":"Worm Cult Window, Bone","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_wrm_duc_housingroomwallwindow001","blueprint":223901}
+{"id":223762,"name":"Worm Cult Wall, Bone","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_wrm_duc_housingmiddlewall001","blueprint":223902}
+{"id":223763,"name":"Worm Cult Door","quality":3,"cat":13,"sub":163,"theme":13,"icon":"housing_wrm_duc_door001","blueprint":223903}
+{"id":223764,"name":"Worm Cult Pillar, Short Bone","quality":3,"cat":6,"sub":69,"theme":13,"icon":"housing_wrm_duc_pillarshort001","blueprint":223904}
+{"id":223765,"name":"Worm Cult Pillar, Tall Bone","quality":4,"cat":6,"sub":69,"theme":13,"icon":"housing_wrm_duc_layerpillar001","blueprint":223905}
+{"id":223766,"name":"Worm Cult Railing, Spiked","quality":3,"cat":13,"sub":164,"theme":13,"icon":"housing_wrm_waf_housingrailingstraighttall001","blueprint":223906}
+{"id":223767,"name":"Worm Cult Post, Railing","quality":2,"cat":6,"sub":69,"theme":13,"icon":"housing_wrm_waf_housingrailingspike001","blueprint":223907}
+{"id":223823,"name":"Worm Cult Pedestal, Railing","quality":2,"cat":13,"sub":117,"theme":13,"icon":"housing_wrm_duc_railingend001","blueprint":223908}
+{"id":223824,"name":"Worm Cult Grating, Metal","quality":2,"cat":13,"sub":138,"theme":13,"icon":"housing_wrm_waf_prisonroof001","blueprint":223909}
+{"id":223825,"name":"Stone-Nest Floor, Bordered Temple Tile","quality":3,"cat":13,"sub":138,"theme":4,"icon":"housing_sol_duc_housingargfloorplain001","blueprint":223910}
+{"id":223826,"name":"Stone-Nest Floor, Temple Tile","quality":2,"cat":13,"sub":138,"theme":4,"icon":"housing_sol_duc_housingargceilingfloorcombo001","blueprint":223911}
+{"id":223827,"name":"Stone-Nest Gazebo, Temple","quality":4,"cat":13,"sub":185,"theme":4,"icon":"housing_sol_run_housingarggazebo001","blueprint":223912}
+{"id":223828,"name":"Stone-Nest Platform, Temple","quality":3,"cat":13,"sub":138,"theme":4,"icon":"housing_sol_run_housingargplatform004","blueprint":223913}
+{"id":223829,"name":"Stone-Nest Staircase, Grand Temple","quality":4,"cat":13,"sub":117,"theme":4,"icon":"housing_sol_run_housingargstairs005","blueprint":223914}
+{"id":223830,"name":"Stone-Nest Platform, Temple Base","quality":4,"cat":13,"sub":138,"theme":4,"icon":"housing_sol_run_housingargplatform001","blueprint":223915}
+{"id":223831,"name":"Stone-Nest Walkway, Temple","quality":3,"cat":13,"sub":138,"theme":4,"icon":"housing_sol_run_housingargwalkway002a","blueprint":223916}
+{"id":223832,"name":"Stone-Nest Staircase, Eastern Landing","quality":3,"cat":13,"sub":117,"theme":4,"icon":"housing_sol_duc_housingargplatformstairs002","blueprint":223917}
+{"id":223833,"name":"Stone-Nest Staircase, Western Landing","quality":3,"cat":13,"sub":117,"theme":4,"icon":"housing_sol_duc_housingargplatformstairs004","blueprint":223918}
+{"id":223834,"name":"Stone-Nest Stairway, Wide","quality":2,"cat":13,"sub":117,"theme":4,"icon":"housing_sol_duc_housingargstairs001","blueprint":223919}
+{"id":223835,"name":"Stone-Nest Stairway, Corner","quality":2,"cat":13,"sub":117,"theme":4,"icon":"housing_sol_duc_housingargstairscorner001","blueprint":223920}
+{"id":223836,"name":"Stone-Nest Wall, Temple","quality":3,"cat":13,"sub":164,"theme":4,"icon":"housing_sol_str_housingargraiderhouseinteriorwall002","blueprint":223921}
+{"id":223837,"name":"Stone-Nest Doorway, Temple","quality":4,"cat":13,"sub":163,"theme":4,"icon":"housing_sol_str_housingargraiderhouseinteriorwall01","blueprint":223922}
+{"id":223838,"name":"Stone-Nest Door, Temple","quality":3,"cat":13,"sub":163,"theme":4,"icon":"housing_sol_duc_argdoor001","blueprint":223923}
+{"id":223839,"name":"Stone-Nest Fence, Temple","quality":2,"cat":13,"sub":164,"theme":4,"icon":"housing_sol_waf_argruinsmallwallshort001","blueprint":223924}
+{"id":223840,"name":"Stone-Nest Post, Temple Fence","quality":2,"cat":6,"sub":69,"theme":4,"icon":"housing_sol_waf_argruinsmallwallpost001","blueprint":223925}
+{"id":223841,"name":"Hearts Week Banner, Standing","quality":4,"cat":3,"sub":58,"theme":2,"icon":"housing_uni_exc_housingheartsweekbanner001"}
+{"id":223842,"name":"Hearts Week Banner, Hanging","quality":4,"cat":3,"sub":58,"theme":2,"icon":"housing_uni_exc_housingheartsweekbanner003"}
+{"id":223843,"name":"Hearts Week Banner, Small Standing","quality":3,"cat":3,"sub":58,"theme":2,"icon":"housing_uni_exc_housingheartsweekbanner002"}
+{"id":223844,"name":"Hearts Week Decor, Red Bow","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekribbon001"}
+{"id":223845,"name":"Hearts Week Garland, Curved Ribbon","quality":2,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland003"}
+{"id":223846,"name":"Hearts Week Garland, Curved Long Ribbon","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland002"}
+{"id":223847,"name":"Hearts Week Garland, Curved Floral Dangles","quality":4,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland010"}
+{"id":223848,"name":"Hearts Week Garland, Curved Floral","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland005"}
+{"id":223849,"name":"Hearts Week Decor, Floral Dangle","quality":2,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland009"}
+{"id":223850,"name":"Hearts Week Decor, Long Floral Dangle","quality":3,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekgarland007"}
+{"id":223851,"name":"Hearts Week Wreath, Floral","quality":4,"cat":9,"sub":89,"theme":2,"icon":"housing_uni_exc_housingheartsweekwreath001"}
+{"id":223852,"name":"Coldharbour Focusing Lens","quality":5,"cat":7,"sub":107,"theme":13,"icon":"housing_cld_fur_housinglens001","blueprint":223926}
+{"id":223853,"name":"Golden Skull, Argonian","quality":5,"cat":9,"sub":92,"theme":4,"icon":"housing_gen_exc_skeletongoldargonianskull001","blueprint":223927}
+{"id":223854,"name":"Shell-Tide Hatchery Altar, Replica","quality":5,"cat":7,"sub":107,"theme":4,"icon":"housing_sol_exc_housingarghatcheryaltar001","blueprint":223928}
+{"id":223855,"name":"Stone-Nest Fountain, Four Headed","quality":5,"cat":6,"sub":74,"theme":4,"icon":"housing_sol_exc_argwellspringfountain001","blueprint":223929}
+{"id":223856,"name":"Worm Cult Tent, Large","quality":5,"cat":13,"sub":114,"theme":13,"icon":"housing_wrm_cmp_tent004","blueprint":223930}
+{"id":223857,"name":"Worm Cult Forge, Mining","quality":5,"cat":10,"sub":170,"theme":13,"icon":"housing_wrm_exc_miningforge001","blueprint":223931}
+{"id":223858,"name":"Worm Cult Torture Rack","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_wrm_fur_torturebed001","blueprint":223932}
+{"id":223859,"name":"Fargrave Paper Lantern, Green Round","quality":3,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging005","blueprint":223933}
+{"id":223860,"name":"Fargrave Paper Lantern, Green Flat","quality":2,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging009","blueprint":223934}
+{"id":223861,"name":"Fargrave Paper Lantern, Red Round","quality":3,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging006","blueprint":223935}
+{"id":223862,"name":"Fargrave Paper Lantern, Red Flat","quality":2,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging010","blueprint":223936}
+{"id":223863,"name":"Fargrave Paper Lantern, Blue Round","quality":3,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging004","blueprint":223937}
+{"id":223864,"name":"Fargrave Paper Lantern, Blue Flat","quality":2,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging008","blueprint":223938}
+{"id":223865,"name":"Fargrave Paper Lantern, Purple Round","quality":3,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging003","blueprint":223939}
+{"id":223866,"name":"Fargrave Paper Lantern, Purple Flat","quality":2,"cat":11,"sub":121,"theme":13,"icon":"housing_bad_lsb_farlanternhanging007","blueprint":223940}
+{"id":223867,"name":"Bearer of Fargrave, Skeletal Jaw","quality":4,"cat":7,"sub":75,"theme":13,"icon":"housing_bad_exc_fargiantjaw001"}
+{"id":223868,"name":"Bearer of Fargrave, Broken Skull","quality":5,"cat":7,"sub":75,"theme":13,"icon":"housing_bad_exc_fargiantskull002"}
+{"id":223869,"name":"Imperial Titan Slayer","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_uni_exc_imptitanslayer001"}
+{"id":223870,"name":"Valenwood Skull Blocks","quality":5,"cat":3,"sub":55,"theme":15,"icon":"housing_uni_exc_emote47grimtempleblocks001"}
+{"id":223871,"name":"Hourglass of Akatosh Brace, Massive","quality":4,"cat":7,"sub":107,"theme":7,"icon":"housing_bad_exc_farnightmarkethourglasslgvarpieces007"}
+{"id":223875,"name":"Clockwork Grating, Pedestal","quality":3,"cat":13,"sub":138,"theme":16,"icon":"housing_cwc_duc_housingdais001"}
+{"id":223876,"name":"Clockwork Door, Mechanical","quality":5,"cat":13,"sub":163,"theme":16,"icon":"housing_cwc_duc_vrdgatesmall001"}
+{"id":223877,"name":"Colovian Medallion, Winery","quality":3,"cat":9,"sub":89,"theme":11,"icon":"housing_chl_str_housemedallion002"}
+{"id":223878,"name":"Blank Wood Sign, Post","quality":3,"cat":6,"sub":99,"theme":11,"icon":"housing_imp_lsb_icpostsign001"}
+{"id":223879,"name":"Fabric Line","quality":3,"cat":3,"sub":52,"theme":7,"icon":"housing_els_exc_merchantrackfabric002"}
+{"id":223880,"name":"Vampiric Scales, Laboratory","quality":4,"cat":10,"sub":96,"theme":17,"icon":"housing_skr_inc_vampirelabscale001"}
+{"id":223881,"name":"Argonian Tile, Trap Trigger Display","quality":3,"cat":7,"sub":106,"theme":4,"icon":"housing_arg_duc_housingtraptrigger001"}
+{"id":223882,"name":"Nord Tile, Trap Trigger Display","quality":3,"cat":7,"sub":106,"theme":8,"icon":"housing_skr_inc_housingpressureplate001"}
+{"id":223883,"name":"Goblin Bedding, Leather","quality":3,"cat":2,"sub":46,"theme":15,"icon":"housing_uni_exc_gobsleepingbag001"}
+{"id":223884,"name":"Rock Altar, Spiked","quality":3,"cat":7,"sub":107,"theme":15,"icon":"housing_gen_exc_primativerockaltar"}
+{"id":223885,"name":"Ayleid Staircase, Split","quality":4,"cat":13,"sub":117,"theme":14,"icon":"housing_iad_run_housingstair001"}
+{"id":223886,"name":"Ayleid Apparatus, Lamp","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_iad_inc_crystalplatform001"}
+{"id":223887,"name":"Alinor Colonnade, Summerset","quality":4,"cat":13,"sub":185,"theme":3,"icon":"housing_sum_str_althousebalconylower001"}
+{"id":223888,"name":"Hedge, Camellia Shrub","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_sum_camelliahedge001"}
+{"id":223889,"name":"Redguard Door, Gilded","quality":4,"cat":13,"sub":163,"theme":10,"icon":"housing_red_run_housingvararchdoor001"}
+{"id":223890,"name":"Redguard Bridge, Covered","quality":3,"cat":13,"sub":185,"theme":10,"icon":"housing_red_str_housingvarhousebridge001"}
+{"id":223891,"name":"Common Cargo, Floating Waterlogged","quality":4,"cat":10,"sub":95,"theme":2,"icon":"housing_gen_exc_floatingcargo001"}
+{"id":223892,"name":"Kelp Tree, Giant","quality":4,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_giantkelpsm001"}
+{"id":223893,"name":"Plants, Sunset Pitcher Patch","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_pitcherflower006"}
+{"id":223894,"name":"Flowers, Blue Moth","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bad_bluemothflower001"}
+{"id":223942,"name":"Druidspring Gazebo, Round","quality":3,"cat":13,"sub":185,"theme":13,"icon":"housing_uni_str_housinggreenhouse004"}
+{"id":223993,"name":"Jornibret's Last Dance","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_scroll_closed002"}
+{"id":223994,"name":"Rislav the Righteous, Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":223995,"name":"Heavy Armor Forging","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":223996,"name":"Report: Quality of Recruits","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_inc_openbook001"}
+{"id":223997,"name":"Xil-Go's Spell","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":223998,"name":"Undeniable Truths of Attire","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":223999,"name":"Call to the Faithful","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":224000,"name":"Discomforts of War","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":224001,"name":"Settling the Debate","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":224002,"name":"Azarrid's Race","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":224003,"name":"Husks and Bones","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":224004,"name":"The Masters' Hall","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybookshelfbooks005"}
+{"id":224005,"name":"Folly in Fixation","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":224006,"name":"Armor of Myth and Legend","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":224007,"name":"The Rotwood Enigma","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":224074,"name":"High Isle Fireplace, Stone","quality":4,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_fireplace002"}
+{"id":224075,"name":"Stained Glass of Julianos, Symbol","quality":5,"cat":11,"sub":126,"theme":2,"icon":"housing_chl_str_housingjulianoswindow001"}
+{"id":224076,"name":"Fireplace Screen, Wrought Iron","quality":3,"cat":10,"sub":96,"theme":3,"icon":"housing_sum_inc_fireplacescreen001"}
+{"id":224077,"name":"Dusklight Mote","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_u49_duskmote"}
+{"id":224078,"name":"Dusklight Rift","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_u49_duskrift"}
+{"id":224079,"name":"Dawnlight Rift","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_u49_dawnrift"}
+{"id":224080,"name":"Dawnlight Mote","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_u49_dawnmote"}
+{"id":224081,"name":"Replica Jubilee Cake 2026","quality":5,"cat":8,"sub":156,"theme":1,"icon":"housing_gen_inc_2025jubileecake001"}
+{"id":224087,"name":"Glittering Goad Banner, Large Hanging","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farglitteringgoadbannerhanging003"}
+{"id":224088,"name":"Ruckus Banner, Large Hanging","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farruckusbannerhanging003"}
+{"id":224089,"name":"Thousand Eyes Banner, Large Hanging","quality":4,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farthousandeyesbannerhanging003"}
+{"id":224090,"name":"Glittering Goad Banner, Small Hanging","quality":3,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farglitteringgoadbannerhanging002"}
+{"id":224091,"name":"Ruckus Banner, Small Hanging","quality":3,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farruckusbannerhanging002"}
+{"id":224092,"name":"Thousand Eyes Banner, Small Hanging","quality":3,"cat":3,"sub":58,"theme":13,"icon":"housing_bad_lsb_farthousandeyesbannerhanging003"}
+{"id":224093,"name":"Incandescent Pod, Large","quality":4,"cat":12,"sub":109,"theme":13,"icon":"housing_veg_bad_nightmarketincandescentpod001"}
+{"id":224094,"name":"Flamepitcher","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_farflamedefense001"}
+{"id":224095,"name":"Antiweather Pylon","quality":4,"cat":6,"sub":99,"theme":13,"icon":"housing_bad_exc_farnightmarketweathercontrolrod001"}
+{"id":224096,"name":"Incandescent Pod, Small","quality":3,"cat":12,"sub":109,"theme":13,"icon":"housing_veg_bad_nightmarketincandescentpodsmall001"}
+{"id":224097,"name":"Duneripper Viscera","quality":3,"cat":14,"sub":167,"theme":13,"icon":"housing_bad_exc_housingfargastricstalk001"}
+{"id":224098,"name":"Jump Pad, Decommissioned","quality":3,"cat":13,"sub":138,"theme":13,"icon":"housing_bad_exc_farnightjumppad001"}
+{"id":224099,"name":"Essence Crucible","quality":4,"cat":9,"sub":91,"theme":13,"icon":"housing_bad_exc_farnightmarketbombdeposit001"}
+{"id":224100,"name":"Hourglass of Akatosh, Shattered","quality":4,"cat":7,"sub":106,"theme":13,"icon":"housing_bad_exc_farnightmarkethourglassmedbroken001"}
+{"id":224101,"name":"Fargrave Switch Plate, Red","quality":3,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_exc_farstomppad001","blueprint":224277}
+{"id":224102,"name":"Fargrave Switch Plate, Green","quality":3,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_exc_farstomppad002","blueprint":224278}
+{"id":224103,"name":"Fargrave Switch Plate, Blue","quality":3,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_exc_farstomppad003","blueprint":224279}
+{"id":224104,"name":"Fargrave Switch Plate, Yellow","quality":3,"cat":11,"sub":126,"theme":13,"icon":"housing_bad_exc_farstomppad004","blueprint":224280}
+{"id":224105,"name":"Night's Den Window Grate, Ornate","quality":2,"cat":13,"sub":164,"theme":13,"icon":"housing_uni_str_housingfarnightclubgrate001","blueprint":224281}
+{"id":224739,"name":"Aetherean Rupture, Liminal","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_uni_fur_u50_etherianrupture"}
+{"id":224843,"name":"Starsong Staircase, Spiral","quality":5,"cat":13,"sub":117,"theme":1,"icon":"housing_uni_fur_u50_starsongstaircase"}
+{"id":224844,"name":"Sigil Trim, Anu Pattern","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_fur_u50_sigiltrim_anu"}
+{"id":224845,"name":"Sigil Trim, Padomay Pattern","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_fur_u50_sigiltrim_padomay"}
+{"id":224846,"name":"Marble Platform, Anu Pattern Square","quality":5,"cat":13,"sub":138,"theme":1,"icon":"housing_uni_str_housingmarbleplatformwhite001"}
+{"id":224847,"name":"Marble Platform, Padomay Pattern Square","quality":5,"cat":13,"sub":138,"theme":1,"icon":"housing_uni_str_housingmarbleplatformblack001"}
+{"id":224848,"name":"Marble Pillar, Anu Pattern","quality":5,"cat":6,"sub":69,"theme":1,"icon":"housing_uni_str_housingmarblepillarwhite001"}
+{"id":224849,"name":"Marble Pillar, Padomay Pattern","quality":5,"cat":6,"sub":69,"theme":1,"icon":"housing_uni_str_housingmarblepillarblack001"}
+{"id":224851,"name":"Statue, Meridia's Champion","quality":5,"cat":6,"sub":70,"theme":2,"icon":"housing_uni_exc_darienthegoldenknightstatue001"}
+{"id":224852,"name":"An Evening with Darien Painting, Gold","quality":5,"cat":9,"sub":54,"theme":2,"icon":"housing_uni_inc_darientributepainting001"}
+{"id":224853,"name":"A Hero Strides Forth Painting, Gold","quality":5,"cat":9,"sub":54,"theme":2,"icon":"housing_uni_inc_darientributepainting002"}
+{"id":224854,"name":"Thieves Guild Armory Station","quality":5,"cat":25,"sub":104,"theme":2,"icon":"housing_gen_crf_housingarmorystation001"}
+{"id":224855,"name":"Fool's Gold Pile","quality":4,"cat":9,"sub":91,"theme":2,"icon":"housing_gen_inc_baandaricoinpile007"}
+{"id":224856,"name":"Tapestry of the Prince's Hunt","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_hircinetapestry001"}
+{"id":224857,"name":"Window of Divinity","quality":4,"cat":11,"sub":126,"theme":2,"icon":"housing_bre_str_housingstainglassint001"}
+{"id":224858,"name":"Zenithar Devotional Stele","quality":5,"cat":7,"sub":107,"theme":2,"icon":"housing_bre_exc_zenitharinset001"}
+{"id":224859,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224860,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224861,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224862,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224863,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224864,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224865,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224866,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224867,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224868,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224869,"name":"Breton Drapes, Maroon","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_bre_inc_drapes002","blueprint":225089}
+{"id":224870,"name":"Breton Drapes, Sage","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_bre_inc_drapesa002","blueprint":225090}
+{"id":224871,"name":"Breton Trellis, Wooden","quality":4,"cat":13,"sub":164,"theme":2,"icon":"housing_bre_str_reminthousetrellece001","blueprint":225091}
+{"id":224872,"name":"Breton Fireplace, Wooden","quality":4,"cat":13,"sub":117,"theme":2,"icon":"housing_bre_str_housingremintwallchimneyinserthigh001","blueprint":225092}
+{"id":224876,"name":"Music Box, A Wish for Fish","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxfishersdream001"}
+{"id":224877,"name":"Chicken Coop, Rustic","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_chickencoop001","blueprint":225093}
+{"id":224878,"name":"Spiked Chain, Long","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_ayl_duc_lanternchain001","blueprint":225094}
+{"id":224879,"name":"Rope, Twisted","quality":1,"cat":10,"sub":96,"theme":2,"icon":"housing_gen_dck_ropelinevertical002"}
+{"id":224880,"name":"Rope, Short Twisted","quality":1,"cat":10,"sub":96,"theme":2,"icon":"housing_gen_exc_clotheslinerope003"}
+{"id":224881,"name":"Brass Chain, Fine","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_red_lsb_chainweddinglanternhanging001","blueprint":225095}
+{"id":224882,"name":"Rope, Thin Knotted","quality":1,"cat":10,"sub":96,"theme":2,"icon":"housing_sys_exc_drugourdrope001"}
+{"id":224883,"name":"Breton Armoire, Mirrored Knotwork","quality":4,"cat":2,"sub":48,"theme":2,"icon":"housing_bre_fur_bookcaselarge001","blueprint":225096}
+{"id":224884,"name":"Breton Hutch, Large Knotwork","quality":4,"cat":4,"sub":60,"theme":2,"icon":"housing_bre_fur_chinacabinetlarge001","blueprint":225097}
+{"id":224885,"name":"Breton Hutch, Tall Knotwork","quality":3,"cat":4,"sub":60,"theme":2,"icon":"housing_bre_fur_chinacabinettall002","blueprint":225098}
+{"id":224886,"name":"Breton Hutch, Narrow Knotwork","quality":2,"cat":4,"sub":60,"theme":2,"icon":"housing_bre_fur_chinacabinettall001","blueprint":225099}
+{"id":224887,"name":"Breton Wardobe, Knotwork","quality":4,"cat":2,"sub":48,"theme":2,"icon":"housing_bre_fur_wardrobelarge001","blueprint":225100}
+{"id":224888,"name":"Breton Sideboard, Wide Knotwork","quality":3,"cat":8,"sub":83,"theme":2,"icon":"housing_bre_fur_cabinetslonglarge001","blueprint":225101}
+{"id":224889,"name":"Breton Trunk, Knotwork","quality":3,"cat":2,"sub":49,"theme":2,"icon":"housing_bre_fur_chestlarge001","blueprint":225102}
+{"id":224891,"name":"Breton Writing Desk, Knotwork","quality":3,"cat":4,"sub":61,"theme":2,"icon":"housing_bre_fur_writingdesk001","blueprint":225104}
+{"id":224892,"name":"Beehive, Thatched Yurt","quality":4,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_beehive001","blueprint":225105}
+{"id":224893,"name":"Breton Vase, Snake Tails","quality":3,"cat":3,"sub":57,"theme":2,"icon":"housing_bre_inc_planter001","blueprint":225106}
+{"id":224894,"name":"Breton Amphora, Marble","quality":4,"cat":3,"sub":57,"theme":2,"icon":"housing_bre_inc_planter002","blueprint":225107}
+{"id":224895,"name":"Breton Vase, Marble","quality":3,"cat":3,"sub":57,"theme":2,"icon":"housing_bre_inc_planter003","blueprint":225108}
+{"id":224896,"name":"Breton Planter, Blue Ivy","quality":3,"cat":12,"sub":109,"theme":2,"icon":"housing_bre_waf_housingplanterdarkflowerscombo001","blueprint":225109}
+{"id":224898,"name":"Birdhouse, Large Cylindrical Mounted","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse003","blueprint":225111}
+{"id":224899,"name":"Birdhouse, Small Red","quality":2,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse019","blueprint":225112}
+{"id":224900,"name":"Birdhouse, Small Green","quality":2,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse023","blueprint":225113}
+{"id":224901,"name":"Apple Pie, Lattice Crust","quality":3,"cat":8,"sub":156,"theme":2,"icon":"housing_gen_inc_applepie001","blueprint":225114}
+{"id":224902,"name":"Mushroom Planter, Half Barrel","quality":3,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poismushroombarrel003","blueprint":225115}
+{"id":224903,"name":"Mushroom Planter, Tiered Rack","quality":4,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poisfarmrack001","blueprint":225116}
+{"id":224904,"name":"Mushroom Planter, Barrel Stand","quality":3,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poismushroombarrel002","blueprint":225117}
+{"id":224910,"name":"Breton Monument, Short","quality":3,"cat":7,"sub":76,"theme":2,"icon":"housing_bre_cem_housingmonumentshort002","blueprint":225123}
+{"id":224919,"name":"Secret Door, Bookcase","quality":4,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_intbookcasedoor001","blueprint":225132}
+{"id":224921,"name":"Breton Support Beam, Wood","quality":1,"cat":13,"sub":117,"theme":2,"icon":"housing_bre_str_housingremintcellarbeam001"}
+{"id":224922,"name":"Breton Panel, Wood","quality":1,"cat":13,"sub":117,"theme":2,"icon":"housing_bre_str_housingremintcellarpannel001"}
+{"id":225015,"name":"Amber Chunk, Display","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_rok_sum_dlrrosin001"}
+{"id":225016,"name":"Ore, Display","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_rok_sum_dlrtemperingalloy001"}
+{"id":225017,"name":"Keg Spigot, Brass","quality":2,"cat":10,"sub":96,"theme":2,"icon":"housing_bre_inc_kegspigot001"}
+{"id":225018,"name":"Pin Cushion, Red","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_gen_crf_pincushioncrown002"}
+{"id":225019,"name":"Flask, Fancy","quality":3,"cat":8,"sub":144,"theme":2,"icon":"housing_gen_exc_propsflask001"}
+{"id":225020,"name":"Handbell, Brass","quality":3,"cat":3,"sub":55,"theme":2,"icon":"housing_gen_inc_dbhhandbell001"}
+{"id":225021,"name":"Pocket Whistle, Brass","quality":2,"cat":3,"sub":55,"theme":2,"icon":"housing_gen_inc_emotewhistle001"}
+{"id":225022,"name":"Hand Mirror, Silver-Plated","quality":3,"cat":2,"sub":50,"theme":2,"icon":"housing_gen_inc_handmirrorlaying001"}
+{"id":225023,"name":"Order Ledger, Business","quality":2,"cat":10,"sub":96,"theme":2,"icon":"housing_gen_inc_ledger002"}
+{"id":225024,"name":"Key, Brass","quality":3,"cat":10,"sub":96,"theme":2,"icon":"housing_sum_inc_dlrundaunted001"}
+{"id":225025,"name":"Teeba-Enoo Ball, Patchwork Leather","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_uni_exc_emoteu44teebatrickball001"}
+{"id":225026,"name":"Chef Hat, Decorative","quality":2,"cat":10,"sub":96,"theme":2,"icon":"housing_uni_exc_npcchefhat001"}
+{"id":225027,"name":"Cheese Crumbs, Echatere","quality":3,"cat":8,"sub":155,"theme":2,"icon":"housing_gen_inc_housingcheesecrumbs001"}
+{"id":225028,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225029,"name":"Boulders, Mossy Cluster","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tancluslgt003_rf"}
+{"id":225030,"name":"Boulder, Round Mossy Striated","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tanlgt006_rf"}
+{"id":225031,"name":"Boulder, Angular Mossy Striated","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tanlgt007_rf"}
+{"id":225032,"name":"Logs, Unprocessed","quality":2,"cat":10,"sub":97,"theme":1,"icon":"housing_tre_ded_logpile002_rf"}
+{"id":225033,"name":"Tree, Giant Climbing Wyrdbloom","quality":4,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_fan_wyrdcamp001"}
+{"id":225034,"name":"Cave Doorway, Mossy Vine-Covered","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_cav_lim_glncavedoortunnel001_rf"}
+{"id":225035,"name":"Ruined Floor, Stonework","quality":3,"cat":13,"sub":138,"theme":2,"icon":"housing_gen_duc_crackfloorceil004"}
+{"id":225036,"name":"Rough Crates, Cargo Shipment","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_gen_exc_cargo18cratestack001"}
+{"id":225037,"name":"Rough Crates, Stack","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_gen_exc_cargo3cratestack001"}
+{"id":225038,"name":"Stones, Loose Rubble","quality":2,"cat":13,"sub":117,"theme":1,"icon":"housing_uni_str_spellcraftingrubblestones003"}
+{"id":225074,"name":"High Elf Wall, Ancient Ornate","quality":3,"cat":13,"sub":164,"theme":3,"icon":"housing_sum_duc_roomcenterwallclean002","blueprint":225161}
+{"id":225075,"name":"High Elf Doorway, Ancient Ornate","quality":3,"cat":13,"sub":163,"theme":3,"icon":"housing_sum_duc_roomdividerdoorwayclean004","blueprint":225162}
+{"id":225076,"name":"High Elf Wall, Windowed Ancient Ornate","quality":4,"cat":13,"sub":164,"theme":3,"icon":"housing_sum_duc_roomdividerwindowclean003","blueprint":225163}
+{"id":225077,"name":"High Elf Wall, Grated Ancient Ornate","quality":3,"cat":13,"sub":164,"theme":3,"icon":"housing_sum_duc_roomcenterwallclean003","blueprint":225164}
+{"id":225078,"name":"High Elf Trim, Ancient Ornate","quality":2,"cat":13,"sub":117,"theme":3,"icon":"housing_sum_duc_roompartsundercap002","blueprint":225165}
+{"id":225079,"name":"High Elf Column, Tall Ancient Ornate","quality":2,"cat":6,"sub":69,"theme":3,"icon":"housing_sum_str_aldcolumnrn011","blueprint":225166}
+{"id":225080,"name":"High Elf Walkway, Curved Ancient Ornate","quality":3,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_str_aldplatformcurvedbasic004","blueprint":225167}
+{"id":225081,"name":"High Elf Walkway, Square Ancient Ornate","quality":4,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_str_aldplatformdockbasic003","blueprint":225168}
+{"id":225082,"name":"High Elf Walkway, Long Ancient Ornate","quality":4,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_str_aldplatformrecbasic001b","blueprint":225169}
+{"id":225083,"name":"High Elf Walkway, Broad Ancient Ornate","quality":4,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_str_aldplatformrecbasic002b","blueprint":225170}
+{"id":225084,"name":"High Elf Staircase, Right Ancient Ornate","quality":3,"cat":13,"sub":117,"theme":3,"icon":"housing_sum_str_aldstaircase002","blueprint":225171}
+{"id":225088,"name":"Cheers to the Hero Painting, Gold","quality":5,"cat":9,"sub":54,"theme":2,"icon":"housing_uni_inc_darientributepainting003"}
+{"id":225110,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225118,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225119,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225120,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225121,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225122,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225124,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225125,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225126,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225127,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225128,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225129,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225130,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225131,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225133,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225134,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225136,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225137,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225138,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225139,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225140,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225141,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225142,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225143,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225144,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225145,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225146,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225147,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225148,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225149,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225150,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225151,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225152,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225153,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225154,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225155,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225157,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225158,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225159,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225160,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225179,"name":"Koldane Cartel Banner","quality":3,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_cartelbanner001"}
+{"id":225180,"name":"Nowhere Key, Replica","quality":3,"cat":9,"sub":91,"theme":1,"icon":"housing_uni_inc_nowherekey001"}
+{"id":225181,"name":"Thieves Moon, Replica","quality":4,"cat":9,"sub":92,"theme":1,"icon":"housing_uni_inc_thievesmoon001"}
+{"id":225182,"name":"Cheese Stack, Giant","quality":4,"cat":8,"sub":155,"theme":1,"icon":"housing_gen_inc_cheesestackgiant001"}
+{"id":225183,"name":"Completed Bounty Sheet, Framed Breton Man","quality":5,"cat":9,"sub":91,"theme":1,"icon":"housing_bre_exc_wantedposterxed001","blueprint":225103}
+{"id":225184,"name":"Pipe, Stately","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_bre_inc_pipe001"}
+{"id":225185,"name":"High Elf Platform, Thick Ancient Ornate","quality":2,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_duc_roomfloorclean001","blueprint":225189}
+{"id":225186,"name":"High Elf Platform, Thin Ancient Ornate","quality":2,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_duc_roomfloorclean002","blueprint":225190}
+{"id":225187,"name":"High Elf Staircase, Left Ancient Ornate","quality":3,"cat":13,"sub":117,"theme":3,"icon":"housing_sum_str_aldstaircase003","blueprint":225191}
+{"id":225188,"name":"High Elf Column, Thin Ancient Ornate","quality":2,"cat":6,"sub":69,"theme":3,"icon":"housing_sum_duc_hallpartscollar003","blueprint":225192}
+{"id":225193,"name":"High Elf Planter, Empty Ancient Ornate","quality":3,"cat":6,"sub":99,"theme":3,"icon":"housing_sum_exc_planter003","blueprint":225198}
+{"id":225194,"name":"High Elf Pillar, Thick Ancient Ornate","quality":2,"cat":6,"sub":69,"theme":3,"icon":"housing_sum_str_aldpillar001","blueprint":225199}
+{"id":225195,"name":"Aspect of the Mad God, Anger","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfaceanger001"}
+{"id":225196,"name":"Aspect of the Mad God, Amusement","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfacegrin001"}
+{"id":225197,"name":"Aspect of the Mad God, Laughter","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfacelaugh001"}
+{"id":225337,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225343,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225344,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225345,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225346,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225347,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225348,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225349,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225350,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225351,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225352,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225353,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225354,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225355,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225356,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225357,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225358,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225359,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225360,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225364,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225365,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225366,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225367,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225368,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225369,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225370,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225371,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225372,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225373,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225374,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225375,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225404,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225405,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225406,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225407,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225408,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225409,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225410,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225411,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225412,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225413,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225414,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226738,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226747,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226748,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226749,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226750,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226751,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226752,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226753,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226754,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226758,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226759,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226760,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226761,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226765,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226769,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226771,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226772,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226773,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226774,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226775,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226776,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226777,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226778,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226779,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226780,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226781,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226782,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226783,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226784,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226897,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226898,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226899,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226900,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226901,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226902,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226903,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226904,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226905,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226906,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226907,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226918,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226923,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226924,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226925,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226926,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226927,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226928,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226929,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226930,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226931,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226932,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226933,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226936,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226941,"name":"","quality":0,"icon":"icon_missing"}
+{"id":227313,"name":"","quality":0,"icon":"icon_missing"}

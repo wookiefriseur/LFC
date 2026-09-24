@@ -1,0 +1,144 @@
+{
+  "manifest_version": 1,
+  "generated": "2026-09-22",
+  "note": "Webui-only reference data. NOT shipped in the addon release. Admin-maintained. The webview must work fully if this file or any shard is absent.",
+  "shard_size": 10000,
+  "datasets": {
+    "meta": {
+      "description": "id -> {name, quality, cat, sub, theme, icon}. Client-derived join layer for the webview (names/labels are client-locale). `icon` is the bare-icon CDN leaf and is absent on a dump taken before it was recorded. Join cat/sub into the categories dataset for localised category names.",
+      "dir": "meta",
+      "record_format": "furniture-meta-v1",
+      "locale": "en",
+      "id_max": 229999,
+      "shards": [
+        {
+          "file": "meta/meta-0080000-0089999.jsonl",
+          "id_min": 80000,
+          "id_max": 89999,
+          "count": 1,
+          "bytes": 125,
+          "digest": "4974f3168571"
+        },
+        {
+          "file": "meta/meta-0090000-0099999.jsonl",
+          "id_min": 90000,
+          "id_max": 99999,
+          "count": 102,
+          "bytes": 13186,
+          "digest": "bc9dc6c3509f"
+        },
+        {
+          "file": "meta/meta-0110000-0119999.jsonl",
+          "id_min": 110000,
+          "id_max": 119999,
+          "count": 1667,
+          "bytes": 230109,
+          "digest": "25625dd687e1"
+        },
+        {
+          "file": "meta/meta-0120000-0129999.jsonl",
+          "id_min": 120000,
+          "id_max": 129999,
+          "count": 1375,
+          "bytes": 181612,
+          "digest": "7c02f285df02"
+        },
+        {
+          "file": "meta/meta-0130000-0139999.jsonl",
+          "id_min": 130000,
+          "id_max": 139999,
+          "count": 931,
+          "bytes": 127253,
+          "digest": "7d13a4d014a9"
+        },
+        {
+          "file": "meta/meta-0140000-0149999.jsonl",
+          "id_min": 140000,
+          "id_max": 149999,
+          "count": 334,
+          "bytes": 45528,
+          "digest": "193618eda83a"
+        },
+        {
+          "file": "meta/meta-0150000-0159999.jsonl",
+          "id_min": 150000,
+          "id_max": 159999,
+          "count": 478,
+          "bytes": 65855,
+          "digest": "b396719dd44b"
+        },
+        {
+          "file": "meta/meta-0160000-0169999.jsonl",
+          "id_min": 160000,
+          "id_max": 169999,
+          "count": 478,
+          "bytes": 68991,
+          "digest": "9776db76342a"
+        },
+        {
+          "file": "meta/meta-0170000-0179999.jsonl",
+          "id_min": 170000,
+          "id_max": 179999,
+          "count": 348,
+          "bytes": 50943,
+          "digest": "362975dbd65c"
+        },
+        {
+          "file": "meta/meta-0180000-0189999.jsonl",
+          "id_min": 180000,
+          "id_max": 189999,
+          "count": 489,
+          "bytes": 69818,
+          "digest": "fcd664440444"
+        },
+        {
+          "file": "meta/meta-0190000-0199999.jsonl",
+          "id_min": 190000,
+          "id_max": 199999,
+          "count": 665,
+          "bytes": 93885,
+          "digest": "e37d969fb84d"
+        },
+        {
+          "file": "meta/meta-0200000-0209999.jsonl",
+          "id_min": 200000,
+          "id_max": 209999,
+          "count": 526,
+          "bytes": 73155,
+          "digest": "c79d4ce62180"
+        },
+        {
+          "file": "meta/meta-0210000-0219999.jsonl",
+          "id_min": 210000,
+          "id_max": 219999,
+          "count": 576,
+          "bytes": 81299,
+          "digest": "63dc9ae3705f"
+        },
+        {
+          "file": "meta/meta-0220000-0229999.jsonl",
+          "id_min": 220000,
+          "id_max": 229999,
+          "count": 559,
+          "bytes": 67536,
+          "digest": "31ade2044443"
+        }
+      ]
+    },
+    "categories": {
+      "description": "Furniture category taxonomy: catId -> {name, parent, order}. Single small file (not sharded), per-locale.",
+      "record_format": "furniture-categories-v1",
+      "locale": "en",
+      "file": "categories.en.json",
+      "count": 170,
+      "digest": "4c791fd3707f"
+    },
+    "recipes": {
+      "description": "blueprint item id -> the furnishing it makes. The one direction a sharded dataset cannot answer, and the one the webview needs: a crafted record is keyed by the blueprint. Single small file, locale-invariant.",
+      "record_format": "furniture-recipes-v1",
+      "file": "recipes.json",
+      "count": 3383,
+      "digest": "bff4ab9bd31f"
+    }
+  }
+}

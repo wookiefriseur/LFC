@@ -1,0 +1,102 @@
+{"id":94091,"name":"Imperial Carpet, Arkay","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugakatoshrectangular003"}
+{"id":94092,"name":"Imperial Carpet, Kyne","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugkynerectangular003"}
+{"id":94093,"name":"Imperial Carpet, Stendarr","quality":2,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugstendarrrectangular003"}
+{"id":94094,"name":"Imperial Banner, Arkay","quality":2,"cat":3,"sub":58,"theme":11,"icon":"housing_imp_inc_tapestryakatoshmediuma003"}
+{"id":94095,"name":"Imperial Banner, Kyne","quality":2,"cat":3,"sub":58,"theme":11,"icon":"housing_imp_inc_tapestrykynemediuma003"}
+{"id":94096,"name":"Imperial Banner, Stendarr","quality":2,"cat":3,"sub":58,"theme":11,"icon":"housing_imp_inc_tapestrystendarrmediuma003"}
+{"id":94097,"name":"Imperial Bed, Bunk","quality":2,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedbunk001"}
+{"id":94098,"name":"Imperial Bed, Single","quality":2,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedtwin001"}
+{"id":94099,"name":"Imperial Dresser, Short","quality":2,"cat":2,"sub":146,"theme":11,"icon":"housing_nib_fur_bookcaseshort001"}
+{"id":94100,"name":"Imperial Bookcase, Swirled","quality":2,"cat":4,"sub":60,"theme":11,"icon":"housing_nib_fur_bookcasetall002"}
+{"id":94101,"name":"Imperial Chair, Slatted","quality":2,"cat":5,"sub":132,"theme":11,"icon":"housing_nib_fur_chairlow001"}
+{"id":94102,"name":"Imperial Rack, Cask","quality":2,"cat":8,"sub":84,"theme":11,"icon":"housing_nib_fur_merchantcaskstand001"}
+{"id":94103,"name":"Imperial Dresser, Open","quality":2,"cat":2,"sub":146,"theme":11,"icon":"housing_nib_fur_shelveslong001"}
+{"id":94104,"name":"Imperial Stool, Sturdy","quality":2,"cat":10,"sub":135,"theme":11,"icon":"housing_nib_fur_stoollow001"}
+{"id":94105,"name":"Imperial Table, Family","quality":2,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tablelow001"}
+{"id":94106,"name":"Imperial Desk, Sturdy","quality":2,"cat":4,"sub":61,"theme":11,"icon":"housing_nib_fur_tablepeasantdesk002"}
+{"id":94107,"name":"Imperial Table, Common","quality":2,"cat":3,"sub":59,"theme":11,"icon":"housing_nib_fur_tableroundlow001"}
+{"id":94108,"name":"Imperial Shelf, Wall","quality":2,"cat":4,"sub":60,"theme":11,"icon":"housing_nib_fur_wallshelf001"}
+{"id":94109,"name":"Imperial Lantern, Wall","quality":2,"cat":11,"sub":121,"theme":11,"icon":"housing_nib_lsb_lamphanginglitonly001"}
+{"id":94110,"name":"Imperial Lightpost, Stone","quality":2,"cat":11,"sub":122,"theme":11,"icon":"housing_nib_lsb_lamppost001"}
+{"id":94111,"name":"Imperial Well, Grated","quality":2,"cat":6,"sub":72,"theme":11,"icon":"housing_nib_str_wellsmall001"}
+{"id":94112,"name":"Imperial Pedestal, Stone","quality":2,"cat":7,"sub":107,"theme":11,"icon":"housing_nib_waf_wallssmallpost001"}
+{"id":94113,"name":"Imperial Basin, Stone","quality":2,"cat":7,"sub":137,"theme":11,"icon":"housing_uni_duc_dragonshrinebrazier002"}
+{"id":94114,"name":"Imperial Statue, Monolith","quality":3,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_cem_monolith001"}
+{"id":94115,"name":"Imperial Statue, Obelisk","quality":3,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_cem_monolith002"}
+{"id":94116,"name":"Imperial Cauldron, Pitch-filled","quality":3,"cat":7,"sub":77,"theme":11,"icon":"housing_imp_exc_boilingoil001"}
+{"id":94118,"name":"Imperial Rug, Kynareth","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugkyneround003"}
+{"id":94119,"name":"Imperial Rug, Stars","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_ruground003"}
+{"id":94120,"name":"Imperial Rug, Stendarr","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugstendarrround003"}
+{"id":94129,"name":"Imperial Tapestry, Arkay","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_imp_inc_tapestryakatoshlargea003"}
+{"id":94130,"name":"Imperial Tapestry, Kynareth","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_imp_inc_tapestrykynelargea003"}
+{"id":94131,"name":"Imperial Tapestry, Stendarr","quality":3,"cat":3,"sub":52,"theme":11,"icon":"housing_imp_inc_tapestrystendarrlargea003"}
+{"id":94132,"name":"Imperial Brazier, Firepot","quality":3,"cat":11,"sub":124,"theme":11,"icon":"housing_imp_str_icarenabrazier001"}
+{"id":94133,"name":"Imperial Bed, Four-Poster","quality":3,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedelegant001"}
+{"id":94134,"name":"Imperial Bed, Double","quality":3,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedfull001"}
+{"id":94135,"name":"Imperial Pew, Windowed","quality":3,"cat":5,"sub":134,"theme":11,"icon":"housing_nib_fur_benchpeasant001"}
+{"id":94136,"name":"Imperial Bench, Fitted","quality":3,"cat":5,"sub":134,"theme":11,"icon":"housing_nib_fur_benchpeasant002"}
+{"id":94137,"name":"Imperial Bookcase, Scrollwork","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_nib_fur_bookcasetall001"}
+{"id":94138,"name":"Imperial Chair, Rocking","quality":3,"cat":5,"sub":132,"theme":11,"icon":"housing_nib_fur_chair003"}
+{"id":94139,"name":"Imperial Chair, Windowed","quality":3,"cat":5,"sub":132,"theme":11,"icon":"housing_nib_fur_chairpeasant001"}
+{"id":94140,"name":"Imperial Chest, Sturdy","quality":3,"cat":2,"sub":49,"theme":11,"icon":"housing_nib_fur_chest001"}
+{"id":94141,"name":"Imperial Hutch, Scrollwork","quality":3,"cat":8,"sub":83,"theme":11,"icon":"housing_nib_fur_chinacabinet002"}
+{"id":94142,"name":"Imperial Cupboard, Scrollwork","quality":3,"cat":8,"sub":83,"theme":11,"icon":"housing_nib_fur_cupboard001"}
+{"id":94143,"name":"Imperial Chest of Drawers","quality":3,"cat":2,"sub":48,"theme":11,"icon":"housing_nib_fur_dresserlong001"}
+{"id":94144,"name":"Imperial Counter, Long Cabinet","quality":3,"cat":5,"sub":67,"theme":11,"icon":"housing_nib_fur_merchantcounter001"}
+{"id":94145,"name":"Imperial Shelf, Barrel","quality":3,"cat":4,"sub":60,"theme":11,"icon":"housing_nib_fur_merchantwinerack001"}
+{"id":94146,"name":"Imperial Desk, Swirled","quality":3,"cat":4,"sub":61,"theme":11,"icon":"housing_nib_fur_tabledesk002"}
+{"id":94147,"name":"Imperial Table, Dining","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tablepeasantrect001"}
+{"id":94148,"name":"Imperial Trestle, Sturdy","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tablepeasanttressle001"}
+{"id":94149,"name":"Imperial Table, Game","quality":3,"cat":3,"sub":59,"theme":11,"icon":"housing_nib_fur_tableround001"}
+{"id":94150,"name":"Imperial Table, Kitchen","quality":3,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tablesquare001"}
+{"id":94151,"name":"Imperial Lightpost, Pair","quality":3,"cat":11,"sub":122,"theme":11,"icon":"housing_nib_lsb_lamppost003"}
+{"id":94152,"name":"Imperial Lightpost, Single","quality":3,"cat":11,"sub":122,"theme":11,"icon":"housing_nib_lsb_lamppost005"}
+{"id":94153,"name":"Imperial Well, Arched","quality":3,"cat":6,"sub":72,"theme":11,"icon":"housing_nib_str_wellmedium001"}
+{"id":94154,"name":"Imperial Basin, Heavy","quality":3,"cat":7,"sub":137,"theme":11,"icon":"housing_uni_duc_dragonshrinebrazier001"}
+{"id":94155,"name":"Imperial Tent, Commander's","quality":4,"cat":13,"sub":114,"theme":11,"icon":"housing_imp_cmp_tentmagissingle001"}
+{"id":94156,"name":"Imperial Brazier, Caged","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_imp_duc_icundergroundbrazier001"}
+{"id":94157,"name":"Imperial Medallion, Crest","quality":4,"cat":9,"sub":92,"theme":11,"icon":"housing_imp_exc_hookpoint001"}
+{"id":94158,"name":"Imperial Tapestry, Stars","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_imp_inc_tapestrywidea003"}
+{"id":94159,"name":"Imperial Streetlight, Imperial City","quality":4,"cat":11,"sub":122,"theme":11,"icon":"housing_imp_lsb_iclampstreet001"}
+{"id":94160,"name":"Imperial Lantern, Imperial City","quality":4,"cat":11,"sub":121,"theme":11,"icon":"housing_imp_lsb_iclampwall001"}
+{"id":94161,"name":"Imperial Pedestal, Chiseled","quality":4,"cat":7,"sub":107,"theme":11,"icon":"housing_imp_str_ichouserailingcap001"}
+{"id":94162,"name":"Imperial Pew, Scrollwork","quality":4,"cat":5,"sub":134,"theme":11,"icon":"housing_nib_fur_bench001"}
+{"id":94163,"name":"Imperial Bench, Scrollwork","quality":4,"cat":5,"sub":134,"theme":11,"icon":"housing_nib_fur_bench002"}
+{"id":94164,"name":"Imperial Sideboard, Scrollwork","quality":4,"cat":8,"sub":83,"theme":11,"icon":"housing_nib_fur_cabinetslong001"}
+{"id":94165,"name":"Imperial Chair, Scrollwork","quality":4,"cat":5,"sub":132,"theme":11,"icon":"housing_nib_fur_chair001"}
+{"id":94166,"name":"Imperial Armchair, Scrollwork","quality":4,"cat":5,"sub":132,"theme":11,"icon":"housing_nib_fur_chair002"}
+{"id":94167,"name":"Imperial Cabinet, Scrollwork","quality":4,"cat":8,"sub":83,"theme":11,"icon":"housing_nib_fur_chinacabinet001"}
+{"id":94168,"name":"Imperial Curio, Scrollwork","quality":4,"cat":8,"sub":83,"theme":11,"icon":"housing_nib_fur_chinacabinet003"}
+{"id":94169,"name":"Imperial Coffer, Scrollwork","quality":4,"cat":2,"sub":49,"theme":11,"icon":"housing_nib_fur_coffer001"}
+{"id":94170,"name":"Imperial Dresser, Scrollwork","quality":4,"cat":2,"sub":146,"theme":11,"icon":"housing_nib_fur_dressershort001"}
+{"id":94171,"name":"Imperial Counter, Corner","quality":4,"cat":5,"sub":67,"theme":11,"icon":"housing_nib_fur_merchantcountercorner001"}
+{"id":94172,"name":"Imperial Bar, Cabinet","quality":4,"cat":5,"sub":67,"theme":11,"icon":"housing_nib_fur_merchantcountersmall001"}
+{"id":94173,"name":"Imperial Mirror, Standing","quality":4,"cat":2,"sub":50,"theme":11,"icon":"housing_nib_fur_mirror001"}
+{"id":94174,"name":"Imperial Nightstand, Scrollwork","quality":4,"cat":2,"sub":145,"theme":11,"icon":"housing_nib_fur_nightstand001"}
+{"id":94175,"name":"Imperial Divider, Folding","quality":4,"cat":2,"sub":47,"theme":11,"icon":"housing_nib_fur_screen001"}
+{"id":94176,"name":"Imperial Divider, Curved","quality":4,"cat":2,"sub":47,"theme":11,"icon":"housing_nib_fur_screen002"}
+{"id":94177,"name":"Imperial Stool, Padded","quality":4,"cat":10,"sub":135,"theme":11,"icon":"housing_nib_fur_stool001"}
+{"id":94178,"name":"Imperial Desk, Scrollwork","quality":4,"cat":4,"sub":61,"theme":11,"icon":"housing_nib_fur_tabledesk001"}
+{"id":94179,"name":"Imperial Table, Formal","quality":4,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tablerect001"}
+{"id":94180,"name":"Imperial Trestle, Scrollwork","quality":4,"cat":5,"sub":66,"theme":11,"icon":"housing_nib_fur_tabletressle001"}
+{"id":94181,"name":"Imperial Throne of the Bay","quality":5,"cat":9,"sub":93,"theme":11,"icon":"housing_nib_fur_throne001"}
+{"id":94182,"name":"Imperial Footlocker, Scrollwork","quality":4,"cat":2,"sub":49,"theme":11,"icon":"housing_nib_fur_trunk001"}
+{"id":94183,"name":"Imperial Wardrobe, Scrollwork","quality":4,"cat":2,"sub":48,"theme":11,"icon":"housing_nib_fur_wardrobe001"}
+{"id":94184,"name":"Imperial Wine Rack, Scrollwork","quality":4,"cat":8,"sub":84,"theme":11,"icon":"housing_nib_fur_winerack001"}
+{"id":94185,"name":"Imperial Lightpost, Full","quality":4,"cat":11,"sub":122,"theme":11,"icon":"housing_nib_lsb_lamppost004"}
+{"id":94187,"name":"Imperial Well, Covered","quality":4,"cat":6,"sub":72,"theme":11,"icon":"housing_nib_str_welllarge001"}
+{"id":94188,"name":"Imperial Carpet, Gilded Dibella","quality":4,"cat":3,"sub":53,"theme":11,"icon":"housing_col_inc_dbhrugdibellarectangularflower001"}
+{"id":94189,"name":"Imperial Carpet, Verdant Dibella","quality":4,"cat":3,"sub":53,"theme":11,"icon":"housing_col_inc_dbhrugdibellarectangularflower002"}
+{"id":94190,"name":"Imperial Rug, Dibella","quality":4,"cat":3,"sub":53,"theme":11,"icon":"housing_col_inc_dbhrugdibellaroundflower001"}
+{"id":94191,"name":"Imperial Tapestry, Dibella","quality":4,"cat":3,"sub":52,"theme":11,"icon":"housing_col_inc_dbhtapestrydibellaflowerlg001"}
+{"id":94192,"name":"Imperial Banner, Dibella","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_col_inc_dbhtapestrydibellaflowersm001"}
+{"id":94193,"name":"Imperial Pillar, Straight","quality":4,"cat":6,"sub":69,"theme":11,"icon":"housing_imp_exc_iccolumn001"}
+{"id":94194,"name":"Imperial Pillar, Chipped","quality":4,"cat":6,"sub":69,"theme":11,"icon":"housing_imp_exc_iccolumn002"}
+{"id":94195,"name":"Imperial Bed, Canopy","quality":4,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_bedcanopy001"}
+{"id":94196,"name":"Imperial Cradle, Scrollwork","quality":4,"cat":2,"sub":46,"theme":11,"icon":"housing_nib_fur_crib001"}
+{"id":94197,"name":"Imperial Shrine of the Bay","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_nib_str_cathedralaltar001"}
+{"id":94198,"name":"Imperial Altar of the Bay","quality":4,"cat":7,"sub":107,"theme":11,"icon":"housing_nib_str_cathedralaltar002"}
+{"id":94200,"name":"Imperial Fountain of the Bay","quality":4,"cat":6,"sub":74,"theme":11,"icon":"housing_nib_str_fountain001"}
+{"id":94201,"name":"Imperial Statue, Knight","quality":4,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_exc_heavystatue001"}
+{"id":94202,"name":"Imperial Statue, Emperor","quality":4,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_exc_lightstatue001"}
+{"id":94203,"name":"Imperial Statue, Warrior","quality":4,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_exc_mediumstatue001"}

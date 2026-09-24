@@ -79,7 +79,7 @@ end[/highlight]
 
 [B]entry.sources[/B] is a set: looking up a source ID gives true when it is present. Use the named constants returned by GetSourceTypes instead of copying numeric values from an example.
 
-The supported entry fields are id, sources, version and blueprint. version and blueprint can be absent. A blueprint ID identifies a recipe, not whether the player knows it. GetEntry returns a copy you can edit without breaking anything.
+The supported entry fields are id, sources, version and blueprint. GetEntry returns a copy you can edit without breaking anything.
 
 [COLOR=wheat][SIZE=3]Show vendors, locations and prices[/SIZE][/COLOR]
 
