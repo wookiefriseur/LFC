@@ -33,7 +33,7 @@ const FIELDS = {
   "source.npc_class": ["Dropped by", "The kind of NPC that drops it."],
   "source.npc_group": ["Dropped by (group)", "A broad group of NPCs rather than one kind - \"random enemies\"."],
   "source.subtype": ["How it is found", "Chest, fishing, pickpocketing and so on."],
-  "source.pieces": ["Lead fragments", "How many fragments the antiquity lead has."],
+  "source.leads": ["Several leads", "Ticked when the furnishing takes more than one antiquity lead."],
 };
 
 // Per-source-type overrides; on the two types whose whole payload is `note`, the generic wording says nothing.

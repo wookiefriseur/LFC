@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 import { partitionFields, DATES_GROUP, SITE_ONLY_FIELDS } from "../../docs/form.js";
+import { validateRecord } from "../../docs/validate.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const enums = JSON.parse(readFileSync(join(here, "..", "..", "docs", "data", "enums.json"), "utf8"));
@@ -20,7 +21,8 @@ function ok(cond, what) {
 
 function sampleValue(field) {
   if (field === "houses") return [1309, 4794];
-  if (["achievement", "quest", "skill_rank", "pieces"].includes(field)) return 7;
+  if (["achievement", "quest", "skill_rank"].includes(field)) return 7;
+  if (field === "leads") return true;
   return `SAMPLE_${field.toUpperCase()}`;
 }
 
@@ -179,6 +181,16 @@ for (const type of types) {
   ok(empty.readonly.length === 0, "site-only: empty site-only fields are not listed");
   ok(SITE_ONLY_FIELDS.join(",") === "description,notes,name_overrides",
     "site-only: exactly the three fields the build strips");
+}
+
+{
+  // `leads` is a flag, not a count: true passes, anything else is refused.
+  const codes = (leads) => validateRecord(
+    baseRecord("drop", { subtype: "scryable", leads }), enums, []).errors
+    .filter((f) => f.field === "source.leads").map((f) => f.code);
+  ok(codes(true).length === 0, "leads: true is valid");
+  ok(codes("true").join() === "bool_required", "leads: the string \"true\" is refused");
+  ok(codes(2).join() === "bool_required", "leads: a count is refused");
 }
 
 console.log(`\n${checks} checks, ${failures} failure(s)`);

@@ -136,6 +136,7 @@ const CODE_MESSAGES = {
   cost_entry_invalid: () =>
     "Each price needs an amount and a currency. One of them is empty.",
   int_required: (f) => `${fieldLabel(f)} has to be a whole number.`,
+  bool_required: (f) => `${fieldLabel(f)} is either ticked or left out.`,
   id_zero_not_allowed: (f) =>
     `${fieldLabel(f)} cannot be 0. Some fields use 0 for "needed, but not ` +
     `recorded"; this is not one of them.`,
@@ -406,7 +407,7 @@ export function validateRecord(record, enums, allRecords) {
 
   // 10. Integer source fields. A zero is legal only where enums.id_unknown declares the unknown-id sentinel; a negative is never an id.
   const sentinelFields = unknownIdFields(enums);
-  for (const intField of ["achievement", "quest", "skill_rank", "pieces",
+  for (const intField of ["achievement", "quest", "skill_rank",
     "collectible", "part_of"]) {
     const v = record.source?.[intField];
     if (v == null) continue;
@@ -420,6 +421,11 @@ export function validateRecord(record, enums, allRecords) {
       err(`source.${intField}`, `${intField} must be a positive id`,
         "int_required", { value: v });
     }
+  }
+  // `leads` is a flag: true, or absent for a single lead.
+  if (record.source?.leads != null && record.source.leads !== true) {
+    err("source.leads", "leads is either ticked or absent", "bool_required",
+      { value: record.source.leads });
   }
   // Integer-array source fields. A symbol list (packs) is checked in 9 instead.
   for (const arrField of ["houses"]) {

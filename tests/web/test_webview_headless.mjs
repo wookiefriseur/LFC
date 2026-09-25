@@ -1350,6 +1350,27 @@ test("Zanil flanks the Luxury column, blurred, mirrored, behind the controls", a
   }
 });
 
+test("clicking a Browse card keeps the other cards' icons", async (page) => {
+  await switchTab(page, "browse");
+  await page.waitForSelector("#panel-browse .browse-card", { timeout: 15000 });
+  await page.evaluate(() => {
+    window.__icons = [...document.querySelectorAll("#panel-browse .browse-card .browse-card-icon > *")];
+  });
+  await page.click("#panel-browse .browse-card:nth-child(2)");
+  const same = await page.evaluate(() => {
+    const now = [...document.querySelectorAll("#panel-browse .browse-card .browse-card-icon > *")];
+    return now.length === window.__icons.length && now.every((n, i) => n === window.__icons[i]);
+  });
+  assertEq(same, true, "a click rebuilt the icons, which makes them flicker");
+  await switchTab(page, "about");
+  await switchTab(page, "browse");
+  const reused = await page.evaluate(() => {
+    const now = new Set(document.querySelectorAll("#panel-browse .browse-card .browse-card-icon > img"));
+    return window.__icons.filter((n) => n.tagName === "IMG").some((n) => now.has(n));
+  });
+  assertEq(reused, true, "reopening Browse built every icon again");
+});
+
 test("Quick Edit shows only what a contributor should reach for", async (page) => {
   const labels = (scope) => page.$$eval(`${scope} .form-label`, (ls) => ls.map((l) => ({
     text: l.firstChild.textContent.trim(),
@@ -2044,6 +2065,45 @@ test("a batch edit writes only the field that was changed", async (page) => {
     s.value = "";
     s.dispatchEvent(new Event("input", { bubbles: true }));
   });
+});
+
+test("the send screen's Edit changes opens Batch edit on the changed rows", async (page) => {
+  await page.click("#btn-submit");
+  await page.waitForSelector("#modal.open", { timeout: 10000 });
+  const header = await page.$$eval("#modal-changelist th", (ths) => ths.map((t) => t.textContent.trim()));
+  assertEq(header[header.length - 1], "Check", "the marker column has no header");
+  const markers = await page.$$eval("#modal-changelist .chg-marker", (ms) => ms.map((m) => [m.textContent, m.title]));
+  assert(!markers.some(([t]) => t === "10x"), "the cryptic 10x marker is back");
+  assert(markers.every(([, tip]) => tip), `a marker has no explanation: ${JSON.stringify(markers)}`);
+  const danger = await page.$eval("#modal-discard", (b) => b.classList.contains("btn-danger"));
+  assertEq(danger, true, "Start over is not a red button");
+  await page.click("#modal-edit-changes");
+  const state = await page.evaluate(() => ({
+    modalOpen: document.querySelector("#modal").classList.contains("open"),
+    batchShown: !document.querySelector("#panel-advanced")?.hidden,
+    changedOnly: document.querySelector("#filter-changed").checked,
+    rows: document.querySelectorAll("#panel-advanced tbody tr:not(.spacer)").length,
+  }));
+  assertEq(state.modalOpen, false, "the send screen stayed open");
+  assertEq(state.batchShown, true, "Batch edit did not open");
+  assertEq(state.changedOnly, true, "Changed only is off");
+  assert(state.rows > 0, "Changed only shows no rows although changes are pending");
+});
+
+test("Batch edit remembers whether Add a detail was open", async (page) => {
+  await switchTab(page, "advanced");
+  const open = async () => {
+    await page.click("#panel-advanced tbody tr:not(.spacer) td:nth-child(3)");
+    await page.waitForSelector("#panel-advanced details.add-detail", { timeout: 10000 });
+    return page.$eval("#panel-advanced details.add-detail", (d) => d.open);
+  };
+  const before = await open();
+  await page.$eval("#panel-advanced details.add-detail > summary", (s) => s.click());
+  await page.waitForFunction((was) => document.querySelector("#panel-advanced details.add-detail").open !== was, {}, before);
+  await switchTab(page, "browse");
+  await switchTab(page, "advanced");
+  assertEq(await open(), !before, "the expander forgot its state");
+  await page.$eval("#panel-advanced details.add-detail > summary", (s) => s.click());
 });
 
 test("the send screen discards the session's changes, after asking", async (page) => {

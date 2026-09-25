@@ -181,6 +181,15 @@ function lastTab() {
   }
 }
 
+// Batch edit's "Add a detail" expander stays as the contributor last left it.
+const DETAIL_OPEN_KEY = "furcat-add-detail-open";
+function detailExpanderOpen() {
+  try { return localStorage.getItem(DETAIL_OPEN_KEY) === "1"; } catch (_) { return false; }
+}
+function rememberDetailExpander(open) {
+  try { localStorage.setItem(DETAIL_OPEN_KEY, open ? "1" : "0"); } catch (_) { /* forgets */ }
+}
+
 function rememberTab(id) {
   if (!KNOWN_TABS.includes(id)) return;
   try {
@@ -1249,7 +1258,8 @@ function renderDetail() {
     // Puts the raw schema path in each label's title.
     partition: "open",
     // A new record has nothing to disclose progressively, so the expander would hold the whole form.
-    expanderOpen: !!state.editing._isNew,
+    expanderOpen: !!state.editing._isNew || detailExpanderOpen(),
+    onExpanderToggle: state.editing._isNew ? null : rememberDetailExpander,
     // The Item name box starts from the game's name, and typing it back is not a change.
     knownName: state.names?.gameName(state.editing.id ?? state.editing.blueprint) || "",
     idPrefix: "adv",
@@ -1350,6 +1360,8 @@ function renderMultiEdit(host) {
     batch: true,
     mixed,
     idPrefix: "multi",
+    expanderOpen: detailExpanderOpen(),
+    onExpanderToggle: rememberDetailExpander,
   }));
 
   host.append(elem("div", { class: "detail-message", id: "multi-message" }));
@@ -1804,6 +1816,14 @@ function bindDiscard() {
     ask.hidden = false;
   });
   $("#modal-discard-no").addEventListener("click", hideAsk);
+  $("#modal-edit-changes")?.addEventListener("click", () => {
+    closeSubmitModal();
+    hideAsk();
+    switchMask("advanced");
+    rememberTab("advanced");
+    setBatchFilters({ changedOnly: true });
+    refilter();
+  });
   $("#modal-discard-yes").addEventListener("click", () => {
     state.buffer.clear();
     renderFooter();

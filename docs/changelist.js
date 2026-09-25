@@ -316,7 +316,7 @@ export function changeRows(bufferOrEntries, ctx = {}) {
 
 function markerList({ tenX, noteLost, hadFinding, newWord, siteOnly }) {
   const out = [];
-  if (tenX) out.push("10x");
+  if (tenX) out.push("TENFOLD");
   if (noteLost) out.push("NOTE LOST");
   if (hadFinding) out.push("KNOWN PROBLEM");
   if (newWord) out.push("NEW WORD");
@@ -407,7 +407,16 @@ export function changeSummary(bufferOrEntries, rows) {
 
 // Call site 1: the submit modal
 
-const COLUMNS = ["Item", "Record", "What changed", "Before", "After", ""];
+const COLUMNS = ["Item", "Record", "What changed", "Before", "After", "Check"];
+
+// What each marker asks the reader to look at, shown as its tooltip.
+const MARKER_TIPS = {
+  "TENFOLD": "The new number is ten times larger or smaller than the old one, or more. Check for a typo or a missing zero.",
+  "NOTE LOST": "The contributor note is gone or shorter than before.",
+  "KNOWN PROBLEM": "This record already had a validation finding before the edit.",
+  "NEW WORD": "Uses a vocabulary word added in this session.",
+  "SITE ONLY": "Only the web site shows this; it does not reach the game.",
+};
 
 export function renderChangeList(bufferOrEntries, ctx = {}) {
   const entries = entriesOf(bufferOrEntries);
@@ -468,6 +477,7 @@ export function renderChangeList(bufferOrEntries, ctx = {}) {
       const span = document.createElement("span");
       span.className = `chg-marker ${markerClass(m)}`;
       span.textContent = m;
+      if (MARKER_TIPS[m]) span.title = MARKER_TIPS[m];
       markers.append(span);
     }
     tr.append(markers);

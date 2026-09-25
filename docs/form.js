@@ -21,8 +21,10 @@ export const FIELD_META = {
 // The validator's table, imported so a picker always offers the vocabulary the validator checks against. `subtype` is absent: its vocabulary depends on the source type (lexicon.subtypeVocab).
 const ENUM_FIELD = SOURCE_ENUM_FIELD;
 
-const INT_FIELDS = new Set(["achievement", "quest", "skill_rank", "pieces",
+const INT_FIELDS = new Set(["achievement", "quest", "skill_rank",
   "collectible", "part_of"]);
+// Flags: true or absent, never false.
+const BOOL_FIELDS = new Set(["leads"]);
 const INT_LIST_FIELDS = new Set(["houses"]);
 
 // One date is left, but the group is how the form offers an absent date at all.
@@ -559,6 +561,17 @@ function sourceControl(ctx, field, id) {
     widget = selectFromPairs(name, value, optionPairs(enums, ENUM_FIELD[field], value));
   } else if (INT_LIST_FIELDS.has(field)) {
     return { widget: renderIntList(ctx, field, id), block: true };
+  } else if (BOOL_FIELDS.has(field)) {
+    const box = h("input", { type: "checkbox", id, "data-field": name });
+    box.checked = value === true;
+    // A batch draft with mixed values stays untouched until the box is clicked.
+    box.indeterminate = value === MIXED;
+    box.addEventListener("change", (e) => {
+      if (e.target.checked) source[field] = true;
+      else delete source[field];
+      ctx.onChange();
+    });
+    return { widget: box, block };
   } else {
     const mixed = value === MIXED;
     widget = h("input", {
@@ -1002,7 +1015,10 @@ export function renderForm(record, enums, onChange, opts = {}) {
       const det = h("details", { class: "add-detail" },
         h("summary", {}, `Add a detail (${addable.length} possible)`), body);
       det.open = ctx.expanderOpen === true;
-      det.addEventListener("toggle", () => { ctx.expanderOpen = det.open; });
+      det.addEventListener("toggle", () => {
+        ctx.expanderOpen = det.open;
+        ctx.opts.onExpanderToggle?.(det.open);
+      });
       game.append(det);
     }
 

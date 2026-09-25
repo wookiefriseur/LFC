@@ -1,4 +1,4 @@
-import { containerContents, containerParents, containerLabel } from "./containers.js";
+import { containerContents, containerParents, containerIndex, containerLabel } from "./containers.js";
 import { ignoredMessage } from "./ignored-items.js";
 import {
   versionLabel, labelOf, entryOf, isNoteSymbol, noteLabel, placementsText,
@@ -27,7 +27,7 @@ const FIELD_ORDER = [
   "vendor", "locations", "note", "event", "container",
   "book_container", "crate", "packs", "bundle", "companion", "houses", "quest",
   "achievement", "skill_line", "skill_rank", "npc_class",
-  "npc_group", "subtype", "rarity", "pieces",
+  "npc_group", "subtype", "rarity", "leads",
 ];
 
 function plainLabel(text) {
@@ -119,10 +119,10 @@ export function browseMask(deps) {
     }
     const q = view.search;
     const out = [];
+    const index = containerIndex(state.records);
     for (const [id, recs] of byId) {
-      const contents = containerContents(state.records, id);
-      const parents = containerParents(state.records, recs);
-      if (parents.some(p => byId.has(p.id))) continue;
+      const contents = index.contents(id);
+      if (index.parentIds(recs).some((pid) => byId.has(pid))) continue;
       if (q) {
         const nm = nameOf(id).toLowerCase();
         if (!nm.includes(q) && !String(id).includes(q) && !recs.some(r => r.blueprint != null && String(r.blueprint).includes(q)) && !contents.some(r => nameOf(r.id ?? r.blueprint).toLowerCase().includes(q) || String(r.id ?? r.blueprint).includes(q) || String(r.blueprint || "").includes(q))) continue;
@@ -334,6 +334,18 @@ export function browseMask(deps) {
     }
   }
 
+  // One icon node per item, reused across renders: a fresh <img> paints blank until decoded, even from cache, so rebuilding the cards made icons flicker. Placeholders are not kept - they swap themselves out when a shard lands.
+  const iconNodes = new Map();
+  function cardIcon(id) {
+    const kept = iconNodes.get(id);
+    // A failed load (complete, no pixels) already replaced itself with a placeholder; build a new one.
+    const failed = kept && kept.complete && kept.naturalWidth === 0;
+    if (kept && !failed && !kept.isConnected) return kept;
+    const node = itemIconImg(id, nameOf(id) || `item ${id}`);
+    if (node.tagName === "IMG") iconNodes.set(id, node);
+    return node;
+  }
+
   function renderGrid() {
     const grid = $("#browse-grid");
     const scroller = $("#browse-scroller");
@@ -362,7 +374,7 @@ export function browseMask(deps) {
       });
 
       const iconWrap = elem("div", { class: "browse-card-icon" });
-      iconWrap.append(itemIconImg(item.id, nameOf(item.id) || `item ${item.id}`));
+      iconWrap.append(cardIcon(item.id));
       card.append(iconWrap);
 
       const body = elem("div", { class: "browse-card-body" });
@@ -409,7 +421,8 @@ export function browseMask(deps) {
         view.selectedKey = item.records[0]._key;
         view._detailItem = item;
         renderDetail();
-        renderGrid();
+        for (const c of grid.querySelectorAll(".browse-card.is-selected")) c.classList.remove("is-selected");
+        card.classList.add("is-selected");
       });
       grid.append(card);
     }

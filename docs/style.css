@@ -1673,7 +1673,7 @@ td.cell-source-detail {
   color: var(--muted);
   white-space: nowrap;
 }
-.chg-marker.m-10x { background: #fffbeb; color: #92400e; border-color: #fcd34d; }
+.chg-marker.m-tenfold { background: #fffbeb; color: #92400e; border-color: #fcd34d; }
 .chg-marker.m-note-lost { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
 .chg-marker.m-site-only { background: #e0e7ff; color: #3730a3; border-color: #a5b4fc; }
 .chg-marker.m-known-problem { background: #f3f4f6; }
@@ -1697,7 +1697,7 @@ td.cell-source-detail {
 /* Submit modal: the change list is the primary content, the JSONL sits behind an expander. */
 .modal-changelist { margin: 0.5rem 0 0.75rem; }
 /* Discarding the session's work: quiet and away from the send button, because the question it opens is what makes it safe rather than its size. */
-.modal-reset { margin: 0.5rem 0 0.25rem; font-size: 0.85rem; }
+.modal-reset { margin: 0.5rem 0 0.25rem; font-size: 0.85rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 .modal-discard-ask { display: inline-flex; align-items: center; gap: 0.5rem; }
 .modal-discard-ask[hidden] { display: none; }
 .modal-technical > summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); }
