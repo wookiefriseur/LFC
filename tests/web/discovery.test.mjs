@@ -20,7 +20,6 @@ function roundtrip(value) {
   const buffer = new DirtyBuffer();
   buffer.add("new", record, "rumour");
   buffer.references.set("new", reference);
-  // A later source edit must preserve metadata and keep it out of canonical data.
   buffer.update("new", record, { ...record, notes: "discovered in game" }, "rumour");
   const line = JSON.parse(serialiseDiff(buffer));
   assert.equal(valid(line), true, JSON.stringify(valid.errors));

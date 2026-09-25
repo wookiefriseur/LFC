@@ -1,8 +1,3 @@
-// form.test.mjs - the enforcement behind AN section 4.1's table.
-//
-// Run:  node form.test.mjs   (from tests/web/)
-//
-// Walks every contract in the REAL data/enums.json and asserts the three properties the progressive-disclosure rule exists
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -23,7 +18,6 @@ function ok(cond, what) {
   console.error(`  FAIL  ${what}`);
 }
 
-// A plausible value for a source field, so a "populated" record is realistic.
 function sampleValue(field) {
   if (field === "houses") return [1309, 4794];
   if (["achievement", "quest", "skill_rank", "pieces"].includes(field)) return 7;
@@ -41,12 +35,11 @@ function baseRecord(type, source = {}) {
 
 const types = Object.keys(contracts);
 console.log(`partitionFields over ${types.length} contracts in data/enums.json\n`);
-if (types.length !== 18) {
+if (types.length !== enums.source_types.length) {
   failures++;
-  console.error(`  FAIL  expected 18 source-type contracts, found ${types.length}`);
+  console.error(`  FAIL  expected one contract per source type (${enums.source_types.length}), found ${types.length}`);
 }
 
-// -- (a) and (b), per type, on an EMPTY record and on a POPULATED one --------
 for (const type of types) {
   const c = contracts[type];
   const required = c.required || [];
@@ -55,7 +48,6 @@ for (const type of types) {
   for (const populated of [false, true]) {
     const source = {};
     if (populated) {
-      // Fill every field the contract knows about, required and optional.
       for (const f of [...required, ...optional]) source[f] = sampleValue(f);
     }
     const rec = baseRecord(type, source);
@@ -67,14 +59,12 @@ for (const type of types) {
     const part = partitionFields(rec, contracts);
     const where = `${type} (${populated ? "populated" : "empty"})`;
 
-    // (a) required is always visible.
     for (const f of required) {
       ok(part.visible.includes(`source.${f}`),
         `${where}: required field source.${f} is in visible`);
     }
     ok(part.noContract === false, `${where}: a contract was found`);
 
-    // (b) addable holds nothing the record has a value for.
     const hasValue = new Set([
       ...Object.keys(rec.source).filter((k) => k !== "type").map((k) => `source.${k}`),
       ...(rec.cost.length ? ["cost"] : []),
@@ -93,35 +83,30 @@ for (const type of types) {
       }
     }
 
-    // Nothing may sit in both partitions, and every addable field must be one the contract allows (plus the envelope group tokens).
     for (const path of part.addable) {
       ok(!part.visible.includes(path), `${where}: ${path} is not in both visible and addable`);
     }
     ok(part.orphans.length === 0, `${where}: a contract-conformant record has no orphans`);
 
     if (populated) {
-      // Everything the record carries is visible - nothing behind the expander.
       for (const f of [...required, ...optional]) {
         ok(part.visible.includes(`source.${f}`), `${where}: set field source.${f} is visible`);
       }
       ok(part.addable.length === 0 || !part.addable.includes(DATES_GROUP),
         `${where}: every date field set, so no Dates and repeats group is offered`);
     } else {
-      // An empty record offers the trio as ONE grouped row.
       ok(part.addable.includes(DATES_GROUP),
         `${where}: the availability fields collapse into one addable group`);
       ok(part.addable.filter((p) => p.startsWith("availability.")).length === 1,
         `${where}: exactly one availability entry in addable`);
     }
 
-    // The envelope's two unconditional fields.
     ok(part.visible.includes("cost"), `${where}: cost is always visible`);
     ok(part.visible.includes("availability.version"),
       `${where}: availability.version is always visible`);
   }
 }
 
-// -- (c) an UNKNOWN source key yields exactly one orphan
 for (const type of types) {
   const rec = baseRecord(type, { dungeon: "FUNGAL_GROTTO_I" });
   const part = partitionFields(rec, contracts);
@@ -141,7 +126,7 @@ for (const type of types) {
     const own = new Set([...(contracts[type].required || []),
       ...(contracts[type].optional || []), "note"]);
     for (const field of union) {
-      if (own.has(field)) continue;          // this type features it already
+      if (own.has(field)) continue;
       pairs++;
       const part = partitionFields(baseRecord(type, { [field]: sampleValue(field) }), contracts);
       ok(part.orphans.length === 0,
@@ -153,7 +138,6 @@ for (const type of types) {
     }
   }
   ok(pairs > 0, "the type/field matrix produced at least one off-contract pair to check");
-  // The card's own case, named so a failure says which record it is about.
   const murkmire = partitionFields(
     baseRecord("quest_reward", { locations: [{ location: "MURKMIRE" }], subtype: "daily",
       container: "BOONBOX" }), contracts);
@@ -161,23 +145,20 @@ for (const type of types) {
     "item 141921's case: a quest reward can carry the container it came in");
 }
 
-// -- V3: a finding pulls an empty optional field out of the expander ---------
 {
   const rec = baseRecord("drop");
   const findings = { errors: [{ field: "source.npc_class", message: "x" }], warnings: [] };
   const part = partitionFields(rec, contracts, findings);
-  ok(part.visible.includes("source.npc_class"), "V3: a field named by a finding is visible");
-  ok(!part.addable.includes("source.npc_class"), "V3: and is not also addable");
+  ok(part.visible.includes("source.npc_class"), "a field named by a finding is visible");
+  ok(!part.addable.includes("source.npc_class"), "a field named by a finding is not also addable");
 }
 
-// -- `note` is allowed on every type, contract or not ------------------------
 for (const type of types) {
   const part = partitionFields(baseRecord(type, { note: "vault chests" }), contracts);
   ok(part.visible.includes("source.note"), `${type}: source.note is legal and visible`);
   ok(part.orphans.length === 0, `${type}: source.note is never an orphan`);
 }
 
-// -- no contract: everything read-only --------------------------------------
 {
   const rec = baseRecord("no_such_type", { vendor: "LUXF" });
   const part = partitionFields(rec, contracts);
@@ -188,7 +169,6 @@ for (const type of types) {
     "unknown source type: the fields it carries are read-only");
 }
 
-// -- the site-only three -----------------------------------------------------
 {
   const rec = baseRecord("recipe");
   rec.notes = "approximated: the row says only 'crafted by'";

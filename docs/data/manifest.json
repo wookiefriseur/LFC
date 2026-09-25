@@ -11,6 +11,7 @@
       "EventItems.lua",
       "Fishing.lua",
       "HomeGoodsFurnisher.lua",
+      "IgnoredItems.lua",
       "Justice.lua",
       "LuxuryFurnisher.lua",
       "MiscItemSources.lua",
@@ -24,10 +25,10 @@
   },
   "files": [
     {
-      "name": "achievement_vendor.jsonl",
-      "type": "achievement_vendor",
-      "records": 1434,
-      "digest": "a907cf5267f8f90a"
+      "name": "vendor.jsonl",
+      "type": "vendor",
+      "records": 1381,
+      "digest": "ea28a1f3654c359d"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -38,8 +39,8 @@
     {
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
-      "records": 160,
-      "digest": "0d5564cc3cbb8e6f"
+      "records": 177,
+      "digest": "1c0496b15372d9a7"
     },
     {
       "name": "luxury.jsonl",
@@ -120,6 +121,12 @@
       "digest": "1dee0720b780d787"
     },
     {
+      "name": "container.jsonl",
+      "type": "container",
+      "records": 175,
+      "digest": "73bc76226a7ea6f8"
+    },
+    {
       "name": "rumour.jsonl",
       "type": "rumour",
       "records": 400,
@@ -132,20 +139,20 @@
       "digest": "f2a038dab9fbb843"
     }
   ],
-  "digest": "091029a642c0d4dd",
+  "digest": "fc56356781863bcb",
   "counts": {
-    "records": 9669,
-    "ids": 11913,
-    "files": 18,
-    "rows_seen": 8790,
-    "module_records": 9669,
+    "records": 9808,
+    "ids": 11930,
+    "files": 19,
+    "rows_seen": 8791,
+    "module_records": 9809,
     "dedup_dropped": 0,
     "rumour_dropped": 1,
     "separator_rejected": 0,
     "by_type": {
-      "achievement_vendor": 1434,
+      "vendor": 1381,
       "pvp_vendor": 84,
-      "writ_vendor": 160,
+      "writ_vendor": 177,
       "luxury": 664,
       "event_drop": 83,
       "event_vendor": 94,
@@ -159,6 +166,7 @@
       "companion": 6,
       "guild_gift": 12,
       "tome_pack": 19,
+      "container": 175,
       "rumour": 400,
       "ignored": 1
     }

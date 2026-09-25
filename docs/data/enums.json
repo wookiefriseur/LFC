@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "source_types": [
-    "achievement_vendor",
+    "vendor",
     "pvp_vendor",
     "writ_vendor",
     "luxury",
@@ -17,14 +17,15 @@
     "companion",
     "guild_gift",
     "tome_pack",
+    "container",
     "rumour",
     "ignored"
   ],
   "source_type_contracts": {
-    "ignored": { "required": [], "optional": ["note"] },
-    "achievement_vendor": {
+    "vendor": {
       "required": [
-        "vendor"
+        "vendor",
+        "subtype"
       ],
       "optional": [
         "locations",
@@ -32,7 +33,8 @@
         "quest",
         "skill_line",
         "skill_rank",
-        "note"
+        "note",
+        "part_of"
       ]
     },
     "pvp_vendor": {
@@ -114,12 +116,6 @@
         "note"
       ]
     },
-    "rumour": {
-      "required": [],
-      "optional": [
-        "note"
-      ]
-    },
     "drop": {
       "required": [],
       "optional": [
@@ -177,6 +173,26 @@
         "note"
       ],
       "optional": []
+    },
+    "container": {
+      "required": [
+        "part_of"
+      ],
+      "optional": [
+        "note"
+      ]
+    },
+    "rumour": {
+      "required": [],
+      "optional": [
+        "note"
+      ]
+    },
+    "ignored": {
+      "required": [],
+      "optional": [
+        "note"
+      ]
     }
   },
   "locations": [
@@ -1974,8 +1990,11 @@
     }
   ],
   "source_priority": [
+    "IGNORED",
     "CRAFTING",
+    "HOME_GOODS",
     "VENDOR",
+    "ACHIEVEMENT",
     "WRIT_VENDOR",
     "ROLIS",
     "TOMES",
@@ -2031,7 +2050,15 @@
     "CHEST",
     "QUEST",
     "PICKPOCKET",
-    "STEAL_CONTAINER"
+    "STEAL_CONTAINER",
+    "IGNORED",
+    "HOME_GOODS",
+    "ACHIEVEMENT"
+  ],
+  "vendor_subtypes": [
+    "achievement",
+    "home_goods",
+    "other"
   ],
   "crown_store_subtypes": [
     "housing_editor"

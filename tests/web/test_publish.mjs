@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-// test_publish.mjs - a deploy under GitHub Pages' caching serves one version.
-
 
 import http from "node:http";
 import fs from "node:fs/promises";
@@ -18,7 +16,6 @@ const CHANGED = ["lexicon.js", "form.js"];
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css",
   ".json": "application/json", ".jsonl": "application/x-ndjson", ".png": "image/png" };
 
-// A static server whose root can be swapped - the deploy - answering every file the way Pages does.
 function pagesServer() {
   let root = null;
   const server = http.createServer(async (req, res) => {
@@ -59,7 +56,6 @@ const importMap = async (dir) => {
   return m ? JSON.parse(m[1]).imports : null;
 };
 
-// Load deploy A, switch the server to B, load again. Returns what each load ran and which module responses the second load took from the browser's cache.
 async function twoLoads(browser, srv, a, b) {
   const ctx = await browser.createBrowserContext();
   const page = await ctx.newPage();
@@ -108,7 +104,6 @@ async function main() {
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"] });
   const srv = await pagesServer();
   try {
-    // The current LFC working tree, then two versions of it.
     const src = path.join(tmp, "src");
     await fs.cp(DOCS, src, { recursive: true });
     const raw = { a: path.join(tmp, "raw-a"), b: path.join(tmp, "raw-b") };

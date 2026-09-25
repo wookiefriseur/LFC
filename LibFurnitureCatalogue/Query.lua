@@ -392,23 +392,25 @@ local function setVendorLocation(rec, id)
   end
 end
 
-local function achievementVendorRecord(rec, recipeKey, version)
+local function vendorRecord(rec, recipeKey, version, data, source)
   local function findIn(versionData)
     if not versionData then
       return
     end
     for zoneName, zoneData in pairs(versionData) do
       for vendorName, vendorData in pairs(zoneData) do
-        if vendorData[recipeKey] then
-          return zoneName, vendorName, vendorData[recipeKey]
+        local row = vendorData[recipeKey]
+        local matches = source == src.HOME_GOODS or (type(row) == "table" and row.achievement and src.ACHIEVEMENT or src.VENDOR) == source
+        if row and matches then
+          return zoneName, vendorName, row
         end
       end
     end
   end
 
-  local zone, vendor, entry = findIn(FurC.AchievementVendors[version])
+  local zone, vendor, entry = findIn(data and data[version])
   if not entry then
-    for _, versionData in pairs(FurC.AchievementVendors) do
+    for _, versionData in pairs(data or {}) do
       zone, vendor, entry = findIn(versionData)
       if entry then
         break
@@ -778,11 +780,16 @@ local SOURCE_MODEL = {
   [src.EDITOR] = function(rec, recipeKey, recipeArray)
     return crownRecord(rec, recipeKey, recipeArray, src.EDITOR)
   end,
-  -- mostly achievement vendors, but a row can also name the same vendor from a misc file
   [src.VENDOR] = function(rec, recipeKey, recipeArray)
-    if not achievementVendorRecord(rec, recipeKey, recipeArray.version) then
+    if not vendorRecord(rec, recipeKey, recipeArray.version, FurC.AchievementVendors, src.VENDOR) then
       miscRecord(rec, recipeKey, recipeArray, src.VENDOR)
     end
+  end,
+  [src.HOME_GOODS] = function(rec, recipeKey, recipeArray)
+    vendorRecord(rec, recipeKey, recipeArray.version, FurC.HomeGoodsFurnisher, src.HOME_GOODS)
+  end,
+  [src.ACHIEVEMENT] = function(rec, recipeKey, recipeArray)
+    vendorRecord(rec, recipeKey, recipeArray.version, FurC.AchievementVendors, src.ACHIEVEMENT)
   end,
   [src.LUXURY] = function(rec, recipeKey, recipeArray)
     luxuryRecord(rec, recipeKey, recipeArray.version)

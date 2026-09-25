@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-// test_diff_schema.mjs
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
-import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
+import { DirtyBuffer, serialiseDiff, MUTABLE_FIELDS } from "../../docs/diff.js";
 import { ENUM_KINDS } from "../../docs/maintenance.js";
 
 const require = createRequire(import.meta.url);
@@ -20,7 +19,6 @@ let failed = 0;
 const ok = (name) => console.log(`  ok   ${name}`);
 const fail = (name, why) => { failed++; console.log(`  FAIL ${name}\n       ${why}`); };
 
-// A value for one ENUM_KINDS field descriptor that satisfies its own rules.
 function sample(field) {
   if (field.type === "int") return Math.max(field.min || 1, 7);
   if (field.key === "si") return "SI_FURC_TEST_ENTRY";
@@ -28,7 +26,6 @@ function sample(field) {
   return "Test entry";
 }
 
-// One add-enum line, produced the way the mask produces it.
 function lineFor(kind, meta) {
   const buffer = new DirtyBuffer();
   buffer.addEnum(`enum#${kind.key}:NEW_VALUE`, kind.key, "NEW_VALUE", meta);
@@ -37,12 +34,9 @@ function lineFor(kind, meta) {
   return JSON.parse(lines[0]);
 }
 
-// -- 1. every vocabulary the editor offers ----------------------------------
-
 for (const kind of ENUM_KINDS) {
   const meta = {};
   for (const f of kind.meta) meta[f.key] = sample(f);
-  // The mask always carries the symbol in `meta`; diff.js drops it.
   meta.symbol = "NEW_VALUE";
   const line = lineFor(kind, meta);
   if (validate(line)) ok(`add-enum ${kind.key}`);
@@ -50,7 +44,6 @@ for (const kind of ENUM_KINDS) {
     `${JSON.stringify(line)}\n       ${JSON.stringify(validate.errors)}`);
 }
 
-// A vocabulary whose optional extras were left blank still validates: diff.js drops an empty field rather than sending it as "".
 for (const kind of ENUM_KINDS.filter((k) => k.meta.some((f) => !f.required))) {
   const meta = { symbol: "NEW_VALUE" };
   for (const f of kind.meta) meta[f.key] = f.required ? sample(f) : "";
@@ -60,7 +53,6 @@ for (const kind of ENUM_KINDS.filter((k) => k.meta.some((f) => !f.required))) {
     `${JSON.stringify(line)}\n       ${JSON.stringify(validate.errors)}`);
 }
 
-// The other three ops go through the same oneOf, so widening `meta` must not have cost them anything.
 {
   const rec = {
     id: 126560, source: { type: "luxury", vendor: "LUXF" },
@@ -78,8 +70,6 @@ for (const kind of ENUM_KINDS.filter((k) => k.meta.some((f) => !f.required))) {
   }
 }
 
-// -- 2. the schema's table against the editor's own ------------------------
-
 const table = schema.$defs.metaFor;
 for (const kind of ENUM_KINDS) {
   const entry = table[kind.key];
@@ -87,7 +77,6 @@ for (const kind of ENUM_KINDS) {
   const wantKeys = kind.meta.map((f) => f.key).sort();
   const wantReq = kind.meta.filter((f) => f.required).map((f) => f.key).sort();
   if (wantKeys.length === 0) {
-    // A flat list: the schema must forbid `meta` rather than describe one.
     const forbids = entry.then?.not?.required?.includes("meta");
     if (forbids) ok(`table ${kind.key} (flat, meta forbidden)`);
     else fail(`table ${kind.key}`, "a flat vocabulary must forbid meta");
@@ -112,8 +101,6 @@ for (const key of Object.keys(table)) {
   }
 }
 
-// -- 3. the schema still refuses what it should ----------------------------
-
 const wrong = { v: 1, op: "add-enum", enum: "places", value: "NEW_VALUE", meta: { crate: 7 } };
 if (!validate(wrong)) ok("a places entry carrying a crates key is refused");
 else fail("a places entry carrying a crates key is refused", "it validated");
@@ -125,8 +112,6 @@ else fail("a places entry with no meta at all is refused", "it validated");
 const flat = { v: 1, op: "add-enum", enum: "currencies", value: "NEW_VALUE", meta: { name: "x" } };
 if (!validate(flat)) ok("a currencies entry carrying meta is refused");
 else fail("a currencies entry carrying meta is refused", "it validated");
-
-// -- 4. record identity: a furnishing id, a blueprint id, or both ----
 
 function recordLine(record) {
   const buffer = new DirtyBuffer();
@@ -144,6 +129,28 @@ for (const [name, ids] of [["furnishing only", { id: 114327 }],
 const anonymous = { v: 1, op: "add", category: "recipe", record: base };
 if (!validate(anonymous)) ok("an add line naming neither id nor blueprint is refused");
 else fail("an add line naming neither id nor blueprint is refused", "it validated");
+
+const updatable = schema.oneOf[0].properties.fields.propertyNames.enum;
+const drift = [...MUTABLE_FIELDS].filter((f) => !updatable.includes(f))
+  .concat(updatable.filter((f) => !MUTABLE_FIELDS.has(f)));
+if (drift.length === 0) ok("every field the editor can change is one an update line may carry");
+else fail("every field the editor can change is one an update line may carry", drift.join(", "));
+
+function updateLine(before, after) {
+  const buffer = new DirtyBuffer();
+  buffer.update("container#1", before, after, "writ_vendor");
+  return JSON.parse(serialiseDiff(buffer).split("\n").filter(Boolean)[0]);
+}
+const folio = { id: 171568, source: { type: "writ_vendor" }, cost: [], availability: { version: "HOMESTEAD" } };
+for (const [name, after] of [["set", { ...folio, container: "folio" }], ["cleared", folio]]) {
+  const before = name === "set" ? folio : { ...folio, container: "folio" };
+  const line = updateLine(before, after);
+  if (validate(line)) ok(`an update line with the container kind ${name} validates`);
+  else fail(`an update line with the container kind ${name} validates`, JSON.stringify(validate.errors));
+}
+const badKind = { v: 1, op: "update", category: "writ_vendor", id: 171568, fields: { container: "crate" } };
+if (!validate(badKind)) ok("an unknown container kind is refused");
+else fail("an unknown container kind is refused", "it validated");
 
 console.log(failed ? `\n${failed} failure(s)` : "\nall green");
 process.exit(failed ? 1 : 0);

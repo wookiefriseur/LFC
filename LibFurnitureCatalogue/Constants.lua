@@ -109,6 +109,8 @@ this.ItemSources = {
   PICKPOCKET = getNextIdFor("ITEM_SOURCES"), -- 29
   STEAL_CONTAINER = getNextIdFor("ITEM_SOURCES"), -- 30
   IGNORED = getNextIdFor("ITEM_SOURCES"), -- 31
+  HOME_GOODS = getNextIdFor("ITEM_SOURCES"), -- 32
+  ACHIEVEMENT = getNextIdFor("ITEM_SOURCES"), -- 33
 }
 
 -- value -> name
@@ -126,7 +128,9 @@ do
     [src.IGNORED] = 0, -- deliberate exclusion overrides acquisition sources
     [src.CRAFTING] = 10,
     -- purchased (in-game currencies)
-    [src.VENDOR] = 20,
+    [src.HOME_GOODS] = 18, -- gold, no achievements
+    [src.VENDOR] = 19,
+    [src.ACHIEVEMENT] = 20,
     [src.WRIT_VENDOR] = 21,
     [src.ROLIS] = 22,
     [src.TOMES] = 23,
@@ -171,7 +175,9 @@ do
     [src.CRAFTING] = "Crafting",
     [src.CRAFTING_KNOWN] = "Crafting",
     [src.CRAFTING_UNKNOWN] = "Crafting",
-    [src.VENDOR] = "Achievement Vendor",
+    [src.VENDOR] = "Vendor",
+    [src.HOME_GOODS] = "Home Goods Furnisher",
+    [src.ACHIEVEMENT] = "Achievement Furnisher",
     [src.PVP] = "PvP Vendor",
     [src.WRIT_VENDOR] = "Master Writ Vendor",
     [src.CROWN] = "Crown Store",

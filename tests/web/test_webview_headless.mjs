@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-// test_webview_headless.mjs - drive the webview prototype in a real browser.
-//
-// Boots ../../docs behind a plain static server and drives it in headless Chromium
 
 import http from "node:http";
 import fs from "node:fs/promises";
@@ -64,7 +61,7 @@ function serve(root) {
   });
 }
 
-// --- the tiny test runner --------------------------------------------------
+// Test runner
 
 let refDataGate = null;
 
@@ -83,7 +80,7 @@ function assertAtLeast(actual, min, msg) {
   if (!(actual >= min)) throw new Error(`${msg || "assertAtLeast"}: ${actual} < ${min}`);
 }
 
-// --- page helpers ----------------------------------------------------------
+// Page helpers
 
 const app = (page) => page.evaluate(() => window.__proto || null);
 
@@ -93,7 +90,6 @@ async function waitForBoot(page) {
     () => window.__proto && window.__proto.ready === true,
     { timeout: 30000 },
   ).catch(() => {
-    // Older builds have no debug hook; fall back to "the default panel drew".
     return page.waitForSelector(".panel:not([hidden])", { timeout: 5000 });
   });
 }
@@ -110,7 +106,7 @@ async function switchTab(page, id) {
 const tabIds = (page) =>
   page.$$eval("#tab-bar button", (bs) => bs.map((b) => b.id.replace(/^tab-/, "")));
 
-// --- tests -----------------------------------------------------------------
+// Tests
 
 test("boots with no page errors and mounts the mask tab bar", async (page) => {
   const ids = await tabIds(page);
@@ -144,15 +140,12 @@ test("contracts are indicators: a known field is legal on any type, an unknown k
     if (!base) return null;
     const clone = () => JSON.parse(JSON.stringify(base));
 
-    // `container` is named by event_drop and event_vendor and by no other contract, so a quest reward carrying one is exactly the combination the per-type lists forbade - and it is what cost item 141921 the container it came in.
     const withContainer = clone();
     withContainer.source.container = s.enums.containers[0].symbol;
 
-    // `dungeon` is named by no contract at all: a field v2 retired.
     const withRetired = clone();
     withRetired.source.dungeon = "FUNGAL_GROTTO_I";
 
-    // Required is per type and stays a hard rule - luxury requires a vendor.
     const missingRequired = {
       id: 1, source: { type: "luxury" }, cost: [],
       availability: { version: base.availability.version },
@@ -335,7 +328,6 @@ test("batch edit: the form renders note, rarity and notes, and follows source.ty
   );
   const after = await page.$$eval("form [data-field], form select, form input", (n) => n.length);
   assert(after > 0 && before > 0, "form fields did not render");
-  // The note field survives the type switch: it is on every contract.
   const notes = await page.$$eval(".note-combo", (n) => n.length);
   assertAtLeast(notes, 1, "note combo missing after a source.type switch");
 });
@@ -595,7 +587,6 @@ test("the tab bar is Luxury, Crown, Browse, Batch edit, Maintenance, About", asy
     (els) => els.filter((e) => /about/i.test(e.textContent)).length);
   assertEq(footerAbout, 0, "the footer still links About");
 
-  // About is never where the site opens: switching to it is not remembered.
   await switchTab(page, "about");
   const stored = await page.evaluate(() => localStorage.getItem("furcat-last-tab"));
   assert(stored !== "about", "About was remembered as the landing tab");
@@ -616,7 +607,6 @@ test("about: the page carries the landing page's links and the Luxury introducti
   assert(/Zanil Theran/.test(text), "the Luxury introduction did not move here");
   assert(/Send it/.test(text), "About does not say how to contribute");
 
-  // ...and the Luxury screen now opens on its controls.
   await switchTab(page, "luxury");
   const head = await page.$eval(".lux-title", (e) => e.textContent.trim());
   assert(!/Zanil Theran/.test(head),
@@ -627,7 +617,7 @@ test("browse: nothing offers a reason for an item being unconfirmed", async (pag
   await switchTab(page, "browse");
   await page.waitForSelector("#browse-search", { timeout: 10000 });
   await page.$$eval("#browse-facet-list .browse-facet-link", (bs) => {
-    const all = bs.find((b) => /All furniture/.test(b.textContent));
+    const all = bs.find((b) => /All items/.test(b.textContent));
     if (all) all.click();
   });
   await page.evaluate(() => {
@@ -653,7 +643,6 @@ test("browse: nothing offers a reason for an item being unconfirmed", async (pag
   });
   await page.waitForSelector(".modal-backdrop", { timeout: 10000 });
 
-  // A shut <details> still yields its text, so this covers the expander too.
   const retired = await page.$eval(".modal-backdrop", (d) =>
     (d.textContent.match(/Why it is unconfirmed|Heard about it|unverified/gi) || []));
   assertEq(retired.length, 0, `the editor still offers: ${retired.join(", ")}`);
@@ -689,7 +678,6 @@ function fencedDiff(body) {
   return between.replace(/```/g, "").trim();
 }
 
-// The diff the submit screen would send, parsed. Opens the modal and closes it again, so a test can assert on the export rather than on the buffer.
 async function diffLines(page) {
   await page.click("#btn-submit");
   await page.waitForFunction(
@@ -778,7 +766,7 @@ test("crown store: an item sold only in a pack is an add, not an edit", async (p
 });
 
 
-test("the placement editor writes what the validator accepts (S10 gate)", async (page) => {
+test("the placement editor writes what the validator accepts", async (page) => {
   await switchTab(page, "advanced");
   await page.waitForSelector("#panel-advanced table tbody tr", { timeout: 20000 });
   await page.click("#panel-advanced table tbody tr");
@@ -809,7 +797,6 @@ test("the placement editor writes what the validator accepts (S10 gate)", async 
   assertEq(await page.$$eval(".placement-list.is-invalid", (n) => n.length), 1,
     "the empty row must mark the widget invalid");
 
-  // Choosing a zone in the row's first select clears it.
   const zone = await page.evaluate(() => window.__proto.enums.locations[0].symbol);
   await page.select(".placement-row select", zone);
   assertEq((await codes()).length, 0,
@@ -817,7 +804,6 @@ test("the placement editor writes what the validator accepts (S10 gate)", async 
   assertEq(await page.$$eval(".placement-row", (n) => n.length), 1,
     "one placement, one row");
 
-  // A second row round-trips too, and "remove" takes the axis back to absent.
   await page.evaluate(() => {
     [...document.querySelectorAll(".placement-list button")]
       .find((b) => b.textContent === "add a place").click();
@@ -920,13 +906,12 @@ test("modal: opens from Find an item, names which record, saves to the one buffe
       { timeout: 10000 }, before,
     );
   }
-  // Escape must always get a keyboard user out.
   await page.keyboard.press("Escape");
   const stillOpen = await page.$(".modal-backdrop");
   assertEq(stillOpen, null, "Escape did not close the quick-edit modal");
 });
 
-test("AN-8 modal: a record that was already broken can still be corrected", async (page) => {
+test("modal: a record that was already broken can still be corrected", async (page) => {
   const fix = await page.evaluate(() => {
     const en = window.__proto.enums;
     en.crates.push({ symbol: "IRONY", crate: null, season: null, name: null,
@@ -980,7 +965,6 @@ test("split: Batch edit names what ships to the game and what does not", async (
 });
 
 test("words: no dotted schema path is visible in the editors", async (page) => {
-  // Batch edit is allowed to carry the path in a tooltip, never in body text.
   const leaked = await page.evaluate(() => {
     const paths = /\b(source|availability)\.[a-z_]+/g;
     const seen = new Set();
@@ -1014,7 +998,7 @@ test("id: read-only everywhere, with no unlock", async (page) => {
   assertEq(unlock, false, 'a "Change ID (advanced)" control still exists');
 });
 
-test("AN-2 review: the submit modal leads with plain English, not JSONL", async (page) => {
+test("review: the submit modal leads with plain English, not JSONL", async (page) => {
   const pending = await page.$eval("#pending-count", (e) => e.textContent);
   assert(/[1-9]/.test(pending),
     `nothing is buffered, so the send flow is not exercised: "${pending}"`);
@@ -1035,7 +1019,6 @@ test("AN-2 review: the submit modal leads with plain English, not JSONL", async 
   });
   assertEq(technical, true, "the raw diff is not behind a collapsed <details>");
   await page.click("#modal-close");
-  // Closing is the same state, read the other way round.
   await page.waitForFunction(
     () => !document.querySelector("#modal")?.classList.contains("open"),
     { timeout: 10000 },
@@ -1087,7 +1070,6 @@ test("batch edit: Ctrl/Shift ticking, Selected only, links in the side pane", as
   await page.click("#filter-selected");
   assertEq(await page.$$eval(rows, (r) => r.length), 4, "Selected only does not leave the four");
   await page.click("#filter-selected");
-  // Untick everything through the header box: tick all, then untick all.
   await page.click("#tick-all");
   await page.click("#tick-all");
   assertEq(await page.$$eval(`${rows} input[type=checkbox]`, (b) => b.filter((x) => x.checked).length),
@@ -1137,7 +1119,6 @@ test("help tooltips stay inside the viewport", async (page) => {
       const b = w.querySelector(".tip-btn").getBoundingClientRect();
       const vw = document.documentElement.clientWidth;
       const vh = document.documentElement.clientHeight;
-      // Next to its "?": over the same column, just above or just below it.
       const beside = r.left <= b.right && r.right >= b.left
         && (Math.abs(r.top - b.bottom) <= 12 || Math.abs(b.top - r.bottom) <= 12);
       return { ok: r.width > 0 && r.left >= 0 && r.top >= 0 && r.right <= vw && r.bottom <= vh
@@ -1268,7 +1249,6 @@ test("Batch edit's Source header is whole and a long detail wraps to two lines",
     const clamps = rows.map((tr) => tr.querySelector(".cell-source-detail .clamp2"));
     const long = clamps.find((d) => d.scrollHeight > d.clientHeight + 1)
       || clamps.find((d) => lines(d) === 2);
-    // "9,668 records - showing 1-44"
     const total = parseInt(document.querySelector("#row-count").textContent.replace(/,/g, ""), 10);
     const tbody = document.querySelector("#table-body");
     return {
@@ -1336,7 +1316,6 @@ test("Zanil flanks the Luxury column, blurred, mirrored, behind the controls", a
           const top = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
           return top && top.closest("#zanil-host");
         }).length;
-      // ...and the strip where each figure tucks under the column: wherever it meets a step card, the card paints on top.
       const cards = [...document.querySelectorAll(".luxury-mask .lux-step")].map((c) => c.getBoundingClientRect());
       let under = 0;
       for (const [x, fig] of [[L.right - 5, L], [R.left + 5, R]]) {
@@ -1372,7 +1351,6 @@ test("Zanil flanks the Luxury column, blurred, mirrored, behind the controls", a
 });
 
 test("Quick Edit shows only what a contributor should reach for", async (page) => {
-  // Every label in the open form, the expander's included, with its help.
   const labels = (scope) => page.$$eval(`${scope} .form-label`, (ls) => ls.map((l) => ({
     text: l.firstChild.textContent.trim(),
     tip: l.querySelector(".tip-bubble")?.firstChild?.textContent || "",
@@ -1471,7 +1449,7 @@ test("an invalid price marks the price input in both editors", async (page) => {
     const c = getComputedStyle(p).color; p.remove(); return c;
   });
 
-  const key = await page.evaluate(() => window.__proto.sampleRecord("achievement_vendor")._key);
+  const key = await page.evaluate(() => window.__proto.sampleRecord("vendor")._key);
   await page.evaluate((k) => window.__proto.openQuickEdit(k), key);
   await page.waitForSelector('.modal-backdrop [data-field="cost.0.amount"]', { timeout: 10000 });
   const quick = await zeroIn(".modal-backdrop");
@@ -1583,7 +1561,6 @@ test("the Item name box shows the item's name and edits it", async (page) => {
   assertEq(JSON.stringify(mine[0].fields?.name_overrides ?? mine[0].record?.name_overrides),
     JSON.stringify({ en: NEW }), `the line does not carry the name: ${JSON.stringify(mine[0])}`);
 
-  // Typing the game's name back is no override at all.
   await page.$eval(box, (i, v) => {
     i.value = v;
     i.dispatchEvent(new Event("input", { bubbles: true }));
@@ -1607,7 +1584,6 @@ test("icons show loading until the map lands, then turn into the icon", async (p
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
 
-    // Two cells drawn by nobody that listens for the map: one id it names (114327) and one below every shard it has (50000).
     await page.evaluate(async () => {
       const m = await import("./external-links.js");
       const host = document.createElement("div");
@@ -1676,7 +1652,6 @@ test("findings mark their own field, follow the edit, and have no block", async 
   assert(before.marked.includes("id"), `the id row is not marked: [${before.marked}]`);
   assertEq(before.block, 0, "the summary block under the form is still there");
 
-  // Typing a valid id clears that row's finding WITHOUT a rebuild
   await page.click("#adv-id");
   await page.type("#adv-id", "999000001");
   await page.waitForFunction(
@@ -1690,7 +1665,6 @@ test("findings mark their own field, follow the edit, and have no block", async 
   assertEq(fixed.marked.join(","), fixed.messaged.join(","),
     "a mark and its message parted company mid-edit");
 
-  // And a field broken mid-edit gains both, which the one-shot render never did.
   await page.evaluate(() => {
     const i = document.querySelector("#adv-id");
     i.value = "";
@@ -1701,7 +1675,6 @@ test("findings mark their own field, follow the edit, and have no block", async 
     { timeout: 5000 },
   );
 
-  // The composite-identity checks have no field row of their own to fall back to
   const multi = await page.evaluate(() => {
     const perCat = new Map(), perId = new Map();
     for (const r of window.__proto.records()) {
@@ -1711,7 +1684,7 @@ test("findings mark their own field, follow the edit, and have no block", async 
     }
     for (const [k, n] of perCat) {
       const id = Number(k.split("|")[1]);
-      if (n > 1 && perId.get(id) === n) return id;   // every record of it is here
+      if (n > 1 && perId.get(id) === n) return id;
     }
     return null;
   });
@@ -1721,7 +1694,6 @@ test("findings mark their own field, follow the edit, and have no block", async 
     s.value = id;
     s.dispatchEvent(new Event("input", { bubbles: true }));
   }, String(multi));
-  // Wait for the FILTER to land, not merely for rows to exist
   await page.waitForFunction(
     (want) => {
       const tr = document.querySelector("#panel-advanced table tbody tr");
@@ -1747,7 +1719,6 @@ test("a crate season is added and filled in one place, with no paste and no pric
   assert(!headers.some((h) => /price|cost/.test(h)),
     `the item list still has a price column: ${headers.join(", ")}`);
 
-  // A crate nobody has recorded yet, added from this screen.
   const CRATE_NAME = "Test Hunt";
   const SYMBOL = "TEST_HUNT";
   const before = await page.evaluate(
@@ -1771,7 +1742,6 @@ test("a crate season is added and filled in one place, with no paste and no pric
     () => window.__proto.enums.crates.map((c) => c.symbol || c));
   assert(known.includes(SYMBOL), "the new crate never reached the live vocabulary");
 
-  // Its items, one at a time, typed.
   const ids = await page.evaluate(() => {
     const have = new Set(window.__proto.records().map((r) => r.id));
     const out = [];
@@ -1805,7 +1775,6 @@ test("a crate season is added and filled in one place, with no paste and no pric
     assertEq(r.costs, 0, `id ${r.id} carries a price a crate item cannot have`);
   }
 
-  // The crate itself rides the same submission as its items.
   const lines = await diffLines(page);
   const enumLine = lines.find((l) => l.op === "add-enum" && l.value === SYMBOL);
   assert(enumLine, "the new crate is not in the submission");
@@ -1858,7 +1827,6 @@ test("a record added and then edited exports one add line with the edit", async 
   await page.waitForFunction(
     (id) => window.__proto.records().some((r) => r.id === id), { timeout: 10000 }, NEW_ID);
 
-  // Now edit the record that is still only an add, and save again.
   const other = await page.evaluate(() => {
     const sel = document.querySelector('#panel-advanced [name="availability.version"]');
     const opts = [...sel.options].map((o) => o.value).filter((v) => v && v !== sel.value);
@@ -1911,12 +1879,10 @@ test("an in-game dump pastes with no source question, and arrives Unconfirmed", 
     assert(r.version && r.version !== "NONE",
       `id ${r.id} has no patch: a dump is taken in one`);
   }
-  // The dropped prices are reported rather than swallowed.
   assert(/price/i.test(status), `the prices left out are not reported: "${status}"`);
 });
 
-test("#245 several ticked rows take one source in a single edit", async (page) => {
-  // Narrow to the two rows the dump just added.
+test("several ticked rows take one source in a single edit", async (page) => {
   await page.evaluate(() => {
     const s = document.querySelector("#search");
     s.value = "990000";
@@ -1927,7 +1893,6 @@ test("#245 several ticked rows take one source in a single edit", async (page) =
     { timeout: 10000 },
   );
 
-  // The header tick acts on what the filters left, not on the rendered slice.
   await page.click("#tick-all");
   await page.waitForSelector("#multi-apply", { timeout: 10000 });
   const count = await page.$eval("#multi-count", (e) => e.textContent);
@@ -1956,7 +1921,6 @@ test("#245 several ticked rows take one source in a single edit", async (page) =
   }
   assert(/2 changes/.test(msg), `the batch edit does not say what it did: "${msg}"`);
 
-  // The change list is where a batch edit has to land
   const lines = await diffLines(page);
   for (const id of DUMP_IDS) {
     const mine = lines.filter((l) => l.id === id);
@@ -1967,7 +1931,6 @@ test("#245 several ticked rows take one source in a single edit", async (page) =
     assertEq(mine[0].category, "drop", `id ${id} is addressed to ${mine[0].category}`);
   }
 
-  // Unticking hands the pane back to the single-record form.
   await page.$$eval("#panel-advanced .form-actions button", (bs) => {
     const b = bs.find((x) => /untick/i.test(x.textContent));
     if (b) b.click();
@@ -1981,7 +1944,6 @@ test("#245 several ticked rows take one source in a single edit", async (page) =
 
 test("a batch edit writes only the field that was changed", async (page) => {
   await switchTab(page, "advanced");
-  // Two untouched records sharing a whole source (with more in it than the type)
   const pair = await page.evaluate(() => {
     const by = new Map();
     for (const r of window.__proto.records()) {
@@ -2021,13 +1983,11 @@ test("a batch edit writes only the field that was changed", async (page) => {
     }, String(id));
   };
 
-  // One tick: the ordinary editor, on that record.
   await tickById(a.id);
   await page.waitForFunction((id) => window.__proto.editing()?.id === id,
     { timeout: 5000 }, a.id);
   assertEq(await page.$("#multi-apply"), null, "one ticked row opened the batch panel");
 
-  // Two: the batch panel, showing the shared source and a mixed game update.
   await tickById(b.id);
   await page.waitForSelector("#multi-apply", { timeout: 5000 });
   const shown = await page.evaluate(() => {
@@ -2053,7 +2013,6 @@ test("a batch edit writes only the field that was changed", async (page) => {
     }
   }
 
-  // Change the price, and nothing else.
   const PRICE = 424242;
   await page.$eval('#panel-advanced [data-field="cost.0.amount"]', (el, v) => {
     el.value = String(v);
@@ -2123,7 +2082,7 @@ test("the send screen discards the session's changes, after asking", async (page
   assertEq(sendHidden, true, "the send button outlived the changes it sends");
 });
 
-// --- driver ----------------------------------------------------------------
+// Driver
 
 // LAST, deliberately: this one RELOADS the page, and a reload empties the change buffer that the tests above build up between them
 test("recipes: a crafted record shows the item it makes, and its icon", async (page) => {
@@ -2171,7 +2130,6 @@ test("recipes: a crafted record shows the item it makes, and its icon", async (p
     assertEq(resolved.metaName, resolved.itemName,
       "a blueprint's metadata is not the metadata of the item it makes");
 
-    // And the card says so: the item's id, with the recipe as a footnote.
     await switchTab(page, "browse");
     await page.waitForSelector("#panel-browse .browse-card", { timeout: 15000 });
     await page.$eval("#browse-search", (e, id) => {
@@ -2195,7 +2153,6 @@ test("recipes: a crafted record shows the item it makes, and its icon", async (p
     assert(card.includes(`from recipe #${blueprint}`),
       `the card does not name the recipe it came from: ${card}`);
 
-    // Searching by the furnishing finds the same card as the blueprint did.
     await page.$eval("#browse-search", (e, id) => {
       e.value = String(id);
       e.dispatchEvent(new Event("input", { bubbles: true }));
@@ -2318,7 +2275,6 @@ test("ignored source: batch ignore and restore preserve notes and export source 
     assertEq(mine[1].record.notes, "Old item IDs; replaced by newer entries", "batch note lost");
     assertEq(JSON.stringify(mine[1].record.source), JSON.stringify({type:"ignored"}), "acquisition details survived ignoring");
   }
-  // The same selected records remain editable after becoming ignored.
   await page.select('#detail [name="source.type"]', "rumour");
   await page.click("#multi-apply");
   lines = await diffLines(page);

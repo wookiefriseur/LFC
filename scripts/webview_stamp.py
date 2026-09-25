@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Version the web interface's module URLs by content
-
-Using content-hash for js cache invalidation:
+"""Version the web interface's module URLs by content hash, for cache invalidation:
 
     "./quick-edit.js": "./quick-edit.js?v=<hash>"
 
-webview_serve.py runs this before serving docs/, so you could also restart the serve script each time. For live the pipeline will take care of it automatically.
+webview_serve.py runs this before serving docs/.
 
     python3 scripts/webview_stamp.py [--check]
 
@@ -34,7 +32,7 @@ def versions(docs):
 
 
 def stamp(html, v, name):
-    """index.html / 404.html with every versioned reference brought up to date. Refuses a page whose entry script or stylesheet it cannot find"""
+    """index.html / 404.html with every versioned reference brought up to date. Refuses a page whose entry script or stylesheet it cannot find."""
     html, n = STYLE.subn(f'<link rel="stylesheet" href="./style.css?v={v["style.css"]}">', html)
     if n != 1:
         raise SystemExit(f"{name}: expected one style.css link, found {n}")
@@ -46,9 +44,7 @@ def stamp(html, v, name):
     html = IMPORT_MAP.sub("", html)
     imports = {f"./{m}": f"./{m}?v={h}" for m, h in v.items() if m.endswith(".js")}
     block = json.dumps({"imports": imports}, indent=2).replace("\n", "\n  ")
-    # End of <head>: before every module script (the entry is in <body>), and
-    # after <meta charset>, which a browser only looks for in the first 1024
-    # bytes.
+    # End of <head>: before every module script, and after <meta charset>, which a browser only looks for in the first 1024 bytes.
     html, n = re.subn(r"</head>",
                       lambda _: f'  <script type="importmap">\n  {block}\n  </script>\n</head>',
                       html, count=1)

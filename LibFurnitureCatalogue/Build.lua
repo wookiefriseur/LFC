@@ -410,11 +410,12 @@ local function scanFromFiles(blocking)
   -- Expects [zone][vendor][itemId]
   local function parseZoneData(zoneName, zoneData, versionNumber, origin)
     for vendorName, vendorData in pairs(zoneData) do
-      for itemId in pairs(vendorData) do
+      for itemId, row in pairs(vendorData) do
         if type(itemId) ~= "number" then
           logDebug("parseZoneData: %s / %s holds non-numeric key %s", zoneName, vendorName, itemId)
         else
-          addDatabaseEntry(itemId, { origin = origin, version = versionNumber })
+          local source = origin == src.VENDOR and type(row) == "table" and row.achievement and src.ACHIEVEMENT or origin
+          addDatabaseEntry(itemId, { origin = source, version = versionNumber })
         end
       end
     end
@@ -600,6 +601,11 @@ local function scanFromFiles(blocking)
   end
 
   local function scanVendorFiles()
+    for versionNumber, versionData in pairs(FurC.HomeGoodsFurnisher or {}) do
+      for zoneName, zoneData in pairs(versionData) do
+        parseZoneData(zoneName, zoneData, versionNumber, src.HOME_GOODS)
+      end
+    end
     for versionNumber, versionData in pairs(FurC.AchievementVendors) do
       for zoneName, zoneData in pairs(versionData) do
         parseZoneData(zoneName, zoneData, versionNumber, src.VENDOR)

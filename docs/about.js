@@ -1,11 +1,9 @@
-// about.js — what this site is, where its data comes from, how to contribute
-
 export function renderAbout(container) {
   container.innerHTML = `
     <section class="about">
       <h2>About this site</h2>
       <p class="about-lead">
-        LibFurnitureCatalogue is the furniture database the FurnitureCatalogue AddOn. It carries where each furnishing comes from and a query API other add-ons can call.
+        LibFurnitureCatalogue is the furniture database for the FurnitureCatalogue AddOn. It carries where each furnishing comes from and a query API other AddOns can call.
       </p>
 
       <div class="about-box">

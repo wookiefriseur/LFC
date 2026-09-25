@@ -1,12 +1,10 @@
--- Data: currently merges into AchievementVendors, must load after AchievementVendors.lua ()
+-- Data: HomeGoodsFurnisher (gold, no achievements)
 --
--- Rows nest `[version][location][vendor][itemId]`, every key an id:
--- - `location`: ZoneIds or PlaceIds value (where a merchant is, like "any capital city" or "Undaunted enclave")
+-- Nested `[version][location][vendor][itemId]`, every key an id:
+-- - `location`: ZoneIds or PlaceIds value
 -- - `vendor`: NpcIds value
 --
--- Row carries `itemPrice` with its `currency`, and requirements (`achievement`, or a `skillRank` of a `skillLine`)
-
-FurC.AchievementVendors = FurC.AchievementVendors or {}
+-- Row carries `itemPrice` with its `currency`
 
 local LFC = LibFurnitureCatalogue
 local places = LFC.Internal.Constants.PlaceIds
@@ -112,7 +110,7 @@ local fishing_trip = {
 local miscVendor = merge(merge(merge(structures, boxes), laundry), fishing_trip)
 
 -- ZERO2
-local homeGoodsFurnisherData = {
+FurC.HomeGoodsFurnisher = {
   [ver.THIEVES] = {
     [zones.GLENUMBRA] = {
       [npcIds.HGF] = {
@@ -2084,60 +2082,3 @@ local homeGoodsFurnisherData = {
     },
   },
 }
-
--- populate the shared achievement-vendor database from the authoring table above
-for version, zones in pairs(homeGoodsFurnisherData) do
-  FurC.AchievementVendors[version] = FurC.AchievementVendors[version] or {}
-  for zoneName, vendors in pairs(zones) do
-    FurC.AchievementVendors[version][zoneName] = FurC.AchievementVendors[version][zoneName] or {}
-    for vendorName, items in pairs(vendors) do
-      FurC.AchievementVendors[version][zoneName][vendorName] = items
-    end
-  end
-end
-
--- WORMS2
-
--- SHADOWS
-
--- WORMS
-
--- Fallen Banners
-
--- 30 Gold Road
-
--- 28 Secrets of the Telvanni
-
--- 26 Necrom
-
--- 24 Firesong
-
--- 22 High Isle
-
--- 20 Deadlands
-
--- 19 Blackwood
-
--- 17 Markarth
-
--- 15 Greymoor
-
--- 13 Dragonhold
-
--- 11 Elsweyr
-
--- 9 Wolfhunter
-
--- 8 Murkmire
-
--- 7 Summerset
-
--- 6 Dragon Bones
-
--- CLOCKWORK
-
--- 4 Horns of the Reach
-
--- MORROWIND
-
--- HOMESTEAD
