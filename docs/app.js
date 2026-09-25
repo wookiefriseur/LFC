@@ -9,7 +9,7 @@ import {
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
   DirtyBuffer, buildIssueBody, buildIssueURL, suggestTitle,
-  MAX_ISSUE_URL_LENGTH, URL_CAP_HINT, ISSUE_REPO,
+  MAX_ISSUE_URL_LENGTH, ISSUE_REPO,
 } from "./diff.js";
 import {
   validateRecord, validateBuffer, findDuplicateRecord, messageFor,
@@ -1861,6 +1861,9 @@ function openSubmitModal() {
   const tooManyForALink = issueURL.length > MAX_ISSUE_URL_LENGTH;
   const openBtn = $("#modal-open-issue");
   const copyBtn = $("#modal-copy");
+  const oversize = $("#modal-oversize");
+  oversize.hidden = true;
+  openBtn.textContent = "Send using GitHub";
   if (blocked) {
     openBtn.classList.add("is-disabled");
     openBtn.removeAttribute("href");
@@ -1868,22 +1871,29 @@ function openSubmitModal() {
   } else {
     openBtn.classList.remove("is-disabled");
     openBtn.removeAttribute("aria-disabled");
-    openBtn.href = tooManyForALink ? `https://github.com/${ISSUE_REPO}/issues/new` : issueURL;
+    // Too long for a URL: the button explains the two-step way instead of opening a truncated issue.
+    if (tooManyForALink) openBtn.removeAttribute("href");
+    else openBtn.href = issueURL;
   }
-  openBtn.textContent = tooManyForALink ? "Open blank issue" : "Open GitHub Issue";
-
-  openBtn.classList.toggle("btn-primary", !tooManyForALink);
-  copyBtn.classList.toggle("btn-primary", tooManyForALink);
-  $("#modal-url-note").textContent = URL_CAP_HINT;
-  $("#modal-url-note").hidden = !tooManyForALink;
-
-  copyBtn.onclick = () => {
-    navigator.clipboard?.writeText(issueBody).then(
-      () => (copyBtn.textContent = "Copied!"),
-      () => (copyBtn.textContent = "Copy failed (use Ctrl+C from the raw data)"),
-    );
-    setTimeout(() => (copyBtn.textContent = "Copy to clipboard"), 2000);
+  openBtn.onclick = (e) => {
+    if (blocked || !tooManyForALink) return;
+    e.preventDefault();
+    oversize.hidden = false;
+    $("#modal-oversize-copy").focus();
   };
+  // The blank issue still carries the title and label, which fit in a URL; only the body is pasted.
+  $("#modal-oversize-open").href = `https://github.com/${ISSUE_REPO}/issues/new?` +
+    new URLSearchParams({ title: suggestTitle(state.buffer), labels: "db-edit" }).toString();
+
+  const copyInto = (btn) => () => {
+    navigator.clipboard?.writeText(issueBody).then(
+      () => (btn.textContent = "Copied!"),
+      () => (btn.textContent = "Copy failed (use Ctrl+C from the raw data)"),
+    );
+    setTimeout(() => (btn.textContent = "Copy to clipboard"), 2000);
+  };
+  copyBtn.onclick = copyInto(copyBtn);
+  $("#modal-oversize-copy").onclick = copyInto($("#modal-oversize-copy"));
   $("#modal").classList.add("open");
 }
 

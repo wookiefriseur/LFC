@@ -8,7 +8,6 @@ export const DIFF_VERSION = 1;
 // Only the prefilled issue URL has a size limit. Larger submissions use copy/paste.
 export const MAX_ISSUE_URL_LENGTH = 8000;
 
-export const URL_CAP_HINT = "Too many changes 1-click-issue, pls copy them and paste into a new issue.";
 
 // `id` is immutable (changing an id = delete+add) and internal `_*` keys never ship. Matches diff-line.schema.json `fields.propertyNames`.
 export const MUTABLE_FIELDS = new Set([

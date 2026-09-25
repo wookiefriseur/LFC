@@ -2075,6 +2075,12 @@ test("the send screen's Edit changes opens Batch edit on the changed rows", asyn
   const markers = await page.$$eval("#modal-changelist .chg-marker", (ms) => ms.map((m) => [m.textContent, m.title]));
   assert(!markers.some(([t]) => t === "10x"), "the cryptic 10x marker is back");
   assert(markers.every(([, tip]) => tip), `a marker has no explanation: ${JSON.stringify(markers)}`);
+  const small = await page.evaluate(() => ({
+    href: document.querySelector("#modal-open-issue").getAttribute("href") || "",
+    shown: !document.querySelector("#modal-oversize").hidden,
+  }));
+  assert(small.href.includes("/issues/new?") && small.href.includes("body="), "a small submission is not a one-click issue");
+  assertEq(small.shown, false, "a small submission shows the two-step guide");
   const danger = await page.$eval("#modal-discard", (b) => b.classList.contains("btn-danger"));
   assertEq(danger, true, "Start over is not a red button");
   await page.click("#modal-edit-changes");
@@ -2365,16 +2371,31 @@ test("dump import: button, display order and unlimited manual submissions", asyn
   const lines = await diffLines(page);
   assertEq(lines.length, 120, "large submission lost records");
   await page.click("#btn-submit");
-  const review = await page.evaluate(() => ({
+  const panel = () => page.evaluate(() => ({
     validation: document.querySelector("#modal-validation").textContent,
     href: document.querySelector("#modal-open-issue").getAttribute("href"),
-    disabled: document.querySelector("#modal-copy").disabled,
-    hint: document.querySelector("#modal-url-note").hidden,
+    send: document.querySelector("#modal-open-issue").textContent,
+    shown: !document.querySelector("#modal-oversize").hidden,
+    steps: [...document.querySelectorAll("#modal-oversize li")].map((li) => li.textContent.replace(/\s+/g, " ").trim()),
+    blank: document.querySelector("#modal-oversize-open").getAttribute("href"),
+    focused: document.activeElement?.id,
   }));
+  let review = await panel();
   assert(!review.validation.includes("cannot be sent"), review.validation);
-  assertEq(review.href, "https://github.com/wookiefriseur/LFC/issues/new", "large submission still uses an oversized URL");
-  assertEq(review.disabled, false, "copy blocked by size");
-  assertEq(review.hint, false, "manual submission guidance missing");
+  assertEq(review.href, null, "large submission still links an oversized URL");
+  assertEq(review.send, "Send using GitHub", "the send button changed its name");
+  assertEq(review.shown, false, "the two-step guide shows before Send is clicked");
+  await page.click("#modal-open-issue");
+  review = await panel();
+  assertEq(review.shown, true, "clicking Send on a large submission explains nothing");
+  assert(/^1?\s*Copy to clipboard/.test(review.steps[0]) && /Open blank issue.*paste/i.test(review.steps[1]),
+    `the steps do not read copy, then open and paste: ${JSON.stringify(review.steps)}`);
+  assertEq(review.focused, "modal-oversize-copy", "step 1 is not focused");
+  const blank = new URL(review.blank);
+  assertEq(blank.origin + blank.pathname, "https://github.com/wookiefriseur/LFC/issues/new", "the blank issue goes elsewhere");
+  assertEq(blank.searchParams.get("labels"), "db-edit", "the blank issue lost its label");
+  assert(blank.searchParams.get("title")?.startsWith("DB update"), "the blank issue lost its title");
+  assertEq(blank.searchParams.get("body"), null, "the blank issue carries a body again");
   await page.click("#modal-close");
 });
 
