@@ -315,7 +315,7 @@ test("batch edit: the form renders note, rarity and notes, and follows source.ty
   await switchTab(page, "advanced");
   await page.waitForSelector("#panel-advanced table tbody tr", { timeout: 20000 });
   await page.click("#panel-advanced table tbody tr");
-  await page.waitForSelector('[data-field="description"]', { timeout: 10000 });
+  await page.waitForSelector('[data-field="notes"]', { timeout: 10000 });
   for (const sel of ['[data-field="notes"]', ".note-combo", '[name="rarity"], [data-field="rarity"]']) {
     const n = await page.$$eval(sel, (e) => e.length).catch(() => 0);
     assertAtLeast(n, 1, `form is missing ${sel}`);
@@ -770,7 +770,7 @@ test("the placement editor writes what the validator accepts", async (page) => {
   await switchTab(page, "advanced");
   await page.waitForSelector("#panel-advanced table tbody tr", { timeout: 20000 });
   await page.click("#panel-advanced table tbody tr");
-  await page.waitForSelector('[data-field="description"]', { timeout: 10000 });
+  await page.waitForSelector('[data-field="notes"]', { timeout: 10000 });
   await page.select('[name="source.type"]', "dungeon_drop");
   await page.waitForFunction(
     () => window.__proto.editing()?.source?.type === "dungeon_drop"
@@ -1130,7 +1130,7 @@ test("help tooltips stay inside the viewport", async (page) => {
   await page.click("#panel-advanced tbody tr:not(.spacer) td:nth-child(3)");
   await page.waitForSelector("#panel-advanced .form-fieldset-site .tip", { timeout: 10000 });
   const site = await page.$$("#panel-advanced .form-fieldset-site .tip");
-  assertAtLeast(site.length, 3, "the site-only fields lost their help");
+  assertAtLeast(site.length, 2, "the site-only fields lost their help");
   for (const tip of site) {
     const r = await inside(tip);
     assert(r.ok, `a site-only tooltip leaves the ${r.vw}x${r.vh} window or its "?": ${r.rect}`);
@@ -1293,6 +1293,26 @@ test("Browse's sidebar children align and its search box clears", async (page) =
   await page.waitForFunction((c) => document.querySelector("#browse-count").textContent === c,
     { timeout: 5000 }, all);
   assertEq(await page.$eval("#browse-search", (i) => i.value), "", "the x did not empty the box");
+  assertEq(await clearShown(), false, "the x stays after clearing");
+});
+
+test("Batch edit's search box clears with its own x", async (page) => {
+  await switchTab(page, "advanced");
+  await page.waitForSelector("#panel-advanced table tbody tr", { timeout: 20000 });
+  const count = () => page.$eval("#row-count", (e) => e.textContent);
+  const clearShown = () => page.$eval("#search-clear", (b) => b.checkVisibility());
+  await page.$eval("#search", (e) => { e.value = ""; e.dispatchEvent(new Event("input")); });
+  await new Promise((r) => setTimeout(r, 400));
+  const all = await count();
+  assertEq(await clearShown(), false, "the x shows on an empty box");
+  await page.type("#search", "crate");
+  await page.waitForFunction((c) => document.querySelector("#row-count").textContent !== c,
+    { timeout: 5000 }, all);
+  assert(await clearShown(), "no x in a non-empty search box");
+  await page.click("#search-clear");
+  await page.waitForFunction((c) => document.querySelector("#row-count").textContent === c,
+    { timeout: 5000 }, all);
+  assertEq(await page.$eval("#search", (i) => i.value), "", "the x did not empty the box");
   assertEq(await clearShown(), false, "the x stays after clearing");
 });
 

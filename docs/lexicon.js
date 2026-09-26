@@ -10,7 +10,6 @@ const FIELDS = {
   "availability.version": ["Version", "Game update this belongs to, not necessarily when the item first appeared"],
   "availability.last_seen": ["Last seen", "Date this item was last offered (only relevant for Luxury furnishings)"],
   "rarity": ["Drop rarity", "How rare the drop is. Usually not needed. Blank means ordinary."],
-  "description": ["Catalogue description","Shown when browsing on this website."],
   "notes": ["Data note - why this record looks like this", "Written script or a maintainer"],
   "name_overrides": ["Item name", "The name this site shows for the item."],
   "_category": ["Data file", "Which file the record lives in. Always the same as where it comes from."],

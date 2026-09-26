@@ -53,6 +53,10 @@ function valueText(key, value, type, enums) {
     const label = plainLabel(labelOf(enums, vocab, value)) || value;
     return entry && entry.undefined_in_library ? label + NOT_IN_GAME_DATA : label;
   }
+  // Empty means "comes furnished with a house nobody has named yet", not "no house"
+  if (key === "houses" && Array.isArray(value)) {
+    return value.length ? value.map((id) => `collectible ${id}`).join(", ") : "a house not yet identified";
+  }
   if (Array.isArray(value)) return value.join(", ");
   return String(value);
 }
@@ -174,9 +178,9 @@ export function browseMask(deps) {
 
         <div class="browse-main">
           <div class="browse-toolbar">
-            <span class="browse-search-box">
+            <span class="search-box">
               <input id="browse-search" type="search" placeholder="search by id or name…">
-              <button id="browse-search-clear" type="button" class="browse-search-clear"
+              <button id="browse-search-clear" type="button" class="search-clear"
                       aria-label="Clear the search" hidden>×</button>
             </span>
             <span id="browse-count" class="muted"
@@ -558,7 +562,7 @@ export function browseMask(deps) {
 
     block.append(fieldList(r, type));
 
-    // Deliberately broken crown_crate records carry their explanation in `description`, so this must stay visible.
+    // A data note is for contributor notes, if something is non-standard or peculiar
     const siteOnly = SITE_ONLY_FIELDS.filter((f) => hasValue(r[f]));
     if (siteOnly.length) {
       const box = elem("div", { class: "browse-siteonly" });

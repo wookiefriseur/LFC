@@ -12,7 +12,7 @@ export const MAX_ISSUE_URL_LENGTH = 8000;
 // `id` is immutable (changing an id = delete+add) and internal `_*` keys never ship. Matches diff-line.schema.json `fields.propertyNames`.
 export const MUTABLE_FIELDS = new Set([
   "source", "cost", "availability", "rarity", "name_overrides",
-  "notes", "description", "container",
+  "notes", "container",
 ]);
 
 // Keyed by the stable per-row `_key`, not by `id`: item ids are not unique.

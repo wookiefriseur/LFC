@@ -179,8 +179,8 @@ for (const type of types) {
     "site-only: a non-empty note is the only readonly entry");
   const empty = partitionFields(baseRecord("recipe"), contracts);
   ok(empty.readonly.length === 0, "site-only: empty site-only fields are not listed");
-  ok(SITE_ONLY_FIELDS.join(",") === "description,notes,name_overrides",
-    "site-only: exactly the three fields the build strips");
+  ok(SITE_ONLY_FIELDS.join(",") === "notes,name_overrides",
+    "site-only: exactly the two fields the build strips");
 }
 
 {

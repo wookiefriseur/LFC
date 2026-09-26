@@ -93,7 +93,7 @@ function render(key) {
     partition: "reduced",
     allowIdEdit: false,
     allowTypeChange: false,
-    webviewOnly: "hidden",      // description / notes / name_overrides
+    webviewOnly: "hidden",      // notes / name_overrides
     idPrefix: idPrefixFor(key),
     // The arrival findings: an errored field is never behind the expander, and a value flagged `undefined_in_library` renders read-only instead of inviting a different pick to make the red go away.
     findings: { errors: ui.before, warnings: [] },

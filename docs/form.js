@@ -12,7 +12,6 @@ import { messageFor, SOURCE_ENUM_FIELD, allowedSourceFields } from "./validate.j
 
 // Which side of the build a field lands on: "game" reaches the in-game addon DB, "browser" is stripped.
 export const FIELD_META = {
-  description: { translationClass: "browser" },
   notes: { translationClass: "browser" },
   name_overrides: { translationClass: "browser" },
   note: { translationClass: "game" },
@@ -35,7 +34,7 @@ export const DATES_GROUP = "availability.dates";
 
 const BATCH_PATHS = new Set(["cost", "availability.version"]);
 
-export const SITE_ONLY_FIELDS = ["description", "notes", "name_overrides"];
+export const SITE_ONLY_FIELDS = ["notes", "name_overrides"];
 
 // Where the ticked records disagree. No vocabulary contains it, and the caller writes only paths moved off their starting value, so a field left on it is never written.
 export const MIXED = "\u0000mixed";
@@ -777,21 +776,6 @@ function siteOnlyFieldset(ctx) {
     if (!any) fs.append(h("p", { class: "muted site-only-empty" }, "Nothing site-only on this record."));
     return fs;
   }
-
-  const descId = ctx.uid("description");
-  const desc = h("textarea", {
-    rows: 2, id: descId,
-    placeholder: "(optional)",
-    "data-field": "description",
-  });
-  desc.value = record.description ?? "";
-  desc.addEventListener("input", (e) => {
-    const v = e.target.value;
-    if (v.trim() === "") delete record.description;
-    else record.description = v;
-    ctx.onChange();
-  });
-  fs.append(row(fieldLabel(ctx, "description", { forId: descId }), desc, [], true));
 
   const notesId = ctx.uid("notes");
   const notes = h("textarea", {

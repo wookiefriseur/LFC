@@ -95,6 +95,8 @@ header h1 small { color: var(--muted); font-weight: 400; }
 }
 /* The search box, not the "Changed only" checkbox, which would inherit the 220px and push its own label half the bar away. */
 .adv-controls input:not([type="checkbox"]) { min-width: 220px; }
+.adv-controls .search-box { flex: 0 1 auto; }
+.adv-controls .search-box input[type="search"] { padding-right: 1.8rem; }
 .adv-controls input[type="checkbox"] { width: auto; }
 .adv-controls #btn-add-dump { margin-right: auto; }
 .btn-dump { background: #c65d08; color: #fff; border-color: #c65d08; }
@@ -1065,21 +1067,21 @@ table.lux-preview tr.lux-warn { background: #fef2f2; }
   border-bottom: 1px solid var(--border);
   background: white;
 }
-.browse-search-box {
+.search-box {
   position: relative;
   display: flex;
   flex: 1 1 auto;
   max-width: 360px;
 }
-.browse-toolbar input[type="search"] {
+.search-box input[type="search"] {
   flex: 1 1 auto;
   padding: 0.35rem 1.8rem 0.35rem 0.5rem;
   border: 1px solid var(--border);
   border-radius: 4px;
 }
 /* One clear control in every browser: ours, not Chromium's own. */
-.browse-toolbar input[type="search"]::-webkit-search-cancel-button { display: none; }
-.browse-search-clear {
+.search-box input[type="search"]::-webkit-search-cancel-button { display: none; }
+.search-clear {
   all: unset;
   position: absolute;
   right: 0.35rem;
@@ -1093,9 +1095,9 @@ table.lux-preview tr.lux-warn { background: #fef2f2; }
   color: var(--muted);
   cursor: pointer;
 }
-.browse-search-clear[hidden] { display: none; }   /* `all: unset` undid it */
-.browse-search-clear:hover { background: #f3f4f6; color: var(--fg); }
-.browse-search-clear:focus-visible { outline: 2px solid var(--accent); }
+.search-clear[hidden] { display: none; }   /* `all: unset` undid it */
+.search-clear:hover { background: #f3f4f6; color: var(--fg); }
+.search-clear:focus-visible { outline: 2px solid var(--accent); }
 .browse-scroller { flex: 1 1 auto; overflow: auto; padding: 0.5rem 1rem; }
 .browse-grid { display: flex; flex-direction: column; }
 .browse-spacer { flex: 0 0 auto; }
@@ -1137,6 +1139,11 @@ table.lux-preview tr.lux-warn { background: #fef2f2; }
 .browse-detail-head { display: flex; gap: 0.6rem; align-items: flex-start; }
 .browse-detail-head > div:last-child { display: flex; gap: 0.5rem; }
 .browse-detail-close { margin-left: auto; order: 9; }
+.browse-detail-head .ext-icon, .browse-detail-head .ext-icon-placeholder {
+  flex: 0 0 auto;
+  width: 110px; height: 110px;
+}
+.browse-detail-head .ext-icon-placeholder::after { line-height: 108px; }
 .browse-detail-title h3 { margin: 0 0 0.2rem; font-size: 1rem; }
 .browse-detail-sub { font-size: 0.82rem; margin: 0.5rem 0; }
 .browse-source-rec {

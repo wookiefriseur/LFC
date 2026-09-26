@@ -796,7 +796,11 @@ function renderAdvancedPanel(container) {
     <div class="adv-controls">
       <button id="btn-add" class="btn-primary">+ Add new</button>
       <button id="btn-add-dump" class="btn-dump" aria-expanded="false" aria-controls="adv-import">++Add from Dump</button>
-      <input id="search" type="search" placeholder="search by id or name…">
+      <span class="search-box">
+        <input id="search" type="search" placeholder="search by id or name…">
+        <button id="search-clear" type="button" class="search-clear"
+                aria-label="Clear the search" hidden>×</button>
+      </span>
       <select id="filter-type" title="source.type"></select>
       <select id="filter-version" title="availability.version"></select>
       <label class="adv-changed-toggle" title="Show only the rows you have ticked.">
@@ -917,11 +921,18 @@ function bindHeader() {
   let searchTimer = null;
   $("#search").addEventListener("input", (e) => {
     const v = e.target.value.toLowerCase();
+    $("#search-clear").hidden = !v;
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => {
       state.search = v;
       refilter();
     }, 150);
+  });
+  $("#search-clear").addEventListener("click", () => {
+    const box = $("#search");
+    box.value = "";
+    box.dispatchEvent(new Event("input"));
+    box.focus();
   });
   $("#filter-type").addEventListener("change", (e) => {
     state.sourceType = e.target.value;
@@ -2003,6 +2014,7 @@ function setBatchFilters({ search = "", sourceType = "", version = "", changedOn
   state.selectedOnly = false;
   const fsel = $("#filter-selected"); if (fsel) fsel.checked = false;
   const s = $("#search");           if (s) s.value = search;
+  const sc = $("#search-clear");    if (sc) sc.hidden = !search;
   const ft = $("#filter-type");     if (ft) ft.value = sourceType;
   const fv = $("#filter-version");  if (fv) fv.value = version;
   const fch = $("#filter-changed"); if (fch) fch.checked = changedOnly;
