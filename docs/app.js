@@ -4,7 +4,7 @@ import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
   labelOf, entryOf, noteLabel, crateLabel, recordsForItem, placementsText,
-  isUnknownId,
+  isUnknownId, setZoneNameLookup,
 } from "./data.js";
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
@@ -38,6 +38,7 @@ import { buildTaxonomy } from "./taxonomy.js";
 import { parseDiscovery, discoveryKnown } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { ReferenceData } from "./reference-data.js";
+import { namesMask } from "./names.js";
 
 const state = {
   enums: null,
@@ -136,6 +137,7 @@ async function init() {
     registerMask({ id: "advanced", label: "Batch edit",
                    render: renderAdvancedPanel, onShow: () => renderTable() });
     registerMask(maintenanceMask(maskDeps()));
+    registerMask(namesMask(maskDeps()));
     // Not in KNOWN_TABS, so it is never remembered as the landing tab.
     registerMask({ id: "about", label: "About", render: renderAbout });
     mountMasks({
@@ -154,6 +156,9 @@ async function init() {
     setIconPathLookup((id) => referenceData.iconPath(id));
     setIconPendingLookup((id) => referenceData.iconPending(id));
     referenceData.onShardLoaded(refreshLoadingIcons);
+    referenceData.setPendingNameSource((kind, id) =>
+      state.buffer.entries.get(`name:${referenceData.namesLocale}:${kind}:${id}`)?.name);
+    setZoneNameLookup((zone) => referenceData.gameName("zones", zone));
     const startRefData = () => { referenceData.init(); };
     if (typeof requestIdleCallback === "function") {
       requestIdleCallback(startRefData, { timeout: 3000 });
@@ -170,7 +175,7 @@ async function init() {
 // A stored id that no longer exists falls back to the landing tab rather than throwing out of mountMasks.
 const LAST_TAB_KEY = "furcat-last-tab";
 const DEFAULT_TAB = "luxury";
-const KNOWN_TABS = ["luxury", "crown-store", "browse", "maintenance", "advanced"];
+const KNOWN_TABS = ["luxury", "crown-store", "browse", "maintenance", "names", "advanced"];
 
 function lastTab() {
   try {
@@ -1951,6 +1956,8 @@ function maskDeps() {
     onRefDataShard: (fn) => referenceData.onShardLoaded(fn),
     // A crafted record is keyed by the blueprint, whose id names nothing a player recognises, so a mask showing an id asks this first.
     craftedItem: (id) => referenceData.resultOf(id),
+    gameName: (kind, id) => referenceData.gameName(kind, id),
+    referenceData,
   };
 }
 

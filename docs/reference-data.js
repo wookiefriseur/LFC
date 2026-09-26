@@ -12,7 +12,11 @@ const SUPPORTED_FORMATS = {
   meta: "furniture-meta-v1",
   // Blueprint id -> furnishing id. Unsharded, because the furnishing's shard is not the one the blueprint's id falls in.
   recipes: "furniture-recipes-v1",
+  // {houses|quests|achievements|zones: {id: name}} for one locale. Unsharded and fetched on first ask.
+  names: "furniture-names-v1",
 };
+
+export const NAME_KINDS = ["houses", "quests", "achievements", "zones"];
 
 const LS_PREFIX = "furcat-refdata-";
 
@@ -28,6 +32,9 @@ export class ReferenceData {
     this.discoveryRecipes = new Map();
     this.recipes = null;
     this._recipesInflight = null;
+    this.names = null;
+    this._namesInflight = null;
+    this._pendingName = () => null;
   }
 
   onShardLoaded(fn) {
@@ -40,8 +47,13 @@ export class ReferenceData {
     }
   }
 
-  async init() {
-    if (this.state !== "unloaded") return;
+  // Every caller shares one load, so a second caller waits for it instead of returning early.
+  init() {
+    this._initPromise ??= this._init();
+    return this._initPromise;
+  }
+
+  async _init() {
     this.state = "loading";
     try {
       const r = await fetch(MANIFEST_URL, { cache: "no-cache" });
@@ -90,6 +102,64 @@ export class ReferenceData {
         this._recipesInflight = null;
         this._fireShardLoaded();
       });
+  }
+
+  get namesLocale() {
+    return this.manifest?.datasets?.names?.locale || "en";
+  }
+
+  // Resolves once the names are loaded, or known to be absent. Absent is not an error: callers show the id alone.
+  loadNames() {
+    if (this.names) return Promise.resolve(this.names);
+    if (this._namesInflight) return this._namesInflight;
+    if (!this._datasetUsable("names")) return Promise.resolve(null);
+    const dataset = this.manifest.datasets.names;
+    const file = dataset.file || `names.${this.namesLocale}.json`;
+    this._namesInflight = (async () => {
+      const r = await fetch(`./reference-data/${file}${dataset.digest ? `?v=${encodeURIComponent(dataset.digest)}` : ""}`,
+        { cache: dataset.digest ? "default" : "no-cache" });
+      if (!r.ok) throw new Error(`${file} ${r.status}`);
+      const obj = JSON.parse(await r.text());
+      const names = {};
+      for (const kind of NAME_KINDS) {
+        names[kind] = new Map();
+        for (const [id, name] of Object.entries(obj[kind] || {})) {
+          const n = Number(id);
+          if (Number.isInteger(n) && typeof name === "string") names[kind].set(n, name);
+        }
+      }
+      this.names = names;
+      return names;
+    })()
+      .catch((e) => {
+        this.names = Object.fromEntries(NAME_KINDS.map((k) => [k, new Map()]));
+        console.info(`reference-data ${file} unavailable (${e.message})`);
+        return this.names;
+      })
+      .finally(() => {
+        this._namesInflight = null;
+        this._fireShardLoaded();
+      });
+    return this._namesInflight;
+  }
+
+  // Null until the file is in; asking starts the load, and the shard listeners hear when it lands.
+  gameName(kind, id) {
+    const pending = this._pendingName(kind, id);
+    if (pending) return pending;
+    if (!this.names) {
+      this.loadNames();
+      return null;
+    }
+    return this.names[kind]?.get(id) ?? null;
+  }
+
+  publishedName(kind, id) {
+    return this.names?.[kind]?.get(id) ?? null;
+  }
+
+  setPendingNameSource(fn) {
+    if (typeof fn === "function") this._pendingName = fn;
   }
 
   // A record keyed by a blueprint is about the furnishing it makes; this resolves one to the other.

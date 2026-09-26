@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run test:unit && npm run test:browser && npm run test:cache",
-    "test:unit": "node form.test.mjs && node test_diff_schema.mjs && node --test reference-cache.test.mjs discovery.test.mjs && python3 ../../scripts/webview_stamp.py --check",
+    "test:unit": "node form.test.mjs && node test_diff_schema.mjs && node --test reference-cache.test.mjs discovery.test.mjs names-dump.test.mjs && python3 ../../scripts/webview_stamp.py --check",
     "test:browser": "node test_webview_headless.mjs",
     "test:cache": "node test_publish.mjs"
   },

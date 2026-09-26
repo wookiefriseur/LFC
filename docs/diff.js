@@ -50,6 +50,13 @@ export class DirtyBuffer {
   addEnum(key, enumName, value, meta = null) {
     this.entries.set(key, { op: "add-enum", key, enumName, value, meta });
   }
+  // A game name for an id in the names reference data. Setting it back to the published name drops the entry.
+  setName(kind, id, locale, name, published) {
+    const key = `name:${locale}:${kind}:${id}`;
+    if (!name || name === published) this.entries.delete(key);
+    else this.entries.set(key, { op: "name", key, kind, id, locale, name, before: published ?? null });
+    return key;
+  }
   delete(key, before, category) {
     const existing = this.entries.get(key);
     if (existing?.op === "add") {
@@ -186,6 +193,11 @@ export function serialiseDiff(buffer) {
       const meta = cleanMeta(entry.meta);
       if (meta) line.meta = meta;
       lines.push(JSON.stringify(line));
+    } else if (entry.op === "name") {
+      // Targets the names reference data, not a data file.
+      lines.push(JSON.stringify({
+        v: DIFF_VERSION, op: "name", kind: entry.kind, id: entry.id, locale: entry.locale, name: entry.name,
+      }));
     }
   }
   return lines.join("\n");
@@ -224,16 +236,18 @@ export function suggestTitle(buffer) {
   if (entries.length === 1) {
     const e = entries[0];
     if (e.op === "add-enum") return `DB add-enum: ${e.enumName}.${e.value}`;
+    if (e.op === "name") return `DB name: ${e.kind} ${e.id}`;
     const id = (e.after ?? e.before).id;
     return `DB ${e.op}: ${id}`;
   }
-  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0 };
+  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, name: 0 };
   for (const e of entries) counts[e.op]++;
   const parts = [];
   if (counts.update) parts.push(`${counts.update} update${counts.update > 1 ? "s" : ""}`);
   if (counts.add) parts.push(`${counts.add} add${counts.add > 1 ? "s" : ""}`);
   if (counts.delete) parts.push(`${counts.delete} delete${counts.delete > 1 ? "s" : ""}`);
   if (counts["add-enum"]) parts.push(`${counts["add-enum"]} enum value${counts["add-enum"] > 1 ? "s" : ""}`);
+  if (counts.name) parts.push(`${counts.name} name${counts.name > 1 ? "s" : ""}`);
   return `DB update: ${parts.join(", ")}`;
 }
 

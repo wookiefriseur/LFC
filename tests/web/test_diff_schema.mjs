@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { DirtyBuffer, serialiseDiff, MUTABLE_FIELDS } from "../../docs/diff.js";
 import { ENUM_KINDS } from "../../docs/maintenance.js";
+import { NAME_KINDS } from "../../docs/reference-data.js";
 
 const require = createRequire(import.meta.url);
 const Ajv = require("ajv/dist/2020.js");
@@ -151,6 +152,26 @@ for (const [name, after] of [["set", { ...folio, container: "folio" }], ["cleare
 const badKind = { v: 1, op: "update", category: "writ_vendor", id: 171568, fields: { container: "crate" } };
 if (!validate(badKind)) ok("an unknown container kind is refused");
 else fail("an unknown container kind is refused", "it validated");
+
+{
+  const buffer = new DirtyBuffer();
+  buffer.setName("houses", 1060, "en", "Mara's Kiss Public House", "Old name");
+  buffer.setName("quests", 12, "en", "Same", "Same");
+  const lines = serialiseDiff(buffer).split("\n").filter(Boolean).map((l) => JSON.parse(l));
+  if (lines.length === 1 && validate(lines[0])) ok("a name line validates, and a name equal to the published one makes none");
+  else fail("a name line validates, and a name equal to the published one makes none", JSON.stringify([lines, validate.errors]));
+}
+const nameKinds = schema.oneOf.find((b) => b.title === "name").properties.kind.enum;
+if (nameKinds.join(",") === NAME_KINDS.join(",")) ok("the name kinds are the ones the site loads");
+else fail("the name kinds are the ones the site loads", `schema [${nameKinds}] vs site [${NAME_KINDS}]`);
+for (const [what, line] of [
+  ["an unknown name kind", { v: 1, op: "name", kind: "npcs", id: 5, locale: "en", name: "x" }],
+  ["a name for id 0", { v: 1, op: "name", kind: "quests", id: 0, locale: "en", name: "x" }],
+  ["an empty name", { v: 1, op: "name", kind: "quests", id: 5, locale: "en", name: "" }],
+]) {
+  if (!validate(line)) ok(`${what} is refused`);
+  else fail(`${what} is refused`, "it validated");
+}
 
 console.log(failed ? `\n${failed} failure(s)` : "\nall green");
 process.exit(failed ? 1 : 0);

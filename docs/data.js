@@ -171,10 +171,18 @@ export function entryOf(enums, key, symbol) {
 }
 
 // A vocabulary whose label comes from the game at render time ships no `name`, so the symbol is the fallback.
+// A zone vocabulary entry carries only the game's zone id; its name comes from the names reference data when that is loaded.
+let zoneName = () => null;
+export function setZoneNameLookup(fn) {
+  if (typeof fn === "function") zoneName = fn;
+}
+
 export function labelOf(enums, key, symbol) {
   const entry = entryOf(enums, key, symbol);
   const name = entry && entry.name;
-  return typeof name === "string" && name !== "" ? stripMarker(name) : String(symbol ?? "");
+  if (typeof name === "string" && name !== "") return stripMarker(name);
+  if (key === "locations" && Number.isInteger(entry?.zone)) return zoneName(entry.zone) || String(symbol ?? "");
+  return String(symbol ?? "");
 }
 
 // The addon's en.lua strings carry trailing grammar markers ("Undaunted Enclaves^p,in") that only the game's string formatter consumes.

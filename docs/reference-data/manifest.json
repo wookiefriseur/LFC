@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "generated": "2026-09-22",
+  "generated": "2026-09-26",
   "note": "Webui-only reference data. NOT shipped in the addon release. Admin-maintained. The webview must work fully if this file or any shard is absent.",
   "shard_size": 10000,
   "datasets": {
@@ -139,6 +139,19 @@
       "file": "recipes.json",
       "count": 3383,
       "digest": "bff4ab9bd31f"
+    },
+    "names": {
+      "description": "Game names for the ids the data refers to: house collectibles, quests, achievements and zones, {kind: {id: name}}. Client-locale, one file per locale. Contributors correct it through `name` change lines.",
+      "record_format": "furniture-names-v1",
+      "locale": "en",
+      "file": "names.en.json",
+      "counts": {
+        "houses": 121,
+        "quests": 3373,
+        "achievements": 3354,
+        "zones": 1096
+      },
+      "digest": "722afad6ff3d"
     }
   }
 }

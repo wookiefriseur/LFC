@@ -212,6 +212,23 @@ export function changeRows(bufferOrEntries, ctx = {}) {
   const rows = [];
 
   for (const entry of entries) {
+    if (entry.op === "name") {
+      rows.push({
+        entryKey: entry.key,
+        op: entry.op,
+        itemId: entry.id,
+        itemName: "",
+        item: `Names: ${titleCase(entry.kind)} (${entry.id})`,
+        record: entry.locale,
+        field: `name.${entry.kind}`,
+        what: entry.before ? "Game name" : "New game name",
+        before: entry.before || "(none)",
+        after: entry.name,
+        markers: [],
+        siteOnly: false,
+      });
+      continue;
+    }
     if (entry.op === "add-enum") {
       rows.push({
         entryKey: entry.key,

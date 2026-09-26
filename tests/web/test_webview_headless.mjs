@@ -579,9 +579,9 @@ test("icons: browsing paints game icons rather than the placeholder", async (pag
     "the page never asked the icon CDN for anything");
 });
 
-test("the tab bar is Luxury, Crown, Browse, Batch edit, Maintenance, About", async (page) => {
+test("the tab bar is Luxury, Crown, Browse, Batch edit, Maintenance, Names, About", async (page) => {
   const labels = await page.$$eval("#tab-bar > button", (bs) => bs.map((b) => b.textContent.trim()));
-  assertEq(labels.join(", "), "Luxury, Crown, Browse, Batch edit, Maintenance, About", "the tab bar");
+  assertEq(labels.join(", "), "Luxury, Crown, Browse, Batch edit, Maintenance, Names, About", "the tab bar");
   assertEq(await page.$("header input, header form"), null, "the header still has a search box");
   const footerAbout = await page.$$eval("footer a, footer button",
     (els) => els.filter((e) => /about/i.test(e.textContent)).length);
@@ -704,7 +704,7 @@ test("submit: the diff serialises one v:1 line per edited record", async (page) 
   assertAtLeast(lines.length, 1, "diff lines");
   for (const l of lines) {
     assertEq(l.v, 1, "diff line version");
-    assert(["add", "update", "delete", "add-enum"].includes(l.op), `bad op ${l.op}`);
+    assert(["add", "update", "delete", "add-enum", "name"].includes(l.op), `bad op ${l.op}`);
   }
   await page.click("#modal-close");
 });
@@ -2417,6 +2417,102 @@ test("dump import: button, display order and unlimited manual submissions", asyn
   assert(blank.searchParams.get("title")?.startsWith("DB update"), "the blank issue lost its title");
   assertEq(blank.searchParams.get("body"), null, "the blank issue carries a body again");
   await page.click("#modal-close");
+});
+
+test("Batch edit: a field's error sentence spans the whole row, not the label column", async (page) => {
+  await switchTab(page, "advanced");
+  await page.waitForSelector("#panel-advanced tbody tr:not(.spacer)", { timeout: 10000 });
+  await page.click("#panel-advanced tbody tr:not(.spacer) td:nth-child(3)");
+  await page.waitForSelector('#panel-advanced [name="source.type"]', { timeout: 10000 });
+  await page.select('#panel-advanced [name="source.type"]', "container");
+  await page.waitForSelector("#panel-advanced .field-findings .field-error", { timeout: 10000 });
+  const r = await page.$eval("#panel-advanced .field-findings .field-error", (p) => {
+    const row = p.closest(".form-row").getBoundingClientRect();
+    return { error: p.getBoundingClientRect().width, row: row.width, text: p.textContent };
+  });
+  assert(r.error > r.row * 0.9, `the error is ${Math.round(r.error)}px in a ${Math.round(r.row)}px row: ${r.text}`);
+});
+
+test("names: the tab lists the game names, a pasted dump becomes name lines, and Browse shows house names", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "names");
+  await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count")?.textContent || ""),
+    { timeout: 15000 });
+  const houses = await page.$eval("#names-count", (e) => e.textContent);
+  assertAtLeast(Number.parseInt(houses, 10), 100, "house names");
+  const published = await page.$eval("#names-table tbody tr td:nth-child(2)", (td) => td.textContent);
+  const firstId = await page.$eval("#names-table tbody tr td:nth-child(1)", (td) => td.textContent);
+
+  await page.click('#names-lists [data-list="game:zones"]');
+  await page.type("#names-search", "Glenumbra");
+  await page.waitForFunction(() => / of \d+ entries$/.test(document.querySelector("#names-count").textContent),
+    { timeout: 5000 });
+  assert(await page.$$eval("#names-table tbody tr", (rs) => rs.some((r) => r.textContent.includes("Glenumbra"))),
+    "zone search finds no Glenumbra");
+
+  await page.click("#names-search-clear");
+  await page.click('#names-lists [data-list="vocab:vendors"]');
+  await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count").textContent), { timeout: 5000 });
+  assertAtLeast(await page.$$eval("#names-table tbody tr", (rs) => rs.length), 1, "the vendors vocabulary is empty");
+
+  await page.click("#names-import-toggle");
+  const applyShown = () => page.$eval("#names-import-apply", (b) => b.checkVisibility());
+  assertEq(await applyShown(), false, "the apply button shows before anything was read");
+  await page.$eval("#names-import-paste", (e, text) => { e.value = text; },
+    `-- houses, en\nhouses = {\n  [${firstId}] = "${published.replace(/"/g, '\\"')}",\n}`);
+  await page.click("#names-import-read");
+  await page.waitForFunction(() => document.querySelector("#names-import-report").textContent.includes("unchanged"),
+    { timeout: 10000 });
+  assertEq(await applyShown(), false, "the apply button shows for 0 changes");
+  const dump = `-- houses, en, API 101051, 2 names\nhouses = {\n  [${firstId}] = "Renamed \\"House\\"",\n  [999999] = "Test House",\n}`;
+  await page.$eval("#names-import-paste", (e, text) => { e.value = text; }, dump);
+  await page.click("#names-import-read");
+  await page.waitForFunction(() => !document.querySelector("#names-import-apply").hidden, { timeout: 10000 });
+  const report = await page.$eval("#names-import-report", (e) => e.textContent);
+  assert(report.includes("1 new, 1 changed"), `report: ${report}`);
+  await page.click("#names-import-apply");
+
+  const lines = await diffLines(page);
+  const names = lines.filter((l) => l.op === "name");
+  assertEq(names.length, 2, "name lines");
+  const renamed = names.find((l) => l.id === Number(firstId));
+  assertEq(renamed?.name, 'Renamed "House"', "the escaped quote");
+  assertEq(renamed?.kind, "houses", "the name kind");
+  assertEq(renamed?.locale, "en", "the name locale");
+
+  await page.click('#names-lists [data-list="game:houses"]');
+  await page.$eval("#names-search", (e) => { e.value = ""; e.dispatchEvent(new Event("input")); });
+  await page.waitForFunction(() => document.querySelector("#names-table tbody tr.is-pending"), { timeout: 5000 });
+  const pendingText = await page.$eval("#names-table tbody tr.is-pending", (r) => r.textContent);
+  assert(pendingText.includes(`was: ${published}`), `pending row: ${pendingText}`);
+
+  // Inline correction and a new id, both through the add/edit controls.
+  const second = await page.$eval("#names-table tbody tr:nth-child(2) td:nth-child(1)", (td) => td.textContent);
+  await page.click("#names-table tbody tr:nth-child(2) td:nth-child(2)");
+  await page.waitForSelector("#names-table input.names-edit", { timeout: 5000 });
+  await page.$eval("#names-table input.names-edit", (i) => { i.value = "Edited inline"; });
+  await page.keyboard.press("Enter");
+  await page.type("#names-add-id", "888888");
+  await page.type("#names-add-name", "Added by hand");
+  await page.click("#names-add-run");
+  const more = (await diffLines(page)).filter((l) => l.op === "name");
+  assertEq(more.length, 4, "name lines after the inline edit and the add");
+  assertEq(more.find((l) => l.id === Number(second))?.name, "Edited inline", "the inline edit");
+  assertEq(more.find((l) => l.id === 888888)?.name, "Added by hand", "the added name");
+
+  // Browse names the house an item comes with, and uses the pending name.
+  const itemId = await page.evaluate((id) => window.__proto.records()
+    .find((r) => Array.isArray(r.source?.houses) && r.source.houses.includes(id))?.id ?? null, Number(firstId));
+  if (itemId) {
+    await switchTab(page, "browse");
+    await page.$eval("#browse-search", (e, v) => { e.value = v; e.dispatchEvent(new Event("input")); }, String(itemId));
+    await page.waitForFunction(() => document.querySelectorAll("#panel-browse .browse-card").length >= 1, { timeout: 10000 });
+    await page.click("#panel-browse .browse-card");
+    await page.waitForSelector("#browse-detail:not([hidden])", { timeout: 10000 });
+    await page.waitForFunction((id) => document.querySelector("#browse-detail").textContent.includes(`Renamed "House" (${id})`),
+      { timeout: 10000 }, firstId);
+  }
 });
 
 async function main() {

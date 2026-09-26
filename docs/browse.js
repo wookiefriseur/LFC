@@ -36,8 +36,18 @@ function plainLabel(text) {
   return i === -1 ? s : s.slice(0, i);
 }
 
+// Set by browseMask; null until the names reference data is in.
+let gameName = () => null;
+const NAMED_ID_KINDS = { achievement: "achievements", quest: "quests" };
+
+function namedId(kind, id, fallback) {
+  const name = gameName(kind, id);
+  return name ? `${name} (${id})` : fallback;
+}
+
 function valueText(key, value, type, enums) {
   if (isUnknownId(enums, key, value)) return ID_NOT_RECORDED;
+  if (NAMED_ID_KINDS[key] && Number.isInteger(value)) return namedId(NAMED_ID_KINDS[key], value, String(value));
   if (key === "subtype" && typeof value === "string") {
     return valueLabel(subtypeVocab(type), value);
   }
@@ -55,7 +65,9 @@ function valueText(key, value, type, enums) {
   }
   // Empty means "comes furnished with a house nobody has named yet", not "no house"
   if (key === "houses" && Array.isArray(value)) {
-    return value.length ? value.map((id) => `collectible ${id}`).join(", ") : "a house not yet identified";
+    return value.length
+      ? value.map((id) => namedId("houses", id, `collectible ${id}`)).join(", ")
+      : "a house not yet identified";
   }
   if (Array.isArray(value)) return value.join(", ");
   return String(value);
@@ -66,6 +78,8 @@ export function browseMask(deps) {
     state, $, elem, nameOf, itemLinkAnchor, itemIconImg, validateRecord,
     sourceDetail, messageFor, recordsForItem,
   } = deps;
+
+  if (typeof deps.gameName === "function") gameName = deps.gameName;
 
   // A crafted record is keyed by the blueprint; where the reference overlay knows the pair, the furnishing is shown and the recipe is the footnote.
   const craftedItem = (id) =>

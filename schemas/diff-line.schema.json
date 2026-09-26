@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/wookiefriseur/LFC/main/schemas/diff-line.schema.json",
   "title": "LibFurnitureCatalogue diff line",
-  "description": "One JSON object per line inside the issue-body diff block. The action's input contract. Op-discriminated: each `op` has its own required-field set. See research/U_issue_flow_contract.md and AF_schema_recommendation.md §7.",
+  "description": "One JSON object per line inside the issue-body diff block. The action's input contract. Op-discriminated: each `op` has its own required-field set.",
   "type": "object",
   "required": ["v", "op"],
   "properties": {
@@ -12,9 +12,9 @@
       "const": 1
     },
     "op": {
-      "description": "Operation. `add-enum` targets enums.json and carries no id/category (AF §7.3).",
+      "description": "Operation. `add-enum` targets enums.json and carries no id/category. `name` targets the names reference data (reference-data/names.<locale>.json).",
       "type": "string",
-      "enum": ["update", "add", "delete", "add-enum"]
+      "enum": ["update", "add", "delete", "add-enum", "name"]
     }
   },
   "oneOf": [
@@ -84,7 +84,7 @@
         "blueprint": { "$ref": "#/$defs/blueprint" },
         "category": { "$ref": "#/$defs/category" },
         "record": {
-          "description": "The complete new record. Validated separately against the full record schema (O_db_schema). The action cross-checks record.id against the line-level id.",
+          "description": "The complete new record. Validated separately against the full record schema. The action cross-checks record.id against the line-level id.",
           "type": "object",
           "required": ["source", "cost", "availability"],
           "properties": {
@@ -162,6 +162,34 @@
         { "$ref": "#/$defs/metaFor/companions" },
         { "$ref": "#/$defs/metaFor/currencies" }
       ]
+    },
+    {
+      "title": "name",
+      "additionalProperties": false,
+      "required": ["v", "op", "kind", "id", "locale", "name"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "name" },
+        "kind": {
+          "description": "Which names table: house collectibles, quests, achievements or zones.",
+          "enum": ["houses", "quests", "achievements", "zones"]
+        },
+        "id": {
+          "description": "The game id the name belongs to (collectible, quest, achievement or zone id).",
+          "type": "integer",
+          "minimum": 1
+        },
+        "locale": {
+          "description": "Client language the name was read in.",
+          "type": "string",
+          "pattern": "^[a-z]{2}$"
+        },
+        "name": {
+          "description": "The name as the game shows it.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   ],
   "$defs": {
@@ -232,7 +260,7 @@
       }
     },
     "enumMeta": {
-      "description": "The rest of an OBJECT-valued vocabulary's entry, so a new value arrives complete rather than as a bare symbol. Under the v2 schema that is most vocabularies, not just `versions` (AM §4). Which keys an entry wants depends on which vocabulary `enum` names; `metaFor` below states that per vocabulary. The editor omits a blank optional field rather than sending it empty, so an absent optional key is normal and `meta` itself is absent when nothing was filled in.",
+      "description": "The rest of an OBJECT-valued vocabulary's entry, so a new value arrives complete rather than as a bare symbol. Under the v2 schema that is most vocabularies, not just `versions`. Which keys an entry wants depends on which vocabulary `enum` names; `metaFor` below states that per vocabulary. The editor omits a blank optional field rather than sending it empty, so an absent optional key is normal and `meta` itself is absent when nothing was filled in.",
       "type": "object",
       "minProperties": 1,
       "additionalProperties": false,
@@ -363,12 +391,12 @@
       "minimum": 1
     },
     "category": {
-      "description": "Which data/<category>.jsonl file the record lives in — equal to source.type (AF §6). Validated against the set of files present in the repo, not a fixed enum.",
+      "description": "Which data/<category>.jsonl file the record lives in — equal to source.type. Validated against the set of files present in the repo, not a fixed enum.",
       "type": "string",
       "pattern": "^[a-z][a-z0-9_]*$"
     },
     "match": {
-      "description": "Required when (id, category) matches more than one record (AF §7.1): the canonical source object of the targeted record, used to disambiguate. Optional otherwise.",
+      "description": "Required when (id, category) matches more than one record: the canonical source object of the targeted record, used to disambiguate. Optional otherwise.",
       "type": "object",
       "required": ["type"],
       "properties": {
