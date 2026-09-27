@@ -56,6 +56,7 @@
 --   Has                   check whether a lookup returns a catalogue entry
 --   GetEntry              get one furnishing's entry, or nil
 --   GetSourceDetails      get the ways to obtain it, in the library's preferred order
+--   GetContainer          get a container kind and its known contents, or nil
 --   GetIngredients        get ingredient links and quantities
 --   GetItemId             convert a link to an item id
 --   GetItemLink           build a link from an id (does not check whether the item exists)
@@ -438,6 +439,7 @@ end
 ---@class LFCPlacement
 ---@field location integer|nil game zone id, resolve with GetZoneNameById
 ---@field place integer|nil locale string id, resolve with GetString then zo_strformat
+---@field note string|nil additional directions within the placement
 
 ---Where one source of an item comes from
 ---
@@ -523,6 +525,25 @@ end
 ---If you only need to test a source type, GetEntry().sources is the smaller answer.
 function api.GetSourceDetails(itemOrLink)
   return getSourceRecords(itemOrLink)
+end
+
+---@class LFCContainer
+---@field kind string "books" or "folio"
+---@field contents integer[] item ids, including blueprint ids for folios; sorted and returned as a copy
+
+---Known contents of a container. Read its price and vendor with GetSourceDetails. A content record names its parent in source.partOf
+---@param itemOrLink integer|string container id or link
+---@return LFCContainer|nil container nil when no contents are recorded
+---```lua
+---local collection = LFC.GetContainer(145596)
+---if collection then
+---  for _, id in ipairs(collection.contents) do d(LFC.GetItemLink(id)) end
+---end
+---```
+function api.GetContainer(itemOrLink)
+  ensureDB()
+  local id = getItemId(itemOrLink)
+  return id and internal.Generated and internal.Generated.Container(id) or nil
 end
 
 ---Ingredient links and required quantities for a craftable furnishing.

@@ -73,18 +73,7 @@ local fields = {
   "houses",
   "companion",
 }
-local vocabularies = {
-  vendor = "vendors",
-  skill_line = "skill_lines",
-  event = "events",
-  container = "containers",
-  crate = "crates",
-  packs = "packs",
-  bundle = "bundles",
-  npc_class = "npc_classes",
-  npc_group = "npc_groups",
-  companion = "companions",
-}
+local vocabularies = constants.sourceVocabularies
 assert(#constants.sourceFields == #fields)
 for index, field in ipairs(fields) do
   assert(constants.sourceFields[index] == field, "source field layout mismatch")

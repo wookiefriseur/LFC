@@ -39,6 +39,22 @@ class GeneratedDatabaseTests(unittest.TestCase):
         self.assertIn(225123, database['rumours'])
         self.assertNotIn(224910, database['rumours'])
 
+    def test_runtime_currency_constants(self):
+        result = subprocess.run([*self.command, str(ROOT / 'tests/generated_currencies.lua'), str(ROOT)],
+                                text=True, capture_output=True, timeout=30)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_added_vocabulary_entry_and_declared_mapping(self):
+        enums = copy.deepcopy(self.catalogue.enums)
+        enums['test_vendors'] = copy.deepcopy(enums['vendors']) + [{'symbol': 'NEW_VENDOR', 'si': 'SI_NEW_VENDOR'}]
+        enums['source_field_vocabularies']['vendor'] = 'test_vendors'
+        catalogue = Catalogue(enums, self.catalogue.recipes)
+        constants, _, _ = self.roundtrip([
+            self.row(source={'type': 'vendor', 'vendor': 'NEW_VENDOR', 'subtype': 'other'})
+        ], catalogue)
+        self.assertEqual(constants['metadata']['test_vendors'][constants['ids']['test_vendors']['NEW_VENDOR']]['si'], 'SI_NEW_VENDOR')
+        self.assertEqual(constants['sourceVocabularies']['vendor'], 'test_vendors')
+
     def test_every_field_and_string_escaping(self):
         source = {
             'type': 'vendor', 'vendor': 'AF', 'subtype': 'achievement',
