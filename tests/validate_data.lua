@@ -94,6 +94,9 @@ end
 -- A name a data file never declared is a nil
 local KNOWN_GLOBALS = {
   FurC = true,
+  assert = true,
+  LFCGeneratedConstants = true,
+  LFCGeneratedDatabase = true,
   LibFurnitureCatalogue = true,
   ipairs = true,
   pairs = true,

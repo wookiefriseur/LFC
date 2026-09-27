@@ -1,0 +1,11 @@
+name: Setup Lua
+description: Install Lua 5.1 for the library checks.
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lua5.1
+        echo "LUA=/usr/bin/lua5.1" >> "$GITHUB_ENV"
+        echo "LUAC=/usr/bin/luac5.1" >> "$GITHUB_ENV"

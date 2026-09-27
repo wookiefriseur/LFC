@@ -101,6 +101,43 @@ for _, rel in ipairs(dataFiles) do
   end
 end
 
+if env.LFCGeneratedDatabase then
+  local function copy(value)
+    if type(value) ~= "table" then
+      return value
+    end
+    local result = {}
+    for key, child in pairs(value) do
+      result[key] = copy(child)
+    end
+    return result
+  end
+  env.ZO_DeepTableCopy = copy
+  for _, file in ipairs({ "LibFurnitureCatalogue.lua", "Generated.lua", "Build.lua" }) do
+    local ok, err = run(file)
+    assert(ok, err)
+  end
+  env.LibFurnitureCatalogue.Internal.Generated.Install()
+  local count = 0
+  for id in pairs(env.LFCGeneratedDatabase.items) do
+    for _, record in ipairs(env.LibFurnitureCatalogue.Internal.Generated.Records(id)) do
+      count = count + 1
+      for field in pairs(record.source) do
+        assert(declared[field], "undeclared generated source field: " .. field)
+      end
+      for _, field in ipairs({ "locations", "packs", "houses" }) do
+        assert(record.source[field] == nil or type(record.source[field]) == "table", field .. " must be a list")
+      end
+      if record.cost then
+        assert(type(record.cost.amount) == "number" and type(record.cost.currency) == "number")
+      end
+    end
+  end
+  assert(count > 0)
+  print("  ok: " .. count .. " generated API source records")
+  return
+end
+
 ---How a value is written
 ---@param value any
 ---@return string

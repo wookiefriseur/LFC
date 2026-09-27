@@ -76,7 +76,11 @@ local function findWithKey(itemOrBlueprintLink)
     lastLink = itemOrBlueprintLink
   end
 
-  if IsItemLinkFurnitureRecipe(itemOrBlueprintLink) then
+  local generated = LFC.Internal.Generated
+  local generatedKey = generated and generated.Key(getItemId(itemOrBlueprintLink))
+  if generatedKey then
+    recipeArray, lastKey = db[generatedKey], generatedKey
+  elseif IsItemLinkFurnitureRecipe(itemOrBlueprintLink) then
     recipeArray, lastKey = parseBlueprint(itemOrBlueprintLink)
   elseif IsItemLinkPlaceableFurniture(itemOrBlueprintLink) then
     recipeArray, lastKey = parseFurnitureItem(itemOrBlueprintLink)
@@ -400,7 +404,8 @@ local function vendorRecord(rec, recipeKey, version, data, source)
     for zoneName, zoneData in pairs(versionData) do
       for vendorName, vendorData in pairs(zoneData) do
         local row = vendorData[recipeKey]
-        local matches = source == src.HOME_GOODS or (type(row) == "table" and row.achievement and src.ACHIEVEMENT or src.VENDOR) == source
+        local matches = source == src.HOME_GOODS
+          or (type(row) == "table" and row.achievement and src.ACHIEVEMENT or src.VENDOR) == source
         if row and matches then
           return zoneName, vendorName, row
         end
@@ -884,6 +889,23 @@ local function getSourceRecords(itemOrLink)
   end
   -- The key find resolved: a blueprint link resolves to the crafted item's entry, and every data table below is keyed by that item
   local recipeKey = resolvedKey or getItemId(itemOrLink)
+
+  if LFC.Internal.Generated then
+    local records = LFC.Internal.Generated.Records(recipeKey)
+    local present = {}
+    for _, record in ipairs(records) do
+      present[record.source.type] = true
+    end
+    for source in eachSource(sourceMask(sources)) do
+      if not present[source] then
+        records[#records + 1] = { source = { type = source } }
+      end
+    end
+    table.sort(records, function(a, b)
+      return (SOURCE_PRIORITY[a.source.type] or math.huge) < (SOURCE_PRIORITY[b.source.type] or math.huge)
+    end)
+    return records
+  end
 
   local ranked = {}
   for s in eachSource(sources) do

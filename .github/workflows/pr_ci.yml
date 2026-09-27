@@ -55,12 +55,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Install Lua 5.1
-        run: sudo apt-get update && sudo apt-get install -y lua5.1
+      - uses: ./.github/actions/setup-lua
       - name: Run static suite
-        env:
-          LUA: /usr/bin/lua5.1
-          LUAC: /usr/bin/luac5.1
         run: tests/run_static.sh
 
   python-tests:
@@ -69,5 +65,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - uses: ./.github/actions/setup-python-env
+      - uses: ./.github/actions/setup-lua
       - name: Run Python tests
         run: python3 -m unittest discover -s scripts -p 'test_*.py'
+      - name: Verify bundled generated database
+        run: python3 scripts/generate_db.py --lua "$LUA" --check

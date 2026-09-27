@@ -690,6 +690,10 @@ local function scanFromFiles(blocking)
     finish,
   }
 
+  if LFC.Internal.Generated then
+    steps = { LFC.Internal.Generated.Install, finish }
+  end
+
   setState(state.BUILDING)
   publish(apiEvents.SCAN_STARTED)
 

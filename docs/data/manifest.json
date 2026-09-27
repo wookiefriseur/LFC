@@ -39,8 +39,8 @@
     {
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
-      "records": 177,
-      "digest": "1c0496b15372d9a7"
+      "records": 55,
+      "digest": "9f02d5e8a0a40904"
     },
     {
       "name": "luxury.jsonl",
@@ -139,20 +139,20 @@
       "digest": "f2a038dab9fbb843"
     }
   ],
-  "digest": "fc56356781863bcb",
+  "digest": "d8bf2ac503b82d58",
   "counts": {
-    "records": 9808,
+    "records": 9686,
     "ids": 11930,
     "files": 19,
     "rows_seen": 8791,
-    "module_records": 9809,
+    "module_records": 9687,
     "dedup_dropped": 0,
     "rumour_dropped": 1,
     "separator_rejected": 0,
     "by_type": {
       "vendor": 1381,
       "pvp_vendor": 84,
-      "writ_vendor": 177,
+      "writ_vendor": 55,
       "luxury": 664,
       "event_drop": 83,
       "event_vendor": 94,

@@ -25,3 +25,16 @@ From the LFC repository root, run `python3 scripts/webview_serve.py` and open `h
 serving the site. Pass a port number to use another port.
 
 Run the web checks from `tests/web` with `npm ci` followed by `npm test`. The public API header check is part of `tests/run_static.sh`.
+
+## Generate and verify game data locally
+
+From the repository root:
+
+```sh
+python3 scripts/generate_db.py --lua /path/to/lua
+LUA=/path/to/lua python3 -m unittest discover -s scripts -p test_generate_db.py
+```
+
+Use Lua 5.1 or ESOLua. With ESOLua, also pass `--esoui /path/to/esoui` to the generator and set `ESOUI=/path/to/esoui` for the tests. The default interpreter is `bin/lua`.
+
+Every generation validates the data and verifies the generated Lua by decoding it back to JSONL before writing either output file. Add `--check` to verify that an existing output directory matches a fresh build.

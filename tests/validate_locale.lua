@@ -28,6 +28,8 @@ local UNREAD = {
   SI_FURC_RANK = "consumer renders it",
   SI_FURC_REQUIRES_ACHIEVEMENT = "consumer renders it",
   SI_FURC_SRC_COLLECTIBLE = "consumer renders it",
+  SI_FURC_SRC_CRAFTING = "consumer renders it",
+  SI_FURC_SRC_RUMOUR_ITEM = "consumer renders it",
   SI_FURC_SRC_EDITOR = "consumer renders it",
   SI_FURC_SRC_EDITOR_TAG = "consumer renders it",
   SI_FURC_SRC_ITEMBUNDLE = "consumer renders it",
@@ -109,7 +111,9 @@ for _, rel in ipairs(shipped) do
   -- Constants keeps the client's social class ids as names rather than as globals
   local text = readFile(root .. "/" .. rel) or ""
   for name in text:gmatch('"(SI_[%u%d_]+)"') do
-    if not name:find("^SI_FURC_") then
+    if name:find("^SI_FURC_") then
+      referenced[name] = referenced[name] or rel
+    else
       clientOwned[name] = true
     end
   end
