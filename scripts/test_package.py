@@ -3,14 +3,12 @@
 # Checks if the packaging actually works, because it just silently continued even if something failed
 
 import os
-import package
 import tempfile
 import unittest
 import zipfile
-
 from unittest import mock
 
-
+import package
 
 MANIFEST = """## Title: TestAddon
 ## Version: 1.0.0

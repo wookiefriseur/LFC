@@ -28,7 +28,7 @@ def find_manifests(directory: str, file_ext: tuple[str, ...]) -> list[str]:
       for source in files:
         if source.endswith(file_ext):
           manifests.append(os.path.join(root, source))
-  except Exception:
+  except Exception:  # noqa: BLE001
     return []
 
   return manifests
@@ -85,7 +85,7 @@ def package_addon(name: str, exclude_filename: str):
       target = os.path.normpath(os.path.join(addon_dir, packaged))
       os.makedirs(os.path.dirname(target), exist_ok=True) # Create target directory
       shutil.copy(source, target)
-    except Exception as ex:
+    except Exception as ex:  # noqa: BLE001
       failures.append((source, ex))
 
   if failures:
@@ -96,8 +96,7 @@ def package_addon(name: str, exclude_filename: str):
   # a copy can report success and land nothing, so compare the tree against the list
   actual = set()
   for root, _, files in os.walk(addon_dir):
-    for file in files:
-      actual.add(os.path.normpath(os.path.relpath(os.path.join(root, file), addon_dir)))
+    actual.update(os.path.normpath(os.path.relpath(os.path.join(root, file), addon_dir)) for file in files)
 
   if actual != expected:
     missing = sorted(expected - actual)

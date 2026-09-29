@@ -1,2 +1,4 @@
 # publish.py
 requests==2.33.0
+# Issue parser must use same JSON Schema as the webinterface
+jsonschema==4.25.1

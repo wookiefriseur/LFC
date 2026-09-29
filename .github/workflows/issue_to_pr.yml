@@ -1,0 +1,48 @@
+name: IssueToPR
+
+# Turns a webinterface issue into one reviewable `db-edit/issue-<N>` PR.
+# - trigger: a maintainer applies `bot:ready4pipeline`, or runs this manually with the issue number
+# - reads the opening post only, applies its diff, regenerates the database files
+# - the PR holds only the affected data and generated files: no formatting, autocomplete or release steps
+# - applying the label again refreshes the same PR against current main (so you can keep editing and previewing)
+# Merging the PR closes the issue.
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+on:
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Issue number whose opening post to prepare'
+        type: number
+        required: true
+
+# One run per issue at a time; other issues are not queued behind it
+concurrency:
+  group: issue-to-pr-${{ github.event.issue.number || inputs.issue }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'bot:ready4pipeline'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: ./.github/actions/configure-bot
+      - uses: ./.github/actions/setup-python-env
+      - uses: ./.github/actions/setup-lua
+      # Issue script fetches the opening post itself
+      - name: Prepare PR from the opening post
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number || inputs.issue }}
+          ACTOR: ${{ github.triggering_actor }}
+        run: python scripts/issue_pipeline.py "$ISSUE"

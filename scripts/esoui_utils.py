@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import typing
+
 import requests
 
 """ESOUI API related utilities.

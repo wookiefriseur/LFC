@@ -104,6 +104,13 @@ function tag(record, category, rowIndex) {
   return record;
 }
 
+export function mirror(live, after) {
+  for (const k of Object.keys(live)) {
+    if (!k.startsWith("_") && !(k in after)) delete live[k];
+  }
+  Object.assign(live, JSON.parse(JSON.stringify(after)));
+}
+
 let newCounter = 0;
 export function newKey(category) {
   return `${category}#new-${newCounter++}`;

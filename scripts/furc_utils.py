@@ -7,7 +7,6 @@ import re
 import shutil
 import sys
 import urllib.request
-
 from tempfile import NamedTemporaryFile
 from typing import NoReturn
 
@@ -105,7 +104,7 @@ def get_manifest_data(manifest_file: str) -> dict:
     if manifest_file.endswith(EXT_MF_ESO):
       manifest[PROP_MF_TYPE] = TYPE_MF_ESO
 
-  except Exception as ex:
+  except Exception as ex:  # noqa: BLE001
     print(f"Failed to get data from {manifest_file}: {ex}")
   return manifest
 
@@ -206,7 +205,7 @@ def update_changelog(notes_file: str | None, header: str, cl_file: str=CL_FILE):
     print(f"🧾 Writing to changelog:\n{change}")
     prepend_str_to_file(change, cl_file)
   else:
-    print(f"🧾 Changelog unchanged")
+    print("🧾 Changelog unchanged")
 
 
 '''
@@ -222,7 +221,8 @@ def prepend_str_to_file(text:str, file: str):
   if not text or not file: return
 
   dir_name = os.path.dirname(file)
-  temp = NamedTemporaryFile(dir=dir_name) # what is my purpose?
+  # what is my purpose?
+  temp = NamedTemporaryFile(dir=dir_name) # noqa: SIM115
   renamed_file = temp.name # > you pass the name
   temp.close() # oh my god
 
@@ -249,7 +249,7 @@ def file_to_binary_string(archive_uri: str):
   try:
     with urllib.request.urlopen(archive_uri) as response:
       return response.read()
-  except Exception:
+  except Exception:  # noqa: BLE001
     msg += 'Cannot be reached as URL. '
 
   # Not a URL or other problem, check locally
@@ -260,7 +260,7 @@ def file_to_binary_string(archive_uri: str):
   try:
     with open(archive_uri, 'rb') as file:
       return file.read()
-  except Exception:
+  except Exception:  # noqa: BLE001
     msg += 'Could not open file.'
 
   # If we reached this point, then the file content could not be retrieved
@@ -522,7 +522,7 @@ def crash_and_burn(msg: str='') -> NoReturn:
   raises SystemExit
   """
   print(f"🔥 ABORT ABORT ABORT: {msg} 🔥")
-  exit(EXIT_FAILURE)
+  sys.exit(EXIT_FAILURE)
 
 # Make some methods available for shell use
 if __name__ == "__main__":

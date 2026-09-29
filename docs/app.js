@@ -33,6 +33,7 @@ import { crownCrateMask } from "./crown-crate.js";
 import { browseMask } from "./browse.js";
 import { crownStoreMask } from "./crown-store.js";
 import { maintenanceMask } from "./maintenance.js";
+import { readDiff, planDiff, applySteps } from "./diff-import.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
 import { parseDiscovery, discoveryKnown } from "./discovery.js";
@@ -800,7 +801,8 @@ function renderAdvancedPanel(container) {
   container.innerHTML = `
     <div class="adv-controls">
       <button id="btn-add" class="btn-primary">+ Add new</button>
-      <button id="btn-add-dump" class="btn-dump" aria-expanded="false" aria-controls="adv-import">++Add from Dump</button>
+      <button id="btn-add-dump" class="btn-dump" aria-expanded="false" aria-controls="adv-import"
+        title="Paste a DevUtility dump, or the diff from a submitted issue to review its changes">++Add from Dump or Diff</button>
       <span class="search-box">
         <input id="search" type="search" placeholder="search by id or name…">
         <button id="search-clear" type="button" class="search-clear"
@@ -819,12 +821,13 @@ function renderAdvancedPanel(container) {
       </label>
     </div>
 
-    <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump">
+    <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump or Diff">
       <div class="adv-import-body">
         <p class="muted">Paste output from DevUtility's Datamine text box. You can paste
-          several pages together. New discoveries arrive as Unconfirmed; choose their source
-          when you know it. Existing entries are skipped.</p>
-        <textarea id="adv-import-paste" rows="7" placeholder="Paste your dump here"></textarea>
+          several pages together. New discoveries arrive as Unconfirme, choose their source
+          if you know it. Existing entries are skipped.</p>
+        <p class="muted">You can also use this to review a submitted issue: just paste the diff or whole raw text in here. The changes load into an empty change list and you can inspect and edit the entries.</p>
+        <textarea id="adv-import-paste" rows="7" placeholder="Paste a dump or an issue's diff here"></textarea>
         <div class="adv-import-actions">
           <button id="adv-import-run" class="btn-primary">Import to the change list</button>
           <button id="adv-import-clear">Clear</button>
@@ -1632,6 +1635,17 @@ function looksLikeJSONL(text) {
 function runBatchImport() {
   const text = $("#adv-import-paste").value;
   const status = $("#adv-import-status");
+  let diff;
+  try {
+    diff = readDiff(text);
+  } catch (err) {
+    status.textContent = `Diff not imported: ${err.message}.`;
+    return;
+  }
+  if (diff) {
+    importDiff(diff.lines, status, diff.complete);
+    return;
+  }
   const targetCat = "";
   let droppedPrices = 0;
   let knownDiscoveries = 0;
@@ -1789,6 +1803,34 @@ function runBatchImport() {
     refilter();
     renderFooter();
   }
+}
+
+// A pasted contribution diff replays into the change list all or nothing, so its change list is exactly the issue's
+async function importDiff(lines, status, complete) {
+  if (state.buffer.size()) {
+    status.textContent = `Diff not imported: send or discard your ${changeCountText()} first, so the change list shows only this diff.`;
+    return;
+  }
+  if (lines.some(({ line }) => line.op === "name")) await referenceData.loadNames();
+  const { steps, errors, warnings } = planDiff(lines, {
+    records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
+    publishedName: (kind, id) => referenceData.publishedName(kind, id),
+  });
+  if (errors.length) {
+    status.textContent = `Diff not imported, nothing changed. ${errors.slice(0, 3).join("; ")}`
+      + (errors.length > 3 ? ` (${errors.length - 3} more in the console)` : "");
+    console.warn("diff import - errors:", errors);
+    return;
+  }
+  applySteps(steps, state, referenceData);
+  status.textContent = `Diff loaded: ${changeCountText()} to review, compared against the catalogue as loaded now.`
+    + (complete ? "" : " Pasted without the issue's diff markers, so it cannot be confirmed complete: the copy button on the issue's diff block copies all of it.")
+    + (warnings.length ? ` ${warnings.join("; ")}.` : "");
+  state.changedOnly = true;
+  const cb = $("#filter-changed");
+  if (cb) cb.checked = true;
+  refilter();
+  renderFooter();
 }
 
 // Shared footer + submit modal

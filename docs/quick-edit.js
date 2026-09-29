@@ -1,7 +1,7 @@
 // The quick-edit modal is a view: it renders through the same renderForm() as Batch edit with a reduced partition, validates with validateRecord() and saves through state.buffer.update(). Which fields a record shows is renderForm()'s decision; no per-type field list lives here.
 
 import { labelFor, sourceTypeLabel, subtypeVocab } from "./lexicon.js";
-import { entryOf } from "./data.js";
+import { entryOf, mirror } from "./data.js";
 import { messageFor, sourceEnumFields } from "./validate.js";
 
 const FOCUSABLE = [
@@ -394,14 +394,6 @@ function dropPhantoms(before, after) {
     }
   }
   return after;
-}
-
-// Object.assign alone would leave a key the edit removed standing.
-function mirror(live, after) {
-  for (const k of Object.keys(live)) {
-    if (!k.startsWith("_") && !(k in after)) delete live[k];
-  }
-  Object.assign(live, deepClone(after));
 }
 
 function deepClone(v) {

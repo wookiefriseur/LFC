@@ -3,8 +3,8 @@
 import argparse
 import json
 
-import furc_utils as FU
 import esoui_utils as EU
+import furc_utils as FU
 
 """Perform all steps required for Publishing.
     - get AddOn data from manifest
@@ -54,7 +54,7 @@ def publish_to_esoui(optional_params: dict | None = None):
   try:
     archivename = f"{manifest[FU.PROP_MF_TITLE]}-{manifest[FU.PROP_MF_VERSION]}.zip"
     archive_content = FU.file_to_binary_string(optional_params.get('archive_file') or archivename)
-  except Exception:
+  except Exception:  # noqa: BLE001
     FU.crash_and_burn('no zip, no live')
 
   if len(archive_content) < ARCHIVE_MIN_SIZE_IN_BYTES:
@@ -99,6 +99,6 @@ if __name__ == '__main__':
 
   try:
     publish_to_esoui(params)
-  except Exception as ex:
+  except Exception as ex:  # noqa: BLE001
     # Abort for safety reasons
     FU.crash_and_burn(f"Error: {ex}")

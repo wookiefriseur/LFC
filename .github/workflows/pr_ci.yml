@@ -67,6 +67,9 @@ jobs:
       - uses: ./.github/actions/setup-python-env
       - uses: ./.github/actions/setup-lua
       - name: Run Python tests
-        run: python3 -m unittest discover -s scripts -p 'test_*.py'
-      - name: Verify bundled generated database
-        run: python3 scripts/generate_db.py --lua "$LUA" --check
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+          python3 -m unittest discover -s tests/pipeline -p 'test_*.py'
+      # Required check for db-edit PRs (data, manifests and generated Lua have to agree)
+      - name: Verify canonical data and generated database agree
+        run: python3 scripts/apply_issue.py --check --lua "$LUA"

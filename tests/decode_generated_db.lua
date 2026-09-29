@@ -142,7 +142,7 @@ for id, row in pairs(database.items) do
       decoded.container = assert(({ "books", "folio" })[record[6]])
     end
     for fieldIndex, field in ipairs(fields) do
-      local value = record[7 + fieldIndex]
+      local value = record[constants.sourceFieldOffset + fieldIndex]
       if value ~= nil then
         decoded.source[field] = sourceValue(kind, field, value)
       end

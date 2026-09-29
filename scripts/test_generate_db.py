@@ -1,13 +1,21 @@
 import copy
-import json
 import os
-from pathlib import Path
 import random
 import subprocess
 import tempfile
 import unittest
+from pathlib import Path
 
-from generate_db import Catalogue, ROOT, canonical, load_inputs, read_json, render, verify
+from generate_db import (
+    LUA_MAX_EXACT_INTEGER,
+    ROOT,
+    Catalogue,
+    canonical,
+    load_inputs,
+    read_json,
+    render,
+    verify,
+)
 
 
 class GeneratedDatabaseTests(unittest.TestCase):
@@ -25,7 +33,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
     def roundtrip(self, records, catalogue=None):
         constants, database, projection = (catalogue or self.catalogue).build(records)
         with tempfile.TemporaryDirectory() as temp:
-            for name, content in render(constants, database).items():
+            for name, content in render(constants, database, self.catalogue.labels).items():
                 (Path(temp) / name).write_text(content)
             verify(Path(temp), projection, self.command)
         return constants, database, projection
@@ -41,7 +49,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
 
     def test_runtime_currency_constants(self):
         result = subprocess.run([*self.command, str(ROOT / 'tests/generated_currencies.lua'), str(ROOT)],
-                                text=True, capture_output=True, timeout=30)
+                                text=True, capture_output=True, timeout=30, check=False)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_added_vocabulary_entry_and_declared_mapping(self):
@@ -117,7 +125,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
 
     def test_bad_inputs_fail(self):
         base = self.row()
-        invalid = [dict(base, surprise=True), dict(base, id=True), dict(base, id=2**53),
+        invalid = [dict(base, surprise=True), dict(base, id=True), dict(base, id=LUA_MAX_EXACT_INTEGER + 1),
                    dict(base, blueprint=9000000), dict(base, blueprint=118991),
                    dict(base, source={'type': '../bad'}), dict(base, source={'type': 'drop', 'typo': 1}),
                    dict(base, source={'type': 'vendor', 'vendor': 'AF'}),
@@ -175,8 +183,18 @@ class GeneratedDatabaseTests(unittest.TestCase):
                 (Path(temp) / name).write_text(content)
             command = [*self.command, str(ROOT / 'tests/decode_generated_db.lua'), temp,
                        str(Path(temp) / 'decoded.jsonl'), str(ROOT)]
-            result = subprocess.run(command, text=True, capture_output=True, timeout=120)
+            result = subprocess.run(command, text=True, capture_output=True, timeout=120, check=False)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_name_comments_cannot_break_out(self):
+        records = [self.row(1)]
+        constants, database, projection = self.catalogue.build(records)
+        labels = {'items': {1: 'Chair\nerror("escaped")\r--'}, 'enums': {}}
+        with tempfile.TemporaryDirectory() as temp:
+            for name, content in render(constants, database, labels).items():
+                (Path(temp) / name).write_text(content)
+            self.assertIn('-- Chair error("escaped") --', (Path(temp) / 'GeneratedDatabase.lua').read_text())
+            verify(Path(temp), projection, self.command)
 
     def test_container_cycle(self):
         rows = [self.row(1, {'type': 'container', 'part_of': 2}, container='books'),

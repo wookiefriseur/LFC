@@ -11,7 +11,8 @@ permissions:
 jobs:
   format:
     # no fork PRs, which are only style checked and handled by pr_ci.yml
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    # no db-edit PRs, which must hold only the data and generated files of their issue (adding lua formatting and other stuff would make changes harder to track)
+    if: github.event.pull_request.head.repo.full_name == github.repository && !startsWith(github.event.pull_request.head.ref, 'db-edit/')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR branch

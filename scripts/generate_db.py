@@ -6,13 +6,17 @@ import collections
 import datetime
 import hashlib
 import json
-from pathlib import Path
 import re
 import subprocess
 import tempfile
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = 1
+LUA_MAX_EXACT_INTEGER = 2**53 - 1
+# Fixed record head before the SOURCE_FIELDS columns
+SOURCE_FIELD_OFFSET = 7
+HEADER = '-- DO NOT MANUALLY EDIT THIS FILE, USE THE WEBINTERFACE PIPELINE INSTEAD\n\n'
 SOURCE_FIELDS = (
     'vendor', 'subtype', 'locations', 'achievement', 'quest', 'skill_line',
     'skill_rank', 'note', 'part_of', 'event', 'container', 'collectible',
@@ -32,7 +36,7 @@ def require(condition, message):
 
 
 def integer(value, minimum=1):
-    return type(value) is int and minimum <= value <= 2**53 - 1
+    return type(value) is int and minimum <= value <= LUA_MAX_EXACT_INTEGER
 
 
 def object_keys(value, allowed, required=()):
@@ -62,7 +66,7 @@ def lua(value):
     if isinstance(value, int):
         return str(value)
     if isinstance(value, str):
-        return '"' + ''.join('\\%03d' % ord(c) if ord(c) < 32 or c in '\\"' else c for c in value) + '"'
+        return '"' + ''.join(f'\\{ord(c):03d}' if ord(c) < 32 or c in '\\"' else c for c in value) + '"'
     if isinstance(value, (list, tuple)):
         values = list(value)
         while values and values[-1] is None:
@@ -73,14 +77,55 @@ def lua(value):
     raise ValueError(f'cannot emit {type(value).__name__}')
 
 
+def comment(text):
+    # A line comment ends at any line break, so free text must not carry one into the code
+    text = ' '.join(''.join(' ' if ord(c) < 32 else c for c in str(text)).split())
+    return f' -- {text}' if text else ''
+
+
+def lua_block(value, note=lambda path, key: None, path=(), depth=0):
+    """One entry per line, nested by indentation; a leaf table short enough stays on its line."""
+    inline = lua(value)
+    if not isinstance(value, (dict, list, tuple)):
+        return inline
+    scalar = all(not isinstance(v, (dict, list, tuple)) for v in (value.values() if isinstance(value, dict) else value))
+    if path and scalar and len(inline) <= 100 and not any(note(path, k) for k in (value if isinstance(value, dict) else range(len(value)))):
+        return inline
+    pad = '  ' * (depth + 1)
+    items = sorted(value.items()) if isinstance(value, dict) else enumerate(value)
+    lines = []
+    for key, item in items:
+        prefix = f'[{lua(key)}]=' if isinstance(value, dict) else ''
+        text, remark = lua_block(item, note, (*path, key), depth + 1), comment(note(path, key) or '')
+        # A multi-line entry is named on its opening line, where a reader meets it
+        lines.append(f'{pad}{prefix}{{{remark}{text[1:]},' if text.startswith('{\n') else f'{pad}{prefix}{text},{remark}')
+    return '{\n' + '\n'.join(lines) + '\n' + '  ' * depth + '}'
+
+
 class Catalogue:
     def __init__(self, enums, recipes):
         require(enums.get('schema_version') == 2, 'unsupported vocabulary schema')
         self.enums = enums
         self.recipes = recipes
+        # Comments only: display names from the data never reach the game tables
+        self.labels = {'items': {}, 'enums': {key: {e['symbol']: e['name'] for e in values if isinstance(e, dict) and e.get('name')}
+                                              for key, values in enums.items() if isinstance(values, list)}}
         self.vocab_fields = enums['source_field_vocabularies']
         require(isinstance(self.vocab_fields, dict), 'source vocabularies must be an object')
-        require(enums.get('id_unknown', {}).get('value') == 0 and enums['id_unknown'].get('fields') == ['achievement', 'quest'], 'unknown-id contract changed')
+
+        # The unknown-id contract is declared explicitly (fields that may carry 0 or value 0 are covered)
+        self.id_unknown = enums.get('id_unknown') or {}
+        require(isinstance(self.id_unknown, dict), 'id_unknown must be an object')
+        self.id_unknown_value = self.id_unknown.get('value')
+        self.id_unknown_fields = self.id_unknown.get('fields')
+        unknown_value = self.id_unknown_value
+        if type(unknown_value) is not int or not 0 <= unknown_value <= LUA_MAX_EXACT_INTEGER:
+            raise ValueError('id_unknown.value must be a non-negative integer')
+        self.id_unknown_floor: int = unknown_value
+        require(isinstance(self.id_unknown_fields, list) and self.id_unknown_fields
+                and all(f in SOURCE_FIELDS for f in self.id_unknown_fields)
+                and len(set(self.id_unknown_fields)) == len(self.id_unknown_fields),
+                'id_unknown.fields must name distinct source fields')
         self.symbols = {}
         self.ids = {}
         for key, values in enums.items():
@@ -135,7 +180,8 @@ class Catalogue:
         elif field == 'houses':
             require(isinstance(value, list) and all(integer(v) for v in value), f'{field} must be an id list')
         else:
-            require(integer(value, 0 if field in ('achievement', 'quest') else 1), f'invalid source.{field}')
+            floor: int = self.id_unknown_floor if field in self.id_unknown_fields else 1
+            require(integer(value, floor), f'invalid source.{field}')
         return value
 
     def project(self, record):
@@ -184,11 +230,13 @@ class Catalogue:
     def encode_record(self, record):
         source = record['source']
         av = record['availability']
-        return [self.enum('source_types', source['type']), self.enum('versions', av['version']),
+        head = [self.enum('source_types', source['type']), self.enum('versions', av['version']),
                 [[self.enum('currencies', c['currency']), c['amount']] for c in record['cost']],
                 av.get('last_seen'), self.enum('rarities', record['rarity']) if 'rarity' in record else None,
                 CONTAINER_KINDS.index(record['container']) + 1 if 'container' in record else None,
-                record.get('blueprint')] + [self.source_value(source['type'], f, source[f]) if f in source else None for f in SOURCE_FIELDS]
+                record.get('blueprint')]
+        require(len(head) == SOURCE_FIELD_OFFSET, 'record head changed; update SOURCE_FIELD_OFFSET')
+        return head + [self.source_value(source['type'], f, source[f]) if f in source else None for f in SOURCE_FIELDS]
 
     def build(self, records):
         projected = []
@@ -261,7 +309,7 @@ class Catalogue:
         priority = [self.enum('item_sources', value) for value in self.enums['source_priority']]
         constants = {'vendorLocations': vendor_locations, 'currencyDefaults': currency_defaults, 'sourcePriority': priority,
                      'format': FORMAT, 'ids': self.ids, 'symbols': self.symbols, 'metadata': metadata,
-                     'sourceFields': list(SOURCE_FIELDS), 'sourceVocabularies': self.vocab_fields, 'containerKinds': list(CONTAINER_KINDS)}
+                     'sourceFields': list(SOURCE_FIELDS), 'sourceFieldOffset': SOURCE_FIELD_OFFSET, 'sourceVocabularies': self.vocab_fields, 'containerKinds': list(CONTAINER_KINDS)}
         digest = hashlib.sha256(canonical(constants).encode()).hexdigest()
         constants['vocabulary'] = digest
         db = {'format': FORMAT, 'vocabulary': digest, 'items': items, 'rumours': rumours, 'blueprints': blueprints}
@@ -274,6 +322,9 @@ def load_inputs(data_dir, recipes_path):
     expected = {f'{t}.jsonl' for t in catalogue.ids['source_types']}
     actual = {p.name for p in data_dir.glob('*.jsonl')}
     require(expected == actual, f'source files differ: {sorted(expected ^ actual)}')
+    names = data_dir / 'names.en.json'
+    if names.exists():
+        catalogue.labels['items'] = {int(k): v for k, v in read_json(names.read_text()).items()}
     records = []
     for filename in sorted(expected):
         for line_number, line in enumerate((data_dir / filename).read_text().splitlines(), 1):
@@ -290,20 +341,44 @@ def load_inputs(data_dir, recipes_path):
     return catalogue, records
 
 
-def render(constants, database):
-    data = ('local C=assert(LFCGeneratedConstants,"load GeneratedConstants.lua first")\n'
+def render(constants, database, labels=None):
+    """labels: {'items': {id: name}, 'enums': {group: {symbol: name}}} for comments; they never change the data."""
+    items, enums = (labels or {}).get('items', {}), (labels or {}).get('enums', {})
+    symbols = constants['symbols']
+
+    def symbol(group, number):
+        name = symbols.get(group, {}).get(number)
+        return ' - '.join(str(s) for s in (name, enums.get(group, {}).get(name)) if s) or None
+
+    def note(path, key):
+        if path[:1] == ('ids',) and len(path) == 2:
+            return enums.get(path[1], {}).get(key)
+        if path[:1] in (('symbols',), ('metadata',)) and len(path) == 2:
+            return enums.get(path[1], {}).get(symbols[path[1]].get(key)) if path[0] == 'symbols' else symbol(path[1], key)
+        if path == ('vendorLocations',):
+            return symbol(constants['sourceVocabularies']['vendor'], key)
+        if path == ('currencyDefaults',):
+            return 'default' if key == 0 else symbol('source_types', key)
+        if path == ('sourcePriority',):
+            return symbol('item_sources', constants['sourcePriority'][key])
+        return None
+
+    def rows(table):
+        return ''.join(f'  [{key}]={lua(row)},{comment(items.get(key, ""))}\n' for key, row in sorted(table.items()))
+
+    data = (HEADER + 'local C=assert(LFCGeneratedConstants,"load GeneratedConstants.lua first")\n'
             f'assert(C.format=={FORMAT} and C.vocabulary=={lua(database["vocabulary"])},"generated vocabulary mismatch")\n'
-            f'LFCGeneratedDatabase={{format={FORMAT},vocabulary=C.vocabulary,items={{\n')
-    data += ''.join(f'[{item}]={lua(row)},\n' for item, row in sorted(database['items'].items()))
-    data += '},rumours=' + lua(database['rumours']) + ',blueprints=' + lua(database['blueprints']) + '}\n'
-    return {'GeneratedConstants.lua': 'LFCGeneratedConstants=' + lua(constants) + '\n', 'GeneratedDatabase.lua': data}
+            f'LFCGeneratedDatabase={{format={FORMAT},vocabulary=C.vocabulary,\nitems={{\n' + rows(database['items'])
+            + '},\n-- rumours[furnishing or blueprint id] = version\nrumours={\n' + rows(database['rumours'])
+            + '},\n-- blueprints[blueprint id] = furnishing id\nblueprints={\n' + rows(database['blueprints']) + '}}\n')
+    return {'GeneratedConstants.lua': HEADER + 'LFCGeneratedConstants=' + lua_block(constants, note) + '\n', 'GeneratedDatabase.lua': data}
 
 
 def verify(output, projection, lua_command):
     with tempfile.TemporaryDirectory() as temp:
         decoded = Path(temp) / 'decoded.jsonl'
         command = [*lua_command, str(ROOT / 'tests/decode_generated_db.lua'), str(output), str(decoded)]
-        result = subprocess.run(command, text=True, capture_output=True, timeout=120)
+        result = subprocess.run(command, text=True, capture_output=True, timeout=120, check=False)
         require(result.returncode == 0, f'Lua decode failed:\n{result.stdout}\n{result.stderr}')
         actual = sorted((read_json(line) for line in decoded.read_text().splitlines()), key=canonical)
         require(actual == projection, 'game-data roundtrip differs from canonical JSONL')
@@ -320,7 +395,7 @@ def main():
     args = parser.parse_args()
     catalogue, records = load_inputs(args.data, args.recipes)
     constants, database, projection = catalogue.build(records)
-    artifacts = render(constants, database)
+    artifacts = render(constants, database, catalogue.labels)
     command = [args.lua] + (['-s', str(args.esoui)] if args.esoui else [])
     with tempfile.TemporaryDirectory() as temp:
         candidate = Path(temp)

@@ -77,7 +77,7 @@ def merge_translation(curlang_map: dict, reflang_map: dict) -> tuple[dict,dict,d
   leftovers = {key: curlang_map[key] for key in (list(set(curlang_map.keys()) - set(reflang_map.keys())))}
 
   # Remove leftovers from translations
-  for key in leftovers.keys():
+  for key in leftovers:
     del curlang_map[key]
 
   merged = {**reflang_map, **curlang_map}
@@ -85,13 +85,11 @@ def merge_translation(curlang_map: dict, reflang_map: dict) -> tuple[dict,dict,d
 
   # Check for untranslated variables
   for key, val in merged.items():
-    if key in reflang_map and key in curlang_map and reflang_map[key] == curlang_map[key]:
-      untranslated[key] = val
-    elif not key in curlang_map:
+    if key not in curlang_map or (key in reflang_map and reflang_map[key] == curlang_map[key]):
       untranslated[key] = val
 
   # Remove untranslated variables from merged map
-  for key in untranslated.keys():
+  for key in untranslated:
     del merged[key]
 
   return (merged, leftovers, untranslated)
@@ -127,7 +125,7 @@ def write_translation_file(out_path: str, merged: tuple[dict,dict,dict]):
   # just abort if the region markers are missing
   if not TRANSL_START_MARKER in (item.strip() for item in current_langfile):
     print(f"Error: Missing region marker in {out_path}")
-    exit(EXIT_FAILURE)
+    sys.exit(EXIT_FAILURE)
 
   # Extract string pairs from the maps
   str_list = [f"{key} = {val},\n" for key, val in merged[0].items()]
@@ -192,13 +190,13 @@ if __name__ == '__main__':
     masters = sorted(p.replace('\\', '/') for p in glob.glob('**/locale/en.lua', recursive=True))
     if not masters:
       print("Error: no locale/en.lua found — run from the project root.")
-      exit(EXIT_FAILURE)
+      sys.exit(EXIT_FAILURE)
     for master in masters:
       str_map = extract_strings(get_file_content(master))
       write_lua_doc(master, out_path, str_map)
       print(f"Wrote {master} to {out_path}")
 
-    exit(EXIT_SUCCESS)
+    sys.exit(EXIT_SUCCESS)
 
   # Clean up paths
   if len(sys.argv) > 1:
@@ -208,7 +206,7 @@ if __name__ == '__main__':
 
   if input_file == out_path:
     print("Error: Input and output file are the same.")
-    exit(EXIT_FAILURE)
+    sys.exit(EXIT_FAILURE)
 
   # Parse input file
   str_map = extract_strings(get_file_content(input_file))
@@ -226,4 +224,4 @@ if __name__ == '__main__':
     write_lua_doc(input_file, out_path, str_map)
 
   print(f"Wrote {input_file} to {out_path}")
-  exit(EXIT_SUCCESS)
+  sys.exit(EXIT_SUCCESS)

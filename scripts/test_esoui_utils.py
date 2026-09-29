@@ -3,9 +3,8 @@
 import unittest
 from unittest import mock
 
-import requests
-
 import esoui_utils as EU
+import requests
 
 
 class FakeResponse:

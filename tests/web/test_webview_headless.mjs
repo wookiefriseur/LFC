@@ -2285,6 +2285,50 @@ test("discovery: metadata and recipe links survive paste and review", async (pag
     "repeat discovery was not skipped");
 });
 
+async function pasteImport(page, text) {
+  await page.evaluate((t) => {
+    const panel = document.querySelector("#adv-import");
+    if (panel.hidden) document.querySelector("#btn-add-dump").click();
+    document.querySelector("#adv-import-paste").value = t;
+    document.querySelector("#adv-import-status").textContent = "";
+  }, text);
+  await page.click("#adv-import-run");
+  await page.waitForFunction(
+    () => (document.querySelector("#adv-import-status")?.textContent || "").length > 0,
+    { timeout: 10000 },
+  );
+  return page.$eval("#adv-import-status", (e) => e.textContent);
+}
+
+test("issue diff: a pasted issue body loads its changes for review, only into an empty change list", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const lux = await page.evaluate(() => {
+    const r = window.__proto.records().find((x) => x._category === "luxury" && x.id === 184200);
+    return { source: r.source, availability: r.availability };
+  });
+  const diff = { v: 1, op: "update", id: 184200, category: "luxury", match: lux.source,
+    fields: { availability: { ...lux.availability, last_seen: "2026-09-18" } } };
+  const body = ["## Summary", "", "Seen {today}", "", "[//]: # (diff-begin)", "```",
+    JSON.stringify(diff), "```", "[//]: # (diff-end)"].join("\n");
+
+  const mixed = await pasteImport(page, JSON.stringify(diff) + "\n" +
+    JSON.stringify({ id: 9900071, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } }));
+  assert(mixed.startsWith("Diff not imported"), `a mixed paste was not refused: "${mixed}"`);
+  assertEq(await page.$eval("#pending-count", (e) => e.textContent), "Nothing to send yet.",
+    "a refused paste changed the change list");
+
+  const loaded = await pasteImport(page, body);
+  assert(loaded.startsWith("Diff loaded: 1 change"), `the diff did not load: "${loaded}"`);
+  const lines = await diffLines(page);
+  assertEq(lines.length, 1, "the change list is not the issue's");
+  assertEq(lines[0].fields.availability.last_seen, "2026-09-18", "the edit was lost");
+
+  const again = await pasteImport(page, body);
+  assert(again.includes("send or discard"), `a second diff was merged into unsaved work: "${again}"`);
+});
+
 test("discovery: ignored items and recipes never enter the change buffer", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

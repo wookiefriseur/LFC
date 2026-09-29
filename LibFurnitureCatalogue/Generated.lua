@@ -103,11 +103,15 @@ local function note(value)
   end
   return _G[value] or value
 end
+local sourceColumn = {}
+for i, name in ipairs(vocabulary.sourceFields) do
+  sourceColumn[name] = vocabulary.sourceFieldOffset + i
+end
 local function decode(record)
   local kind = symbol("source_types", record[1])
   local fields = {}
-  for i, name in ipairs(vocabulary.sourceFields) do
-    fields[name] = record[7 + i]
+  for name, column in pairs(sourceColumn) do
+    fields[name] = record[column]
   end
   local subtype = fields.subtype and symbol(kind .. "_subtypes", fields.subtype)
   local source = { type = kinds[kind] }
@@ -326,7 +330,7 @@ function generated.Install()
   end
   for id, row in pairs(data.items) do
     for i = 4, #row do
-      local parent = row[i][16]
+      local parent = row[i][sourceColumn.part_of]
       local container = parent and containers[parent]
       if container then
         table.insert(container.contents, row[i][7] or id)
@@ -335,6 +339,14 @@ function generated.Install()
   end
   for _, container in pairs(containers) do
     table.sort(container.contents)
+  end
+  FurC.BookCollections, FurC.FurnishingFolios = {}, {}
+  local byKind = { books = FurC.BookCollections, folio = FurC.FurnishingFolios }
+  for id, container in pairs(containers) do
+    local target = byKind[container.kind]
+    if target then
+      target[id] = { contents = ZO_DeepTableCopy(container.contents) }
+    end
   end
   for id, version in pairs(data.rumours) do
     build.Upsert(id, { origin = src.RUMOUR, version = version })
