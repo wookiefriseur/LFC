@@ -46,7 +46,7 @@
       "name": "luxury.jsonl",
       "type": "luxury",
       "records": 664,
-      "digest": "277c1594e06d82ef"
+      "digest": "1b635b4b8a8a242a"
     },
     {
       "name": "event_drop.jsonl",
@@ -139,7 +139,7 @@
       "digest": "f2a038dab9fbb843"
     }
   ],
-  "digest": "bed7520b5e35e961",
+  "digest": "79a102867a53db65",
   "counts": {
     "records": 9686,
     "ids": 11930,
