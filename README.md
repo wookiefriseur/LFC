@@ -16,7 +16,7 @@ Any tools and webinterface files stay out of the packaged AddOn on ESOUI and you
 
 ## API documentation
 
-You can use the header of [./LibFurnitureCatalogue/Api.lua](`LibFurnitureCatalogue/Api.lua`) as reference. 
+You can use the header of [./LibFurnitureCatalogue/Api.lua](LibFurnitureCatalogue/Api.lua) as reference. 
 
 ## Contributing
 
