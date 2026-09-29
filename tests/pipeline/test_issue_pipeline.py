@@ -178,7 +178,7 @@ class PipelineTests(unittest.TestCase):
 
     def test_long_before_after_is_truncated(self):
         big = {**REPORT, 'operations': [{**REPORT['operations'][0], 'after': {'id': 1, 'a': 'x' * 70000}}]}
-        text = issue_pipeline.describe(5, 'm', 'b', 'h', big)
+        text = issue_pipeline.describe(5, 'm', big)
         self.assertLess(len(text), 65536)
         self.assertIn('truncated', text)
 

@@ -72,7 +72,7 @@ def existing_pr(api, git, owner, branch):
     return current, current['head']['sha']
 
 
-def describe(number, actor, base, body_hash, report):
+def describe(number, actor, report):
     rows, details = [], []
     for op in report['operations']:
         before, after = op.get('before'), op.get('after')
@@ -91,18 +91,13 @@ def describe(number, actor, base, body_hash, report):
         rows.append(f'| {op["op"]} | {target} | {fields} |')
     text = '\n'.join([
         f'Closes #{number}', '',
-        (f'Prepared from the opening post of #{number} at the request of @{actor}. '
-         'Comments on the issue are not inputs. Later edits to the issue are not picked up; '
-         f'apply `{LABEL}` again to refresh this PR against current `main`.'), '',
-        '| | |', '|---|---|',
-        f'| Base commit | `{base}` |',
-        f'| Opening post sha256 | `{body_hash}` |',
-        f'| Diff payload sha256 | `{report["payload_sha256"]}` |',
-        f'| Records after | {report["records"]} |', '',
-        ('Mechanical checks passed before this PR was opened: the diff matches the shared schema, '
+        (f'Prepared from the opening post of #{number} (at the request of @{actor}). '
+         f'apply `{LABEL}` on the issue again to refresh this PR against current `main`.'), '',
+        f'**Records after: {report["records"]}**', '',
+        ('Checks that passed before this PR was opened: the diff has the correct schema, '
          'every update and delete matched exactly one record, and the generated Lua decodes back '
-         'to the resulting data. Whether the data is correct is for the reviewer. '
-         'Merging does not release.'), '',
+         'to the resulting data and you can run additional checks by approving the workflow on the PR. '
+         'Please have a look at file changes here to see if the changes are the correct ones. '), '',
         '| Operation | Target | Changed |', '|---|---|---|', *rows])
     if details:
         block = '\n\n'.join(details)
@@ -143,7 +138,7 @@ def prepare(api, git, repo, number, actor, lua_command, root=ROOT):
     # The lease refuses the push if anyone moved the branch since it was inspected.
     git('push', f'--force-with-lease=refs/heads/{branch}:{lease}', 'origin', f'HEAD:refs/heads/{branch}')
     title = f'Database edit from #{number}'
-    description = describe(number, actor, base, body_hash, report)
+    description = describe(number, actor, report)
     if current:
         pr = api('PATCH', f'pulls/{current["number"]}', {'title': title, 'body': description})
         return f'Refreshed #{pr["number"]} against `main` ({base[:12]}).', True

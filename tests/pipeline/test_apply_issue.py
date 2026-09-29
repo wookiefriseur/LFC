@@ -1,4 +1,5 @@
 import copy
+import datetime
 import json
 import os
 import shutil
@@ -25,8 +26,12 @@ class IssueApplicationTests(unittest.TestCase):
             cls.command += ['-s', os.environ['ESOUI']]
         cls.rows = [json.loads(s) for s in (ROOT / 'docs/data/luxury.jsonl').read_text().splitlines()]
 
-    def update(self, item=184200, date='2026-09-18'):
+    def update(self, item=184200, date=None):
         record = next(r for r in self.rows if r.get('id') == item)
+        if date is None:
+            # CI also runs on the generated PR, where the real submission is already applied. Always exercise a change relative to this tree.
+            # A week earlier keeps the weekday (in case we have Friday clamping and deny future dates)
+            date = str(datetime.date.fromisoformat(record['availability']['last_seen']) - datetime.timedelta(days=7))
         return {'v': 1, 'op': 'update', 'id': item, 'category': 'luxury',
                 'match': copy.deepcopy(record['source']),
                 'fields': {'availability': {**record['availability'], 'last_seen': date}}}
@@ -39,7 +44,7 @@ class IssueApplicationTests(unittest.TestCase):
                 for folder in ('docs/data', 'docs/reference-data', 'LibFurnitureCatalogue/data')
                 for p in (ROOT / folder).rglob('*') if p.is_file()}
 
-    def test_real_issue_5_minimal_deterministic_and_no_writes(self):
+    def test_single_update_minimal_deterministic_and_no_writes(self):
         before = self.snapshot()
         files, report = self.run_plan(self.update())
         self.assertEqual(set(files), {'docs/data/luxury.jsonl', 'docs/data/manifest.json',
@@ -47,15 +52,15 @@ class IssueApplicationTests(unittest.TestCase):
         rows = [json.loads(s) for s in files['docs/data/luxury.jsonl'].decode().splitlines()]
         changed = [(a, b) for a, b in zip(self.rows, rows) if a != b]
         self.assertEqual(len(changed), 1)
-        self.assertEqual(changed[0][1]['availability'], {'version': 'TIDES', 'last_seen': '2026-09-18'})
-        self.assertEqual(report['records'], 9686)
+        self.assertEqual(changed[0][1]['availability'], self.update()['fields']['availability'])
+        self.assertEqual(report['records'], sum(len(p.read_text().splitlines()) for p in (ROOT / 'docs/data').glob('*.jsonl')))
         self.assertEqual((files, report), self.run_plan(self.update()))
         self.assertEqual(before, self.snapshot())
 
-    def test_real_issue_6_fourteen_records(self):
+    def test_fourteen_updates(self):
         ids = [120815, 120816, 120817, 120818, 120823, 134831, 145476,
                145477, 156654, 171826, 184201, 196204, 203592, 212580]
-        files, report = self.run_plan(*(self.update(i, '2026-09-25') for i in ids))
+        files, report = self.run_plan(*(self.update(i) for i in ids))
         rows = [json.loads(s) for s in files['docs/data/luxury.jsonl'].decode().splitlines()]
         self.assertEqual([a['id'] for a, b in zip(self.rows, rows) if a != b], ids)
         self.assertEqual(len(report['operations']), 14)
