@@ -432,7 +432,7 @@
 {"id":184197,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"TIDES","last_seen":"2026-08-28"}}
 {"id":184198,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":1000}],"availability":{"version":"TIDES","last_seen":"2026-09-04"}}
 {"id":184199,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4500}],"availability":{"version":"TIDES","last_seen":"2026-09-11"}}
-{"id":184200,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"TIDES","last_seen":"2025-08-28"}}
+{"id":184200,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"TIDES","last_seen":"2026-09-18"}}
 {"id":184201,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"TIDES","last_seen":"2025-08-29"}}
 {"id":184202,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"TIDES","last_seen":"2025-09-05"}}
 {"id":187785,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"BRETON","last_seen":"2025-09-12"}}
