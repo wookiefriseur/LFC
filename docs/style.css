@@ -157,6 +157,8 @@ tbody tr:hover { background: #f9fafb; }
 tbody tr.selected { background: var(--selected); }
 tbody tr.dirty { background: var(--dirty); }
 tbody tr.selected.dirty { background: #fde68a; }
+tbody tr.deleted td:not(.cell-tick) { text-decoration: line-through; color: var(--muted); }
+.browse-source-deleted > :not(.browse-source-head) { text-decoration: line-through; opacity: .7; }
 /* A ticked row is quieter than the selected one, because a tick is a set and the selection is a place. */
 tbody tr.ticked { box-shadow: inset 3px 0 0 var(--accent); }
 

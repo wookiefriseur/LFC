@@ -35,6 +35,8 @@ export class DirtyBuffer {
   }
   #update(key, before, after, category) {
     const existing = this.entries.get(key);
+    // Only undoing the delete brings a deleted row back; an edit must not quietly replace it.
+    if (existing?.op === "delete") return;
     // An add edited before it is sent stays an add. The file is the record's own type, so an add edited into another type is filed where it now belongs.
     if (existing?.op === "add") {
       this.entries.set(key, {
@@ -81,6 +83,9 @@ export class DirtyBuffer {
       origSource: existing?.origSource ?? sourceSnapshot(before),
     });
     this.changed();
+  }
+  isDeleted(key) {
+    return this.entries.get(key)?.op === "delete";
   }
   list() {
     return [...this.entries.values()];

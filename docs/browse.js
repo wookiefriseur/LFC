@@ -561,7 +561,10 @@ export function browseMask(deps) {
                "confirmed way to get it has been recorded.",
       } : {}),
     }, type ? sourceTypeLabel(type) : "No source"));
-    if (state.buffer.entries.has(r._key)) {
+    if (state.buffer.isDeleted(r._key)) {
+      block.classList.add("browse-source-deleted");
+      recHead.append(elem("span", { class: "browse-source-dirty" }, "to be deleted"));
+    } else if (state.buffer.entries.has(r._key)) {
       recHead.append(elem("span", { class: "browse-source-dirty" }, "edited"));
     }
     block.append(recHead);

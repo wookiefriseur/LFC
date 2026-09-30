@@ -4,7 +4,7 @@ import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
   labelOf, entryOf, noteLabel, crateLabel, recordsForItem, placementsText,
-  isUnknownId, setZoneNameLookup,
+  isUnknownId, setZoneNameLookup, mirror,
 } from "./data.js";
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
@@ -12,7 +12,7 @@ import {
   MAX_ISSUE_URL_LENGTH, ISSUE_REPO,
 } from "./diff.js";
 import {
-  validateRecord, validateBuffer, findDuplicateRecord, messageFor, rumourClash,
+  validateRecord, validateBuffer, findDuplicateRecord, messageFor, rumourClash, withoutDeleted,
   SOURCE_ENUM_FIELD,
 } from "./validate.js";
 import {
@@ -91,6 +91,7 @@ function importOptional(path) {
 
 let quickEditInstance = null;   // a factory-style module's single instance
 async function openQuickEdit(recordKey) {
+  if (state.buffer.isDeleted(recordKey)) { switchToBatchEdit(recordKey); return; }
   const mod = await importOptional("./quick-edit.js");
   if (!mod) return;
   if (typeof mod.openQuickEdit === "function") {
@@ -1072,6 +1073,7 @@ function renderTable() {
     const entry = state.buffer.entries.get(r._key);
     if (entry) {
       tr.classList.add("dirty");
+      if (entry.op === "delete") tr.classList.add("deleted");
       if (isSiteOnlyEdit(entry)) tr.classList.add("dirty-site-only");
       // Red until fixed: this change blocks sending.
       const problems = bufferFindings().perEntry.get(r._key)?.errors || [];
@@ -1251,6 +1253,10 @@ function renderDetail() {
     host.append(em("Select a row to edit, or click + Add new above."));
     return;
   }
+  if (!state.editing._isNew && state.buffer.isDeleted(state.editing._key)) {
+    renderDeletedDetail(host);
+    return;
+  }
   const title = state.editing._isNew
     ? "Add new record"
     : `Edit ${state.editing.id ?? state.editing.blueprint} - ${nameOf(state.editing.id ?? state.editing.blueprint)}`;
@@ -1266,7 +1272,7 @@ function renderDetail() {
     host.append(links);
   }
   if (state.editing._pairFrom) {
-    host.append(elem("p", { class: "muted" }, "This adds a paired replacement. The old record remains until the maintainer reviews and removes it."));
+    host.append(elem("p", { class: "muted" }, "Saving replaces the record you started from, and any Unconfirmed record for either ID, with this one record. The replaced records are shown struck through and can be restored with Undo delete."));
     const original = state.index.get(state.editing._pairFrom);
     const wanted = nameOf(original.id ?? original.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
     const candidates = [...new Set(state.records.filter(r => original.id ? (r.blueprint && !r.id) : r.id)
@@ -1428,7 +1434,7 @@ function applyMultiEdit() {
   const invalid = [];
   for (const key of [...state.ticked]) {
     const live = state.index.get(key);
-    if (!live) continue;
+    if (!live || state.buffer.isDeleted(key)) continue;
     const before = clean(live);
     const after = deepClone(before);
     for (const p of touched) setPath(after, p, getPath(draft, p));
@@ -1483,14 +1489,33 @@ function formMessage(text, level = "error") {
   if (text) host.append(elem("p", {}, text));
 }
 
+// A deleted row is not editable: an edit would have to either cancel the delete or be lost with it.
+function renderDeletedDetail(host) {
+  const rec = state.editing;
+  host.append(elem("h2", {}, `Deleted: ${rec.id ?? rec.blueprint} - ${nameOf(rec.id ?? rec.blueprint)}`));
+  host.append(elem("p", {}, `${recordLocator(rec)}. This record is removed when your changes are sent.`));
+  const undo = elem("button", {}, "Undo delete");
+  undo.addEventListener("click", () => {
+    state.buffer.entries.delete(rec._key);
+    state.buffer.changed();
+    renderAfterBufferChange();
+  });
+  host.append(elem("div", { class: "form-actions" }, undo));
+}
+
+function renderAfterBufferChange() {
+  applyFilters();
+  renderTable();
+  renderDetail();
+  renderFooter();
+}
+
 // The delete line carries an id and a filename and no payload, so the question quotes the record: "which one?" cannot be answered afterwards.
 function confirmDelete() {
   const live = state.index.get(state.selectedKey);
   if (!live) return;
   // The live record carries any pending edit, so the question describes the buffer's `before` (the file's version, which the delete line states); the row's key and category still come from the live record.
-  const pending = state.buffer.list().find(
-    (e) => e.key === state.selectedKey && e.before);
-  const orig = pending?.before || live;
+  const orig = state.buffer.entries.get(state.selectedKey)?.before || live;
   const host = $("#detail-message");
   if (!host) return;
   host.innerHTML = "";
@@ -1500,16 +1525,36 @@ function confirmDelete() {
   const yes = elem("button", { class: "btn-danger" }, "Delete it");
   const no = elem("button", {}, "Keep it");
   yes.addEventListener("click", () => {
-    state.buffer.delete(state.selectedKey, clean(orig), live._category);
-    state.editing = null;
-    state.selectedKey = null;
-    applyFilters();
-    renderTable();
-    renderDetail();
-    renderFooter();
+    const kept = deleteRecord(live);
+    state.editing = kept ? deepClone(live) : null;
+    if (!kept) state.selectedKey = null;
+    renderAfterBufferChange();
   });
   no.addEventListener("click", () => formMessage(""));
   host.append(elem("div", { class: "form-actions" }, yes, no));
+}
+
+// Returns false when the row was only ever a pending add, which leaves nothing to strike through.
+function deleteRecord(live) {
+  const pending = state.buffer.entries.get(live._key);
+  const orig = clean(pending?.before || live);
+  state.buffer.delete(live._key, orig, live._category);
+  if (pending?.op === "add") {
+    state.records.splice(state.records.indexOf(live), 1);
+    state.index.delete(live._key);
+    return false;
+  }
+  // The struck-through row shows what the delete line removes: the file's version, not a discarded edit.
+  mirror(live, orig);
+  return true;
+}
+
+// What a paired record replaces: the row it was started from, and any unconfirmed record for either of its ids, since a rumour answers for both.
+function pairReplaced(pair, fromKey) {
+  const ids = [pair.id, pair.blueprint].filter(Number.isInteger);
+  return liveRecords().filter((r) => r._key === fromKey
+    || (pair.source?.type !== "rumour" && r.source?.type === "rumour"
+      && (ids.includes(r.id) || ids.includes(r.blueprint))));
 }
 
 // The one way this app names which record of an item is meant; the quick-edit header, the change list and the delete confirmation all read it.
@@ -1523,11 +1568,23 @@ function recordLocator(record) {
 }
 
 // Findings are stated at the field they are about. validateRecord omits the same-id-different-source warning (the normal multi-source case), so it is added here, addressed to `id`.
+// Rows with a pending delete are still listed but are no longer another record of the item.
+function liveRecords() {
+  return withoutDeleted(state.records, state.buffer);
+}
+
+// A paired record is checked against the records that remain once it has replaced its predecessors.
+function recordsBesides(e) {
+  if (!e?._pairFrom) return liveRecords();
+  const replaced = new Set(pairReplaced(e, e._pairFrom));
+  return liveRecords().filter((r) => !replaced.has(r));
+}
+
 function editingFindings() {
-  const { errors, warnings } = validateRecord(state.editing, state.enums, state.records);
+  const { errors, warnings } = validateRecord(state.editing, state.enums, recordsBesides(state.editing));
   if (!Number.isInteger(state.editing.id)) return { errors, warnings };
   const { sameId } = findDuplicateRecord(
-    state.editing.id, state.editing._category, state.editing.source, state.records,
+    state.editing.id, state.editing._category, state.editing.source, recordsBesides(state.editing),
     state.editing._isNew ? null : state.editing._key,
   );
   if (sameId.length) {
@@ -1552,7 +1609,7 @@ function commitEdit() {
     formMessage("Enter a furnishing ID or blueprint ID, then save.");
     return;
   }
-  const { errors } = validateRecord(e, state.enums, state.records);
+  const { errors } = validateRecord(e, state.enums, recordsBesides(e));
   if (errors.length) {
     formMessage(
       `This cannot be saved yet: ${errors.map((f) => messageFor(f)).join(" ")} ` +
@@ -1562,7 +1619,7 @@ function commitEdit() {
   }
   // Block only a byte-identical (id, source) record; the same id with a different source is a legitimate second record.
   const { exact } = findDuplicateRecord(
-    e.id, e._category, e.source, state.records, e._isNew ? null : e._key, e.blueprint,
+    e.id, e._category, e.source, recordsBesides(e), e._isNew ? null : e._key, e.blueprint,
   );
   if (exact) {
     formMessage(
@@ -1579,12 +1636,9 @@ function commitEdit() {
     }
     const clone = deepClone(e);
     delete clone._isNew;
-    if (e._pairFrom) {
-      const old = clean(state.index.get(e._pairFrom));
-      const note = `Paired replacement: maintainer should review removal of ${JSON.stringify({ id: old.id, blueprint: old.blueprint, source: old.source })}.`;
-      clone.notes = clone.notes ? `${clone.notes}\n${note}` : note;
-      delete clone._pairFrom;
-    }
+    delete clone._pairFrom;
+    const replaced = e._pairFrom ? pairReplaced(clone, e._pairFrom) : [];
+    for (const r of replaced) deleteRecord(r);
     state.buffer.add(clone._key, clean(clone), clone._category);
     state.records.push(clone);
     state.index.set(clone._key, clone);

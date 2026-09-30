@@ -542,6 +542,11 @@ export function rumourClash(record, allRecords, excludeKey) {
   };
 }
 
+export function withoutDeleted(records, buffer) {
+  const gone = new Set(buffer.list().filter((e) => e.op === "delete").map((e) => e.key));
+  return gone.size ? records.filter((r) => !gone.has(r._key)) : records;
+}
+
 function findingSignature(f) {
   return `${f.field}|${f.code || ""}|${f.message}`;
 }
@@ -551,6 +556,8 @@ export function validateBuffer(buffer, enums, allRecords) {
   let errors = 0;
   let warnings = 0;
   const perEntry = new Map();
+  // A row with a pending delete stays on screen, struck through, but is no longer another record of its item.
+  allRecords = withoutDeleted(allRecords, buffer);
 
   // Duplicates count on the composite key (id/blueprint + canonical source), never on an identity field alone.
   const compositeByCategory = new Map(); // category -> Map<identityKey, count>

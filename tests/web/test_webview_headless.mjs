@@ -2320,6 +2320,86 @@ test("discovery: a new blueprint of a confirmed item becomes a recipe, and probl
   await page.click("#modal-close");
 });
 
+// Selects the Batch-edit row for one record: a search by number can match several rows.
+async function selectRecord(page, key, number) {
+  await page.evaluate((n) => {
+    const changed = document.querySelector("#filter-changed");
+    if (changed.checked) changed.click();
+    const box = document.querySelector("#search");
+    box.value = String(n);
+    box.dispatchEvent(new Event("input", { bubbles: true }));
+  }, number);
+  await page.waitForFunction((n) => document.querySelector("#search").value === String(n)
+    && document.querySelectorAll("#table-body tr:not(.spacer)").length > 0, { timeout: 5000 }, number);
+  await new Promise((r) => setTimeout(r, 300));
+  const rows = await page.$$("#table-body tr:not(.spacer) td:nth-child(3)");
+  for (const row of rows) {
+    await row.click();
+    if (await page.evaluate((k) => window.__proto.editing()?._key === k, key)) return;
+  }
+  const seen = await page.$$eval("#table-body tr:not(.spacer)", (r) => r.map((x) => x.textContent.slice(0, 80)));
+  throw new Error(`no Batch-edit row selects ${key}: ${JSON.stringify(seen)} editing=${await page.evaluate(() => window.__proto.editing()?._key)}`);
+}
+
+test("delete and pair: a struck-through deletion stops clashing, and a pair replaces the unconfirmed records", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  // An item-only and a blueprint-only rumour with nothing else recorded: the data may change which ones those are.
+  const { item, bp } = await page.evaluate(() => {
+    const all = window.__proto.records();
+    const alone = (n) => all.filter((o) => o.id === n || o.blueprint === n).length === 1;
+    const rum = all.filter((r) => r.source?.type === "rumour");
+    const item = rum.find((r) => Number.isInteger(r.id) && r.blueprint === undefined && alone(r.id));
+    const bp = rum.find((r) => Number.isInteger(r.blueprint) && r.id === undefined && alone(r.blueprint));
+    return { item: { key: item._key, id: item.id }, bp: { key: bp._key, blueprint: bp.blueprint } };
+  });
+
+  // A confirmed record beside the rumour blocks sending until the rumour is deleted.
+  await pasteImport(page, JSON.stringify({ id: item.id, source: { type: "writ_vendor", vendor: "ROLIS" },
+    cost: [{ currency: "WRIT_VOUCHERS", amount: 125 }], availability: { version: "NONE" } }));
+  assert(await page.$("#table-body tr.dirty-error"), "the confirmed record beside a rumour is not red");
+  await selectRecord(page, item.key, item.id);
+  await page.click("#detail .form-actions .btn-danger");
+  await page.click("#detail-message .btn-danger");
+  await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
+  const struck = await page.$eval("#table-body tr.deleted td:nth-child(3)", (td) => getComputedStyle(td).textDecorationLine);
+  assertEq(struck, "line-through", "the deleted row is not struck through");
+  assertEq(await page.$("#table-body tr.dirty-error"), null, "a deleted rumour still blocks the confirmed record");
+  assert(await page.$eval("#detail", (d) => d.textContent.includes("Undo delete") && !d.querySelector("#adv-source-type")),
+    "a deleted row still opens the edit form");
+
+  // Undo restores the row; deleting it again leaves it deleted for the rest of the test.
+  await page.evaluate(() => [...document.querySelectorAll("#detail button")].find((b) => b.textContent === "Undo delete").click());
+  await page.waitForFunction(() => !document.querySelector("#table-body tr.deleted"), { timeout: 5000 });
+  await page.click("#detail .form-actions .btn-danger");
+  await page.click("#detail-message .btn-danger");
+  await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
+
+  // Pair the blueprint-only rumour with the item: one Crafting record replaces it, with no note for the maintainer.
+  await selectRecord(page, bp.key, bp.blueprint);
+  await page.click("#detail .form-pair");
+  await page.select("#adv-source-type", "recipe");
+  await page.evaluate((id) => {
+    const box = document.querySelector("#adv-id");
+    box.value = String(id);
+    box.dispatchEvent(new Event("input", { bubbles: true }));
+    box.dispatchEvent(new Event("change", { bubbles: true }));
+  }, item.id);
+  await page.click("#detail .btn-primary");
+  const lines = await diffLines(page);
+  const pair = lines.find((l) => l.op === "add" && l.category === "recipe" && l.record.blueprint === bp.blueprint);
+  assert(pair && pair.record.id === item.id && pair.record.notes === undefined, `pair line: ${JSON.stringify(pair)}`);
+  assert(lines.some((l) => l.op === "delete" && l.category === "rumour" && l.blueprint === bp.blueprint),
+    "the paired rumour was not deleted");
+
+  await page.click("#btn-submit");
+  await page.waitForSelector("#modal.open", { timeout: 10000 });
+  const findings = await page.$eval("#modal-validation", (e) => e.textContent);
+  assert(!findings.includes("Fix these changes"), `the send screen still blocks: ${findings}`);
+  await page.click("#modal-close");
+});
+
 test("vocabulary: the zone name search fills the zone id and symbol, and names an existing entry", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

@@ -131,3 +131,23 @@ test("a rumour beside a confirmed record is refused, and a new blueprint of a co
   const { blueprint: _, ...plain } = blueprint;
   assert.equal(discoveryAsRecipe(plain, [drop]), plain);
 });
+
+test("a record with a pending delete neither clashes nor survives a later edit", () => {
+  const rumour = { id: 226739, source: { type: "rumour" }, cost: [], availability: { version: "NONE" },
+    _category: "rumour", _key: "rumour#1" };
+  const { _category, _key, ...file } = rumour;
+  const vendor = { id: 226739, source: { type: "writ_vendor", vendor: "ROLIS" },
+    cost: [{ currency: "WRIT_VOUCHERS", amount: 125 }], availability: { version: "NONE" } };
+  const buffer = new DirtyBuffer();
+  buffer.add("writ_vendor#new", vendor, "writ_vendor");
+  const live = [rumour, { ...vendor, _category: "writ_vendor", _key: "writ_vendor#new" }];
+  assert.equal(validateBuffer(buffer, enums, live).perEntry.get("writ_vendor#new").errors[0].code, "confirmed_has_rumour");
+
+  buffer.delete("rumour#1", file, "rumour");
+  const found = validateBuffer(buffer, enums, live);
+  assert.equal(found.errors, 0);
+  assert.deepEqual(found.perEntry.get("writ_vendor#new").warnings, [], "a deleted record is not another way to get the item");
+
+  buffer.update("rumour#1", file, { ...file, notes: "edited after delete" }, "rumour");
+  assert.equal(buffer.isDeleted("rumour#1"), true);
+});
