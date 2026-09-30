@@ -125,6 +125,7 @@
 {"id":171775,"name":"Fountain of the Fiery Drake","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_skr_duc_markblackdrakefountainhead001"}
 {"id":171776,"name":"Basalt Pillar, Glowing","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_rok_bad_basaltpillar001"}
 {"id":171817,"name":"Ayleid Chandelier, Caged","quality":4,"cat":11,"sub":125,"theme":14,"icon":"housing_ayl_duc_housinglanternhangingc001"}
+{"id":171818,"name":"Tree, Giant Cork Oak","icon":"housing_tre_dec_gccorkoak001","quality":3,"cat":12,"sub":150,"theme":1}
 {"id":171819,"name":"Tree, Towering Cork Oak","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_dec_gccorkoak002"}
 {"id":171820,"name":"Redguard Urn, Wrapped Golden","quality":4,"cat":3,"sub":57,"theme":10,"icon":"housing_red_inc_vargoldvase001"}
 {"id":171821,"name":"Redguard Amphora, Golden","quality":4,"cat":3,"sub":57,"theme":10,"icon":"housing_red_inc_vargoldvaselarge001"}
@@ -154,6 +155,18 @@
 {"id":171945,"name":"Deadlands Sconce, Horned","quality":5,"cat":11,"sub":123,"theme":13,"icon":"housing_bad_lsb_dedwallsconce001"}
 {"id":171946,"name":"Deadlands Cage, Bladed","quality":5,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedcage001"}
 {"id":171947,"name":"Deadlands Chandelier, Bladed","quality":5,"cat":11,"sub":125,"theme":13,"icon":"housing_bad_lsb_dedchandelier001"}
+{"id":172451,"name":"Clothing Station (Hist Whisperer)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172452,"name":"Woodworking Station (Hist Whisperer)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172453,"name":"Blacksmithing Station (Hist Whisperer)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172454,"name":"Jewelry Station (Hist Whisperer)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172825,"name":"Clothing Station (Heartland Conqueror)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172826,"name":"Woodworking Station (Heartland Conqueror)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172827,"name":"Blacksmithing Station (Heartland Conqueror)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":172828,"name":"Jewelry Station (Heartland Conqueror)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":173199,"name":"Clothing Station (Diamond's Victory)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":173200,"name":"Woodworking Station (Diamond's Victory)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":173201,"name":"Blacksmithing Station (Diamond's Victory)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":173202,"name":"Jewelry Station (Diamond's Victory)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":175135,"name":"Statue, Prince of Ambition","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_bad_exc_housingdedmehrunesdagonstatue001"}
 {"id":175578,"name":"Banner, Meridia","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermeridiasmall001"}
 {"id":175583,"name":"Leyawiin Cupboard, Sturdy","quality":3,"cat":8,"sub":83,"theme":11,"icon":"housing_bad_fur_leylowwallcabinet001","blueprint":175915}
@@ -346,3 +359,15 @@
 {"id":178694,"name":"Target Ogrim","quality":5,"cat":25,"sub":98,"theme":1,"icon":"target_greenarmoredogrim"}
 {"id":178799,"name":"Ruby Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_torchbug_red"}
 {"id":178800,"name":"Amethyst Candlefly Gathering","quality":5,"cat":14,"sub":167,"theme":1,"icon":"housing_torchbug_purple"}
+{"id":178802,"name":"Clothing Station (Wretched Vitality)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":178803,"name":"Woodworking Station (Wretched Vitality)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":178804,"name":"Blacksmithing Station (Wretched Vitality)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":178805,"name":"Jewelry Station (Wretched Vitality)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179176,"name":"Clothing Station (Deadlands Demolisher)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179177,"name":"Woodworking Station (Deadlands Demolisher)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179178,"name":"Blacksmithing Station (Deadlands Demolisher)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179179,"name":"Jewelry Station (Deadlands Demolisher)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179550,"name":"Clothing Station (Iron Flask)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179551,"name":"Woodworking Station (Iron Flask)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179552,"name":"Blacksmithing Station (Iron Flask)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":179553,"name":"Jewelry Station (Iron Flask)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
