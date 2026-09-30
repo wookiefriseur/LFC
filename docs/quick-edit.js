@@ -305,6 +305,7 @@ function save() {
 
   state.buffer.update(key, before, after, live._category);
   mirror(live, after);
+  state.names?.setRecordName(live.id ?? live.blueprint, live.name_overrides?.en);
   deps.applyFilters();
   deps.renderFooter();
 

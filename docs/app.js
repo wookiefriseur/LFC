@@ -37,7 +37,7 @@ import { readDiff, planDiff, applySteps } from "./diff-import.js";
 import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown, discoveryAsRecipe } from "./discovery.js";
+import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { ReferenceData } from "./reference-data.js";
 import { namesMask } from "./names.js";
@@ -116,8 +116,8 @@ async function init() {
     state.manifest = manifest;
     state.categories = categoriesFrom(manifest);
     state.names = new NameStore(names);
-    for (const r of state.records) state.names.setRecordName(r.id ?? r.blueprint, r.name_overrides?.en);
     state.records = records;
+    for (const r of state.records) state.names.setRecordName(r.id ?? r.blueprint, r.name_overrides?.en);
     state.index = new Map(records.map((r) => [r._key, r]));
     if (errors && errors.length) {
       console.warn(`${errors.length} JSONL parse error(s):`, errors);
@@ -1809,7 +1809,8 @@ function runBatchImport() {
       continue;
     }
     // A dump block is as much a scan as a discovery line: an item already catalogued is skipped either way.
-    if ((c.reference || c.rumourFallback) && discoveryKnown(rec, state.records)) {
+    if (c.reference ? discoveryKnown(rec, state.records)
+        : c.rumourFallback && dumpKnown(rec.id, state.records)) {
       knownDiscoveries++;
       continue;
     }

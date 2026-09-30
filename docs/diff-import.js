@@ -189,6 +189,10 @@ export function applySteps(steps, state, referenceData) {
         state.records.push(live);
         state.index.set(key, live);
       }
+      // A name the diff sets shows in the table at once, as it does after "Save to the change list".
+      if (record.name_overrides?.en || step.before?.name_overrides?.en) {
+        state.names.setRecordName(record.id ?? record.blueprint, record.name_overrides?.en);
+      }
       if (step.reference) {
         state.buffer.references.set(key, step.reference);
         referenceData.addDiscovery(step.reference.meta, record.blueprint);

@@ -3,7 +3,7 @@ import test from "node:test";
 import fs from "node:fs";
 import Ajv from "ajv/dist/2020.js";
 import { isIgnoredItem } from "../../docs/ignored-items.js";
-import { parseDiscovery, discoveryKnown, discoveryAsRecipe } from "../../docs/discovery.js";
+import { parseDiscovery, discoveryKnown, discoveryAsRecipe, dumpKnown } from "../../docs/discovery.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
 import { ReferenceData } from "../../docs/reference-data.js";
 import { validateRecord, validateBuffer, rumourClash, messageFor } from "../../docs/validate.js";
@@ -150,4 +150,11 @@ test("a record with a pending delete neither clashes nor survives a later edit",
 
   buffer.update("rumour#1", file, { ...file, notes: "edited after delete" }, "rumour");
   assert.equal(buffer.isDeleted("rumour#1"), true);
+});
+
+test("a trader dump number is catalogued whether it is a furnishing or a blueprint", () => {
+  const records = [{ id: 118553, blueprint: 119592, source: { type: "writ_vendor", vendor: "ROLIS" } }];
+  assert.equal(dumpKnown(118553, records), true);
+  assert.equal(dumpKnown(119592, records), true);
+  assert.equal(dumpKnown(999999, records), false);
 });

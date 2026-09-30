@@ -2400,6 +2400,42 @@ test("delete and pair: a struck-through deletion stops clashing, and a pair repl
   await page.click("#modal-close");
 });
 
+test("diff: an item name set by a loaded diff shows in the Batch-edit table without saving again", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const rec = await page.evaluate(() => {
+    const r = window.__proto.records().find((x) => Number.isInteger(x.id) && !x.name_overrides && x.source?.type === "writ_vendor");
+    return { id: r.id, blueprint: r.blueprint, category: r._category, key: r._key, source: r.source };
+  });
+  const line = { v: 1, op: "update", id: rec.id, ...(rec.blueprint === undefined ? {} : { blueprint: rec.blueprint }),
+    category: rec.category, fields: { name_overrides: { en: "Zz Loaded Name" } }, match: rec.source };
+  const status = await pasteImport(page, `[//]: # (diff-begin)\n${JSON.stringify(line)}\n[//]: # (diff-end)`);
+  assert(/1 change/.test(status), `the diff did not load: ${status}`);
+  await selectRecord(page, rec.key, rec.id);
+  const shown = await page.$eval("#table-body tr.selected", (tr) => tr.textContent);
+  assert(shown.includes("Zz Loaded Name"), `the table does not show the loaded name: ${shown}`);
+});
+
+test("dump import: a trader dump skips numbers already catalogued as a furnishing or a blueprint", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const { furnishing, blueprint, unknown } = await page.evaluate(() => {
+    const all = window.__proto.records();
+    const paired = all.find((r) => Number.isInteger(r.id) && Number.isInteger(r.blueprint));
+    const taken = new Set(all.flatMap((r) => [r.id, r.blueprint]));
+    let unknown = 990001;
+    while (taken.has(unknown)) unknown++;
+    return { furnishing: paired.id, blueprint: paired.blueprint, unknown };
+  });
+  const block = (n) => `[${n}] = { -- Some Item\n  itemPrice = 35,\n},`;
+  const status = await pasteImport(page, [furnishing, blueprint, unknown].map(block).join("\n"));
+  assert(status.includes("2 already catalogued (skipped)"), `known numbers were not skipped: ${status}`);
+  const added = (await diffLines(page)).filter((l) => l.op === "add").map((l) => l.id);
+  assertEq(JSON.stringify(added), JSON.stringify([unknown]), "the dump added more than the unknown number");
+});
+
 test("vocabulary: the zone name search fills the zone id and symbol, and names an existing entry", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
