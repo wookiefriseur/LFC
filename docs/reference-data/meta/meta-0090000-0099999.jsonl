@@ -24,6 +24,7 @@
 {"id":94114,"name":"Imperial Statue, Monolith","quality":3,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_cem_monolith001"}
 {"id":94115,"name":"Imperial Statue, Obelisk","quality":3,"cat":6,"sub":70,"theme":11,"icon":"housing_imp_cem_monolith002"}
 {"id":94116,"name":"Imperial Cauldron, Pitch-filled","quality":3,"cat":7,"sub":77,"theme":11,"icon":"housing_imp_exc_boilingoil001"}
+{"id":94117,"name":"Imperial Rug, Arkay","icon":"housing_imp_inc_rugakatoshround003","quality":3,"cat":3,"sub":53,"theme":11}
 {"id":94118,"name":"Imperial Rug, Kynareth","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugkyneround003"}
 {"id":94119,"name":"Imperial Rug, Stars","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_ruground003"}
 {"id":94120,"name":"Imperial Rug, Stendarr","quality":3,"cat":3,"sub":53,"theme":11,"icon":"housing_imp_inc_rugstendarrround003"}

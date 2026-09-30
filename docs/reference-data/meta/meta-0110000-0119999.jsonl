@@ -856,6 +856,7 @@
 {"id":117762,"name":"Redguard Mat, Desert Sun","quality":4,"cat":3,"sub":53,"theme":10,"icon":"housing_red_inc_rugsmall003","blueprint":119222}
 {"id":117763,"name":"Redguard Mat, Sunrise","quality":4,"cat":3,"sub":53,"theme":10,"icon":"housing_red_inc_rugsmall010","blueprint":119223}
 {"id":117764,"name":"Redguard Awning, Desert Flame","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawninghigh001","blueprint":119224}
+{"id":117765,"name":"Redguard Canopy, Dusk","icon":"housing_red_str_varawningstandalone003","quality":4,"cat":13,"sub":114,"theme":10}
 {"id":117766,"name":"Redguard Tent, Scaled Flames","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning004","blueprint":119225}
 {"id":117767,"name":"Redguard Canopy, Dawn","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning005","blueprint":119226}
 {"id":117769,"name":"Redguard Caravan, Cargo","quality":4,"cat":6,"sub":71,"theme":10,"icon":"housing_red_csb_varmerchantcart001","blueprint":119228}
@@ -918,6 +919,7 @@
 {"id":117827,"name":"Redguard Counter, Bar Island","quality":4,"cat":5,"sub":67,"theme":10,"icon":"housing_red_str_varinthicounterstraight001","blueprint":119286}
 {"id":117828,"name":"Redguard Counter, Grill","quality":4,"cat":5,"sub":67,"theme":10,"icon":"housing_red_str_varinthicounterstraight002","blueprint":119287}
 {"id":117829,"name":"Redguard Brazier, Enchanted","quality":4,"cat":11,"sub":124,"theme":10,"icon":"housing_red_str_varmilemarker001","blueprint":119288}
+{"id":117835,"name":"Redguard Lamp, Oil","icon":"housing_red_lsb_oillamp001","quality":4,"cat":11,"sub":120,"theme":10}
 {"id":117839,"name":"Redguard Canopy, Stars","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawningstandalone001","blueprint":119290}
 {"id":117840,"name":"Redguard Pillow, Lattice Flames","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow002","blueprint":119291}
 {"id":117841,"name":"Redguard Pillow, Florid Flames","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow006","blueprint":119292}
@@ -1016,6 +1018,7 @@
 {"id":117968,"name":"Rough Clothesline, Full","quality":1,"cat":8,"sub":153,"theme":1,"icon":"housing_bre_exc_clotheslinecm001"}
 {"id":117969,"name":"Rough Clothesline, Long","quality":1,"cat":8,"sub":153,"theme":1,"icon":"housing_bre_exc_clotheslinelg001"}
 {"id":117970,"name":"Rough Clothesline, Half","quality":1,"cat":8,"sub":153,"theme":1,"icon":"housing_bre_exc_clotheslinemd001"}
+{"id":117971,"name":"Rough Clothesline, Post","icon":"housing_bre_exc_clotheslinepost001","quality":1,"cat":6,"sub":69,"theme":1}
 {"id":117972,"name":"Rough Clothesline, Short","quality":1,"cat":8,"sub":153,"theme":1,"icon":"housing_bre_exc_clotheslinesm001"}
 {"id":117973,"name":"Rough Crate, Dry","quality":1,"cat":10,"sub":95,"theme":1,"icon":"housing_cav_min_crate001"}
 {"id":117974,"name":"Rough Hay Bed, Tidy","quality":1,"cat":2,"sub":46,"theme":1,"icon":"housing_cre_exc_minbedding001"}
@@ -1397,6 +1400,7 @@
 {"id":118795,"name":"Skull, Giant Mammoth","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_orc_exc_mammothskull001"}
 {"id":118796,"name":"Skull, Mammoth","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_mammothskull003"}
 {"id":118797,"name":"Skull, Dragon","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_dragonskull001"}
+{"id":118813,"name":"Bone Claw, Dragon","icon":"housing_gen_exc_lgclaw001","quality":5,"cat":7,"sub":75,"theme":1}
 {"id":118825,"name":"Remains, Bear","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_bearskeleton008"}
 {"id":118856,"name":"Remains, Wamasu","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_wamasuskeleton011"}
 {"id":118877,"name":"Bone, Right Arm","quality":5,"cat":7,"sub":75,"theme":1,"icon":"housing_gen_exc_skeletonarm001"}
@@ -1518,9 +1522,111 @@
 {"id":119689,"name":"Arch of the Wild Hunt","quality":4,"cat":6,"sub":70,"theme":15,"icon":"housing_bos_waf_wallssmallgate001"}
 {"id":119690,"name":"Banner of Hircine","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannerhircinesmall001"}
 {"id":119697,"name":"Blade of Woe, Replica","quality":5,"cat":10,"sub":96,"theme":1,"icon":"housing_fx_prt_bladeofwoe"}
+{"id":119706,"name":"Blacksmithing Station (Death's Wind)","icon":"housing_gen_crf_portableblacksmith001","quality":4,"cat":25,"sub":104,"theme":1}
 {"id":119707,"name":"Clothing Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portabletableleatherworking001"}
+{"id":119708,"name":"Clothing Station (Death's Wind)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119709,"name":"Clothing Station (Twilight's Embrace)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119710,"name":"Clothing Station (Night's Silence)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119711,"name":"Clothing Station (Whitestrake's Retribution)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119712,"name":"Clothing Station (Armor of the Seducer)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119713,"name":"Clothing Station (Vampire's Kiss)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119714,"name":"Clothing Station (Magnus' Gift)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119715,"name":"Clothing Station (Night Mother's Gaze)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119716,"name":"Clothing Station (Ashen Grip)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119717,"name":"Clothing Station (Oblivion's Foe)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119718,"name":"Clothing Station (Spectre's Eye)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119719,"name":"Clothing Station (Torug's Pact)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119720,"name":"Clothing Station (Hist Bark)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119721,"name":"Clothing Station (Willow's Path)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119722,"name":"Clothing Station (Hunding's Rage)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119723,"name":"Clothing Station (Song of Lamae)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119724,"name":"Clothing Station (Alessia's Bulwark)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119725,"name":"Clothing Station (Orgnum's Scales)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119726,"name":"Clothing Station (Eyes of Mara)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119727,"name":"Clothing Station (Kagrenac's Hope)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119728,"name":"Clothing Station (Shalidor's Curse)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119729,"name":"Clothing Station (Way of the Arena)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119730,"name":"Clothing Station (Twice-Born Star)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119731,"name":"Clothing Station (Noble's Conquest)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119732,"name":"Clothing Station (Redistributor)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119733,"name":"Clothing Station (Armor Master)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119734,"name":"Clothing Station (Law of Julianos)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119735,"name":"Clothing Station (Trial by Fire)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119736,"name":"Clothing Station (Armor of the Code)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119737,"name":"Clothing Station (Morkuldin)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119738,"name":"Clothing Station (Tava's Favor)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119739,"name":"Clothing Station (Clever Alchemist)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119740,"name":"Clothing Station (Eternal Hunt)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119741,"name":"Clothing Station (Kvatch Gladiator)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119742,"name":"Clothing Station (Varen's Legacy)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119743,"name":"Clothing Station (Pelinal's Wrath)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119744,"name":"Woodworking Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portabletablewoodworking001"}
+{"id":119745,"name":"Woodworking Station (Death's Wind)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119746,"name":"Woodworking Station (Twilight's Embrace)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119747,"name":"Woodworking Station (Night's Silence)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119748,"name":"Woodworking Station (Whitestrake's Retribution)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119749,"name":"Woodworking Station (Armor of the Seducer)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119750,"name":"Woodworking Station (Vampire's Kiss)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119751,"name":"Woodworking Station (Magnus' Gift)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119752,"name":"Woodworking Station (Night Mother's Gaze)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119753,"name":"Woodworking Station (Ashen Grip)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119754,"name":"Woodworking Station (Oblivion's Foe)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119755,"name":"Woodworking Station (Spectre's Eye)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119756,"name":"Woodworking Station (Torug's Pact)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119757,"name":"Woodworking Station (Hist Bark)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119758,"name":"Woodworking Station (Willow's Path)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119759,"name":"Woodworking Station (Hunding's Rage)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119760,"name":"Woodworking Station (Song of Lamae)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119761,"name":"Woodworking Station (Alessia's Bulwark)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119762,"name":"Woodworking Station (Orgnum's Scales)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119763,"name":"Woodworking Station (Eyes of Mara)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119764,"name":"Woodworking Station (Kagrenac's Hope)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119765,"name":"Woodworking Station (Shalidor's Curse)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119766,"name":"Woodworking Station (Way of the Arena)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119767,"name":"Woodworking Station (Twice-Born Star)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119768,"name":"Woodworking Station (Noble's Conquest)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119769,"name":"Woodworking Station (Redistributor)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119770,"name":"Woodworking Station (Armor Master)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119771,"name":"Woodworking Station (Law of Julianos)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119772,"name":"Woodworking Station (Trial by Fire)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119773,"name":"Woodworking Station (Armor of the Code)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119774,"name":"Woodworking Station (Morkuldin)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119775,"name":"Woodworking Station (Tava's Favor)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119776,"name":"Woodworking Station (Clever Alchemist)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119777,"name":"Woodworking Station (Eternal Hunt)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119778,"name":"Woodworking Station (Kvatch Gladiator)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119779,"name":"Woodworking Station (Varen's Legacy)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119780,"name":"Woodworking Station (Pelinal's Wrath)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119781,"name":"Blacksmithing Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portableblacksmith001"}
+{"id":119782,"name":"Blacksmithing Station (Death's Wind)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119783,"name":"Blacksmithing Station (Twilight's Embrace)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119784,"name":"Blacksmithing Station (Night's Silence)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119785,"name":"Blacksmithing Station (Whitestrake's Retribution)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119786,"name":"Blacksmithing Station (Armor of the Seducer)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119787,"name":"Blacksmithing Station (Vampire's Kiss)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119788,"name":"Blacksmithing Station (Magnus' Gift)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119789,"name":"Blacksmithing Station (Night Mother's Gaze)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119790,"name":"Blacksmithing Station (Ashen Grip)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119791,"name":"Blacksmithing Station (Oblivion's Foe)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119792,"name":"Blacksmithing Station (Spectre's Eye)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119793,"name":"Blacksmithing Station (Torug's Pact)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119794,"name":"Blacksmithing Station (Hist Bark)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119795,"name":"Blacksmithing Station (Willow's Path)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119796,"name":"Blacksmithing Station (Hunding's Rage)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119797,"name":"Blacksmithing Station (Song of Lamae)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119798,"name":"Blacksmithing Station (Alessia's Bulwark)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119799,"name":"Blacksmithing Station (Orgnum's Scales)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119800,"name":"Blacksmithing Station (Eyes of Mara)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119801,"name":"Blacksmithing Station (Kagrenac's Hope)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119802,"name":"Blacksmithing Station (Shalidor's Curse)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119803,"name":"Blacksmithing Station (Way of the Arena)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119804,"name":"Blacksmithing Station (Twice-Born Star)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119805,"name":"Blacksmithing Station (Noble's Conquest)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119806,"name":"Blacksmithing Station (Redistributor)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119807,"name":"Blacksmithing Station (Armor Master)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119808,"name":"Blacksmithing Station (Law of Julianos)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119809,"name":"Blacksmithing Station (Trial by Fire)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119810,"name":"Blacksmithing Station (Armor of the Code)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119821,"name":"Attunable Clothing Station","quality":5,"icon":"housing_gen_crf_portabletableleatherworking001"}
 {"id":119822,"name":"Attunable Woodworking Station","quality":5,"icon":"housing_gen_crf_portabletablewoodworking001"}
 {"id":119823,"name":"Tanzelwil Culanda Stone","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_ayl_duc_welkydclusteryellow001"}

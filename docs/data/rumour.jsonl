@@ -398,3 +398,8 @@
 {"id":226936,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226941,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":227313}
+{"id":94117,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
+{"id":117765,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
+{"id":117835,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
+{"id":117971,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
+{"id":118813,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
