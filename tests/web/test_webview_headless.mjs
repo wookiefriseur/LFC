@@ -2559,6 +2559,54 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   }
 });
 
+test("submit split: each part has its own copy, preview and numbered issue link", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  await page.click("#btn-add-dump");
+  const records = Array.from({ length: 200 }, (_, i) => ({ id: 9900500 + i,
+    source: { type: "rumour" }, cost: [], availability: { version: "NONE" }, notes: "x".repeat(700) }));
+  await page.$eval("#adv-import-paste", (e, text) => { e.value = text; }, records.map(JSON.stringify).join("\n"));
+  await page.click("#adv-import-run");
+  await page.click("#btn-submit");
+  const parts = await page.$$eval("#modal-parts section", (els) => els.map((el) => ({
+    body: el.querySelector("textarea").value,
+    href: el.querySelector("a").href,
+  })));
+  assert(parts.length > 1, "large contribution was not split");
+  assert(await page.$eval("#modal-single-actions", (e) => e.hidden), "whole-body actions remain visible");
+  assert(await page.$eval("#modal-technical", (e) => e.hidden), "oversized raw body remains visible");
+  assertEq(await page.$eval("#modal-diff", (e) => e.value), "", "stale whole-body payload remains");
+  const exported = parts.flatMap((p) => fencedDiff(p.body).split("\n").map(JSON.parse));
+  assertEq(exported.length, records.length, "split lost or duplicated changes");
+  assertEq(new Set(exported.map((r) => r.id)).size, records.length, "split repeated IDs");
+  await page.evaluate(() => {
+    window.__copied = null;
+    Object.defineProperty(navigator, "clipboard", { configurable: true,
+      value: { writeText: (text) => { window.__copied = text; return Promise.resolve(); } } });
+  });
+  for (const [i, part] of parts.entries()) {
+    assert(part.body.length <= 60000, "part exceeds the body budget");
+    const url = new URL(part.href);
+    assertEq(url.searchParams.get("labels"), "db-edit", "part lost the issue label");
+    assertEq(url.searchParams.get("body"), null, "part uses an oversized prefilled URL");
+    assert(url.searchParams.get("title").includes(`Part ${i + 1} of ${parts.length}`), "part title is not numbered");
+    assert(part.body.includes("merge each resulting PR in part-number order"), "part lost the processing instructions");
+    const button = `#modal-parts section:nth-of-type(${i + 1}) button`;
+    await page.click(button);
+    assertEq(await page.evaluate(() => window.__copied), part.body, "clipboard does not match this part's raw preview");
+    assertEq(await page.$eval(button, (e) => e.textContent), `Part ${i + 1} copied`, "copy has no per-part feedback");
+  }
+  await page.evaluate(() => { navigator.clipboard.writeText = () => Promise.reject(new Error("denied")); });
+  await page.click("#modal-parts section button");
+  assert((await page.$eval("#modal-parts section button", (e) => e.textContent)).includes("Copy failed"), "clipboard failure is hidden");
+  await page.click("#modal-close");
+  await page.click("#btn-submit");
+  const reopened = await page.$$eval("#modal-parts textarea", (els) => els.map((e) => e.value));
+  assertEq(JSON.stringify(reopened), JSON.stringify(parts.map((p) => p.body)), "copying cleared or changed the contribution");
+  await page.click("#modal-close");
+});
+
 async function main() {
   const { server, port } = await serve(ROOT);
   const browser = await puppeteer.launch({

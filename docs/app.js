@@ -8,7 +8,7 @@ import {
 } from "./data.js";
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
-  DirtyBuffer, buildIssueBody, buildIssueURL, suggestTitle,
+  DirtyBuffer, buildIssueBody, buildIssueParts, buildIssueURL, suggestTitle,
   MAX_ISSUE_URL_LENGTH, ISSUE_REPO,
 } from "./diff.js";
 import {
@@ -1895,9 +1895,12 @@ function openSubmitModal() {
   if (state.buffer.size() === 0) return;
   const title = suggestTitle(state.buffer);
   // The raw box holds the whole issue body, so the manual path files the same issue as the GitHub link.
-  const issueBody = buildIssueBody(state.buffer, title, state.records, maskDeps());
   $("#modal-summary").textContent = title;
-  $("#modal-diff").textContent = issueBody;
+  const partsHost = $("#modal-parts");
+  partsHost.replaceChildren();
+  $("#modal-oversize").hidden = true;
+  $("#modal-single-actions").hidden = true;
+  $("#modal-technical").hidden = false;
 
   renderChangeListInto($("#modal-changelist"));
 
@@ -1915,7 +1918,55 @@ function openSubmitModal() {
   }
 
   const blocked = errors > 0;
-  const issueURL = buildIssueURL(state.buffer, undefined, state.records, maskDeps());
+  let parts;
+  try {
+    parts = buildIssueParts(state.buffer, state.records, maskDeps());
+  } catch (error) {
+    vHost.append(elem("p", { class: "v-error", role: "alert" }, error.message));
+    $("#modal-diff").value = buildIssueBody(state.buffer, title, state.records, maskDeps());
+    $("#modal").classList.add("open");
+    return;
+  }
+  const copyInto = (btn, body, copied = "Copied!") => async () => {
+    try {
+      await navigator.clipboard.writeText(body);
+      btn.textContent = copied;
+    } catch {
+      btn.textContent = "Copy failed (use Ctrl+C from the raw data)";
+    }
+  };
+  if (parts.length > 1) {
+    $("#modal-technical").hidden = true;
+    $("#modal-diff").value = "";
+    partsHost.append(elem("p", {}, `Your changes need ${parts.length} GitHub issues. Copy and submit each part below.`),
+      elem("p", {}, "For maintainers: process the issues and merge each resulting PR in part-number order before processing the next part."));
+    parts.forEach((part, i) => {
+      const label = `Part ${i + 1} of ${parts.length}`;
+      const copy = elem("button", { type: "button", "aria-live": "polite" }, `Copy part ${i + 1}`);
+      copy.onclick = copyInto(copy, part.body, `Part ${i + 1} copied`);
+      const open = elem("a", { class: "btn-primary", target: "_blank", rel: "noopener" }, `Open GitHub for part ${i + 1}`);
+      if (blocked) {
+        open.classList.add("is-disabled");
+        open.setAttribute("aria-disabled", "true");
+      }
+      else open.href = `https://github.com/${ISSUE_REPO}/issues/new?` +
+        new URLSearchParams({ title: part.title, labels: "db-edit" }).toString();
+      const raw = elem("textarea", { readonly: "", rows: "12", "aria-label": `${label} issue body` });
+      raw.value = part.body;
+      partsHost.append(elem("section", {},
+        elem("h3", {}, label),
+        elem("p", { class: "muted" }, `${changeCountText(part.buffer.size())}, ${part.body.length.toLocaleString("en-US")} characters`),
+        elem("div", { class: "modal-actions" }, copy, open),
+        elem("p", {}, "Copy this part, open GitHub, paste into the issue text and submit."),
+        elem("details", { class: "modal-technical" }, elem("summary", {}, `Raw data - ${label}`), raw)));
+    });
+    $("#modal").classList.add("open");
+    return;
+  }
+  $("#modal-single-actions").hidden = false;
+  const issueBody = parts[0].body;
+  $("#modal-diff").value = issueBody;
+  const issueURL = buildIssueURL(parts[0].buffer, undefined, state.records, maskDeps());
   const tooManyForALink = issueURL.length > MAX_ISSUE_URL_LENGTH;
   const openBtn = $("#modal-open-issue");
   const copyBtn = $("#modal-copy");
@@ -1943,15 +1994,10 @@ function openSubmitModal() {
   $("#modal-oversize-open").href = `https://github.com/${ISSUE_REPO}/issues/new?` +
     new URLSearchParams({ title: suggestTitle(state.buffer), labels: "db-edit" }).toString();
 
-  const copyInto = (btn) => () => {
-    navigator.clipboard?.writeText(issueBody).then(
-      () => (btn.textContent = "Copied!"),
-      () => (btn.textContent = "Copy failed (use Ctrl+C from the raw data)"),
-    );
-    setTimeout(() => (btn.textContent = "Copy to clipboard"), 2000);
-  };
-  copyBtn.onclick = copyInto(copyBtn);
-  $("#modal-oversize-copy").onclick = copyInto($("#modal-oversize-copy"));
+  for (const btn of [copyBtn, $("#modal-oversize-copy")]) {
+    btn.textContent = "Copy to clipboard";
+    btn.onclick = copyInto(btn, issueBody);
+  }
   $("#modal").classList.add("open");
 }
 

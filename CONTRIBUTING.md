@@ -10,7 +10,7 @@ and choose **Add JSONL to textbox**.
 
 Copy the output into **Batch edit -> ++Add from Dump or Diff** on the website. If the scan has several pages, you can paste them consecutively into the same box. Cancel keeps the previous completed output.
 
-New discoveries appear as **UNCONFIRMED**. Existing catalogue items are skipped. If you know where an item comes from, select its row and set its source. You can tick several rows to change them together. Review the change list, then submit. Large submissions use copy+paste into an issue instead of a prefilled link.
+New discoveries appear as **UNCONFIRMED**. Existing catalogue items are skipped. If you know where an item comes from, select its row and set its source. You can tick several rows to change them together. Review the change list, then submit. Large submissions use copy+paste into an issue instead of a prefilled link. If the issue body is too large, the page splits it into numbered parts. Submit every part. Please process and merge them in the numbered order (because they might depend on each other).
 
 ## Correct sources and obsolete IDs
 
