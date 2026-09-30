@@ -248,6 +248,18 @@
 {"id":145491,"name":"Static Pitcher","quality":5,"cat":25,"sub":183,"theme":1,"icon":"housing_veg_flr_mrkpitcherplant005"}
 {"id":145492,"name":"Gas Blossom","quality":5,"cat":25,"sub":183,"theme":1,"icon":"housing_veg_flr_mrktentacleplant003"}
 {"id":145493,"name":"Lantern Mantis","quality":5,"cat":25,"sub":183,"theme":1,"icon":"housing_veg_flr_lanternmantis002"}
+{"id":145494,"name":"Clothing Station (Grave-Stake Collector)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145495,"name":"Woodworking Station (Grave-Stake Collector)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145496,"name":"Blacksmithing Station (Grave-Stake Collector)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145497,"name":"Jewelry Station (Grave-Stake Collector)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145498,"name":"Clothing Station (Naga Shaman)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145499,"name":"Woodworking Station (Naga Shaman)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145500,"name":"Blacksmithing Station (Naga Shaman)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145501,"name":"Jewelry Station (Naga Shaman)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145502,"name":"Clothing Station (Might of the Lost Legion)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145503,"name":"Woodworking Station (Might of the Lost Legion)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145504,"name":"Blacksmithing Station (Might of the Lost Legion)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":145505,"name":"Jewelry Station (Might of the Lost Legion","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":145547,"name":"Plant, Moorstalk Hive","quality":3,"cat":12,"sub":109,"theme":4,"icon":"housing_cre_exc_mrkmoorhive001"}
 {"id":145548,"name":"Murkmire Totem, Wolf-Lizard","quality":3,"cat":6,"sub":69,"theme":4,"icon":"housing_arg_exc_mrkwolftotem001","blueprint":146017}
 {"id":145549,"name":"Murkmire Totem, Stone Head","quality":3,"cat":6,"sub":70,"theme":4,"icon":"housing_arg_run_mrkjunkpiece003"}

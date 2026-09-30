@@ -31,41 +31,41 @@
           "file": "meta/meta-0110000-0119999.jsonl",
           "id_min": 110000,
           "id_max": 119999,
-          "count": 1773,
-          "bytes": 246244,
-          "digest": "d94269fc28c3"
+          "count": 1780,
+          "bytes": 247290,
+          "digest": "97fe1b6889e3"
         },
         {
           "file": "meta/meta-0120000-0129999.jsonl",
           "id_min": 120000,
           "id_max": 129999,
-          "count": 1375,
-          "bytes": 181612,
-          "digest": "7c02f285df02"
+          "count": 1385,
+          "bytes": 183127,
+          "digest": "29afc76db138"
         },
         {
           "file": "meta/meta-0130000-0139999.jsonl",
           "id_min": 130000,
           "id_max": 139999,
-          "count": 931,
-          "bytes": 127253,
-          "digest": "7d13a4d014a9"
+          "count": 994,
+          "bytes": 136617,
+          "digest": "a0817bb570a9"
         },
         {
           "file": "meta/meta-0140000-0149999.jsonl",
           "id_min": 140000,
           "id_max": 149999,
-          "count": 334,
-          "bytes": 45528,
-          "digest": "193618eda83a"
+          "count": 346,
+          "bytes": 47395,
+          "digest": "ccd28770ba6c"
         },
         {
           "file": "meta/meta-0150000-0159999.jsonl",
           "id_min": 150000,
           "id_max": 159999,
-          "count": 478,
-          "bytes": 65855,
-          "digest": "b396719dd44b"
+          "count": 492,
+          "bytes": 68015,
+          "digest": "438d41b771f5"
         },
         {
           "file": "meta/meta-0160000-0169999.jsonl",
@@ -137,8 +137,8 @@
       "description": "blueprint item id -> the furnishing it makes. The one direction a sharded dataset cannot answer, and the one the webview needs: a crafted record is keyed by the blueprint. Single small file, locale-invariant.",
       "record_format": "furniture-recipes-v1",
       "file": "recipes.json",
-      "count": 3383,
-      "digest": "bff4ab9bd31f"
+      "count": 3384,
+      "digest": "5fd3c0e788bc"
     },
     "names": {
       "description": "Game names for the ids the data refers to: house collectibles, quests, achievements and zones, {kind: {id: name}}. Client-locale, one file per locale. Contributors correct it through `name` change lines.",

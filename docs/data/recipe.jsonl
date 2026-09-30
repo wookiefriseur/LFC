@@ -3357,3 +3357,4 @@
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"THIEVES"},"blueprint":225192,"id":225188}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"THIEVES"},"blueprint":225198,"id":225193}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"THIEVES"},"blueprint":225199,"id":225194}
+{"id":130326,"blueprint":132173,"source":{"type":"recipe"},"cost":[],"availability":{"version":"NONE"}}

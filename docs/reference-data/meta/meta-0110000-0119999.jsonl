@@ -1627,6 +1627,13 @@
 {"id":119808,"name":"Blacksmithing Station (Law of Julianos)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119809,"name":"Blacksmithing Station (Trial by Fire)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119810,"name":"Blacksmithing Station (Armor of the Code)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119811,"name":"Blacksmithing Station (Morkuldin)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119812,"name":"Blacksmithing Station (Tava's Favor)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119813,"name":"Blacksmithing Station (Clever Alchemist)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119814,"name":"Blacksmithing Station (Eternal Hunt)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119815,"name":"Blacksmithing Station (Kvatch Gladiator)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119816,"name":"Blacksmithing Station (Varen's Legacy)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":119817,"name":"Blacksmithing Station (Pelinal's Wrath)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119821,"name":"Attunable Clothing Station","quality":5,"icon":"housing_gen_crf_portabletableleatherworking001"}
 {"id":119822,"name":"Attunable Woodworking Station","quality":5,"icon":"housing_gen_crf_portabletablewoodworking001"}
 {"id":119823,"name":"Tanzelwil Culanda Stone","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_ayl_duc_welkydclusteryellow001"}

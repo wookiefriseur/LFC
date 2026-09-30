@@ -481,6 +481,7 @@
 {"id":120628,"name":"Stone, Slanted Mossy","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_gry_shadowfensmall003"}
 {"id":120629,"name":"Stone, Smooth Mossy","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_gry_shadowfensmall004"}
 {"id":120630,"name":"Pebble, Stacked Lichen","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_gry_shadowfensmall005"}
+{"id":120631,"name":"Pebble, Stacked Mossy","icon":"housing_rok_gry_shadowfensmall006","quality":1,"cat":12,"sub":136,"theme":1}
 {"id":120632,"name":"Pebbles, Stacked Mossy","quality":1,"cat":12,"sub":136,"theme":1,"icon":"housing_rok_gry_shadowfensmall007"}
 {"id":120634,"name":"Tree, Towering Swamp Palm","quality":2,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_fan_sfswamppalm001"}
 {"id":120636,"name":"Tree, Mud Palm","quality":2,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_fan_sfswamppalm003"}
@@ -768,6 +769,15 @@
 {"id":121399,"name":"Target Skeleton, Robust Khajiit","quality":5,"cat":25,"sub":98,"theme":1,"icon":"housing_targetdummy_robustkhajiit_01"}
 {"id":121400,"name":"Target Skeleton, Robust Argonian","quality":5,"cat":25,"sub":98,"theme":1,"icon":"housing_targetdummy_robustargonian_01"}
 {"id":121538,"name":"Argonian Box, Woven","quality":3,"cat":8,"sub":87,"theme":4,"icon":"housing_arg_fur_mrkbasket002","blueprint":121546}
+{"id":122601,"name":"Clothing Station (Assassin's Guile)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122602,"name":"Clothing Station (Daedric Trickery)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122603,"name":"Clothing Station (Shacklebreaker)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122604,"name":"Woodworking Station (Assassin's Guile)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122605,"name":"Woodworking Station (Daedric Trickery)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122606,"name":"Woodworking Station (Shacklebreaker)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122607,"name":"Blacksmithing Station (Assassin's Guile)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122608,"name":"Blacksmithing Station (Daedric Trickery)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":122609,"name":"Blacksmithing Station (Shacklebreaker)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":125451,"name":"The Apprentice","quality":5,"cat":25,"sub":160,"theme":1,"icon":"housing_gen_exc_mundusstoneapprentice001"}
 {"id":125452,"name":"The Lady","quality":5,"cat":25,"sub":160,"theme":1,"icon":"housing_gen_exc_mundusstonelady001"}
 {"id":125453,"name":"The Warrior","quality":5,"cat":25,"sub":160,"theme":1,"icon":"housing_gen_exc_mundusstonewarrior001"}
