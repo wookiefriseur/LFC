@@ -432,6 +432,18 @@
 {"id":214519,"name":"Elkhorn Coral, Verdant Branching","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_elkhorncavecoral005"}
 {"id":214520,"name":"Elkhorn Coral, Sturdy Branching","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_elkhorncoral005"}
 {"id":214521,"name":"Elkhorn Coral, Cluster","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_sys_veg_sys_elkhorncoralgroup001"}
+{"id":215095,"name":"Clothing Station (Shared Burden)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215096,"name":"Woodworking Station (Shared Burden)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215097,"name":"Blacksmithing Station (Shared Burden)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215098,"name":"Jewelry Station (Shared Burden)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215475,"name":"Clothing Station (Tide-Born Wildstalker)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215476,"name":"Woodworking Station (Tide-Born Wildstalker)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215477,"name":"Blacksmithing Station (Tide-Born Wildstalker)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215478,"name":"Jewelry Station (Tide-Born Wildstalker)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215855,"name":"Clothing Station (Fellowship's Fortitude)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215856,"name":"Woodworking Station (Fellowship's Fortitude)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215857,"name":"Blacksmithing Station (Fellowship's Fortitude)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":215858,"name":"Jewelry Station (Fellowship's Fortitude)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":217583,"name":"Cage, Elevated","quality":3,"cat":7,"sub":77,"theme":4,"icon":"housing_arg_exc_housingcomboprisoncage001"}
 {"id":217584,"name":"Worm Cult Cage, Closed","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_wrm_str_cage001"}
 {"id":217585,"name":"Tomb Marker, Ra Gada","quality":3,"cat":7,"sub":107,"theme":10,"icon":"housing_red_cem_yukodantombdoors003"}

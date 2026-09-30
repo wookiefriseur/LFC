@@ -95,33 +95,33 @@
           "file": "meta/meta-0190000-0199999.jsonl",
           "id_min": 190000,
           "id_max": 199999,
-          "count": 686,
-          "bytes": 97152,
-          "digest": "2dc0d7cf70c9"
+          "count": 688,
+          "bytes": 97452,
+          "digest": "0660457b10f4"
         },
         {
           "file": "meta/meta-0200000-0209999.jsonl",
           "id_min": 200000,
           "id_max": 209999,
-          "count": 526,
-          "bytes": 73155,
-          "digest": "c79d4ce62180"
+          "count": 539,
+          "bytes": 75121,
+          "digest": "ac4455b19234"
         },
         {
           "file": "meta/meta-0210000-0219999.jsonl",
           "id_min": 210000,
           "id_max": 219999,
-          "count": 576,
-          "bytes": 81299,
-          "digest": "63dc9ae3705f"
+          "count": 588,
+          "bytes": 83167,
+          "digest": "187f77ed7da6"
         },
         {
           "file": "meta/meta-0220000-0229999.jsonl",
           "id_min": 220000,
           "id_max": 229999,
-          "count": 559,
-          "bytes": 67536,
-          "digest": "31ade2044443"
+          "count": 626,
+          "bytes": 76797,
+          "digest": "e75c7b56af40"
         }
       ]
     },
@@ -146,12 +146,12 @@
       "locale": "en",
       "file": "names.en.json",
       "counts": {
-        "houses": 121,
-        "quests": 3373,
-        "achievements": 3354,
+        "houses": 123,
+        "quests": 3431,
+        "achievements": 3364,
         "zones": 1096
       },
-      "digest": "722afad6ff3d"
+      "digest": "37d8be321278"
     }
   }
 }

@@ -243,6 +243,8 @@
 {"id":194941,"name":"Jewelry Station (Telvanni Efficiency)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":195318,"name":"Clothing Station (Seeker Synthesis)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":195319,"name":"Woodworking Station (Seeker Synthesis)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":195320,"name":"Blacksmithing Station (Seeker Synthesis)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":195321,"name":"Jewelry Station (Seeker Synthesis)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":196204,"name":"Blackwood Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_waf_leywalllowmilemarker001"}
 {"id":196205,"name":"Systres Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":2,"icon":"housing_sys_str_milemarker001"}
 {"id":196206,"name":"Daedric Post, Spike","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedspikepost001"}
