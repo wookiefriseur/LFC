@@ -114,7 +114,7 @@
 {"id":130320,"name":"Hagraven Cauldron, Ritual","quality":3,"cat":11,"sub":126,"theme":5,"icon":"housing_bos_cmp_cauldron001","blueprint":132167}
 {"id":130322,"name":"Tool, Harvest Scythe","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_exc_scythe001"}
 {"id":130325,"name":"Witches Totem, Emphatic Warning","quality":4,"cat":7,"sub":75,"theme":15,"icon":"housing_cre_lsb_skullpole002"}
-{"id":130326,"name":"Witches Brazier, Primitive Log","quality":3,"cat":11,"sub":124,"theme":15,"icon":"housing_gen_exc_lampstand001"}
+{"id":130326,"name":"Witches Brazier, Primitive Log","quality":3,"cat":11,"sub":124,"theme":15,"icon":"housing_gen_exc_lampstand001","blueprint":132173}
 {"id":130327,"name":"Witches Totem, Wooden Rack","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_gen_exc_ogretotemstand001"}
 {"id":130328,"name":"Witches Skull, Horned Ram","quality":4,"cat":7,"sub":75,"theme":15,"icon":"housing_gen_exc_ramskull001"}
 {"id":130329,"name":"Primal Brazier, Rock Slab","quality":4,"cat":11,"sub":124,"theme":15,"icon":"housing_gen_exc_rocklampb001"}
@@ -125,6 +125,15 @@
 {"id":130338,"name":"Witches Bones, Offering","quality":3,"cat":7,"sub":75,"theme":15,"icon":"housing_uni_exc_hagravenskullpile001"}
 {"id":130339,"name":"Witches Totem, Twisted Vines and Skull","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_uni_exc_reachmantotem001"}
 {"id":130340,"name":"Witches Totem, Gnarled Vines and Skull","quality":3,"cat":7,"sub":106,"theme":15,"icon":"housing_uni_exc_reachmantotem002"}
+{"id":130361,"name":"Clothing Station (Fortified Brass)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130362,"name":"Clothing Station (Innate Axiom)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130363,"name":"Clothing Station (Mechanical Acuity)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130364,"name":"Woodworking Station (Fortified Brass)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130365,"name":"Woodworking Station (Innate Axiom)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130366,"name":"Woodworking Station (Mechanical Acuity)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130367,"name":"Blacksmithing Station (Fortified Brass)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130368,"name":"Blacksmithing Station (Innate Axiom)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":130369,"name":"Blacksmithing Station (Mechanical Acuity)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":131420,"name":"Shrub, Glowing Thistle","quality":4,"cat":12,"sub":110,"theme":13,"icon":"housing_veg_bsh_thistlebush002"}
 {"id":131421,"name":"Saplings, Withered Thicket","quality":2,"cat":12,"sub":141,"theme":13,"icon":"housing_tre_ded_coldhsapling004"}
 {"id":131422,"name":"Flower Patch, Glowstalks","quality":4,"cat":11,"sub":126,"theme":13,"icon":"housing_veg_fug_chlightstalk008"}
@@ -587,7 +596,61 @@
 {"id":134973,"name":"Cave Deposit, Stalactite Cone Cluster","quality":4,"cat":12,"sub":152,"theme":1,"icon":"housing_orc_duc_stalactitesmallgroup002"}
 {"id":134974,"name":"Brotherhood Carpet, Worn","quality":4,"cat":3,"sub":53,"theme":1,"icon":"housing_col_inc_dbhrugsanctuary002"}
 {"id":137870,"name":"Jewelry Crafting Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portabletablejewelry001"}
+{"id":137871,"name":"Jewelry Station (Death's Wind)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137872,"name":"Jewelry Station (Twilight's Embrace)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137873,"name":"Jewelry Station (Night's Silence)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137874,"name":"Jewelry Station (Whitestrake's)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137875,"name":"Jewelry Station (Armor of the Seducer)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137876,"name":"Jewelry Station (Vampire's Kiss)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137877,"name":"Jewelry Station (Magnus' Gift)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137878,"name":"Jewelry Station (Night Mother's Gaze)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137879,"name":"Jewelry Station (Ashen Grip)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137880,"name":"Jewelry Station (Oblivion's Foe)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137881,"name":"Jewelry Station (Spectre's Eye)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137882,"name":"Jewelry Station (Torug's Pact)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137883,"name":"Jewelry Station (Hist Bark)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137884,"name":"Jewelry Station (Willow's Path)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137885,"name":"Jewelry Station (Hunding's Rage)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137886,"name":"Jewelry Station (Song of Lamae)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137887,"name":"Jewelry Station (Alessia's Bulwark)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137888,"name":"Jewelry Station (Orgnum's Scales)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137889,"name":"Jewelry Station (Eyes of Mara)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137890,"name":"Jewelry Station (Kagrenac's Hope)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137891,"name":"Jewelry Station (Shalidor's Curse)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137892,"name":"Jewelry Station (Way of the Arena)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137893,"name":"Jewelry Station (Twice-Born Star)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137894,"name":"Jewelry Station (Noble's Conquest)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137895,"name":"Jewelry Station (Redistributor)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137896,"name":"Jewelry Station (Armor Master)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137897,"name":"Jewelry Station (Law of Julianos)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137898,"name":"Jewelry Station (Trial by Fire)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137899,"name":"Jewelry Station (Armor of the Code)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137900,"name":"Jewelry Station (Morkuldin)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137901,"name":"Jewelry Station (Tava's Favor)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137902,"name":"Jewelry Station (Clever Alchemist)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137903,"name":"Jewelry Station (Eternal Hunt)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137904,"name":"Jewelry Station (Kvatch Gladiator)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137905,"name":"Jewelry Station (Varen's Legacy)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137906,"name":"Jewelry Station (Pelinal's Wrath)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137907,"name":"Jewelry Station (Assassin's Guile)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137908,"name":"Jewelry Station (Daedric Trickery)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137909,"name":"Jewelry Station (Shacklebreaker)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137910,"name":"Jewelry Station (Innate Axiom)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137911,"name":"Jewelry Station (Fortified Brass)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":137912,"name":"Jewelry Station (Mechanical Acuity)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":137947,"name":"Attunable Jewelry Crafting Station","quality":5,"icon":"housing_gen_crf_portabletablejewelry001"}
+{"id":138737,"name":"Clothing Station (Adept Rider)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138738,"name":"Woodworking Station (Adept Rider)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138739,"name":"Blacksmithing Station (Adept Rider)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138740,"name":"Jewelry Station (Adept Rider)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138741,"name":"Clothing Station (Sload's Semblance)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138742,"name":"Woodworking Station (Sload's Semblance)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138743,"name":"Blacksmithing Station (Sload's Semblance)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138744,"name":"Jewelry Station (Sload's Semblance)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138745,"name":"Clothing Station (Nocturnal's Favor)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138746,"name":"Woodworking Station (Nocturnal's Favor)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138747,"name":"Blacksmithing Station (Nocturnal's Favor)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":138748,"name":"Jewelry Station (Nocturnal's Favor)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":139059,"name":"Ivory, Polished","quality":2,"cat":3,"sub":56,"theme":1,"icon":"housing_sum_inc_scrimshaw002"}
 {"id":139060,"name":"Giant Clam, Ancient","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_rok_sum_geyserclam001"}
 {"id":139061,"name":"Giant Clam, Sealed","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_rok_sum_geyserclam002"}

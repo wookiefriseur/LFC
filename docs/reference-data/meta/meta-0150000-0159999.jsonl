@@ -1,3 +1,15 @@
+{"id":150360,"name":"Clothing Station (Coldharbour's Favorite)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150361,"name":"Woodworking Station (Coldharbour's Favorite)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150362,"name":"Blacksmithing Station (Coldharbour's Favorite)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150363,"name":"Jewelry Station (Coldharbour's Favorite)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150364,"name":"Clothing Station (Senche-raht's Grit)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150365,"name":"Woodworking Station (Senche-raht's Grit)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150366,"name":"Blacksmithing Station (Senche-raht's Grit)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150367,"name":"Jewelry Station (Senche-raht's Grit)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150368,"name":"Clothing Station (Vastarie's Tutelage)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150369,"name":"Woodworking Station (Vastarie's Tutelage)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150370,"name":"Blacksmithing Station (Vastarie's Tutelage)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":150371,"name":"Jewelry Station (Vastarie's Tutelage)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":150774,"name":"Banner of Vaermina","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannervaerminasmall001"}
 {"id":150775,"name":"Banner of Jyggalag","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannerjyggalagsmall001"}
 {"id":151589,"name":"Baandari Lunar Compass","quality":5,"cat":3,"sub":56,"theme":7,"icon":"housing_lunarcompass_icon"}
@@ -304,6 +316,7 @@
 {"id":152144,"name":"Orcish Mirror, Peaked","quality":4,"cat":2,"sub":50,"theme":9,"icon":"housing_orc_fur_wtgmirror001"}
 {"id":152145,"name":"Orcish Tapestry, War","quality":4,"cat":3,"sub":52,"theme":9,"icon":"housing_orc_inc_wtgtapestrylarge001"}
 {"id":152146,"name":"Orcish Chandelier, Spiked","quality":4,"cat":11,"sub":125,"theme":9,"icon":"housing_orc_lsb_wtgdungeonchandelier001"}
+{"id":152147,"name":"Orcish Statue, Strength","icon":"housing_orc_exc_heavystatue002","quality":4,"cat":6,"sub":70,"theme":9}
 {"id":152148,"name":"Orcish Tapestry, Hunt","quality":4,"cat":3,"sub":52,"theme":9,"icon":"housing_orc_inc_wtgtapestrylarge002"}
 {"id":152149,"name":"Orcish Brazier, Pillar","quality":4,"cat":11,"sub":124,"theme":9,"icon":"housing_orc_lsb_wtglamppost001"}
 {"id":152257,"name":"Banner of Mephala","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermephalasmall001"}
@@ -385,6 +398,7 @@
 {"id":153814,"name":"Dragon's Treasure Trove","quality":5,"icon":"housing_els_inc_dragonloot001"}
 {"id":153841,"name":"Rewoven Khajiiti Tapestry","quality":1,"icon":"icon_missing"}
 {"id":153887,"name":"Dragonguard Banner","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_els_lsb_bannerdragonguardmedium001"}
+{"id":155400,"name":"Clothing Station (Daring Corsair)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":156553,"name":"Music Box, That Breezy Night in Bruma","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_heartsdaymusicbox001"}
 {"id":156554,"name":"Music Box, A Frost Melt Melody","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_newlifemusicbox001"}
 {"id":156644,"name":"Books, Towering Pile","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_cra_inc_bookpile005"}
