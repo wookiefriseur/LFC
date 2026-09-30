@@ -145,6 +145,11 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual(recipes['230124'], 230123)
         self.assertEqual(recipes['139587'], 139264)
         self.assertEqual(recipes['225123'], 224910)
+        # The name reaches the catalogue's names, in id order, and the generated comment
+        names = json.loads(files['docs/data/names.en.json'])
+        self.assertEqual(names['230123'], 'Test furnishing')
+        self.assertEqual(list(names), sorted(names, key=int))
+        self.assertIn('[230123]={', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode().split('-- Test furnishing')[0].rsplit('\n', 1)[-1])
 
     def test_duplicate_add_rejected(self):
         row = next(r for r in self.rows if r.get('id') == 184200)

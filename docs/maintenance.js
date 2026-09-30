@@ -37,6 +37,7 @@ for (const [field, enumKey] of Object.entries(SOURCE_ENUM_FIELD)) {
 //   pattern     "text" only, a RegExp the value must match
 //   patternHint the message shown when `pattern` fails
 //   prefill     (list) => value, used to seed the input on kind switch
+//   type "lookup" a search over a names-table kind (`names`) that fills the `fills` field and the symbol on a pick; free text is allowed and nothing of it is stored
 // An empty `meta` is a flat string list (currencies), mirrored and serialised as a bare symbol.
 // `path` is the schema path the vocabulary feeds and the tooltip; the visible name comes from the lexicon unless `label` overrides it.
 
@@ -75,27 +76,31 @@ export const ENUM_KINDS = [
   },
   {
     key: "locations", path: "source.locations[].location",
-    label: "Where - a game zone",
+    label: "Where (zone)",
     meta: [
+      {
+        key: "zoneName", label: "Zone name", type: "lookup", names: "zones", fills: "zone",
+        hint: "search the game's zone names; a pick fills the id and the symbol",
+      },
       intField("zone", "Zone id",
-        "the game zoneId GetZoneNameById() resolves. A game ZONE only - a " +
-        "placeless qualifier is an Extra detail, not a zone."),
+        "resolved ingame by GetZoneNameById, use furcdev to look it up. Don't make up zones, " +
+        "they should exist and resolve ingame"),
     ],
   },
   {
-    key: "places", path: "source.locations[].place", label: "Where - a finer place",
+    key: "places", path: "source.locations[].place", label: "Where (place)",
     meta: [
       siField("the locale key the place name resolves from (LFC locale/en.lua)"),
       nameField("what en.lua says, e.g. \"any capital city\""),
     ],
   },
   {
-    key: "versions", path: "availability.version", label: "Game update",
+    key: "versions", path: "availability.version", label: "Version",
     meta: [
-      intField("ordinal", "Update ordinal",
-        "the running patch number - prefilled with the next free one",
+      intField("ordinal", "Version number used in LFC",
+        "not the U123 update version number, pre-filled with the next free one",
         { prefill: (list) => nextFreeInt(list, "ordinal") }),
-      nameField("the patch's marketing name, e.g. \"Fallen Banners (U45)\"", true),
+      nameField("official patch name like \"Fallen Banners (U45)\"", true),
     ],
   },
   {
@@ -201,7 +206,7 @@ export function queueEnumValue(state, enumName, symbol, meta = null) {
 export function maintenanceMask(deps) {
   const {
     state, $, elem, nameOf, validateRecord, itemLinkAnchor, itemIconImg,
-    switchToBatchEdit, renderFooter,
+    switchToBatchEdit, renderFooter, referenceData,
   } = deps;
 
   const view = {
@@ -590,9 +595,9 @@ export function maintenanceMask(deps) {
 
         <div id="maint-vocab" class="maint-section" hidden>
           <div class="maint-enum-warn">
-            Adding a value changes the shared vocabulary for everyone. Most
-            missing values turn out to be a near-duplicate of one already
-            there - check the highlighted chips first.
+            Adding a value changes the shared vocabulary for everyone. Please
+            check if there is already an existing entry for what you want to
+            assign.
           </div>
           <div id="maint-enum-form" class="maint-enum-form">
             <label class="lc-field">
@@ -1076,6 +1081,45 @@ export function maintenanceMask(deps) {
       label.append(input);
       form.insertBefore(label, addBtn);
     }
+    for (const f of kind.meta) if (f.type === "lookup") bindLookup(f, list);
+  }
+
+  // A native combobox: the list offers "name (id)", a pick splits it into the name and the id field, anything else stays free text.
+  function bindLookup(f, list) {
+    const input = $(`#${metaInputId(f)}`);
+    const target = $(`#maint-enum-meta-${f.fills}`);
+    const listId = `${metaInputId(f)}-list`;
+    const options = elem("datalist", { id: listId });
+    input.setAttribute("list", listId);
+    input.after(options);
+    let table = new Map();
+    referenceData?.init().then(() => referenceData.loadNames()).then((names) => {
+      table = names?.[f.names] || new Map();
+      options.replaceChildren(...[...table].map(([id, name]) => elem("option", { value: `${name} (${id})` })));
+    });
+    const status = () => $("#maint-enum-status");
+    const fill = (id, name) => {
+      const known = list.find((v) => typeof v !== "string" && v?.[f.fills] === id);
+      status().className = known ? "v-warning" : "muted";
+      status().textContent = known ? `${name} (${id}) is already in the vocabulary as ${known.symbol}.` : "";
+    };
+    input.addEventListener("input", () => {
+      const m = /^(.*) \((\d+)\)$/.exec(input.value);
+      const id = m && Number(m[2]);
+      if (!m || table.get(id) !== m[1]) return;
+      input.value = m[1];
+      target.value = String(id);
+      $("#maint-enum-value").value = suggestSymbol(m[1]);
+      highlightDuplicateChip();
+      fill(id, m[1]);
+    });
+    // Typed the other way round: a known id names itself.
+    target.addEventListener("input", () => {
+      const id = Number(target.value);
+      if (!table.has(id)) return;
+      input.value = table.get(id);
+      fill(id, input.value);
+    });
   }
 
   function metaInputId(field) {
@@ -1088,6 +1132,7 @@ export function maintenanceMask(deps) {
     const list = state.enums[kind.key] || [];
     const meta = {};
     for (const f of kind.meta) {
+      if (f.type === "lookup") continue;
       const el = $(`#${metaInputId(f)}`);
       const raw = (el?.value ?? "").trim();
       if (raw === "") {
@@ -1138,7 +1183,7 @@ export function maintenanceMask(deps) {
     status.className = "muted";
     status.textContent =
       `Prefilled from “${truncate(text, 60)}”. Add the SI string id, and ` +
-      `check the highlighted chips for a near-duplicate first.`;
+      `check whether an existing entry already covers it.`;
     const si = $("#maint-enum-meta-si");
     (si || $("#maint-enum-value")).focus();
   }
@@ -1221,6 +1266,7 @@ export function maintenanceMask(deps) {
           const idx = list.findIndex((v) => symbolOf(v) === e.value);
           if (idx >= 0) list.splice(idx, 1);
         }
+        state.buffer.changed();
         renderMetaFields();
         renderExistingEnum();
         renderPendingEnums();

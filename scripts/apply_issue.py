@@ -87,6 +87,15 @@ class Files:
         self.put(name, json_bytes(value, indent))
 
 
+def add_name(files, item, name):
+    """A discovered item's game name joins the catalogue's names, which the site and the generated comments read; a known name is kept."""
+    names = files.obj('docs/data/names.en.json')
+    if str(item) in names:
+        return
+    names[str(item)] = name
+    files.put_obj('docs/data/names.en.json', dict(sorted(names.items(), key=lambda kv: int(kv[0]))), 0)
+
+
 def update_reference(files, line, record):
     reference = line.get('reference')
     if not reference:
@@ -96,6 +105,7 @@ def update_reference(files, line, record):
     manifest = files.obj('docs/reference-data/manifest.json')
     dataset = manifest['datasets']['meta']
     require(reference['locale'] == dataset['locale'], 'discovery locale differs from the metadata dataset')
+    add_name(files, meta['id'], meta['name'])
     size = manifest['shard_size']
     low = meta['id'] // size * size
     name = f'meta/meta-{low:07d}-{low + size - 1:07d}.jsonl'
@@ -246,6 +256,10 @@ def apply(lines, root=ROOT, lua_command=None):
             (data / name).write_bytes(files.read('docs/data/' + name))
         recipes = candidate / 'recipes.json'
         recipes.write_bytes(files.read('docs/reference-data/recipes.json'))
+        # The metadata names the discovered items in the generated comments
+        (candidate / 'meta').mkdir()
+        for shard in files.obj('docs/reference-data/manifest.json')['datasets']['meta']['shards']:
+            (candidate / shard['file']).write_bytes(files.read('docs/reference-data/' + shard['file']))
         catalogue, records = load_inputs(data, recipes)
         constants, database, projection = catalogue.build(records)
         outputs = render(constants, database, catalogue.labels)

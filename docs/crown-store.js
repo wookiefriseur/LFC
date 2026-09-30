@@ -447,6 +447,7 @@ export function crownStoreMask(deps) {
         }
         state.buffer.entries.delete(last.key);
       }
+      state.buffer.changed();
     }
     searchItems.reset();
     renderSession();

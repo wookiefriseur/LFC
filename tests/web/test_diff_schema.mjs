@@ -35,9 +35,12 @@ function lineFor(kind, meta) {
   return JSON.parse(lines[0]);
 }
 
+// A lookup field only helps fill the others; the editor never stores it.
+const stored = (kind) => kind.meta.filter((f) => f.type !== "lookup");
+
 for (const kind of ENUM_KINDS) {
   const meta = {};
-  for (const f of kind.meta) meta[f.key] = sample(f);
+  for (const f of stored(kind)) meta[f.key] = sample(f);
   meta.symbol = "NEW_VALUE";
   const line = lineFor(kind, meta);
   if (validate(line)) ok(`add-enum ${kind.key}`);
@@ -45,9 +48,9 @@ for (const kind of ENUM_KINDS) {
     `${JSON.stringify(line)}\n       ${JSON.stringify(validate.errors)}`);
 }
 
-for (const kind of ENUM_KINDS.filter((k) => k.meta.some((f) => !f.required))) {
+for (const kind of ENUM_KINDS.filter((k) => stored(k).some((f) => !f.required))) {
   const meta = { symbol: "NEW_VALUE" };
-  for (const f of kind.meta) meta[f.key] = f.required ? sample(f) : "";
+  for (const f of stored(kind)) meta[f.key] = f.required ? sample(f) : "";
   const line = lineFor(kind, meta);
   if (validate(line)) ok(`add-enum ${kind.key} with the optional extras blank`);
   else fail(`add-enum ${kind.key} with the optional extras blank`,
@@ -75,8 +78,8 @@ const table = schema.$defs.metaFor;
 for (const kind of ENUM_KINDS) {
   const entry = table[kind.key];
   if (!entry) { fail(`table ${kind.key}`, "the schema has no conditional for it"); continue; }
-  const wantKeys = kind.meta.map((f) => f.key).sort();
-  const wantReq = kind.meta.filter((f) => f.required).map((f) => f.key).sort();
+  const wantKeys = stored(kind).map((f) => f.key).sort();
+  const wantReq = stored(kind).filter((f) => f.required).map((f) => f.key).sort();
   if (wantKeys.length === 0) {
     const forbids = entry.then?.not?.required?.includes("meta");
     if (forbids) ok(`table ${kind.key} (flat, meta forbidden)`);

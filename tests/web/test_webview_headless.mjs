@@ -2285,6 +2285,97 @@ test("discovery: metadata and recipe links survive paste and review", async (pag
     "repeat discovery was not skipped");
 });
 
+test("discovery: a new blueprint of a confirmed item becomes a recipe, and problems are named", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  // Any item whose only record is an event drop: the data may still change which items those are.
+  const id = await page.evaluate(() => {
+    const all = window.__proto.records();
+    return all.find((r) => r.source?.type === "event_drop" && Number.isInteger(r.id)
+      && all.filter((o) => o.id === r.id || o.blueprint === r.id).length === 1).id;
+  });
+  const dump = { format: "furniture-discovery-v1", locale: "en", apiVersion: 101051,
+    record: { id, blueprint: 9900132 },
+    meta: { id, name: "Dropped Chair", quality: 3, cat: 11, sub: 124, theme: 15, icon: "/esoui/art/icons/chair.dds" } };
+  const status = await pasteImport(page, JSON.stringify(dump));
+  assert(status.includes("1 new blueprint(s) of confirmed items as Crafting"), `blueprint was not made a recipe: ${status}`);
+  const line = (await diffLines(page)).find((l) => l.blueprint === 9900132);
+  assertEq(line.category, "recipe", "blueprint was filed as a rumour");
+  assertEq(line.record.availability.version, "NONE", "the version was guessed");
+
+  // Imported anyway, explained in the page and marked red; only sending is blocked.
+  await pasteImport(page, JSON.stringify({ id, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } }));
+  const report = await page.$eval("#adv-import-report", (e) => e.textContent);
+  assert(report.includes(`id ${id}`) && report.includes("already has a confirmed source (Event drop)"),
+    `the clashing rumour was not explained in the page: ${report}`);
+  const red = await page.$$eval("#table-body tr.dirty-error", (rows) => rows.map((r) => r.title));
+  assert(red.some((t) => t.includes("already has a confirmed source")), `the clashing row is not red: ${red}`);
+
+  await page.click("#btn-submit");
+  await page.waitForSelector("#modal.open", { timeout: 10000 });
+  const findings = await page.$eval("#modal-validation", (e) => e.textContent);
+  assert(findings.startsWith("Fix these changes") && findings.includes(`(${id}), UNCONFIRMED: This item already has a confirmed source`),
+    `the send screen did not name the blocking change: ${findings}`);
+  await page.click("#modal-close");
+});
+
+test("vocabulary: the zone name search fills the zone id and symbol, and names an existing entry", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "maintenance");
+  await page.click("#maint-tab-vocab");
+  await page.select("#maint-enum-kind", "locations");
+  const name = "Alik'r Desert";   // zone 104 in the published names
+  await page.waitForFunction((n) => [...document.querySelectorAll("#maint-enum-meta-zoneName-list option")]
+    .some((o) => o.value === `${n} (104)`), { timeout: 10000 }, name);
+  await page.evaluate((n) => {
+    const input = document.querySelector("#maint-enum-meta-zoneName");
+    input.value = `${n} (104)`;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  }, name);
+  const got = await page.evaluate(() => ({
+    name: document.querySelector("#maint-enum-meta-zoneName").value,
+    zone: document.querySelector("#maint-enum-meta-zone").value,
+    symbol: document.querySelector("#maint-enum-value").value,
+    status: document.querySelector("#maint-enum-status").textContent,
+  }));
+  assertEq(got.name, name, "the pick kept its id suffix");
+  assertEq(got.zone, "104", "the pick did not fill the zone id");
+  assert(got.symbol.length > 0, "the pick did not suggest a symbol");
+  assert(got.status.includes("already in the vocabulary as ALIKR"), `the existing entry was not named: ${got.status}`);
+});
+
+test("unsent changes survive a reload, and a kept diff that no longer fits is offered for review", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const dump = { format: "furniture-discovery-v1", locale: "en", apiVersion: 101051, record: { id: 9900091 },
+    meta: { id: 9900091, name: "Kept Chair", quality: 3, cat: 4, sub: 5, theme: 6, icon: "/esoui/art/icons/chair.dds" } };
+  await pasteImport(page, JSON.stringify(dump));
+  const before = await diffLines(page);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  const note = await page.$eval("#pending-restore", (e) => e.textContent);
+  assert(note.includes("Restored 1 change"), `nothing was restored: ${note}`);
+  assertEq(JSON.stringify(await diffLines(page)), JSON.stringify(before), "the restored change differs");
+
+  const stale = JSON.stringify({ v: 1, op: "delete", id: 1, category: "drop" });
+  await page.evaluate((diff) => {
+    window.__proto.forgetPending();
+    localStorage.setItem("furcat-pending-v1", JSON.stringify({ savedAt: new Date().toISOString(), diff }));
+  }, stale);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  const note2 = await page.$eval("#pending-restore", (e) => e.textContent);
+  assert(note2.includes("no longer fit the catalogue"), `the stale diff was not reported: ${note2}`);
+  await switchTab(page, "advanced");
+  const kept = await page.evaluate(() => [localStorage.getItem("furcat-pending-unrestored-v1"),
+    document.querySelector("#adv-import-paste").value]);
+  assertEq(JSON.parse(kept[0] || "{}").diff, stale, "the stale diff was not kept");
+  assertEq(kept[1], stale, "the stale diff was not offered in the import box");
+});
+
 async function pasteImport(page, text) {
   await page.evaluate((t) => {
     const panel = document.querySelector("#adv-import");
@@ -2591,7 +2682,7 @@ test("submit split: each part has its own copy, preview and numbered issue link"
     assertEq(url.searchParams.get("labels"), "db-edit", "part lost the issue label");
     assertEq(url.searchParams.get("body"), null, "part uses an oversized prefilled URL");
     assert(url.searchParams.get("title").includes(`Part ${i + 1} of ${parts.length}`), "part title is not numbered");
-    assert(part.body.includes("merge each resulting PR in part-number order"), "part lost the processing instructions");
+    assert(part.body.includes("finish each issue in order (first part 1, then 2"), "part lost the processing instructions");
     const button = `#modal-parts section:nth-of-type(${i + 1}) button`;
     await page.click(button);
     assertEq(await page.evaluate(() => window.__copied), part.body, "clipboard does not match this part's raw preview");
@@ -2654,6 +2745,7 @@ async function main() {
       ran++;
       const before = pageErrors.length;
       try {
+        await page.evaluate(() => window.__proto?.forgetPending());
         await t.fn(page);
         const fresh = pageErrors.slice(before);
         if (fresh.length) throw new Error(`page errors during test:\n    ${fresh.join("\n    ")}`);

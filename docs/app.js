@@ -8,11 +8,11 @@ import {
 } from "./data.js";
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
-  DirtyBuffer, buildIssueBody, buildIssueParts, buildIssueURL, suggestTitle,
+  DirtyBuffer, buildIssueBody, buildIssueParts, buildIssueURL, suggestTitle, PART_ORDER_NOTE, serialiseDiff,
   MAX_ISSUE_URL_LENGTH, ISSUE_REPO,
 } from "./diff.js";
 import {
-  validateRecord, validateBuffer, findDuplicateRecord, messageFor,
+  validateRecord, validateBuffer, findDuplicateRecord, messageFor, rumourClash,
   SOURCE_ENUM_FIELD,
 } from "./validate.js";
 import {
@@ -34,9 +34,10 @@ import { browseMask } from "./browse.js";
 import { crownStoreMask } from "./crown-store.js";
 import { maintenanceMask } from "./maintenance.js";
 import { readDiff, planDiff, applySteps } from "./diff-import.js";
+import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown } from "./discovery.js";
+import { parseDiscovery, discoveryKnown, discoveryAsRecipe } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { ReferenceData } from "./reference-data.js";
 import { namesMask } from "./names.js";
@@ -148,7 +149,14 @@ async function init() {
     });
     bindTabMemory();
     renderFooter();
+    state.buffer.onChange = () => {
+      findingsCache = null;
+      schedulePendingSave();
+    };
+    addEventListener("pagehide", savePending);
+    await restorePending();
     installTestHook();
+
     // Warm the optional modules so the first "Fix this" / "Send it" does not wait on a network round trip.
     importOptional("./quick-edit.js");
     importOptional("./changelist.js");
@@ -220,6 +228,13 @@ function installTestHook() {
     get recordCount() { return state.records.length; },
     records: () => state.records,
     validate: (record) => validateRecord(record, state.enums, state.records),
+    // Tests share one browser: this drops the kept copy and stops keeping one until the next page load, so a test's own reload starts clean.
+    forgetPending: () => {
+      pendingOff = true;
+      clearTimeout(pendingTimer);
+      localStorage.removeItem(PENDING_KEY);
+      localStorage.removeItem(PENDING_UNRESTORED_KEY);
+    },
     taxonomy: () => {
       const t = buildTaxonomy(state.enums || {}, state.records);
       return {
@@ -824,7 +839,7 @@ function renderAdvancedPanel(container) {
     <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump or Diff">
       <div class="adv-import-body">
         <p class="muted">Paste output from DevUtility's Datamine text box. You can paste
-          several pages together. New discoveries arrive as Unconfirme, choose their source
+          several pages together. New discoveries arrive as Unconfirmed, choose their source
           if you know it. Existing entries are skipped.</p>
         <p class="muted">You can also use this to review a submitted issue: just paste the diff or whole raw text in here. The changes load into an empty change list and you can inspect and edit the entries.</p>
         <textarea id="adv-import-paste" rows="7" placeholder="Paste a dump or an issue's diff here"></textarea>
@@ -833,6 +848,7 @@ function renderAdvancedPanel(container) {
           <button id="adv-import-clear">Clear</button>
           <span id="adv-import-status" class="muted"></span>
         </div>
+        <ul id="adv-import-report" class="adv-import-report"></ul>
       </div>
     </section>
 
@@ -1057,6 +1073,12 @@ function renderTable() {
     if (entry) {
       tr.classList.add("dirty");
       if (isSiteOnlyEdit(entry)) tr.classList.add("dirty-site-only");
+      // Red until fixed: this change blocks sending.
+      const problems = bufferFindings().perEntry.get(r._key)?.errors || [];
+      if (problems.length) {
+        tr.classList.add("dirty-error");
+        tr.title = `Cannot be sent yet: ${problems.map(messageFor).join(" ")}`;
+      }
     }
 
     // A tick never selects the row: ticking twenty rows would otherwise walk the side form through twenty records.
@@ -1597,9 +1619,15 @@ function bindBatchImport() {
     if (!panel.hidden) $("#adv-import-paste").focus();
   });
   $("#adv-import-run").addEventListener("click", () => runBatchImport());
+  // Batch edit renders on first visit, which can be after a restore that did not fit.
+  if (unrestoredDiff) {
+    $("#adv-import-paste").value = unrestoredDiff;
+    $("#adv-import").hidden = false;
+  }
   $("#adv-import-clear").addEventListener("click", () => {
     $("#adv-import-paste").value = "";
     $("#adv-import-status").textContent = "";
+    showImportReport();
   });
 }
 
@@ -1630,6 +1658,13 @@ function looksLikeJSONL(text) {
     return t.startsWith("{");
   }
   return false;
+}
+
+// Each problem is shown with its line and item, so the contributor can act on it without opening the console.
+function showImportReport(errorLines = [], warnLines = []) {
+  $("#adv-import-report").replaceChildren(
+    ...errorLines.map((t) => elem("li", { class: "v-error" }, t)),
+    ...warnLines.map((t) => elem("li", { class: "v-warning" }, t)));
 }
 
 function runBatchImport() {
@@ -1709,6 +1744,7 @@ function runBatchImport() {
   let updated = 0;
   let ignored = 0;
   let rumoured = 0;
+  let asRecipe = 0;
   const warnLines = [];
   const errorLines = [...parseErrors.map((e) => `line ${e.lineNo}: ${e.message}`)];
 
@@ -1718,9 +1754,18 @@ function runBatchImport() {
       ignored++;
       continue;
     }
-    if (c.reference && discoveryKnown(rec, state.records)) {
+    // A dump block is as much a scan as a discovery line: an item already catalogued is skipped either way.
+    if ((c.reference || c.rumourFallback) && discoveryKnown(rec, state.records)) {
       knownDiscoveries++;
       continue;
+    }
+    if (c.reference) {
+      const recipe = discoveryAsRecipe(rec, state.records);
+      if (recipe !== rec) {
+        rec = recipe;
+        c.category = "recipe";
+        asRecipe++;
+      }
     }
     const where = `line ${c.lineNo} (id ${rec.id ?? "?"})`;
 
@@ -1755,6 +1800,9 @@ function runBatchImport() {
       continue;
     }
     for (const w of warnings) warnLines.push(`${where}: ${messageFor(w)}`);
+    // Imported anyway: the row turns red and the change cannot be sent until it is fixed in the form.
+    const clash = rumourClash(rec, state.records);
+    if (clash) warnLines.push(`${where}: ${messageFor(clash)}`);
 
     // An exact (id, source) match re-states that record as an update; a same-id-different-source paste is a new record. Never a hard block here.
     const { exact: existing } = findDuplicateRecord(
@@ -1785,16 +1833,14 @@ function runBatchImport() {
   if (ignored) parts.push(`${ignored} ignored (skipped)`);
   if (knownDiscoveries) parts.push(`${knownDiscoveries} already catalogued (skipped)`);
   if (rumoured) parts.push(`${rumoured} as ${sourceTypeLabel("rumour")} (no source yet)`);
+  if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
   if (droppedPrices) {
     parts.push(`${droppedPrices} price(s) left out (a record with no source carries none)`);
   }
   if (warnLines.length) parts.push(`${warnLines.length} warning(s)`);
   if (errorLines.length) parts.push(`${errorLines.length} error(s)`);
   status.textContent = parts.join(" · ") + ".";
-  if (errorLines.length || warnLines.length) {
-    console.warn("batch import - errors:", errorLines, "warnings:", warnLines);
-    status.textContent += " See console for details.";
-  }
+  showImportReport(errorLines, warnLines);
 
   if (imported > 0 || updated > 0) {
     state.changedOnly = true;
@@ -1831,6 +1877,90 @@ async function importDiff(lines, status, complete) {
   if (cb) cb.checked = true;
   refilter();
   renderFooter();
+}
+
+// Unsent changes survive a reload or a closed tab: the buffer is kept as the diff lines an issue would carry, and replayed on the next visit through the same import a pasted issue uses.
+const PENDING_KEY = "furcat-pending-v1";
+// A saved diff the catalogue no longer accepts is moved here, never dropped.
+const PENDING_UNRESTORED_KEY = "furcat-pending-unrestored-v1";
+let pendingTimer = null;
+let pendingOff = false;
+let unrestoredDiff = "";
+
+function schedulePendingSave() {
+  clearTimeout(pendingTimer);
+  pendingTimer = setTimeout(savePending, 300);
+}
+
+function savePending() {
+  clearTimeout(pendingTimer);
+  if (pendingOff) return;
+  const diff = state.buffer.size() ? serialiseDiff(state.buffer) : "";
+  const write = () => {
+    if (diff) localStorage.setItem(PENDING_KEY, JSON.stringify({ savedAt: new Date().toISOString(), diff }));
+    else localStorage.removeItem(PENDING_KEY);
+  };
+  try {
+    write();
+  } catch (_) {
+    // Out of space: cached icons can be fetched again, unsent work cannot.
+    try {
+      clearIconCache();
+      write();
+    } catch (_) {
+      $("#pending-restore").textContent = "This browser cannot keep your changes - send them before closing the page.";
+    }
+  }
+}
+
+async function restorePending() {
+  let saved = null;
+  try {
+    saved = JSON.parse(localStorage.getItem(PENDING_KEY) || "null");
+  } catch (_) {
+    return;
+  }
+  if (!saved?.diff) return;
+  const note = $("#pending-restore");
+  const when = new Date(saved.savedAt).toLocaleString();
+  try {
+    const { lines } = readDiff(saved.diff);
+    if (lines.some(({ line }) => line.op === "name")) {
+      await referenceData.init();
+      await referenceData.loadNames();
+    }
+    const { steps, errors } = planDiff(lines, {
+      records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
+      publishedName: (kind, id) => referenceData.publishedName(kind, id),
+    });
+    if (errors.length) throw new Error(errors.slice(0, 3).join("; "));
+    applySteps(steps, state, referenceData);
+    note.textContent = `Restored ${changeCountText()} you had not sent yet (from ${when}).`;
+  } catch (err) {
+    try {
+      localStorage.setItem(PENDING_UNRESTORED_KEY, localStorage.getItem(PENDING_KEY));
+      localStorage.removeItem(PENDING_KEY);
+    } catch (_) { /* kept under the old key, tried again next visit */ }
+    unrestoredDiff = saved.diff;
+    const paste = $("#adv-import-paste");
+    if (paste) {
+      paste.value = saved.diff;
+      $("#adv-import").hidden = false;
+    }
+    note.textContent = `Your unsent changes from ${when} no longer fit the catalogue (${err.message}). ` +
+      "They are in Batch edit -> Add from Dump or Diff, to review and import again.";
+    console.warn("pending changes not restored:", err);
+  }
+  applyFilters();
+  renderTable();
+  renderFooter();
+}
+
+// Every buffer change drops the cached findings; the table asks for them on every scroll frame.
+let findingsCache = null;
+function bufferFindings() {
+  findingsCache ??= validateBuffer(state.buffer, state.enums, state.records);
+  return findingsCache;
 }
 
 // Shared footer + submit modal
@@ -1904,18 +2034,29 @@ function openSubmitModal() {
 
   renderChangeListInto($("#modal-changelist"));
 
-  const { errors, warnings } = validateBuffer(state.buffer, state.enums, state.records);
+  const { errors, perEntry } = bufferFindings();
   const vHost = $("#modal-validation");
   vHost.innerHTML = "";
+  // Named per change: a count alone cannot be found again in a long change list.
+  const flagged = [];
+  for (const entry of state.buffer.list()) {
+    const found = perEntry.get(entry.key);
+    if (!found || !(found.errors.length || found.warnings.length)) continue;
+    const rec = entry.after ?? entry.before;
+    const id = rec?.id ?? rec?.blueprint;
+    const item = `${nameOf(id) || "(no name)"} (${id}), ${sourceTypeLabel(rec?.source?.type)}`;
+    flagged.push(elem("li", {}, elem("strong", {}, item), ": ",
+      ...found.errors.map((f) => elem("span", { class: "v-error" }, messageFor(f), " ")),
+      ...found.warnings.map((f) => elem("span", { class: "v-warning" }, messageFor(f), " "))));
+  }
   if (errors) {
-    vHost.append(elem("span", { class: "v-error" },
-      `${changeCountText(errors)} cannot be sent yet - open it and fix the highlighted field.`));
-  } else if (warnings) {
-    vHost.append(elem("span", { class: "v-warning" },
-      `${changeCountText(warnings)} to look over before sending.`));
+    vHost.append(elem("span", { class: "v-error" }, "Fix these changes before sending - open each in Batch edit:"));
+  } else if (flagged.length) {
+    vHost.append(elem("span", { class: "v-warning" }, "Look over these changes before sending:"));
   } else {
     vHost.append(elem("span", { class: "v-ok" }, "Looks good."));
   }
+  if (flagged.length) vHost.append(elem("ul", { class: "modal-findings" }, ...flagged));
 
   const blocked = errors > 0;
   let parts;
@@ -1939,7 +2080,7 @@ function openSubmitModal() {
     $("#modal-technical").hidden = true;
     $("#modal-diff").value = "";
     partsHost.append(elem("p", {}, `Your changes need ${parts.length} GitHub issues. Copy and submit each part below.`),
-      elem("p", {}, "For maintainers: process the issues and merge each resulting PR in part-number order before processing the next part."));
+      elem("p", {}, `For maintainers: ${PART_ORDER_NOTE}`));
     parts.forEach((part, i) => {
       const label = `Part ${i + 1} of ${parts.length}`;
       const copy = elem("button", { type: "button", "aria-live": "polite" }, `Copy part ${i + 1}`);

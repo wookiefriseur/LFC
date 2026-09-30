@@ -141,7 +141,16 @@ const CODE_MESSAGES = {
     `${fieldLabel(f)} cannot be 0. Some fields use 0 for "needed, but not ` +
     `recorded"; this is not one of them.`,
   int_list_required: (f) => `${fieldLabel(f)} has to be whole numbers, separated by commas.`,
-  id_cross_file: (f) => `This item number is also used in: ${f.value}.`,
+  id_cross_file: (f) =>
+    `This item also has ${f.value.split(", ").map(sourceTypeLabel).join(", ")} records - check this is another way to get it.`,
+  rumour_confirmed: (f) => f.blueprint
+    ? `This item already has a confirmed source (${sourceTypeLabel(f.value)}), so a blueprint for it is a ` +
+      `${sourceTypeLabel("recipe")} record, not ${sourceTypeLabel("rumour")}. Change its source to ${sourceTypeLabel("recipe")}.`
+    : `This item already has a confirmed source (${sourceTypeLabel(f.value)}), so it cannot also be ` +
+      `${sourceTypeLabel("rumour")}. Remove this record.`,
+  confirmed_has_rumour: () =>
+    `This item also has an ${sourceTypeLabel("rumour")} record. Remove that record, or change its source ` +
+    `(a blueprint becomes ${sourceTypeLabel("recipe")}).`,
   // Raised by the masks: the same id with a different source is the normal multi-source case, worth a look but never a block.
   ignored_item: () => ignoredMessage,
   same_id_other_source: () =>
@@ -450,6 +459,11 @@ export function validateRecord(record, enums, allRecords) {
     }
   }
 
+  if (Array.isArray(allRecords)) {
+    const clash = rumourClash(record, allRecords, record._key);
+    if (clash) errors.push(clash);
+  }
+
   // The presentation map needs source.type for per-type label overrides.
   for (const f of [...errors, ...warnings]) {
     if (f.type === undefined) f.type = type;
@@ -502,6 +516,30 @@ export function findDuplicateRecord(id, category, source, allRecords, excludeKey
     }
   }
   return result;
+}
+
+// The generator refuses an item that is both unconfirmed and confirmed: a rumour answers for its id and its blueprint, a confirmed record for its item id.
+export function rumourClash(record, allRecords, excludeKey) {
+  const type = record?.source?.type;
+  if (!type || !Array.isArray(allRecords)) return null;
+  const others = allRecords.filter((r) => r._key !== excludeKey && r !== record && r.source?.type);
+  if (type === "rumour") {
+    const keys = [record.id, record.blueprint].filter(isPositiveInt);
+    const other = others.find((r) => r.source.type !== "rumour" && keys.includes(r.id));
+    if (!other) return null;
+    return {
+      level: "error", field: identityField(record), code: "rumour_confirmed", type,
+      value: other.source.type, blueprint: isPositiveInt(record.blueprint),
+      message: `${identityText(record.id, record.blueprint)}: item ${other.id} already has a confirmed ${other.source.type} record`,
+    };
+  }
+  if (!isPositiveInt(record.id)) return null;
+  const other = others.find((r) => r.source.type === "rumour" && (r.id === record.id || r.blueprint === record.id));
+  if (!other) return null;
+  return {
+    level: "error", field: "id", code: "confirmed_has_rumour", type,
+    message: `id ${record.id} also has a rumour record (${identityText(other.id, other.blueprint)})`,
+  };
 }
 
 function findingSignature(f) {
@@ -578,6 +616,11 @@ export function validateBuffer(buffer, enums, allRecords) {
           });
         }
       }
+    }
+
+    if (entry.op !== "delete" && rec) {
+      const clash = rumourClash(rec, allRecords, entry.key);
+      if (clash) findings.errors.push(clash);
     }
 
     if (entry.before) {

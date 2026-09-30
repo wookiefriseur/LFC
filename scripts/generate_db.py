@@ -279,9 +279,13 @@ class Catalogue:
                 rumours[key] = self.enum('versions', row['availability']['version'])
             else:
                 grouped[row['id']].append(row)
-        rumour_ids = {r.get('id', r.get('blueprint')) for r in projected if r['source']['type'] == 'rumour'}
-        require(not (set(rumours) | rumour_ids).intersection(grouped), 'rumour also has a confirmed source')
-        require(not set(blueprints).intersection(grouped), 'blueprint id also used as a furnishing id')
+        # A rumour answers for its id and its blueprint; the message names both so a contributor can find the line
+        clashes = [r for r in projected if r['source']['type'] == 'rumour' and {r.get('id'), r.get('blueprint')} & grouped.keys()]
+        require(not clashes, 'rumour also has a confirmed source: ' + ', '.join(
+            f"id {r.get('id', '-')}" + (f" / blueprint {r['blueprint']}" if 'blueprint' in r else '') for r in clashes)
+            + ' (a blueprint for a confirmed item is a recipe record)')
+        reused = sorted(set(blueprints) & grouped.keys())
+        require(not reused, f'blueprint id also used as a furnishing id: {", ".join(map(str, reused))}')
         items = {}
         for item, rows in sorted(grouped.items()):
             item_blueprints = {r['blueprint'] for r in rows if 'blueprint' in r}
@@ -325,6 +329,16 @@ def load_inputs(data_dir, recipes_path):
     names = data_dir / 'names.en.json'
     if names.exists():
         catalogue.labels['items'] = {int(k): v for k, v in read_json(names.read_text()).items()}
+    # Comments only: an item added by a discovery is named in the reference metadata beside the recipe map, not in names.en.json
+    labels = catalogue.labels['items']
+    for shard in sorted((recipes_path.parent / 'meta').glob('*.jsonl')):
+        for line in shard.read_text().splitlines():
+            if line.strip():
+                row = read_json(line)
+                labels.setdefault(row['id'], row['name'])
+    for blueprint, item in catalogue.recipes.items():
+        if item in labels:
+            labels.setdefault(int(blueprint), labels[item])
     records = []
     for filename in sorted(expected):
         for line_number, line in enumerate((data_dir / filename).read_text().splitlines(), 1):

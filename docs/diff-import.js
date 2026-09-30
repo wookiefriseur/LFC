@@ -1,6 +1,6 @@
 // Reads a contribution diff back into change-list steps: the inverse of serialiseDiff, so a pasted issue can be reviewed against the loaded catalogue
 import { DIFF_VERSION, MUTABLE_FIELDS } from "./diff.js";
-import { canonicalSource, findDuplicateRecord, validateRecord, messageFor } from "./validate.js";
+import { canonicalSource, findDuplicateRecord } from "./validate.js";
 import { NAME_KINDS } from "./reference-data.js";
 import { mirror, newKey } from "./data.js";
 import { queueEnumValue } from "./maintenance.js";
@@ -84,13 +84,6 @@ function target(line, records) {
   return hits[0];
 }
 
-// Like quick edit: a finding the record already carried does not block the change.
-function newErrors(before, after, enums, records) {
-  const sig = (f) => `${f.field}|${f.code || ""}|${f.message}`;
-  const known = new Set(validateRecord(before, enums, records).errors.map(sig));
-  return validateRecord(after, enums, records).errors.filter((f) => !known.has(sig(f)));
-}
-
 function checkEnvelope(line) {
   if (line.v !== DIFF_VERSION) throw new Error(`unsupported diff version ${JSON.stringify(line.v)}`);
   if (!OPS.has(line.op)) throw new Error(`unknown operation ${JSON.stringify(line.op)}`);
@@ -145,8 +138,6 @@ export function planDiff(lines, ctx) {
           throw new Error(`add ${identity(line)}: this record is already in ${line.category}`);
         }
         added.add(key);
-        const { errors: bad } = validateRecord(record, enums, ctx.records);
-        if (bad.length) throw new Error(`add ${identity(line)}: ${bad.map(messageFor).join(" ")}`);
         if (line.reference && line.reference.meta?.id !== record.id) throw new Error(`add ${identity(line)}: discovery metadata names another id`);
         steps.push({ op: "add", record: clone(record), category: line.category, reference: line.reference ?? null });
       } else {
@@ -167,9 +158,6 @@ export function planDiff(lines, ctx) {
           else after[k] = clone(v);
         }
         if (after.source?.type !== line.category) throw new Error(`update ${identity(line)}: a new source type is a delete plus an add`);
-        const probe = (record) => ({ ...record, _key: live._key, _category: line.category });
-        const bad = newErrors(probe(before), probe(after), enums, ctx.records);
-        if (bad.length) throw new Error(`update ${identity(line)}: ${bad.map(messageFor).join(" ")}`);
         steps.push({ op: "update", live, before, after, category: line.category, reference: line.reference ?? null });
       }
     } catch (err) {

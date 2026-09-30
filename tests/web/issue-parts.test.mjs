@@ -38,7 +38,7 @@ test("parts include all body overhead, put enums first and keep each ID together
     assert.ok(part.body.length <= MAX_ISSUE_BODY_LENGTH);
     assert.match(part.title, new RegExp(`Part ${i + 1} of ${parts.length}`));
     assert.ok(part.body.includes(part.title));
-    assert.match(part.body, /merge each resulting PR in part-number order/);
+    assert.match(part.body, /finish each issue in order \(first part 1, then 2/);
     assert.equal((part.body.match(/diff-begin/g) || []).length, 1);
     assert.equal((part.body.match(/diff-end/g) || []).length, 1);
     assert.ok(part.body.includes("## What changed"));

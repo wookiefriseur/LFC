@@ -3,10 +3,10 @@ import test from "node:test";
 import fs from "node:fs";
 import Ajv from "ajv/dist/2020.js";
 import { isIgnoredItem } from "../../docs/ignored-items.js";
-import { parseDiscovery, discoveryKnown } from "../../docs/discovery.js";
+import { parseDiscovery, discoveryKnown, discoveryAsRecipe } from "../../docs/discovery.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
 import { ReferenceData } from "../../docs/reference-data.js";
-import { validateRecord, validateBuffer } from "../../docs/validate.js";
+import { validateRecord, validateBuffer, rumourClash, messageFor } from "../../docs/validate.js";
 const schema = JSON.parse(fs.readFileSync(new URL("../../schemas/diff-line.schema.json", import.meta.url)));
 const valid = new Ajv({ strict: false }).compile(schema);
 const enums = JSON.parse(fs.readFileSync(new URL("../../docs/data/enums.json", import.meta.url)));
@@ -103,4 +103,31 @@ test("LFC and canonical ignored item identities agree", () => {
   const lua = fs.readFileSync(new URL("../../LibFurnitureCatalogue/data/IgnoredItems.lua", import.meta.url), "utf8");
   const ids = [...lua.matchAll(/^\s*\[(\d+)\]\s*=/gm)].map((m) => Number(m[1]));
   assert.deepEqual(ids.sort((a,b) => a-b), ignoredRecords.map((r) => r.id).sort((a,b) => a-b));
+});
+
+test("a rumour beside a confirmed record is refused, and a new blueprint of a confirmed item becomes a recipe", () => {
+  const drop = { id: 130326, source: { type: "event_drop", event: "WITCHES" }, cost: [], availability: { version: "REACH" },
+    _category: "event_drop", _key: "event_drop#1" };
+  const blueprint = { id: 130326, blueprint: 132173, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } };
+  const clash = rumourClash(blueprint, [drop]);
+  assert.equal(clash.code, "rumour_confirmed");
+  assert.match(messageFor(clash), /confirmed source \(Event drop\).*Crafting/);
+  assert.equal(rumourClash({ ...blueprint, source: { type: "recipe" } }, [drop]), null);
+  assert.equal(rumourClash({ id: 130326, source: { type: "rumour" } }, [drop]).blueprint, false);
+  // The other direction: a confirmed record for an item that is still a rumour, addressed by id or by blueprint.
+  const rumour = { ...blueprint, _category: "rumour", _key: "rumour#1" };
+  assert.equal(rumourClash({ ...drop, _key: "new" }, [rumour]).code, "confirmed_has_rumour");
+  assert.equal(rumourClash({ ...drop, id: 132173, _key: "new" }, [rumour]).code, "confirmed_has_rumour");
+  assert.equal(validateRecord(blueprint, enums, [drop]).errors.some((f) => f.code === "rumour_confirmed"), true);
+
+  const buffer = new DirtyBuffer();
+  buffer.add("rumour#new", blueprint, "rumour");
+  const live = [drop, { ...blueprint, _category: "rumour", _key: "rumour#new" }];
+  assert.equal(validateBuffer(buffer, enums, live).perEntry.get("rumour#new").errors[0].code, "rumour_confirmed");
+
+  assert.deepEqual(discoveryAsRecipe(blueprint, [drop]).source, { type: "recipe" });
+  assert.equal(discoveryAsRecipe(blueprint, [drop]).availability.version, "NONE");
+  assert.equal(discoveryAsRecipe(blueprint, []), blueprint);
+  const { blueprint: _, ...plain } = blueprint;
+  assert.equal(discoveryAsRecipe(plain, [drop]), plain);
 });

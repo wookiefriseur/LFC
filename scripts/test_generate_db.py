@@ -202,6 +202,16 @@ class GeneratedDatabaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'container cycle'):
             self.catalogue.build(rows)
 
+    def test_discovered_items_and_blueprints_are_named_in_comments(self):
+        labels = self.catalogue.labels['items']
+        self.assertEqual(labels[122609], 'Blacksmithing Station (Shacklebreaker)')
+        self.assertEqual(labels[132173], labels[130326])
+
+    def test_rumour_beside_confirmed_source_names_the_ids(self):
+        with self.assertRaisesRegex(ValueError, r'rumour also has a confirmed source: id 1 / blueprint 9000001 '):
+            self.catalogue.build([self.row(), self.row(source={'type': 'rumour'}, blueprint=9000001,
+                                                       availability={'version': 'NONE'})])
+
     def test_ignored_with_acquisition_source(self):
         with self.assertRaisesRegex(ValueError, 'ignored item'):
             self.catalogue.build([self.row(), self.row(source={'type': 'ignored'})])

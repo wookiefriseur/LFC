@@ -7,6 +7,7 @@ export const DIFF_VERSION = 1;
 
 export const MAX_ISSUE_URL_LENGTH = 8000;
 export const MAX_ISSUE_BODY_LENGTH = 60000;
+export const PART_ORDER_NOTE = "Please process and finish each issue in order (first part 1, then 2, and so on), because parts might depend on their predecessor being merged.";
 
 
 // `id` is immutable (changing an id = delete+add) and internal `_*` keys never ship. Matches diff-line.schema.json `fields.propertyNames`.
@@ -20,12 +21,19 @@ export class DirtyBuffer {
   constructor() {
     this.entries = new Map();
     this.references = new Map();
+    // Called after every change, so the app can refresh findings and keep a local copy.
+    this.onChange = null;
   }
   size() { return this.entries.size; }
-  clear() { this.entries.clear(); this.references.clear(); }
+  clear() { this.entries.clear(); this.references.clear(); this.changed(); }
+  changed() { this.onChange?.(); }
 
 // Keeps the original `before` and pre-edit source across re-edits; the source snapshot is what `match` uses to address this row when (id, category) is ambiguous, even after the edit changed source.
   update(key, before, after, category) {
+    this.#update(key, before, after, category);
+    this.changed();
+  }
+  #update(key, before, after, category) {
     const existing = this.entries.get(key);
     // An add edited before it is sent stays an add. The file is the record's own type, so an add edited into another type is filed where it now belongs.
     if (existing?.op === "add") {
@@ -45,22 +53,26 @@ export class DirtyBuffer {
   }
   add(key, record, category) {
     this.entries.set(key, { op: "add", key, after: record, category });
+    this.changed();
   }
   // `meta` is the rest of the enums.json entry minus `symbol`, passed through verbatim; flat string vocabularies have none.
   addEnum(key, enumName, value, meta = null) {
     this.entries.set(key, { op: "add-enum", key, enumName, value, meta });
+    this.changed();
   }
   // A game name for an id in the names reference data. Setting it back to the published name drops the entry.
   setName(kind, id, locale, name, published) {
     const key = `name:${locale}:${kind}:${id}`;
     if (!name || name === published) this.entries.delete(key);
     else this.entries.set(key, { op: "name", key, kind, id, locale, name, before: published ?? null });
+    this.changed();
     return key;
   }
   delete(key, before, category) {
     const existing = this.entries.get(key);
     if (existing?.op === "add") {
       this.entries.delete(key);
+      this.changed();
       return;
     }
     // Keep the pristine `before` of an earlier edit: a delete states what is in the data file, not the caller's edited copy.
@@ -68,6 +80,7 @@ export class DirtyBuffer {
       op: "delete", key, before: existing?.before ?? before, category: existing?.category ?? category,
       origSource: existing?.origSource ?? sourceSnapshot(before),
     });
+    this.changed();
   }
   list() {
     return [...this.entries.values()];
@@ -253,7 +266,7 @@ export function buildIssueParts(buffer, allRecords, ctx) {
     part.references = buffer.references;
     const title = suggestTitle(part) + (number ? ` [${batch}, Part ${number} of ${total}]` : "");
     const summary = title + (number
-      ? "\n\nPlease process the issues and merge each resulting PR in part-number order before processing the next part."
+      ? `\n\n${PART_ORDER_NOTE}`
       : "");
     return { buffer: part, title, body: buildIssueBody(part, summary, allRecords, ctx) };
   };

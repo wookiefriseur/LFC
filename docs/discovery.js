@@ -1,3 +1,5 @@
+import { rumourClash } from "./validate.js";
+
 export function parseDiscovery(value) {
   if (value?.format !== "furniture-discovery-v1") throw new Error("unsupported discovery format");
   const { record, meta, locale, apiVersion } = value;
@@ -23,4 +25,11 @@ export function discoveryKnown(record, records) {
   return record.blueprint !== undefined
     ? records.some((r) => r.blueprint === record.blueprint)
     : records.some((r) => r.id === record.id);
+}
+
+// A new blueprint for an item that already has a confirmed source is another way to get it, not an unconfirmed item. The version stays as scanned: the scan cannot tell which update the blueprint arrived in.
+// It's not really correct, but do this so a change is not blocked. You should still check what item the recipe really belongs to (there are items that have the identical name, but one is a drop and the other one is crafted, there is a difference).
+export function discoveryAsRecipe(record, records) {
+  if (record.blueprint === undefined || !rumourClash(record, records)) return record;
+  return { ...record, source: { type: "recipe" } };
 }

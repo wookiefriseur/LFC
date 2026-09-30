@@ -417,6 +417,8 @@ footer {
 .v-ok { color: #15803d; font-weight: 500; }
 .v-error { color: var(--danger); font-weight: 600; }
 .v-warning { color: #b45309; font-weight: 600; }
+.modal-findings, .adv-import-report { margin: 0.4rem 0; padding-left: 1.2rem; max-height: 12rem; overflow-y: auto; }
+.modal-findings .v-error, .modal-findings .v-warning { font-weight: normal; }
 
 a.is-disabled {
   opacity: 0.5;
@@ -1817,6 +1819,9 @@ tbody tr.dirty.dirty-site-only {
   box-shadow: inset 3px 0 0 var(--dirty);
 }
 tbody tr.selected.dirty.dirty-site-only { background: var(--selected); }
+/* A buffered change that blocks sending. */
+tbody tr.dirty.dirty-error { background: #fee2e2; box-shadow: inset 3px 0 0 var(--danger); }
+tbody tr.selected.dirty.dirty-error { background: #fecaca; }
 /* Rows carrying a data note: a glyph in the source-detail cell. */
 .note-glyph { color: var(--muted); cursor: help; margin-right: 0.3rem; }
 
