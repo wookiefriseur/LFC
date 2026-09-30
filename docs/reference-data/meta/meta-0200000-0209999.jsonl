@@ -261,6 +261,7 @@
 {"id":204433,"name":"Lily Pads, Flowering Patch","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_mrklilycluster001"}
 {"id":204434,"name":"Breton Rowboat","quality":3,"cat":6,"sub":71,"theme":2,"icon":"housing_bre_csb_boatfishing002"}
 {"id":204455,"name":"Redguard Tent, Squared Blue","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset004"}
+{"id":204456,"name":"Redguard Oven, Clay","icon":"housing_red_inc_firepitsmall001","quality":5,"cat":25,"sub":104,"theme":10}
 {"id":204618,"name":"Ayleid Arch, Wide","quality":4,"cat":13,"sub":117,"theme":14,"icon":"housing_iad_inc_ayliedarch001"}
 {"id":204619,"name":"Ayleid Window, Large","quality":4,"cat":7,"sub":107,"theme":14,"icon":"housing_iad_inc_ayliedlens001"}
 {"id":204620,"name":"Ayleid Sculpture, Simple Tree","quality":3,"cat":11,"sub":126,"theme":14,"icon":"housing_iad_inc_ayliedtree002"}
@@ -457,6 +458,18 @@
 {"id":204812,"name":"Crystaljack Cocoon, Dormant","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_iad_duc_trapprismcocoonwall001","blueprint":207921}
 {"id":204836,"name":"Colovian Wine Basket, Plain","quality":2,"cat":8,"sub":87,"theme":11,"icon":"housing_chl_inc_winebasketlarge001"}
 {"id":205388,"name":"Colovian Windmill, Decorative","quality":5,"cat":13,"sub":185,"theme":11,"icon":"housing_chl_str_housingwindmill001"}
+{"id":205389,"name":"Clothing Station (Tharriker's Strike)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205390,"name":"Woodworking Station (Tharriker's Strike)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205391,"name":"Blacksmithing Station (Tharriker's Strike)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205392,"name":"Jewelry Station (Tharriker's Strike)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205769,"name":"Clothing Station (Highland Sentinel)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205770,"name":"Woodworking Station (Highland Sentinel)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205771,"name":"Blacksmithing Station (Highland Sentinel)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":205772,"name":"Jewelry Station (Highland Sentinel)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":206149,"name":"Clothing Station (Threads of War)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":206150,"name":"Woodworking Station (Threads of War)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":206151,"name":"Blacksmithing Station (Threads of War)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":206152,"name":"Jewelry Station (Threads of War)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":206538,"name":"Scholarium Door, Netch","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_uni_exc_smallscribingdoorbullnetch001"}
 {"id":206539,"name":"Lucent Crystals, Plume","quality":3,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_chl_mirrorcrystals003","blueprint":207923}
 {"id":206540,"name":"Lucent Crystals, Bed","quality":4,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_chl_mirrorcrystals002","blueprint":207924}
