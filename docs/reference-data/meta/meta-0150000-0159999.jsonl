@@ -399,6 +399,17 @@
 {"id":153841,"name":"Rewoven Khajiiti Tapestry","quality":1,"icon":"icon_missing"}
 {"id":153887,"name":"Dragonguard Banner","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_els_lsb_bannerdragonguardmedium001"}
 {"id":155400,"name":"Clothing Station (Daring Corsair)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155401,"name":"Woodworking Station (Daring Corsair)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155402,"name":"Blacksmithing Station (Daring Corsair)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155403,"name":"Jewelry Station (Daring Corsair)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155774,"name":"Clothing Station (Ancient Dragonguard)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155775,"name":"Woodworking Station (Ancient Dragonguard)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155776,"name":"Blacksmithing Station (Ancient Dragonguard)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":155777,"name":"Jewelry Station (Ancient Dragonguard)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":156148,"name":"Clothing Station (New Moon Acolyte)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":156149,"name":"Woodworking Station (New Moon Acolyte)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":156150,"name":"Blacksmithing Station (New Moon Acolyte)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":156151,"name":"Jewelry Station (New Moon Acolyte)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":156553,"name":"Music Box, That Breezy Night in Bruma","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_heartsdaymusicbox001"}
 {"id":156554,"name":"Music Box, A Frost Melt Melody","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_newlifemusicbox001"}
 {"id":156644,"name":"Books, Towering Pile","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_cra_inc_bookpile005"}
@@ -455,6 +466,18 @@
 {"id":156776,"name":"Bouquet, Large Dibella's","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_uni_inc_romanticvase003"}
 {"id":156777,"name":"Bouquet, Medium Dibella's","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_uni_inc_romanticvase001"}
 {"id":156778,"name":"Flower, Dibella's Promise","quality":4,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_flr_romanticflower001"}
+{"id":158312,"name":"Clothing Station (Critical Riposte)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158313,"name":"Woodworking Station (Critical Riposte)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158314,"name":"Blacksmithing Station (Critical Riposte)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158315,"name":"Jewelry Station (Critical Riposte)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158686,"name":"Clothing Station (Unchained Aggressor)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158687,"name":"Woodworking Station (Unchained Aggressor)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158688,"name":"Blacksmithing Station (Unchained Aggressor)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":158689,"name":"Jewelry Station (Unchained Aggressor)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":159060,"name":"Clothing Station (Dauntless Combatant)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":159061,"name":"Woodworking Station (Dauntless Combatant)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":159062,"name":"Blacksmithing Station (Dauntless Combatant)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":159063,"name":"Jewelry Station (Dauntless Combatant)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":159436,"name":"Dwarven Miniature Sun, Portable","quality":5,"cat":11,"sub":125,"theme":12,"icon":"housing_dwe_duc_housinglanternhangingsmall001"}
 {"id":159437,"name":"Painting of Blackreach, Rough","quality":5,"cat":9,"sub":54,"theme":1,"icon":"housing_uni_inc_housingpaintinggloomspore001"}
 {"id":159438,"name":"Fungus, Gloomspore Ghost","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_skr_nidiformiswavehousing004"}

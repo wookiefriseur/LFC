@@ -241,6 +241,7 @@
 {"id":182934,"name":"Log, Charred Deadlands","quality":3,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck008"}
 {"id":182935,"name":"Stump, Charred Deadlands","quality":3,"cat":12,"sub":165,"theme":13,"icon":"housing_tre_bad_sllightningstruck010"}
 {"id":183196,"name":"Antique Map of the Deadlands","quality":2,"cat":4,"sub":64,"theme":1,"icon":"housing_gen_inc_mappropsdeadlandsscroll001"}
+{"id":183198,"name":"Bushes, Withered Cluster","icon":"housing_veg_bsh_mphdead001","quality":1,"cat":0,"sub":0,"theme":0}
 {"id":183200,"name":"Music Box: Wonders of the Shoals","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_coralmusicbox001"}
 {"id":183201,"name":"Music Box: Bleak Beacon Shanty","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxspookylighthouse001"}
 {"id":183202,"name":"Deadlands Wall, Short Curved","quality":2,"cat":13,"sub":164,"theme":1,"icon":"housing_bad_waf_dedwalllowcurve001","blueprint":183203}
@@ -316,6 +317,18 @@
 {"id":184248,"name":"Stones, Coral Cluster","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_rok_sum_coralsm004"}
 {"id":184249,"name":"Elkhorn Coral, Branching","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphelkhorncoral002"}
 {"id":184250,"name":"Nedic Banner, Ancient","quality":2,"cat":3,"sub":58,"theme":8,"icon":"housing_cra_lsb_banners002"}
+{"id":184767,"name":"Clothing Station (Order's Wrath)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":184768,"name":"Woodworking Station (Order's Wrath)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":184769,"name":"Blacksmithing Station (Order's Wrath)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":184770,"name":"Jewelry Station (Order's Wrath)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185147,"name":"Clothing Station (Serpent's Disdain)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185148,"name":"Woodworking Station (Serpent's Disdain)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185149,"name":"Blacksmithing Station (Serpent's Disdain)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185150,"name":"Jewelry Station (Serpent's Disdain)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185527,"name":"Clothing Station (Druid's Braid)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185528,"name":"Woodworking Station (Druid's Braid)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185529,"name":"Blacksmithing Station (Druid's Braid)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":185530,"name":"Jewelry Station (Druid's Braid)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":187660,"name":"Mages Guild Stained Glass","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_sys_str_windowmagesguildhousing001"}
 {"id":187661,"name":"Mage's Flame","quality":5,"cat":11,"sub":127,"theme":1,"icon":"u34_housing_mages_flame"}
 {"id":187662,"name":"House Dufort Chandelier","quality":5,"cat":11,"sub":125,"theme":1,"icon":"housing_sys_lsb_chandelierblue001"}

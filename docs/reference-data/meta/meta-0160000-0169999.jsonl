@@ -12,6 +12,18 @@
 {"id":161214,"name":"Spellscar Shard","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_uni_inc_antspellscarshard001"}
 {"id":161215,"name":"Yokudan Skystone Scabbard","quality":4,"cat":9,"sub":91,"theme":10,"icon":"housing_uni_inc_antyokudanskystonescabbard001"}
 {"id":161216,"name":"Tri-Angled Truth Altar","quality":4,"cat":7,"sub":107,"theme":6,"icon":"housing_uni_inc_triangledtruthaltar001"}
+{"id":161217,"name":"Clothing Station (Stuhn's Favor)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161218,"name":"Woodworking Station (Stuhn's Favor)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161219,"name":"Blacksmithing Station (Stuhn's Favor)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161220,"name":"Jewelry Station (Stuhn's Favor)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161591,"name":"Clothing Station (Dragon's Appetite)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161592,"name":"Woodworking Station (Dragon's Appetite)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161593,"name":"Blacksmithing Station (Dragon's Appetite)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":161594,"name":"Jewelry Station (Dragon's Appetite)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":163053,"name":"Clothing Station (Spell Parasite)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":163054,"name":"Woodworking Station (Spell Parasite)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":163055,"name":"Blacksmithing Station (Spell Parasite)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":163056,"name":"Jewelry Station (Spell Parasite)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":163428,"name":"Music Box, The Shadows Stir","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxgreyhost001"}
 {"id":163429,"name":"Music Box, Enigmas of the Elder Way","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_psijicmusicbox001"}
 {"id":163431,"name":"Music Box, Dreams and Memories","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxaldmerisymphonia001"}
@@ -475,4 +487,16 @@
 {"id":167933,"name":"Dwarven Beam Emitter, Medium","quality":5,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_str_markdwemercrystalpillarsmall001"}
 {"id":167934,"name":"Dwarven Orrery, Scholastic","quality":5,"cat":10,"sub":170,"theme":12,"icon":"housing_skr_inc_marktableorrey001"}
 {"id":167935,"name":"Dwarven Work Lamp, Powered Floor","quality":5,"cat":11,"sub":120,"theme":12,"icon":"housing_skr_lsb_markdwelamp001"}
+{"id":167995,"name":"Clothing Station (Red Eagle's Fury)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":167996,"name":"Woodworking Station (Red Eagle's Fury)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":167997,"name":"Blacksmithing Station (Red Eagle's Fury)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":167998,"name":"Jewelry Station (Red Eagle's Fury)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168369,"name":"Clothing Station (Legacy of Karth)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168370,"name":"Woodworking Station (Legacy of Karth)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168371,"name":"Blacksmithing Station (Legacy of Karth)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168372,"name":"Jewelry Station (Legacy of Karth)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168743,"name":"Clothing Station (Aetherial Ascension)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168744,"name":"Woodworking Station (Aetherial Ascension)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168745,"name":"Blacksmithing Station (Aetherial Ascension)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":168746,"name":"Jewelry Station (Aetherial Ascension)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":169117,"name":"Target Bloodknight","quality":5,"cat":25,"sub":98,"theme":1,"icon":"targetdummy_bloodknight"}

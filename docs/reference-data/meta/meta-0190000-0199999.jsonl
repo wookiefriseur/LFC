@@ -58,6 +58,17 @@
 {"id":191206,"name":"Druidic Game, Marble Maze","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_sys_inc_drumarblegame001","blueprint":192561}
 {"id":191207,"name":"Druidic Bowl, Clay","quality":2,"cat":8,"sub":81,"theme":2,"icon":"housing_sys_inc_druterrabowllarge001","blueprint":192562}
 {"id":191208,"name":"Druidic Mug, Clay","quality":2,"cat":8,"sub":144,"theme":2,"icon":"housing_sys_inc_druterramug001","blueprint":192563}
+{"id":191228,"name":"Clothing Station (Chimera's Rebuke)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191229,"name":"Woodworking Station (Chimera's Rebuke)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191230,"name":"Blacksmithing Station (Chimera's Rebuke)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191231,"name":"Jewelry Station (Chimera's Rebuke)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191608,"name":"Clothing Station (Old Growth Brewer)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191609,"name":"Woodworking Station (Old Growth Brewer)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191610,"name":"Blacksmithing Station (Old Growth Brewer)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191988,"name":"Clothing Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191989,"name":"Woodworking Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191990,"name":"Blacksmithing Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191991,"name":"Jewelry Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":192393,"name":"Tree, Large Galen Beech","quality":3,"cat":12,"sub":108,"theme":1,"icon":"housing_tre_sys_carobcliffroots001"}
 {"id":192394,"name":"Sapling, Galen Beech","quality":1,"cat":12,"sub":141,"theme":1,"icon":"housing_tre_sys_carob006"}
 {"id":192395,"name":"Flowers, Sunflower Patch","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_sys_sunflowerfield005"}
@@ -222,6 +233,16 @@
 {"id":194536,"name":"Dock Buoys, Mounted","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockwallbouys002"}
 {"id":194538,"name":"Cargo Netting, Large","quality":3,"cat":10,"sub":95,"theme":1,"icon":"housing_gen_dck_hangingcargonet002"}
 {"id":194539,"name":"Rough Hammock, Pole-Strung","quality":3,"cat":2,"sub":46,"theme":1,"icon":"housing_gen_inc_hammock002"}
+{"id":194558,"name":"Clothing Station (Shattered Fate)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194559,"name":"Woodworking Station (Shattered Fate)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194560,"name":"Blacksmithing Station (Shattered Fate)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194561,"name":"Jewelry Station (Shattered Fate)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194938,"name":"Clothing Station (Telvanni Efficiency)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194939,"name":"Woodworking Station (Telvanni Efficiency)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194940,"name":"Blacksmithing Station (Telvanni Efficiency)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":194941,"name":"Jewelry Station (Telvanni Efficiency)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":195318,"name":"Clothing Station (Seeker Synthesis)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":195319,"name":"Woodworking Station (Seeker Synthesis)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":196204,"name":"Blackwood Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":11,"icon":"housing_bad_waf_leywalllowmilemarker001"}
 {"id":196205,"name":"Systres Brazier, Cold-Flame","quality":4,"cat":11,"sub":124,"theme":2,"icon":"housing_sys_str_milemarker001"}
 {"id":196206,"name":"Daedric Post, Spike","quality":3,"cat":7,"sub":77,"theme":13,"icon":"housing_bad_inc_dedspikepost001"}
