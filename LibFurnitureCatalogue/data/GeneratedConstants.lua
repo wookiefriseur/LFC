@@ -469,6 +469,7 @@ LFCGeneratedConstants={
       ["DRAGON2"]=13, -- Dragonhold U24
       ["DRAGONS"]=6, -- Dragon Bones U17
       ["DRUID"]=25, -- Firesong U36
+      ["ECHOES"]=40, -- Season Two (U51)
       ["ENDLESS"]=29, -- Secrets of the Telvanni U40
       ["FALLBAN"]=34, -- Fallen Banners (U45)
       ["FLAMES"]=18, -- Flames of Ambition U29
@@ -1424,6 +1425,7 @@ LFCGeneratedConstants={
       [37]="WORMS2", -- Seasons of the Worm Cult Part 2 (U48)
       [38]="ZERO", -- Season Zero (U49)
       [39]="THIEVES", -- Season One (U50)
+      [40]="ECHOES", -- Season Two (U51)
     },
   },
   ["vendorLocations"]={
@@ -1438,5 +1440,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="af9656c5f94ac581d44d9fb647b2af733005eeb21baafcac328bd68ae3ea439f",
+  ["vocabulary"]="e0124c9ec2cf5e7f86c8e4218d9dd71aeb88e1c9a9c6cb0a26086b284121c4cc",
 }
