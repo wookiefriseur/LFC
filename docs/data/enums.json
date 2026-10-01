@@ -1987,6 +1987,11 @@
       "symbol": "THIEVES",
       "ordinal": 39,
       "name": "Season One (U50)"
+    },
+    {
+      "symbol": "ECHOES",
+      "ordinal": 40,
+      "name": "Season Two (U51)"
     }
   ],
   "source_priority": [
