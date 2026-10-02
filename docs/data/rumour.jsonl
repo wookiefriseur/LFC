@@ -364,13 +364,6 @@
 {"id":226774,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226775,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226776,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226777}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226778}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226779}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226780}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226781}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226782}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226783}
 {"id":226784,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226897}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226898}
@@ -455,13 +448,6 @@
 {"id":224947,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224948,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224949,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226739,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226740,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226741,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226742,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226743,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226744,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226745,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226746,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226755,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226756,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}

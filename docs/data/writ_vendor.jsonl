@@ -47,3 +47,10 @@
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":223932,"id":223858}
 {"id":223978,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"FALLBAN"},"container":"folio"}
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"container":"folio","id":226916,"name_overrides":{"en":"Solstice Furnishing Folio"}}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226779,"id":226741}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226782,"id":226744}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"HOMESTEAD"},"blueprint":226781,"id":226743}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226780,"id":226742}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226777,"id":226739}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226778,"id":226740}
+{"source":{"type":"writ_vendor","vendor":"ROLIS"},"cost":[{"currency":"WRIT_VOUCHERS","amount":125}],"availability":{"version":"ECHOES"},"blueprint":226783,"id":226745}
