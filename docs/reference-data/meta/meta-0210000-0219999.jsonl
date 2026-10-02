@@ -557,6 +557,7 @@
 {"id":219702,"name":"Paintbrush, Detail","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_inc_paintbrush002","blueprint":219698}
 {"id":219703,"name":"Paintbrush, Angled","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_inc_paintbrush003","blueprint":219699}
 {"id":219704,"name":"Paint Palette, Wooden","quality":3,"cat":10,"sub":96,"theme":1,"icon":"housing_bre_inc_palette001","blueprint":219700}
+{"id":219721,"name":"West Weald Furnishing Folio I","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":219725,"name":"Stirk Fellowship Command Tent","quality":5,"cat":13,"sub":114,"theme":2,"icon":"housing_sol_cmp_alliancetentlarge001"}
 {"id":219726,"name":"Worm Cult Crystal Pylon","quality":5,"cat":11,"sub":126,"theme":13,"icon":"housing_wrm_waf_harvestercrystalbrazier001"}
 {"id":219727,"name":"Worm Cult Papers, Scattered","quality":2,"cat":4,"sub":63,"theme":13,"icon":"housing_wrm_fur_necromancerpagepile002","blueprint":223618}
