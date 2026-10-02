@@ -39,8 +39,8 @@
     {
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
-      "records": 55,
-      "digest": "37c29bf2f12ac495"
+      "records": 49,
+      "digest": "bb0386b9cc517786"
     },
     {
       "name": "luxury.jsonl",
@@ -123,8 +123,8 @@
     {
       "name": "container.jsonl",
       "type": "container",
-      "records": 175,
-      "digest": "73bc76226a7ea6f8"
+      "records": 182,
+      "digest": "d3841937f3a1d657"
     },
     {
       "name": "rumour.jsonl",
@@ -139,10 +139,10 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "e4e6de11aef9e2b7",
+  "digest": "d97480cdb0107580",
   "counts": {
-    "records": 10099,
-    "ids": 12344,
+    "records": 10100,
+    "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
     "module_records": 9687,
@@ -152,7 +152,7 @@
     "by_type": {
       "vendor": 1381,
       "pvp_vendor": 84,
-      "writ_vendor": 55,
+      "writ_vendor": 49,
       "luxury": 664,
       "event_drop": 83,
       "event_vendor": 94,
@@ -166,7 +166,7 @@
       "companion": 6,
       "guild_gift": 12,
       "tome_pack": 19,
-      "container": 175,
+      "container": 182,
       "rumour": 475,
       "ignored": 337
     }

@@ -25,7 +25,6 @@
 {"id":171574,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"SCALES"},"container":"folio"}
 {"id":171778,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"HARROW"},"container":"folio"}
 {"id":171808,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"STONET"},"container":"folio"}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219660,"id":184101}
 {"id":184192,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"FLAMES"},"container":"folio"}
 {"id":190121,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"WAKE"},"container":"folio"}
 {"id":194429,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"TIDES"},"container":"folio"}
@@ -38,12 +37,6 @@
 {"id":204499,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"SCRIBE"},"container":"folio"}
 {"id":211090,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"BASED"},"container":"folio"}
 {"id":214255,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"SCIONS"},"container":"folio"}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219661,"id":217973}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219662,"id":217974}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219663,"id":217975}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219664,"id":217976}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219665,"id":217977}
-{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":219666,"id":217978}
 {"id":219721,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"BASE43"},"container":"folio"}
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":223926,"id":223852}
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":223927,"id":223853}
@@ -53,3 +46,4 @@
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":223931,"id":223857}
 {"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":100}],"availability":{"version":"ZERO"},"blueprint":223932,"id":223858}
 {"id":223978,"source":{"type":"writ_vendor","vendor":"FAUSTINA","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"FALLBAN"},"container":"folio"}
+{"source":{"type":"writ_vendor","vendor":"FAUSTINA"},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"container":"folio","id":226916,"name_overrides":{"en":"Solstice Furnishing Folio"}}

@@ -173,3 +173,10 @@
 {"source":{"type":"container","part_of":223978},"cost":[],"availability":{"version":"FALLBAN"},"blueprint":212565,"id":212558}
 {"source":{"type":"container","part_of":223978},"cost":[],"availability":{"version":"FALLBAN"},"blueprint":212566,"id":212559}
 {"source":{"type":"container","part_of":223978},"cost":[],"availability":{"version":"FALLBAN"},"blueprint":212567,"id":212560}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219665,"id":217977,"container":"folio"}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219663,"id":217975}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219664,"id":217976}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219660,"id":184101}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219661,"id":217973}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219666,"id":217978}
+{"source":{"type":"container","vendor":"FAUSTINA","part_of":226916},"cost":[{"currency":"WRIT_VOUCHERS","amount":700}],"availability":{"version":"ZERO"},"blueprint":219662,"id":217974}
