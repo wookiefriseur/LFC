@@ -427,6 +427,10 @@
     {
       "symbol": "WSKYRIM",
       "zone": 1160
+    },
+    {
+      "symbol": "VOYAGE_ON_THE_ABECEAN_SEA",
+      "zone": 1570
     }
   ],
   "places": [
