@@ -174,112 +174,112 @@
 {"id":120207,"name":"Guild Memo on Soul-Trapping","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120208,"name":"Wayshrines of Tamriel","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120209,"name":"Proposal: Schools of Magic","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120210,"name":"Before the Ages of Man: Dawn Era","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120211,"name":"Before the Ages of Man: Merethic Era","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120212,"name":"Ebony Blade History","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120213,"name":"Noxiphilic Sanguivoria","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120214,"name":"A Werewolf's Confession","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120215,"name":"The Firmament","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120216,"name":"The Pig Children","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120217,"name":"Ruminations on the Elder Scrolls","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120218,"name":"Sithis","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120219,"name":"The Consecrations of Arkay","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120220,"name":"The Book of Daedra","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120221,"name":"Darkest Darkness","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120222,"name":"The Doors of Oblivion, Part 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120223,"name":"The Doors of Oblivion, Part 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120224,"name":"On Oblivion","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120225,"name":"Spirit of the Daedra","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120226,"name":"Varieties of Daedra, Part 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120227,"name":"Varieties of Daedra, Part 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120228,"name":"The Slave Pits of Coldharbour","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120229,"name":"On the Nature of Coldharbour","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120210,"name":"Before the Ages of Man: Dawn Era","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120211,"name":"Before the Ages of Man: Merethic Era","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120212,"name":"Ebony Blade History","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120213,"name":"Noxiphilic Sanguivoria","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120214,"name":"A Werewolf's Confession","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120215,"name":"The Firmament","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120216,"name":"The Pig Children","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120217,"name":"Ruminations on the Elder Scrolls","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120218,"name":"Sithis","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120219,"name":"The Consecrations of Arkay","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120220,"name":"The Book of Daedra","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120221,"name":"Darkest Darkness","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120222,"name":"The Doors of Oblivion, Part 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120223,"name":"The Doors of Oblivion, Part 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120224,"name":"On Oblivion","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120225,"name":"Spirit of the Daedra","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120226,"name":"Varieties of Daedra, Part 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120227,"name":"Varieties of Daedra, Part 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120228,"name":"The Slave Pits of Coldharbour","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120229,"name":"On the Nature of Coldharbour","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
 {"id":120230,"name":"The Battle of Glenumbria Moors","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120231,"name":"The Book of Dawn and Dusk","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120232,"name":"The Cantatas of Vivec","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120233,"name":"The Five Far Stars","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120234,"name":"Flesh to Cut from Bone","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120233,"name":"The Five Far Stars","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120234,"name":"Flesh to Cut from Bone","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120235,"name":"Ode to the Tundrastriders","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120236,"name":"Proper-Life: Three Chants","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120237,"name":"Song of the Askelde Men","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120238,"name":"The Warrior's Charge","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120239,"name":"Words of the Wind","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120240,"name":"Ayleid Inscriptions Translated","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120241,"name":"Frontier, Conquest","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120242,"name":"History of the Fighters Guild Pt. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120243,"name":"History of the Fighters Guild Pt. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120244,"name":"Origin of the Mages Guild","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120245,"name":"Eulogy for Emperor Varen","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120246,"name":"House Tharn of Nibenay","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120247,"name":"The Order of the Black Worm","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120248,"name":"Return to Orsinium","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120249,"name":"The Second Akaviri Invasion","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120250,"name":"Suril's Journal","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120251,"name":"The Right Mattock for the Job","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120252,"name":"Dust's Shadow","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120253,"name":"Remember Me","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120254,"name":"Fair Argonian Maiden","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120255,"name":"A Shallow Pool","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120256,"name":"Freedom's Price","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120257,"name":"A Mother's Nursery Rhyme","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120258,"name":"The Ruby Necklace","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120259,"name":"On the Knahaten Flu","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":120260,"name":"Ancestors and the Dunmer (Abridged)","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120261,"name":"The Brothers of Strife","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120262,"name":"The Great Houses and Their Use","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120263,"name":"Argonians Among Us","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120264,"name":"Nords of Skyrim","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120265,"name":"Mottos of the Dunmeri Great Houses","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120266,"name":"Varieties of Faith: The Argonians","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120267,"name":"Varieties of Faith: The Dark Elves","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120268,"name":"Varieties of Faith: The Nords","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120269,"name":"The Voice of the People","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120270,"name":"The Woodsmer","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120271,"name":"Green Lady, My Lady","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120272,"name":"Valenwood: A Study","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120273,"name":"The Humor of Wood Elves","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120274,"name":"Pirates of the Abecean","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120275,"name":"The Wedding Feast: A Memoir","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120276,"name":"A Nereid Stole My Husband","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120277,"name":"The Red Paint","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120278,"name":"Ayleid Cities of Valenwood","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":120279,"name":"Guide to the Ebonheart Pact","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120280,"name":"The Brothers' War","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120281,"name":"Second Invasion: Reports","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120282,"name":"The Ternion Monks","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120283,"name":"Orcs of Skyrim","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120284,"name":"The Crown of Freydis","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120285,"name":"Spirits of Skyrim","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120286,"name":"All About Giants","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120287,"name":"The Stormfist Clan","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120288,"name":"On Stepping Lightly","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120289,"name":"Dreamwalkers","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120290,"name":"The Living Gods","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120291,"name":"The Judgment of Saint Veloth","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120292,"name":"Kwama Mining for Fun and Profit","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120293,"name":"Shad Astula Academy Handbook","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120294,"name":"Dwemer Dungeons: What I Know","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120295,"name":"Legend of the Ghost Snake","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120296,"name":"War of Two Houses","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120297,"name":"A Pocket Guide to Mournhold","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120298,"name":"Sanctioned Murder","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120299,"name":"Dark Ruins","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120300,"name":"Clans of the Reach: A Guide","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120301,"name":"Rivers of Profit in Riften","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120302,"name":"Touch of the Worm's Tongue","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120303,"name":"Songs of the Return, Volume 5","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120304,"name":"The Road to Sovngarde","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120305,"name":"Unexpected Allies","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120306,"name":"Thenephan's Mysteries of Mead","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120307,"name":"The Wandering Skald","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120308,"name":"Songs of the Return, Volume 27","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120309,"name":"Songs of the Return, Volume 49","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120310,"name":"Crimes of the Daggerfall Covenant","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120311,"name":"Regarding the Ebonheart Pact","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120312,"name":"The Lay of Firsthold","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120313,"name":"Varieties of Faith: The High Elves","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120314,"name":"Why Don the Veil?","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120315,"name":"Fang of the Sea Vipers","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120238,"name":"The Warrior's Charge","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120239,"name":"Words of the Wind","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120240,"name":"Ayleid Inscriptions Translated","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120241,"name":"Frontier, Conquest","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120242,"name":"History of the Fighters Guild Pt. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120243,"name":"History of the Fighters Guild Pt. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120244,"name":"Origin of the Mages Guild","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120245,"name":"Eulogy for Emperor Varen","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120246,"name":"House Tharn of Nibenay","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120247,"name":"The Order of the Black Worm","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120248,"name":"Return to Orsinium","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120249,"name":"The Second Akaviri Invasion","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120250,"name":"Suril's Journal","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120251,"name":"The Right Mattock for the Job","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120252,"name":"Dust's Shadow","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120253,"name":"Remember Me","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120254,"name":"Fair Argonian Maiden","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120255,"name":"A Shallow Pool","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120256,"name":"Freedom's Price","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120257,"name":"A Mother's Nursery Rhyme","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120258,"name":"The Ruby Necklace","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120259,"name":"On the Knahaten Flu","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":120260,"name":"Ancestors and the Dunmer (Abridged)","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120261,"name":"The Brothers of Strife","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120262,"name":"The Great Houses and Their Use","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120263,"name":"Argonians Among Us","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120264,"name":"Nords of Skyrim","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120265,"name":"Mottos of the Dunmeri Great Houses","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120266,"name":"Varieties of Faith: The Argonians","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120267,"name":"Varieties of Faith: The Dark Elves","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120268,"name":"Varieties of Faith: The Nords","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120269,"name":"The Voice of the People","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120270,"name":"The Woodsmer","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120271,"name":"Green Lady, My Lady","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120272,"name":"Valenwood: A Study","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120273,"name":"The Humor of Wood Elves","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120274,"name":"Pirates of the Abecean","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120275,"name":"The Wedding Feast: A Memoir","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120276,"name":"A Nereid Stole My Husband","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120277,"name":"The Red Paint","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120278,"name":"Ayleid Cities of Valenwood","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":120279,"name":"Guide to the Ebonheart Pact","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120280,"name":"The Brothers' War","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120281,"name":"Second Invasion: Reports","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120282,"name":"The Ternion Monks","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120283,"name":"Orcs of Skyrim","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120284,"name":"The Crown of Freydis","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120285,"name":"Spirits of Skyrim","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120286,"name":"All About Giants","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120287,"name":"The Stormfist Clan","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120288,"name":"On Stepping Lightly","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120289,"name":"Dreamwalkers","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120290,"name":"The Living Gods","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120291,"name":"The Judgment of Saint Veloth","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120292,"name":"Kwama Mining for Fun and Profit","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120293,"name":"Shad Astula Academy Handbook","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120294,"name":"Dwemer Dungeons: What I Know","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120295,"name":"Legend of the Ghost Snake","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120296,"name":"War of Two Houses","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120297,"name":"A Pocket Guide to Mournhold","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120298,"name":"Sanctioned Murder","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120299,"name":"Dark Ruins","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120300,"name":"Clans of the Reach: A Guide","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120301,"name":"Rivers of Profit in Riften","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120302,"name":"Touch of the Worm's Tongue","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120303,"name":"Songs of the Return, Volume 5","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120304,"name":"The Road to Sovngarde","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120305,"name":"Unexpected Allies","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120306,"name":"Thenephan's Mysteries of Mead","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120307,"name":"The Wandering Skald","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120308,"name":"Songs of the Return, Volume 27","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120309,"name":"Songs of the Return, Volume 49","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120310,"name":"Crimes of the Daggerfall Covenant","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120311,"name":"Regarding the Ebonheart Pact","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120312,"name":"The Lay of Firsthold","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120313,"name":"Varieties of Faith: The High Elves","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120314,"name":"Why Don the Veil?","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120315,"name":"Fang of the Sea Vipers","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120316,"name":"The Rise of Queen Ayrenn","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120317,"name":"Kinlord Rilis and the Mages Guild","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120318,"name":"Life in the Eagle's Shadow","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}

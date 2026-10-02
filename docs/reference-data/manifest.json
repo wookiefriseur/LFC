@@ -40,8 +40,8 @@
           "id_min": 120000,
           "id_max": 129999,
           "count": 1385,
-          "bytes": 183225,
-          "digest": "841f7bf463ef"
+          "bytes": 183325,
+          "digest": "95434c686f35"
         },
         {
           "file": "meta/meta-0130000-0139999.jsonl",
