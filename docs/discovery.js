@@ -21,6 +21,25 @@ export function parseDiscovery(value) {
   return { record: cleanRecord, reference: { format: value.format, locale, apiVersion, meta: cleanMeta } };
 }
 
+export function iconLeaf(icon) {
+  return String(icon ?? "").replace(/^.*\//, "").replace(/\.dds$/i, "");
+}
+
+const DETAIL_FIELDS = ["icon", "quality", "cat", "sub", "theme"];
+
+// What a discovery of a catalogued item would change in the published {name, meta}: the changed field names, empty when it says nothing new.
+export function itemDetailsChanges(reference, published) {
+  const m = reference.meta;
+  const changed = [];
+  if (m.name !== (published?.name ?? null)) changed.push("name");
+  const had = published?.meta;
+  for (const k of DETAIL_FIELDS) {
+    const want = k === "icon" ? iconLeaf(m.icon) : m[k];
+    if (!had || had[k] !== want) changed.push(k);
+  }
+  return changed;
+}
+
 export function discoveryKnown(record, records) {
   return record.blueprint !== undefined
     ? records.some((r) => r.blueprint === record.blueprint)

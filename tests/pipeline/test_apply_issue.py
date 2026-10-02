@@ -151,6 +151,29 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual(list(names), sorted(names, key=int))
         self.assertIn('[230123]={', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode().split('-- Test furnishing')[0].rsplit('\n', 1)[-1])
 
+    def item_details(self, item, name):
+        return {'v': 1, 'op': 'item', 'id': item, 'reference': {
+            'format': 'furniture-discovery-v1', 'locale': 'en', 'apiVersion': 101051,
+            'meta': {'id': item, 'name': name, 'icon': '/esoui/art/icons/test.dds',
+                     'quality': 3, 'cat': 1, 'sub': 2, 'theme': 3}}}
+
+    def test_item_details_overwrite_name_and_metadata_without_record_change(self):
+        names = json.loads((ROOT / 'docs/data/names.en.json').read_text())
+        item = next(int(k) for k, v in names.items() if v not in ('', f'Item {k}')
+                    and any(r.get('id') == int(k) for r in self.rows))
+        files, report = self.run_plan(self.item_details(item, 'Refreshed name'))
+        self.assertNotIn('docs/data/luxury.jsonl', files)
+        self.assertEqual(json.loads(files['docs/data/names.en.json'])[str(item)], 'Refreshed name')
+        shard = next(f for f in files if f.startswith('docs/reference-data/meta/'))
+        row = next(json.loads(s) for s in files[shard].decode().splitlines() if json.loads(s)['id'] == item)
+        self.assertEqual((row['name'], row['icon'], row['quality']), ('Refreshed name', 'test', 3))
+        self.assertIn('-- Refreshed name', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode())
+        self.assertEqual(report['operations'], [{'op': 'item', 'id': item, 'name': 'Refreshed name'}])
+
+    def test_item_details_need_a_catalogued_item(self):
+        with self.assertRaisesRegex(ValueError, 'not in the catalogue'):
+            self.run_plan(self.item_details(999993, 'Nobody'))
+
     def test_manual_pairing_without_discovery_metadata(self):
         before = self.snapshot()
         row = {'id': 999991, 'blueprint': 999992, 'source': {'type': 'recipe'},

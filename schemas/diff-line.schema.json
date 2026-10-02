@@ -12,9 +12,9 @@
       "const": 1
     },
     "op": {
-      "description": "Operation. `add-enum` targets enums.json and carries no id/category. `name` targets the names reference data (reference-data/names.<locale>.json).",
+      "description": "Operation. `add-enum` targets enums.json and carries no id/category. `name` targets the names reference data (reference-data/names.<locale>.json). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
       "type": "string",
-      "enum": ["update", "add", "delete", "add-enum", "name"]
+      "enum": ["update", "add", "delete", "add-enum", "name", "item"]
     }
   },
   "oneOf": [
@@ -189,6 +189,17 @@
           "type": "string",
           "minLength": 1
         }
+      }
+    },
+    {
+      "title": "item",
+      "additionalProperties": false,
+      "required": ["v", "op", "id", "reference"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "item" },
+        "id": { "$ref": "#/$defs/id" },
+        "reference": { "$ref": "#/$defs/discoveryReference" }
       }
     }
   ],

@@ -12,6 +12,10 @@ Copy the output into **Batch edit -> ++Add from Dump or Diff** on the website. I
 
 New discoveries appear as **UNCONFIRMED**. Existing catalogue items are skipped. If you know where an item comes from, select its row and set its source. You can tick several rows to change them together. Review the change list, then submit. Unsent changes are kept in your browser until you discard them, so a reload or a closed tab loses nothing. Large submissions use copy+paste into an issue instead of a prefilled link. If the issue body is too large, the page splits it into numbered parts. Submit every part. Please process and merge them in the numbered order (because they might depend on each other).
 
+## Refresh names and metadata of catalogued items
+
+**Maintenance -> Check -> Missing a name or metadata** lists catalogued items with a placeholder name ("Item 123") or no item metadata. **Copy id list** copies their ids as a request (narrow it with the search box first if you like). Paste those ids into the **Datamine** text box ingame and click **Item list**: it produces a dump for each requested item. Paste the output into **Batch edit -> ++Add from Dump or Diff**. Every catalogued item whose name or metadata differs becomes an **item details** change, shown in the change list as before and after; its records stay as they are.
+
 ## Correct sources and obsolete IDs
 
 Search by name or ID. Open a record in **Batch edit** to change its source or other details. Tick several records to apply a shared change and data note.

@@ -268,6 +268,28 @@ export class ReferenceData {
     if (blueprint) this.discoveryRecipes.set(blueprint, meta.id);
   }
 
+  // The metadata row as published, without this session's discoveries or the blueprint fallback: what an item-details change is compared against.
+  publishedMeta(id) {
+    if (!Number.isInteger(id) || !this._datasetUsable("meta")) return null;
+    const shard = this._coveringShard("meta", id);
+    return (shard && this.shards.get(shard.file)?.get(id)) || null;
+  }
+
+  // True while the metadata for `id` may still arrive, so a null from publishedMeta() does not yet mean "none".
+  metaPending(id) {
+    if (this.state === "unloaded" || this.state === "loading") return true;
+    if (!this._datasetUsable("meta")) return false;
+    const shard = this._coveringShard("meta", id);
+    return Boolean(shard) && !this.shards.has(shard.file) && !this.missingShards.has(shard.file);
+  }
+
+  // Resolves once every meta shard covering `ids` has loaded or failed.
+  async loadMeta(ids) {
+    await this.init();
+    this.prefetchForIds(ids, "meta");
+    await Promise.all([...this.inflight.values()]);
+  }
+
   meta(id) {
     const discovered = this.discoveries.get(this.discoveryRecipes.get(id) ?? id);
     if (discovered) return discovered;

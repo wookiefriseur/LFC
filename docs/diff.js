@@ -70,6 +70,13 @@ export class DirtyBuffer {
     this.changed();
     return key;
   }
+  // A catalogued item's metadata and game name from a discovery; `previous` is the published {name, meta}, for the change list only.
+  setItem(id, reference, previous) {
+    const key = `item:${id}`;
+    this.entries.set(key, { op: "item", key, id, reference, previous: previous ?? null });
+    this.changed();
+    return key;
+  }
   delete(key, before, category) {
     const existing = this.entries.get(key);
     if (existing?.op === "add") {
@@ -211,6 +218,9 @@ export function serialiseDiff(buffer) {
       const meta = cleanMeta(entry.meta);
       if (meta) line.meta = meta;
       lines.push(JSON.stringify(line));
+    } else if (entry.op === "item") {
+      // Targets the item metadata and the catalogue's names, not a data file.
+      lines.push(JSON.stringify({ v: DIFF_VERSION, op: "item", id: entry.id, reference: entry.reference }));
     } else if (entry.op === "name") {
       // Targets the names reference data, not a data file.
       lines.push(JSON.stringify({
@@ -253,6 +263,7 @@ export function buildIssueParts(buffer, allRecords, ctx) {
   const groupOf = (e) => {
     if (e.op === "add-enum") return `Enum ${e.enumName}.${e.value}`;
     if (e.op === "name") return `${e.kind} name ${e.id}`;
+    if (e.op === "item") return `ID ${e.id}`;
     const record = e.before ?? e.after;
     return record.id === undefined ? `Blueprint ${record.blueprint}` : `ID ${record.id}`;
   };
@@ -307,10 +318,11 @@ export function suggestTitle(buffer) {
     const e = entries[0];
     if (e.op === "add-enum") return `DB add-enum: ${e.enumName}.${e.value}`;
     if (e.op === "name") return `DB name: ${e.kind} ${e.id}`;
+    if (e.op === "item") return `DB item details: ${e.id}`;
     const id = (e.after ?? e.before).id;
     return `DB ${e.op}: ${id}`;
   }
-  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, name: 0 };
+  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, name: 0, item: 0 };
   for (const e of entries) counts[e.op]++;
   const parts = [];
   if (counts.update) parts.push(`${counts.update} update${counts.update > 1 ? "s" : ""}`);
@@ -318,6 +330,7 @@ export function suggestTitle(buffer) {
   if (counts.delete) parts.push(`${counts.delete} delete${counts.delete > 1 ? "s" : ""}`);
   if (counts["add-enum"]) parts.push(`${counts["add-enum"]} enum value${counts["add-enum"] > 1 ? "s" : ""}`);
   if (counts.name) parts.push(`${counts.name} name${counts.name > 1 ? "s" : ""}`);
+  if (counts.item) parts.push(`${counts.item} item detail${counts.item > 1 ? "s" : ""}`);
   return `DB update: ${parts.join(", ")}`;
 }
 

@@ -130,6 +130,8 @@ export class NameStore {
     this.base = names;
     this.overrides = new Map();
     this.recordNames = new Map();
+    // Game names an unsent item-details change brings; they replace the file's name, as the pipeline will.
+    this.refreshed = new Map();
   }
   get(id) {
     return this.recordNames.get(id) || this.gameName(id);
@@ -143,8 +145,13 @@ export class NameStore {
     const n = this.base[id];
     return typeof n === "string" && n.length > 0 && n !== `Item ${id}`;
   }
+  setRefreshedName(id, name) {
+    if (name) this.refreshed.set(id, name);
+    else this.refreshed.delete(id);
+  }
   // The names file wins so a stale import comment never masks the real name.
   gameName(id) {
+    if (this.refreshed.has(id)) return this.refreshed.get(id);
     if (this.hasRealName(id)) return this.base[id];
     const o = this.overrides.get(id);
     if (o) return o;

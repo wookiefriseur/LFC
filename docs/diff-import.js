@@ -8,7 +8,7 @@ import { queueEnumValue } from "./maintenance.js";
 const BEGIN = "[//]: # (diff-begin)";
 const END = "[//]: # (diff-end)";
 const FENCE = /^```\w*$/;
-const OPS = new Set(["update", "add", "delete", "add-enum", "name"]);
+const OPS = new Set(["update", "add", "delete", "add-enum", "name", "item"]);
 const SYMBOL = /^[A-Z][A-Z0-9_]*$/;
 
 function count(text, marker) {
@@ -95,7 +95,7 @@ function checkEnvelope(line) {
 
 /**
  * Plans every line against the loaded catalogue without changing it. All or nothing: any error means no steps.
- * @param ctx {{ records: object[], enums: object, namesLocale: string, publishedName: (kind: string, id: number) => string|null }}
+ * @param ctx {{ records: object[], enums: object, namesLocale: string, publishedName: (kind: string, id: number) => string|null, publishedItem?: (id: number) => {name: string|null, meta: object|null} }}
  * @returns {{ steps: object[], errors: string[], warnings: string[] }}
  */
 export function planDiff(lines, ctx) {
@@ -129,6 +129,15 @@ export function planDiff(lines, ctx) {
         if (!Number.isSafeInteger(line.id) || line.id < 1 || typeof line.name !== "string" || !line.name.trim()) throw new Error("name needs an id and a name");
         steps.push({ op: "name", kind: line.kind, id: line.id, locale: line.locale, name: line.name,
           before: ctx.publishedName(line.kind, line.id) });
+      } else if (line.op === "item") {
+        const meta = line.reference?.meta;
+        if (!Number.isSafeInteger(line.id) || line.id < 1 || meta?.id !== line.id || typeof meta.name !== "string" || !meta.name.trim()) {
+          throw new Error("item details need an id and discovery metadata for that id");
+        }
+        if (!ctx.records.some((r) => r.id === line.id)) throw new Error(`item ${line.id} is not in the catalogue`);
+        if (touched.has(`item:${line.id}`)) throw new Error(`item ${line.id}: details are changed twice`);
+        touched.add(`item:${line.id}`);
+        steps.push({ op: "item", id: line.id, reference: clone(line.reference), previous: ctx.publishedItem?.(line.id) ?? null });
       } else if (line.op === "add") {
         const record = line.record;
         if (!record || typeof record !== "object" || record.source?.type !== line.category) throw new Error(`add ${identity(line)}: the record's source type must be ${line.category}`);
@@ -174,6 +183,8 @@ export function applySteps(steps, state, referenceData) {
       queueEnumValue(state, step.enumName, step.value, step.meta);
     } else if (step.op === "name") {
       state.buffer.setName(step.kind, step.id, step.locale, step.name, step.before);
+    } else if (step.op === "item") {
+      applyItemDetails(step, state, referenceData);
     } else if (step.op === "delete") {
       state.buffer.delete(step.live._key, step.before, step.category);
     } else {
@@ -201,4 +212,11 @@ export function applySteps(steps, state, referenceData) {
       }
     }
   }
+}
+
+// Shared with the dump import: the change list entry, and the new name and icon shown at once.
+export function applyItemDetails({ id, reference, previous }, state, referenceData) {
+  state.buffer.setItem(id, reference, previous);
+  referenceData.addDiscovery(reference.meta);
+  state.names.setRefreshedName(id, reference.meta.name);
 }

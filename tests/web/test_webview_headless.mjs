@@ -2285,6 +2285,37 @@ test("discovery: metadata and recipe links survive paste and review", async (pag
     "repeat discovery was not skipped");
 });
 
+test("item details: Maintenance requests the ids, and a discovery of a published item becomes an item change", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  const id = 198006;
+  await switchTab(page, "maintenance");
+  await page.waitForSelector("#maint-filter", { timeout: 10000 });
+  await page.select("#maint-filter", "missingname");
+  await page.type("#maint-search", String(id));
+  await page.waitForFunction((id) => document.querySelector("#maint-body")?.textContent.includes(String(id)),
+    { timeout: 10000 }, id);
+  assertEq(await page.$eval("#maint-request", (b) => b.hidden), false, "the request button is hidden");
+  await page.click("#maint-request");
+  const ids = await page.$eval("#maint-request-ids", (t) => t.value.split(" ").map(Number));
+  assert(ids.includes(id), "the request does not list the placeholder-named item");
+  await page.select("#maint-filter", "invalid");
+  assertEq(await page.$eval("#maint-request", (b) => b.hidden), true, "a check without requests offers one");
+
+  await switchTab(page, "advanced");
+  const line = JSON.stringify({ format: "furniture-discovery-v1", locale: "en", apiVersion: 101051,
+    record: { id, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } },
+    meta: { id, name: "Daedric Mirror, Nightmarish", quality: 5, cat: 2, sub: 50, theme: 13,
+      icon: "/esoui/art/icons/housing_dae_fur_vaerminamirror001.dds" } });
+  const status = await pasteImport(page, line);
+  assert(status.includes("1 item detail change"), `no item change: "${status}"`);
+  const lines = await diffLines(page);
+  assertEq(lines.length, 1, "the item change is not the only change");
+  assertEq(lines[0].op, "item", "wrong operation");
+  assertEq(lines[0].reference.meta.name, "Daedric Mirror, Nightmarish", "the game name was lost");
+  assert((await pasteImport(page, line)).includes("1 item(s) already up to date"), "a repeat paste changed something");
+});
+
 test("discovery: a new blueprint of a confirmed item becomes a recipe, and problems are named", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

@@ -176,5 +176,16 @@ for (const [what, line] of [
   else fail(`${what} is refused`, "it validated");
 }
 
+{
+  const buffer = new DirtyBuffer();
+  const meta = { id: 198006, name: "Daedric Mirror, Nightmarish", icon: "/esoui/art/icons/x.dds", quality: 3, cat: 1, sub: 2, theme: 3 };
+  buffer.setItem(198006, { format: "furniture-discovery-v1", locale: "en", apiVersion: 101051, meta }, null);
+  const line = JSON.parse(serialiseDiff(buffer));
+  if (validate(line)) ok("an item-details line validates");
+  else fail("an item-details line validates", JSON.stringify(validate.errors));
+  if (!validate({ ...line, category: "drop" })) ok("an item-details line carries no category");
+  else fail("an item-details line carries no category", "it validated");
+}
+
 console.log(failed ? `\n${failed} failure(s)` : "\nall green");
 process.exit(failed ? 1 : 0);

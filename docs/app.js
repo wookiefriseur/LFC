@@ -33,11 +33,11 @@ import { crownCrateMask } from "./crown-crate.js";
 import { browseMask } from "./browse.js";
 import { crownStoreMask } from "./crown-store.js";
 import { maintenanceMask } from "./maintenance.js";
-import { readDiff, planDiff, applySteps } from "./diff-import.js";
+import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.js";
 import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe } from "./discovery.js";
+import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe, itemDetailsChanges } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { ReferenceData } from "./reference-data.js";
 import { namesMask } from "./names.js";
@@ -1721,7 +1721,12 @@ function showImportReport(errorLines = [], warnLines = []) {
     ...warnLines.map((t) => elem("li", { class: "v-warning" }, t)));
 }
 
-function runBatchImport() {
+// What an item-details change is measured against: the names file and the metadata row as published.
+function publishedItem(id) {
+  return { name: state.names?.base[id] ?? null, meta: referenceData.publishedMeta(id) };
+}
+
+async function runBatchImport() {
   const text = $("#adv-import-paste").value;
   const status = $("#adv-import-status");
   let diff;
@@ -1794,9 +1799,21 @@ function runBatchImport() {
     return;
   }
 
+  // A discovery of a catalogued furnishing is a details refresh, compared against its published metadata, so those shards must be in first.
+  // An item added in this session is not published yet, so a repeat discovery of it is still a skip.
+  const published = (id) => state.records.some((r) => r.id === id && state.buffer.entries.get(r._key)?.op !== "add");
+  const refreshable = (c) => c.reference && discoveryKnown(c.record, state.records) && published(c.record.id);
+  const refreshIds = candidates.filter(refreshable).map((c) => c.record.id);
+  if (refreshIds.length) {
+    status.textContent = "Loading item metadata to compare against...";
+    await referenceData.loadMeta(refreshIds);
+  }
+
   let imported = 0;
   let updated = 0;
   let ignored = 0;
+  let refreshed = 0;
+  let current = 0;
   let rumoured = 0;
   let asRecipe = 0;
   const warnLines = [];
@@ -1806,6 +1823,18 @@ function runBatchImport() {
     let rec = c.record;
     if (rec.source?.type !== "ignored" && isIgnoredItem(rec, state.records)) {
       ignored++;
+      continue;
+    }
+    // A discovery line for a catalogued furnishing becomes an item-details change when it says something the published data does not.
+    if (refreshable(c)) {
+      const queued = state.buffer.entries.get(`item:${rec.id}`)?.reference;
+      if (JSON.stringify(queued?.meta) !== JSON.stringify(c.reference.meta)
+          && itemDetailsChanges(c.reference, publishedItem(rec.id)).length) {
+        applyItemDetails({ id: rec.id, reference: c.reference, previous: publishedItem(rec.id) }, state, referenceData);
+        refreshed++;
+      } else {
+        current++;
+      }
       continue;
     }
     // A dump block is as much a scan as a discovery line: an item already catalogued is skipped either way.
@@ -1887,6 +1916,8 @@ function runBatchImport() {
   const parts = [`${imported} added`, `${updated} updated`];
   if (ignored) parts.push(`${ignored} ignored (skipped)`);
   if (knownDiscoveries) parts.push(`${knownDiscoveries} already catalogued (skipped)`);
+  if (refreshed) parts.push(`${refreshed} item detail change(s) - see the change list`);
+  if (current) parts.push(`${current} item(s) already up to date`);
   if (rumoured) parts.push(`${rumoured} as ${sourceTypeLabel("rumour")} (no source yet)`);
   if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
   if (droppedPrices) {
@@ -1897,6 +1928,7 @@ function runBatchImport() {
   status.textContent = parts.join(" · ") + ".";
   showImportReport(errorLines, warnLines);
 
+  if (refreshed > 0) renderFooter();
   if (imported > 0 || updated > 0) {
     state.changedOnly = true;
     const cb = $("#filter-changed");
@@ -1913,9 +1945,11 @@ async function importDiff(lines, status, complete) {
     return;
   }
   if (lines.some(({ line }) => line.op === "name")) await referenceData.loadNames();
+  await loadItemMeta(lines);
   const { steps, errors, warnings } = planDiff(lines, {
     records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
     publishedName: (kind, id) => referenceData.publishedName(kind, id),
+    publishedItem,
   });
   if (errors.length) {
     status.textContent = `Diff not imported, nothing changed. ${errors.slice(0, 3).join("; ")}`
@@ -1932,6 +1966,11 @@ async function importDiff(lines, status, complete) {
   if (cb) cb.checked = true;
   refilter();
   renderFooter();
+}
+
+function loadItemMeta(lines) {
+  const ids = lines.filter(({ line }) => line.op === "item").map(({ line }) => line.id);
+  return ids.length ? referenceData.loadMeta(ids) : Promise.resolve();
 }
 
 // Unsent changes survive a reload or a closed tab: the buffer is kept as the diff lines an issue would carry, and replayed on the next visit through the same import a pasted issue uses.
@@ -1984,9 +2023,11 @@ async function restorePending() {
       await referenceData.init();
       await referenceData.loadNames();
     }
+    await loadItemMeta(lines);
     const { steps, errors } = planDiff(lines, {
       records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
       publishedName: (kind, id) => referenceData.publishedName(kind, id),
+      publishedItem,
     });
     if (errors.length) throw new Error(errors.slice(0, 3).join("; "));
     applySteps(steps, state, referenceData);

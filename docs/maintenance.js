@@ -512,25 +512,36 @@ export function maintenanceMask(deps) {
       },
     },
     missingname: {
-      label: "Missing a name",
+      label: "Missing a name or metadata",
       tip: "Items whose display name is effectively absent - empty, a " +
-           "generated placeholder (\"Item 94091\"), or the bare id. The name " +
-           "file is an incomplete build artefact.",
+           "generated placeholder (\"Item 94091\"), or the bare id - or that " +
+           "have no item metadata (icon, quality, category). \"Copy id list\" " +
+           "gives the ids to request from the game.",
+      requestable: true,
       compute() {
+        const ids = [...new Set(state.records.map((r) => r.id).filter(Number.isInteger))];
+        referenceData?.prefetchForIds(ids, "meta");
         const rows = [];
+        let waiting = 0;
         const seen = new Set();
         for (const r of state.records) {
           if (!Number.isInteger(r.id) || seen.has(r.id)) continue;
-          const nm = nameOf(r.id);
-          if (!isPlaceholderName(nm, r.id)) continue;
           seen.add(r.id);
+          const nm = nameOf(r.id);
+          const noName = isPlaceholderName(nm, r.id);
+          // Unknown until the covering shard is in; the shard listener recomputes this filter.
+          const pending = referenceData?.metaPending(r.id);
+          if (pending) waiting++;
+          const noMeta = !pending && referenceData?.state === "ready" && !referenceData.publishedMeta(r.id)
+            && !referenceData.discoveries.has(r.id);
+          if (!noName && !noMeta) continue;
           const shown = String(nm == null ? "" : nm).trim();
-          rows.push({
-            id: r.id, key: r._key,
-            detail: shown === "" ? "empty name" : `placeholder name "${shown}"`,
-          });
+          const said = [];
+          if (noName) said.push(shown === "" ? "empty name" : `placeholder name "${shown}"`);
+          if (noMeta) said.push("no item metadata");
+          rows.push({ id: r.id, key: r._key, detail: said.join(", ") });
         }
-        return { rows };
+        return { rows, summary: waiting ? `Still loading item metadata for ${waiting.toLocaleString()} item(s)...` : "" };
       },
     },
   };
@@ -581,6 +592,14 @@ export function maintenanceMask(deps) {
             <span id="maint-count" class="muted"></span>
             <input id="maint-search" type="search" placeholder="search by id or name…">
             <span id="maint-badge" class="maint-badge" hidden></span>
+            <button id="maint-request" class="btn-mini" hidden
+                    title="The ids of the listed items, for FurCDev's Datamine tab: paste them into its text box and press Item list, then paste its output into Batch edit -> Add from Dump or Diff.">Copy id list</button>
+          </div>
+          <div id="maint-request-box" class="maint-request-box" hidden>
+            <p class="muted maint-hint">In game: FurCDev -> Datamine, paste these ids into the text box, press
+              <strong>Item list</strong>, and paste each output page into Batch edit -> Add from Dump or Diff.
+              Every item whose game data differs becomes an item-details change.</p>
+            <textarea id="maint-request-ids" rows="3" readonly></textarea>
           </div>
           <p id="maint-summary" class="muted maint-hint" hidden></p>
           <div id="maint-scroller" class="maint-scroller">
@@ -639,6 +658,7 @@ export function maintenanceMask(deps) {
       view.expanded.clear();
       refreshCheck();
     });
+    $("#maint-request").addEventListener("click", copyRequest);
     let searchTimer = null;
     $("#maint-search").addEventListener("input", (e) => {
       const v = e.target.value.toLowerCase();
@@ -655,7 +675,16 @@ export function maintenanceMask(deps) {
       raf = requestAnimationFrame(() => { raf = null; renderTable(); });
     });
     if (deps.onRefDataShard) {
-      deps.onRefDataShard(() => { if ($("#maint-body")) renderTable(); });
+      let again = null;
+      deps.onRefDataShard(() => {
+        if (!$("#maint-body")) return;
+        // Metadata gaps are only known once their shards are in.
+        if (view.section === "check" && FILTERS[view.filter].requestable) {
+          if (!again) again = requestAnimationFrame(() => { again = null; rebuildRows(); renderTable(); labelFilterCounts(); });
+        } else {
+          renderTable();
+        }
+      });
     }
 
     const ksel = $("#maint-enum-kind");
@@ -733,7 +762,27 @@ export function maintenanceMask(deps) {
     idle(step);
   }
 
+  // The listed ids (search applied) as one line: what FurCDev's Item list reads.
+  async function copyRequest() {
+    const ids = view.rows.map((r) => r.id).join(" ");
+    const box = $("#maint-request-ids");
+    box.value = ids;
+    $("#maint-request-box").hidden = false;
+    box.select();
+    const btn = $("#maint-request");
+    try {
+      await navigator.clipboard.writeText(ids);
+      btn.textContent = `Copied ${view.rows.length.toLocaleString()} ids`;
+    } catch {
+      btn.textContent = "Copy them from the box below";
+    }
+    setTimeout(() => { btn.textContent = "Copy id list"; }, 2500);
+  }
+
   function refreshCheck() {
+    const requestable = !!FILTERS[view.filter].requestable;
+    $("#maint-request").hidden = !requestable;
+    if (!requestable) $("#maint-request-box").hidden = true;
     rebuildRows();
     const scroller = $("#maint-scroller");
     if (scroller) scroller.scrollTop = 0;

@@ -1310,6 +1310,7 @@ kbd {
 }
 .maint-filter-bar input { flex: 1 1 220px; }
 .maint-hint { font-size: 0.82rem; margin: 0.5rem 0; }
+.maint-request-box textarea { width: 100%; box-sizing: border-box; font-family: monospace; }
 .maint-scroller { max-height: 56vh; overflow: auto; border: 1px solid var(--border); border-radius: 5px; }
 table.maint-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 table.maint-table th:nth-child(1) { width: 50px; }

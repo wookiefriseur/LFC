@@ -158,3 +158,14 @@ test("a trader dump number is catalogued whether it is a furnishing or a bluepri
   assert.equal(dumpKnown(119592, records), true);
   assert.equal(dumpKnown(999999, records), false);
 });
+
+test("a discovery of a catalogued item names exactly the details it changes", async () => {
+  const { itemDetailsChanges } = await import("../../docs/discovery.js");
+  const meta = { id: 5, name: "Chair", icon: "/esoui/art/icons/chair.dds", quality: 2, cat: 1, sub: 2, theme: 3 };
+  const reference = { meta };
+  const published = { name: "Chair", meta: { id: 5, name: "Chair", icon: "chair", quality: 2, cat: 1, sub: 2, theme: 3 } };
+  assert.deepEqual(itemDetailsChanges(reference, published), []);
+  assert.deepEqual(itemDetailsChanges(reference, { ...published, name: "Item 5" }), ["name"]);
+  assert.deepEqual(itemDetailsChanges(reference, { ...published, meta: { ...published.meta, theme: 4 } }), ["theme"]);
+  assert.deepEqual(itemDetailsChanges(reference, { name: null, meta: null }), ["name", "icon", "quality", "cat", "sub", "theme"]);
+});

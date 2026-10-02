@@ -78,6 +78,8 @@ def describe(number, actor, report):
         before, after = op.get('before'), op.get('after')
         if op['op'] == 'name':
             target, fields = f'{op["kind"]} {op["id"]}', op['name']
+        elif op['op'] == 'item':
+            target, fields = f'item {op["id"]}', op['name']
         elif op['op'] == 'add-enum':
             target, fields = op['enum'], op['value']
         else:

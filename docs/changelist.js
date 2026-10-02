@@ -7,6 +7,7 @@ import {
   entryOf, labelOf, noteLabel, placementsText, versionLabel,
 } from "./data.js";
 import { validateRecord, SOURCE_ENUM_FIELD, sourceEnumFields } from "./validate.js";
+import { iconLeaf } from "./discovery.js";
 import { SITE_ONLY_FIELDS } from "./form.js";
 
 // Fields the build strips: a row touching one needs no in-game verification. form.js owns the list.
@@ -227,6 +228,26 @@ export function changeRows(bufferOrEntries, ctx = {}) {
         markers: [],
         siteOnly: false,
       });
+      continue;
+    }
+    if (entry.op === "item") {
+      const now = entry.reference.meta;
+      const had = entry.previous?.meta;
+      const describe = (m) => (m ? `quality ${m.quality}, category ${m.cat}/${m.sub}, theme ${m.theme}, icon ${iconLeaf(m.icon)}` : "(none)");
+      const common = {
+        entryKey: entry.key, op: entry.op, itemId: entry.id, itemName: now.name,
+        item: `${now.name} (${entry.id})`, record: "item details", markers: [], siteOnly: false,
+      };
+      if (now.name !== (entry.previous?.name ?? null)) {
+        rows.push({ ...common, field: "item.name", what: "Game name", before: entry.previous?.name || "(none)", after: now.name });
+      }
+      if (describe(had) !== describe(now)) {
+        rows.push({ ...common, field: "item.meta", what: "Item metadata", before: describe(had), after: describe(now) });
+      }
+      // A replayed line that matches what is published still has to be visible, or it is sent unseen.
+      if (rows.at(-1)?.entryKey !== entry.key) {
+        rows.push({ ...common, field: "item", what: "Item details", before: "(as published)", after: "(unchanged)" });
+      }
       continue;
     }
     if (entry.op === "add-enum") {

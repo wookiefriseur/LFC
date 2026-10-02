@@ -87,10 +87,10 @@ class Files:
         self.put(name, json_bytes(value, indent))
 
 
-def add_name(files, item, name):
-    """A discovered item's game name joins the catalogue's names, which the site and the generated comments read; a known name is kept."""
+def add_name(files, item, name, overwrite=False):
+    """A discovered item's game name joins the catalogue's names, which the site and the generated comments read; a known name is kept unless it is a placeholder or `overwrite` asks for the game's."""
     names = files.obj('docs/data/names.en.json')
-    if str(item) in names:
+    if not overwrite and names.get(str(item), f'Item {item}') not in ('', f'Item {item}', str(item)):
         return
     names[str(item)] = name
     files.put_obj('docs/data/names.en.json', dict(sorted(names.items(), key=lambda kv: int(kv[0]))), 0)
@@ -110,12 +110,16 @@ def update_reference(files, line, record):
     reference = line.get('reference')
     if not reference:
         return
+    require(reference['meta']['id'] == record.get('id'), 'discovery metadata must address the furnishing id')
+    put_meta(files, reference, record.get('blueprint'))
+
+
+def put_meta(files, reference, blueprint=None, overwrite_name=False):
     meta = copy.deepcopy(reference['meta'])
-    require(meta['id'] == record.get('id'), 'discovery metadata must address the furnishing id')
     manifest = files.obj('docs/reference-data/manifest.json')
     dataset = manifest['datasets']['meta']
     require(reference['locale'] == dataset['locale'], 'discovery locale differs from the metadata dataset')
-    add_name(files, meta['id'], meta['name'])
+    add_name(files, meta['id'], meta['name'], overwrite_name)
     size = manifest['shard_size']
     low = meta['id'] // size * size
     name = f'meta/meta-{low:07d}-{low + size - 1:07d}.jsonl'
@@ -123,8 +127,8 @@ def update_reference(files, line, record):
     rows = [read_json(s) for s in files.read(path).decode().splitlines() if s.strip()] if (files.root / path).exists() or path in files.changed else []
     # A partial discovery updates one row and preserves all other reference rows.
     meta['icon'] = meta['icon'].rsplit('/', 1)[-1][:-4]
-    if 'blueprint' in record:
-        meta['blueprint'] = record['blueprint']
+    if blueprint is not None:
+        meta['blueprint'] = blueprint
     existing = next((r for r in rows if r['id'] == meta['id']), None)
     if existing is not None:
         existing.update(meta)
@@ -217,6 +221,13 @@ def apply(lines, root=ROOT, lua_command=None):
         if op == 'name':
             update_name(files, line)
             summaries.append(line)
+            continue
+        if op == 'item':
+            # Item details refresh a catalogued item's metadata and game name from a discovery; records stay as they are
+            require(line['reference']['meta']['id'] == line['id'], 'item details must address their own id')
+            require(any(r.get('id') == line['id'] for rows in groups.values() for r in rows), f'item {line["id"]}: not in the catalogue')
+            put_meta(files, line['reference'], overwrite_name=True)
+            summaries.append({'op': 'item', 'id': line['id'], 'name': line['reference']['meta']['name']})
             continue
         kind = line['category']
         require(kind in groups, f'unknown source file: {kind}')

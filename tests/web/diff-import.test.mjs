@@ -134,3 +134,28 @@ test("planning leaves the catalogue untouched", () => {
   assert.equal(state.buffer.size(), 0);
   assert.deepEqual(state.enums, enums);
 });
+
+test("item details round-trip through the diff and refuse an id the catalogue does not hold", () => {
+  const state = freshState();
+  state.names = { addOverride() {}, setRefreshedName(id, name) { this.last = [id, name]; } };
+  const id = state.records.find((r) => Number.isInteger(r.id)).id;
+  const reference = { format: "furniture-discovery-v1", locale: "en", apiVersion: 101051,
+    meta: { id, name: "Refreshed", icon: "/esoui/art/icons/x.dds", quality: 2, cat: 1, sub: 2, theme: 3 } };
+  state.buffer.setItem(id, reference, { name: `Item ${id}`, meta: null });
+  const text = serialiseDiff(state.buffer);
+  assert.deepEqual(JSON.parse(text), { v: 1, op: "item", id, reference });
+
+  const replay = freshState();
+  replay.names = state.names;
+  const { steps, errors } = planDiff(readDiff(text).lines,
+    { ...ctxOf(replay), publishedItem: () => ({ name: `Item ${id}`, meta: null }) });
+  assert.deepEqual(errors, []);
+  applySteps(steps, replay, refs);
+  assert.equal(serialiseDiff(replay.buffer), text);
+  assert.deepEqual(state.names.last, [id, "Refreshed"]);
+
+  const stranger = line({ op: "item", id: 9999977, reference: { ...reference, meta: { ...reference.meta, id: 9999977 } } });
+  assert.match(planDiff(readDiff(stranger).lines, ctxOf(replay)).errors[0], /not in the catalogue/);
+  assert.match(planDiff(readDiff(line({ op: "item", id, reference: { ...reference, meta: { ...reference.meta, id: 1 } } })).lines,
+    ctxOf(replay)).errors[0], /metadata for that id/);
+});
