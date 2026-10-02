@@ -11,10 +11,10 @@ LibFurnitureCatalogue.lua
 locale\en.lua
 locale\$(language).lua
 
+data\GeneratedConstants.lua
 Constants.lua
 Format.lua
 
-data\GeneratedConstants.lua
 data\GeneratedDatabase.lua
 Generated.lua
 

@@ -213,58 +213,15 @@ do
   }
 end
 
--- TODO #REFACTOR Switch version numbering to the same as game update numbers
-
--- versioning
-this.Versioning = {
-  NONE = getNextIdFor("VERSIONING"), -- 1 off
-  HOMESTEAD = getNextIdFor("VERSIONING"), -- 2 Homestead U13
-  MORROWIND = getNextIdFor("VERSIONING"), -- 3 Morrowind U14
-  REACH = getNextIdFor("VERSIONING"), -- 4 Horns of the Reach U15
-  CLOCKWORK = getNextIdFor("VERSIONING"), -- 5 Clockwork City U16
-  DRAGONS = getNextIdFor("VERSIONING"), -- 6 Dragon Bones U17
-  ALTMER = getNextIdFor("VERSIONING"), -- 7 Summerset U18
-  SLAVES = getNextIdFor("VERSIONING"), -- 8 Murkmire U19
-  WEREWOLF = getNextIdFor("VERSIONING"), -- 9 Wolfhunter U20
-  WOTL = getNextIdFor("VERSIONING"), -- 10 Wrathstone U21
-  KITTY = getNextIdFor("VERSIONING"), -- 11 Elsweyr U22
-  SCALES = getNextIdFor("VERSIONING"), -- 12 Scalebreaker U23
-  DRAGON2 = getNextIdFor("VERSIONING"), -- 13 Dragonhold U24
-  HARROW = getNextIdFor("VERSIONING"), -- 14 Harrowstorm U25
-  SKYRIM = getNextIdFor("VERSIONING"), -- 15 Greymoor U26
-  STONET = getNextIdFor("VERSIONING"), -- 16 Stonethorn U27
-  MARKAT = getNextIdFor("VERSIONING"), -- 17 Markarth U28
-  FLAMES = getNextIdFor("VERSIONING"), -- 18 Flames of Ambition U29
-  BLACKW = getNextIdFor("VERSIONING"), -- 19 Blackwood U30
-  WAKE = getNextIdFor("VERSIONING"), -- 20 Waking Flame U31
-  DEADL = getNextIdFor("VERSIONING"), -- 21 Deadlands U32
-  TIDES = getNextIdFor("VERSIONING"), -- 22 Ascending Tide U33
-  BRETON = getNextIdFor("VERSIONING"), -- 23 High Isle U34
-  DEPTHS = getNextIdFor("VERSIONING"), -- 24 Lost Depths U35
-  DRUID = getNextIdFor("VERSIONING"), -- 25 Firesong U36
-  SCRIBE = getNextIdFor("VERSIONING"), -- 26 Scribes of Fate U37
-  NECROM = getNextIdFor("VERSIONING"), -- 27 Necrom U38
-  BASED = getNextIdFor("VERSIONING"), -- 28 Base Game Patch U39
-  ENDLESS = getNextIdFor("VERSIONING"), -- 29 Secrets of the Telvanni U40
-  SCIONS = getNextIdFor("VERSIONING"), -- 30 Scions of Ithelia U41
-  WEALD = getNextIdFor("VERSIONING"), -- 31 Gold Road U42
-  BASE43 = getNextIdFor("VERSIONING"), -- 32 Home Tours U43
-  BASE44 = getNextIdFor("VERSIONING"), -- 33 Golden Pursuits U44
-  FALLBAN = getNextIdFor("VERSIONING"), -- 34 Fallen Banners (U45)
-  WORMS = getNextIdFor("VERSIONING"), -- 35 Seasons of the Worm Cult (U46)
-  SHADOWS = getNextIdFor("VERSIONING"), -- 36 Feast of Shadows (U47)
-  WORMS2 = getNextIdFor("VERSIONING"), -- 37 Seasons of the Worm Cult Part 2 (U48)
-  ZERO = getNextIdFor("VERSIONING"), -- 38 Season Zero (U49)
-  THIEVES = getNextIdFor("VERSIONING"), -- 39 Season One (U50)
-}
-
--- value -> name, taken before the aliases below start sharing values
+this.Versioning = {}
 this.VersionNames = {}
-for name, value in pairs(this.Versioning) do
+local latestVersion = 0
+for name, value in pairs(assert(LFCGeneratedConstants).ids.versions) do
+  this.Versioning[name] = value
   this.VersionNames[value] = name
+  latestVersion = math.max(latestVersion, value)
 end
-
-this.Versioning.LATEST = this.Versioning.THIEVES
+this.Versioning.LATEST = latestVersion
 
 ---@deprecated Version smushing related compatibility workaround. Currently required by FC 7.0.0
 --- Delete at next main version update.
