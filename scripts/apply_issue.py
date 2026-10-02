@@ -184,10 +184,16 @@ def plan(body, root=ROOT, lua_command=None):
     return apply(extract(body), root, lua_command)
 
 
+def stale(root=ROOT, lua_command=None):
+    """The generated files (manifests, Lua) that disagree with the canonical data. Records are re-encoded byte for byte, so only generated files can appear here."""
+    files, _ = apply([], root, lua_command)
+    return sorted(files)
+
+
 def check(root=ROOT, lua_command=None):
     """Canonical data, manifests and generated Lua agree: an empty diff changes nothing."""
-    files, _ = apply([], root, lua_command)
-    require(not files, 'out of date with canonical data: ' + ', '.join(sorted(files)))
+    files = stale(root, lua_command)
+    require(not files, 'out of date with canonical data: ' + ', '.join(files))
 
 
 def apply(lines, root=ROOT, lua_command=None):
@@ -292,10 +298,17 @@ def main():
     parser.add_argument('body', type=Path, nargs='?', help='opening post saved as UTF-8 text')
     parser.add_argument('--out', type=Path, help='preview directory to create, outside the checkout')
     parser.add_argument('--check', action='store_true', help='verify the checkout is consistent, write nothing')
+    parser.add_argument('--refresh', action='store_true', help='regenerate out-of-date manifests and generated Lua in the checkout')
     parser.add_argument('--lua', default=os.environ.get('LUA', str(ROOT / 'bin/lua')))
     parser.add_argument('--esoui')
     args = parser.parse_args()
     command = [args.lua] + (['-s', args.esoui] if args.esoui else [])
+    if args.refresh:
+        files, _ = apply([], lua_command=command)
+        for name, data in files.items():
+            (ROOT / name).write_bytes(data)
+        print('\n'.join(sorted(files)) or 'Nothing out of date')
+        return
     if args.check:
         check(lua_command=command)
         print('Canonical data, manifests and generated Lua agree')

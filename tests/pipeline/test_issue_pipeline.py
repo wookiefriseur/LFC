@@ -58,9 +58,9 @@ class FakeGit:
 
 
 class PipelineTests(unittest.TestCase):
-    def go(self, api, git, files=FILES, planned=None):
+    def go(self, api, git, files=FILES, planned=None, stale=()):
         with tempfile.TemporaryDirectory() as tmp, \
-                mock.patch.object(issue_pipeline, 'check'), \
+                mock.patch.object(issue_pipeline, 'stale', return_value=list(stale)), \
                 mock.patch.object(issue_pipeline, 'plan', side_effect=planned or (lambda *a: (files, REPORT))) as plan:
             root = Path(tmp)
             (root / 'docs/data').mkdir(parents=True)
@@ -87,6 +87,15 @@ class PipelineTests(unittest.TestCase):
         self.assertFalse(any('comments' in p for m, p, b in api.calls if m == 'GET'))
         self.assertIn('Prepared #9', api.comments()[0])
         self.assert_label_removed(api)
+
+    def test_stale_main_is_regenerated_by_the_pr_not_refused(self):
+        api, git = FakeGitHub(), FakeGit()
+        ok, _, _ = self.go(api, git, stale=['docs/data/manifest.json'])
+        self.assertTrue(ok)
+        [(_, _, pr)] = api.wrote('POST', 'pulls')
+        self.assertIn('regenerates them too: `docs/data/manifest.json`', pr['body'])
+        self.assertIn('Prepared #9', api.comments()[0])
+        self.assertIn('`docs/data/manifest.json`', api.comments()[0])
 
     def test_unauthorized_actor(self):
         api, git = FakeGitHub(role='triage'), FakeGit()

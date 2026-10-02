@@ -1,0 +1,50 @@
+name: RefreshGenerated
+
+# Two PRs side by side each regenerate the manifests and the Lua for their own base. This can cause the digest and the files to be out of sync. This flow regenerates the digest
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/data/**'
+      - 'docs/reference-data/**'
+      - 'LibFurnitureCatalogue/data/**'
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-generated
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: ./.github/actions/configure-bot
+      - uses: ./.github/actions/setup-python-env
+      - uses: ./.github/actions/setup-lua
+      - name: Regenerate out-of-date files
+        run: python scripts/apply_issue.py --refresh
+      - name: Commit to main, or open a PR when main is protected
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "Generated files agree with the data."
+            exit 0
+          fi
+          git commit -am "Regenerate manifests and generated Lua after concurrent merges"
+          git push origin HEAD:main && exit 0
+          BRANCH=bot/refresh-generated
+          git push --force origin "HEAD:refs/heads/$BRANCH"
+          gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -qx OPEN \
+            || gh pr create --base main --head "$BRANCH" \
+                 --title "Regenerate manifests and generated Lua" \
+                 --body "main has generated files out of date with its data, usually after two db-edit PRs were merged side by side. This only regenerates them."

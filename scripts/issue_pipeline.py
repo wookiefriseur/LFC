@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 import requests
-from apply_issue import check, plan
+from apply_issue import plan, stale
 from generate_db import ROOT
 
 LABEL = 'bot:ready4pipeline'
@@ -72,7 +72,7 @@ def existing_pr(api, git, owner, branch):
     return current, current['head']['sha']
 
 
-def describe(number, actor, report):
+def describe(number, actor, report, refreshed=()):
     rows, details = [], []
     for op in report['operations']:
         before, after = op.get('before'), op.get('after')
@@ -101,12 +101,19 @@ def describe(number, actor, report):
          'to the resulting data and you can run additional checks by approving the workflow on the PR. '
          'Please have a look at file changes here to see if the changes are the correct ones. '), '',
         '| Operation | Target | Changed |', '|---|---|---|', *rows])
+    if refreshed:
+        text += '\n\n' + refresh_note(refreshed)
     if details:
         block = '\n\n'.join(details)
         if len(text) + len(block) > BODY_LIMIT:
             block = block[:BODY_LIMIT - len(text)] + '\n... truncated, see the diff'
         text += f'\n\n<details><summary>Before and after</summary>\n\n```diff\n{block}\n```\n</details>'
     return text
+
+
+def refresh_note(files):
+    return ('`main` had generated files out of date with its data (usually two PRs merged side by side); '
+            'this PR regenerates them too: ' + ', '.join(f'`{f}`' for f in files))
 
 
 def prepare(api, git, repo, number, actor, lua_command, root=ROOT):
@@ -122,10 +129,8 @@ def prepare(api, git, repo, number, actor, lua_command, root=ROOT):
     branch = f'db-edit/issue-{number}'
     current, lease = existing_pr(api, git, repo.split('/')[0], branch)
     base = git('rev-parse', 'HEAD')
-    try:
-        check(root, lua_command)
-    except ValueError as exc:
-        raise Refused(f'main is inconsistent before applying anything; fix main first. {exc}') from exc
+    # Every plan regenerates the generated files from the data, so a stale main is repaired by the PR automatically
+    refreshed = stale(root, lua_command)
     files, report = plan(body, root, lua_command)
     if not files:
         return f'The opening post changes nothing on `main` ({base[:12]}); no PR prepared.', True
@@ -140,12 +145,14 @@ def prepare(api, git, repo, number, actor, lua_command, root=ROOT):
     # The lease refuses the push if anyone moved the branch since it was inspected.
     git('push', f'--force-with-lease=refs/heads/{branch}:{lease}', 'origin', f'HEAD:refs/heads/{branch}')
     title = f'Database edit from #{number}'
-    description = describe(number, actor, report)
+    description = describe(number, actor, report, refreshed)
     if current:
         pr = api('PATCH', f'pulls/{current["number"]}', {'title': title, 'body': description})
-        return f'Refreshed #{pr["number"]} against `main` ({base[:12]}).', True
-    pr = api('POST', 'pulls', {'title': title, 'head': branch, 'base': 'main', 'body': description})
-    return f'Prepared #{pr["number"]} from the opening post.', True
+        message = f'Refreshed #{pr["number"]} against `main` ({base[:12]}).'
+    else:
+        pr = api('POST', 'pulls', {'title': title, 'head': branch, 'base': 'main', 'body': description})
+        message = f'Prepared #{pr["number"]} from the opening post.'
+    return message + (f'\n\n{refresh_note(refreshed)}' if refreshed else ''), True
 
 
 def run(api, git, repo, number, actor, lua_command, run_url, root=ROOT):
