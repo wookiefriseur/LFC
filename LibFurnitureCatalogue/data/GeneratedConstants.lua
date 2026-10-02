@@ -265,6 +265,7 @@ LFCGeneratedConstants={
       ["STROSMKAI"]=52,
       ["SUMMERSET"]=53,
       ["TELVANNI"]=54,
+      ["VOYAGE_ON_THE_ABECEAN_SEA"]=59,
       ["VVARDENFELL"]=55,
       ["WEALD"]=56,
       ["WROTHGAR"]=57,
@@ -698,6 +699,7 @@ LFCGeneratedConstants={
       [56]={["zone"]=1443}, -- WEALD
       [57]={["zone"]=684}, -- WROTHGAR
       [58]={["zone"]=1160}, -- WSKYRIM
+      [59]={["zone"]=1570}, -- VOYAGE_ON_THE_ABECEAN_SEA
     },
     ["npc_classes"]={
       [1]={["si"]="SI_MONSTERSOCIALCLASS2"}, -- CLASS_ALCHEMIST
@@ -1198,6 +1200,7 @@ LFCGeneratedConstants={
       [56]="WEALD",
       [57]="WROTHGAR",
       [58]="WSKYRIM",
+      [59]="VOYAGE_ON_THE_ABECEAN_SEA",
     },
     ["npc_classes"]={
       [1]="CLASS_ALCHEMIST",
@@ -1440,5 +1443,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="e0124c9ec2cf5e7f86c8e4218d9dd71aeb88e1c9a9c6cb0a26086b284121c4cc",
+  ["vocabulary"]="0c20c74bdb209e03952396e9821db0569ed36cecb1df52da537169c8c9f827a0",
 }
