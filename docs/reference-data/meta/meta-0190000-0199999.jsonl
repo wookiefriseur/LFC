@@ -628,6 +628,7 @@
 {"id":198574,"name":"Khajiiti Water Vessel, Large","quality":4,"cat":7,"sub":137,"theme":7,"icon":"housing_els_exc_seempyreanholderlarge001"}
 {"id":198575,"name":"Khajiiti Well","quality":4,"cat":6,"sub":72,"theme":7,"icon":"housing_kha_str_welllarge001"}
 {"id":198576,"name":"Shelf, Black Soul Gems","quality":4,"cat":7,"sub":199,"theme":13,"icon":"housing_bad_inc_fargemshelf001"}
+{"id":198597,"name":"High Isle Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":198646,"name":"Druidic Drying Rack, Wide","quality":2,"cat":8,"sub":153,"theme":2,"icon":"housing_sys_exc_drudryingrack001"}
 {"id":198647,"name":"Druidic Drying Rack, Tall","quality":2,"cat":8,"sub":153,"theme":2,"icon":"housing_sys_exc_drudryingrack002"}
 {"id":198648,"name":"Druidic Rack, Hide Stretcher","quality":2,"cat":8,"sub":86,"theme":2,"icon":"housing_sys_exc_druhangingfurstand001"}
