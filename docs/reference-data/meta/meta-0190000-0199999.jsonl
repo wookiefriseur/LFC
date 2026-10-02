@@ -1,3 +1,4 @@
+{"id":190121,"name":"Blackwood Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":190938,"name":"Music Box, Blessings of Stone","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_standingstonemusicbox001"}
 {"id":190939,"name":"Music Box, Dawnbreaker's Forging","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_meridiadawnbreakermusicbox001"}
 {"id":190940,"name":"Music Box, Songbird's Paradise","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_iridglassgardenmusicbox001"}
@@ -208,6 +209,7 @@
 {"id":194421,"name":"Nesting Boulder, Green","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_apc_inferniumooze006"}
 {"id":194422,"name":"Hermaeus Mora Banner, Extra Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner001"}
 {"id":194423,"name":"Hermaeus Mora Banner, Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner005"}
+{"id":194429,"name":"Deadlands Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":194439,"name":"The Journal of Emperor Leovic","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
 {"id":194440,"name":"Tome of Daedric Portals","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
 {"id":194441,"name":"Graccus' Journal, Volume I","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
