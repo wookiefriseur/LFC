@@ -101,6 +101,12 @@
 {"id":171544,"name":"Comet, Aetherial","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_aetherialcomet_02"}
 {"id":171545,"name":"Ayleid Gate, Large","quality":5,"cat":13,"sub":163,"theme":14,"icon":"housing_ayl_duc_housingdoorbroom001"}
 {"id":171546,"name":"Ayleid Relief, Blessed Life-Tree","quality":5,"cat":9,"sub":92,"theme":14,"icon":"housing_ayl_duc_housingdoorstonehall001"}
+{"id":171568,"name":"Crafter's Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171569,"name":"Morrowind Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171571,"name":"Dark Elf Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171572,"name":"Summerset Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171573,"name":"Ebonheart Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171574,"name":"Elsweyr Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":171601,"name":"Replica Jubilee Cake 2021","quality":5,"cat":8,"sub":156,"theme":1,"icon":"memento_jubileecake2021"}
 {"id":171755,"name":"Markarth Floor, Circular","quality":3,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markrugmediumround001","blueprint":171781}
 {"id":171756,"name":"Markarth Floor, Square","quality":3,"cat":13,"sub":138,"theme":12,"icon":"housing_skr_inc_markrugmediumsquare001","blueprint":171782}
@@ -124,6 +130,8 @@
 {"id":171774,"name":"Markarth Tower, Stone","quality":4,"cat":13,"sub":185,"theme":12,"icon":"housing_skr_str_marktower001","blueprint":171800}
 {"id":171775,"name":"Fountain of the Fiery Drake","quality":5,"cat":6,"sub":70,"theme":11,"icon":"housing_skr_duc_markblackdrakefountainhead001"}
 {"id":171776,"name":"Basalt Pillar, Glowing","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_rok_bad_basaltpillar001"}
+{"id":171778,"name":"Dragonhold Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":171808,"name":"Western Skyrim Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":171817,"name":"Ayleid Chandelier, Caged","quality":4,"cat":11,"sub":125,"theme":14,"icon":"housing_ayl_duc_housinglanternhangingc001"}
 {"id":171818,"name":"Tree, Giant Cork Oak","icon":"housing_tre_dec_gccorkoak001","quality":3,"cat":12,"sub":150,"theme":1}
 {"id":171819,"name":"Tree, Towering Cork Oak","quality":3,"cat":12,"sub":150,"theme":1,"icon":"housing_tre_dec_gccorkoak002"}
