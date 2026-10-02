@@ -104,6 +104,7 @@ LFCGeneratedConstants={
       ["FIRE_ATRO"]=36, -- Flame Atronach
       ["FROST_ATRO"]=28, -- Frost Atronach
       ["GLOOMSPORE"]=27, -- Gloomspore
+      ["HARBINGERS"]=40, -- Harbingers of the Divine
       ["HARLEQUIN"]=21, -- Grim Harlequin
       ["HOLLOWJACK"]=33, -- Hollowjack
       ["IRON_ATRO"]=22, -- Iron Atronach
@@ -616,6 +617,7 @@ LFCGeneratedConstants={
       [37]={["crate"]=5}, -- REAPER - Reaper's Harvest
       [38]={["crate"]=4}, -- DWEMER - Dwarven
       [39]={["crate"]=2}, -- WILD_HUNT - Wild Hunt
+      [40]={["crate"]=68}, -- HARBINGERS - Harbingers of the Divine
     },
     ["crown_store_subtypes"]={},
     ["currencies"]={},
@@ -1057,6 +1059,7 @@ LFCGeneratedConstants={
       [37]="REAPER", -- Reaper's Harvest
       [38]="DWEMER", -- Dwarven
       [39]="WILD_HUNT", -- Wild Hunt
+      [40]="HARBINGERS", -- Harbingers of the Divine
     },
     ["crown_store_subtypes"]={[1]="housing_editor"},
     ["currencies"]={
@@ -1443,5 +1446,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="0c20c74bdb209e03952396e9821db0569ed36cecb1df52da537169c8c9f827a0",
+  ["vocabulary"]="b074d0076bbda0b13201e555eeb675fc2c2c05b94bfccf8db55fde3467b73d07",
 }
