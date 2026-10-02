@@ -32,7 +32,7 @@ end
 local constantsPath = root .. "/Constants.lua"
 local chunk, err = loadfile(constantsPath)
 assert(chunk, "cannot load " .. constantsPath .. ": " .. tostring(err))
-local env = makeSandbox()
+local env = makeSandbox(root)
 setfenv(chunk, env)
 chunk()
 local constants = env.LibFurnitureCatalogue.Internal.Constants

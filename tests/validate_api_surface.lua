@@ -24,13 +24,17 @@ local function loadInto(env, path)
   chunk()
 end
 
-local env = makeSandbox()
+local env = makeSandbox(root)
 -- Api.lua only reads these at load time, so a name per entry is enough
 env.ZO_DeepTableCopy = function(t)
   return t
 end
 env.ZO_ShallowTableCopy = function(t)
-  return t
+  local copy = {}
+  for key, value in pairs(t) do
+    copy[key] = value
+  end
+  return copy
 end
 
 loadInto(env, root .. "/LibFurnitureCatalogue.lua")
@@ -52,6 +56,33 @@ internal.Query = {
 internal.Build = { EnsureDB = stub(), SourceSet = stub() }
 
 loadInto(env, root .. "/Api.lua")
+
+do
+  local api = env.LibFurnitureCatalogue.API
+  local versions, keys = api.GetDataVersions(), api.GetDataVersionKeys()
+  local latest = 0
+  for name, id in pairs(env.LFCGeneratedConstants.ids.versions) do
+    assert(versions[name] == id, "API version differs from generated vocabulary: " .. name)
+    assert(keys[id] == name, "API reverse version differs: " .. name)
+    latest = math.max(latest, id)
+  end
+  assert(versions.ECHOES == 40 and keys[40] == "ECHOES")
+  assert(versions.LATEST == latest and env.FURC_LATEST == latest)
+  assert(versions.ZERO2 == versions.THIEVES and keys[versions.ZERO2] == "THIEVES")
+  versions.ECHOES, keys[40] = -1, "changed"
+  assert(api.GetDataVersions().ECHOES == 40 and api.GetDataVersionKeys()[40] == "ECHOES")
+
+  local future = latest + 7
+  env.LFCGeneratedConstants.ids.versions.FUTURE_TEST = future
+  loadInto(env, root .. "/Constants.lua")
+  assert(api.GetDataVersions().FUTURE_TEST == future)
+  assert(api.GetDataVersionKeys()[future] == "FUTURE_TEST")
+  assert(api.GetDataVersions().LATEST == future and env.FURC_LATEST == future)
+  assert(api.GetDataVersions().ZERO2 == versions.THIEVES)
+  assert(env.LFCGeneratedConstants.ids.versions.LATEST == nil)
+  env.LFCGeneratedConstants.ids.versions.FUTURE_TEST = nil
+  loadInto(env, root .. "/Constants.lua")
+end
 
 -- The header is the leading run of comment lines in Api.lua
 local header = {}

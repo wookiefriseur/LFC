@@ -97,6 +97,16 @@ def add_name(files, item, name):
 
 
 def update_reference(files, line, record):
+    if 'id' in record and 'blueprint' in record:
+        recipes = files.obj('docs/reference-data/recipes.json')
+        key = str(record['blueprint'])
+        require(key not in recipes or recipes[key] == record['id'], 'conflicting recipe reference')
+        recipes[key] = record['id']
+        files.put_obj('docs/reference-data/recipes.json', recipes, None)
+        manifest = files.obj('docs/reference-data/manifest.json')
+        manifest['datasets']['recipes']['count'] = len(recipes)
+        manifest['datasets']['recipes']['digest'] = digest(files.read('docs/reference-data/recipes.json'), 12)
+        files.put_obj('docs/reference-data/manifest.json', manifest)
     reference = line.get('reference')
     if not reference:
         return
@@ -115,13 +125,6 @@ def update_reference(files, line, record):
     meta['icon'] = meta['icon'].rsplit('/', 1)[-1][:-4]
     if 'blueprint' in record:
         meta['blueprint'] = record['blueprint']
-        recipes = files.obj('docs/reference-data/recipes.json')
-        key = str(record['blueprint'])
-        require(key not in recipes or recipes[key] == meta['id'], 'conflicting recipe reference')
-        recipes[key] = meta['id']
-        files.put_obj('docs/reference-data/recipes.json', recipes, None)
-        manifest['datasets']['recipes']['count'] = len(recipes)
-        manifest['datasets']['recipes']['digest'] = digest(files.read('docs/reference-data/recipes.json'), 12)
     existing = next((r for r in rows if r['id'] == meta['id']), None)
     if existing is not None:
         existing.update(meta)

@@ -23,7 +23,7 @@ local VOCABULARIES = {
 local path = root .. "/Constants.lua"
 local chunk, err = loadfile(path)
 assert(chunk, "cannot load " .. path .. ": " .. tostring(err))
-local env = makeSandbox()
+local env = makeSandbox(root)
 setfenv(chunk, env)
 chunk()
 
@@ -116,7 +116,6 @@ end
 -- The aliases below each table are deliberately not pinned: `LATEST` is defined to move with every release
 local COUNTER_TABLES = {
   ITEM_SOURCES = "ItemSources",
-  VERSIONING = "Versioning",
 }
 
 do

@@ -12,7 +12,7 @@ local root = (arg and arg[1]) or "../LibFurnitureCatalogue"
 -- The read path, in manifest order
 local FILES = { "LibFurnitureCatalogue.lua", "Constants.lua", "Format.lua", "Build.lua", "Query.lua" }
 
-local env = makeSandbox()
+local env = makeSandbox(root)
 for _, name in ipairs(FILES) do
   local path = root .. "/" .. name
   local chunk, err = loadfile(path)

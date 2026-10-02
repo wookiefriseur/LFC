@@ -62,7 +62,7 @@ for field, reason in pairs(DATA_ONLY) do
 end
 
 -- Load the library's vocabulary and its data files into one sandbox
-local env = makeSandbox()
+local env = makeSandbox(root)
 local function run(rel)
   local chunk, err = loadfile(root .. "/" .. rel)
   if not chunk then

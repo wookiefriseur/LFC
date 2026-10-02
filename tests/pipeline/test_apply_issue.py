@@ -10,7 +10,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
 
-from apply_issue import BEGIN, END, extract, plan, validate_diff
+from apply_issue import BEGIN, END, digest, extract, plan, validate_diff
 from generate_db import ROOT
 
 
@@ -150,6 +150,43 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual(names['230123'], 'Test furnishing')
         self.assertEqual(list(names), sorted(names, key=int))
         self.assertIn('[230123]={', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode().split('-- Test furnishing')[0].rsplit('\n', 1)[-1])
+
+    def test_manual_pairing_without_discovery_metadata(self):
+        before = self.snapshot()
+        row = {'id': 999991, 'blueprint': 999992, 'source': {'type': 'recipe'},
+               'cost': [], 'availability': {'version': 'ECHOES'}}
+        files, _ = self.run_plan(
+            *({'v': 1, 'op': 'add', key: row[key], 'category': 'rumour',
+               'record': {key: row[key], 'source': {'type': 'rumour'}, 'cost': [],
+                          'availability': {'version': 'NONE'}}} for key in ('id', 'blueprint')),
+            *({'v': 1, 'op': 'delete', key: row[key], 'category': 'rumour',
+               'match': {'type': 'rumour'}} for key in ('id', 'blueprint')),
+            {'v': 1, 'op': 'add', 'id': row['id'], 'blueprint': row['blueprint'],
+             'category': 'recipe', 'record': row})
+        recipes = json.loads(before['docs/reference-data/recipes.json'])
+        recipes[str(row['blueprint'])] = row['id']
+        self.assertEqual(json.loads(files['docs/reference-data/recipes.json']), recipes)
+        manifest = json.loads(before['docs/reference-data/manifest.json'])
+        manifest['datasets']['recipes'].update(
+            count=len(recipes), digest=digest(files['docs/reference-data/recipes.json'], 12))
+        self.assertEqual(json.loads(files['docs/reference-data/manifest.json']), manifest)
+        self.assertEqual(set(files), {'docs/data/recipe.jsonl', 'docs/data/manifest.json',
+                                     'docs/reference-data/recipes.json', 'docs/reference-data/manifest.json',
+                                     'LibFurnitureCatalogue/data/GeneratedDatabase.lua'})
+        self.assertEqual(before, self.snapshot())
+
+    def test_manual_pairing_preserves_existing_mapping_and_rejects_conflict(self):
+        before = self.snapshot()
+        row = next(json.loads(s) for s in before['docs/data/recipe.jsonl'].decode().splitlines()
+                   if 'id' in json.loads(s) and 'blueprint' in json.loads(s))
+        files, _ = self.run_plan({'v': 1, 'op': 'update', 'id': row['id'],
+                                 'blueprint': row['blueprint'], 'category': 'recipe',
+                                 'match': row['source'], 'fields': {'availability': row['availability']}})
+        self.assertEqual(files, {})
+        with self.assertRaisesRegex(ValueError, 'conflicting recipe reference'):
+            self.run_plan(self.update(), {'v': 1, 'op': 'add', 'id': 999991,
+                                         'category': 'recipe', 'record': {**row, 'id': 999991}})
+        self.assertEqual(before, self.snapshot())
 
     def test_duplicate_add_rejected(self):
         row = next(r for r in self.rows if r.get('id') == 184200)

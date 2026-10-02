@@ -2,7 +2,7 @@
 -- Unknown SI_* globals become ids and the name lookups return marker strings, so a file that only wants "some id" and "some name" loads unchanged
 -- Shared by the static validators
 
-local function makeSandbox()
+local function makeSandbox(root)
   local nextStringId, stringIds = 1000000, {}
   local env = { FurC = {}, LibFurnitureCatalogue = { Internal = {} } }
   setmetatable(env, {
@@ -41,6 +41,11 @@ local function makeSandbox()
   end
   env.zo_strformat = function(_, value)
     return tostring(value)
+  end
+  if root then
+    local chunk = assert(loadfile(root .. "/data/GeneratedConstants.lua"))
+    setfenv(chunk, env)
+    chunk()
   end
   return env
 end

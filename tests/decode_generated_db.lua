@@ -169,6 +169,7 @@ output:close()
 
 if arg[3] then
   local sandbox = dofile(arg[3] .. "/tests/eso_sandbox.lua")()
+  sandbox.LFCGeneratedConstants = constants
   local chunk = assert(loadfile(arg[3] .. "/LibFurnitureCatalogue/Constants.lua"))
   setfenv(chunk, sandbox)
   chunk()
