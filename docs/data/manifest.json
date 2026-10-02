@@ -28,7 +28,7 @@
       "name": "vendor.jsonl",
       "type": "vendor",
       "records": 1381,
-      "digest": "ec0b46e00ebe0e6b"
+      "digest": "ea28a1f3654c359d"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "4964f4d053789343",
+  "digest": "ec0b46e00ebe0e6b",
   "counts": {
     "records": 10099,
     "ids": 12344,
