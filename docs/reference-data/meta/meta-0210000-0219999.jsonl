@@ -86,7 +86,7 @@
 {"id":211400,"name":"Lucent Crystals, Cluster","quality":2,"cat":12,"sub":161,"theme":13,"icon":"housing_rok_chl_mirrorcrystalssm004","blueprint":211456}
 {"id":211401,"name":"Lucent Defensive Spike, Corner","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_uni_exc_mirrorfarroofspikescorner001","blueprint":211457}
 {"id":211402,"name":"Lucent Defensive Spike, Curved","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_uni_exc_mirrorfarroofspikeslcurve001","blueprint":211458}
-{"id":211403,"name":"Lucent  Defensive Spike, Straight","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_uni_exc_mirrorfarroofspikesmiddle001","blueprint":211459}
+{"id":211403,"name":"Lucent Defensive Spike, Straight","quality":3,"cat":13,"sub":117,"theme":13,"icon":"housing_uni_exc_mirrorfarroofspikesmiddle001","blueprint":211459}
 {"id":211498,"name":"Music Box, Merry Mudcrab Melody","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_mudcrabmusicbox001"}
 {"id":211499,"name":"Target Dwarf-light the Destroyer, Robust","quality":5,"cat":25,"sub":98,"theme":12,"icon":"u44_furniture_dwarflightthedestroyertargetdummy"}
 {"id":211500,"name":"Dwarven Archway","quality":5,"cat":13,"sub":163,"theme":12,"icon":"housing_dwe_duc_housingrkindeleftgenerator001"}
@@ -255,6 +255,7 @@
 {"id":214252,"name":"Battleground Powerup, Defense","quality":5,"cat":10,"sub":96,"theme":11,"icon":"u45_furniture_bgbuff_defense"}
 {"id":214253,"name":"Battleground Powerup, Ultimate","quality":5,"cat":10,"sub":96,"theme":11,"icon":"u45_furniture_bgbuff_ultimate"}
 {"id":214254,"name":"Battleground Powerup, Speed","quality":5,"cat":10,"sub":96,"theme":11,"icon":"u45_furniture_bgbuff_speed"}
+{"id":214255,"name":"Tomehold Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":214331,"name":"World-Eater Effigy","quality":5,"cat":6,"sub":70,"theme":8,"icon":"housing_uni_exc_alduintotem001"}
 {"id":214332,"name":"Dragonclash Firepit","quality":5,"cat":11,"sub":127,"theme":8,"icon":"housing_uni_exc_akatoshvsalduinfirepit001"}
 {"id":214333,"name":"Stone-Nest Spellmote","quality":5,"cat":14,"sub":167,"theme":1,"icon":"u46_furn_stonenestlandloper"}
