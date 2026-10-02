@@ -70,7 +70,7 @@
 {"id":220335,"name":"Stone-Nest Table, Carved Stone","quality":2,"cat":5,"sub":66,"theme":4,"icon":"housing_sol_fur_ductable001","blueprint":223635}
 {"id":220336,"name":"Stone-Nest Sculpture, Xanmeer Idol Head","quality":4,"cat":3,"sub":56,"theme":4,"icon":"housing_sol_inc_argidolhead001","blueprint":223636}
 {"id":220337,"name":"Stone-Nest Basket, Woven Round","quality":2,"cat":8,"sub":87,"theme":4,"icon":"housing_sol_inc_argonianbasket001","blueprint":223637}
-{"id":220338,"name":"Argonian Tablet,  Vos-Toh of Dance","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housing_sol_inc_vostohsithiscrests001","blueprint":223638}
+{"id":220338,"name":"Argonian Tablet, Vos-Toh of Dance","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housing_sol_inc_vostohsithiscrests001","blueprint":223638}
 {"id":220339,"name":"Argonian Tablet, Vos-Toh of Song","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housing_sol_inc_vostohsithiscrests002","blueprint":223639}
 {"id":220340,"name":"Argonian Tablet, Vos-Toh of Death","quality":3,"cat":9,"sub":92,"theme":4,"icon":"housingsol_inc_vostohsithiscrests003","blueprint":223640}
 {"id":220341,"name":"Stone-Nest Decor, Bismuth Carved Stone","quality":4,"cat":9,"sub":89,"theme":4,"icon":"housing_sol_lsb_ducbismuthwalldecor001","blueprint":223641}
@@ -273,6 +273,7 @@
 {"id":223893,"name":"Plants, Sunset Pitcher Patch","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_sys_pitcherflower006"}
 {"id":223894,"name":"Flowers, Blue Moth","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bad_bluemothflower001"}
 {"id":223942,"name":"Druidspring Gazebo, Round","quality":3,"cat":13,"sub":185,"theme":13,"icon":"housing_uni_str_housinggreenhouse004"}
+{"id":223978,"name":"West Weald Furnishing Folio II","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":223993,"name":"Jornibret's Last Dance","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_scroll_closed002"}
 {"id":223994,"name":"Rislav the Righteous, Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
 {"id":223995,"name":"Heavy Armor Forging","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
