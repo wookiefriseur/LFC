@@ -1293,6 +1293,8 @@ function renderDetail() {
     }
   }
 
+  if (state.editing._moveFrom) renderFolioPicker(host);
+
   // The form mutates state.editing in place. A source.type change moves the record to another file, and live findings are refreshed in place: rebuilding the form mid-keystroke takes the focus with it.
   let formEl = null;
   const onChange = () => {
@@ -1312,6 +1314,7 @@ function renderDetail() {
     idPrefix: "adv",
     findings: editingFindings(),
     onPair: state.editing._isNew ? null : () => pairRecord(state.editing._key),
+    onFolio: state.editing._isNew ? null : () => moveToFolio(state.editing._key),
   });
   host.append(formEl);
 
@@ -1575,8 +1578,9 @@ function liveRecords() {
 
 // A paired record is checked against the records that remain once it has replaced its predecessors.
 function recordsBesides(e) {
-  if (!e?._pairFrom) return liveRecords();
-  const replaced = new Set(pairReplaced(e, e._pairFrom));
+  const from = e?._pairFrom ?? e?._moveFrom;
+  if (!from) return liveRecords();
+  const replaced = new Set(pairReplaced(e, from));
   return liveRecords().filter((r) => !replaced.has(r));
 }
 
@@ -1634,11 +1638,28 @@ function commitEdit() {
       formMessage("Enter both IDs to propose a paired replacement.");
       return;
     }
+    let folio = null;
+    if (e._moveFrom) {
+      folio = newFolioRecord(e);
+      if (typeof folio === "string") {
+        formMessage(folio);
+        return;
+      }
+    }
     const clone = deepClone(e);
     delete clone._isNew;
     delete clone._pairFrom;
-    const replaced = e._pairFrom ? pairReplaced(clone, e._pairFrom) : [];
+    delete clone._moveFrom;
+    delete clone._newFolio;
+    const from = e._pairFrom ?? e._moveFrom;
+    const replaced = from ? pairReplaced(clone, from) : [];
     for (const r of replaced) deleteRecord(r);
+    // The folio goes in first, so its contents never point at a container the change list does not have.
+    if (folio) {
+      state.buffer.add(folio._key, clean(folio), folio._category);
+      state.records.push(folio);
+      state.index.set(folio._key, folio);
+    }
     state.buffer.add(clone._key, clean(clone), clone._category);
     state.records.push(clone);
     state.index.set(clone._key, clone);
@@ -2273,7 +2294,7 @@ function maskDeps() {
     // Find an item's detail list, the modal header's "record N of M" and Crown Store's "also:" note must agree, so they all read this.
     recordsForItem: (id) => recordsForItem(state.records, id, state.enums),
     recordLocator, sourceDetail,
-    switchToBatchEdit, pairRecord,
+    switchToBatchEdit, pairRecord, moveToFolio,
     switchToBrowse,
     // Without it the Crown Store panels' "Send now" is a silent no-op.
     openSubmitModal,
@@ -2321,6 +2342,137 @@ function pairRecord(key) {
   state.selectedKey = null;
   state.editing = { ...deepClone(original), _key: newKey(original._category), _isNew: true, _pairFrom: key };
   renderDetail();
+}
+
+// A folio's contents carry no vendor or price of their own: the folio is what is sold. The item keeps the update it arrived in.
+function moveToFolio(key) {
+  const original = state.index.get(key);
+  if (!original) return;
+  switchMask("advanced");
+  rememberTab("advanced");
+  state.ticked.clear();
+  state.selectedKey = null;
+  state.editing = {
+    id: original.id,
+    ...(original.blueprint === undefined ? {} : { blueprint: original.blueprint }),
+    source: { type: "container", part_of: null },
+    cost: [],
+    availability: { version: original.availability?.version },
+    _category: "container", _key: newKey("container"), _isNew: true, _moveFrom: key,
+  };
+  renderDetail();
+}
+
+function folioRecords() {
+  return liveRecords().filter((r) => r.container === "folio" && Number.isInteger(r.id))
+    .sort((a, b) => b.id - a.id);
+}
+
+function titleFromSymbol(symbol) {
+  return symbol.toLowerCase().split("_").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ");
+}
+
+function folioLabel(id) {
+  return `${nameOf(id) || "Furnishing folio"} (${id})`;
+}
+
+// The search narrows the dropdown in place, so typing keeps its focus; picking writes source.part_of
+function renderFolioPicker(host) {
+  const e = state.editing;
+  const original = state.index.get(e._moveFrom);
+  host.append(elem("p", { class: "muted" },
+    "Saving replaces the vendor record you started from, and any Unconfirmed record for either ID, " +
+    "with an entry in the folio. The folio's price applies, so the entry has no price or vendor of its own. " +
+    "The replaced records are shown struck through and can be restored with Undo delete."));
+  const folios = folioRecords();
+  // A folio the vocabulary already names, but that has no record yet: picking it adds the record with its id filled in.
+  const listed = new Set(liveRecords().map((r) => r.id));
+  const named = (state.enums.containers || [])
+    .filter((c) => /_FOLIO$/.test(c?.symbol ?? "") && Number.isInteger(c.item) && !listed.has(c.item))
+    .map((c) => ({ id: c.item, label: `${nameOf(c.item) || titleFromSymbol(c.symbol)} (${c.item}) - not listed yet, adds it` }));
+  const search = elem("input", { type: "search", id: "folio-search", autocomplete: "off",
+    placeholder: "search a folio by name or ID" });
+  const select = elem("select", { id: "folio-pick" });
+  const NEW = "new";
+  const fill = () => {
+    const q = search.value.trim().toLowerCase();
+    const shown = folios.filter((r) => !q || String(r.id).includes(q) || folioLabel(r.id).toLowerCase().includes(q));
+    const namedShown = named.filter((c) => !q || c.label.toLowerCase().includes(q) || String(c.id).includes(q));
+    select.replaceChildren(
+      elem("option", { value: "" }, shown.length + namedShown.length ? "(pick a folio)" : "(no folio matches)"),
+      ...shown.map((r) => elem("option", { value: String(r.id) }, folioLabel(r.id))),
+      ...namedShown.map((c) => elem("option", { value: `${NEW}:${c.id}` }, c.label)),
+      elem("option", { value: NEW }, "A folio that is not listed yet..."));
+    const pending = e._newFolio && named.some((c) => c.id === e._newFolio.id) ? `${NEW}:${e._newFolio.id}` : NEW;
+    select.value = e._newFolio ? pending : (shown.some((r) => r.id === e.source.part_of) ? String(e.source.part_of) : "");
+  };
+  fill();
+  search.addEventListener("input", fill);
+
+  const fresh = elem("div", { class: "folio-new", id: "folio-new" });
+  fresh.hidden = !e._newFolio;
+  const versions = versionsDesc(state.enums).map((v) => v.symbol);
+  const folioId = elem("input", { type: "number", min: "1", id: "folio-new-id", placeholder: "folio item ID" });
+  const price = elem("input", { type: "number", min: "1", id: "folio-new-price", placeholder: "price in writ vouchers" });
+  const version = elem("select", { id: "folio-new-version" },
+    ...versions.map((v) => elem("option", { value: v }, versionLabel(state.enums, v))));
+  const sync = () => {
+    e._newFolio = { id: Number(folioId.value) || null, amount: Number(price.value) || null, version: version.value };
+    e.source.part_of = e._newFolio.id;
+  };
+  if (e._newFolio) {
+    folioId.value = e._newFolio.id ?? "";
+    price.value = e._newFolio.amount ?? "";
+    version.value = e._newFolio.version;
+  } else {
+    version.value = latestVersion(state.enums);
+  }
+  for (const input of [folioId, price, version]) input.addEventListener("input", sync);
+  fresh.append(
+    elem("p", { class: "muted" }, "Adds the folio too, sold by the same vendor. Its name comes from the game: " +
+      "Maintenance -> Missing a name or metadata requests it."),
+    elem("label", { class: "lc-field" }, elem("span", {}, "Folio item ID"), folioId),
+    elem("label", { class: "lc-field" }, elem("span", {}, "Folio price (writ vouchers)"), price),
+    elem("label", { class: "lc-field" }, elem("span", {}, "Folio released in"), version));
+
+  select.addEventListener("change", () => {
+    if (select.value.startsWith(NEW)) {
+      fresh.hidden = false;
+      folioId.value = select.value.slice(NEW.length + 1);
+      sync();
+    } else {
+      fresh.hidden = true;
+      delete e._newFolio;
+      e.source.part_of = select.value ? Number(select.value) : null;
+    }
+    renderDetail();
+  });
+  host.append(elem("div", { class: "folio-picker" },
+    elem("label", { class: "lc-field" }, elem("span", {}, `Move ${nameOf(original?.id) || original?.id} into`), search, select),
+    fresh));
+}
+
+// Move into a not yet listed folio adds it or says what is missing
+function newFolioRecord(e) {
+  if (!Number.isInteger(e.source?.part_of)) return "Pick the folio to move the item into.";
+  if (!e._newFolio) return null;
+  const { id, amount, version } = e._newFolio;
+  if (!Number.isInteger(id) || id < 1) return "Enter the folio's item ID.";
+  if (!Number.isInteger(amount) || amount < 1) return "Enter the folio's price in writ vouchers.";
+  if (folioRecords().some((r) => r.id === id)) return `Folio ${id} is already listed: pick it from the list.`;
+  if (liveRecords().some((r) => r.id === id)) return `ID ${id} is already catalogued as something other than a folio.`;
+  const original = state.index.get(e._moveFrom);
+  const locations = original.source.locations ?? folioRecords()[0]?.source.locations;
+  const folio = {
+    id,
+    source: { type: "writ_vendor", vendor: original.source.vendor, ...(locations ? { locations: deepClone(locations) } : {}) },
+    cost: [{ currency: "WRIT_VOUCHERS", amount }],
+    availability: { version },
+    container: "folio",
+    _category: "writ_vendor", _key: newKey("writ_vendor"),
+  };
+  const { errors } = validateRecord(folio, state.enums, liveRecords());
+  return errors.length ? `The new folio cannot be saved yet: ${errors.map((f) => messageFor(f)).join(" ")}` : folio;
 }
 
 function addRecordForItem(id, sourceType) {

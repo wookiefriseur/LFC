@@ -2288,31 +2288,33 @@ test("discovery: metadata and recipe links survive paste and review", async (pag
 test("item details: Maintenance requests the ids, and a discovery of a published item becomes an item change", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
-  const id = 198006;
   await switchTab(page, "maintenance");
   await page.waitForSelector("#maint-filter", { timeout: 10000 });
   await page.select("#maint-filter", "missingname");
-  await page.type("#maint-search", String(id));
-  await page.waitForFunction((id) => document.querySelector("#maint-body")?.textContent.includes(String(id)),
-    { timeout: 10000 }, id);
   assertEq(await page.$eval("#maint-request", (b) => b.hidden), false, "the request button is hidden");
+  // Whatever the data lists today: the request carries exactly the rows shown.
+  await page.waitForFunction(() => !document.querySelector("#maint-summary")?.textContent.startsWith("Still loading"),
+    { timeout: 20000 });
   await page.click("#maint-request");
-  const ids = await page.$eval("#maint-request-ids", (t) => t.value.split(" ").map(Number));
-  assert(ids.includes(id), "the request does not list the placeholder-named item");
+  const rows = await page.$eval("#maint-count", (e) => parseInt(e.textContent.replace(/\D/g, ""), 10) || 0);
+  const ids = await page.$eval("#maint-request-ids", (t) => t.value.split(" ").filter(Boolean));
+  assertEq(ids.length, rows, "the request does not list every row");
   await page.select("#maint-filter", "invalid");
   assertEq(await page.$eval("#maint-request", (b) => b.hidden), true, "a check without requests offers one");
 
   await switchTab(page, "advanced");
+  const id = await page.evaluate(() => window.__proto.records().find((r) => Number.isInteger(r.id)
+    && r.source?.type !== "ignored" && r.source?.type !== "rumour").id);
   const line = JSON.stringify({ format: "furniture-discovery-v1", locale: "en", apiVersion: 101051,
     record: { id, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } },
-    meta: { id, name: "Daedric Mirror, Nightmarish", quality: 5, cat: 2, sub: 50, theme: 13,
-      icon: "/esoui/art/icons/housing_dae_fur_vaerminamirror001.dds" } });
+    meta: { id, name: "Renamed by the game", quality: 5, cat: 2, sub: 50, theme: 13,
+      icon: "/esoui/art/icons/housing_test001.dds" } });
   const status = await pasteImport(page, line);
   assert(status.includes("1 item detail change"), `no item change: "${status}"`);
   const lines = await diffLines(page);
   assertEq(lines.length, 1, "the item change is not the only change");
   assertEq(lines[0].op, "item", "wrong operation");
-  assertEq(lines[0].reference.meta.name, "Daedric Mirror, Nightmarish", "the game name was lost");
+  assertEq(lines[0].reference.meta.name, "Renamed by the game", "the game name was lost");
   assert((await pasteImport(page, line)).includes("1 item(s) already up to date"), "a repeat paste changed something");
 });
 
@@ -2428,6 +2430,82 @@ test("delete and pair: a struck-through deletion stops clashing, and a pair repl
   await page.waitForSelector("#modal.open", { timeout: 10000 });
   const findings = await page.$eval("#modal-validation", (e) => e.textContent);
   assert(!findings.includes("Fix these changes"), `the send screen still blocks: ${findings}`);
+  await page.click("#modal-close");
+});
+
+test("folio: a master writ recipe pair moves into a listed folio or into a new one", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const [one, two] = await page.evaluate(() => window.__proto.records()
+    .filter((r) => r.source?.type === "writ_vendor" && !r.container && Number.isInteger(r.id) && Number.isInteger(r.blueprint))
+    .slice(0, 2).map((r) => ({ key: r._key, id: r.id, blueprint: r.blueprint })));
+  const folio = await page.evaluate(() => window.__proto.records().find((r) => r.container === "folio").id);
+  const folioKey = await page.evaluate((id) => window.__proto.records().find((r) => r.id === id)._key, folio);
+  await selectRecord(page, folioKey, folio);
+  assertEq(await page.$("#detail .form-folio"), null, "a folio offers to move itself into a folio");
+
+  const save = () => page.evaluate(() => [...document.querySelectorAll("#detail .form-actions .btn-primary")].pop().click());
+  await selectRecord(page, one.key, one.id);
+  await page.click("#detail .form-folio");
+  await page.type("#folio-search", String(folio));
+  await page.select("#folio-pick", String(folio));
+  await save();
+  await page.waitForFunction(() => document.querySelector("#detail-message")?.textContent.startsWith("Saved"), { timeout: 5000 });
+
+  // The second move starts from Browse, where the action sits on the vendor record.
+  const openInBrowse = async (id) => {
+    await switchTab(page, "browse");
+    await page.waitForSelector("#browse-search", { timeout: 10000 });
+    await page.$$eval("#browse-facet-list .browse-facet-link", (bs) => bs.find((b) => /All items/.test(b.textContent))?.click());
+    await page.evaluate((id) => {
+      const b = document.querySelector("#browse-search");
+      b.value = String(id);
+      b.dispatchEvent(new Event("input", { bubbles: true }));
+    }, id);
+    await page.waitForFunction((id) => [...document.querySelectorAll("#browse-grid .browse-card")]
+      .some((c) => c.textContent.includes(String(id))), { timeout: 10000 }, id);
+    await page.$$eval("#browse-grid .browse-card", (cs, id) => cs.find((c) => c.textContent.includes(String(id))).click(), id);
+    await page.waitForFunction(() => !document.querySelector("#browse-detail")?.hidden, { timeout: 10000 });
+  };
+  await openInBrowse(folio);
+  assertEq(await page.$("#browse-detail .browse-folio"), null, "Browse offers to move a folio into a folio");
+  await openInBrowse(two.id);
+  await page.click("#browse-detail .browse-folio");
+  await page.waitForSelector("#folio-pick", { timeout: 10000 });
+  // A folio the containers vocabulary names without a record is offered with its id filled in.
+  const named = await page.evaluate(() => {
+    const ids = new Set(window.__proto.records().map((r) => r.id));
+    return (window.__proto.enums.containers || []).find((c) => /_FOLIO$/.test(c.symbol) && !ids.has(c.item))?.item;
+  });
+  const fresh = named ?? 9900091;
+  if (named) {
+    // A search matching only a folio that is not listed yet still says there is something to pick.
+    await page.type("#folio-search", String(named));
+    assertEq(await page.$eval("#folio-pick option", (o) => o.textContent), "(pick a folio)", "the filter claims no match");
+    await page.select("#folio-pick", `new:${named}`);
+    assertEq(await page.$eval("#folio-new-id", (i) => i.value), String(named), "the vocabulary folio id is not filled in");
+  } else {
+    await page.select("#folio-pick", "new");
+    await page.type("#folio-new-id", String(fresh));
+  }
+  await page.type("#folio-new-price", "700");
+  await save();
+  await page.waitForFunction(() => document.querySelector("#detail-message")?.textContent.startsWith("Saved"), { timeout: 5000 });
+
+  const lines = await diffLines(page);
+  for (const [it, part] of [[one, folio], [two, fresh]]) {
+    const add = lines.find((l) => l.op === "add" && l.category === "container" && l.id === it.id);
+    assert(add && add.record.blueprint === it.blueprint && add.record.source.part_of === part
+      && add.record.source.vendor === undefined && add.record.cost.length === 0, `folio entry: ${JSON.stringify(add)}`);
+    assert(lines.some((l) => l.op === "delete" && l.category === "writ_vendor" && l.id === it.id), "the vendor record stayed");
+  }
+  const made = lines.find((l) => l.op === "add" && l.id === fresh);
+  assert(made && made.record.container === "folio" && made.record.cost[0].amount === 700, `new folio: ${JSON.stringify(made)}`);
+  await page.click("#btn-submit");
+  await page.waitForSelector("#modal.open", { timeout: 10000 });
+  const findings = await page.$eval("#modal-validation", (e) => e.textContent);
+  assert(!findings.includes("Fix these changes"), `the send screen blocks: ${findings}`);
   await page.click("#modal-close");
 });
 

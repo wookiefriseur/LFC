@@ -12,7 +12,7 @@ import {
   NOT_IN_GAME_DATA, ID_NOT_RECORDED,
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
-import { SITE_ONLY_FIELDS } from "./form.js";
+import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -608,6 +608,11 @@ export function browseMask(deps) {
       if (typeof deps.switchToBatchEdit === "function") deps.switchToBatchEdit(r._key);
     });
     actions.append(batch);
+    if (typeof deps.moveToFolio === "function" && canMoveToFolio(r) && !state.buffer.isDeleted(r._key)) {
+      const folio = elem("button", { class: "btn-mini browse-folio" }, "Move into a folio");
+      folio.addEventListener("click", () => deps.moveToFolio(r._key));
+      actions.append(folio);
+    }
     block.append(actions);
     return block;
   }

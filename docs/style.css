@@ -1857,3 +1857,6 @@ table.names-list tr.is-pending td { background: var(--selected); }
 table.names-list td.names-editable { cursor: text; }
 table.names-list td.names-editable:hover { background: #f9fafb; }
 table.names-list input.names-edit { width: 100%; box-sizing: border-box; font: inherit; }
+
+.folio-picker { display: grid; gap: 0.5rem; margin: 0.5rem 0 1rem; }
+.folio-picker select, .folio-picker input { max-width: 100%; }

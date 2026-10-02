@@ -829,6 +829,12 @@ function siteOnlyFieldset(ctx) {
  * @param {string} [opts.idPrefix=""] prefixed onto every DOM id, so two forms can be open at once
  * @param {{errors:Array,warnings:Array}} [opts.findings]
  */
+// Separately sold master writ recipes move into a folio once one is released; a folio itself never does, and neither does anything that is not crafted.
+export function canMoveToFolio(record) {
+  return record?.source?.type === "writ_vendor" && !record.container
+    && Number.isInteger(record.id) && Number.isInteger(record.blueprint);
+}
+
 export function renderForm(record, enums, onChange, opts = {}) {
   record.source ??= { type: enums.source_types[0] };
   record.cost ??= [];
@@ -897,6 +903,11 @@ export function renderForm(record, enums, onChange, opts = {}) {
         "Link a blueprint and furnishing");
       pair.addEventListener("click", () => opts.onPair());
       game.append(row(h("span", {}), pair));
+    }
+    if (!reduced && !batch && typeof opts.onFolio === "function" && canMoveToFolio(record)) {
+      const folio = h("button", { type: "button", class: "btn-mini form-folio" }, "Move into a folio");
+      folio.addEventListener("click", () => opts.onFolio());
+      game.append(row(h("span", {}), folio));
     }
 
     if (opts.allowTypeChange === false) {
