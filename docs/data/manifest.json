@@ -40,7 +40,7 @@
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
       "records": 55,
-      "digest": "9f02d5e8a0a40904"
+      "digest": "37c29bf2f12ac495"
     },
     {
       "name": "luxury.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "3eecc24de2536564",
+  "digest": "4964f4d053789343",
   "counts": {
     "records": 10099,
     "ids": 12344,
