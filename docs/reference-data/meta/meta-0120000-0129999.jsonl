@@ -46,32 +46,32 @@
 {"id":120066,"name":"Display Craft Bag","quality":4,"cat":10,"sub":96,"theme":1,"icon":"housing_uni_inc_craftingbag001"}
 {"id":120075,"name":"Decoy Elder Scroll","quality":5,"cat":9,"sub":148,"theme":1,"icon":"housing_imp_exc_elderscrollorange001"}
 {"id":120079,"name":"Disconnected Transitus Shrine","quality":5,"cat":9,"sub":148,"theme":11,"icon":"housing_col_str_wayshrinedungeon001"}
-{"id":120082,"name":"The Code of Mauloch","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120083,"name":"A Warning to the Aldmeri Dominion","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120084,"name":"True Heirs of the Empire","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120085,"name":"The Werewolf's Hide","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120086,"name":"Guide to the Daggerfall Covenant","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120087,"name":"The True Nature of Orcs","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120088,"name":"Varieties of Faith: The Bretons","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120089,"name":"Varieties of Faith: The Orcs","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120090,"name":"Wyresses: The Name-Daughters","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120091,"name":"Schemes of the Reachmage","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":120092,"name":"Once","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120093,"name":"Founding of the Spirit Wardens","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120094,"name":"The Knightly Orders of High Rock","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120095,"name":"The Bretons: Mongrels or Paragons?","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120096,"name":"Sacred Rites of the Stonechewers","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120097,"name":"Orcs: The Vermin Among Us","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120098,"name":"Our Calling, Our Pledge","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120099,"name":"To Dream Beyond Dreams","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120100,"name":"Tower of Adamant","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120101,"name":"Wayrest, Jewel of the Bay","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120082,"name":"The Code of Mauloch","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120083,"name":"A Warning to the Aldmeri Dominion","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120084,"name":"True Heirs of the Empire","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120085,"name":"The Werewolf's Hide","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120086,"name":"Guide to the Daggerfall Covenant","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120087,"name":"The True Nature of Orcs","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120088,"name":"Varieties of Faith: The Bretons","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120089,"name":"Varieties of Faith: The Orcs","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120090,"name":"Wyresses: The Name-Daughters","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120091,"name":"Schemes of the Reachmage","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":120092,"name":"Once","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120093,"name":"Founding of the Spirit Wardens","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120094,"name":"The Knightly Orders of High Rock","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120095,"name":"The Bretons: Mongrels or Paragons?","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120096,"name":"Sacred Rites of the Stonechewers","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120097,"name":"Orcs: The Vermin Among Us","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120098,"name":"Our Calling, Our Pledge","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120099,"name":"To Dream Beyond Dreams","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120100,"name":"Tower of Adamant","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120101,"name":"Wayrest, Jewel of the Bay","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120102,"name":"The Barrows of Westmark Moor","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120103,"name":"The Story of Princess Eselde","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120103,"name":"The Story of Princess Eselde","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120104,"name":"Bloodfiends of Rivenspire","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120105,"name":"The Remnant of Light","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120105,"name":"The Remnant of Light","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120106,"name":"Horse-Folk of Silverhoof","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120107,"name":"Dire Legends of the Doomcrag","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120107,"name":"Dire Legends of the Doomcrag","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120108,"name":"House Tamrith: A Recent History","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120109,"name":"Shornhelm, Crown City of the North","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120110,"name":"Northpoint: An Assessment","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
@@ -82,78 +82,78 @@
 {"id":120115,"name":"The Posting of the Hunt","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120116,"name":"Aspects of Lord Hircine","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120117,"name":"The Viridian Sentinel","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120118,"name":"The True-Told Tale of Hallin, Pt. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120119,"name":"The True-Told Tale of Hallin, Pt. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120118,"name":"The True-Told Tale of Hallin, Pt. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120119,"name":"The True-Told Tale of Hallin, Pt. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120120,"name":"A Life Barbaric and Brutal","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120121,"name":"The Glenmoril Wyrd","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120122,"name":"Redguards, History and Heroes, V. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120123,"name":"Redguards, History and Heroes, V. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120124,"name":"Redguards, History and Heroes, V. 3","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120125,"name":"Tu'whacca's Prayer","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120126,"name":"Varieties of Faith, Crown Redguards","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120127,"name":"Varieties of Faith, The Forebears","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120128,"name":"Motalion Necropolis Report","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120129,"name":"The Salas En Expedition","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120130,"name":"Sentinel, the Jewel of Alik'r","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120131,"name":"Sacrilege and Mayhem in the Alik'r","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120122,"name":"Redguards, History and Heroes, V. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120123,"name":"Redguards, History and Heroes, V. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120124,"name":"Redguards, History and Heroes, V. 3","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120125,"name":"Tu'whacca's Prayer","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120126,"name":"Varieties of Faith, Crown Redguards","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120127,"name":"Varieties of Faith, The Forebears","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120128,"name":"Motalion Necropolis Report","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120129,"name":"The Salas En Expedition","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120130,"name":"Sentinel, the Jewel of Alik'r","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":120131,"name":"Sacrilege and Mayhem in the Alik'r","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120132,"name":"Circus of Cheerful Slaughter","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
 {"id":120133,"name":"Robier's Vegetable Garden","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
-{"id":120134,"name":"Galerion the Mystic","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120135,"name":"Great Harbingers of the Companions","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120136,"name":"The Illusion of Death","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120137,"name":"Jorunn the Skald-King","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120138,"name":"Triumphs of a Monarch, Ch. 3","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120139,"name":"Triumphs of a Monarch, Ch. 6","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120140,"name":"Triumphs of a Monarch, Ch. 10","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120141,"name":"Trials of Saint Alessia","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120142,"name":"The All-Beneficent King Fahara'jad","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120143,"name":"Ayrenn: The Unforeseen Queen","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":120144,"name":"Aedra and Daedra","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120145,"name":"Boethiah's Proving","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120146,"name":"The Dreamstride","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120147,"name":"The House of Troubles","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120148,"name":"Invocation of Azura","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120149,"name":"Modern Heretics","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120150,"name":"Opusculus Lamae Bal ta Mezzamortie","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120151,"name":"The Totems of Hircine","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120152,"name":"Fragmentae Abyssum Hermaeus Morus","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120153,"name":"The Spawn of Molag Bal","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120154,"name":"The Anuad Paraphrased","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120155,"name":"The Lunar Lorkhan","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120156,"name":"Monomyth: Dragon God & Missing God","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120157,"name":"Monomyth: Lorkhan and Satakal","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120158,"name":"Monomyth: \"Shezarr's Song\"","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120159,"name":"Monomyth: The Myth of Aurbis","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120160,"name":"Monomyth: The Heart of the World","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120161,"name":"Nine Commands of the Eight Divines","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120162,"name":"Gods and Worship in Tamriel","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120163,"name":"Vivec and Mephala","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":120164,"name":"With Regards to the Ebony Blade","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120165,"name":"What is Volendrung?","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120166,"name":"The Thief God's Treasures","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120167,"name":"War Weather","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120168,"name":"Civility and Etiquette: Wood Orcs I","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120169,"name":"The Art of Kwama Egg Cooking","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120170,"name":"The Binding Stone","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120171,"name":"Where Magical Paths Meet","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120172,"name":"Wayrest Sewers: A Short History","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120173,"name":"To Posterity","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120174,"name":"Ancient Scrolls of the Dwemer, I-A","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120175,"name":"Ancient Scrolls of the Dwemer II","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120176,"name":"Ancient Scrolls of the Dwemer III","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120177,"name":"Ancient Scrolls of the Dwemer V","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120178,"name":"Ancient Scrolls of the Dwemer VI","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120179,"name":"Ancient Scrolls of the Dwemer X","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120180,"name":"Ancient Scrolls of the Dwemer XI","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120134,"name":"Galerion the Mystic","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120135,"name":"Great Harbingers of the Companions","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120136,"name":"The Illusion of Death","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120137,"name":"Jorunn the Skald-King","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120138,"name":"Triumphs of a Monarch, Ch. 3","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120139,"name":"Triumphs of a Monarch, Ch. 6","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120140,"name":"Triumphs of a Monarch, Ch. 10","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120141,"name":"Trials of Saint Alessia","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120142,"name":"The All-Beneficent King Fahara'jad","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120143,"name":"Ayrenn: The Unforeseen Queen","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":120144,"name":"Aedra and Daedra","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120145,"name":"Boethiah's Proving","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120146,"name":"The Dreamstride","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120147,"name":"The House of Troubles","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120148,"name":"Invocation of Azura","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120149,"name":"Modern Heretics","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120150,"name":"Opusculus Lamae Bal ta Mezzamortie","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120151,"name":"The Totems of Hircine","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120152,"name":"Fragmentae Abyssum Hermaeus Morus","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120153,"name":"The Spawn of Molag Bal","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
+{"id":120154,"name":"The Anuad Paraphrased","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120155,"name":"The Lunar Lorkhan","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120156,"name":"Monomyth: Dragon God & Missing God","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120157,"name":"Monomyth: Lorkhan and Satakal","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120158,"name":"Monomyth: \"Shezarr's Song\"","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120159,"name":"Monomyth: The Myth of Aurbis","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120160,"name":"Monomyth: The Heart of the World","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120161,"name":"Nine Commands of the Eight Divines","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120162,"name":"Gods and Worship in Tamriel","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120163,"name":"Vivec and Mephala","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":120164,"name":"With Regards to the Ebony Blade","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120165,"name":"What is Volendrung?","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120166,"name":"The Thief God's Treasures","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120167,"name":"War Weather","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120168,"name":"Civility and Etiquette: Wood Orcs I","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120169,"name":"The Art of Kwama Egg Cooking","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120170,"name":"The Binding Stone","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120171,"name":"Where Magical Paths Meet","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120172,"name":"Wayrest Sewers: A Short History","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120173,"name":"To Posterity","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120174,"name":"Ancient Scrolls of the Dwemer, I-A","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120175,"name":"Ancient Scrolls of the Dwemer II","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120176,"name":"Ancient Scrolls of the Dwemer III","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120177,"name":"Ancient Scrolls of the Dwemer V","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120178,"name":"Ancient Scrolls of the Dwemer VI","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120179,"name":"Ancient Scrolls of the Dwemer X","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120180,"name":"Ancient Scrolls of the Dwemer XI","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120181,"name":"Antecedents of Dwemer Law","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120182,"name":"Dwarven Automatons","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120183,"name":"Ancient Scrolls of the Dwemer I-B","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120184,"name":"Guylaine's Dwemer Architecture","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120185,"name":"Ancient Scrolls of the Dwemer VIII","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120182,"name":"Dwarven Automatons","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120183,"name":"Ancient Scrolls of the Dwemer I-B","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120184,"name":"Guylaine's Dwemer Architecture","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120185,"name":"Ancient Scrolls of the Dwemer VIII","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120186,"name":"Dwemer Inquiries Volume I","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120187,"name":"Dwemer Inquiries Volume II","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120188,"name":"Dwemer Inquiries Volume III","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120189,"name":"Ancient Scrolls of the Dwemer IV","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120189,"name":"Ancient Scrolls of the Dwemer IV","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120190,"name":"The Homilies of Blessed Almalexia","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120191,"name":"The Legendary Scourge","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120192,"name":"The Lusty Argonian Maid, Vol. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
@@ -162,18 +162,18 @@
 {"id":120195,"name":"Myths of Sheogorath, Vol. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120196,"name":"The Red Book of Riddles","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120197,"name":"16 Accords of Madness, Vol. VI","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120198,"name":"Crow and Raven: Three Short Fables","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120198,"name":"Crow and Raven: Three Short Fables","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120199,"name":"Wabbajack","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120200,"name":"Arcana Restored","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120201,"name":"Liminal Bridges","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120202,"name":"Magic from the Sky","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120203,"name":"Manual of Spellcraft","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120204,"name":"The Old Ways","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120205,"name":"On the Detachment of the Sheath","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120206,"name":"Reality and Other Falsehoods","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120207,"name":"Guild Memo on Soul-Trapping","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120208,"name":"Wayshrines of Tamriel","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120209,"name":"Proposal: Schools of Magic","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120200,"name":"Arcana Restored","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120201,"name":"Liminal Bridges","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120202,"name":"Magic from the Sky","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120203,"name":"Manual of Spellcraft","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120204,"name":"The Old Ways","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120205,"name":"On the Detachment of the Sheath","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120206,"name":"Reality and Other Falsehoods","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120207,"name":"Guild Memo on Soul-Trapping","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120208,"name":"Wayshrines of Tamriel","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":120209,"name":"Proposal: Schools of Magic","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120210,"name":"Before the Ages of Man: Dawn Era","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120211,"name":"Before the Ages of Man: Merethic Era","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120212,"name":"Ebony Blade History","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
