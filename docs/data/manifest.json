@@ -75,14 +75,14 @@
     {
       "name": "recipe.jsonl",
       "type": "recipe",
-      "records": 3365,
-      "digest": "3c431c9b1b78a52a"
+      "records": 3368,
+      "digest": "62cb462457125454"
     },
     {
       "name": "drop.jsonl",
       "type": "drop",
-      "records": 699,
-      "digest": "85abc3cff643989c"
+      "records": 705,
+      "digest": "47d0850ff6a01c50"
     },
     {
       "name": "quest_reward.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 452,
-      "digest": "b045cb30b516596d"
+      "records": 440,
+      "digest": "75223f417a99a8b4"
     },
     {
       "name": "ignored.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "add94f478529e808",
+  "digest": "ea7cf1655ea586c1",
   "counts": {
-    "records": 10089,
+    "records": 10086,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -158,8 +158,8 @@
       "event_vendor": 94,
       "crown_crate": 144,
       "crown_store": 1690,
-      "recipe": 3365,
-      "drop": 699,
+      "recipe": 3368,
+      "drop": 705,
       "quest_reward": 41,
       "dungeon_drop": 120,
       "housing": 659,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 19,
       "container": 182,
-      "rumour": 452,
+      "rumour": 440,
       "ignored": 337
     }
   }

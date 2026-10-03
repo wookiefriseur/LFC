@@ -675,7 +675,7 @@
 {"id":223177,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223867,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223868,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
-{"id":223869,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
+{"id":223869,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223870,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223871,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":224854,"source":{"type":"drop","leads":true,"locations":[{"location":"HEWSBANE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -697,3 +697,9 @@
 {"id":225026,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225027,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225184,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
+{"id":226752,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"HEWSBANE"}],"note":"High Seas Event"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226751,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226750,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226749,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226748,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226747,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
