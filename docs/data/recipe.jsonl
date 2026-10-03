@@ -3359,3 +3359,7 @@
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"THIEVES"},"blueprint":225199,"id":225194}
 {"id":130326,"blueprint":132173,"source":{"type":"recipe"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226785,"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226907}
+{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226901,"id":226763}
+{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226902,"id":226764}
+{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226898,"id":226756}
+{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226900,"id":226762}

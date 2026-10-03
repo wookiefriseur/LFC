@@ -249,7 +249,6 @@
 {"id":223994,"source":{"type":"rumour"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223995,"source":{"type":"rumour"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":224859,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":224860,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":224861,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":224862,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":224863,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -366,11 +365,7 @@
 {"id":226776,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226784,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226897}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226898}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226899}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226900}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226901}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226902}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226903}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226904}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226905}
@@ -450,11 +445,7 @@
 {"id":224949,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226746,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226755,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226756,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226757,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226762,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226763,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226764,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226766,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226767,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226768,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
