@@ -950,6 +950,11 @@
       "symbol": "ZENITHAR",
       "si": "SI_FURC_EVENT_ZENITHAR",
       "name": "Zeal of Zenithar"
+    },
+    {
+      "symbol": "HIGHSEAS",
+      "si": "SI_FURC_EVENT_HIGHSEAS",
+      "name": "High Seas"
     }
   ],
   "containers": [
