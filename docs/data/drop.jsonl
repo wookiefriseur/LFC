@@ -477,7 +477,7 @@
 {"id":197783,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
 {"id":197829,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"NECROM"}}
 {"id":197916,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":198325,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":198325,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":198566,"source":{"type":"drop","locations":[{"location":"REAPER"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":198567,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":198568,"source":{"type":"drop","locations":[{"location":"ALIKR"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
@@ -494,17 +494,17 @@
 {"id":199116,"source":{"type":"drop","subtype":"tales_of_tribute"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199117,"source":{"type":"drop","subtype":"tales_of_tribute"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199118,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":199119,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":199119,"source":{"type":"drop","leads":true,"locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199126,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":199127,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":199128,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":199127,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":199128,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199129,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199130,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199131,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199132,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199890,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":199932,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":199933,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":199932,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
+{"id":199933,"source":{"type":"drop","locations":[{"location":"TELVANNI"},{"location":"APOCRYPHA"}],"subtype":"scryable","note":"Infinite Archive"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203377,"source":{"type":"drop","locations":[{"location":"CWC"}],"subtype":"chest"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203378,"source":{"type":"drop","locations":[{"location":"CWC"}],"subtype":"chest"},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203379,"source":{"type":"drop","locations":[{"location":"CWC"}],"subtype":"chest"},"cost":[],"availability":{"version":"ENDLESS"}}
@@ -673,11 +673,11 @@
 {"id":223174,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"chest"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223176,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223177,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223867,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
-{"id":223868,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
+{"id":223867,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
+{"id":223868,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223869,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
-{"id":223870,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
-{"id":223871,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"ZERO"}}
+{"id":223870,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
+{"id":223871,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":224854,"source":{"type":"drop","leads":true,"locations":[{"location":"HEWSBANE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":224855,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":224856,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"scryable"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -697,9 +697,11 @@
 {"id":225026,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225027,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225184,"source":{"type":"drop","locations":[{"location":"GLENUMBRA"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":226752,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"HEWSBANE"}],"note":"High Seas Event"},"cost":[],"availability":{"version":"ECHOES"}}
-{"id":226751,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
-{"id":226750,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
-{"id":226749,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
-{"id":226748,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
-{"id":226747,"source":{"type":"drop","subtype":"scryable","note":"High Seas Event","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226752,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"HEWSBANE"}],"note":"High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226751,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226750,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226749,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226748,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226747,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226754,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226765,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"GOLDCOAST"}],"note":"High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"}}

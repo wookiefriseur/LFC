@@ -164,6 +164,7 @@ LFCGeneratedConstants={
       ["CRIME"]=3, -- Crime Wave
       ["ELSWEYR"]=4, -- Season of the Dragon
       ["HEARTS"]=5, -- Hearts Week
+      ["HIGHSEAS"]=17, -- High Seas
       ["HOLLOWJACK"]=6, -- Sinister Hollowjack
       ["IC"]=7, -- Imperial City Celebration 2020
       ["JESTER"]=8, -- Jester's Festival
@@ -640,6 +641,7 @@ LFCGeneratedConstants={
       [14]={["si"]="SI_FURC_EVENT_WITCHES"}, -- WITCHES - Witches Festival
       [15]={["si"]="SI_FURC_EVENT_WRITHING"}, -- WRITHING - Writhing Wall
       [16]={["si"]="SI_FURC_EVENT_ZENITHAR"}, -- ZENITHAR - Zeal of Zenithar
+      [17]={["si"]="SI_FURC_EVENT_HIGHSEAS"}, -- HIGHSEAS - High Seas
     },
     ["item_sources"]={},
     ["locations"]={
@@ -1108,6 +1110,7 @@ LFCGeneratedConstants={
       [14]="WITCHES", -- Witches Festival
       [15]="WRITHING", -- Writhing Wall
       [16]="ZENITHAR", -- Zeal of Zenithar
+      [17]="HIGHSEAS", -- High Seas
     },
     ["item_sources"]={
       [1]="NONE",
@@ -1446,5 +1449,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="b074d0076bbda0b13201e555eeb675fc2c2c05b94bfccf8db55fde3467b73d07",
+  ["vocabulary"]="23e829b79738c9c2694f76ceb361c4109eaea74dd76ca49a57fa855989a72c26",
 }
