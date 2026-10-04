@@ -63,8 +63,8 @@
     {
       "name": "crown_crate.jsonl",
       "type": "crown_crate",
-      "records": 144,
-      "digest": "91c3b63fb001010e"
+      "records": 152,
+      "digest": "fcc08278d52cfa7f"
     },
     {
       "name": "crown_store.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 430,
-      "digest": "d8dd21487f54d7b0"
+      "records": 422,
+      "digest": "4a6b19fc13ac038b"
     },
     {
       "name": "ignored.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "eeb2f870f451162f",
+  "digest": "a1b85d759a9f1d46",
   "counts": {
     "records": 10084,
     "ids": 12345,
@@ -156,7 +156,7 @@
       "luxury": 665,
       "event_drop": 84,
       "event_vendor": 94,
-      "crown_crate": 144,
+      "crown_crate": 152,
       "crown_store": 1690,
       "recipe": 3370,
       "drop": 707,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 19,
       "container": 182,
-      "rumour": 430,
+      "rumour": 422,
       "ignored": 337
     }
   }
