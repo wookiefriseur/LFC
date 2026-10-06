@@ -301,16 +301,6 @@
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":225159}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":225160}
 {"id":225337,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225351,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225352,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225353,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225354,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225355,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225356,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225357,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225358,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225359,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":225360,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225364,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225365,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225366,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -344,7 +334,6 @@
 {"id":226775,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226776,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226784,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":226905}
 {"id":226918,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226923,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226924,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -419,4 +408,3 @@
 {"id":224948,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224949,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":226746,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226768,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}

@@ -1731,6 +1731,11 @@
       "symbol": "ZENI",
       "item": 197985,
       "name": "Furnishing Pack: Chapel of Zenithar"
+    },
+    {
+      "symbol": "SHEOGORATH",
+      "item": 225361,
+      "name": "Sheogorath Shenanigans"
     }
   ],
   "bundles": [

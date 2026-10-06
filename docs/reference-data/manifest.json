@@ -137,8 +137,8 @@
       "description": "blueprint item id -> the furnishing it makes. The one direction a sharded dataset cannot answer, and the one the webview needs: a crafted record is keyed by the blueprint. Single small file, locale-invariant.",
       "record_format": "furniture-recipes-v1",
       "file": "recipes.json",
-      "count": 3401,
-      "digest": "87d397c22cc4"
+      "count": 3402,
+      "digest": "b2d88f52aff4"
     },
     "names": {
       "description": "Game names for the ids the data refers to: house collectibles, quests, achievements and zones, {kind: {id: name}}. Client-locale, one file per locale. Contributors correct it through `name` change lines.",
