@@ -369,6 +369,7 @@ LFCGeneratedConstants={
       ["OASIS"]=42, -- Furnishing Pack: Moons-Blessed Oasis
       ["PIPES"]=43, -- Furnishing Pack: Dwarven Pipes
       ["SANGUINE"]=44, -- Furnishing Pack: Sanguine's Festival
+      ["SHEOGORATH"]=57, -- Sheogorath Shenanigans
       ["SOTHA"]=45, -- Furnishing Pack: The Clockwork God's Domain
       ["SWAMP"]=46, -- Furnishing Pack: Shadow and Stone
       ["THEATER"]=47, -- Furnishing Pack: Community Theater
@@ -813,6 +814,7 @@ LFCGeneratedConstants={
       [54]={["item"]=223659}, -- WINTER - Furnishing Pack: Winter's Feast
       [55]={["item"]=223665}, -- WRITHING - Furnishing Pack: Writhing Fortress
       [56]={["item"]=197985}, -- ZENI - Furnishing Pack: Chapel of Zenithar
+      [57]={["item"]=225361}, -- SHEOGORATH - Sheogorath Shenanigans
     },
     ["places"]={
       [1]={["si"]="SI_FURC_LOC_ANY"}, -- ANY - anywhere
@@ -1316,6 +1318,7 @@ LFCGeneratedConstants={
       [54]="WINTER", -- Furnishing Pack: Winter's Feast
       [55]="WRITHING", -- Furnishing Pack: Writhing Fortress
       [56]="ZENI", -- Furnishing Pack: Chapel of Zenithar
+      [57]="SHEOGORATH", -- Sheogorath Shenanigans
     },
     ["places"]={
       [1]="ANY", -- anywhere
@@ -1449,5 +1452,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="23e829b79738c9c2694f76ceb361c4109eaea74dd76ca49a57fa855989a72c26",
+  ["vocabulary"]="bb498c9d342748579c8174eeb1197b1ac6d51e01a6e25049086321e9b44e8cba",
 }
