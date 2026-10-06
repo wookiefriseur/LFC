@@ -27,8 +27,8 @@
     {
       "name": "vendor.jsonl",
       "type": "vendor",
-      "records": 1384,
-      "digest": "6630f25f1628a081"
+      "records": 1381,
+      "digest": "ea28a1f3654c359d"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -51,14 +51,14 @@
     {
       "name": "event_drop.jsonl",
       "type": "event_drop",
-      "records": 84,
-      "digest": "f9401095bc60e75a"
+      "records": 86,
+      "digest": "480b9b2969a20525"
     },
     {
       "name": "event_vendor.jsonl",
       "type": "event_vendor",
-      "records": 94,
-      "digest": "5362e749307862e6"
+      "records": 98,
+      "digest": "f12409f836673e19"
     },
     {
       "name": "crown_crate.jsonl",
@@ -75,8 +75,8 @@
     {
       "name": "recipe.jsonl",
       "type": "recipe",
-      "records": 3371,
-      "digest": "2b4382608fbfc4f9"
+      "records": 3410,
+      "digest": "a8012562c2ff7713"
     },
     {
       "name": "drop.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 410,
-      "digest": "5975710462baa6a2"
+      "records": 329,
+      "digest": "b4cb1ac8990e7aff"
     },
     {
       "name": "ignored.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "32ca3c9232ce3a46",
+  "digest": "0033676cb13e9526",
   "counts": {
-    "records": 10083,
+    "records": 10044,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -150,15 +150,15 @@
     "rumour_dropped": 1,
     "separator_rejected": 0,
     "by_type": {
-      "vendor": 1384,
+      "vendor": 1381,
       "pvp_vendor": 84,
       "writ_vendor": 56,
       "luxury": 665,
-      "event_drop": 84,
-      "event_vendor": 94,
+      "event_drop": 86,
+      "event_vendor": 98,
       "crown_crate": 152,
       "crown_store": 1700,
-      "recipe": 3371,
+      "recipe": 3410,
       "drop": 707,
       "quest_reward": 41,
       "dungeon_drop": 120,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 19,
       "container": 182,
-      "rumour": 410,
+      "rumour": 329,
       "ignored": 337
     }
   }
