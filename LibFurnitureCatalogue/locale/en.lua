@@ -32,6 +32,7 @@ local strings = {
   SI_FURC_EVENT_UNDAUNTED = "Undaunted Celebration",
   SI_FURC_EVENT_WITCHES = "Witches Festival",
   SI_FURC_EVENT_WRITHING = "Writhing Wall",
+  SI_FURC_EVENT_HIGHSEAS = "High Seas",
   SI_FURC_EVENT_ZENITHAR = "Zeal of Zenithar",
   -- SI_FURC_FILTER_SRC_SOLD_TOMEPOINTS = "Purchasable (tome points)",
   -- SI_FURC_FILTER_SRC_SOLD_TOMEPOINTS_TT = "Obtainable only from Tamriel Tomes during a specific season",
