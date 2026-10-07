@@ -11,6 +11,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from luaDoc_generateStr import extract_strings
+
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = 1
 LUA_MAX_EXACT_INTEGER = 2**53 - 1
@@ -24,6 +26,36 @@ SOURCE_FIELDS = (
 )
 WEB_FIELDS = {'notes', 'name_overrides'}
 CONTAINER_KINDS = ('books', 'folio')
+LOCALE_BEGIN = '  -- BEGIN WEBINTERFACE STRINGS - generated from docs/data/enums.json\n'
+LOCALE_END = '  -- END WEBINTERFACE STRINGS\n'
+
+
+def render_locale(enums, english):
+    """Fill only missing addon strings; handwritten definitions remain authoritative."""
+    require(english.count(LOCALE_BEGIN) == english.count(LOCALE_END) == 1,
+            'English locale needs one pair of webinterface string markers')
+    before, rest = english.split(LOCALE_BEGIN)
+    require(LOCALE_END in rest, 'English locale string markers are reversed')
+    _, after = rest.split(LOCALE_END)
+    manual = extract_strings((before + after).splitlines())
+    generated = {}
+    for entries in enums.values():
+        if not isinstance(entries, list):
+            continue
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            key = entry.get('si', '')
+            # Game-owned SI_* constants already exist in the client.
+            if not key.startswith('SI_FURC_') or key in manual:
+                continue
+            require(re.fullmatch(r'SI_FURC_[A-Z0-9_]+', key), f'invalid addon string id: {key}')
+            name = entry.get('name')
+            require(isinstance(name, str) and name.strip(), f'missing English name for {key}')
+            require(key not in generated or generated[key] == name, f'conflicting English names for {key}')
+            generated[key] = name
+    body = ''.join(f'  {key} = {lua(value)},\n' for key, value in sorted(generated.items()))
+    return before + LOCALE_BEGIN + body + LOCALE_END + after
 
 
 def canonical(value):
@@ -403,6 +435,7 @@ def main():
     parser.add_argument('--data', type=Path, default=ROOT / 'docs/data')
     parser.add_argument('--recipes', type=Path, default=ROOT / 'docs/reference-data/recipes.json')
     parser.add_argument('--output', type=Path, default=ROOT / 'LibFurnitureCatalogue/data')
+    parser.add_argument('--locale', type=Path, help='English locale output (default: ../locale/en.lua beside --output)')
     parser.add_argument('--lua', default=str(ROOT / 'bin/lua'))
     parser.add_argument('--esoui', type=Path)
     parser.add_argument('--check', action='store_true', help='verify existing artifacts instead of writing')
@@ -410,18 +443,22 @@ def main():
     catalogue, records = load_inputs(args.data, args.recipes)
     constants, database, projection = catalogue.build(records)
     artifacts = render(constants, database, catalogue.labels)
+    locale = args.locale or args.output.parent / 'locale/en.lua'
+    template = locale if locale.is_file() else ROOT / 'LibFurnitureCatalogue/locale/en.lua'
+    english = render_locale(catalogue.enums, template.read_text(encoding='utf-8'))
     command = [args.lua] + (['-s', str(args.esoui)] if args.esoui else [])
     with tempfile.TemporaryDirectory() as temp:
         candidate = Path(temp)
         for name, content in artifacts.items():
             (candidate / name).write_text(content, encoding='utf-8')
         verify(candidate, projection, command)
-        for name, content in artifacts.items():
-            path = args.output / name
+        outputs = {args.output / name: content for name, content in artifacts.items()}
+        outputs[locale] = english
+        for path, content in outputs.items():
             if args.check:
                 require(path.is_file() and path.read_bytes() == content.encode(), f'outdated artifact: {path}')
             else:
-                args.output.mkdir(parents=True, exist_ok=True)
+                path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(content, encoding='utf-8')
     print(f'Verified {len(projection)} records: {len(database["items"])} items, {len(database["rumours"])} rumours.')
 

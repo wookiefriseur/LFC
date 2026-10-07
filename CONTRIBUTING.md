@@ -89,7 +89,9 @@ LUA=/path/to/lua python3 -m unittest discover -s scripts -p test_generate_db.py
 
 Use Lua 5.1 or ESOLua. With ESOLua, also pass `--esoui /path/to/esoui` to the generator and set `ESOUI=/path/to/esoui` for the tests. The default interpreter is `bin/lua`.
 
-Every generation validates the data and verifies the generated Lua by decoding it back to JSONL before writing either output file. Add `--check` to verify that an existing output directory matches a fresh build.
+Every generation validates the data and verifies the generated Lua by decoding it back to JSONL before writing the outputs. Add `--check` to verify that existing outputs match a fresh build.
+
+Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.json` inside the `WEBINTERFACE STRINGS` comment markers in `locale/en.lua`. If you run into issues ingame check for missing strings first. Handwritten definitions outside the markers stay authoritative, game-owned string IDs are not generated.
 
 ## Release
 

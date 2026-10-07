@@ -60,3 +60,25 @@ for id, name in ipairs(symbols) do
   local record = env.LibFurnitureCatalogue.Internal.Generated.Records(id)[1]
   assert(record.cost.currency == expected[name], name)
 end
+
+-- The published API promises packs is always a list
+env.LibFurnitureCatalogue.Internal.Constants.ItemSources.CROWN = 9
+for _, file in ipairs({ "data/GeneratedConstants.lua", "data/GeneratedDatabase.lua", "Generated.lua" }) do
+  local load = assert(loadfile(root .. "/LibFurnitureCatalogue/" .. file))
+  setfenv(load, env)
+  load()
+end
+for _, id in ipairs({ 225351, 225352 }) do
+  local source = env.LibFurnitureCatalogue.Internal.Generated.Records(id)[1].source
+  assert(type(source.packs) == "table", "packs must be a list for " .. id)
+  assert(#source.packs == 1 and source.packs[1] == 225361)
+end
+for i, field in ipairs(env.LFCGeneratedConstants.sourceFields) do
+  if field == "packs" then
+    local row = env.LFCGeneratedDatabase.items[225351][4]
+    local column = env.LFCGeneratedConstants.sourceFieldOffset + i
+    row[column] = { row[column] }
+  end
+end
+local packs = env.LibFurnitureCatalogue.Internal.Generated.Records(225351)[1].source.packs
+assert(type(packs) == "table" and #packs == 1 and packs[1] == 225361)

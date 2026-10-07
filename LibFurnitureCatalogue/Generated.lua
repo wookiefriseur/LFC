@@ -143,6 +143,9 @@ local function decode(record)
       source[target] = type(value) == "table" and ZO_DeepTableCopy(value) or value
     end
   end
+  if source.packs and type(source.packs) ~= "table" then
+    source.packs = { source.packs }
+  end
   if not source.locations and fields.vendor then
     source.locations = placements(vocabulary.vendorLocations[fields.vendor])
   end

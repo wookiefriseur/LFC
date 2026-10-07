@@ -119,9 +119,11 @@ class IssueApplicationTests(unittest.TestCase):
         files, _ = self.run_plan(
             {'v': 1, 'op': 'add', 'id': row['id'], 'category': 'vendor', 'record': row},
             {'v': 1, 'op': 'add-enum', 'enum': 'vendors', 'value': 'NEW_TEST_VENDOR',
-             'meta': {'si': 'SI_NEW_TEST_VENDOR', 'name': 'A vendor'}})
+             'meta': {'si': 'SI_FURC_NEW_TEST_VENDOR', 'name': 'A vendor'}})
         self.assertIn('docs/data/enums.json', files)
         self.assertIn('LibFurnitureCatalogue/data/GeneratedConstants.lua', files)
+        self.assertIn('SI_FURC_NEW_TEST_VENDOR = "A vendor",',
+                      files['LibFurnitureCatalogue/locale/en.lua'].decode())
 
     def test_name_preserves_other_names_and_does_not_change_lua(self):
         files, _ = self.run_plan({'v': 1, 'op': 'name', 'kind': 'houses', 'id': 99999,

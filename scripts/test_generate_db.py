@@ -14,8 +14,10 @@ from generate_db import (
     load_inputs,
     read_json,
     render,
+    render_locale,
     verify,
 )
+from luaDoc_generateStr import extract_strings, merge_translation
 
 
 class GeneratedDatabaseTests(unittest.TestCase):
@@ -51,6 +53,36 @@ class GeneratedDatabaseTests(unittest.TestCase):
         result = subprocess.run([*self.command, str(ROOT / 'tests/generated_currencies.lua'), str(ROOT)],
                                 text=True, capture_output=True, timeout=30, check=False)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_missing_event_string_and_locale_tools(self):
+        english = (ROOT / 'LibFurnitureCatalogue/locale/en.lua').read_text()
+        # Reproduce the missing string fixed by 670d80d without editing the checkout.
+        missing = ''.join(line for line in english.splitlines(keepends=True)
+                          if 'SI_FURC_EVENT_HIGHSEAS =' not in line)
+        result = render_locale(self.catalogue.enums, missing)
+        self.assertIn('  SI_FURC_EVENT_HIGHSEAS = "High Seas",\n', result)
+        self.assertEqual(render_locale(self.catalogue.enums, result), result)
+        self.assertEqual(render_locale(self.catalogue.enums, english), english)
+        strings = extract_strings(result.splitlines())
+        self.assertEqual(strings['SI_FURC_EVENT_HIGHSEAS'], '"High Seas"')
+        self.assertEqual(merge_translation({}, strings)[2]['SI_FURC_EVENT_HIGHSEAS'], '"High Seas"')
+        enums = {'events': [{'si': 'SI_FURC_TEST', 'name': 'A "quoted" \\ name\nline'},
+                            {'si': 'SI_GAME_OWNED'}]}
+        result = render_locale(enums, missing)
+        self.assertNotIn('SI_GAME_OWNED =', result)
+        self.assertIn('SI_FURC_TEST', extract_strings(result.splitlines()))
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'locale.lua'
+            output = Path(temp) / 'registered.txt'
+            path.write_text('LibFurnitureCatalogue = { Internal = { RegisterStrings = function(strings) '
+                            'local f = assert(io.open(arg[1], "w")); '
+                            'f:write(strings.SI_FURC_TEST); f:close() end } }\n' + result)
+            loaded = subprocess.run([*self.command, str(path), str(output)],
+                                    text=True, capture_output=True, timeout=30)
+            self.assertEqual(loaded.returncode, 0, loaded.stderr)
+            self.assertEqual(output.read_text(), enums['events'][0]['name'])
+        with self.assertRaisesRegex(ValueError, 'missing English name'):
+            render_locale({'events': [{'si': 'SI_FURC_TEST'}]}, english)
 
     def test_added_vocabulary_entry_and_declared_mapping(self):
         enums = copy.deepcopy(self.catalogue.enums)

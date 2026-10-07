@@ -13,7 +13,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from generate_db import ROOT, canonical, load_inputs, read_json, render, require, verify
+from generate_db import ROOT, canonical, load_inputs, read_json, render, render_locale, require, verify
 from jsonschema import Draft202012Validator
 
 BEGIN = '[//]: # (diff-begin)'
@@ -287,6 +287,8 @@ def apply(lines, root=ROOT, lua_command=None):
         for name, content in outputs.items():
             (candidate / name).write_text(content, encoding='utf-8')
         verify(candidate, projection, command)
+        locale = 'LibFurnitureCatalogue/locale/en.lua'
+        files.put(locale, render_locale(enums, files.read(locale).decode()).encode())
         for name, content in outputs.items():
             files.put('LibFurnitureCatalogue/data/' + name, content.encode())
     return files.changed, {'payload_sha256': payload_hash(lines), 'operations': summaries,
