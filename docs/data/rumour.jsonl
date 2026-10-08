@@ -153,7 +153,6 @@
 {"id":119687,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":119688,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":119689,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
-{"id":119690,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":120411,"source":{"type":"rumour"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":120485,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NECROM"}}
 {"id":120851,"source":{"type":"rumour"},"cost":[],"availability":{"version":"DEADL"}}
@@ -277,7 +276,6 @@
 {"id":226918,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226936,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":226941,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":227313}
 {"id":94117,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":117765,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":117835,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
@@ -297,4 +295,3 @@
 {"id":223131,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224850,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224897,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":226746,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}

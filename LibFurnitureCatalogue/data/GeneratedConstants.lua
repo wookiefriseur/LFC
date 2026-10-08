@@ -46,6 +46,8 @@ LFCGeneratedConstants={
       ["TRUTH_IN_SEQUENCE"]=32,
     },
     ["bundles"]={
+      ["BITTERMERCY"]=7, -- Spear of Bitter Mercy Style
+      ["CHRYSAMERE"]=8, -- Chrysamere Style
       ["DWEMER"]=1, -- Dwemer
       ["EBONY"]=2, -- Ebony Blade Style
       ["FIRSTBLADE"]=3, -- Firstblade Style
@@ -545,6 +547,8 @@ LFCGeneratedConstants={
       [4]={["si"]="SI_FURC_ITEMPACK_JYGGALAG"}, -- JYGGALAG - Sword of Jyggalag Style
       [5]={["si"]="SI_FURC_ITEMPACK_RAZOR"}, -- RAZOR - Mehrunes' Razor
       [6]={["si"]="SI_FURC_ITEMPACK_STABLE"}, -- STABLE - Steadfast Stablemaster Bundle
+      [7]={["si"]="SI_FURC_ITEMPACK_BITTERMERCY"}, -- BITTERMERCY - Spear of Bitter Mercy Style
+      [8]={["si"]="SI_FURC_ITEMPACK_CHRYSAMERE"}, -- CHRYSAMERE - Chrysamere Style
     },
     ["companions"]={},
     ["containers"]={
@@ -989,6 +993,8 @@ LFCGeneratedConstants={
       [4]="JYGGALAG", -- Sword of Jyggalag Style
       [5]="RAZOR", -- Mehrunes' Razor
       [6]="STABLE", -- Steadfast Stablemaster Bundle
+      [7]="BITTERMERCY", -- Spear of Bitter Mercy Style
+      [8]="CHRYSAMERE", -- Chrysamere Style
     },
     ["companions"]={[1]="AZANDAR",[2]="EMBER",[3]="ISOBEL",[4]="SHARP_AS_NIGHT",[5]="TANLORIN",[6]="ZERITH_VAR"},
     ["containers"]={
@@ -1452,5 +1458,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="bb498c9d342748579c8174eeb1197b1ac6d51e01a6e25049086321e9b44e8cba",
+  ["vocabulary"]="b3e62c7100d53595c1936525a871bd9784b150b9e20dd67c08b1300d473e4fa4",
 }

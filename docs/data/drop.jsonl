@@ -52,17 +52,17 @@
 {"id":121058,"source":{"type":"drop","note":"SI_FURC_DB_STEALTH","subtype":"dark_brotherhood"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":125543,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125544,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125551,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125552,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125553,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125551,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125552,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"rare"}
+{"id":125553,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"rare"}
 {"id":125562,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125583,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125583,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125590,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125595,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125596,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125597,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"shroom beetles"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125600,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125606,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125597,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"shroom beetles"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"extremely_rare"}
+{"id":125600,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and Alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125606,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125608,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125609,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125613,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -82,7 +82,7 @@
 {"id":125637,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125647,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125648,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125649,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125649,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"extremely_rare"}
 {"id":125650,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125670,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125671,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -155,7 +155,7 @@
 {"id":126772,"source":{"type":"drop","npc_class":"CLASS_THIEF","subtype":"pickpocket"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126773,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"SI_FURC_RUINS"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126773,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"SI_FURC_TOMBS"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":126830,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":126830,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":127149,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"},{"location":"PDUNG_VVARDENFELL_FW"}]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":130067,"source":{"type":"drop","note":"SI_FURC_SRC_DOLMEN","npc_class":"CLASS_DAEDRA"},"cost":[],"availability":{"version":"REACH"}}
 {"id":130191,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"REACH"}}
