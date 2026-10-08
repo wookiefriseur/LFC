@@ -1768,6 +1768,16 @@
       "symbol": "STABLE",
       "si": "SI_FURC_ITEMPACK_STABLE",
       "name": "Steadfast Stablemaster Bundle"
+    },
+    {
+      "symbol": "BITTERMERCY",
+      "si": "SI_FURC_ITEMPACK_BITTERMERCY",
+      "name": "Spear of Bitter Mercy Style"
+    },
+    {
+      "symbol": "CHRYSAMERE",
+      "si": "SI_FURC_ITEMPACK_CHRYSAMERE",
+      "name": "Chrysamere Style"
     }
   ],
   "skill_lines": [

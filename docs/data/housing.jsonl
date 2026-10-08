@@ -265,10 +265,10 @@
 {"id":121056,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":125484,"source":{"type":"housing","houses":[11525,11223,1243]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125545,"source":{"type":"housing","houses":[11525,11223]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125546,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":125550,"source":{"type":"housing","houses":[12732,11223,1245]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125546,"source":{"type":"housing","houses":[1245,14778,14779]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":125550,"source":{"type":"housing","houses":[12732,11223,1245,14778,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125561,"source":{"type":"housing","houses":[12732]},"cost":[],"availability":{"version":"BASE44"}}
-{"id":125565,"source":{"type":"housing","houses":[1244]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125565,"source":{"type":"housing","houses":[1243,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125566,"source":{"type":"housing","houses":[1243]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125567,"source":{"type":"housing","houses":[1244]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125568,"source":{"type":"housing","houses":[1243]},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -277,8 +277,8 @@
 {"id":125579,"source":{"type":"housing","houses":[1243]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125580,"source":{"type":"housing","houses":[1244]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125581,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125607,"source":{"type":"housing","houses":[11223,12732,11525]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125610,"source":{"type":"housing","houses":[11223,11525]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125607,"source":{"type":"housing","houses":[11223,12732,11525,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125610,"source":{"type":"housing","houses":[11223,11525,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126128,"source":{"type":"housing","houses":[6752]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126462,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126463,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -288,8 +288,8 @@
 {"id":126477,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126478,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126479,"source":{"type":"housing","houses":[1245]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":126601,"source":{"type":"housing","houses":[1243]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":126607,"source":{"type":"housing","houses":[1244,1243]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":126601,"source":{"type":"housing","houses":[1243,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":126607,"source":{"type":"housing","houses":[1244,1243,14779]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":130070,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"REACH"}}
 {"id":130078,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"REACH"}}
 {"id":130080,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"REACH"}}
@@ -366,9 +366,9 @@
 {"id":134945,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134947,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134948,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":134950,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134950,"source":{"type":"housing","houses":[4794,14779]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134951,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":134952,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":134952,"source":{"type":"housing","houses":[4794,14779]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134953,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134970,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134971,"source":{"type":"housing","houses":[4794]},"cost":[],"availability":{"version":"DRAGONS"}}
@@ -657,3 +657,25 @@
 {"id":223181,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223732,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223942,"source":{"type":"housing","houses":[13882]},"cost":[],"availability":{"version":"WORMS2"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225406,"name_overrides":{"en":"Carnaval Wagon, Covered"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225405,"name_overrides":{"en":"Carnaval Wall, Long Rectangular Cloth"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225404,"name_overrides":{"en":"Carnaval Tent, Enclosed"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217695,"name_overrides":{"en":"Carnaval Tent, Open"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217697,"name_overrides":{"en":"Carnaval Wall, Rectangular Cloth"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217698,"name_overrides":{"en":"Carnaval Wall, Triangular Cloth"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225410,"name_overrides":{"en":"Vines, Rose Ivy Curtain"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225412,"name_overrides":{"en":"Vines, Rose Ivy Drape"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225411,"name_overrides":{"en":"Vines, Rose Ivy Swath"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225409,"name_overrides":{"en":"Vines, Verdant Rose Ivy Swath"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225414,"name_overrides":{"en":"Flowers, Large Rose Ivy Patch"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225413,"name_overrides":{"en":"Flowers, Small Rose Ivy Patch"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"DRAGONS"},"id":134900,"name_overrides":{"en":"Flowers, Red Poppy"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225407,"name_overrides":{"en":"Colovian Throne, Noble"}}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192420,"name_overrides":{"en":"Maormer Rug, Serpentine"}}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192422,"name_overrides":{"en":"Maormer Half-Rug"}}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192423,"name_overrides":{"en":"Maormer Runner, Amethyst Waves"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":125605,"name_overrides":{"en":"Mushroom, Young Erupted Stinkcap"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":125603}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126597,"name_overrides":{"en":"Velothi Painting, Oversized Volcano"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126598}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126604,"name_overrides":{"en":"Velothi Panels, Geyser"}}

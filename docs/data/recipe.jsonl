@@ -3367,8 +3367,8 @@
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226899,"id":226757}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226897,"id":226755}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226906,"id":226770}
-{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226903,"id":226766}
-{"id":226768,"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226905}
+{"source":{"type":"recipe","note":"Antiquity during High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226903,"id":226766}
+{"id":226768,"source":{"type":"recipe","note":"Antiquity during High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":226905}
 {"id":224915,"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225128}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225143,"id":224932}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225144,"id":224933}
@@ -3408,3 +3408,4 @@
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225158,"id":224947}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225159,"id":224948}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225160,"id":224949}
+{"source":{"type":"recipe"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":227313,"id":226746}

@@ -28,7 +28,7 @@
       "name": "vendor.jsonl",
       "type": "vendor",
       "records": 1384,
-      "digest": "b097e9fffac9490c"
+      "digest": "440c64483b40bbc3"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -63,26 +63,26 @@
     {
       "name": "crown_crate.jsonl",
       "type": "crown_crate",
-      "records": 152,
-      "digest": "fcc08278d52cfa7f"
+      "records": 153,
+      "digest": "f342a37572d67ac8"
     },
     {
       "name": "crown_store.jsonl",
       "type": "crown_store",
-      "records": 1724,
-      "digest": "0afdb3cb0f3d607c"
+      "records": 1729,
+      "digest": "3301a432e520faae"
     },
     {
       "name": "recipe.jsonl",
       "type": "recipe",
-      "records": 3410,
-      "digest": "a8012562c2ff7713"
+      "records": 3411,
+      "digest": "d7be27e2744a625d"
     },
     {
       "name": "drop.jsonl",
       "type": "drop",
       "records": 707,
-      "digest": "a096d20f17267a03"
+      "digest": "530a4006cf8ac662"
     },
     {
       "name": "quest_reward.jsonl",
@@ -99,8 +99,8 @@
     {
       "name": "housing.jsonl",
       "type": "housing",
-      "records": 659,
-      "digest": "b3bac02989ba6bb8"
+      "records": 681,
+      "digest": "ca3b1269388784a8"
     },
     {
       "name": "companion.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 300,
-      "digest": "8b8029ea6135fb30"
+      "records": 297,
+      "digest": "38c863bb3a7901ce"
     },
     {
       "name": "ignored.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "90bc6036e861bf49",
+  "digest": "c192e634cc0c5aaa",
   "counts": {
-    "records": 10044,
+    "records": 10070,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -156,18 +156,18 @@
       "luxury": 665,
       "event_drop": 88,
       "event_vendor": 98,
-      "crown_crate": 152,
-      "crown_store": 1724,
-      "recipe": 3410,
+      "crown_crate": 153,
+      "crown_store": 1729,
+      "recipe": 3411,
       "drop": 707,
       "quest_reward": 41,
       "dungeon_drop": 120,
-      "housing": 659,
+      "housing": 681,
       "companion": 6,
       "guild_gift": 12,
       "tome_pack": 19,
       "container": 182,
-      "rumour": 300,
+      "rumour": 297,
       "ignored": 337
     }
   }
