@@ -27,8 +27,8 @@
     {
       "name": "vendor.jsonl",
       "type": "vendor",
-      "records": 1381,
-      "digest": "ea28a1f3654c359d"
+      "records": 1384,
+      "digest": "b097e9fffac9490c"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -51,8 +51,8 @@
     {
       "name": "event_drop.jsonl",
       "type": "event_drop",
-      "records": 86,
-      "digest": "480b9b2969a20525"
+      "records": 88,
+      "digest": "bb05b4ce2ee98d39"
     },
     {
       "name": "event_vendor.jsonl",
@@ -69,8 +69,8 @@
     {
       "name": "crown_store.jsonl",
       "type": "crown_store",
-      "records": 1700,
-      "digest": "d8f3e72b4e61ab93"
+      "records": 1724,
+      "digest": "0afdb3cb0f3d607c"
     },
     {
       "name": "recipe.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 329,
-      "digest": "b4cb1ac8990e7aff"
+      "records": 300,
+      "digest": "8b8029ea6135fb30"
     },
     {
       "name": "ignored.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "0033676cb13e9526",
+  "digest": "90bc6036e861bf49",
   "counts": {
     "records": 10044,
     "ids": 12345,
@@ -150,14 +150,14 @@
     "rumour_dropped": 1,
     "separator_rejected": 0,
     "by_type": {
-      "vendor": 1381,
+      "vendor": 1384,
       "pvp_vendor": 84,
       "writ_vendor": 56,
       "luxury": 665,
-      "event_drop": 86,
+      "event_drop": 88,
       "event_vendor": 98,
       "crown_crate": 152,
-      "crown_store": 1700,
+      "crown_store": 1724,
       "recipe": 3410,
       "drop": 707,
       "quest_reward": 41,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 19,
       "container": 182,
-      "rumour": 329,
+      "rumour": 300,
       "ignored": 337
     }
   }
