@@ -81,6 +81,8 @@
 {"id":219730,"source":{"type":"event_drop","event":"WRITHING"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":219731,"source":{"type":"event_drop","event":"WRITHING"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":219732,"source":{"type":"event_drop","event":"WRITHING"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":226771,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"THIEVES"}}
+{"id":226771,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226759,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226761,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226769,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226784,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
