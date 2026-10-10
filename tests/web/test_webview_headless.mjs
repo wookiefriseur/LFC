@@ -1940,7 +1940,7 @@ test("several ticked rows take one source in a single edit", async (page) => {
   assertEq(count, "2 records ticked", `the batch panel miscounts: "${count}"`);
   const fields = await page.$$eval("#panel-advanced .edit-form [data-field]",
     (n) => n.map((e) => e.getAttribute("data-field")));
-  const BATCH = ["cost.0.amount", "cost.0.currency", "availability.version", "notes"];
+  const BATCH = ["cost.0.amount", "cost.0.currency", "availability.version", "availability.last_seen", "notes"];
   assert(fields.every((f) => f.startsWith("source.") || BATCH.includes(f)),
     `the batch form offers a per-record field: ${fields.join(", ")}`);
 
@@ -2791,6 +2791,98 @@ test("Batch edit: a field's error sentence spans the whole row, not the label co
     return { error: p.getBoundingClientRect().width, row: row.width, text: p.textContent };
   });
   assert(r.error > r.row * 0.9, `the error is ${Math.round(r.error)}px in a ${Math.round(r.row)}px row: ${r.text}`);
+});
+
+test("Batch edit: ticked Luxury records take one last-seen date, and a mixed date left empty changes nothing", async (page) => {
+  await page.evaluate(() => window.__proto.forgetPending());
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  await page.select("#filter-type", "luxury");
+  await page.waitForSelector('#panel-advanced tbody .cell-tick input');
+  // Two rows whose dates differ, so the panel starts on "(mixed)".
+  const ids = await page.evaluate(() => {
+    const seen = (id) => window.__proto.records().find((r) => r.id === id && r.source?.type === "luxury")?.availability?.last_seen ?? null;
+    const rows = [...document.querySelectorAll("#panel-advanced tbody tr")].filter((r) => r.querySelector(".cell-tick input"));
+    const first = rows[0];
+    const other = rows.find((r) => seen(Number(r.children[1].textContent)) !== seen(Number(first.children[1].textContent)));
+    const picked = [first, other].filter(Boolean).map((r) => Number(r.children[1].textContent));
+    // A tick re-renders the table, so each row is looked up again.
+    for (const id of picked) {
+      const row = [...document.querySelectorAll("#panel-advanced tbody tr")].find((r) => Number(r.children[1]?.textContent) === id);
+      row.querySelector(".cell-tick input").click();
+    }
+    return picked;
+  });
+  assertEq(ids.length, 2, "no two Luxury rows with different last-seen dates");
+  await page.waitForSelector("#multi-apply");
+  const date = '#detail [data-field="availability.last_seen"]';
+  await page.waitForSelector(date, { timeout: 5000 });
+  assertEq(await page.$eval(date, (e) => e.value), "", "a mixed date shows a value");
+  const message = async () => page.$eval("#multi-message", (e) => e.textContent);
+  await page.$eval("#multi-apply", (b) => b.click());
+  assert(!/saved to the change list/.test(await message()), `an untouched mixed date wrote a change: ${await message()}`);
+
+  await page.$eval(date, (e) => { e.value = "2026-10-09"; e.dispatchEvent(new Event("input", { bubbles: true })); });
+  await page.$eval("#multi-apply", (b) => b.click());
+  const lines = (await diffLines(page)).filter((l) => ids.includes(l.id));
+  assertEq(lines.length, 2, "both ticked records should carry the date");
+  for (const l of lines) {
+    assertEq(l.op, "update", `id ${l.id} exports ${l.op}`);
+    assertEq(l.fields?.availability?.last_seen, "2026-10-09", `id ${l.id} did not take the date: ${JSON.stringify(l)}`);
+  }
+});
+
+test("Batch edit: a pack list shows its labels, keeps a second pack, and an edit writes a list", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const rec = await page.evaluate(() => window.__proto.records()
+    .find((r) => Array.isArray(r.source?.packs) && r.source.packs.length === 2));
+  assert(rec, "no record with two packs");
+  await selectRecord(page, rec._key, rec.id);
+  const picks = '#detail .pack-list .pack-row select';
+  await page.waitForSelector(picks, { timeout: 5000 });
+  const shown = await page.$$eval(picks, (s) => s.map((x) => ({ value: x.value, text: x.selectedOptions[0].textContent })));
+  assertEq(shown.map((x) => x.value).join(","), rec.source.packs.join(","), "the packs are not both shown");
+  assert(shown.every((x) => !/not in the list/.test(x.text)), `a listed pack reads as unknown: ${JSON.stringify(shown)}`);
+  // Remove the second pack: the record keeps a one-element list, not a bare symbol.
+  await page.$$eval('#detail .pack-list .pack-row .clear-link', (b) => b[1].click());
+  const after = await page.evaluate(() => window.__proto.editing()?.source?.packs);
+  assertEq(JSON.stringify(after), JSON.stringify([rec.source.packs[0]]), "removing a pack did not leave a list");
+});
+
+test("names: vocabulary labels can be edited, restored after reload, cancelled and reverted", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "names");
+  await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count")?.textContent || ""));
+  await page.click('#names-lists [data-list="vocab:events"]');
+  const cell = '#names-table tbody tr:last-child td:nth-child(2)';
+  const original = await page.$eval(cell, (e) => e.textContent);
+  const symbol = await page.$eval('#names-table tbody tr:last-child td:first-child', (e) => e.textContent);
+  await page.click(cell);
+  await page.$eval(`${cell} input`, (e) => { e.value = "High Seas of Tamriel"; });
+  await page.keyboard.press("Enter");
+  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "edited event label");
+  let lines = await diffLines(page);
+  assert(lines.some((l) => l.op === "enum-name" && l.enum === "events" && l.value === symbol && l.name === "High Seas of Tamriel"), "missing event diff");
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "names");
+  await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count")?.textContent || ""));
+  await page.click('#names-lists [data-list="vocab:events"]');
+  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "restored event label");
+  await page.click(cell);
+  await page.$eval(`${cell} input`, (e) => { e.value = "Cancelled"; });
+  await page.keyboard.press("Escape");
+  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "cancelled edit");
+  await page.click(cell);
+  await page.$eval(`${cell} input`, (e, name) => { e.value = name; }, original);
+  await page.keyboard.press("Tab");
+  assertEq(await page.$eval(cell, (e) => e.textContent), original, "reverted label");
+  assertEq(await page.$$eval("#names-table tr.is-pending", (rs) => rs.length), 0, "reverted event is still pending");
+  assert(await page.$eval("#btn-submit", (e) => e.disabled), "reverted change is still submit-able");
 });
 
 test("names: the tab lists the game names, a pasted dump becomes name lines, and Browse shows house names", async (page) => {

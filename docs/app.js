@@ -1360,7 +1360,8 @@ function batchPaths(...recs) {
   const keys = new Set();
   for (const r of recs) for (const k of Object.keys(r?.source || {})) keys.add(k);
   keys.delete("type");
-  return ["source.type", ...[...keys].map((k) => `source.${k}`), "cost", "availability.version", "notes"];
+  return ["source.type", ...[...keys].map((k) => `source.${k}`), "cost", "availability.version",
+    "availability.last_seen", "notes"];
 }
 
 function batchBaseline(records) {

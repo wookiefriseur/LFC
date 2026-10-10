@@ -213,6 +213,12 @@ export function changeRows(bufferOrEntries, ctx = {}) {
   const rows = [];
 
   for (const entry of entries) {
+    if (entry.op === "enum-name") {
+      rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
+        item: `${entry.enumName}: ${entry.value}`, record: "en", field: `${entry.enumName}.name`, what: "Vocabulary name",
+        before: entry.before, after: entry.name, markers: [], siteOnly: false });
+      continue;
+    }
     if (entry.op === "name") {
       rows.push({
         entryKey: entry.key,

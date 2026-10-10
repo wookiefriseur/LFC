@@ -213,10 +213,29 @@ do
   }
 end
 
+-- Symbol -> one metadata field of a vocabulary the webinterface can extend. A hand-kept copy here missed every value added there.
+local generated = assert(LFCGeneratedConstants)
+local function fromVocabulary(key, field)
+  local out = {}
+  for name, ordinal in pairs(generated.ids[key]) do
+    out[name] = generated.metadata[key][ordinal][field]
+  end
+  return out
+end
+
+-- Symbol -> the string id its `si` names (SI_* constants exist once the locale has loaded)
+local function stringsOf(key)
+  local out = {}
+  for name, si in pairs(fromVocabulary(key, "si")) do
+    out[name] = _G[si]
+  end
+  return out
+end
+
 this.Versioning = {}
 this.VersionNames = {}
 local latestVersion = 0
-for name, value in pairs(assert(LFCGeneratedConstants).ids.versions) do
+for name, value in pairs(generated.ids.versions) do
   this.Versioning[name] = value
   this.VersionNames[value] = name
   latestVersion = math.max(latestVersion, value)
@@ -229,96 +248,10 @@ this.Versioning.ZERO2 = this.Versioning.THIEVES
 
 -- Game zones, translated by the game
 --  Careful: the ids may change with expansions, use FurCDev.FindZone to fix any broken ones
-this.ZoneIds = {
-  ALIKR = 104, -- Alik'r Desert
-  APOCRYPHA = 1413, -- Apocrypha
-  ARTAEUM = 1027, -- Artaeum
-  AURIDON = 381, -- Auridon
-  BALFOYEN = 281, -- Bal Foyen
-  BANG = 92, -- Bangkorai
-  BETNIKH = 535, -- Betnikh
-  BLACKREACH_GMC = 1161, --  Blackreach: Greymoor Caverns
-  BLACKWOOD = 1261, -- Blackwood
-  BLEAK = 280, -- Bleakrock Isle
-  COLDH = 347, -- Coldharbor
-  CRAGLORN = 888, -- Craglorn
-  CWC = 980, -- Clockwork City
-  CYRO = 181, -- Cyrodiil
-  DEADLANDS = 1286, -- Deadlands
-  DESHAAN = 57, -- Deshaan
-  DUNG_DOM = 1081, -- Depths of Malatar
-  DUNG_FL = 1009, -- Fang Lair
-  DUNG_FV = 1080, -- Frostvault
-  DUNG_IA = 1436, -- Infinite Archive
-  DUNG_MHK = 1052, -- Moon Hunter Keep
-  DUNG_MOS = 1055, -- March of the Sacrifices
-  DUNG_NYMIC = 1420, -- Bastion Nymic
-  DUNG_SCP = 1010, -- Scalecaller Peak
-  DUNG_SCRIV = 1390, -- Scrivener's Hall
-  EASTMARCH = 101, -- Eastmarch
-  FARGRAVE = 1282, -- Fargrave
-  GALEN = 1383, -- Galen
-  GLENUMBRA = 3, -- Glenumbra
-  GOLDCOAST = 823, -- Gold Coast
-  GRAHTWOOD = 383, -- Grahtwood
-  GREENSHADE = 108, -- Greenshade
-  HEWSBANE = 816, -- Hew's Bane
-  HIGHISLE = 1318, -- High Isle
-  IMPCITY = 584, -- Imperial City
-  KHENARTHI = 537, -- Khenarthi's Roost
-  MALABAL = 58, -- Malabal Tor
-  MURKMIRE = 726, -- Murkmire
-  NELSWEYR = 1086, -- Northern Elsweyr
-  NMARKET = 1559, -- Night Market
-  PDUNG_VVARDENFELL_FW = 919, -- Forgotten Wastes
-  REACH = 1207, -- The Reach
-  REAPER = 382, -- Reaper's March
-  RIFT = 103, -- Rift
-  RIVENSPIRE = 20, -- Rivenspire
-  SCHOLAR = 1463, -- The Scholarium
-  SELSWEYR = 1133, -- Southern Elsweyr
-  SHADOWFEN = 117, -- Shadowfen
-  SOLSTICE = 1502, -- Solstice
-  STONEFALLS = 41, -- Stonefalls
-  STORMHAVEN = 19, -- Stormhaven
-  STROSMKAI = 534, -- Stros M'Kai
-  SUMMERSET = 1011, -- Summerset
-  TELVANNI = 1414, -- Telvanni Peninsula
-  VVARDENFELL = 849, -- Vvardenfell
-  WEALD = 1443, -- West Weald
-
-  WROTHGAR = 684, -- Wrothgar
-  WSKYRIM = 1160, -- Western Skyrim
-}
+this.ZoneIds = fromVocabulary("locations", "zone")
 
 -- Places the game has no zone ids for
-this.PlaceIds = {
-  ANY = SI_FURC_LOC_ANY,
-  ANY_CAPITAL = SI_FURC_LOC_ANY_CAPITAL,
-  ANY_CITY = SI_FURC_LOC_ANY_CITY,
-  GUILD_FIGHTERS = SI_FURC_GUILD_FIGHTERS, -- location in AchievementVendors
-  GUILD_MAGES = SI_FURC_GUILD_MAGES, -- location in AchievementVendors
-  -- TODO
-  LILANDRIL = SI_FURC_LOC_LILANDRIL,
-  MURKMIRE_LIL = SI_FURC_LOC_MURKMIRE_LIL,
-  PLACE_ORSINIUM = SI_FURC_LOC_PLACE_ORSINIUM,
-  REACH_MARKARTH_MM = SI_FURC_LOC_REACH_MARKARTH_MM,
-  SELSWEYR_DHA = SI_FURC_LOC_SELSWEYR_DHA,
-  SELSWEYR_SENCHAL_MARKET = SI_FURC_LOC_SELSWEYR_SENCHAL_MARKET,
-  SHADOWFEN_CORIMONT = SI_FURC_LOC_SHADOWFEN_CORIMONT,
-  STONEFALLS_EBONHEART = SI_FURC_LOC_STONEFALLS_EBONHEART,
-  SUMMERSET_ALINOR = SI_FURC_LOC_SUMMERSET_ALINOR,
-  SUMMERSET_ALINOR_RIVERSIDE = SI_FURC_LOC_SUMMERSET_ALINOR_RIVERSIDE,
-  UNDAUNTED = SI_FURC_LOC_UNDAUNTED,
-  STORMHAVEN_WAY_MERCH = SI_FURC_LOC_STORMHAVEN_WAY_MERCH,
-  TELVANNI_NECROM_FRF = SI_FURC_TELVANNI_NECROM_FRF,
-  VVARDENFELL_SURAN = SI_FURC_LOC_VVARDENFELL_SURAN,
-  VVARDENFELL_ALDRUHN = SI_FURC_LOC_VVARDENFELL_ALDRUHN, -- Vvardenfell
-  VVARDENFELL_VIVEC = SI_FURC_LOC_VVARDENFELL_VIVEC,
-  VVARDENFELL_VIVEC_GQ = SI_FURC_LOC_VVARDENFELL_VIVEC_GQ,
-  VVARDENFELL_VIVEC_SDI = SI_FURC_LOC_VVARDENFELL_VIVEC_SDI,
-  WSKYRIM_SOLI_DH = SI_FURC_LOC_WSKYRIM_SOLI_DH,
-}
+this.PlaceIds = stringsOf("places")
 
 -- Localised names, keyed as before. Zones and places share the namespace
 this.Locations = {}
@@ -338,41 +271,7 @@ end
 
 -- NPC ids, for better readability and more control of the string sources
 -- Names keep the game's grammar markup; the formatter resolves it
-this.NpcIds = {
-  -- Writ Furnishers
-  ROLIS = SI_FURC_TRADERS_ROLIS, -- Rolis Hlaalu, Mastercraft Mediator
-  FAUSTINA = SI_FURC_TRADERS_FAUSTINA, -- Faustina Curio, Achievement Mediator
-
-  -- Other Furnishers
-  ALCHEMISTS = SI_FURC_TRADERS_ALCHEMISTS, -- any alchemist
-  BLACKSMITHS = SI_FURC_TRADERS_BLACKSMITHS, -- any blacksmith
-  CARPENTERS = SI_FURC_TRADERS_CARPENTERS, -- any capenter
-  CLOTHIERS = SI_FURC_TRADERS_CLOTHIERS, -- any clothier
-  COOKS = SI_FURC_TRADERS_COOKS, -- any cook
-  ENCHANTERS = SI_FURC_TRADERS_ENCHANTERS, -- any enchanter
-
-  -- Special Merchants
-  AF = SI_FURC_TRADERS_AF, -- Achievement Vendor: Lozotusk, ...
-  BGF = SI_FURC_TRADERS_BGF, -- Battlegrounds Furnishers
-  CAF = SI_FURC_TRADERS_CAF, -- Global Achievement Vendor: Nolenowen, ...
-  EVENT = SI_FURC_TRADERS_EVENT, -- Event Merchant, any capital city: The Impressario
-  HGF = SI_FURC_TRADERS_HGF, -- Home Goods Furnisher: Maladdiq, Rohzika, ... (19 named NPCs over 44 placements)
-  HOLIDAY = SI_FURC_TRADERS_HOLIDAY, -- Heralda, Tildannire, ...
-  LUXF = SI_FURC_TRADERS_LUXF, -- Luxury Furnisher: Zanil
-  NM = SI_FURC_TRADERS_NM, -- Night Market Vendors: Nymisasha, Fennel, Najirra
-  COLL_MERCH = SI_FURC_TRADERS_COLL_MERCH, -- Tel Var Collectibles Merchant: Enruvie, Skoref Bearblood, Bernamund Bertault
-
-  -- Guild Traders
-  FIGHTERS_STEWARD = SI_FURC_GUILD_FIGHTERS_STEWARD, -- stewards in Fighters Guild locations
-  MAGES_MYSTIC = SI_FURC_GUILD_MAGES_MYSTIC, --  mystics in Mages Guild locations
-  PSIJIC_NALIRSEWEN = SI_FURC_GUILD_PSIJIC_NALIRSEWEN, -- Psijic Trader on Artaeum
-  THIEVES_MERCH = SI_FURC_GUILD_THIEVES_MERCH, -- Outlaw Merchant in any refuge
-  UNDAUNTED_QM = SI_FURC_GUILD_UNDAUNTED_QM, -- Undaunted Achievement trader
-
-  -- enemies (loot)
-  ENEMY_AUTOMATON = SI_FURC_NPC_AUTOMATON,
-  ENEMY_ECHATERE = SI_FURC_NPC_ECHATERE,
-}
+this.NpcIds = stringsOf("vendors")
 
 -- Default vendor locations
 --
@@ -444,9 +343,7 @@ for key, stringId in pairs(SOCIAL_CLASS_STRINGS) do
 end
 
 -- Groups of enemies, rendered plural
-this.NpcGroupIds = {
-  ENEMY_RND = SI_FURC_SRC_RNDMOB,
-}
+this.NpcGroupIds = stringsOf("npc_groups")
 
 this.NPC = {}
 this.NpcByName = {}
@@ -458,56 +355,8 @@ deriveNames(this.NpcGroupIds, getNpcGroupStr, this.NPC, this.NpcByName)
 
 this.AchievementIds = { UNKNOWN = 0 }
 
-this.CrownCrateIds = {
-  -- Source: https://en.uesp.net/wiki/Online:Crown_Crates
-
-  -- a crate row that does not say which crate
-  UNKNOWN = 0,
-
-  -- ids not confirmed ingame yet
-
-  KINDRED = 64, -- 2025-12, Hidden Kindred
-
-  -- confirmed ids
-  ANU_PAD = 67, -- 2026-06, Anu vs. Padomay
-  DB = 60, -- 2024-12, Dark Brotherhood
-  MIRROR = 61, -- 2025-03, Mirrormoor
-  WAVE = 66, -- 2026-06, Warrior Wave
-  AKA_ALDU = 63, -- 2025-09, Akatosh vs. Alduin
-  CARNAVAL = 62, -- 2025-06, Carnaval
-  ORSINIUM = 65, -- 2026-03, Moons Over Orsinium
-  DIAMOND = 59, -- 2024-07, Diamond Anniversary
-  LAMP = 58, -- 2024-04 Order of the Lamp
-  ALLMAKER = 57, -- 2023-12 All-Maker
-  ARMIGER = 55, -- 2023-09 Buoyant Armiger
-  FEATHER = 54, -- 2023-06, Unfeathered
-  RAGE = 53, -- 2023-04 Ragebound
-  STONELORE = 52, -- 2022-12 Stonelore
-  WRAITH = 51, -- 2022-09 Wraithtide
-  DARK = 50, -- 2022-06 Dark Chivalry
-  SUNKEN = 49, -- 2022-04 Sunken Trove
-  CELESTIAL = 48, -- 2021-12 Celestial
-  HARLEQUIN = 47, -- 2021-09 Grim Harlequin
-  IRON_ATRO = 46, -- 2021-06 Iron Atronach
-  AYLEID = 45, -- 2021-03 Ayleid
-  POTENTATE = 44, -- 2020-12, Akaviri Potentate
-  SOVNGARDE = 41, -- 2020-09 Sovngarde
-  NIGHTFALL = 39, -- 2020-06 Nightfall
-  GLOOMSPORE = 37, -- 2020-04 Gloomspore
-  FROST_ATRO = 30, -- 2020-01 Frost Atronach
-  NEWMOON = 27, -- 2019-09 New Moon
-  BAANDARI = 21, -- 2019-07, Baandari Pedlar
-  DRAGONSCALE = 24, -- 2019-04 Dragonscale
-  XANMEER = 12, -- 2018-12, Xanmeer
-  HOLLOWJACK = 10, -- 2018-09, Hollowjack
-  PSIJIC = 9, -- 2018-06, Psijic Vault
-  SCALECALLER = 8, -- 2018-03, Scalecaller
-  FIRE_ATRO = 6, -- 2017-11, Flame Atronach
-  REAPER = 5, -- 2017-09, Reaper's Harvest
-  DWEMER = 4, -- 2017-07, Dwarven
-  WILD_HUNT = 2, -- 2017-04, Wild Hunt
-  --STORM_ATRO = 1, -- 2016-12, Storm Atronach, no exclusive furnishings
-}
+-- Crate ids per season: https://en.uesp.net/wiki/Online:Crown_Crates. UNKNOWN (0) is a crate row that does not say which crate.
+this.CrownCrateIds = fromVocabulary("crates", "crate")
 
 this.CrownCrates = {}
 this.CrownCrateByName = {}
@@ -553,66 +402,7 @@ this.BookContainers = {
   NOTHING_EYES = 145596, -- Look Upon Their Nothing Eyes (Murkmire)
 }
 
-this.ItemPacks = {
-  -- Source: PTS + UESP dump
-
-  ALCHEMIST = 197984, -- Furnishing Pack: Mad Alchemist
-  AMBITIONS = 197988, -- Furnishing Pack: Daedric Ambitions
-  AQUATIC = 197990, -- Furnishing Pack: Aquatic Splendor
-  ASTULA = 197994, -- Furnishing Pack: Shad Astula Scholars
-  AYLEID = 197959, -- Furniture Pack: Ayleid
-  AZURA = 197956, -- Furnishing Pack: Azura
-  COLDHARBOUR = 197964, -- Furnishing Pack: Coldharbour Arcanaeum
-  COMBAT = 214259, -- Furnishing Pack: Combat Training
-  COVEN = 197960, -- Furnishing Pack: Witches' Coven
-  CRAGBED = 197941, -- Craglorn Multicultural Bedroom Pack
-  CRAGKITCHEN = 197940, -- Craglorn Multicultural Kitchen Pack
-  CRAGKNICKS = 197943, -- Craglorn Multicultural Knick-Knacks Pack
-  CRAGPARLOUR = 197942, -- Craglorn Multicultural Parlor Pack
-  CURIO = 203179, -- Furnishing Pack: Apocryphal Curiosities
-  DARIEN = 225202, -- Furnishing Pack: Darien's Delights
-  DEEPMIRE = 197976, -- Furnishing Pack: Deepmire Expedition
-  DIBELLA = 197966, -- Furnishing Pack: Dibella's Garden
-  DRUIDIC = 198668, -- Furnishing Pack: Druidic Gatherings
-  DWARVEN = 212354, -- Furnishing Pack: Dwarven Training Dummies
-  FARGRAVE = 197989, -- Furnishing Pack: Fargrave Bazaar
-  FORGE = 197977, -- Furnishing Pack: Forge-Lord's Great Works
-  HAUNTED = 211094, -- Furnishing Pack: Haunted Housewares
-  HEART = 197982, -- Furnishing Pack: Heart's Day Retreat
-  HOLLOWJACK = 197973, -- Furnishing Pack: Sinister Hollowjack Items
-  HUBTREASURE = 197965, -- Furnishing Pack: Hubalajad's Final Treasure
-  JESTER = 204435, -- Furnishing Pack: Jester's Festival Stagecraft
-  KHAJIIT = 197981, -- Furnishing Pack: Khajiiti Life
-  LOOM = 214260, -- Furnishing Pack: Heart of the Loom
-  MALACATH = 197963, -- Furnishing Pack: Malacath's Chosen
-  MAORMER = 197993, -- Furnishing Pack: Maormer Boarding Party
-  MEPHALA = 197968, -- Furnishing Pack: Trappings of Mephala Worship
-  MERMAID = 197987, -- Furnishing Pack: Steam Bath Serenity
-  MOLAG = 197961, -- Furnishing Pack: Molag Bal
-  MOONBISHOP = 197979, -- Furnishing Pack: Moon-Bishop's Sanctuary
-  MOONPATH = 219746, -- Furnishing Pack: Moonlit Pathways
-  NECROM = 198324, -- Furnishing Pack: Necrom Garden
-  NEREID = 217656, -- Furnishing Pack: Water Dancer Nereid
-  NEWLIFE2018 = 197974, -- Furnishing Pack: New Life Festival
-  NOBLEBATH = 197972, -- Summerset Noble's Bathing Pack
-  NOBLEKIT = 197970, -- Summerset Noble's Kitchen Pack
-  NOBLEPARLOUR = 197971, -- Summerset Noble's Parlor Pack
-  OASIS = 197980, -- Furnishing Pack: Moons-Blessed Oasis
-  PIPES = 197957, -- Furnishing Pack: Dwarven Pipes
-  SANGUINE = 219745, -- Furnishing Pack: Sanguine's Festival
-  SOTHA = 197962, -- Furnishing Pack: The Clockwork God's Domain
-  SWAMP = 197975, -- Furnishing Pack: Shadow and Stone
-  THEATER = 217655, -- Furnishing Pack: Community Theater
-  TOYMAKER = 224366, -- Furnishing Pack: Toymaker's Trove
-  TREES = 197954, -- Trees of Tamriel Garden Pack
-  TYRANTS = 197967, -- Furnishing Pack: Tyrants of the Merethic Era
-  VAMPIRE = 197983, -- Furnishing Pack: Vampiric Libations
-  VIVEC = 197958, -- Furnishing Pack: Lord Vivec
-  WINDOWS = 197986, -- Furnishing Pack: Windows of the Divines
-  WINTER = 223659, -- Furnishing Pack: Winter's Feast
-  WRITHING = 223665, -- Furnishing Pack: Writhing Fortress
-  ZENI = 197985, -- Furnishing Pack: Chapel of Zenithar
-}
+this.ItemPacks = fromVocabulary("packs", "item")
 
 --- Tamriel Tomes item packs. We don't have ids for those, so we use the strings
 this.TomesPacks = {
@@ -622,52 +412,18 @@ this.TomesPacks = {
 }
 
 --- Crown Store bundles without itemlink, mv to ItemPacks when you get an ID
-this.ItemBundles = {
-  DWEMER = SI_FURC_ITEMPACK_DWEMER,
-  EBONY = SI_FURC_ITEMPACK_EBONY,
-  FIRSTBLADE = SI_FURC_ITEMPACK_FIRSTBLADE,
-  JYGGALAG = SI_FURC_ITEMPACK_JYGGALAG,
-  RAZOR = SI_FURC_ITEMPACK_RAZOR,
-  STABLE = SI_FURC_ITEMPACK_STABLE,
-}
+this.ItemBundles = stringsOf("bundles")
 
 -- The game's guilds are skill lines, so a vendor row uses this table to say which guild sells the item
 -- Guild source can be Mages, Fighters, Psijic, Thieves, Antiquariats (Thieves are connected to LEGERDEMAIN skill line; mages, fighters, antiquariats and psijic have their own)
-this.SkillLineIds = {
-  -- manual lookup for now:
-  -- /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
-  -- TODO: add skill line search to furcdev
-  -- TODO: look up the Antiquarian Circle id
-
-  FIGHTERS = 45,
-  LEGERDEMAIN = 111,
-  MAGES = 44,
-  PSIJIC = 130,
-  UNDAUNTED = 55,
-}
+-- Finding a new id: /script for i=1, 1000 do if (string.find(LocaleAwareToLower(GetSkillLineNameById(i)), "psijic")) then d(string.format("%d: %s", i, GetSkillLineNameById(i))) end end
+this.SkillLineIds = fromVocabulary("skill_lines", "skill_line")
 
 this.SkillLines = {}
 this.SkillLineByName = {}
 deriveNames(this.SkillLineIds, getSkillLineStr, this.SkillLines, this.SkillLineByName)
 
-this.EventIds = {
-  ANNIVERSARY = SI_FURC_EVENT_ANNIVERSARY, -- Anniversary Jubilee
-  BLACKWOOD = SI_FURC_EVENT_BLACKWOOD, -- Bounties of Blackwood
-  CRIME = SI_FURC_EVENT_CRIME, -- Crime Wave
-  ELSWEYR = SI_FURC_EVENT_ELSWEYR, -- Season of the Dragon
-  HOLLOWJACK = SI_FURC_EVENT_HOLLOWJACK, -- Sinister Hollowjack
-  IC = SI_FURC_EVENT_IC, -- Imperial City Celebration Event
-  JESTER = SI_FURC_EVENT_JESTER, -- Jester's Festival
-  MAYHEM = SI_FURC_EVENT_MAYHEM, -- Whitestrake's Mayhem
-  NEWLIFE = SI_FURC_EVENT_NEWLIFE, -- New Life Festival
-  UNDAUNTED = SI_FURC_EVENT_UNDAUNTED, -- Undaunted Celebration
-  WITCHES = SI_FURC_EVENT_WITCHES, -- Witches Festival
-  ZENITHAR = SI_FURC_EVENT_ZENITHAR, -- Zeal of Zenithar
-  HEARTS = SI_FURC_EVENT_HEARTS, -- Hearts Week
-  NIGHTMARKET = SI_FURC_EVENT_NIGHTMARKET, -- Night Market
-  WRITHING = SI_FURC_EVENT_WRITHING, -- Writhing Wall
-  ORSINIUM = SI_FURC_EVENT_ORSINIUM, -- Orsinium Celebration
-}
+this.EventIds = stringsOf("events")
 
 this.Events = {}
 this.EventByName = {}

@@ -12,9 +12,9 @@
       "const": 1
     },
     "op": {
-      "description": "Operation. `add-enum` targets enums.json and carries no id/category. `name` targets the names reference data (reference-data/names.<locale>.json). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
+      "description": "Operation. `add-enum` and `enum-name` target enums.json and carry no id/category; `enum-name` corrects the English label of an existing vocabulary entry. `name` targets the names reference data (reference-data/names.<locale>.json). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
       "type": "string",
-      "enum": ["update", "add", "delete", "add-enum", "name", "item"]
+      "enum": ["update", "add", "delete", "add-enum", "enum-name", "name", "item"]
     }
   },
   "oneOf": [
@@ -189,6 +189,19 @@
           "type": "string",
           "minLength": 1
         }
+      }
+    },
+    {
+      "title": "enum-name",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["v", "op", "enum", "value", "name"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "enum-name" },
+        "enum": { "type": "string", "pattern": "^[a-z][a-z_]*$" },
+        "value": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "name": { "type": "string", "description": "The English label. No `^`: that starts an ESO grammar suffix, which the pipeline keeps from the existing string.", "pattern": "^[^\\^]*[^\\^\\s][^\\^]*$" }
       }
     },
     {

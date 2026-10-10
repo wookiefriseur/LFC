@@ -33,6 +33,32 @@ const line = (obj) => JSON.stringify({ v: 1, ...obj });
 // The consumer reads parsed JSON, so key order within a line carries no meaning.
 const parsed = (lines) => lines.map((l) => canonicalSource(JSON.parse(l))).sort();
 
+test("vocabulary names round trip, retain their original label, and revert without changing symbols", () => {
+  const state = freshState();
+  const event = state.enums.events.find((e) => e.symbol === "HIGHSEAS") || state.enums.events[0];
+  const original = structuredClone(event);
+  state.buffer.setEnumName("events", event.symbol, "High Seas of Tamriel", event.name);
+  state.buffer.setEnumName("events", event.symbol, "High Seas of Tamriel!", event.name);
+  const vendor = state.enums.vendors[0];
+  state.buffer.setEnumName("vendors", vendor.symbol, `${vendor.name} renamed`, vendor.name);
+  assert.equal(state.buffer.list()[0].before, original.name);
+  const diff = serialiseDiff(state.buffer);
+  assert.match(diff, /"op":"enum-name","enum":"vendors"/);
+  const imported = freshState();
+  const plan = planDiff(readDiff(diff).lines, ctxOf(imported));
+  assert.deepEqual(plan.errors, []);
+  applySteps(plan.steps, imported, refs);
+  assert.equal(serialiseDiff(imported.buffer), diff);
+  assert.match(buildIssueBody(imported.buffer, "Vocabulary correction", [], ctxOf(imported)), /High Seas of Tamriel!/);
+  assert.deepEqual(event, original);
+  state.buffer.setEnumName("events", event.symbol, original.name, original.name);
+  assert.equal(state.buffer.size(), 1);
+  for (const change of [{ enum: "events", value: "UNKNOWN_EVENT", name: "Name" }, { enum: "events", value: event.symbol, name: " " },
+    { enum: "events", value: event.symbol, name: "Seas^p" }, { enum: "source_types", value: "VENDOR", name: "Name" }]) {
+    assert.equal(planDiff(readDiff(line({ op: "enum-name", ...change })).lines, ctxOf(state)).errors.length, 1);
+  }
+});
+
 // A realistic submission: an edit, a delete, a source-type move, an add, a vocabulary value and a name.
 function submission() {
   const state = freshState();

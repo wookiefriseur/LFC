@@ -192,5 +192,12 @@ class PipelineTests(unittest.TestCase):
         self.assertIn('truncated', text)
 
 
+    def test_vocabulary_rename_is_described(self):
+        report = {**REPORT, 'operations': [{'op': 'enum-name', 'enum': 'events', 'value': 'HIGHSEAS',
+                                            'before': 'High Seas', 'name': 'High Seas of Tamriel'}]}
+        self.assertIn('| enum-name | events HIGHSEAS | High Seas -> High Seas of Tamriel |',
+                      issue_pipeline.describe(5, 'm', report))
+
+
 if __name__ == '__main__':
     unittest.main()

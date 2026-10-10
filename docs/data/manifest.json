@@ -70,7 +70,7 @@
       "name": "crown_store.jsonl",
       "type": "crown_store",
       "records": 1735,
-      "digest": "0fb15e1272e4fa71"
+      "digest": "3d9749e468417270"
     },
     {
       "name": "recipe.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "4005670013c4e57a",
+  "digest": "4e4d6d7b122422fb",
   "counts": {
     "records": 10077,
     "ids": 12345,

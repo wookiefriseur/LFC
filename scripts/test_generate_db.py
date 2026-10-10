@@ -46,8 +46,9 @@ class GeneratedDatabaseTests(unittest.TestCase):
         self.assertEqual(projection, sorted(expected, key=canonical))
         self.assertEqual(len(projection), len(self.records))
         self.assertEqual(database['blueprints'][225123], 224910)
-        self.assertIn(225123, database['rumours'])
-        self.assertNotIn(224910, database['rumours'])
+        rumoured = {r.get('blueprint', r.get('id')) for r in self.records if r['source']['type'] == 'rumour'}
+        self.assertTrue(rumoured)
+        self.assertEqual(set(database['rumours']), rumoured)
 
     def test_runtime_currency_constants(self):
         result = subprocess.run([*self.command, str(ROOT / 'tests/generated_currencies.lua'), str(ROOT)],

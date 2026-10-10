@@ -8,7 +8,7 @@ import { queueEnumValue } from "./maintenance.js";
 const BEGIN = "[//]: # (diff-begin)";
 const END = "[//]: # (diff-end)";
 const FENCE = /^```\w*$/;
-const OPS = new Set(["update", "add", "delete", "add-enum", "name", "item"]);
+const OPS = new Set(["update", "add", "delete", "add-enum", "enum-name", "name", "item"]);
 const SYMBOL = /^[A-Z][A-Z0-9_]*$/;
 
 function count(text, marker) {
@@ -123,6 +123,11 @@ export function planDiff(lines, ctx) {
         }
         list.push(entry);
         steps.push({ op: "add-enum", enumName: line.enum, value: line.value, meta: line.meta ?? null });
+      } else if (line.op === "enum-name") {
+        const entry = Array.isArray(enums[line.enum]) ? enums[line.enum].find((e) => e?.symbol === line.value) : null;
+        if (typeof entry?.name !== "string") throw new Error(`${line.enum}.${line.value} is not a named vocabulary entry`);
+        if (typeof line.name !== "string" || !line.name.trim() || line.name.includes("^")) throw new Error("a vocabulary name needs text and no ^");
+        steps.push({ op: "enum-name", enumName: line.enum, value: line.value, name: line.name, before: entry.name });
       } else if (line.op === "name") {
         if (!NAME_KINDS.includes(line.kind)) throw new Error(`unknown name list ${JSON.stringify(line.kind)}`);
         if (line.locale !== ctx.namesLocale) throw new Error(`name locale ${line.locale} is not the site's (${ctx.namesLocale})`);
@@ -181,6 +186,8 @@ export function applySteps(steps, state, referenceData) {
   for (const step of steps) {
     if (step.op === "add-enum") {
       queueEnumValue(state, step.enumName, step.value, step.meta);
+    } else if (step.op === "enum-name") {
+      state.buffer.setEnumName(step.enumName, step.value, step.name, step.before);
     } else if (step.op === "name") {
       state.buffer.setName(step.kind, step.id, step.locale, step.name, step.before);
     } else if (step.op === "item") {

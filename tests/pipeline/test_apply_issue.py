@@ -57,6 +57,27 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual((files, report), self.run_plan(self.update()))
         self.assertEqual(before, self.snapshot())
 
+    def test_enum_name_updates_canonical_enum_and_generated_locale(self):
+        enums = json.loads((ROOT / 'docs/data/enums.json').read_text())
+        event = next(e for e in enums['events'] if e['symbol'] == 'HIGHSEAS')
+        line = {'v': 1, 'op': 'enum-name', 'enum': 'events', 'value': event['symbol'], 'name': 'High Seas of Tamriel'}
+        files, _ = self.run_plan(line)
+        changed = json.loads(files['docs/data/enums.json'])
+        self.assertEqual(next(e for e in changed['events'] if e['symbol'] == event['symbol']),
+                         {**event, 'name': line['name']})
+        self.assertIn(f'{event["si"]} = "High Seas of Tamriel"',
+                      files['LibFurnitureCatalogue/locale/en.lua'].decode())
+        for bad in ({'value': 'UNKNOWN_EVENT'}, {'enum': 'source_types'}, {'name': 'Seas^p'}):
+            with self.assertRaises(ValueError):
+                self.run_plan({**line, **bad})
+
+    def test_enum_name_rewrites_a_handwritten_string_and_keeps_its_suffix(self):
+        line = {'v': 1, 'op': 'enum-name', 'enum': 'vendors', 'value': 'LUXF', 'name': 'Luxury Furnishings Vendor'}
+        files, _ = self.run_plan(line)
+        english = files['LibFurnitureCatalogue/locale/en.lua'].decode()
+        self.assertIn('SI_FURC_TRADERS_LUXF = "Luxury Furnishings Vendor^Nd,from"', english)
+        self.assertEqual(english.count('SI_FURC_TRADERS_LUXF ='), 1)
+
     def test_fourteen_updates(self):
         ids = [120815, 120816, 120817, 120818, 120823, 134831, 145476,
                145477, 156654, 171826, 184201, 196204, 203592, 212580]

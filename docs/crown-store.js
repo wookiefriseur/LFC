@@ -95,7 +95,7 @@ export function crownStoreMask(deps) {
     const s = record.source || {};
     if (s.packs) {
       return `${labelFor("source.packs")} ` +
-        s.packs.map((p) => labelOf(state.enums, "packs", p)).join(", ");
+        [].concat(s.packs).map((p) => labelOf(state.enums, "packs", p)).join(", ");
     }
     if (s.bundle) return `${labelFor("source.bundle")} ${labelOf(state.enums, "bundles", s.bundle)}`;
     if (s.note) return `${labelFor("source.note")} "${s.note}"`;

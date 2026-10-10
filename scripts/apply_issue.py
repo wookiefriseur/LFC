@@ -13,7 +13,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from generate_db import ROOT, canonical, load_inputs, read_json, render, render_locale, require, verify
+from generate_db import ROOT, canonical, load_inputs, lua, read_json, render, render_locale, require, verify
 from jsonschema import Draft202012Validator
 
 BEGIN = '[//]: # (diff-begin)'
@@ -219,10 +219,22 @@ def apply(lines, root=ROOT, lua_command=None):
         if not found:
             enums[key].append(entry)
         summaries.append({'op': 'add-enum', 'enum': key, 'value': value})
+    renamed = {}
+    for line in lines:
+        if line['op'] != 'enum-name':
+            continue
+        found = [e for e in enums.get(line['enum'], []) if isinstance(e, dict) and e.get('symbol') == line['value']]
+        require(len(found) == 1 and isinstance(found[0].get('name'), str),
+                f'no named vocabulary entry {line["enum"]}.{line["value"]}')
+        summaries.append({'op': 'enum-name', 'enum': line['enum'], 'value': line['value'],
+                          'before': found[0]['name'], 'name': line['name']})
+        found[0]['name'] = line['name']
+        if found[0].get('si', '').startswith('SI_FURC_'):
+            renamed[found[0]['si']] = line['name']
     files.put_obj('docs/data/enums.json', enums)
     for line in lines:
         op = line['op']
-        if op == 'add-enum':
+        if op in ('add-enum', 'enum-name'):
             continue
         if op == 'name':
             update_name(files, line)
@@ -288,7 +300,12 @@ def apply(lines, root=ROOT, lua_command=None):
             (candidate / name).write_text(content, encoding='utf-8')
         verify(candidate, projection, command)
         locale = 'LibFurnitureCatalogue/locale/en.lua'
-        files.put(locale, render_locale(enums, files.read(locale).decode()).encode())
+        english = render_locale(enums, files.read(locale).decode())
+        # A hand-written definition outside the generated block wins over enums.json, so a rename rewrites it in place, keeping its grammar suffix (^n,from)
+        for key, name in renamed.items():
+            english = re.sub(rf'^(\s*{key}\s*=\s*)"([^"\\^\n]*)(\^[^"\\\n]*)?"',
+                             lambda m: m.group(1) + lua(name + (m.group(3) or '')), english, flags=re.M)
+        files.put(locale, english.encode())
         for name, content in outputs.items():
             files.put('LibFurnitureCatalogue/data/' + name, content.encode())
     return files.changed, {'payload_sha256': payload_hash(lines), 'operations': summaries,

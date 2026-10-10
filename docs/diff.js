@@ -70,6 +70,14 @@ export class DirtyBuffer {
     this.changed();
     return key;
   }
+  // Changes the label of an existing vocabulary entry (restoring the published label drops the change)
+  setEnumName(enumName, value, name, published) {
+    const key = `enum-name:${enumName}:${value}`;
+    if (!name || name === published) this.entries.delete(key);
+    else this.entries.set(key, { op: "enum-name", key, enumName, value, name, before: published });
+    this.changed();
+    return key;
+  }
   // A catalogued item's metadata and game name from a discovery; `previous` is the published {name, meta}, for the change list only.
   setItem(id, reference, previous) {
     const key = `item:${id}`;
@@ -218,6 +226,8 @@ export function serialiseDiff(buffer) {
       const meta = cleanMeta(entry.meta);
       if (meta) line.meta = meta;
       lines.push(JSON.stringify(line));
+    } else if (entry.op === "enum-name") {
+      lines.push(JSON.stringify({ v: DIFF_VERSION, op: "enum-name", enum: entry.enumName, value: entry.value, name: entry.name }));
     } else if (entry.op === "item") {
       // Targets the item metadata and the catalogue's names, not a data file.
       lines.push(JSON.stringify({ v: DIFF_VERSION, op: "item", id: entry.id, reference: entry.reference }));
@@ -261,6 +271,7 @@ export function buildIssueBody(buffer, summary, allRecords, ctx) {
 export function buildIssueParts(buffer, allRecords, ctx) {
   // Names have their own id spaces (houses, quests, ...), so a name never joins a record group of the same number.
   const groupOf = (e) => {
+    if (e.op === "enum-name") return `Enum name ${e.enumName}.${e.value}`;
     if (e.op === "add-enum") return `Enum ${e.enumName}.${e.value}`;
     if (e.op === "name") return `${e.kind} name ${e.id}`;
     if (e.op === "item") return `ID ${e.id}`;
@@ -316,15 +327,17 @@ export function suggestTitle(buffer) {
   if (entries.length === 0) return "DB update";
   if (entries.length === 1) {
     const e = entries[0];
+    if (e.op === "enum-name") return `DB enum name: ${e.enumName}.${e.value}`;
     if (e.op === "add-enum") return `DB add-enum: ${e.enumName}.${e.value}`;
     if (e.op === "name") return `DB name: ${e.kind} ${e.id}`;
     if (e.op === "item") return `DB item details: ${e.id}`;
     const id = (e.after ?? e.before).id;
     return `DB ${e.op}: ${id}`;
   }
-  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, name: 0, item: 0 };
+  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, "enum-name": 0, name: 0, item: 0 };
   for (const e of entries) counts[e.op]++;
   const parts = [];
+  if (counts["enum-name"]) parts.push(`${counts["enum-name"]} vocabulary name${counts["enum-name"] > 1 ? "s" : ""}`);
   if (counts.update) parts.push(`${counts.update} update${counts.update > 1 ? "s" : ""}`);
   if (counts.add) parts.push(`${counts.add} add${counts.add > 1 ? "s" : ""}`);
   if (counts.delete) parts.push(`${counts.delete} delete${counts.delete > 1 ? "s" : ""}`);

@@ -16,9 +16,13 @@ New discoveries appear as **UNCONFIRMED**. Existing catalogue items are skipped.
 
 **Maintenance -> Check -> Missing a name or metadata** lists catalogued items with a placeholder name ("Item 123") or no item metadata. **Copy id list** copies their ids as a request (narrow it with the search box first if you like). Paste those ids into the **Datamine** text box ingame and click **Item list**: it produces a dump for each requested item. Paste the output into **Batch edit -> ++Add from Dump or Diff**. Every catalogued item whose name or metadata differs becomes an **item details** change, shown in the change list as before and after; its records stay as they are.
 
+## Edit vocabulary names
+
+In **Names**, click the name of a vocabulary entry to change its label. Enter or clicking outside saves it to the change list, ESC cancels (you can also restore the name to remove the change). Pipeline updates the enum and the Lua strings (it keeps any grammar suffix such as `^n,from`).
+
 ## Correct sources and obsolete IDs
 
-Search by name or ID. Open a record in **Batch edit** to change its source or other details. Tick several records to apply a shared change and data note.
+Search by name or ID. Open a record in **Batch edit** to change its source or other details.
 
 For unwanted or obsolete item IDs, choose **IGNORED** and explain why in **Data note**, including replacement IDs where known. Ignored entries stay searchable here and identifiable in game, but FC hides them from normal lists
 and Datamine does not report them as missing. Unignore them by setting a different source in the webinterface, if you think it should not be ignored.

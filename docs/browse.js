@@ -58,6 +58,8 @@ function valueText(key, value, type, enums) {
     return placementsText(enums, value);
   }
   const vocab = SOURCE_FIELD_ENUM[key];
+  // A symbol list (packs) reads as its labels
+  if (vocab && Array.isArray(value)) return value.map((v) => valueText(key, v, type, enums)).join(", ");
   if (vocab && typeof value === "string") {
     const entry = entryOf(enums, vocab, value);
     const label = plainLabel(labelOf(enums, vocab, value)) || value;

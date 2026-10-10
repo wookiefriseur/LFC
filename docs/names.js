@@ -58,7 +58,10 @@ export function namesMask(deps) {
         .filter(([k]) => k !== "symbol" && k !== "name")
         .map(([k, v]) => `${k}: ${typeof v === "object" ? JSON.stringify(v) : v}`)
         .join(", ");
-      return { id: entry.symbol, name: labelOf(enums, key, entry.symbol), extra, pending: false };
+      const pending = state.buffer.entries.get(`enum-name:${key}:${entry.symbol}`);
+      return { id: entry.symbol, name: pending?.name ?? labelOf(enums, key, entry.symbol),
+        extra: pending ? `was: ${pending.before}` : extra, pending: !!pending,
+        editable: typeof entry.name === "string" };
     });
   }
 
@@ -116,10 +119,10 @@ export function namesMask(deps) {
     for (const r of hits.slice(0, ROW_LIMIT)) {
       const tr = elem("tr", { class: r.pending ? "is-pending" : "" });
       const nameCell = elem("td", {}, r.name);
-      if (game) {
+      if (game || r.editable) {
         nameCell.classList.add("names-editable");
         nameCell.title = "Click to correct this name";
-        nameCell.addEventListener("click", () => editName(nameCell, Number(r.id), r.name));
+        nameCell.addEventListener("click", () => editName(nameCell, game ? Number(r.id) : r.id, r.name));
       }
       tr.append(elem("td", { class: "names-id" }, r.id), nameCell, elem("td", { class: "muted" }, r.extra));
       body.append(tr);
@@ -149,20 +152,32 @@ export function namesMask(deps) {
   function editName(cell, id, current) {
     if (cell.querySelector("input")) return;
     const kind = kindOfList();
+    const vocab = view.list.startsWith("vocab:") ? view.list.slice("vocab:".length) : null;
     const input = elem("input", { type: "text", class: "names-edit", "aria-label": `Name for ${id}` });
     input.value = current;
     let done = false;
     const finish = (save) => {
       if (done) return;
       done = true;
-      if (save && input.value.trim() !== current) setName(kind, id, input.value);
+      if (save && input.value.trim() !== current && vocab) {
+        const published = state.enums[vocab].find((e) => e.symbol === id).name;
+        state.buffer.setEnumName(vocab, id, input.value.trim() || published, published);
+        renderFooter();
+        renderTable();
+      } else if (save && input.value.trim() !== current) setName(kind, id, input.value);
       else renderTable();
     };
+    // pipeline keeps the existing grammar suffix
+    const invalid = () => vocab && input.value.includes("^");
+    input.addEventListener("input", () => {
+      input.setAttribute("aria-invalid", String(invalid()));
+      input.title = invalid() ? "A name cannot contain ^" : "";
+    });
     input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") finish(true);
+      if (e.key === "Enter" && !invalid()) finish(true);
       else if (e.key === "Escape") finish(false);
     });
-    input.addEventListener("blur", () => finish(true));
+    input.addEventListener("blur", () => finish(!invalid()));
     cell.innerHTML = "";
     cell.append(input);
     input.focus();

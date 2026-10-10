@@ -32,7 +32,7 @@ const AVAIL_DATES = [
 ];
 export const DATES_GROUP = "availability.dates";
 
-const BATCH_PATHS = new Set(["cost", "availability.version"]);
+const BATCH_PATHS = new Set(["cost", "availability.version", ...AVAIL_DATES]);
 
 export const SITE_ONLY_FIELDS = ["notes", "name_overrides"];
 
@@ -363,6 +363,50 @@ function placementRow(ctx, index, repaint) {
   return row_;
 }
 
+// Packs are a list (a few items are in two packs). Any edit writes the list form
+function renderPackList(ctx, id) {
+  const source = ctx.record.source;
+  const wrap = h("div", { class: "pack-list", id });
+  const packs = () => (source.packs == null ? [] : [].concat(source.packs));
+  const write = (list) => {
+    if (list.length) source.packs = list;
+    else delete source.packs;
+    repaint();
+    ctx.onChange();
+  };
+
+  const repaint = () => {
+    wrap.textContent = "";
+    const list = packs();
+    list.forEach((pack, i) => {
+      const sel = selectFromPairs(`source.packs.${i}`, pack, optionPairs(ctx.enums, "packs", pack));
+      sel.setAttribute("aria-label", `Furnishing pack ${i + 1}`);
+      sel.addEventListener("change", (e) => {
+        const next = packs();
+        if (e.target.value === "") next.splice(i, 1);
+        else next[i] = e.target.value;
+        write(next);
+      });
+      const remove = h("button", { type: "button", class: "clear-link" }, "remove");
+      remove.addEventListener("click", () => {
+        const next = packs();
+        next.splice(i, 1);
+        write(next);
+      });
+      wrap.append(h("div", { class: "pack-row" }, sel, remove));
+    });
+    const add = selectFromPairs("source.packs.new", "", optionPairs(ctx.enums, "packs", ""));
+    add.setAttribute("aria-label", list.length ? "Add another furnishing pack" : "Furnishing pack");
+    add.options[0].textContent = list.length ? "(add another pack)" : "(none)";
+    add.addEventListener("change", (e) => {
+      if (e.target.value) write([...packs(), e.target.value]);
+    });
+    wrap.append(add);
+  };
+  repaint();
+  return wrap;
+}
+
 function renderPlacements(ctx, id) {
   const source = ctx.record.source;
   const wrap = h("div", { class: "placement-list", id });
@@ -556,6 +600,8 @@ function sourceControl(ctx, field, id) {
     widget = selectFromPairs(name, value, flatPairs(enums, subtypeVocab(source.type)));
   } else if (field === "locations") {
     return { widget: renderPlacements(ctx, id), block: true };
+  } else if (field === "packs" && value !== MIXED) {
+    return { widget: renderPackList(ctx, id), block: true };
   } else if (ENUM_FIELD[field] && enums[ENUM_FIELD[field]]) {
     widget = selectFromPairs(name, value, optionPairs(enums, ENUM_FIELD[field], value));
   } else if (INT_LIST_FIELDS.has(field)) {
@@ -686,13 +732,17 @@ function dateInput(ctx, path, onPaint) {
   const key = path.slice("availability.".length);
   const av = ctx.record.availability;
   const id = ctx.uid(path.replace(/\./g, "-"));
+  const mixed = av[key] === MIXED;
   const input = h("input", {
-    type: "date", id, value: av[key] ?? "", "data-field": path,
+    type: "date", id, value: mixed ? "" : av[key] ?? "", "data-field": path,
+    title: mixed ? MIXED_LABEL : null,
   });
   input.addEventListener("input", (e) => {
     const raw = e.target.value;
     if (raw === "") {
-      if (ctx.origAvail.has(key)) av[key] = null;
+      // Emptying a mixed date again leaves every ticked record's own date alone
+      if (mixed) av[key] = MIXED;
+      else if (ctx.origAvail.has(key)) av[key] = null;
       else delete av[key];
     } else {
       av[key] = raw;
@@ -707,7 +757,9 @@ function datesGroup(ctx, paths) {
   const wrap = h("div", { class: "dates-group" });
   for (const path of paths) {
     const { id, input } = dateInput(ctx, path, () => {});
-    wrap.append(row(fieldLabel(ctx, path, { forId: id }), input, findingLines(ctx, path)));
+    const hint = ctx.record.availability[path.slice("availability.".length)] === MIXED
+      ? h("span", { class: "muted" }, ` ${MIXED_LABEL}`) : null;
+    wrap.append(row(fieldLabel(ctx, path, { forId: id }), hint ? h("span", {}, input, hint) : input, findingLines(ctx, path)));
   }
   return wrap;
 }
@@ -956,7 +1008,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
       game.append(h("p", { class: "muted" },
         "These records come from different kinds of source. Pick one above to " +
         "set it on all of them; their details stay as they are."));
-      game.append(costRow(ctx), versionRow(ctx), batchNoteRow(ctx));
+      game.append(costRow(ctx), versionRow(ctx), datesGroup(ctx, AVAIL_DATES), batchNoteRow(ctx));
       form.append(game);
       return;
     }
@@ -994,7 +1046,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
 
     // The expander holds only empty fields, so it is an add control and is labelled as one.
     const addable = batch
-      ? part.addable.filter((p) => p.startsWith("source."))
+      ? part.addable.filter((p) => p.startsWith("source.") || p === DATES_GROUP)
       : part.addable.filter((p) => !quickHidden(p));
     if (addable.length) {
       const body = h("div", { class: "add-detail-body" });

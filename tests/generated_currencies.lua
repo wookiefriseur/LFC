@@ -77,7 +77,7 @@ for i, field in ipairs(env.LFCGeneratedConstants.sourceFields) do
   if field == "packs" then
     local row = env.LFCGeneratedDatabase.items[225351][4]
     local column = env.LFCGeneratedConstants.sourceFieldOffset + i
-    row[column] = { row[column] }
+    row[column] = type(row[column]) == "table" and row[column][1] or { row[column] }
   end
 end
 local packs = env.LibFurnitureCatalogue.Internal.Generated.Records(225351)[1].source.packs

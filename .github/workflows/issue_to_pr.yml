@@ -31,7 +31,17 @@ jobs:
   prepare:
     if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'bot:ready4pipeline'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
+      # First, so the issue shows the run is alive even where the Actions view is hard to find (mobile)
+      - name: Say on the issue that the run started
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number || inputs.issue }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh issue comment "$ISSUE" --body "Preparing a PR from this issue: $RUN"
       - name: Checkout main
         uses: actions/checkout@v6
         with:
@@ -41,8 +51,20 @@ jobs:
       - uses: ./.github/actions/setup-lua
       # Issue script fetches the opening post itself
       - name: Prepare PR from the opening post
+        id: prepare
         env:
           GH_TOKEN: ${{ github.token }}
           ISSUE: ${{ github.event.issue.number || inputs.issue }}
           ACTOR: ${{ github.triggering_actor }}
         run: python scripts/issue_pipeline.py "$ISSUE"
+      # The script reports its own failures
+      - name: Report a run that never reached the script
+        if: (failure() || cancelled()) && steps.prepare.outcome != 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number || inputs.issue }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh issue comment "$ISSUE" --body "The pipeline run stopped before it could prepare a PR (setup failed or timed out): $RUN. Apply \`bot:ready4pipeline\` again to retry."
+          gh issue edit "$ISSUE" --remove-label bot:ready4pipeline || true

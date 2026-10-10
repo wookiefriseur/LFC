@@ -82,6 +82,8 @@ def describe(number, actor, report, refreshed=()):
             target, fields = f'item {op["id"]}', op['name']
         elif op['op'] == 'add-enum':
             target, fields = op['enum'], op['value']
+        elif op['op'] == 'enum-name':
+            target, fields = f'{op["enum"]} {op["value"]}', f'{op["before"]} -> {op["name"]}'
         else:
             record = after or before
             target = f'{op["category"]} {record.get("id", record.get("blueprint"))}'
