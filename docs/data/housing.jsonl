@@ -438,7 +438,7 @@
 {"id":151831,"source":{"type":"housing","houses":[10051]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151834,"source":{"type":"housing","houses":[6399]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151842,"source":{"type":"housing","houses":[12456]},"cost":[],"availability":{"version":"KITTY"}}
-{"id":151845,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"KITTY"}}
+{"id":151845,"source":{"type":"housing","houses":[10051,7218,7226]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151846,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151867,"source":{"type":"housing","houses":[7226]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151868,"source":{"type":"housing","houses":[7218,7226]},"cost":[],"availability":{"version":"KITTY"}}
@@ -475,9 +475,9 @@
 {"id":159461,"source":{"type":"housing","houses":[7601]},"cost":[],"availability":{"version":"HARROW"}}
 {"id":159496,"source":{"type":"housing","houses":[7600]},"cost":[],"availability":{"version":"HARROW"}}
 {"id":166452,"source":{"type":"housing","houses":[8011]},"cost":[],"availability":{"version":"SKYRIM"}}
-{"id":167289,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167290,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167291,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167289,"source":{"type":"housing","houses":[14609,8652,8353]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167290,"source":{"type":"housing","houses":[8353,8652,12732,14609]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167291,"source":{"type":"housing","houses":[14609,8652,13882,8353]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167292,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167293,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167294,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
@@ -679,3 +679,13 @@
 {"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126597,"name_overrides":{"en":"Velothi Painting, Oversized Volcano"}}
 {"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126598}
 {"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126604,"name_overrides":{"en":"Velothi Panels, Geyser"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226923,"name_overrides":{"en":"Cheese Stack, Large"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226924,"name_overrides":{"en":"Cheese Stack, Medium"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226925,"name_overrides":{"en":"Cheese Stack, Small"}}
+{"source":{"type":"housing","houses":[14479]},"cost":[],"availability":{"version":"ECHOES"},"id":226931,"name_overrides":{"en":"Hanging Cheese Stack, Long"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226929,"name_overrides":{"en":"Hanging Cheese Stack, Long Aged"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226932,"name_overrides":{"en":"Hanging Cheese Stack, Short"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226930,"name_overrides":{"en":"Hanging Cheese Stack, Short Aged"}}
+{"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"},"id":171818,"name_overrides":{"en":"Tree, Giant Cork Oak"}}
+{"id":204456,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
+{"source":{"type":"housing","houses":[10223]},"cost":[],"availability":{"version":"TIDES"},"id":184105,"name_overrides":{"en":"Green Algae Coral Formation, Tree Capped"}}

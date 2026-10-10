@@ -23,6 +23,8 @@ local strings = {
   SI_FURC_EVENT_ZENITHAR = "Zeal of Zenithar",
   SI_FURC_ITEMPACK_BITTERMERCY = "Spear of Bitter Mercy Style",
   SI_FURC_ITEMPACK_CHRYSAMERE = "Chrysamere Style",
+  SI_FURC_ITEMPACK_DAWNBREAKER = "Dawnbreaker Style",
+  SI_FURC_ITEMPACK_FEARSTRUCK = "Fearstruck Style",
   -- END WEBINTERFACE STRINGS
 
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",

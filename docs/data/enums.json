@@ -431,6 +431,10 @@
     {
       "symbol": "VOYAGE_ON_THE_ABECEAN_SEA",
       "zone": 1570
+    },
+    {
+      "symbol": "NOWHERE",
+      "zone": 1583
     }
   ],
   "places": [
@@ -1778,6 +1782,16 @@
       "symbol": "CHRYSAMERE",
       "si": "SI_FURC_ITEMPACK_CHRYSAMERE",
       "name": "Chrysamere Style"
+    },
+    {
+      "symbol": "FEARSTRUCK",
+      "si": "SI_FURC_ITEMPACK_FEARSTRUCK",
+      "name": "Fearstruck Style"
+    },
+    {
+      "symbol": "DAWNBREAKER",
+      "si": "SI_FURC_ITEMPACK_DAWNBREAKER",
+      "name": "Dawnbreaker Style"
     }
   ],
   "skill_lines": [
