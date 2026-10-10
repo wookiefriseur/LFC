@@ -1382,3 +1382,5 @@
 {"id":226774,"source":{"type":"vendor","vendor":"AF","subtype":"achievement","achievement":4741,"locations":[{"location":"GLENUMBRA"}]},"cost":[{"currency":"GOLD","amount":75000}],"availability":{"version":"ECHOES"}}
 {"id":226772,"source":{"type":"vendor","vendor":"AF","subtype":"achievement","achievement":4742,"locations":[{"location":"GLENUMBRA"}]},"cost":[{"currency":"GOLD","amount":150000}],"availability":{"version":"ECHOES"}}
 {"id":226773,"source":{"type":"vendor","vendor":"AF","subtype":"achievement","achievement":4657,"locations":[{"location":"GLENUMBRA"}]},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"ECHOES"}}
+{"id":117971,"source":{"type":"vendor","vendor":"HGF","subtype":"home_goods","locations":[{"place":"ANY_CAPITAL"}]},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
+{"id":120631,"source":{"type":"vendor","vendor":"HGF","subtype":"home_goods","locations":[{"location":"SHADOWFEN","place":"SHADOWFEN_CORIMONT"}]},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}

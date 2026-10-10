@@ -48,8 +48,10 @@ LFCGeneratedConstants={
     ["bundles"]={
       ["BITTERMERCY"]=7, -- Spear of Bitter Mercy Style
       ["CHRYSAMERE"]=8, -- Chrysamere Style
+      ["DAWNBREAKER"]=10, -- Dawnbreaker Style
       ["DWEMER"]=1, -- Dwemer
       ["EBONY"]=2, -- Ebony Blade Style
+      ["FEARSTRUCK"]=9, -- Fearstruck Style
       ["FIRSTBLADE"]=3, -- Firstblade Style
       ["JYGGALAG"]=4, -- Sword of Jyggalag Style
       ["RAZOR"]=5, -- Mehrunes' Razor
@@ -255,6 +257,7 @@ LFCGeneratedConstants={
       ["MURKMIRE"]=38,
       ["NELSWEYR"]=39,
       ["NMARKET"]=40,
+      ["NOWHERE"]=60,
       ["PDUNG_VVARDENFELL_FW"]=41,
       ["REACH"]=42,
       ["REAPER"]=43,
@@ -549,6 +552,8 @@ LFCGeneratedConstants={
       [6]={["si"]="SI_FURC_ITEMPACK_STABLE"}, -- STABLE - Steadfast Stablemaster Bundle
       [7]={["si"]="SI_FURC_ITEMPACK_BITTERMERCY"}, -- BITTERMERCY - Spear of Bitter Mercy Style
       [8]={["si"]="SI_FURC_ITEMPACK_CHRYSAMERE"}, -- CHRYSAMERE - Chrysamere Style
+      [9]={["si"]="SI_FURC_ITEMPACK_FEARSTRUCK"}, -- FEARSTRUCK - Fearstruck Style
+      [10]={["si"]="SI_FURC_ITEMPACK_DAWNBREAKER"}, -- DAWNBREAKER - Dawnbreaker Style
     },
     ["companions"]={},
     ["containers"]={
@@ -709,6 +714,7 @@ LFCGeneratedConstants={
       [57]={["zone"]=684}, -- WROTHGAR
       [58]={["zone"]=1160}, -- WSKYRIM
       [59]={["zone"]=1570}, -- VOYAGE_ON_THE_ABECEAN_SEA
+      [60]={["zone"]=1583}, -- NOWHERE
     },
     ["npc_classes"]={
       [1]={["si"]="SI_MONSTERSOCIALCLASS2"}, -- CLASS_ALCHEMIST
@@ -995,6 +1001,8 @@ LFCGeneratedConstants={
       [6]="STABLE", -- Steadfast Stablemaster Bundle
       [7]="BITTERMERCY", -- Spear of Bitter Mercy Style
       [8]="CHRYSAMERE", -- Chrysamere Style
+      [9]="FEARSTRUCK", -- Fearstruck Style
+      [10]="DAWNBREAKER", -- Dawnbreaker Style
     },
     ["companions"]={[1]="AZANDAR",[2]="EMBER",[3]="ISOBEL",[4]="SHARP_AS_NIGHT",[5]="TANLORIN",[6]="ZERITH_VAR"},
     ["containers"]={
@@ -1215,6 +1223,7 @@ LFCGeneratedConstants={
       [57]="WROTHGAR",
       [58]="WSKYRIM",
       [59]="VOYAGE_ON_THE_ABECEAN_SEA",
+      [60]="NOWHERE",
     },
     ["npc_classes"]={
       [1]="CLASS_ALCHEMIST",
@@ -1458,5 +1467,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="b3e62c7100d53595c1936525a871bd9784b150b9e20dd67c08b1300d473e4fa4",
+  ["vocabulary"]="307251a901fc9e322903f2f8e8e8366309d58a57474550f2585d78a40a943d40",
 }

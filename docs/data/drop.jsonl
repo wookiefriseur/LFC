@@ -175,7 +175,7 @@
 {"id":130300,"source":{"type":"drop","note":"Wood","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"}}
 {"id":130301,"source":{"type":"drop","note":"Wood","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"}}
 {"id":130302,"source":{"type":"drop","note":"Wood","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"}}
-{"id":131420,"source":{"type":"drop","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"}}
+{"id":131420,"source":{"type":"drop","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"},"rarity":"rare"}
 {"id":131422,"source":{"type":"drop","subtype":"harvest"},"cost":[],"availability":{"version":"REACH"}}
 {"id":134399,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134400,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"CLOCKWORK"}}
@@ -197,13 +197,13 @@
 {"id":134416,"source":{"type":"drop","locations":[{"location":"CWC"}],"subtype":"safebox"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134417,"source":{"type":"drop","locations":[{"location":"CWC"}],"subtype":"safebox"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":139059,"source":{"type":"drop","note":"ENEMY_ECHATERE"},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":139060,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT"},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":139060,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139060,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_GEYSER"},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":139061,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT"},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":139061,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139061,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_GEYSER"},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":139062,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT"},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":139062,"source":{"type":"drop","locations":[{"location":"SUMMERSET"},{"location":"HIGHISLE"}],"note":"SI_FURC_SRC_CLAM_GIANT","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139062,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_GEYSER"},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":139063,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_CLAM_GIANT"},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":139063,"source":{"type":"drop","locations":[{"location":"SUMMERSET"},{"location":"HIGHISLE"}],"note":"SI_FURC_SRC_CLAM_GIANT","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
 {"id":139063,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"SI_FURC_SRC_GEYSER"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139064,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"note":"Clothing and Alchemy","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139065,"source":{"type":"drop","note":"Clothing","subtype":"harvest"},"cost":[],"availability":{"version":"DRAGONS"}}
@@ -214,9 +214,9 @@
 {"id":139070,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
 {"id":139071,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
 {"id":139072,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
-{"id":139074,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
+{"id":139074,"source":{"type":"drop","locations":[{"location":"SUMMERSET"},{"location":"ARTAEUM"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"},"rarity":"rare"}
 {"id":139075,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":139076,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"}}
+{"id":139076,"source":{"type":"drop","locations":[{"location":"SUMMERSET"},{"location":"ARTAEUM"}],"subtype":"chest"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139077,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"fish"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139078,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"fish"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139079,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"fish"},"cost":[],"availability":{"version":"DRAGONS"}}
@@ -227,7 +227,7 @@
 {"id":139084,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"fish"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139085,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"fish"},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":139088,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
-{"id":139089,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
+{"id":139089,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket","npc_class":"CLASS_CLOTHIER"},"cost":[],"availability":{"version":"ALTMER"},"rarity":"extremely_rare"}
 {"id":139090,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
 {"id":139237,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
 {"id":139238,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
@@ -705,3 +705,5 @@
 {"id":226747,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"GOLDCOAST"}]},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226754,"source":{"type":"drop","subtype":"scryable","note":"High Seas of Tamriel","locations":[{"location":"HEWSBANE"}]},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226765,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"GOLDCOAST"}],"note":"High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226775,"source":{"type":"drop","subtype":"chest","locations":[{"location":"NOWHERE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226776,"source":{"type":"drop","subtype":"chest","locations":[{"location":"NOWHERE"}]},"cost":[],"availability":{"version":"ECHOES"}}
