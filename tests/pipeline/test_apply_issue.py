@@ -60,12 +60,12 @@ class IssueApplicationTests(unittest.TestCase):
     def test_enum_name_updates_canonical_enum_and_generated_locale(self):
         enums = json.loads((ROOT / 'docs/data/enums.json').read_text())
         event = next(e for e in enums['events'] if e['symbol'] == 'HIGHSEAS')
-        line = {'v': 1, 'op': 'enum-name', 'enum': 'events', 'value': event['symbol'], 'name': 'High Seas of Tamriel'}
+        line = {'v': 1, 'op': 'enum-name', 'enum': 'events', 'value': event['symbol'], 'name': event['name'] + ' (renamed)'}
         files, _ = self.run_plan(line)
         changed = json.loads(files['docs/data/enums.json'])
         self.assertEqual(next(e for e in changed['events'] if e['symbol'] == event['symbol']),
                          {**event, 'name': line['name']})
-        self.assertIn(f'{event["si"]} = "High Seas of Tamriel"',
+        self.assertIn(f'{event["si"]} = "{line["name"]}"',
                       files['LibFurnitureCatalogue/locale/en.lua'].decode())
         for bad in ({'value': 'UNKNOWN_EVENT'}, {'enum': 'source_types'}, {'name': 'Seas^p'}):
             with self.assertRaises(ValueError):

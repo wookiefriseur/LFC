@@ -2887,21 +2887,23 @@ test("names: vocabulary labels can be edited, restored after reload, cancelled a
   const original = await page.$eval(cell, (e) => e.textContent);
   const symbol = await page.$eval('#names-table tbody tr:last-child td:first-child', (e) => e.textContent);
   await page.click(cell);
-  await page.$eval(`${cell} input`, (e) => { e.value = "High Seas of Tamriel"; });
+  // Always differs from the published label, whatever the data says today
+  const renamed = `${original} (renamed)`;
+  await page.$eval(`${cell} input`, (e, name) => { e.value = name; }, renamed);
   await page.keyboard.press("Enter");
-  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "edited event label");
+  assertEq(await page.$eval(cell, (e) => e.textContent), renamed, "edited event label");
   let lines = await diffLines(page);
-  assert(lines.some((l) => l.op === "enum-name" && l.enum === "events" && l.value === symbol && l.name === "High Seas of Tamriel"), "missing event diff");
+  assert(lines.some((l) => l.op === "enum-name" && l.enum === "events" && l.value === symbol && l.name === renamed), "missing event diff");
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
   await switchTab(page, "names");
   await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count")?.textContent || ""));
   await page.click('#names-lists [data-list="vocab:events"]');
-  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "restored event label");
+  assertEq(await page.$eval(cell, (e) => e.textContent), renamed, "restored event label");
   await page.click(cell);
   await page.$eval(`${cell} input`, (e) => { e.value = "Cancelled"; });
   await page.keyboard.press("Escape");
-  assertEq(await page.$eval(cell, (e) => e.textContent), "High Seas of Tamriel", "cancelled edit");
+  assertEq(await page.$eval(cell, (e) => e.textContent), renamed, "cancelled edit");
   await page.click(cell);
   await page.$eval(`${cell} input`, (e, name) => { e.value = name; }, original);
   await page.keyboard.press("Tab");

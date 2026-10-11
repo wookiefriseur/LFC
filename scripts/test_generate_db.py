@@ -12,6 +12,7 @@ from generate_db import (
     Catalogue,
     canonical,
     load_inputs,
+    lua,
     read_json,
     render,
     render_locale,
@@ -60,13 +61,14 @@ class GeneratedDatabaseTests(unittest.TestCase):
         # Reproduce the missing string fixed by 670d80d without editing the checkout.
         missing = ''.join(line for line in english.splitlines(keepends=True)
                           if 'SI_FURC_EVENT_HIGHSEAS =' not in line)
+        label = lua(next(e['name'] for e in self.catalogue.enums['events'] if e['symbol'] == 'HIGHSEAS'))
         result = render_locale(self.catalogue.enums, missing)
-        self.assertIn('  SI_FURC_EVENT_HIGHSEAS = "High Seas",\n', result)
+        self.assertIn(f'  SI_FURC_EVENT_HIGHSEAS = {label},\n', result)
         self.assertEqual(render_locale(self.catalogue.enums, result), result)
         self.assertEqual(render_locale(self.catalogue.enums, english), english)
         strings = extract_strings(result.splitlines())
-        self.assertEqual(strings['SI_FURC_EVENT_HIGHSEAS'], '"High Seas"')
-        self.assertEqual(merge_translation({}, strings)[2]['SI_FURC_EVENT_HIGHSEAS'], '"High Seas"')
+        self.assertEqual(strings['SI_FURC_EVENT_HIGHSEAS'], label)
+        self.assertEqual(merge_translation({}, strings)[2]['SI_FURC_EVENT_HIGHSEAS'], label)
         enums = {'events': [{'si': 'SI_FURC_TEST', 'name': 'A "quoted" \\ name\nline'},
                             {'si': 'SI_GAME_OWNED'}]}
         result = render_locale(enums, missing)
