@@ -1,3 +1,11 @@
+1.2.0 (2026-10-11)
+- updated sourcing on a large number of items (U51, High Seas event, Harbingers crate, Nowhere Vault)
+- lux furnishing updates
+- new houses and furnishing pack updates
+- webinterface for contributors
+- new API: GetContainer (folios and book collections)
+- old FurC.* calls now return empty results (see API for replacements)
+
 1.1.0 (2026-09-08)
 - first bump of the standalone version
 - API endpoints now set in stone and with docs
