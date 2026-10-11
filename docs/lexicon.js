@@ -89,11 +89,12 @@ const VALUES = {
   },
   crown_store_subtypes: { housing_editor: "Housing editor" },
   drop_subtypes: {
-    chest: "Treasure chest", safebox: "Safebox", fish: "Fishing",
-    steal: "Stealing", pickpocket: "Pickpocketing", harvest: "Harvesting node",
+    chest: "Treasure chest", fish: "Fishing", harvest: "Harvesting node",
     mob: "Dropped by monsters", scryable: "Antiquity (scrying)",
     tales_of_tribute: "Tales of Tribute", dark_brotherhood: "Dark Brotherhood",
     lorebook: "Lorebook",
+    steal: "Justice: stolen from a container", safebox: "Justice: safebox",
+    wardrobe: "Justice: wardrobe", cabinet: "Justice: cabinet", pickpocket: "Justice: pickpocketing",
   },
   dungeon_drop_subtypes: {
     chest: "Treasure chest",

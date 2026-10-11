@@ -271,11 +271,18 @@ function selectFromPairs(name, value, pairs, opts = {}) {
     // A stored value the vocabulary lacks is kept and marked: the editor must surface it.
     pairs = [{ value: v, label: `${v} - not in the list` }, ...pairs];
   }
+  // A label "Group: name" sorts into an optgroup of that name, after the ungrouped options
+  const groups = new Map();
   for (const p of pairs) {
     const o = h("option", { value: p.value }, p.label);
     if (p.value === v) o.selected = true;
-    sel.append(o);
+    const m = opts.grouped ? /^([^:]+): (.+)$/.exec(p.label) : null;
+    if (!m) { sel.append(o); continue; }
+    o.textContent = m[2];
+    if (!groups.has(m[1])) groups.set(m[1], h("optgroup", { label: m[1] }));
+    groups.get(m[1]).append(o);
   }
+  for (const g of groups.values()) sel.append(g);
   return sel;
 }
 
@@ -597,7 +604,7 @@ function sourceControl(ctx, field, id) {
       }));
     widget = selectFromPairs(name, value, pairs);
   } else if (field === "subtype") {
-    widget = selectFromPairs(name, value, flatPairs(enums, subtypeVocab(source.type)));
+    widget = selectFromPairs(name, value, flatPairs(enums, subtypeVocab(source.type)), { grouped: true });
   } else if (field === "locations") {
     return { widget: renderPlacements(ctx, id), block: true };
   } else if (field === "packs" && value !== MIXED) {

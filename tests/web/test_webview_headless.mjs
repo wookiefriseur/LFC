@@ -2833,6 +2833,31 @@ test("Batch edit: ticked Luxury records take one last-seen date, and a mixed dat
   }
 });
 
+test("Batch edit: justice drop subtypes sit in their own group and keep the record's value", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  // One search hit, so selecting it does not re-render the rows under the click
+  const rec = await page.evaluate(() => {
+    const all = window.__proto.records();
+    return all.find((r) => r.source?.type === "drop" && r.source.subtype === "safebox"
+      && all.filter((o) => String(o.id ?? "").includes(String(r.id)) || String(o.blueprint ?? "").includes(String(r.id))).length === 1);
+  });
+  assert(rec, "no safebox drop record");
+  await selectRecord(page, rec._key, rec.id);
+  const sel = '#detail select[name="source.subtype"]';
+  // The detail panel re-renders once after selection, so wait for the select that stays
+  await page.waitForFunction((q) => document.querySelector(q)?.value === "safebox", { timeout: 5000 }, sel);
+  const r = await page.$eval(sel, (s) => ({
+    value: s.value,
+    justice: [...s.querySelectorAll('optgroup[label="Justice"] option')].map((o) => o.value).sort(),
+    loose: [...s.children].filter((c) => c.tagName === "OPTION").map((o) => o.value),
+  }));
+  assertEq(r.value, "safebox", "the stored subtype is not selected");
+  assertEq(r.justice.join(","), "cabinet,pickpocket,safebox,steal,wardrobe", "justice group");
+  assert(r.loose.includes("chest") && !r.loose.includes("steal"), `ungrouped options: ${r.loose}`);
+});
+
 test("Batch edit: a pack list shows its labels, keeps a second pack, and an edit writes a list", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
