@@ -93,8 +93,8 @@ const VALUES = {
     mob: "Dropped by monsters", scryable: "Antiquity (scrying)",
     tales_of_tribute: "Tales of Tribute", dark_brotherhood: "Dark Brotherhood",
     lorebook: "Lorebook",
-    steal: "Justice: stolen from a container", safebox: "Justice: safebox",
-    wardrobe: "Justice: wardrobe", cabinet: "Justice: cabinet", pickpocket: "Justice: pickpocketing",
+    steal: "Justice: Stolen from a container", safebox: "Justice: Safebox",
+    wardrobe: "Justice: Wardrobe", cabinet: "Justice: Cabinet", pickpocket: "Justice: Pickpocketing",
   },
   dungeon_drop_subtypes: {
     chest: "Treasure chest",
