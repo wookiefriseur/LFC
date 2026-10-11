@@ -51,8 +51,8 @@
     {
       "name": "event_drop.jsonl",
       "type": "event_drop",
-      "records": 88,
-      "digest": "bb05b4ce2ee98d39"
+      "records": 92,
+      "digest": "47b8e9619d38cefd"
     },
     {
       "name": "event_vendor.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "4e4d6d7b122422fb",
+  "digest": "18b7c062cb6e4a61",
   "counts": {
-    "records": 10077,
+    "records": 10081,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -154,7 +154,7 @@
       "pvp_vendor": 84,
       "writ_vendor": 56,
       "luxury": 666,
-      "event_drop": 88,
+      "event_drop": 92,
       "event_vendor": 98,
       "crown_crate": 153,
       "crown_store": 1735,

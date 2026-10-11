@@ -86,3 +86,7 @@
 {"id":226761,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226769,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226784,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226763,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226756,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226770,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"id":226785,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
