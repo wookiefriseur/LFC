@@ -3,7 +3,7 @@
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
   SI_FURC_EVENT_IC = "Imperial City Celebration",
-  -- 135 ENTRIES UNTRANSLATED/IDENTICAL
+  -- 141 ENTRIES UNTRANSLATED/IDENTICAL
   SI_FURC_ACHIEVEMENT_UNKNOWN = "achievement^n",
   SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
   SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
@@ -23,6 +23,7 @@ local strings = {
   SI_FURC_EVENT_CRIME = "Crime Wave",
   SI_FURC_EVENT_ELSWEYR = "Season of the Dragon",
   SI_FURC_EVENT_HEARTS = "Hearts Week",
+  SI_FURC_EVENT_HIGHSEAS = "High Seas of Tamriel",
   SI_FURC_EVENT_HOLLOWJACK = "Sinister Hollowjack",
   SI_FURC_EVENT_JESTER = "Jester's Festival",
   SI_FURC_EVENT_MAYHEM = "Whitestrake's Mayhem",
@@ -45,8 +46,12 @@ local strings = {
   SI_FURC_GUILD_UNDAUNTED_QM = "Quartermaster",
   SI_FURC_HOUSE = "Included in: <<1>>",
   SI_FURC_HOUSE_MORE = "<<1>> and <<2>> more",
+  SI_FURC_ITEMPACK_BITTERMERCY = "Spear of Bitter Mercy Style",
+  SI_FURC_ITEMPACK_CHRYSAMERE = "Chrysamere Style",
+  SI_FURC_ITEMPACK_DAWNBREAKER = "Dawnbreaker Style",
   SI_FURC_ITEMPACK_DWEMER = "Dwemer",
   SI_FURC_ITEMPACK_EBONY = "Ebony Blade Style",
+  SI_FURC_ITEMPACK_FEARSTRUCK = "Fearstruck Style",
   SI_FURC_ITEMPACK_FIRSTBLADE = "Firstblade Style",
   SI_FURC_ITEMPACK_JYGGALAG = "Sword of Jyggalag Style",
   SI_FURC_ITEMPACK_RAZOR = "Mehrunes' Razor",
@@ -96,6 +101,7 @@ local strings = {
   SI_FURC_SRC_FISH = "fishing^N,by",
   SI_FURC_SRC_GEYSER = "geysers^p,from",
   SI_FURC_SRC_HARVEST = "harvesting^N,from",
+  SI_FURC_SRC_IGNORED = "FurnitureCatalogue does not track this item on purpose",
   SI_FURC_SRC_ITEMBUNDLE = "Crown Store bundle: <<1>>",
   SI_FURC_SRC_ITEMPACK = "Part of <<1>>",
   SI_FURC_SRC_LEADS = "several leads",
