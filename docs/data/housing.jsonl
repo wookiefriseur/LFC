@@ -76,7 +76,7 @@
 {"id":117843,"source":{"type":"housing","houses":[1094]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117862,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":117867,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
-{"id":117873,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
+{"id":117873,"source":{"type":"housing","houses":[11456,13560]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":117881,"source":{"type":"housing","houses":[14078,7601]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117882,"source":{"type":"housing","houses":[14078]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117886,"source":{"type":"housing","houses":[7601]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -84,7 +84,7 @@
 {"id":117891,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117892,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117893,"source":{"type":"housing","houses":[4795]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":117894,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":117894,"source":{"type":"housing","houses":[1095,7601,1100,11456,4795]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117896,"source":{"type":"housing","houses":[1095,7601]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117897,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117899,"source":{"type":"housing","houses":[14078,14077]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -109,7 +109,7 @@
 {"id":117952,"source":{"type":"housing","houses":[1310,1074]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117962,"source":{"type":"housing","houses":[1311]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118000,"source":{"type":"housing","houses":[1067,1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":118054,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":118054,"source":{"type":"housing","houses":[5169,8323,7600,5757]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118055,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118057,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118058,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -190,8 +190,8 @@
 {"id":120470,"source":{"type":"housing","houses":[14078,1095]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120471,"source":{"type":"housing","houses":[14078,1095]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120472,"source":{"type":"housing","houses":[14078,1095,14077]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120475,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120481,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":120475,"source":{"type":"housing","houses":[14078,1095,11456,1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":120481,"source":{"type":"housing","houses":[14078,13882,11456,1095,1092]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120482,"source":{"type":"housing","houses":[14078,1095,1093]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120483,"source":{"type":"housing","houses":[1095,14078]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120484,"source":{"type":"housing","houses":[14078,1095]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -240,7 +240,7 @@
 {"id":121020,"source":{"type":"housing","houses":[1097,1310]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121023,"source":{"type":"housing","houses":[1309]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121024,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":121025,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":121025,"source":{"type":"housing","houses":[9014,13882,11456]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121026,"source":{"type":"housing","houses":[1309,13078]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121027,"source":{"type":"housing","houses":[1309]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121029,"source":{"type":"housing","houses":[1309,5462]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -439,7 +439,7 @@
 {"id":151834,"source":{"type":"housing","houses":[6399]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151842,"source":{"type":"housing","houses":[12456]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151845,"source":{"type":"housing","houses":[10051,7218,7226]},"cost":[],"availability":{"version":"KITTY"}}
-{"id":151846,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"KITTY"}}
+{"id":151846,"source":{"type":"housing","houses":[10051,7226,6399,9735,10511]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151867,"source":{"type":"housing","houses":[7226]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151868,"source":{"type":"housing","houses":[7218,7226]},"cost":[],"availability":{"version":"KITTY"}}
 {"id":151874,"source":{"type":"housing","houses":[6399]},"cost":[],"availability":{"version":"KITTY"}}
@@ -478,18 +478,18 @@
 {"id":167289,"source":{"type":"housing","houses":[14609,8652,8353]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167290,"source":{"type":"housing","houses":[8353,8652,12732,14609]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167291,"source":{"type":"housing","houses":[14609,8652,13882,8353]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167292,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167292,"source":{"type":"housing","houses":[13882,12732,8353,8323,14609]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167293,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167294,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167294,"source":{"type":"housing","houses":[12732,14609,8323,8353]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167295,"source":{"type":"housing","houses":[13882,8323]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167296,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167297,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167296,"source":{"type":"housing","houses":[8323,13882]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167297,"source":{"type":"housing","houses":[8323,13882]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167298,"source":{"type":"housing","houses":[8697,14609,8323]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167299,"source":{"type":"housing","houses":[8697,14609,8323]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167300,"source":{"type":"housing","houses":[8697,14609,8323]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167301,"source":{"type":"housing","houses":[8697,14609,8323]},"cost":[],"availability":{"version":"STONET"}}
 {"id":167302,"source":{"type":"housing","houses":[8652,8323]},"cost":[],"availability":{"version":"STONET"}}
-{"id":167306,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"STONET"}}
+{"id":167306,"source":{"type":"housing","houses":[8323,13882]},"cost":[],"availability":{"version":"STONET"}}
 {"id":171382,"source":{"type":"housing","houses":[8697]},"cost":[],"availability":{"version":"MARKAT"}}
 {"id":171817,"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"}}
 {"id":171819,"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"}}
@@ -511,9 +511,9 @@
 {"id":181604,"source":{"type":"housing","houses":[13882]},"cost":[],"availability":{"version":"WAKE"}}
 {"id":181605,"source":{"type":"housing","houses":[12270,9735]},"cost":[],"availability":{"version":"WAKE"}}
 {"id":181606,"source":{"type":"housing","houses":[9735]},"cost":[],"availability":{"version":"WAKE"}}
-{"id":181607,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"WAKE"}}
-{"id":181608,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"WAKE"}}
-{"id":181609,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"WAKE"}}
+{"id":181607,"source":{"type":"housing","houses":[9735,12732,11172,13882,14609]},"cost":[],"availability":{"version":"WAKE"}}
+{"id":181608,"source":{"type":"housing","houses":[9735,12732,11172,13882,14609]},"cost":[],"availability":{"version":"WAKE"}}
+{"id":181609,"source":{"type":"housing","houses":[9735,12732,11172,13882,14609]},"cost":[],"availability":{"version":"WAKE"}}
 {"id":181610,"source":{"type":"housing","houses":[13882,9735]},"cost":[],"availability":{"version":"WAKE"}}
 {"id":181611,"source":{"type":"housing","houses":[13882,9735]},"cost":[],"availability":{"version":"WAKE"}}
 {"id":182230,"source":{"type":"housing","houses":[13882]},"cost":[],"availability":{"version":"DEADL"}}
@@ -604,7 +604,7 @@
 {"id":198667,"source":{"type":"housing","houses":[11655]},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203132,"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203202,"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"ENDLESS"}}
-{"id":203596,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
+{"id":203596,"source":{"type":"housing","houses":[11456,14078]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":203597,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":203598,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":203599,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
@@ -689,3 +689,4 @@
 {"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"},"id":171818,"name_overrides":{"en":"Tree, Giant Cork Oak"}}
 {"id":204456,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
 {"source":{"type":"housing","houses":[10223]},"cost":[],"availability":{"version":"TIDES"},"id":184105,"name_overrides":{"en":"Green Algae Coral Formation, Tree Capped"}}
+{"source":{"type":"housing","houses":[1095,14078,11456,14077]},"cost":[],"availability":{"version":"HOMESTEAD"},"id":120473}
