@@ -1041,8 +1041,8 @@
 {"id":165811,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"SKYRIM"}}
 {"id":165812,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"SKYRIM"}}
 {"id":165813,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"SKYRIM"}}
-{"id":165814,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"SKYRIM"}}
-{"id":165815,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":900}],"availability":{"version":"SKYRIM"}}
+{"id":165814,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"},{"location":"REACH"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"SKYRIM"}}
+{"id":165815,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"},{"location":"REACH"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":900}],"availability":{"version":"SKYRIM"}}
 {"id":165816,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":300}],"availability":{"version":"SKYRIM"}}
 {"id":165817,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"SKYRIM"}}
 {"id":165818,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"WSKYRIM"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":900}],"availability":{"version":"SKYRIM"}}
