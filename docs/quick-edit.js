@@ -110,12 +110,11 @@ function render(key) {
   ui.saveBtn.addEventListener("click", () => save());
   const cancelBtn = elem("button", { class: "modal-cancel" }, "Cancel");
   cancelBtn.addEventListener("click", () => closeQuickEdit());
-  const batchLink = elem("button", { class: "modal-quiet", type: "button" },
-    "Open in Batch edit instead");
+  const batchLink = elem("button", { class: "modal-batch", type: "button" },
+    "Batch edit");
   batchLink.addEventListener("click", () => jumpToBatchEdit());
   ui.inner.append(elem("div", { class: "modal-footer" },
-    ui.status, cancelBtn, ui.saveBtn,
-    elem("p", { class: "modal-escape" }, batchLink)));
+    ui.status, batchLink, cancelBtn, ui.saveBtn));
 
   paint();
   focusFirst();

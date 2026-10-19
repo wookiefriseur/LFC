@@ -1,3 +1,5 @@
+import "./responsive-tables.js";
+
 // Every mask shares one dirty buffer (state.buffer) and one Review & Submit flow (quick-edit modal is a reduced view of the same write path)
 
 import {
@@ -104,7 +106,15 @@ async function openQuickEdit(recordKey) {
   }
 }
 
-const ROW_H = 36;       // px per <tr>; style.css fixes the row at this height
+const mobileRows = matchMedia("(max-width: 900px)");
+let ROW_H = mobileRows.matches ? 304 : 36;
+mobileRows.addEventListener("change", () => {
+  const scroller = document.querySelector("#scroller");
+  const index = scroller ? Math.floor(scroller.scrollTop / ROW_H) : 0;
+  ROW_H = mobileRows.matches ? 304 : 36;
+  if (scroller) scroller.scrollTop = index * ROW_H;
+  renderTable();
+});
 const OVERSCAN = 8;     // extra rows above/below the viewport
 
 const $ = (sel) => document.querySelector(sel);
@@ -150,6 +160,7 @@ async function init() {
     });
     bindTabMemory();
     renderFooter();
+    showSiteUpdated();
     state.buffer.onChange = () => {
       findingsCache = null;
       schedulePendingSave();
@@ -210,6 +221,27 @@ function rememberTab(id) {
   try {
     localStorage.setItem(LAST_TAB_KEY, id);
   } catch (_) { /* storage unavailable: the app just forgets */ }
+}
+
+// Get date of latest update from commit
+const UPDATED_KEY = "lfc.siteUpdated";
+async function showSiteUpdated() {
+  const el = $("#site-updated");
+  let iso = null;
+  try { iso = sessionStorage.getItem(UPDATED_KEY); } catch (_) { /* storage unavailable */ }
+  if (!iso) {
+    try {
+      const res = await fetch(`https://api.github.com/repos/${ISSUE_REPO}/commits?path=docs&per_page=1`);
+      iso = res.ok ? (await res.json())[0]?.commit?.committer?.date : null;
+    } catch (_) { /* offline */ }
+    if (!iso) return;
+    try { sessionStorage.setItem(UPDATED_KEY, iso); } catch (_) { /* fetched again next time */ }
+  }
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return;
+  el.dateTime = date.toISOString();
+  el.textContent = `Updated ${date.toISOString().slice(0, 16).replace("T", " ")} UTC`;
+  el.hidden = false;
 }
 
 // masks.js has no switch callback, so the write hangs off a click on the bar and this module's own switchTo* helpers.
@@ -815,7 +847,9 @@ function commitLuxuryPlan() {
 // Mask 2: Batch edit (virtualised table + schema-driven form)
 function renderAdvancedPanel(container) {
   container.innerHTML = `
-    <div class="adv-controls">
+    <details id="batch-filters" class="batch-filters" open>
+      <summary>Search and filters</summary>
+      <div class="adv-controls">
       <button id="btn-add" class="btn-primary">+ Add new</button>
       <button id="btn-add-dump" class="btn-dump" aria-expanded="false" aria-controls="adv-import"
         title="Paste a DevUtility dump, or the diff from a submitted issue to review its changes">++Add from Dump or Diff</button>
@@ -835,6 +869,11 @@ function renderAdvancedPanel(container) {
         <span>Changed only</span>
         <span id="changed-count" class="adv-changed-count"></span>
       </label>
+      </div>
+    </details>
+    <div class="batch-view-nav">
+      <button id="batch-show-results" type="button">Back to results</button>
+      <button id="batch-show-editor" type="button" disabled>Continue editing</button>
     </div>
 
     <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump or Diff">
@@ -876,6 +915,13 @@ function renderAdvancedPanel(container) {
       </aside>
     </div>`;
 
+  const narrow = matchMedia("(max-width: 1000px)");
+  const filters = $("#batch-filters");
+  filters.open = !narrow.matches;
+  narrow.addEventListener("change", () => { filters.open = !narrow.matches; });
+  filters.addEventListener("toggle", () => renderTable());
+  $("#batch-show-results").addEventListener("click", () => showBatchView(false));
+  $("#batch-show-editor").addEventListener("click", () => showBatchView(true));
   populateFilters();
   bindHeader();
   bindScroller();
@@ -886,6 +932,23 @@ function renderAdvancedPanel(container) {
   // The panel renders lazily on first switch, by which time edits from other masks may already be buffered.
   renderChangedCount();
 }
+
+
+function showBatchView(editing) {
+  $("#panel-advanced").classList.toggle("is-editing", editing);
+  if (matchMedia("(max-width: 1000px)").matches) {
+    if (editing) $("#batch-filters").open = false;
+    $("#panel-advanced").scrollTop = 0;
+    if (editing) {
+      const heading = $("#detail h2");
+      if (heading) { heading.tabIndex = -1; heading.focus(); }
+    } else {
+      renderTable();
+      $("#batch-show-editor").focus();
+    }
+  }
+}
+
 
 function populateFilters() {
   fillSelect("#filter-type", ["", ...orderedSourceTypes(state.enums.source_types)],
@@ -991,6 +1054,7 @@ function addNewRecord(opts = {}) {
   state.selectedKey = null;
   state.editing = blank;
   renderDetail();
+  showBatchView(true);
 }
 
 function applyFilters() {
@@ -1149,10 +1213,14 @@ function renderTable() {
         onTickChange({ rerender: false });
         return;
       }
-      state.selectedKey = r._key;
-      state.editing = deepClone(r);
+      const sameDraft = state.selectedKey === r._key && state.editing && state.ticked.size === 0;
+      if (!sameDraft) {
+        state.selectedKey = r._key;
+        state.editing = deepClone(r);
+      }
       renderTable();
-      renderDetail();
+      if (!sameDraft) renderDetail();
+      showBatchView(true);
     });
     tbody.append(tr);
   }
@@ -1234,6 +1302,10 @@ function bindScroller() {
 function renderDetail() {
   const host = $("#detail");
   if (!host) return;
+  const resume = $("#batch-show-editor");
+  resume.disabled = !state.editing && state.ticked.size === 0;
+  resume.textContent = state.ticked.size >= BATCH_MIN ? `Edit ${state.ticked.size} selected records` : "Continue editing";
+  if (resume.disabled) $("#panel-advanced").classList.remove("is-editing");
   host.innerHTML = "";
   // Ticked rows take the pane; a single tick is not a batch and gets the ordinary editor.
   if (state.ticked.size >= BATCH_MIN) {
@@ -1297,7 +1369,12 @@ function renderDetail() {
 
   // The form mutates state.editing in place. A source.type change moves the record to another file, and live findings are refreshed in place: rebuilding the form mid-keystroke takes the focus with it.
   let formEl = null;
+  let discardBtn = null;
+  // Against the stored record, not the draft as rendered: a re-render keeps a dirty draft.
+  const stored = state.selectedKey ? JSON.stringify(clean(state.index.get(state.selectedKey))) : null;
+  const unchanged = () => JSON.stringify(clean(state.editing)) === stored;
   const onChange = () => {
+    if (discardBtn) discardBtn.disabled = unchanged();
     state.editing._category = deriveCategory(state.editing, state.editing._category);
     formEl?.refreshFindings?.(editingFindings());
   };
@@ -1323,7 +1400,8 @@ function renderDetail() {
 
   const saveBtn = elem("button", { class: "btn-primary" }, "Save to the change list");
   saveBtn.addEventListener("click", () => commitEdit());
-  const discardBtn = elem("button", {}, "Discard");
+  discardBtn = elem("button", {}, "Discard");
+  discardBtn.disabled = unchanged();
   discardBtn.addEventListener("click", () => {
     state.editing = state.selectedKey
       ? deepClone(state.index.get(state.selectedKey))
@@ -2326,6 +2404,7 @@ function switchToBatchEdit(key) {
   applyFilters();
   renderTable();
   renderDetail();
+  showBatchView(true);
   const idx = state.filtered.findIndex((r) => r._key === key);
   const scroller = $("#scroller");
   if (idx >= 0 && scroller) {
@@ -2343,6 +2422,7 @@ function pairRecord(key) {
   state.selectedKey = null;
   state.editing = { ...deepClone(original), _key: newKey(original._category), _isNew: true, _pairFrom: key };
   renderDetail();
+  showBatchView(true);
 }
 
 // A folio's contents carry no vendor or price of their own: the folio is what is sold. The item keeps the update it arrived in.
@@ -2362,6 +2442,7 @@ function moveToFolio(key) {
     _category: "container", _key: newKey("container"), _isNew: true, _moveFrom: key,
   };
   renderDetail();
+  showBatchView(true);
 }
 
 function folioRecords() {

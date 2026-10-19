@@ -95,7 +95,12 @@ async function waitForBoot(page) {
 }
 
 async function switchTab(page, id) {
-  await page.click(`#tab-${id}`);
+  const target = `#tab-${id}`;
+  if (!await page.$eval(target, (e) => e.checkVisibility())) {
+    await page.click("#nav-toggle");
+    await page.waitForFunction((selector) => document.querySelector(selector)?.checkVisibility(), {}, target);
+  }
+  await page.click(target);
   await page.waitForSelector(`#panel-${id}:not([hidden])`, { timeout: 10000 });
   await page.waitForFunction(
     (pid) => document.querySelector(pid).childElementCount > 0,
@@ -114,6 +119,13 @@ test("boots with no page errors and mounts the mask tab bar", async (page) => {
   for (const want of ["browse", "advanced", "maintenance"]) {
     assert(ids.includes(want), `expected a "${want}" tab, got ${ids.join(", ")}`);
   }
+});
+
+test("the header shows the date of the last docs/ commit", async (page) => {
+  await page.waitForSelector("#site-updated:not([hidden])", { timeout: 5000 });
+  const { text, datetime } = await page.$eval("#site-updated", (e) => ({ text: e.textContent, datetime: e.dateTime }));
+  assert(text === "Updated 2026-10-19 01:56 UTC", `header text: ${text}`);
+  assert(datetime === "2026-10-19T01:56:12.000Z", `datetime: ${datetime}`);
 });
 
 test("loads the v2 data set: records, enums and the file manifest", async (page) => {
@@ -330,6 +342,51 @@ test("batch edit: the form renders note, rarity and notes, and follows source.ty
   assert(after > 0 && before > 0, "form fields did not render");
   const notes = await page.$$eval(".note-combo", (n) => n.length);
   assertAtLeast(notes, 1, "note combo missing after a source.type switch");
+});
+
+test("Batch edit Discard only resets unsaved draft changes", async (page) => {
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "advanced");
+    const rec = await page.evaluate(() => window.__proto.sampleRecord("luxury"));
+    await selectRecord(page, rec._key, rec.id);
+    const disabled = () => page.$$eval("#detail .form-actions button", (bs) => bs.find((b) => b.textContent === "Discard").disabled);
+    assert(await disabled(), "pristine draft can be discarded");
+    const notes = '#detail [data-field="notes"]';
+    const before = await page.$eval(notes, (e) => e.value);
+    await page.$eval(notes, (e) => { e.value += " contributor note"; e.dispatchEvent(new Event("input", { bubbles: true })); });
+    assert(!await disabled(), "changed draft cannot be discarded");
+    await page.$$eval("#detail .form-actions button", (bs) => bs.find((b) => b.textContent === "Discard").click());
+    assertEq(await page.$eval(notes, (e) => e.value), before, "Discard did not restore draft");
+    assert(await disabled(), "discarded draft is still dirty");
+    await page.$eval(notes, (e) => { e.value += " saved note"; e.dispatchEvent(new Event("input", { bubbles: true })); });
+    await page.click("#detail .form-actions .btn-primary");
+    assert(await disabled(), "saved queued edit can still be discarded");
+    assert((await diffLines(page)).some((l) => l.op === "update"), "save did not queue update");
+  } finally {
+    await page.evaluate(() => window.__proto.forgetPending());
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
+test("maintenance sourceless rows offer Add source with the item prefilled", async (page) => {
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "maintenance");
+    await page.select("#maint-filter", "sourceless");
+    await page.waitForSelector("#maint-body .maint-actions button");
+    const id = await page.$eval("#maint-body tr:not(.spacer) td:nth-child(2)", (e) => Number(e.textContent));
+    await page.$$eval("#maint-body tr:not(.spacer) .maint-actions button", (bs) => bs.find((b) => b.textContent === "Add source").click());
+    assertEq(await page.evaluate(() => window.__proto.editing().id), id, "Add source lost item id");
+    assert(await page.evaluate(() => window.__proto.editing()._isNew), "Add source edits rumour instead of adding source");
+  } finally {
+    await page.evaluate(() => window.__proto.forgetPending());
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
 });
 
 test("maintenance: the health filters compute", async (page) => {
@@ -865,6 +922,12 @@ test("modal: opens from Find an item, names which record, saves to the one buffe
   });
   await page.waitForSelector(".modal-backdrop", { timeout: 10000 });
 
+  assertEq(await page.$eval(".modal-batch", (b) => b.textContent), "Batch edit", "batch shortcut label");
+  const corner = await page.$eval(".modal-backdrop .modal-close", (b) => {
+    const box = b.getBoundingClientRect(), modal = b.closest(".modal").getBoundingClientRect();
+    return box.top - modal.top < 24 && modal.right - box.right < 24;
+  });
+  assert(corner, "Quick Edit close button is not in the top corner");
   const head = await page.$eval(".modal-backdrop", (d) => d.textContent);
   assert(/record \d+ of \d+ for this item/.test(head),
     "the modal does not say which of the item's records is open");
@@ -2624,8 +2687,9 @@ test("issue diff: a pasted issue body loads its changes for review, only into an
     const r = window.__proto.records().find((x) => x._category === "luxury" && x.id === 184200);
     return { source: r.source, availability: r.availability };
   });
+  const nextDate = lux.availability.last_seen === "2026-09-18" ? "2026-09-11" : "2026-09-18";
   const diff = { v: 1, op: "update", id: 184200, category: "luxury", match: lux.source,
-    fields: { availability: { ...lux.availability, last_seen: "2026-09-18" } } };
+    fields: { availability: { ...lux.availability, last_seen: nextDate } } };
   const body = ["## Summary", "", "Seen {today}", "", "[//]: # (diff-begin)", "```",
     JSON.stringify(diff), "```", "[//]: # (diff-end)"].join("\n");
 
@@ -2639,7 +2703,7 @@ test("issue diff: a pasted issue body loads its changes for review, only into an
   assert(loaded.startsWith("Diff loaded: 1 change"), `the diff did not load: "${loaded}"`);
   const lines = await diffLines(page);
   assertEq(lines.length, 1, "the change list is not the issue's");
-  assertEq(lines[0].fields.availability.last_seen, "2026-09-18", "the edit was lost");
+  assertEq(lines[0].fields.availability.last_seen, nextDate, "the edit was lost");
 
   const again = await pasteImport(page, body);
   assert(again.includes("send or discard"), `a second diff was merged into unsaved work: "${again}"`);
@@ -2877,6 +2941,64 @@ test("Batch edit: a pack list shows its labels, keeps a second pack, and an edit
   assertEq(JSON.stringify(after), JSON.stringify([rec.source.packs[0]]), "removing a pack did not leave a list");
 });
 
+test("names symbols and edit controls stay within their cells", async (page) => {
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "names");
+    const target = await page.evaluate(() => Object.entries(window.__proto.enums)
+      .flatMap(([kind, list]) => Array.isArray(list) ? list.filter(e => e && typeof e === "object" && typeof e.name === "string" && typeof e.symbol === "string")
+        .map(e => ({ kind, symbol: e.symbol })) : []).sort((a, b) => b.symbol.length - a.symbol.length)[0]);
+    await page.$eval(`#names-lists [data-list="vocab:${target.kind}"]`, e => e.click());
+    await page.$eval("#names-search", (e, symbol) => { e.value = symbol; e.dispatchEvent(new Event("input")); }, target.symbol);
+    await page.waitForFunction(symbol => document.querySelector("#names-table tbody tr .names-id")?.textContent === symbol, {}, target.symbol);
+    const measurements = [];
+    for (const width of [1440, 390]) {
+      await page.setViewport({ width, height: 900 });
+      await page.$eval("#names-table tbody tr", e => e.scrollIntoView({ block: "center" }));
+      await page.hover("#names-table .names-edit-button");
+      if (process.env.NAMES_EVIDENCE) await page.screenshot({ path: `${process.env.NAMES_EVIDENCE}-${width}.png` });
+      measurements.push(await page.$eval("#names-table tbody tr", row => {
+        const symbol = row.querySelector(".names-id"), edit = row.querySelector(".names-edit-button");
+        const cell = symbol.getBoundingClientRect(), box = edit.getBoundingClientRect();
+        const range = document.createRange(); range.selectNodeContents(symbol);
+        const parts = [...range.getClientRects()];
+        return { width: innerWidth, symbol: symbol.textContent,
+          visible: parts.every(r => r.left >= cell.left - 1 && r.right <= cell.right + 1 && r.bottom <= cell.bottom + 1),
+          overlaps: parts.some(r => r.left < box.right && r.right > box.left && r.top < box.bottom && r.bottom > box.top) };
+      }));
+    }
+    for (const m of measurements) {
+      assert(m.visible, `symbol clipped at ${m.width}px: ${m.symbol}`);
+      assert(!m.overlaps, `name control covers symbol at ${m.width}px`);
+    }
+    await page.focus("#names-table .names-edit-button");
+    await page.keyboard.press("Space");
+    await page.waitForSelector("#names-table input.names-edit");
+    await page.keyboard.press("Escape");
+    assert(await page.$eval("#names-table .names-edit-button", b => b === document.activeElement), "keyboard cancellation lost focus");
+  } finally {
+    await page.setViewport({ width: 1440, height: 900 });
+    await page.evaluate(() => window.__proto.forgetPending());
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
+test("names categories collapse at mobile widths and reopen on desktop", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await page.setViewport({ width: 390, height: 844 });
+  await switchTab(page, "names");
+  assert(!await page.$eval("#names-filters", (e) => e.open), "mobile categories initially cover the list");
+  await page.focus("#names-filters summary");
+  await page.keyboard.press("Enter");
+  assert(await page.$eval("#names-filters", (e) => e.open), "mobile categories do not open from keyboard");
+  await page.setViewport({ width: 1440, height: 900 });
+  await page.waitForFunction(() => document.querySelector("#names-filters").open);
+  assertEq(await page.$eval("#names-filters summary", (e) => e.tabIndex), -1, "desktop categories leave a disabled toggle in tab order");
+});
+
 test("names: vocabulary labels can be edited, restored after reload, cancelled and reverted", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
@@ -2886,12 +3008,15 @@ test("names: vocabulary labels can be edited, restored after reload, cancelled a
   const cell = '#names-table tbody tr:last-child td:nth-child(2)';
   const original = await page.$eval(cell, (e) => e.textContent);
   const symbol = await page.$eval('#names-table tbody tr:last-child td:first-child', (e) => e.textContent);
-  await page.click(cell);
+  await page.focus(`${cell} .names-edit-button`);
+  await page.keyboard.press("Enter");
   // Always differs from the published label, whatever the data says today
   const renamed = `${original} (renamed)`;
   await page.$eval(`${cell} input`, (e, name) => { e.value = name; }, renamed);
   await page.keyboard.press("Enter");
   assertEq(await page.$eval(cell, (e) => e.textContent), renamed, "edited event label");
+  assert(await page.$eval(`${cell} .names-edit-button`, (b) => document.activeElement === b), "keyboard edit did not restore focus");
+  assert(await page.$eval('#names-lists [data-list="vocab:events"]', (b) => b.classList.contains("is-pending")), "changed category is not highlighted");
   let lines = await diffLines(page);
   assert(lines.some((l) => l.op === "enum-name" && l.enum === "events" && l.value === symbol && l.name === renamed), "missing event diff");
   await page.reload({ waitUntil: "domcontentloaded" });
@@ -2904,10 +3029,9 @@ test("names: vocabulary labels can be edited, restored after reload, cancelled a
   await page.$eval(`${cell} input`, (e) => { e.value = "Cancelled"; });
   await page.keyboard.press("Escape");
   assertEq(await page.$eval(cell, (e) => e.textContent), renamed, "cancelled edit");
-  await page.click(cell);
-  await page.$eval(`${cell} input`, (e, name) => { e.value = name; }, original);
-  await page.keyboard.press("Tab");
+  await page.click("#names-table tr.is-pending .names-revert");
   assertEq(await page.$eval(cell, (e) => e.textContent), original, "reverted label");
+  assert(!await page.$eval('#names-lists [data-list="vocab:events"]', (b) => b.classList.contains("is-pending")), "reverted category is still highlighted");
   assertEq(await page.$$eval("#names-table tr.is-pending", (rs) => rs.length), 0, "reverted event is still pending");
   assert(await page.$eval("#btn-submit", (e) => e.disabled), "reverted change is still submit-able");
 });
@@ -2922,6 +3046,13 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   assertAtLeast(Number.parseInt(houses, 10), 100, "house names");
   const published = await page.$eval("#names-table tbody tr td:nth-child(2)", (td) => td.textContent);
   const firstId = await page.$eval("#names-table tbody tr td:nth-child(1)", (td) => td.textContent);
+  await page.click("#names-table tbody tr td:nth-child(2)");
+  await page.$eval("#names-table input.names-edit", (e) => { e.value += " corrected"; });
+  await page.keyboard.press("Enter");
+  assert(await page.$eval('#names-lists [data-list="game:houses"]', (b) => b.classList.contains("is-pending")), "changed game category is not highlighted");
+  await page.click("#names-table tr.is-pending .names-revert");
+  assertEq(await page.$eval("#names-table tbody tr td:nth-child(2)", (td) => td.textContent), published, "game name Revert did not restore published name");
+  assert(!await page.$eval('#names-lists [data-list="game:houses"]', (b) => b.classList.contains("is-pending")), "reverted game category is still highlighted");
 
   await page.click('#names-lists [data-list="game:zones"]');
   await page.type("#names-search", "Glenumbra");
@@ -3073,6 +3204,11 @@ async function main() {
       externalImages.push(r.url());
       r.respond({ status: 200, contentType: "image/png", body: STUB_PNG })
         .catch(() => {});
+      return;
+    }
+    if (u.hostname === "api.github.com" && u.pathname.endsWith("/commits")) {
+      r.respond({ status: 200, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" },
+        body: JSON.stringify([{ commit: { committer: { date: "2026-10-19T01:56:12Z" } } }]) }).catch(() => {});
       return;
     }
     r.abort().catch(() => {});

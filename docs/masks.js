@@ -44,10 +44,28 @@ export function activeMaskId() {
   return activeId;
 }
 
+// Below 900px the bar is a popover behind #nav-toggle. Without the Popover API `:popover-open` throws, so the bar stays inline.
+function bindNavMenu(tabBar) {
+  const menu = document.getElementById("nav-toggle");
+  if (!("popover" in HTMLElement.prototype)) { menu?.remove(); return; }
+  const narrow = matchMedia("(max-width: 900px)");
+  const syncMenu = () => {
+    if (tabBar.matches(":popover-open")) tabBar.hidePopover();
+    if (narrow.matches) tabBar.setAttribute("popover", "auto");
+    else tabBar.removeAttribute("popover");
+  };
+  syncMenu();
+  narrow.addEventListener("change", syncMenu);
+  tabBar.addEventListener("toggle", () => {
+    menu?.setAttribute("aria-expanded", String(tabBar.matches(":popover-open")));
+  });
+}
+
 export function mountMasks({ tabBar, panelHost, defaultId }) {
   if (masks.length === 0) throw new Error("mountMasks: no masks registered");
   tabBarEl = tabBar;
   panelHostEl = panelHost;
+  bindNavMenu(tabBar);
   tabBar.innerHTML = "";
   panelHost.innerHTML = "";
 
@@ -80,6 +98,8 @@ export function switchMask(id) {
   const mask = masks.find((m) => m.id === id);
   if (!mask) throw new Error(`switchMask: unknown mask "${id}"`);
   activeId = id;
+  if (tabBarEl.hasAttribute("popover") && tabBarEl.matches(":popover-open")) tabBarEl.hidePopover();
+  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Open navigation, current page: ${mask.label}`);
 
   for (const m of masks) {
     const isActive = m.id === id;

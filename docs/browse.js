@@ -188,8 +188,10 @@ export function browseMask(deps) {
     container.innerHTML = `
       <section class="browse-mask">
         <aside class="browse-sidebar">
-          <h2>Find an item</h2>
-          <ul id="browse-facet-list" class="browse-facet-list"></ul>
+          <details id="browse-filters" class="browse-filters">
+            <summary>Category filter</summary>
+            <ul id="browse-facet-list" class="browse-facet-list"></ul>
+          </details>
         </aside>
 
         <div class="browse-main">
@@ -209,6 +211,17 @@ export function browseMask(deps) {
 
         <aside id="browse-detail" class="browse-detail" hidden></aside>
       </section>`;
+
+    const narrow = window.matchMedia("(max-width: 760px)");
+    const filters = $("#browse-filters");
+    filters.open = !narrow.matches;
+    filters.querySelector("summary").tabIndex = narrow.matches ? 0 : -1;
+    narrow.addEventListener("change", () => {
+      filters.open = !narrow.matches;
+      filters.querySelector("summary").tabIndex = narrow.matches ? 0 : -1;
+      renderGrid();
+    });
+    filters.addEventListener("toggle", () => renderGrid());
 
     let searchTimer = null;
     $("#browse-search").addEventListener("input", (e) => {

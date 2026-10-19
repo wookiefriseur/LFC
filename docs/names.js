@@ -69,9 +69,13 @@ export function namesMask(deps) {
     const ul = $("#names-lists");
     ul.innerHTML = "";
     const item = (id, label, count) => {
+      const [group, key] = id.split(":");
+      const pending = [...state.buffer.entries.values()].some((e) => group === "game"
+        ? e.op === "name" && e.kind === key && e.locale === locale()
+        : e.op === "enum-name" && e.enumName === key);
       const btn = elem("button", {
         type: "button",
-        class: `browse-facet-link${view.list === id ? " is-active" : ""}`,
+        class: `browse-facet-link${view.list === id ? " is-active" : ""}${pending ? " is-pending" : ""}`,
         "data-list": id,
       });
       btn.append(elem("span", {}, label), elem("span", { class: "muted" }, count == null ? "" : String(count)));
@@ -121,10 +125,31 @@ export function namesMask(deps) {
       const nameCell = elem("td", {}, r.name);
       if (game || r.editable) {
         nameCell.classList.add("names-editable");
-        nameCell.title = "Click to correct this name";
-        nameCell.addEventListener("click", () => editName(nameCell, game ? Number(r.id) : r.id, r.name));
+        nameCell.dataset.nameId = r.id;
+        nameCell.title = "Edit this name";
+        const edit = elem("button", { type: "button", class: "names-edit-button",
+          "aria-label": `Edit name for ${r.id}` }, r.name || "Add name");
+        edit.addEventListener("click", () => editName(nameCell, game ? Number(r.id) : r.id, r.name));
+        nameCell.replaceChildren(edit);
       }
-      tr.append(elem("td", { class: "names-id" }, r.id), nameCell, elem("td", { class: "muted" }, r.extra));
+      const details = elem("td", { class: "muted" }, r.extra);
+      if (r.pending) {
+        const revert = elem("button", { type: "button", class: "btn-mini names-revert",
+          "aria-label": `Revert name for ${r.id}` }, "Revert");
+        revert.addEventListener("click", () => {
+          if (game) setName(kindOfList(), Number(r.id), "");
+          else {
+            const vocab = view.list.slice("vocab:".length);
+            const published = state.enums[vocab].find((e) => e.symbol === r.id).name;
+            state.buffer.setEnumName(vocab, r.id, published, published);
+            renderFooter();
+            renderSidebar();
+            renderTable();
+          }
+        });
+        details.append(" ", revert);
+      }
+      tr.append(elem("td", { class: "names-id" }, r.id), nameCell, details);
       body.append(tr);
     }
     table.append(body);
@@ -156,16 +181,20 @@ export function namesMask(deps) {
     const input = elem("input", { type: "text", class: "names-edit", "aria-label": `Name for ${id}` });
     input.value = current;
     let done = false;
-    const finish = (save) => {
+    const finish = (save, refocus = true) => {
       if (done) return;
       done = true;
       if (save && input.value.trim() !== current && vocab) {
         const published = state.enums[vocab].find((e) => e.symbol === id).name;
         state.buffer.setEnumName(vocab, id, input.value.trim() || published, published);
         renderFooter();
+        renderSidebar();
         renderTable();
       } else if (save && input.value.trim() !== current) setName(kind, id, input.value);
       else renderTable();
+      const restored = [...$("#names-table").querySelectorAll(".names-editable")]
+        .find((el) => el.dataset.nameId === String(id));
+      if (refocus) restored?.querySelector(".names-edit-button")?.focus();
     };
     // pipeline keeps the existing grammar suffix
     const invalid = () => vocab && input.value.includes("^");
@@ -174,10 +203,11 @@ export function namesMask(deps) {
       input.title = invalid() ? "A name cannot contain ^" : "";
     });
     input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !invalid()) finish(true);
-      else if (e.key === "Escape") finish(false);
+      if (e.key === "Enter" && !invalid()) { e.preventDefault(); finish(true); }
+      else if (e.key === "Escape") { e.preventDefault(); finish(false); }
     });
-    input.addEventListener("blur", () => finish(!invalid()));
+    // A blur already moved the focus where the user wanted it.
+    input.addEventListener("blur", () => finish(!invalid(), false));
     cell.innerHTML = "";
     cell.append(input);
     input.focus();
@@ -266,8 +296,10 @@ export function namesMask(deps) {
     container.innerHTML = `
       <section class="browse-mask names-mask">
         <aside class="browse-sidebar">
-          <h2>Names</h2>
-          <ul id="names-lists" class="browse-facet-list"></ul>
+          <details id="names-filters" class="browse-filters">
+            <summary>Name categories</summary>
+            <ul id="names-lists" class="browse-facet-list"></ul>
+          </details>
         </aside>
         <div class="browse-main">
           <div class="browse-toolbar">
@@ -302,6 +334,15 @@ export function namesMask(deps) {
           <div id="names-table" class="browse-scroller"></div>
         </div>
       </section>`;
+
+    const narrow = window.matchMedia("(max-width: 760px)");
+    const filters = $("#names-filters");
+    const syncFilters = () => {
+      filters.open = !narrow.matches;
+      filters.querySelector("summary").tabIndex = narrow.matches ? 0 : -1;
+    };
+    syncFilters();
+    narrow.addEventListener("change", syncFilters);
 
     let searchTimer = null;
     $("#names-search").addEventListener("input", (e) => {

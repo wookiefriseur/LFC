@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <title>Furniture Catalogue</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./style.css?v=3a41ed7a624b">
+  <link rel="stylesheet" href="./style.css?v=2ed9f0057d63">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232563eb'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <script type="importmap">
   {
     "imports": {
       "./about.js": "./about.js?v=5cbcba6b8262",
-      "./app.js": "./app.js?v=783527e314c6",
-      "./browse.js": "./browse.js?v=416a6420d729",
+      "./app.js": "./app.js?v=ba943cf24bf0",
+      "./browse.js": "./browse.js?v=09474296df42",
       "./changelist.js": "./changelist.js?v=775feb673c6d",
       "./containers.js": "./containers.js?v=3d2af7b127b1",
       "./crown-crate.js": "./crown-crate.js?v=73880c8a0f6d",
@@ -27,12 +27,13 @@
       "./ignored-items.js": "./ignored-items.js?v=2bafeeb1a80e",
       "./lexicon.js": "./lexicon.js?v=4657d3d9fca1",
       "./luxury.js": "./luxury.js?v=922fb757f700",
-      "./maintenance.js": "./maintenance.js?v=1ba243e10f36",
-      "./masks.js": "./masks.js?v=67dd1548288e",
+      "./maintenance.js": "./maintenance.js?v=697bb90a68d7",
+      "./masks.js": "./masks.js?v=ac88bc90da43",
       "./names-dump.js": "./names-dump.js?v=e7887711c110",
-      "./names.js": "./names.js?v=4320f0e0ad6a",
-      "./quick-edit.js": "./quick-edit.js?v=323d02b2cd56",
+      "./names.js": "./names.js?v=281d9faf8e48",
+      "./quick-edit.js": "./quick-edit.js?v=cce0fd5c3c88",
       "./reference-data.js": "./reference-data.js?v=9ff855a9d947",
+      "./responsive-tables.js": "./responsive-tables.js?v=9670eb924511",
       "./taxonomy.js": "./taxonomy.js?v=c3463551509b",
       "./validate.js": "./validate.js?v=51160c9a48e7",
       "./zanil.js": "./zanil.js?v=40b7c8b90df8"
@@ -42,8 +43,9 @@
 </head>
 <body>
   <header>
-    <h1>Furniture Catalogue</h1>
+    <h1>Furniture Catalogue<small><time id="site-updated" hidden></time></small></h1>
     <!-- Tab bar - generated from masks.js -->
+    <button id="nav-toggle" type="button" popovertarget="tab-bar" aria-label="Open navigation" aria-expanded="false">Menu</button>
     <nav id="tab-bar" class="tabs" role="tablist"></nav>
   </header>
 
@@ -120,6 +122,6 @@
     </div>
   </div>
 
-  <script type="module" src="./app.js?v=783527e314c6"></script>
+  <script type="module" src="./app.js?v=ba943cf24bf0"></script>
 </body>
 </html>

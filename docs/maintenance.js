@@ -204,6 +204,7 @@ export function queueEnumValue(state, enumName, symbol, meta = null) {
 }
 
 export function maintenanceMask(deps) {
+  const mobileTable = window.matchMedia("(max-width: 900px)");
   const {
     state, $, elem, nameOf, validateRecord, itemLinkAnchor, itemIconImg,
     switchToBatchEdit, renderFooter, referenceData,
@@ -674,6 +675,11 @@ export function maintenanceMask(deps) {
       if (raf) return;
       raf = requestAnimationFrame(() => { raf = null; renderTable(); });
     });
+    mobileTable.addEventListener("change", () => {
+      const scroller = $("#maint-scroller");
+      if (scroller) scroller.scrollTop = 0;
+      renderTable();
+    });
     if (deps.onRefDataShard) {
       let again = null;
       deps.onRefDataShard(() => {
@@ -866,22 +872,24 @@ export function maintenanceMask(deps) {
     if (!tbody || !scroller) return;
     const total = view.display.length;
     const virtual = total > VIRT_MIN;
+    tbody.classList.toggle("is-virtual", virtual);
+    const rowHeight = mobileTable.matches ? 304 : ROW_H;
 
     let first = 0;
     let last = total;
     if (virtual) {
       const viewH = scroller.clientHeight || 500;
-      first = Math.max(0, Math.floor(scroller.scrollTop / ROW_H) - OVERSCAN);
-      last = Math.min(total, first + Math.ceil(viewH / ROW_H) + OVERSCAN * 2);
+      first = Math.max(0, Math.floor(scroller.scrollTop / rowHeight) - OVERSCAN);
+      last = Math.min(total, first + Math.ceil(viewH / rowHeight) + OVERSCAN * 2);
     }
 
     tbody.innerHTML = "";
-    if (first > 0) tbody.append(spacerRow(first * ROW_H));
+    if (first > 0) tbody.append(spacerRow(first * rowHeight));
     for (let i = first; i < last; i++) {
       const item = view.display[i];
       tbody.append(item.kind === "group" ? groupTr(item) : recordTr(item));
     }
-    if (last < total) tbody.append(spacerRow((total - last) * ROW_H));
+    if (last < total) tbody.append(spacerRow((total - last) * rowHeight));
 
     const grouped = view.display.some((d) => d.kind === "group");
     $("#maint-count").textContent = grouped
@@ -962,9 +970,12 @@ export function maintenanceMask(deps) {
     const fix = elem("button", { class: "btn-mini btn-primary maint-fix" }, "Quick Edit");
     fix.addEventListener("click", () => openFix(row.key));
     acts.append(fix);
+    const needsSource = view.filter === "sourceless";
     const jump = elem("button", { class: "btn-mini maint-secondary" },
-      "Open in Batch edit");
-    jump.addEventListener("click", () => switchToBatchEdit(row.key));
+      needsSource ? "Add source" : "Open in Batch edit");
+    jump.addEventListener("click", () => needsSource
+      ? deps.addRecordForItem(row.id)
+      : switchToBatchEdit(row.key));
     acts.append(jump);
     if (row.leaf) acts.append(sourcesButton(row.leaf));
     actTd.append(acts);
