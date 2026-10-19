@@ -94,3 +94,4 @@
 {"id":226764,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226767,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226755,"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"}}
+{"source":{"type":"event_drop","event":"HIGHSEAS"},"cost":[],"availability":{"version":"ECHOES"},"id":226757,"name_overrides":{"en":"Driftwood Arrangement, Hanging"}}
