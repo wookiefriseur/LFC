@@ -51,8 +51,8 @@
     {
       "name": "event_drop.jsonl",
       "type": "event_drop",
-      "records": 96,
-      "digest": "5dbbf9823ec8f6c6"
+      "records": 97,
+      "digest": "3cc3128cbda1ee5d"
     },
     {
       "name": "event_vendor.jsonl",
@@ -70,7 +70,7 @@
       "name": "crown_store.jsonl",
       "type": "crown_store",
       "records": 1735,
-      "digest": "3d9749e468417270"
+      "digest": "c1f391bb10c7498a"
     },
     {
       "name": "recipe.jsonl",
@@ -82,7 +82,7 @@
       "name": "drop.jsonl",
       "type": "drop",
       "records": 709,
-      "digest": "e3a6c2771296c9d5"
+      "digest": "4fe4b229a76ed2dd"
     },
     {
       "name": "quest_reward.jsonl",
@@ -99,8 +99,8 @@
     {
       "name": "housing.jsonl",
       "type": "housing",
-      "records": 692,
-      "digest": "d34a6665d0f6fc33"
+      "records": 694,
+      "digest": "e7b97f80c777e632"
     },
     {
       "name": "companion.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "8b439b7cfa6b92c4",
+  "digest": "7687c09d59b9bcca",
   "counts": {
-    "records": 10086,
+    "records": 10089,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -154,7 +154,7 @@
       "pvp_vendor": 84,
       "writ_vendor": 56,
       "luxury": 667,
-      "event_drop": 96,
+      "event_drop": 97,
       "event_vendor": 98,
       "crown_crate": 153,
       "crown_store": 1735,
@@ -162,7 +162,7 @@
       "drop": 709,
       "quest_reward": 41,
       "dungeon_drop": 120,
-      "housing": 692,
+      "housing": 694,
       "companion": 6,
       "guild_gift": 12,
       "tome_pack": 19,

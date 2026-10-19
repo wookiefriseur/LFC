@@ -387,7 +387,6 @@
 {"id":121046,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":30}],"availability":{"version":"HOMESTEAD"}}
 {"id":121047,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":25}],"availability":{"version":"HOMESTEAD"}}
 {"id":121049,"source":{"type":"crown_store","packs":["CRAGKNICKS"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":121049,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121052,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":121053,"source":{"type":"crown_store","packs":["CRAGKNICKS","HUBTREASURE"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121053,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":170}],"availability":{"version":"HOMESTEAD"}}
@@ -1539,7 +1538,6 @@
 {"id":199136,"source":{"type":"crown_store","packs":["CURIO"]},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":199136,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":130}],"availability":{"version":"ENDLESS"}}
 {"id":203132,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":50}],"availability":{"version":"ENDLESS"}}
-{"id":203133,"source":{"type":"crown_store","packs":["CURIO"]},"cost":[],"availability":{"version":"ENDLESS"}}
 {"id":203133,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":20}],"availability":{"version":"ENDLESS"}}
 {"id":203165,"source":{"type":"crown_store","packs":["JESTER"]},"cost":[],"availability":{"version":"SCIONS"}}
 {"id":203166,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":2800}],"availability":{"version":"ENDLESS"}}
@@ -1733,3 +1731,5 @@
 {"id":224850,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":4500}],"availability":{"version":"THIEVES"}}
 {"id":152258,"source":{"type":"crown_store","bundle":"FEARSTRUCK"},"cost":[{"currency":"CROWNS","amount":1200}],"availability":{"version":"SCALES"}}
 {"id":175578,"source":{"type":"crown_store","bundle":"DAWNBREAKER"},"cost":[{"currency":"CROWNS","amount":1200}],"availability":{"version":"BLACKW"}}
+{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}

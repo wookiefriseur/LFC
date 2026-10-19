@@ -50,12 +50,12 @@
 {"id":120755,"source":{"type":"drop","subtype":"fish"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121055,"source":{"type":"drop","npc_class":"CLASS_DRUNKARD","subtype":"pickpocket"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121058,"source":{"type":"drop","note":"SI_FURC_DB_STEALTH","subtype":"dark_brotherhood"},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":125543,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125543,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125544,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125551,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125552,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"rare"}
 {"id":125553,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"rare"}
-{"id":125562,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125562,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125583,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125590,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125595,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -64,24 +64,24 @@
 {"id":125600,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and Alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125606,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125608,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125609,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125609,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125613,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125617,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125618,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125619,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125620,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125620,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125621,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125622,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125630,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125630,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125631,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125632,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125633,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125634,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125634,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125635,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125636,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125636,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125637,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125647,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125648,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125647,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
+{"id":125648,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125649,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"extremely_rare"}
 {"id":125650,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125670,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -181,7 +181,7 @@
 {"id":134400,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134401,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134402,"source":{"type":"drop","subtype":"steal"},"cost":[],"availability":{"version":"CLOCKWORK"}}
-{"id":134403,"source":{"type":"drop","locations":[{"location":"HEWSBANE"}],"subtype":"wardrobe"},"cost":[],"availability":{"version":"CLOCKWORK"}}
+{"id":134403,"source":{"type":"drop","locations":[{"location":"HEWSBANE"}],"subtype":"wardrobe"},"cost":[],"availability":{"version":"CLOCKWORK"},"rarity":"extremely_rare"}
 {"id":134404,"source":{"type":"drop","locations":[{"location":"CWC"}],"note":"ENEMY_AUTOMATON"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134405,"source":{"type":"drop","locations":[{"location":"CWC"}],"note":"ENEMY_AUTOMATON"},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":134406,"source":{"type":"drop","locations":[{"location":"CWC"}],"note":"ENEMY_AUTOMATON"},"cost":[],"availability":{"version":"CLOCKWORK"}}
@@ -229,9 +229,9 @@
 {"id":139088,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
 {"id":139089,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket","npc_class":"CLASS_CLOTHIER"},"cost":[],"availability":{"version":"ALTMER"},"rarity":"extremely_rare"}
 {"id":139090,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
-{"id":139237,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
-{"id":139238,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
-{"id":139239,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket"},"cost":[],"availability":{"version":"ALTMER"}}
+{"id":139237,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket","npc_class":"CLASS_NOBLE"},"cost":[],"availability":{"version":"ALTMER"},"rarity":"rare"}
+{"id":139238,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket","npc_class":"CLASS_NOBLE"},"cost":[],"availability":{"version":"ALTMER"},"rarity":"rare"}
+{"id":139239,"source":{"type":"drop","locations":[{"location":"SUMMERSET"}],"subtype":"pickpocket","npc_class":"CLASS_NOBLE"},"cost":[],"availability":{"version":"ALTMER"},"rarity":"rare"}
 {"id":145396,"source":{"type":"drop","locations":[{"location":"MURKMIRE"}],"subtype":"steal"},"cost":[],"availability":{"version":"SLAVES"}}
 {"id":145397,"source":{"type":"drop","locations":[{"location":"MURKMIRE"}],"subtype":"steal"},"cost":[],"availability":{"version":"SLAVES"}}
 {"id":145398,"source":{"type":"drop","locations":[{"location":"MURKMIRE"}],"subtype":"steal"},"cost":[],"availability":{"version":"SLAVES"}}
