@@ -943,8 +943,13 @@ function showBatchView(editing) {
       const heading = $("#detail h2");
       if (heading) { heading.tabIndex = -1; heading.focus(); }
     } else {
+      // bring back the row that was open
+      const idx = state.filtered.findIndex((r) => r._key === state.selectedKey);
+      const scroller = $("#scroller");
+      if (idx >= 0 && scroller) scroller.scrollTop = Math.max(0, idx * ROW_H - ROW_H / 2);
       renderTable();
-      $("#batch-show-editor").focus();
+      const resume = $("#batch-show-editor");
+      (resume.disabled ? $("#batch-filters > summary") : resume).focus();
     }
   }
 }

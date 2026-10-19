@@ -222,6 +222,7 @@ export function browseMask(deps) {
       renderGrid();
     });
     filters.addEventListener("toggle", () => renderGrid());
+    filters.querySelector("summary").addEventListener("click", (e) => { if (!narrow.matches) e.preventDefault(); });
 
     let searchTimer = null;
     $("#browse-search").addEventListener("input", (e) => {

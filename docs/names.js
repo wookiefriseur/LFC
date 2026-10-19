@@ -343,6 +343,7 @@ export function namesMask(deps) {
     };
     syncFilters();
     narrow.addEventListener("change", syncFilters);
+    filters.querySelector("summary").addEventListener("click", (e) => { if (!narrow.matches) e.preventDefault(); });
 
     let searchTimer = null;
     $("#names-search").addEventListener("input", (e) => {
