@@ -130,7 +130,7 @@
 {"id":118120,"source":{"type":"housing","houses":[12731]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118127,"source":{"type":"housing","houses":[1098]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118128,"source":{"type":"housing","houses":[1445]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":118131,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":118131,"source":{"type":"housing","houses":[5461,7600,11655]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118138,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118139,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118140,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}

@@ -990,8 +990,8 @@
 {"id":151806,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
 {"id":151807,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
 {"id":151808,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
-{"id":151809,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"KITTY"}}
-{"id":151810,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
+{"id":151809,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"KITTY"}}
+{"id":151810,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
 {"id":151811,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
 {"id":151812,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":350}],"availability":{"version":"KITTY"}}
 {"id":151813,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":350}],"availability":{"version":"KITTY"}}
@@ -1000,7 +1000,7 @@
 {"id":151816,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
 {"id":151817,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"KITTY"}}
 {"id":151818,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"KITTY"}}
-{"id":151819,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":350}],"availability":{"version":"KITTY"}}
+{"id":151819,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":350}],"availability":{"version":"KITTY"}}
 {"id":151820,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
 {"id":151821,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":150}],"availability":{"version":"KITTY"}}
 {"id":151822,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":450}],"availability":{"version":"KITTY"}}
@@ -1008,12 +1008,12 @@
 {"id":151968,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"NELSWEYR"}],"achievement":2404,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"KITTY"}}
 {"id":153677,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
 {"id":153678,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
-{"id":153679,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"KITTY"}}
-{"id":153680,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":300}],"availability":{"version":"KITTY"}}
-{"id":153681,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":150}],"availability":{"version":"KITTY"}}
-{"id":153682,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
-{"id":153683,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":150}],"availability":{"version":"KITTY"}}
-{"id":153684,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"KITTY"}}
+{"id":153679,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":400}],"availability":{"version":"SCALES"}}
+{"id":153680,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":300}],"availability":{"version":"SCALES"}}
+{"id":153681,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":150}],"availability":{"version":"SCALES"}}
+{"id":153682,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"SCALES"}}
+{"id":153683,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":150}],"availability":{"version":"SCALES"}}
+{"id":153684,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"NELSWEYR"},{"location":"SELSWEYR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"SCALES"}}
 {"id":153685,"source":{"type":"vendor","vendor":"UNDAUNTED_QM","locations":[{"place":"UNDAUNTED"}],"achievement":2425,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"SCALES"}}
 {"id":153686,"source":{"type":"vendor","vendor":"UNDAUNTED_QM","locations":[{"place":"UNDAUNTED"}],"achievement":2425,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"SCALES"}}
 {"id":153687,"source":{"type":"vendor","vendor":"UNDAUNTED_QM","locations":[{"place":"UNDAUNTED"}],"achievement":2425,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":4500}],"availability":{"version":"SCALES"}}
@@ -1146,7 +1146,7 @@
 {"id":187780,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":200}],"availability":{"version":"BRETON"}}
 {"id":187781,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
 {"id":187782,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":700}],"availability":{"version":"BRETON"}}
-{"id":187783,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
+{"id":187783,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
 {"id":187784,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":2000}],"availability":{"version":"BRETON"}}
 {"id":187798,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3272,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
 {"id":187803,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3319,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"BRETON"}}
@@ -1155,7 +1155,7 @@
 {"id":187811,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3244,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"BRETON"}}
 {"id":187812,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3284,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":70000}],"availability":{"version":"BRETON"}}
 {"id":187813,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3300,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"BRETON"}}
-{"id":187814,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":1000}],"availability":{"version":"BRETON"}}
+{"id":187814,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":1000}],"availability":{"version":"BRETON"}}
 {"id":187815,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3269,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":2000}],"availability":{"version":"BRETON"}}
 {"id":187856,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"BRETON"}}
 {"id":187866,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3304,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"BRETON"}}
