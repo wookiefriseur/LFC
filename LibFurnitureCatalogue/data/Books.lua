@@ -88,7 +88,7 @@ FurC.BookCollections[bc.TRUTH_IN_SEQUENCE] = { -- The Truth in Sequence
 }
 
 FurC.BookCollections[bc.NOTHING_EYES] = { -- Look Upon Their Nothing Eyes
-  version = ver.SLAVES,
+  version = ver.MURKM,
   vendor = npcIds.AF,
   location = zones.MURKMIRE,
   place = places.MURKMIRE_LIL,

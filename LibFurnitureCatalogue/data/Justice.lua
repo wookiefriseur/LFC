@@ -131,7 +131,7 @@ FurC.Justice[ver.KITTY] = {
 }
 
 -- 8 Murkmire
-FurC.Justice[ver.SLAVES] = {
+FurC.Justice[ver.MURKM] = {
   [src.STEAL_CONTAINER] = {
     [145399] = stealable_swamp, -- Murkmire Rug, Crawling Serpents Worn
     [145400] = stealable_swamp, -- Murkmire Rug, Lurking Lizard Worn

@@ -487,6 +487,7 @@ LFCGeneratedConstants={
       ["KITTY"]=11, -- Elsweyr U22
       ["MARKAT"]=17, -- Markarth U28
       ["MORROWIND"]=3, -- Morrowind U14
+      ["MURKM"]=8, -- Murkmire U19
       ["NECROM"]=27, -- Necrom U38
       ["NONE"]=1, -- (no patch)
       ["REACH"]=4, -- Horns of the Reach U15
@@ -495,7 +496,6 @@ LFCGeneratedConstants={
       ["SCRIBE"]=26, -- Scribes of Fate U37
       ["SHADOWS"]=36, -- Feast of Shadows (U47)
       ["SKYRIM"]=15, -- Greymoor U26
-      ["SLAVES"]=8, -- Murkmire U19
       ["STONET"]=16, -- Stonethorn U27
       ["THIEVES"]=39, -- Season One (U50)
       ["TIDES"]=22, -- Ascending Tide U33
@@ -1420,7 +1420,7 @@ LFCGeneratedConstants={
       [5]="CLOCKWORK", -- Clockwork City U16
       [6]="DRAGONS", -- Dragon Bones U17
       [7]="ALTMER", -- Summerset U18
-      [8]="SLAVES", -- Murkmire U19
+      [8]="MURKM", -- Murkmire U19
       [9]="WEREWOLF", -- Wolfhunter U20
       [10]="WOTL", -- Wrathstone U21
       [11]="KITTY", -- Elsweyr U22
@@ -1467,5 +1467,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="307251a901fc9e322903f2f8e8e8366309d58a57474550f2585d78a40a943d40",
+  ["vocabulary"]="2b5f7b99a3cb9278c5fb9568347804b78bd1ee1a8d938cecc452ea0a2eb2fcbb",
 }

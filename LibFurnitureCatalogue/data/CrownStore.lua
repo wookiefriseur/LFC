@@ -1002,7 +1002,7 @@ FurC.CrownStore[ver.WEREWOLF] = {
   },
 }
 
-FurC.CrownStore[ver.SLAVES] = {
+FurC.CrownStore[ver.MURKM] = {
   [src.CROWN] = {
     [145446] = { pack = packs.SWAMP }, -- Sithis, the Hungering Dark
     [146069] = { pack = packs.SWAMP }, -- Target Voriplasm

@@ -924,7 +924,7 @@ FurC.HomeGoodsFurnisher = {
       },
     },
   },
-  [ver.SLAVES] = {
+  [ver.MURKM] = {
     [zones.MURKMIRE] = {
       [npcIds.HGF] = {
         [145551] = { -- Murkmire Kiln, Derelict

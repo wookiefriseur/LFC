@@ -677,7 +677,7 @@ FurC.MiscItemSources[ver.WEREWOLF] = {
 }
 
 -- 8 Murkmire
-FurC.MiscItemSources[ver.SLAVES] = {
+FurC.MiscItemSources[ver.MURKM] = {
   [src.DROP] = {
     -- also stealable, see data/Justice.lua. Two sources, so two rows
     [145550] = { location = zones.MURKMIRE, note = { npcGroup = npcGroups.ENEMY_RND } }, -- Murkmire Hunting Lure, Grisly

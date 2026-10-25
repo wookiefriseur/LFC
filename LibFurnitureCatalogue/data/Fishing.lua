@@ -42,7 +42,7 @@ FurC.Fishing[ver.WORMS] = {
 }
 
 -- 8 Murkmire
-FurC.Fishing[ver.SLAVES] = {
+FurC.Fishing[ver.MURKM] = {
   [src.FISHING] = {
     [145402] = fishing_swamp, -- Fish, Black Marsh
   },

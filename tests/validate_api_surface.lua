@@ -69,6 +69,7 @@ do
   assert(versions.ECHOES == 40 and keys[40] == "ECHOES")
   assert(versions.LATEST == latest and env.FURC_LATEST == latest)
   assert(versions.ZERO2 == versions.THIEVES and keys[versions.ZERO2] == "THIEVES")
+  assert(versions.SLAVES == versions.MURKM and keys[versions.SLAVES] == "MURKM")
   versions.ECHOES, keys[40] = -1, "changed"
   assert(api.GetDataVersions().ECHOES == 40 and api.GetDataVersionKeys()[40] == "ECHOES")
 

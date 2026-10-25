@@ -1,7 +1,7 @@
 -- DO NOT MANUALLY EDIT THIS FILE, USE THE WEBINTERFACE PIPELINE INSTEAD
 
 local C=assert(LFCGeneratedConstants,"load GeneratedConstants.lua first")
-assert(C.format==1 and C.vocabulary=="307251a901fc9e322903f2f8e8e8366309d58a57474550f2585d78a40a943d40","generated vocabulary mismatch")
+assert(C.format==1 and C.vocabulary=="2b5f7b99a3cb9278c5fb9568347804b78bd1ee1a8d938cecc452ea0a2eb2fcbb","generated vocabulary mismatch")
 LFCGeneratedDatabase={format=1,vocabulary=C.vocabulary,
 items={
   [87709]={1152,2,0,{11,2,{},nil,nil,nil,nil,nil,nil,nil,0,nil,nil,nil,"LEVELUP_REWARD"},{8,2,{{6,65}},nil,nil,nil,nil,nil,1}}, -- Imperial Brazier, Spiked

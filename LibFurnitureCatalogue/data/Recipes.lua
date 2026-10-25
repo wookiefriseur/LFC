@@ -1857,7 +1857,7 @@ FurC.Recipes[ver.WEREWOLF] = {
 }
 
 -- 8 Murkmire
-FurC.Recipes[ver.SLAVES] = {
+FurC.Recipes[ver.MURKM] = {
 
   145944, -- Praxis: Murkmire Chair, Engraved
   145945, -- Praxis: Murkmire Bench, Wide

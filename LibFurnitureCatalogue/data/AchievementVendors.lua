@@ -1982,7 +1982,7 @@ FurC.AchievementVendors[ver.WEREWOLF] = {
 }
 
 -- 8 Murkmire
-FurC.AchievementVendors[ver.SLAVES] = {
+FurC.AchievementVendors[ver.MURKM] = {
   [places.ANY_CAPITAL] = {
     [npcIds.CAF] = {
       [145488] = { -- Banner, Jewelry Crafting

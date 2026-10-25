@@ -77,11 +77,11 @@
 {"source":{"type":"container","part_of":171572},"cost":[],"availability":{"version":"WEREWOLF"},"blueprint":141906,"id":141829}
 {"source":{"type":"container","part_of":171572},"cost":[],"availability":{"version":"WEREWOLF"},"blueprint":141907,"id":141830}
 {"source":{"type":"container","part_of":171572},"cost":[],"availability":{"version":"WEREWOLF"},"blueprint":141896,"id":141831}
-{"id":145597,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"SLAVES"}}
-{"id":145923,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"SLAVES"}}
-{"id":145926,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"SLAVES"}}
-{"id":145927,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"SLAVES"}}
-{"id":145928,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"SLAVES"}}
+{"id":145597,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145923,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145926,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145927,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145928,"source":{"type":"container","part_of":145596},"cost":[],"availability":{"version":"MURKM"}}
 {"source":{"type":"container","part_of":171573},"cost":[],"availability":{"version":"WOTL"},"blueprint":147651,"id":147592}
 {"source":{"type":"container","part_of":171573},"cost":[],"availability":{"version":"WOTL"},"blueprint":147652,"id":147593}
 {"source":{"type":"container","part_of":171573},"cost":[],"availability":{"version":"WOTL"},"blueprint":147653,"id":147594}

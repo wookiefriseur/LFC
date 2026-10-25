@@ -1814,7 +1814,7 @@ FurC.LuxuryFurnisher[ver.WEREWOLF] = {
 }
 
 -- 8 Murkmire
-FurC.LuxuryFurnisher[ver.SLAVES] = {
+FurC.LuxuryFurnisher[ver.MURKM] = {
   [145487] = { -- Banner, Order of the Hour
     itemPrice = 12000,
     itemDate = "2025-11-14",

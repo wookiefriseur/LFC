@@ -28,7 +28,7 @@
       "name": "vendor.jsonl",
       "type": "vendor",
       "records": 1386,
-      "digest": "1a86354894a2ba10"
+      "digest": "17911cab221e3718"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -46,7 +46,7 @@
       "name": "luxury.jsonl",
       "type": "luxury",
       "records": 668,
-      "digest": "f58935d170911727"
+      "digest": "274b2498efa989bc"
     },
     {
       "name": "event_drop.jsonl",
@@ -64,25 +64,25 @@
       "name": "crown_crate.jsonl",
       "type": "crown_crate",
       "records": 153,
-      "digest": "f342a37572d67ac8"
+      "digest": "5729c08922e618a8"
     },
     {
       "name": "crown_store.jsonl",
       "type": "crown_store",
       "records": 1735,
-      "digest": "c1f391bb10c7498a"
+      "digest": "92283e83b7b80935"
     },
     {
       "name": "recipe.jsonl",
       "type": "recipe",
       "records": 3412,
-      "digest": "383213f777f04636"
+      "digest": "fda8ff332c7aab2d"
     },
     {
       "name": "drop.jsonl",
       "type": "drop",
       "records": 709,
-      "digest": "a1f5f241bc5aaeff"
+      "digest": "a1a8349d87b9652b"
     },
     {
       "name": "quest_reward.jsonl",
@@ -100,7 +100,7 @@
       "name": "housing.jsonl",
       "type": "housing",
       "records": 694,
-      "digest": "0781eede592c0a1c"
+      "digest": "9563faad62f466b7"
     },
     {
       "name": "companion.jsonl",
@@ -124,7 +124,7 @@
       "name": "container.jsonl",
       "type": "container",
       "records": 182,
-      "digest": "d3841937f3a1d657"
+      "digest": "ca247cfb1318e3a4"
     },
     {
       "name": "rumour.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "6cc4b7e52e7b6fe6",
+  "digest": "018568aaa2c8779c",
   "counts": {
     "records": 10089,
     "ids": 12345,
