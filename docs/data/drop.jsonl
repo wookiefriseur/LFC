@@ -707,3 +707,6 @@
 {"id":226765,"source":{"type":"drop","subtype":"scryable","locations":[{"location":"GOLDCOAST"}],"note":"High Seas of Tamriel"},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226775,"source":{"type":"drop","subtype":"chest","locations":[{"location":"NOWHERE"}]},"cost":[],"availability":{"version":"ECHOES"}}
 {"id":226776,"source":{"type":"drop","subtype":"chest","locations":[{"location":"NOWHERE"}]},"cost":[],"availability":{"version":"ECHOES"}}
+{"source":{"type":"drop","subtype":"pickpocket","locations":[{"location":"CWC"}]},"cost":[],"availability":{"version":"CLOCKWORK"},"id":134410,"name_overrides":{"en":"Clockwork Crank, Miniature"}}
+{"source":{"type":"drop","subtype":"pickpocket","locations":[{"location":"CWC"}]},"cost":[],"availability":{"version":"CLOCKWORK"},"id":134411,"name_overrides":{"en":"Clockwork Gear Shaft, Miniature"}}
+{"source":{"type":"drop","subtype":"pickpocket","locations":[{"location":"CWC"}]},"cost":[],"availability":{"version":"CLOCKWORK"},"id":134412,"name_overrides":{"en":"Clockwork Piston, Miniature"}}
