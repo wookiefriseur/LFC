@@ -434,7 +434,8 @@
 {"id":126115,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126116,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126117,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":126118,"source":{"type":"crown_store","packs":["AZURA"],"bundle":"CHRYSAMERE"},"cost":[{"currency":"CROWNS","amount":4000},{"currency":"CROWNS","amount":1200}],"availability":{"version":"MORROWIND"}}
+{"id":126118,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[{"currency":"CROWNS","amount":4000}],"availability":{"version":"MORROWIND"}}
+{"id":126118,"source":{"type":"crown_store","bundle":"CHRYSAMERE"},"cost":[{"currency":"CROWNS","amount":1200}],"availability":{"version":"MORROWIND"}}
 {"id":126128,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126128,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126138,"source":{"type":"crown_store","bundle":"DWEMER"},"cost":[],"availability":{"version":"MORROWIND"}}

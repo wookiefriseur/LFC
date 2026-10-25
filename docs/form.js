@@ -533,11 +533,16 @@ function renderCostRows(ctx) {
       });
       wrap.append(h("div", { class: "cost-row" }, cur, amt, rm));
     });
-    const add = h("button", { type: "button", class: "btn-mini" }, "+ price");
+    // A second price is for a second currency of the same offer or should be an additional record
+    const add = h("button", {
+      type: "button", class: "btn-mini",
+      title: "Same offer, paid in another currency as well. A different offer needs its own record.",
+    }, "+ price in another currency");
     add.addEventListener("click", () => {
+      const used = new Set(cost.map((c) => c.currency));
+      const preferred = defaultCurrency(enums, ctx.record.source?.type);
       cost.push({
-        currency: defaultCurrency(enums, ctx.record.source?.type)
-          || currencies[0],
+        currency: [preferred, ...currencies].find((c) => c && !used.has(c)) || preferred,
         amount: 1,
       });
       ctx.onChange();

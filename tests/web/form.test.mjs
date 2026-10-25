@@ -193,5 +193,18 @@ for (const type of types) {
   ok(codes(2).join() === "bool_required", "leads: a count is refused");
 }
 
+{
+  // One record is one offer: a repeated currency or a pack plus a bundle is two offers in one record.
+  const codes = (source, cost) => validateRecord(
+    { ...baseRecord("crown_store", source), cost }, enums, []).errors.map((f) => f.code)
+    .filter((c) => c === "cost_currency_repeated" || c === "crown_offer_mixed");
+  const crowns = (amount) => ({ currency: "CROWNS", amount });
+  ok(!codes({ packs: ["AZURA"] }, [crowns(4000)]).length, "offer: one pack, one price is valid");
+  ok(codes({ packs: ["AZURA"] }, [crowns(4000), crowns(1200)]).includes("cost_currency_repeated"),
+    "offer: two Crowns prices are refused");
+  ok(codes({ packs: ["AZURA"], bundle: "CHRYSAMERE" }, [crowns(4000)]).includes("crown_offer_mixed"),
+    "offer: a pack and a bundle in one record are refused");
+}
+
 console.log(`\n${checks} checks, ${failures} failure(s)`);
 process.exit(failures ? 1 : 0);

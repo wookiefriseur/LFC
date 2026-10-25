@@ -69,8 +69,8 @@
     {
       "name": "crown_store.jsonl",
       "type": "crown_store",
-      "records": 1735,
-      "digest": "92283e83b7b80935"
+      "records": 1736,
+      "digest": "d041bf250dc0fffa"
     },
     {
       "name": "recipe.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "018568aaa2c8779c",
+  "digest": "02b566ad981f5ce0",
   "counts": {
-    "records": 10089,
+    "records": 10090,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -157,7 +157,7 @@
       "event_drop": 97,
       "event_vendor": 98,
       "crown_crate": 153,
-      "crown_store": 1735,
+      "crown_store": 1736,
       "recipe": 3412,
       "drop": 709,
       "quest_reward": 41,

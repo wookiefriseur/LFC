@@ -243,6 +243,10 @@ class Catalogue:
             object_keys(cost, ('currency', 'amount'), ('currency', 'amount'))
             self.enum('currencies', cost['currency'])
             require(integer(cost['amount']), 'cost amount must be a positive integer')
+        currencies = [cost['currency'] for cost in record['cost']]
+        require(len(currencies) == len(set(currencies)), 'a currency appears twice in one cost')
+        require(not (kind == 'crown_store' and source.get('packs') and source.get('bundle')),
+                'a crown_store record carries either packs or a bundle, not both')
         if 'rarity' in record:
             self.enum('rarities', record['rarity'])
         if 'container' in record:

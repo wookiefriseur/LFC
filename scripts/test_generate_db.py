@@ -171,6 +171,8 @@ class GeneratedDatabaseTests(unittest.TestCase):
                    dict(base, cost=[{'currency': 'GOLD', 'amount': 1, 'extra': 0}]),
                    dict(base, cost=[{'currency': 'GOLD', 'amount': 0}]),
                    dict(base, cost=[{'currency': 'GOLD', 'amount': True}]),
+                   dict(base, cost=[{'currency': 'GOLD', 'amount': 1}, {'currency': 'GOLD', 'amount': 2}]),
+                   dict(base, source={'type': 'crown_store', 'packs': ['AZURA'], 'bundle': 'CHRYSAMERE'}),
                    dict(base, availability={'version': 'HOMESTEAD', 'extra': 1}),
                    dict(base, availability={'version': 'HOMESTEAD', 'last_seen': '2025-02-29'}),
                    dict(base, source={'type': 'rumour', 'note': 'would be lost'}),

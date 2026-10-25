@@ -103,6 +103,10 @@ const CODE_MESSAGES = {
     "This record is filed under the wrong kind of source. Open it in Batch edit.",
   required_field_missing: (f) => `${fieldLabel(f)} is needed for a ${typeLabel(f)} record.`,
   cost_amount_invalid: () => "A price has to be a whole number, 1 or more.",
+  cost_currency_repeated: () =>
+    "Two prices in the same currency are two offers. Keep one here and add a second record for the other.",
+  crown_offer_mixed: () =>
+    "A furnishing pack and a Crown Store bundle are separate offers. Keep one here and add a second record for the other, with its own price.",
   id_invalid: () => "That item number is not valid.",
   blueprint_invalid: () => "That blueprint number is not valid.",
   identity_required: () => "This record needs a positive item number or blueprint number.",
@@ -263,6 +267,7 @@ export function validateRecord(record, enums, allRecords) {
 
   // 5. cost
   if (Array.isArray(record.cost)) {
+    const currencies = new Set();
     record.cost.forEach((c, i) => {
       // A malformed entry must produce a finding, not a TypeError that takes the whole validation pass down.
       if (!c || typeof c !== "object" || Array.isArray(c)) {
@@ -279,8 +284,18 @@ export function validateRecord(record, enums, allRecords) {
       } else if (!enums.currencies.includes(c.currency)) {
         err(`cost.${i}.currency`, `unknown currency "${c.currency}"`,
           "unknown_symbol", { value: c.currency });
+      } else if (currencies.has(c.currency)) {
+        // One record is one offer; a second price in the same currency is a second offer.
+        err(`cost.${i}.currency`, `currency "${c.currency}" appears twice in one cost`,
+          "cost_currency_repeated", { value: c.currency });
       }
+      currencies.add(c.currency);
     });
+  }
+
+  if (type === "crown_store" && record.source?.bundle && record.source?.packs?.length) {
+    err("source.bundle", "a crown_store record carries either packs or a bundle, not both",
+      "crown_offer_mixed");
   }
 
   // 7. rarity: top-level on older rows, source.rarity on drop / dungeon_drop.
