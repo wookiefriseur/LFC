@@ -57,8 +57,8 @@
     {
       "name": "event_vendor.jsonl",
       "type": "event_vendor",
-      "records": 98,
-      "digest": "f12409f836673e19"
+      "records": 101,
+      "digest": "de9b745bb165b020"
     },
     {
       "name": "crown_crate.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "02b566ad981f5ce0",
+  "digest": "0f6ad22d261ddb4d",
   "counts": {
-    "records": 10090,
+    "records": 10093,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -155,7 +155,7 @@
       "writ_vendor": 56,
       "luxury": 668,
       "event_drop": 97,
-      "event_vendor": 98,
+      "event_vendor": 101,
       "crown_crate": 153,
       "crown_store": 1736,
       "recipe": 3412,
