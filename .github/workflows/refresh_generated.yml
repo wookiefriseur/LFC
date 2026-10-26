@@ -1,6 +1,6 @@
 name: RefreshGenerated
 
-# Two PRs side by side each regenerate the manifests and the Lua for their own base. This can cause the digest and the files to be out of sync. This flow regenerates the digest
+# Two PRs side by side each regenerate the manifests and the Lua for their own base. This can cause the digest and the files to be out of sync. This flow regenerates the digest and also restamps web interface
 
 permissions:
   contents: write
@@ -13,6 +13,10 @@ on:
       - 'docs/data/**'
       - 'docs/reference-data/**'
       - 'LibFurnitureCatalogue/data/**'
+      - 'docs/*.js'
+      - 'docs/style.css'
+      - 'docs/index.html'
+      - 'docs/404.html'
   workflow_dispatch:
 
 concurrency:
@@ -33,6 +37,8 @@ jobs:
       - uses: ./.github/actions/setup-lua
       - name: Regenerate out-of-date files
         run: python scripts/apply_issue.py --refresh
+      - name: Restamp the web interface
+        run: python scripts/webview_stamp.py
       - name: Commit to main, or open a PR when main is protected
         env:
           GH_TOKEN: ${{ github.token }}
@@ -41,11 +47,11 @@ jobs:
             echo "Generated files agree with the data."
             exit 0
           fi
-          git commit -am "Regenerate manifests and generated Lua after concurrent merges"
+          git commit -am "Regenerate manifests, generated Lua and the web interface stamp"
           git push origin HEAD:main && exit 0
           BRANCH=bot/refresh-generated
           git push --force origin "HEAD:refs/heads/$BRANCH"
           gh pr view "$BRANCH" --json state -q .state 2>/dev/null | grep -qx OPEN \
             || gh pr create --base main --head "$BRANCH" \
-                 --title "Regenerate manifests and generated Lua" \
-                 --body "main has generated files out of date with its data, usually after two db-edit PRs were merged side by side. This only regenerates them."
+                 --title "Regenerate manifests, generated Lua and the web interface stamp" \
+                 --body "main has generated files out of date with its data, usually after two db-edit PRs were merged side by side, or a stale web interface stamp. This only regenerates them."
