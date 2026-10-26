@@ -109,6 +109,9 @@ const CODE_MESSAGES = {
   crown_offer_mixed: () =>
     "A furnishing pack and a Crown Store bundle are separate offers. Keep one here and add a second record for the other, with its own price.",
   value_missing: (f) => `${fieldLabel(f)} is still empty. Pick one.`,
+  crown_set_priced: () =>
+    "A pack or bundle price is for the whole set, not this furnishing. Leave the price empty; " +
+    "if the furnishing is also sold on its own, add a separate Crown Store record with that price.",
   id_invalid: () => "That item number is not valid.",
   blueprint_invalid: () => "That blueprint number is not valid.",
   identity_required: () => "This record needs a positive item number or blueprint number.",
@@ -298,6 +301,11 @@ export function validateRecord(record, enums, allRecords) {
   if (type === "crown_store" && record.source?.bundle && record.source?.packs?.length) {
     err("source.bundle", "a crown_store record carries either packs or a bundle, not both",
       "crown_offer_mixed");
+  }
+  // A pack or bundle price is for the whole set, not this furnishing
+  if (type === "crown_store" && (record.source?.bundle || record.source?.packs?.length)
+      && Array.isArray(record.cost) && record.cost.length) {
+    err("cost", "a furnishing from a crown_store pack or bundle carries no price", "crown_set_priced");
   }
 
   // 7. rarity: top-level on older rows, source.rarity on drop / dungeon_drop.

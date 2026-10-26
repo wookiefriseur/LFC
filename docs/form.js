@@ -111,10 +111,15 @@ export function partitionFields(record, contracts, findings) {
     .filter((f) => !known.has(f))
     .map((f) => `source.${f}`);
 
-  const visible = ["cost", "availability.version", ...visSource.map((f) => `source.${f}`)];
+  // A pack or bundle price is for the whole pack, not the single furnishing
+  const setOffer = source.type === "crown_store" && (source.bundle || source.packs?.length);
+  const costHidden = setOffer && !record.cost?.length && !named.has("cost");
+  const visible = [...(costHidden ? [] : ["cost"]), "availability.version",
+    ...visSource.map((f) => `source.${f}`)];
   const addable = featured
     .filter((f) => !visSource.includes(f))
     .map((f) => `source.${f}`);
+  if (costHidden) addable.push("cost");
 
   // A date the record has stays visible even when cleared to null: the contributor must see what they emptied.
   const av = (record && record.availability) || {};
@@ -1059,7 +1064,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
 
     // The expander holds only empty fields, so it is an add control and is labelled as one.
     const addable = batch
-      ? part.addable.filter((p) => p.startsWith("source.") || p === DATES_GROUP)
+      ? part.addable.filter((p) => p.startsWith("source.") || p === DATES_GROUP || p === "cost")
       : part.addable.filter((p) => !quickHidden(p));
     if (addable.length) {
       const body = h("div", { class: "add-detail-body" });
@@ -1068,6 +1073,8 @@ export function renderForm(record, enums, onChange, opts = {}) {
           body.append(datesGroup(ctx, AVAIL_DATES.filter((d) => !part.visible.includes(d))));
         } else if (path === "rarity") {
           body.append(rarityRow(ctx));
+        } else if (path === "cost") {
+          body.append(costRow(ctx));
         } else if (path.startsWith("source.")) {
           body.append(sourceRow(ctx, path.slice(7)));
         }

@@ -104,7 +104,11 @@ for (const type of types) {
         `${where}: exactly one availability entry in addable`);
     }
 
-    ok(part.visible.includes("cost"), `${where}: cost is always visible`);
+    // The one exception: an unpriced Crown Store pack or bundle record offers its price in the expander.
+    const setOffer = type === "crown_store" && (rec.source.bundle || rec.source.packs?.length)
+      && !rec.cost.length;
+    ok(setOffer ? part.addable.includes("cost") : part.visible.includes("cost"),
+      `${where}: cost is visible${setOffer ? " only through the expander" : ""}`);
     ok(part.visible.includes("availability.version"),
       `${where}: availability.version is always visible`);
   }
@@ -198,13 +202,31 @@ for (const type of types) {
   // One record is one offer: a repeated currency or a pack plus a bundle is two offers in one record.
   const codes = (source, cost) => validateRecord(
     { ...baseRecord("crown_store", source), cost }, enums, []).errors.map((f) => f.code)
-    .filter((c) => c === "cost_currency_repeated" || c === "crown_offer_mixed");
+    .filter((c) => ["cost_currency_repeated", "crown_offer_mixed", "crown_set_priced"].includes(c));
   const crowns = (amount) => ({ currency: "CROWNS", amount });
-  ok(!codes({ packs: ["AZURA"] }, [crowns(4000)]).length, "offer: one pack, one price is valid");
-  ok(codes({ packs: ["AZURA"] }, [crowns(4000), crowns(1200)]).includes("cost_currency_repeated"),
+  ok(!codes({ packs: ["AZURA"] }, []).length, "offer: a pack without a price is valid");
+  ok(!codes({}, [crowns(2100)]).length, "offer: the furnishing's own price is valid");
+  ok(codes({}, [crowns(2100), crowns(1200)]).includes("cost_currency_repeated"),
     "offer: two Crowns prices are refused");
-  ok(codes({ packs: ["AZURA"], bundle: "CHRYSAMERE" }, [crowns(4000)]).includes("crown_offer_mixed"),
+  ok(codes({ packs: ["AZURA"], bundle: "CHRYSAMERE" }, []).includes("crown_offer_mixed"),
     "offer: a pack and a bundle in one record are refused");
+  ok(codes({ packs: ["AZURA"] }, [crowns(4000)]).includes("crown_set_priced"),
+    "offer: a pack price is refused");
+  ok(codes({ bundle: "CHRYSAMERE" }, [crowns(1200)]).includes("crown_set_priced"),
+    "offer: a bundle price is refused");
+
+  // The price of an unpriced pack or bundle record waits in the expander; one the record has, or one with a finding, stays in sight.
+  const where = (source, cost, findings) => {
+    const part = partitionFields({ ...baseRecord("crown_store", source), cost }, contracts, findings);
+    return part.visible.includes("cost") ? "visible" : part.addable.includes("cost") ? "addable" : "none";
+  };
+  ok(where({ bundle: "CHRYSAMERE" }, []) === "addable", "offer: a bundle record hides its empty price");
+  ok(where({ packs: ["AZURA"] }, []) === "addable", "offer: a pack record hides its empty price");
+  ok(where({}, []) === "visible", "offer: a plain Crown Store record shows its price");
+  ok(where({ bundle: "CHRYSAMERE" }, [crowns(1200)]) === "visible",
+    "offer: a bundle record that has a price shows it, so it can be removed");
+  ok(where({ bundle: "CHRYSAMERE" }, [], { errors: [{ field: "cost.0.amount" }], warnings: [] }) === "visible",
+    "offer: a price with a finding stays visible");
 }
 
 {
