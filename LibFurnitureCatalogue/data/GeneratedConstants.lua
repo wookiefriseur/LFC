@@ -442,6 +442,7 @@ LFCGeneratedConstants={
       ["ARMOR"]=1, -- Armor Principles
       ["DAWN"]=2, -- Dawn and Dusk
       ["LOGIC"]=3, -- Study of Wisdom and Logic
+      ["UNDERCROFT"]=4, -- Undercroft Bundle
     },
     ["vendor_subtypes"]={["achievement"]=1,["home_goods"]=2,["other"]=3},
     ["vendors"]={
@@ -871,6 +872,7 @@ LFCGeneratedConstants={
       [1]={["si"]="SI_FURC_TOMESPACK_ARMOR"}, -- ARMOR - Armor Principles
       [2]={["si"]="SI_FURC_TOMESPACK_DAWN"}, -- DAWN - Dawn and Dusk
       [3]={["si"]="SI_FURC_TOMESPACK_LOGIC"}, -- LOGIC - Study of Wisdom and Logic
+      [4]={["si"]="SI_FURC_TOMESPACK_UNDERCROFT"}, -- UNDERCROFT - Undercroft Bundle
     },
     ["vendor_subtypes"]={},
     ["vendors"]={
@@ -1401,6 +1403,7 @@ LFCGeneratedConstants={
       [1]="ARMOR", -- Armor Principles
       [2]="DAWN", -- Dawn and Dusk
       [3]="LOGIC", -- Study of Wisdom and Logic
+      [4]="UNDERCROFT", -- Undercroft Bundle
     },
     ["vendor_subtypes"]={[1]="achievement",[2]="home_goods",[3]="other"},
     ["vendors"]={
@@ -1484,5 +1487,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="c1989696f2b1feb5b0f03e9d0c0eaac61f1ad189e4004512e38a0e110143eb5a",
+  ["vocabulary"]="957fa49e081bf0d77f0f679e43f0e99070c996eb779daa4fa1f85b016afb562e",
 }

@@ -117,8 +117,8 @@
     {
       "name": "tome_pack.jsonl",
       "type": "tome_pack",
-      "records": 19,
-      "digest": "b6b52899230977cf"
+      "records": 31,
+      "digest": "4588644eb309f286"
     },
     {
       "name": "container.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 280,
-      "digest": "805ce1b768416c40"
+      "records": 277,
+      "digest": "fcdda5a215609b9c"
     },
     {
       "name": "ignored.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "937fa030f2013384",
+  "digest": "ba96a8a77e3e711e",
   "counts": {
-    "records": 10090,
+    "records": 10099,
     "ids": 12345,
     "files": 19,
     "rows_seen": 8791,
@@ -165,9 +165,9 @@
       "housing": 694,
       "companion": 6,
       "guild_gift": 12,
-      "tome_pack": 19,
+      "tome_pack": 31,
       "container": 182,
-      "rumour": 280,
+      "rumour": 277,
       "ignored": 337
     }
   }

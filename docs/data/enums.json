@@ -1809,6 +1809,11 @@
       "symbol": "LOGIC",
       "si": "SI_FURC_TOMESPACK_LOGIC",
       "name": "Study of Wisdom and Logic"
+    },
+    {
+      "symbol": "UNDERCROFT",
+      "si": "SI_FURC_TOMESPACK_UNDERCROFT",
+      "name": "Undercroft Bundle"
     }
   ],
   "skill_lines": [
