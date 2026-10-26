@@ -397,7 +397,7 @@
 {"id":178447,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"BLACKW"}}
 {"id":178448,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"BLACKW"}}
 {"id":178449,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"BLACKW"}}
-{"id":178450,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"DEADL"}}
+{"id":178450,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"BLACKW"}}
 {"id":178451,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"chest"},"cost":[],"availability":{"version":"DEADL"}}
 {"id":178459,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"scryable"},"cost":[],"availability":{"version":"BLACKW"}}
 {"id":182302,"source":{"type":"drop","leads":true,"locations":[{"location":"DEADLANDS"}],"subtype":"scryable"},"cost":[],"availability":{"version":"DEADL"}}

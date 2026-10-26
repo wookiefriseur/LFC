@@ -36,7 +36,6 @@
 {"id":116487,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":116488,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":116489,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
-{"id":116490,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":117898,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":118100,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
 {"id":118103,"source":{"type":"rumour"},"cost":[],"availability":{"version":"STONET"}}
@@ -273,5 +272,4 @@
 {"id":220318,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":220320,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":220323,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
-{"id":223131,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":224897,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}

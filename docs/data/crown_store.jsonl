@@ -1733,3 +1733,4 @@
 {"id":175578,"source":{"type":"crown_store","bundle":"DAWNBREAKER"},"cost":[],"availability":{"version":"BLACKW"}}
 {"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
 {"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
+{"id":223131,"source":{"type":"crown_store","packs":["WINTER"]},"cost":[],"availability":{"version":"WORMS2"}}

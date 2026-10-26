@@ -179,7 +179,7 @@
 {"id":120413,"source":{"type":"housing","houses":[1098]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120414,"source":{"type":"housing","houses":[1097]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120415,"source":{"type":"housing","houses":[1097,1076]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120416,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":120416,"source":{"type":"housing","houses":[1445,1099,13558,1075]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120417,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120420,"source":{"type":"housing","houses":[1088,14586,7601]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120456,"source":{"type":"housing","houses":[1093]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -693,3 +693,4 @@
 {"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"ENDLESS"},"id":203133,"name_overrides":{"en":"Apocrypha Coral, Spiky"}}
 {"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
 {"source":{"type":"housing","houses":[4794,1085,1309]},"cost":[],"availability":{"version":"HOMESTEAD"},"id":94093}
+{"id":116490,"source":{"type":"housing","houses":[1445]},"cost":[],"availability":{"version":"HOMESTEAD"}}
