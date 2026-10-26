@@ -107,6 +107,7 @@ const CODE_MESSAGES = {
     "Two prices in the same currency are two offers. Keep one here and add a second record for the other.",
   crown_offer_mixed: () =>
     "A furnishing pack and a Crown Store bundle are separate offers. Keep one here and add a second record for the other, with its own price.",
+  value_missing: (f) => `${fieldLabel(f)} is still empty. Pick one.`,
   id_invalid: () => "That item number is not valid.",
   blueprint_invalid: () => "That blueprint number is not valid.",
   identity_required: () => "This record needs a positive item number or blueprint number.",
@@ -334,7 +335,14 @@ export function validateRecord(record, enums, allRecords) {
   // 9. source.* vocabulary membership
   for (const [field, enumKey] of Object.entries(sourceEnumFields(enums))) {
     const v = record.source?.[field];
-    if (v == null || v === "") continue;
+    if (v == null) continue;
+    // Present but blank
+    if (v === "" || (Array.isArray(v) && !v.length)) {
+      if (!contract?.required?.includes(field)) {
+        err(`source.${field}`, `source.${field} is empty`, "value_missing");
+      }
+      continue;
+    }
     if (!Array.isArray(enums[enumKey])) continue;   // vocabulary absent (v1 enums)
     // A list-valued field checks every member, so a field turning plural upstream stays checked.
     const members = Array.isArray(v) ? v : [v];

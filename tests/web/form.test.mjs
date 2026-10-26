@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 
 import { partitionFields, DATES_GROUP, SITE_ONLY_FIELDS } from "../../docs/form.js";
 import { validateRecord } from "../../docs/validate.js";
+import { PRESETS, presetById, applyPreset } from "../../docs/presets.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const enums = JSON.parse(readFileSync(join(here, "..", "..", "docs", "data", "enums.json"), "utf8"));
@@ -204,6 +205,31 @@ for (const type of types) {
     "offer: two Crowns prices are refused");
   ok(codes({ packs: ["AZURA"], bundle: "CHRYSAMERE" }, [crowns(4000)]).includes("crown_offer_mixed"),
     "offer: a pack and a bundle in one record are refused");
+}
+
+{
+  // Presets are hand-curated: every fixed value has to exist, and every blank has to be reported until it is picked.
+  const BLANK_CODES = new Set(["value_missing", "required_field_missing", "cost_amount_invalid"]);
+  const version = enums.versions.at(-1).symbol;
+  for (const preset of PRESETS) {
+    const rec = applyPreset({ id: 123456 }, preset, version);
+    const { errors } = validateRecord(rec, enums, []);
+    const other = errors.filter((f) => !BLANK_CODES.has(f.code));
+    ok(other.length === 0, `preset ${preset.id}: fixed values are valid (${other.map((f) => f.code)})`);
+    const blanks = Object.values(preset.source).filter((v) => v === "" || (Array.isArray(v) && !v.length)).length
+      + preset.cost.filter((c) => c.amount == null).length;
+    const houses = preset.source.houses ? 1 : 0;   // an empty house list is legal: "misc house"
+    ok(errors.length === blanks - houses, `preset ${preset.id}: each blank is reported once`);
+    ok(presetById(preset.id) === preset, `preset ${preset.id}: found by id`);
+  }
+  ok(new Set(PRESETS.map((p) => p.id)).size === PRESETS.length, "presets: ids are unique");
+  // Whichever presets are enabled: applying one keeps the item and copies its source and price.
+  for (const preset of PRESETS) {
+    const kept = applyPreset({ id: 178799, source: { type: "drop" }, cost: [] }, preset, version);
+    ok(kept.id === 178799 && JSON.stringify(kept.source) === JSON.stringify(preset.source)
+      && JSON.stringify(kept.cost) === JSON.stringify(preset.cost) && kept.source !== preset.source,
+      `preset ${preset.id}: applying keeps the item and copies source and price`);
+  }
 }
 
 console.log(`\n${checks} checks, ${failures} failure(s)`);

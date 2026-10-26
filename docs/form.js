@@ -517,7 +517,8 @@ function renderCostRows(ctx) {
         ctx.onChange();
       });
       const amt = h("input", {
-        type: "number", step: 1, min: 1, value: c.amount ?? 1,
+        // A preset or a carried-over record names the currency only; an invented 1 would pass as a real price.
+        type: "number", step: 1, min: 1, value: c.amount ?? "",
         "data-field": `cost.${i}.amount`,
         "aria-label": labelFor("cost[].amount"),
       });
@@ -1004,7 +1005,8 @@ export function renderForm(record, enums, onChange, opts = {}) {
         findingLines(ctx, "source.type")));
     }
 
-    if (!batch && !reduced) {
+    // A preset already says what the record is, and none of them is a container.
+    if (!batch && !reduced && !opts.hideContainerKind) {
       const kind = selectFromPairs("container", record.container || "", [
         { value: "", label: "Not a container" }, { value: "books", label: "Book collection" }, { value: "folio", label: "Furnishing folio" },
       ]);

@@ -41,6 +41,7 @@ import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
 import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe, itemDetailsChanges } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
+import { PRESETS, presetById, applyPreset } from "./presets.js";
 import { ReferenceData } from "./reference-data.js";
 import { namesMask } from "./names.js";
 
@@ -1047,12 +1048,15 @@ function bindHeader() {
 }
 
 function addNewRecord(opts = {}) {
+  const last = opts.sourceType ? null : state.lastAdded;
   const blank = {
     ...(Number.isInteger(opts.id) ? { id: opts.id } : {}),
-    source: { type: opts.sourceType || state.enums.source_types[0] },
-    cost: [],
-    availability: { version: latestVersion(state.enums) },
+    source: last ? deepClone(last.source) : { type: opts.sourceType || state.enums.source_types[0] },
+    cost: last ? deepClone(last.cost) : [],
+    availability: { version: last ? last.version : latestVersion(state.enums) },
     _isNew: true,
+    ...(last ? { _fromLast: true } : {}),
+    ...(last?.preset ? { _preset: last.preset } : {}),
   };
   blank._category = deriveCategory(blank, state.categories[0]);
   blank._key = newKey(blank._category);
@@ -1060,6 +1064,34 @@ function addNewRecord(opts = {}) {
   state.editing = blank;
   renderDetail();
   showBatchView(true);
+}
+
+// "Start from": fills the fixed parts of a common source and leaves the rest to pick. Picking again replaces source and price
+function presetPicker() {
+  const sel = elem("select", { id: "adv-preset" },
+    elem("option", { value: "" }, "Fill in everything myself"),
+    ...PRESETS.map((p) => elem("option", { value: p.id }, p.label)));
+  sel.value = state.editing._preset || "";
+  sel.addEventListener("change", () => {
+    const preset = presetById(sel.value);
+    if (preset) {
+      state.editing = applyPreset(state.editing, preset, latestVersion(state.enums));
+    } else {
+      state.editing = { ...state.editing, source: { type: state.editing.source.type }, cost: [] };
+      delete state.editing._preset;
+    }
+    delete state.editing._fromLast;
+    state.editing._category = deriveCategory(state.editing, state.editing._category);
+    state.editing._key = newKey(state.editing._category);
+    renderDetail();
+  });
+  const wrap = elem("div", { class: "form-row preset-row" },
+    elem("label", { for: "adv-preset" }, "Start from"), sel);
+  if (state.editing._fromLast) {
+    wrap.append(elem("p", { class: "muted" },
+      "Filled in like the last record you added, except the item and the price. Change anything that differs."));
+  }
+  return wrap;
 }
 
 function applyFilters() {
@@ -1338,6 +1370,7 @@ function renderDetail() {
     ? "Add new record"
     : `Edit ${state.editing.id ?? state.editing.blueprint} - ${nameOf(state.editing.id ?? state.editing.blueprint)}`;
   host.append(elem("h2", {}, title));
+  if (state.editing._isNew && !state.editing._pairFrom) host.append(presetPicker());
   if (!state.editing._isNew) {
     const links = elem("p", { class: "detail-links muted" });
     const { id, blueprint } = state.editing;
@@ -1388,8 +1421,9 @@ function renderDetail() {
     allowIdEdit: !!state.editing._isNew,
     // Puts the raw schema path in each label's title.
     partition: "open",
-    // A new record has nothing to disclose progressively, so the expander would hold the whole form.
-    expanderOpen: !!state.editing._isNew || detailExpanderOpen(),
+    // A new record has nothing to disclose progressively, so the expander would hold the whole form - unless a preset already picked the fields that matter.
+    expanderOpen: (!!state.editing._isNew && !state.editing._preset) || detailExpanderOpen(),
+    hideContainerKind: !!state.editing._preset,
     onExpanderToggle: state.editing._isNew ? null : rememberDetailExpander,
     // The Item name box starts from the game's name, and typing it back is not a change.
     knownName: state.names?.gameName(state.editing.id ?? state.editing.blueprint) || "",
@@ -1749,6 +1783,15 @@ function commitEdit() {
     state.index.set(clone._key, clone);
     state.selectedKey = clone._key;
     state.editing = deepClone(clone);
+    // The next "+ Add new" starts from this one's choices. Amounts are not carried: a price belongs to one item.
+    if (!from && !folio) {
+      state.lastAdded = {
+        source: deepClone(clone.source),
+        cost: clone.cost.map((c) => ({ currency: c.currency })),
+        version: clone.availability.version,
+        preset: e._preset,
+      };
+    }
   } else {
     const before = state.index.get(state.selectedKey);
     const after = deepClone(e);

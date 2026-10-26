@@ -5,6 +5,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer-core";
+import { PRESETS } from "../../docs/presets.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.WEBVIEW_ROOT
@@ -1052,6 +1053,76 @@ test("filter bar: the category select is gone and Add new still works", async (p
   assertEq(hasCategory, null, "the category filter survived");
   const selects = await page.$$eval("#panel-advanced select", (n) => n.length);
   assertAtLeast(selects, 1, "the filter bar lost every select");
+});
+
+test("add new: a preset fills source and currency and hides the container kind", async (page) => {
+  // Any enabled preset with a fixed vendor and currency and only single-choice blanks will do; none enabled is not a failure.
+  const blankOf = (p) => Object.keys(p.source).filter((k) => p.source[k] === "");
+  const preset = PRESETS.find((p) => p.source.vendor && p.cost[0]?.currency
+    && Object.values(p.source).every((v) => !Array.isArray(v) || v.length));
+  if (!preset) return;
+  const blanks = blankOf(preset);
+  await switchTab(page, "advanced");
+  await page.click("#btn-add");
+  await page.waitForSelector("#adv-preset", { timeout: 10000 });
+  const label = () => page.evaluate(() =>
+    [...document.querySelectorAll("#detail label")].some((l) => l.textContent.trim() === "Container kind"));
+  assertEq(await label(), true, "a new record without a preset lost its container kind");
+  await page.select("#adv-preset", preset.id);
+  await page.waitForFunction((id) => document.querySelector("#adv-preset")?.value === id, { timeout: 10000 }, preset.id);
+  const read = (fields) => page.evaluate((fields) => {
+    const out = {};
+    for (const f of fields) out[f] = document.querySelector(`#detail [data-field="${f}"]`)?.value;
+    out.errors = [...document.querySelectorAll("#detail [data-findings] .field-error")]
+      .map((e) => e.closest("[data-findings]").getAttribute("data-findings"));
+    out.expanderOpen = document.querySelector("#detail details.add-detail")?.open;
+    out.preset = document.querySelector("#adv-preset")?.value;
+    out.note = /like the last record you added/.test(document.querySelector("#detail .preset-row")?.textContent || "");
+    return out;
+  }, fields);
+  const fields = ["source.vendor", "cost.0.currency", "cost.0.amount", ...blanks.map((b) => `source.${b}`)];
+  const form = await read(fields);
+  assertEq(form["source.vendor"], preset.source.vendor, "the preset did not pick its vendor");
+  assertEq(form["cost.0.currency"], preset.cost[0].currency, "the preset did not pick its currency");
+  assertEq(form.expanderOpen, false, "the preset left the rarely used fields open");
+  for (const b of blanks) assert(form.errors.includes(`source.${b}`), `the blank source.${b} is not reported`);
+  assertEq(await label(), false, "the preset still shows the container kind");
+
+  // Saved, the next new record starts from the same choices, without the item and the price.
+  await page.type("#adv-id", "999000002");
+  const picked = await page.evaluate((blanks) => {
+    const set = (sel, v) => {
+      const el = document.querySelector(sel);
+      el.value = v;
+      el.dispatchEvent(new Event(el.tagName === "SELECT" ? "change" : "input", { bubbles: true }));
+    };
+    const picked = {};
+    for (const b of blanks) {
+      const el = document.querySelector(`#detail [data-field="source.${b}"]`);
+      picked[b] = [...el.options].find((o) => o.value).value;
+      set(`#detail [data-field="source.${b}"]`, picked[b]);
+    }
+    set('#detail [data-field="cost.0.amount"]', "400");
+    [...document.querySelectorAll("#detail button")].find((b) => /save to the change list/i.test(b.textContent)).click();
+    return picked;
+  }, blanks);
+  await page.waitForFunction(() => /Saved\./.test(document.querySelector("#detail-message")?.textContent || ""),
+    { timeout: 10000 });
+  await page.click("#btn-add");
+  await page.waitForFunction(() => !document.querySelector("#adv-id")?.value, { timeout: 10000 });
+  const next = await read(fields);
+  assertEq(next.preset, preset.id, "the next new record forgot the preset");
+  assertEq(next["source.vendor"], preset.source.vendor, "the next new record forgot the vendor");
+  assertEq(next["cost.0.currency"], preset.cost[0].currency, "the next new record forgot the currency");
+  for (const b of blanks) assertEq(next[`source.${b}`], picked[b], `the next new record forgot source.${b}`);
+  assertEq(next["cost.0.amount"], "", "the last item's price was carried over");
+  assertEq(next.note, true, "the carried-over choices are not explained");
+
+  // Leave Batch edit as the next test expects it: no open draft, results in view.
+  await page.evaluate(() => {
+    [...document.querySelectorAll("#detail button")].find((b) => b.textContent === "Discard")?.click();
+    document.querySelector("#batch-show-results")?.click();
+  });
 });
 
 test("id: read-only everywhere, with no unlock", async (page) => {
