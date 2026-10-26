@@ -65,7 +65,7 @@ local categories = {
 }
 local enumFields = vocabulary.sourceVocabularies
 local fieldNames =
-  { skill_line = "skillLine", skill_rank = "skillRank", part_of = "partOf", npc_class = "npcClass", npc_group = "note" }
+  { skill_line = "skillLine", skill_rank = "skillRank", part_of = "partOf", npc_class = "npcClass", npc_group = "note", tome = "itemPack" }
 local function symbol(group, id)
   return assert(vocabulary.symbols[group][id], "unknown generated vocabulary id")
 end
@@ -162,13 +162,6 @@ local function decode(record)
       ZERITH_VAR = "Zerith-var",
     }
     source.note = assert(names[symbol("companions", fields.companion)]) .. " rapport"
-  end
-  if kind == "tome_pack" then
-    local names = { armor = "ARMOR", dawn = "DAWN", logic = "LOGIC" }
-    source.itemPack = constants.TomesPacks[names[fields.note]]
-    if source.itemPack then
-      source.note = nil
-    end
   end
   if record[5] then
     local rarity = symbol("rarities", record[5])

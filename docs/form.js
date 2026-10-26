@@ -42,7 +42,6 @@ const MIXED_LABEL = "(mixed - leave unchanged)";
 
 const NOTE_PLACEHOLDER = {
   guild_gift: "the guild's name, e.g. Aetherius Art",
-  tome_pack: "the tome-pack keyword: armor | dawn | logic",
 };
 
 // Visibility rule

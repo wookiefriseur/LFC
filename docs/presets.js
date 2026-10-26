@@ -51,6 +51,12 @@ export const PRESETS = [
 //    cost: [],
 //    },
   {
+    id: "tome",
+    label: "Tamriel Tomes",
+    source: { type: "tome_pack", tome: "" },
+    cost: [],
+  },
+  {
     id: "rolis",
     label: "Master writ vendor (Vouchers)",
     source: { type: "writ_vendor", vendor: "ROLIS" },

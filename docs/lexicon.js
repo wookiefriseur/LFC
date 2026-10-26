@@ -22,6 +22,7 @@ const FIELDS = {
   "source.crate": ["Crown Crate season", "A Crown Crate season, such as Hidden Kindred. Use this for an item in that season's reward pool, not for an ordinary loot coffer."],
   "source.packs": ["Furnishing packs", "A Crown Store furnishing pack with a fixed collection, such as an Alinor pack"],
   "source.bundle": ["Bundle", "A named store offer containing several purchases, such as the Dwemer bundle"],
+  "source.tome": ["Tome pack", "The Tamriel Tomes reward pack it comes in, named as on UESP. A new pack is added under Names"],
   "source.houses": ["Houses it comes with", "House collectible numbers, separated by commas."],
   "source.companion": ["Companion", "The companion whose rapport rewards it."],
   "source.quest": ["Quest ID", "a number, not its name. Use 0 when you know it needs one but not which."],
@@ -39,7 +40,6 @@ const FIELDS = {
 const FIELD_BY_TYPE = {
   vendor: { "source.subtype": ["Vendor kind", "Home Goods stock varies by location and needs no achievement. Achievement furnishings require an achievement. Choose Other for other vendors."] },
   guild_gift: {"source.note": ["Which guild", "The player guild that it is dedicated to, e.g. Aetherius Art."],},
-  tome_pack: { "source.note": ["Which tome pack", "The tome-pack keyword: armor, dawn or logic."],},
 };
 
 const ORPHAN_TIP =

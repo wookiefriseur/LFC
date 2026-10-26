@@ -170,7 +170,7 @@
     },
     "tome_pack": {
       "required": [
-        "note"
+        "tome"
       ],
       "optional": []
     },
@@ -1794,6 +1794,23 @@
       "name": "Dawnbreaker Style"
     }
   ],
+  "tome_packs": [
+    {
+      "symbol": "ARMOR",
+      "si": "SI_FURC_TOMESPACK_ARMOR",
+      "name": "Armor Principles"
+    },
+    {
+      "symbol": "DAWN",
+      "si": "SI_FURC_TOMESPACK_DAWN",
+      "name": "Dawn and Dusk"
+    },
+    {
+      "symbol": "LOGIC",
+      "si": "SI_FURC_TOMESPACK_LOGIC",
+      "name": "Study of Wisdom and Logic"
+    }
+  ],
   "skill_lines": [
     {
       "symbol": "FIGHTERS",
@@ -2163,7 +2180,8 @@
     "npc_group": "npc_groups",
     "packs": "packs",
     "skill_line": "skill_lines",
-    "vendor": "vendors"
+    "vendor": "vendors",
+    "tome": "tome_packs"
   },
   "id_unknown": {
     "value": 0,

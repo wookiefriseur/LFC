@@ -438,6 +438,11 @@ LFCGeneratedConstants={
       ["vendor"]=1,
       ["writ_vendor"]=3,
     },
+    ["tome_packs"]={
+      ["ARMOR"]=1, -- Armor Principles
+      ["DAWN"]=2, -- Dawn and Dusk
+      ["LOGIC"]=3, -- Study of Wisdom and Logic
+    },
     ["vendor_subtypes"]={["achievement"]=1,["home_goods"]=2,["other"]=3},
     ["vendors"]={
       ["AF"]=1, -- Achievement Furnisher
@@ -862,6 +867,11 @@ LFCGeneratedConstants={
       [5]={["skill_line"]=55}, -- UNDAUNTED
     },
     ["source_types"]={},
+    ["tome_packs"]={
+      [1]={["si"]="SI_FURC_TOMESPACK_ARMOR"}, -- ARMOR - Armor Principles
+      [2]={["si"]="SI_FURC_TOMESPACK_DAWN"}, -- DAWN - Dawn and Dusk
+      [3]={["si"]="SI_FURC_TOMESPACK_LOGIC"}, -- LOGIC - Study of Wisdom and Logic
+    },
     ["vendor_subtypes"]={},
     ["vendors"]={
       [1]={["si"]="SI_FURC_TRADERS_AF"}, -- AF - Achievement Furnisher
@@ -913,6 +923,7 @@ LFCGeneratedConstants={
     "leads",
     "houses",
     "companion",
+    "tome",
   },
   ["sourcePriority"]={
     31, -- IGNORED
@@ -955,6 +966,7 @@ LFCGeneratedConstants={
     ["npc_group"]="npc_groups",
     ["packs"]="packs",
     ["skill_line"]="skill_lines",
+    ["tome"]="tome_packs",
     ["vendor"]="vendors",
   },
   ["symbols"]={
@@ -1385,6 +1397,11 @@ LFCGeneratedConstants={
       [18]="rumour",
       [19]="ignored",
     },
+    ["tome_packs"]={
+      [1]="ARMOR", -- Armor Principles
+      [2]="DAWN", -- Dawn and Dusk
+      [3]="LOGIC", -- Study of Wisdom and Logic
+    },
     ["vendor_subtypes"]={[1]="achievement",[2]="home_goods",[3]="other"},
     ["vendors"]={
       [1]="AF", -- Achievement Furnisher
@@ -1467,5 +1484,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="2b5f7b99a3cb9278c5fb9568347804b78bd1ee1a8d938cecc452ea0a2eb2fcbb",
+  ["vocabulary"]="c1989696f2b1feb5b0f03e9d0c0eaac61f1ad189e4004512e38a0e110143eb5a",
 }

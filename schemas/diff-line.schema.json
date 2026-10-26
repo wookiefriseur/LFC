@@ -155,6 +155,7 @@
         { "$ref": "#/$defs/metaFor/crates" },
         { "$ref": "#/$defs/metaFor/packs" },
         { "$ref": "#/$defs/metaFor/bundles" },
+        { "$ref": "#/$defs/metaFor/tome_packs" },
         { "$ref": "#/$defs/metaFor/containers" },
         { "$ref": "#/$defs/metaFor/events" },
         { "$ref": "#/$defs/metaFor/npc_classes" },
@@ -372,6 +373,11 @@
         "if": { "properties": { "enum": { "const": "bundles" } }, "required": ["enum"] },
         "then": { "required": ["meta"], "properties": { "meta": {
           "required": ["si"], "propertyNames": { "enum": ["si", "name"] } } } }
+      },
+      "tome_packs": {
+        "if": { "properties": { "enum": { "const": "tome_packs" } }, "required": ["enum"] },
+        "then": { "required": ["meta"], "properties": { "meta": {
+          "required": ["si", "name"], "propertyNames": { "enum": ["si", "name"] } } } }
       },
       "containers": {
         "if": { "properties": { "enum": { "const": "containers" } }, "required": ["enum"] },

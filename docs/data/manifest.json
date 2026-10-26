@@ -118,7 +118,7 @@
       "name": "tome_pack.jsonl",
       "type": "tome_pack",
       "records": 19,
-      "digest": "1dee0720b780d787"
+      "digest": "b6b52899230977cf"
     },
     {
       "name": "container.jsonl",
@@ -139,7 +139,7 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "02b566ad981f5ce0",
+  "digest": "8660cf93ad17aab4",
   "counts": {
     "records": 10090,
     "ids": 12345,

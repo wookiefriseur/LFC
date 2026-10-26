@@ -31,6 +31,7 @@ const SOURCE_ENUM_FIELD_FALLBACK = {
   npc_group: "npc_groups",
   packs: "packs",
   bundle: "bundles",
+  tome: "tome_packs",
   companion: "companions",
   crate: "crates",
 };

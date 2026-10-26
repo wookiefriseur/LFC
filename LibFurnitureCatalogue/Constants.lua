@@ -408,11 +408,7 @@ this.BookContainers = {
 this.ItemPacks = fromVocabulary("packs", "item")
 
 --- Tamriel Tomes item packs. We don't have ids for those, so we use the strings
-this.TomesPacks = {
-  ARMOR = SI_FURC_TOMESPACK_ARMOR,
-  DAWN = SI_FURC_TOMESPACK_DAWN,
-  LOGIC = SI_FURC_TOMESPACK_LOGIC,
-}
+this.TomesPacks = stringsOf("tome_packs")
 
 --- Crown Store bundles without itemlink, mv to ItemPacks when you get an ID
 this.ItemBundles = stringsOf("bundles")

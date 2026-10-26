@@ -72,6 +72,7 @@ local fields = {
   "leads",
   "houses",
   "companion",
+  "tome",
 }
 local vocabularies = constants.sourceVocabularies
 assert(#constants.sourceFields == #fields)

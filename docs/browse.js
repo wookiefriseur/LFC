@@ -25,7 +25,7 @@ const SOURCE_FIELD_ENUM = SOURCE_ENUM_FIELD;
 // Identifying fields first; unlisted fields follow in record order.
 const FIELD_ORDER = [
   "vendor", "locations", "note", "event", "container",
-  "book_container", "crate", "packs", "bundle", "companion", "houses", "quest",
+  "book_container", "crate", "packs", "bundle", "tome", "companion", "houses", "quest",
   "achievement", "skill_line", "skill_rank", "npc_class",
   "npc_group", "subtype", "rarity", "leads",
 ];

@@ -133,6 +133,13 @@ export const ENUM_KINDS = [
     ],
   },
   {
+    key: "tome_packs", path: "source.tome",
+    meta: [
+      siField("the locale key the pack name resolves from, e.g. SI_FURC_TOMESPACK_UNDERCROFT"),
+      nameField("the pack's name on UESP, e.g. \"Undercroft Bundle\"", true),
+    ],
+  },
+  {
     key: "containers", path: "source.container",
     meta: [
       intField("item", "Container itemId",

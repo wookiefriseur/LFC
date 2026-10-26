@@ -22,7 +22,7 @@ HEADER = '-- DO NOT MANUALLY EDIT THIS FILE, USE THE WEBINTERFACE PIPELINE INSTE
 SOURCE_FIELDS = (
     'vendor', 'subtype', 'locations', 'achievement', 'quest', 'skill_line',
     'skill_rank', 'note', 'part_of', 'event', 'container', 'collectible',
-    'crate', 'packs', 'bundle', 'npc_class', 'npc_group', 'leads', 'houses', 'companion',
+    'crate', 'packs', 'bundle', 'npc_class', 'npc_group', 'leads', 'houses', 'companion', 'tome',
 )
 WEB_FIELDS = {'notes', 'name_overrides'}
 CONTAINER_KINDS = ('books', 'folio')

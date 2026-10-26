@@ -1,7 +1,7 @@
 -- DO NOT MANUALLY EDIT THIS FILE, USE THE WEBINTERFACE PIPELINE INSTEAD
 
 local C=assert(LFCGeneratedConstants,"load GeneratedConstants.lua first")
-assert(C.format==1 and C.vocabulary=="2b5f7b99a3cb9278c5fb9568347804b78bd1ee1a8d938cecc452ea0a2eb2fcbb","generated vocabulary mismatch")
+assert(C.format==1 and C.vocabulary=="c1989696f2b1feb5b0f03e9d0c0eaac61f1ad189e4004512e38a0e110143eb5a","generated vocabulary mismatch")
 LFCGeneratedDatabase={format=1,vocabulary=C.vocabulary,
 items={
   [87709]={1152,2,0,{11,2,{},nil,nil,nil,nil,nil,nil,nil,0,nil,nil,nil,"LEVELUP_REWARD"},{8,2,{{6,65}},nil,nil,nil,nil,nil,1}}, -- Imperial Brazier, Spiked
@@ -8356,25 +8356,25 @@ items={
   [223894]={8,39,0,{4,39,{{1,3000}},"2026-09-18",nil,nil,nil,18}}, -- Flowers, Blue Moth
   [223942]={4096,37,0,{13,37,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,{13882}}}, -- Druidspring Gazebo, Round
   [223978]={4,34,0,{3,34,{{4,700}},nil,nil,2,nil,14,nil,{{nil,2}}}}, -- West Weald Furnishing Folio II
-  [223996]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Report: Quality of Recruits
-  [223997]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Xil-Go's Spell
-  [223998]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Undeniable Truths of Attire
-  [223999]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Call to the Faithful
-  [224000]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Discomforts of War
-  [224001]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Settling the Debate
-  [224002]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Azarrid's Race
-  [224003]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Husks and Bones
-  [224004]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- The Masters' Hall
-  [224005]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Folly in Fixation
-  [224006]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- Armor of Myth and Legend
-  [224007]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"armor"}}, -- The Rotwood Enigma
-  [224074]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"logic"}}, -- High Isle Fireplace, Stone
-  [224075]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"logic"}}, -- Stained Glass of Julianos, Symbol
-  [224076]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"logic"}}, -- Fireplace Screen, Wrought Iron
-  [224077]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"dawn"}}, -- Dusklight Mote
-  [224078]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"dawn"}}, -- Dusklight Rift
-  [224079]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"dawn"}}, -- Dawnlight Rift
-  [224080]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,"dawn"}}, -- Dawnlight Mote
+  [223996]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Report: Quality of Recruits
+  [223997]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Xil-Go's Spell
+  [223998]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Undeniable Truths of Attire
+  [223999]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Call to the Faithful
+  [224000]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Discomforts of War
+  [224001]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Settling the Debate
+  [224002]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Azarrid's Race
+  [224003]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Husks and Bones
+  [224004]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- The Masters' Hall
+  [224005]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Folly in Fixation
+  [224006]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- Armor of Myth and Legend
+  [224007]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,1}}, -- The Rotwood Enigma
+  [224074]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,3}}, -- High Isle Fireplace, Stone
+  [224075]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,3}}, -- Stained Glass of Julianos, Symbol
+  [224076]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,3}}, -- Fireplace Screen, Wrought Iron
+  [224077]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,2}}, -- Dusklight Mote
+  [224078]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,2}}, -- Dusklight Rift
+  [224079]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,2}}, -- Dawnlight Rift
+  [224080]={32768,38,0,{16,38,{},nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,2}}, -- Dawnlight Mote
   [224081]={32,38,0,{6,38,{{11,300}},nil,nil,nil,nil,13,nil,nil,nil,nil,nil,nil,nil,nil,1,nil,14325}}, -- Replica Jubilee Cake 2026
   [224087]={32,38,0,{6,38,{{1,5000}},nil,nil,nil,nil,20,nil,nil,nil,7363,nil,nil,nil,nil,11}}, -- Glittering Goad Banner, Large Hanging
   [224088]={32,38,0,{6,38,{{1,5000}},nil,nil,nil,nil,20,nil,nil,nil,7363,nil,nil,nil,nil,11}}, -- Ruckus Banner, Large Hanging
