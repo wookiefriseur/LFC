@@ -361,7 +361,6 @@
 {"id":121021,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
 {"id":121022,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121023,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":121023,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121024,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":70}],"availability":{"version":"HOMESTEAD"}}
 {"id":121025,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":70}],"availability":{"version":"HOMESTEAD"}}
 {"id":121026,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":45}],"availability":{"version":"HOMESTEAD"}}
@@ -1255,7 +1254,7 @@
 {"id":171932,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":160}],"availability":{"version":"FLAMES"}}
 {"id":171933,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":80}],"availability":{"version":"FLAMES"}}
 {"id":171934,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":360}],"availability":{"version":"FLAMES"}}
-{"id":171940,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":280}],"availability":{"version":"FLAMES"}}
+{"id":171940,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":2800}],"availability":{"version":"FLAMES"}}
 {"id":171943,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":1000}],"availability":{"version":"BLACKW"}}
 {"id":171944,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":1000}],"availability":{"version":"BLACKW"}}
 {"id":175135,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":3500}],"availability":{"version":"BLACKW"}}

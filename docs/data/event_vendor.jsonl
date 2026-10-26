@@ -96,3 +96,6 @@
 {"id":226738,"source":{"type":"event_vendor","vendor":"HOLIDAY","achievement":4686,"event":"HIGHSEAS"},"cost":[{"currency":"GOLD","amount":24000}],"availability":{"version":"ECHOES"}}
 {"id":226758,"source":{"type":"event_vendor","vendor":"HOLIDAY","achievement":4687,"event":"HIGHSEAS"},"cost":[{"currency":"GOLD","amount":100000}],"availability":{"version":"ECHOES"}}
 {"id":226753,"source":{"type":"event_vendor","vendor":"HOLIDAY","event":"HIGHSEAS","achievement":4691},"cost":[{"currency":"GOLD","amount":50000}],"availability":{"version":"ECHOES"}}
+{"id":178799,"source":{"type":"event_vendor","event":"WITCHES","vendor":"EVENT"},"cost":[{"currency":"TRADE_BARS","amount":400}],"availability":{"version":"ECHOES"}}
+{"source":{"type":"event_vendor","event":"WITCHES","vendor":"EVENT"},"cost":[{"currency":"TRADE_BARS","amount":300}],"availability":{"version":"ECHOES"},"id":141967}
+{"source":{"type":"event_vendor","event":"WITCHES","vendor":"EVENT"},"cost":[{"currency":"TRADE_BARS","amount":100}],"availability":{"version":"ECHOES"},"id":139162}
