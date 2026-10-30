@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 359,
-      "digest": "bb0d8ebcd4a33fd4"
+      "records": 363,
+      "digest": "696e00cbb2004f55"
     },
     {
       "name": "ignored.jsonl",
@@ -139,10 +139,10 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "e0ed14e023f63356",
+  "digest": "7990f8ffa4f8aaf6",
   "counts": {
-    "records": 10217,
-    "ids": 12486,
+    "records": 10221,
+    "ids": 12490,
     "files": 19,
     "rows_seen": 8791,
     "module_records": 9687,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 22,
       "container": 182,
-      "rumour": 359,
+      "rumour": 363,
       "ignored": 337
     }
   }
