@@ -32,8 +32,8 @@
           "id_min": 110000,
           "id_max": 119999,
           "count": 1780,
-          "bytes": 247290,
-          "digest": "97fe1b6889e3"
+          "bytes": 247936,
+          "digest": "6cc9c8cd3c2c"
         },
         {
           "file": "meta/meta-0120000-0129999.jsonl",
@@ -104,8 +104,8 @@
           "id_min": 200000,
           "id_max": 209999,
           "count": 540,
-          "bytes": 75245,
-          "digest": "0dafca3e9bde"
+          "bytes": 75359,
+          "digest": "e8cc60ce6948"
         },
         {
           "file": "meta/meta-0210000-0219999.jsonl",
@@ -119,9 +119,9 @@
           "file": "meta/meta-0220000-0229999.jsonl",
           "id_min": 220000,
           "id_max": 229999,
-          "count": 627,
-          "bytes": 76928,
-          "digest": "a2bd5f01c475"
+          "count": 708,
+          "bytes": 87825,
+          "digest": "c3d2714dbedf"
         }
       ]
     },
@@ -137,8 +137,8 @@
       "description": "blueprint item id -> the furnishing it makes. The one direction a sharded dataset cannot answer, and the one the webview needs: a crafted record is keyed by the blueprint. Single small file, locale-invariant.",
       "record_format": "furniture-recipes-v1",
       "file": "recipes.json",
-      "count": 3442,
-      "digest": "e2441d23fc92"
+      "count": 3502,
+      "digest": "f6b8b56ce4b8"
     },
     "names": {
       "description": "Game names for the ids the data refers to: house collectibles, quests, achievements and zones, {kind: {id: name}}. Client-locale, one file per locale. Contributors correct it through `name` change lines.",

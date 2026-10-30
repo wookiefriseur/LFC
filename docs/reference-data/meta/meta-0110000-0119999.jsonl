@@ -856,7 +856,7 @@
 {"id":117762,"name":"Redguard Mat, Desert Sun","quality":4,"cat":3,"sub":53,"theme":10,"icon":"housing_red_inc_rugsmall003","blueprint":119222}
 {"id":117763,"name":"Redguard Mat, Sunrise","quality":4,"cat":3,"sub":53,"theme":10,"icon":"housing_red_inc_rugsmall010","blueprint":119223}
 {"id":117764,"name":"Redguard Awning, Desert Flame","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawninghigh001","blueprint":119224}
-{"id":117765,"name":"Redguard Canopy, Dusk","icon":"housing_red_str_varawningstandalone003","quality":4,"cat":13,"sub":114,"theme":10}
+{"id":117765,"name":"Redguard Canopy, Dusk","icon":"housing_red_str_varawningstandalone003","quality":4,"cat":13,"sub":114,"theme":10,"blueprint":227445}
 {"id":117766,"name":"Redguard Tent, Scaled Flames","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning004","blueprint":119225}
 {"id":117767,"name":"Redguard Canopy, Dawn","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning005","blueprint":119226}
 {"id":117769,"name":"Redguard Caravan, Cargo","quality":4,"cat":6,"sub":71,"theme":10,"icon":"housing_red_csb_varmerchantcart001","blueprint":119228}
@@ -919,12 +919,12 @@
 {"id":117827,"name":"Redguard Counter, Bar Island","quality":4,"cat":5,"sub":67,"theme":10,"icon":"housing_red_str_varinthicounterstraight001","blueprint":119286}
 {"id":117828,"name":"Redguard Counter, Grill","quality":4,"cat":5,"sub":67,"theme":10,"icon":"housing_red_str_varinthicounterstraight002","blueprint":119287}
 {"id":117829,"name":"Redguard Brazier, Enchanted","quality":4,"cat":11,"sub":124,"theme":10,"icon":"housing_red_str_varmilemarker001","blueprint":119288}
-{"id":117835,"name":"Redguard Lamp, Oil","icon":"housing_red_lsb_oillamp001","quality":4,"cat":11,"sub":120,"theme":10}
+{"id":117835,"name":"Redguard Lamp, Oil","icon":"housing_red_lsb_oillamp001","quality":4,"cat":11,"sub":120,"theme":10,"blueprint":227449}
 {"id":117839,"name":"Redguard Canopy, Stars","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawningstandalone001","blueprint":119290}
 {"id":117840,"name":"Redguard Pillow, Lattice Flames","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow002","blueprint":119291}
 {"id":117841,"name":"Redguard Pillow, Florid Flames","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow006","blueprint":119292}
 {"id":117842,"name":"Redguard Pillow, Florid Sunset","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow007","blueprint":119293}
-{"id":117843,"name":"Redguard Bed, Wide Lattice","quality":4,"cat":2,"sub":46,"theme":10,"icon":"housing_red_fur_pillowbed002"}
+{"id":117843,"name":"Redguard Bed, Wide Lattice","quality":4,"cat":2,"sub":46,"theme":10,"icon":"housing_red_fur_pillowbed002","blueprint":227444}
 {"id":117844,"name":"Redguard Table, Inlaid","quality":3,"cat":5,"sub":66,"theme":10,"icon":"housing_red_fur_rectangulartable001","blueprint":119295}
 {"id":117845,"name":"Redguard Table, Grand Inlaid","quality":4,"cat":5,"sub":66,"theme":10,"icon":"housing_red_fur_rectangulartablelarge001","blueprint":119296}
 {"id":117846,"name":"Redguard End Table, Tea","quality":4,"cat":3,"sub":59,"theme":10,"icon":"housing_red_fur_roundtable001","blueprint":119297}
@@ -943,9 +943,9 @@
 {"id":117859,"name":"Redguard Lantern, Caged","quality":4,"cat":11,"sub":121,"theme":10,"icon":"housing_red_lsb_varlanternsitting001","blueprint":119310}
 {"id":117860,"name":"Redguard Lantern, Caged Stand","quality":4,"cat":11,"sub":121,"theme":10,"icon":"housing_red_lsb_varlanternsitting002","blueprint":119311}
 {"id":117861,"name":"Redguard Tapestry, Starry","quality":4,"cat":3,"sub":52,"theme":10,"icon":"housing_red_str_varawningstandaloneside001","blueprint":119312}
-{"id":117862,"name":"Redguard Cart, Merchant","quality":3,"cat":6,"sub":71,"theme":10,"icon":"housing_red_csb_varmerchantcart005"}
-{"id":117867,"name":"Statue, Redguard's Respect","quality":4,"cat":6,"sub":70,"theme":10,"icon":"housing_red_exc_statue003"}
-{"id":117873,"name":"Redguard Rugs, Rolled","quality":3,"cat":3,"sub":53,"theme":10,"icon":"housing_red_exc_varmarketrugset001"}
+{"id":117862,"name":"Redguard Cart, Merchant","quality":3,"cat":6,"sub":71,"theme":10,"icon":"housing_red_csb_varmerchantcart005","blueprint":227447}
+{"id":117867,"name":"Statue, Redguard's Respect","quality":4,"cat":6,"sub":70,"theme":10,"icon":"housing_red_exc_statue003","blueprint":227456}
+{"id":117873,"name":"Redguard Rugs, Rolled","quality":3,"cat":3,"sub":53,"theme":10,"icon":"housing_red_exc_varmarketrugset001","blueprint":227451}
 {"id":117875,"name":"Wedding Pergola, Bare","quality":4,"cat":13,"sub":185,"theme":1,"icon":"housing_red_exc_varpergola001"}
 {"id":117876,"name":"Wedding Curtain, Wide","quality":4,"cat":9,"sub":92,"theme":1,"icon":"housing_red_exc_varweddingprops001"}
 {"id":117881,"name":"Redguard Pillow, Lattice Sands","quality":4,"cat":2,"sub":51,"theme":10,"icon":"housing_red_fur_pillow001"}
@@ -971,8 +971,8 @@
 {"id":117908,"name":"Redguard Candlestick, Twisted","quality":4,"cat":11,"sub":129,"theme":10,"icon":"housing_red_lsb_candlesticks002"}
 {"id":117910,"name":"Redguard Chandelier, Dark","quality":4,"cat":11,"sub":125,"theme":10,"icon":"housing_red_lsb_varchadelier003","blueprint":121305}
 {"id":117911,"name":"Redguard Chandelier, Grated","quality":4,"cat":11,"sub":125,"theme":10,"icon":"housing_red_lsb_varchadelier004","blueprint":121304}
-{"id":117912,"name":"Redguard Awning, Florid","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning001"}
-{"id":117914,"name":"Redguard Canopy, Florid","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawningstandalone002"}
+{"id":117912,"name":"Redguard Awning, Florid","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawning001","blueprint":227443}
+{"id":117914,"name":"Redguard Canopy, Florid","quality":3,"cat":13,"sub":114,"theme":10,"icon":"housing_red_str_varawningstandalone002","blueprint":227446}
 {"id":117925,"name":"Rough Cot, Military","quality":1,"cat":2,"sub":46,"theme":1,"icon":"housing_bre_cmp_sleepingcot001"}
 {"id":117926,"name":"Rough Stretcher, Military","quality":1,"cat":2,"sub":46,"theme":1,"icon":"housing_bre_cmp_stretcher001","blueprint":119314}
 {"id":117927,"name":"Rough Barrel, Sturdy","quality":1,"cat":10,"sub":95,"theme":1,"icon":"housing_bre_con_barrel002"}
@@ -1047,7 +1047,7 @@
 {"id":117997,"name":"Pumpkin, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_veg_crp_pumpkinsmall001","blueprint":119352}
 {"id":117998,"name":"Winter Squash, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_veg_crp_pumpkinsmall002","blueprint":119353}
 {"id":117999,"name":"Beet String, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_arg_exc_hangingbeets001","blueprint":119354}
-{"id":118000,"name":"Garlic String, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_arg_exc_hanginggarlic001"}
+{"id":118000,"name":"Garlic String, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_arg_exc_hanginggarlic001","blueprint":227436}
 {"id":118001,"name":"Beets, Display","quality":2,"cat":8,"sub":154,"theme":1,"icon":"housing_arg_exc_horizbeets001","blueprint":119356}
 {"id":118002,"name":"Common Counter, Island Stall","quality":2,"cat":5,"sub":67,"theme":1,"icon":"housing_bre_cmp_merchanttentcounter001","blueprint":119357}
 {"id":118003,"name":"Common Barrel, Sealed","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_bre_con_barrel001","blueprint":119358}
@@ -1101,24 +1101,24 @@
 {"id":118051,"name":"Common Cargo, Sealed","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_red_exc_varcargocratelg001","blueprint":119406}
 {"id":118052,"name":"Common Cargo, Reinforced","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_red_exc_varcargocratelg002","blueprint":119407}
 {"id":118053,"name":"Common Campfire, Outdoor","quality":2,"cat":11,"sub":127,"theme":1,"icon":"housing_bre_cmp_campfireringed001","blueprint":121098}
-{"id":118054,"name":"Common Firepit, Outdoor","quality":2,"cat":11,"sub":127,"theme":1,"icon":"housing_bre_cmp_campfiresimple001"}
-{"id":118055,"name":"Common Firepit, Piled","quality":2,"cat":11,"sub":127,"theme":1,"icon":"housing_bre_cmp_campfiresimple002"}
-{"id":118056,"name":"Common Stewpot, Hanging","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_cmp_cauldronfireplace003"}
-{"id":118057,"name":"Sack of Beans","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack003"}
-{"id":118058,"name":"Sack of Rice","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack005"}
-{"id":118059,"name":"Sack of Millet","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack006"}
-{"id":118060,"name":"Sack of Grain","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack007"}
-{"id":118061,"name":"Chicken Dinner, Display","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_plate001_full"}
-{"id":118062,"name":"Chicken Meal, Display","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_platesetfull001"}
+{"id":118054,"name":"Common Firepit, Outdoor","quality":2,"cat":11,"sub":127,"theme":1,"icon":"housing_bre_cmp_campfiresimple001","blueprint":227459}
+{"id":118055,"name":"Common Firepit, Piled","quality":2,"cat":11,"sub":127,"theme":1,"icon":"housing_bre_cmp_campfiresimple002","blueprint":227460}
+{"id":118056,"name":"Common Stewpot, Hanging","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_cmp_cauldronfireplace003","blueprint":227461}
+{"id":118057,"name":"Sack of Beans","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack003","blueprint":227438}
+{"id":118058,"name":"Sack of Rice","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack005","blueprint":227441}
+{"id":118059,"name":"Sack of Millet","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack006","blueprint":227440}
+{"id":118060,"name":"Sack of Grain","quality":2,"cat":8,"sub":87,"theme":1,"icon":"housing_bre_con_sack007","blueprint":227439}
+{"id":118061,"name":"Chicken Dinner, Display","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_plate001_full","blueprint":227434}
+{"id":118062,"name":"Chicken Meal, Display","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_platesetfull001","blueprint":227435}
 {"id":118063,"name":"Common Quill, Feather","quality":2,"cat":4,"sub":63,"theme":1,"icon":"housing_bre_inc_quill001","blueprint":121104}
 {"id":118064,"name":"Common Barrel, Dry","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_cav_min_barrel001"}
 {"id":118065,"name":"Common Cargo Crate, Dry","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_cav_min_cratelarge001"}
 {"id":118066,"name":"Steak Dinner","quality":2,"cat":8,"sub":85,"theme":1,"icon":"housing_gen_inc_foodplate001"}
 {"id":118067,"name":"Simple Blue Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerblue001","blueprint":119408}
-{"id":118068,"name":"Simple Brown Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerbrown001"}
-{"id":118069,"name":"Simple Gray Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannergray001"}
-{"id":118070,"name":"Simple Purple Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerpurple001"}
-{"id":118071,"name":"Simple Red Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerred001"}
+{"id":118068,"name":"Simple Brown Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerbrown001","blueprint":227468}
+{"id":118069,"name":"Simple Gray Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannergray001","blueprint":227469}
+{"id":118070,"name":"Simple Purple Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerpurple001","blueprint":227470}
+{"id":118071,"name":"Simple Red Banner","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_gen_lsb_blankbannerred001","blueprint":227471}
 {"id":118075,"name":"Banner, War","quality":3,"cat":3,"sub":58,"theme":9,"icon":"housing_orc_lsb_wtgorcbannerclana001"}
 {"id":118076,"name":"Banner, Forge","quality":3,"cat":3,"sub":58,"theme":9,"icon":"housing_orc_lsb_wtgorcbannerclana002"}
 {"id":118077,"name":"Banner, Forceful","quality":2,"cat":3,"sub":58,"theme":1,"icon":"housing_orc_lsb_wtgorcbannerclana003"}
@@ -1134,9 +1134,9 @@
 {"id":118093,"name":"Keg","quality":3,"cat":8,"sub":84,"theme":1,"icon":"housing_bre_con_keg001","blueprint":119423}
 {"id":118094,"name":"Cleaver, Butcher's","quality":3,"cat":8,"sub":82,"theme":1,"icon":"housing_bre_exc_cleaver002","blueprint":119424}
 {"id":118095,"name":"Hearty Bread","quality":3,"cat":8,"sub":156,"theme":1,"icon":"housing_bre_inc_bread001","blueprint":119425}
-{"id":118096,"name":"Bread, Plain","quality":2,"cat":8,"sub":156,"theme":1,"icon":"housing_bre_inc_bread002"}
+{"id":118096,"name":"Bread, Plain","quality":2,"cat":8,"sub":156,"theme":1,"icon":"housing_bre_inc_bread002","blueprint":227433}
 {"id":118097,"name":"Cheese Wedge","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bre_inc_cheese001","blueprint":119427}
-{"id":118098,"name":"Common Bowl, Serving","quality":2,"cat":8,"sub":81,"theme":1,"icon":"housing_bre_inc_fruitbowl001"}
+{"id":118098,"name":"Common Bowl, Serving","quality":2,"cat":8,"sub":81,"theme":1,"icon":"housing_bre_inc_fruitbowl001","blueprint":227458}
 {"id":118099,"name":"Ham, Display","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bre_inc_ham001","blueprint":119429}
 {"id":118100,"name":"Horn, Carved","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_bre_inc_hornbattle001"}
 {"id":118102,"name":"Hourglass, Common","quality":4,"cat":3,"sub":56,"theme":1,"icon":"housing_bre_inc_hourglass001","blueprint":119432}
@@ -1144,21 +1144,21 @@
 {"id":118104,"name":"","quality":0,"icon":"icon_missing"}
 {"id":118105,"name":"","quality":0,"icon":"icon_missing"}
 {"id":118106,"name":"","quality":0,"icon":"icon_missing"}
-{"id":118107,"name":"Pie, Display","quality":4,"cat":8,"sub":156,"theme":1,"icon":"housing_bre_inc_pie001"}
+{"id":118107,"name":"Pie, Display","quality":4,"cat":8,"sub":156,"theme":1,"icon":"housing_bre_inc_pie001","blueprint":227437}
 {"id":118108,"name":"Baked Potato, Display","quality":3,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_potato001","blueprint":119438}
 {"id":118109,"name":"Pot Pie, Display","quality":3,"cat":8,"sub":85,"theme":1,"icon":"housing_bre_inc_potpie001","blueprint":119439}
 {"id":118110,"name":"Pie Dish, Empty","quality":3,"cat":8,"sub":81,"theme":1,"icon":"housing_bre_inc_servingdish001_empty","blueprint":119440}
-{"id":118111,"name":"Steak, Display","quality":4,"cat":8,"sub":155,"theme":1,"icon":"housing_bre_inc_steak001"}
-{"id":118112,"name":"Teapot, Common","quality":4,"cat":8,"sub":144,"theme":1,"icon":"housing_bre_inc_teapot001"}
+{"id":118111,"name":"Steak, Display","quality":4,"cat":8,"sub":155,"theme":1,"icon":"housing_bre_inc_steak001","blueprint":227442}
+{"id":118112,"name":"Teapot, Common","quality":4,"cat":8,"sub":144,"theme":1,"icon":"housing_bre_inc_teapot001","blueprint":227472}
 {"id":118113,"name":"Drumstick","quality":3,"cat":8,"sub":155,"theme":1,"icon":"housing_bre_inc_turkeyleg001","blueprint":119443}
 {"id":118114,"name":"Candle, Group","quality":3,"cat":11,"sub":129,"theme":1,"icon":"housing_bre_lsb_candleset002","blueprint":119444}
 {"id":118115,"name":"Lantern, Stationary","quality":3,"cat":11,"sub":121,"theme":1,"icon":"housing_bre_lsb_lanternhanging001","blueprint":119445}
 {"id":118116,"name":"Lantern, Hanging","quality":3,"cat":11,"sub":121,"theme":1,"icon":"housing_bre_lsb_lanternhanginginterior001","blueprint":119446}
 {"id":118117,"name":"Table, Carved","quality":4,"cat":5,"sub":66,"theme":1,"icon":"housing_cra_fur_tablea001"}
-{"id":118118,"name":"Candles, Lasting","quality":4,"cat":11,"sub":129,"theme":1,"icon":"housing_coh_inc_candlecluster003"}
-{"id":118119,"name":"Minecart, Empty","quality":2,"cat":6,"sub":71,"theme":1,"icon":"housing_gen_csb_minecart001"}
-{"id":118120,"name":"Minecart, Push","quality":2,"cat":6,"sub":71,"theme":1,"icon":"housing_gen_csb_minecart002"}
-{"id":118121,"name":"Knife, Carving","quality":2,"cat":8,"sub":82,"theme":1,"icon":"housing_gen_crf_tablepropsknife001"}
+{"id":118118,"name":"Candles, Lasting","quality":4,"cat":11,"sub":129,"theme":1,"icon":"housing_coh_inc_candlecluster003","blueprint":227457}
+{"id":118119,"name":"Minecart, Empty","quality":2,"cat":6,"sub":71,"theme":1,"icon":"housing_gen_csb_minecart001","blueprint":227463}
+{"id":118120,"name":"Minecart, Push","quality":2,"cat":6,"sub":71,"theme":1,"icon":"housing_gen_csb_minecart002","blueprint":227464}
+{"id":118121,"name":"Knife, Carving","quality":2,"cat":8,"sub":82,"theme":1,"icon":"housing_gen_crf_tablepropsknife001","blueprint":227462}
 {"id":118122,"name":"Kennel, Locked","quality":3,"cat":7,"sub":77,"theme":1,"icon":"housing_gen_exc_cage005","blueprint":119451}
 {"id":118123,"name":"Pelt, Ice Wolf","quality":3,"cat":9,"sub":91,"theme":1,"icon":"housing_gen_exc_rkrwolfpeltsnow001"}
 {"id":118124,"name":"Pelt, Wolf","quality":3,"cat":9,"sub":91,"theme":1,"icon":"housing_gen_inc_wolfpelt001"}
@@ -1171,7 +1171,7 @@
 {"id":118134,"name":"Tangerines, Bunch","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_red_exc_varmarketproducepile002","blueprint":119463}
 {"id":118135,"name":"Peaches, Bunch","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_red_exc_varmarketproducepile003","blueprint":119464}
 {"id":118136,"name":"Oranges, Bunch","quality":3,"cat":8,"sub":154,"theme":1,"icon":"housing_red_exc_varmarketproducepile004","blueprint":119465}
-{"id":118137,"name":"Podium, Engraved","quality":4,"cat":4,"sub":63,"theme":1,"icon":"housing_uni_inc_spellcraftingpodium001"}
+{"id":118137,"name":"Podium, Engraved","quality":4,"cat":4,"sub":63,"theme":1,"icon":"housing_uni_inc_spellcraftingpodium001","blueprint":227466}
 {"id":118138,"name":"Painting of Mountains, Refined","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_bre_inc_painting_plain001"}
 {"id":118139,"name":"Painting of Valley, Refined","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_bre_inc_painting_plain002"}
 {"id":118140,"name":"Painting of a Waterfall, Refined","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_bre_inc_painting_plain003"}
@@ -1272,8 +1272,8 @@
 {"id":118266,"name":"Painting of Bridge, Bolted","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_red_inc_varpuzzlepaintings002"}
 {"id":118267,"name":"Painting of Autumn, Bolted","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_red_inc_varpuzzlepaintings003"}
 {"id":118268,"name":"Painting of Great Ruins, Bolted","quality":4,"cat":9,"sub":54,"theme":1,"icon":"housing_red_inc_varpuzzlepaintings004"}
-{"id":118277,"name":"Ram Horns, Mounted","quality":4,"cat":9,"sub":89,"theme":1,"icon":"housing_bre_inc_trophy_antlers001"}
-{"id":118278,"name":"Plaque, Bordered Deer Antlers","quality":3,"cat":9,"sub":89,"theme":1,"icon":"housing_bre_inc_trophy_antlers002"}
+{"id":118277,"name":"Ram Horns, Mounted","quality":4,"cat":9,"sub":89,"theme":1,"icon":"housing_bre_inc_trophy_antlers001","blueprint":227467}
+{"id":118278,"name":"Plaque, Bordered Deer Antlers","quality":3,"cat":9,"sub":89,"theme":1,"icon":"housing_bre_inc_trophy_antlers002","blueprint":227465}
 {"id":118279,"name":"Deer Head, Wall Mount","quality":5,"cat":9,"sub":89,"theme":1,"icon":"housing_bre_inc_trophy_deer001"}
 {"id":118281,"name":"Carcass, Hanging Geese","quality":4,"cat":8,"sub":86,"theme":1,"icon":"housing_orc_exc_geese001"}
 {"id":118282,"name":"Carcass, Fresh Goose","quality":4,"cat":8,"sub":86,"theme":1,"icon":"housing_orc_exc_geese002"}

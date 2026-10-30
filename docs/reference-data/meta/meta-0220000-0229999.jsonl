@@ -414,6 +414,7 @@
 {"id":224942,"name":"Breton Ceiling, Simple Dual Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":3,"cat":13,"sub":117,"theme":2}
 {"id":224943,"name":"Breton Ceiling, Ornate Dual-Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":4,"cat":13,"sub":117,"theme":2}
 {"id":224944,"name":"Breton Flooring, Wooden Large","icon":"housing_bre_str_housingreminthousefloor001","quality":3,"cat":13,"sub":138,"theme":2}
+{"id":224945,"name":"Breton Footbridge, Stone","icon":"housing_bre_str_housingbridgesmall001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225156}
 {"id":224946,"name":"Breton Stone Walkway, Crossing","icon":"housing_bre_waf_housingcitystair4way001","quality":4,"cat":13,"sub":138,"theme":2}
 {"id":224947,"name":"Breton Stone Walkway, Side","icon":"housing_bre_waf_housingcitystairsstraight002","quality":3,"cat":13,"sub":138,"theme":2}
 {"id":224948,"name":"Breton Stone Walkway Stairs","icon":"housing_bre_waf_housingcitystairsswitchback002","quality":4,"cat":13,"sub":117,"theme":2}
@@ -624,4 +625,84 @@
 {"id":226933,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226936,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226941,"name":"","quality":0,"icon":"icon_missing"}
+{"id":227217,"name":"Bright-Throat Remembrance Garland, Curved","icon":"housing_uni_exc_marigoldgarland001","quality":5,"cat":9,"sub":89,"theme":4}
+{"id":227218,"name":"Bright-Throat Remembrance Garland, Straight","icon":"housing_uni_exc_marigoldgarland002","quality":5,"cat":9,"sub":89,"theme":4}
+{"id":227219,"name":"Sun Bird Rebirth Sculpture","icon":"housing_uni_lsb_flamerebirthsculpture001","quality":5,"cat":11,"sub":126,"theme":11}
+{"id":227220,"name":"Bright-Throat Remembrance Bridge","icon":"housing_uni_str_marigoldbridge001","quality":5,"cat":13,"sub":117,"theme":4}
+{"id":227221,"name":"Star-Gazer Stellar Ring","icon":"housing_uni_exc_u52constellationring001","quality":5,"cat":7,"sub":107,"theme":11}
+{"id":227222,"name":"Star-Gazer Stellar Tree","icon":"housing_tre_bad_housingwillow004","quality":5,"cat":12,"sub":150,"theme":1}
+{"id":227223,"name":"Sun Bird Rebirth Fountain","icon":"housing_uni_str_flamerebirthfountain001","quality":5,"cat":6,"sub":74,"theme":11}
+{"id":227224,"name":"Skybox Changer Spring","icon":"icon_missing","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":227225,"name":"Skybox Changer Summer","icon":"icon_missing","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":227226,"name":"Skybox Changer Fall","icon":"icon_missing","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":227227,"name":"Skybox Changer Winter","icon":"icon_missing","quality":5,"cat":0,"sub":0,"theme":0}
+{"id":227228,"name":"Fox Ice Sculpture","icon":"housing_uni_inc_snowfox001","quality":5,"cat":6,"sub":70,"theme":8}
+{"id":227229,"name":"Nord Dais, Ice","icon":"housing_skr_run_housingicedias001","quality":5,"cat":13,"sub":138,"theme":8}
+{"id":227230,"name":"Nord Bench, Ice","icon":"housing_uni_fur_icebench001","quality":3,"cat":5,"sub":134,"theme":8,"blueprint":227476}
+{"id":227231,"name":"Nord Altar, Ice","icon":"housing_uni_fur_icealtar001","quality":4,"cat":5,"sub":66,"theme":8,"blueprint":227477}
+{"id":227232,"name":"Illuminated Icedrop, Multicolor","icon":"housing_uni_lsb_icedrop001","quality":5,"cat":11,"sub":126,"theme":8,"blueprint":227478}
+{"id":227234,"name":"Snow Flurry, Whirlwind","icon":"housing_u52_snowfx","quality":5,"cat":14,"sub":167,"theme":1}
+{"id":227235,"name":"Statue, Frostbinder","icon":"housing_uni_exc_frostbinderstatue001","quality":5,"cat":6,"sub":70,"theme":8}
+{"id":227236,"name":"Apothecary Dye Station","icon":"icon_missing","quality":5,"cat":25,"sub":104,"theme":8}
 {"id":227313,"name":"","quality":0,"icon":"icon_missing"}
+{"id":227372,"name":"Colovian Gate, Barred","icon":"housing_col_waf_dbhkvatcharenadoor001","quality":4,"cat":13,"sub":163,"theme":11}
+{"id":227373,"name":"Night Mother Sarcophagus, Replica","icon":"housing_uni_inc_sarcophagusnightmother001","quality":5,"cat":7,"sub":107,"theme":11}
+{"id":227374,"name":"Dwarven Centurion, Forge Line","icon":"housing_cwc_duc_assemblylinecenturion001","quality":5,"cat":10,"sub":170,"theme":12}
+{"id":227375,"name":"Markarth Dwarven Relic, Replica","icon":"housing_skr_inc_markancientdwemerrelic001","quality":4,"cat":7,"sub":107,"theme":12}
+{"id":227376,"name":"Daedric Cage, Soul Refinery","icon":"housing_bad_lsb_dedfloorsoulrefinery001","quality":4,"cat":7,"sub":77,"theme":13}
+{"id":227377,"name":"Deadlands Tile, Octagonal","icon":"housing_bad_str_dedbirthingmachinepartsmallvar001","quality":4,"cat":7,"sub":106,"theme":13}
+{"id":227378,"name":"Tree Stump, Mushroom-Hollowed","icon":"housing_tlv_fur_binhigh001","quality":3,"cat":12,"sub":143,"theme":6}
+{"id":227379,"name":"Mushroom, Enormous Baldcap","icon":"housing_veg_fug_housinggiantmushroom007","quality":5,"cat":12,"sub":143,"theme":1}
+{"id":227422,"name":"Storage Vat, Covered","icon":"housing_gen_crf_dyestationbarrelcovered001","quality":3,"cat":10,"sub":97,"theme":2,"blueprint":227428}
+{"id":227423,"name":"Storage Vat, Empty","icon":"housing_gen_crf_dyestationbarrelempty001","quality":2,"cat":10,"sub":97,"theme":2,"blueprint":227429}
+{"id":227424,"name":"Storage Jar, Covered","icon":"housing_gen_crf_dyestationjarcovered001","quality":3,"cat":10,"sub":97,"theme":2,"blueprint":227430}
+{"id":227425,"name":"Poison Flask, Sealed","icon":"housing_uni_inc_poisbeaker001","quality":2,"cat":10,"sub":96,"theme":2,"blueprint":227431}
+{"id":227426,"name":"Poison Bottle, Sealed","icon":"housing_uni_inc_poiscontainer001","quality":3,"cat":10,"sub":96,"theme":2,"blueprint":227432}
+{"id":227427,"name":"Breton Shelf, Covered Wall","icon":"housing_uni_inc_poiscraftingshelf001","quality":2,"cat":4,"sub":60,"theme":2,"blueprint":227473}
+{"id":227479,"name":"Wood Ladder, Scavenged","icon":"housing_apc_str_scaffoldladder002","quality":3,"cat":10,"sub":96,"theme":1,"blueprint":227513}
+{"id":227480,"name":"Wood Ladder, Short","icon":"housing_gen_inc_ladder001","quality":2,"cat":10,"sub":96,"theme":2,"blueprint":227514}
+{"id":227481,"name":"Metal Grate, Square","icon":"housing_gen_sew_channelslotgrateb001","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":227515}
+{"id":227482,"name":"Cleated Ramp, Wood","icon":"housing_red_str_varwalkwaystairs002","quality":3,"cat":13,"sub":138,"theme":1,"blueprint":227516}
+{"id":227483,"name":"Rustic Shelves, Wide","icon":"housing_sys_fur_merchantcounterhutch001","quality":3,"cat":4,"sub":60,"theme":2,"blueprint":227517}
+{"id":227484,"name":"Rustic Shelf, Tall","icon":"housing_sys_fur_merchantcounterhutch003","quality":2,"cat":4,"sub":60,"theme":2,"blueprint":227518}
+{"id":227485,"name":"Wood Ladder, Long","icon":"housing_sys_str_inthousehighladder001","quality":3,"cat":10,"sub":96,"theme":2,"blueprint":227519}
+{"id":227486,"name":"Planed Beam, Short","icon":"housing_chl_exc_loggingbeam001","quality":3,"cat":13,"sub":116,"theme":1}
+{"id":227487,"name":"Planed Plank, Small","icon":"housing_gen_inc_charcuterieplank001","quality":1,"cat":13,"sub":116,"theme":1}
+{"id":227488,"name":"Planed Plank, Thin","icon":"housing_red_csb_varboatboard001","quality":1,"cat":13,"sub":116,"theme":1}
+{"id":227489,"name":"Planed Plank, Wide","icon":"housing_red_csb_varboatboard002","quality":2,"cat":13,"sub":116,"theme":1}
+{"id":227490,"name":"Weathered Plank, Thin","icon":"housing_sum_exc_varboatboard001","quality":1,"cat":13,"sub":116,"theme":1}
+{"id":227491,"name":"Weathered Plank, Wide","icon":"housing_sum_exc_varboatboard002","quality":2,"cat":13,"sub":116,"theme":1}
+{"id":227492,"name":"Weathered Beam, Short","icon":"housing_sys_cmp_bleachersupportsingle001","quality":3,"cat":13,"sub":116,"theme":1}
+{"id":227493,"name":"Plant, Low Summerleaf Bamboo","icon":"housing_veg_bsh_auridonpalmbush004","quality":2,"cat":12,"sub":110,"theme":1}
+{"id":227494,"name":"Plant, Trailing Summerleaf Bamboo","icon":"housing_veg_bsh_auridonpalmbush005","quality":2,"cat":12,"sub":110,"theme":1}
+{"id":227495,"name":"Plant, Dense Summerleaf Bamboo","icon":"housing_veg_bsh_auridonpalmbush007","quality":3,"cat":12,"sub":110,"theme":1}
+{"id":227496,"name":"Plant, Purple Croton","icon":"housing_veg_els_cronton005","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227497,"name":"Plant, Crimson Croton","icon":"housing_veg_els_crontonred003","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227498,"name":"Bush, Wide-Leaf Senche","icon":"housing_veg_els_leopardplant001","quality":2,"cat":12,"sub":109,"theme":1}
+{"id":227499,"name":"Plant, Triple-Frond Tenmar Palm","icon":"housing_veg_els_nypapalm002","quality":2,"cat":12,"sub":109,"theme":1}
+{"id":227500,"name":"Plant Cluster, Tenmar Palm","icon":"housing_veg_els_nypapalm008","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227501,"name":"Plant, Palmetto","icon":"housing_veg_els_palmetto004","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227502,"name":"Plant, Sprouting Rawlith Palm","icon":"housing_veg_els_pineconeplant004","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227503,"name":"Plant Cluster, Sprouting Rawlith Palm","icon":"housing_veg_els_pineconeplant001","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227504,"name":"Verdant Violet Ivy Climber","icon":"housing_veg_els_purpleivy004","quality":3,"cat":12,"sub":112,"theme":1}
+{"id":227505,"name":"Violet Ivy Climber","icon":"housing_veg_els_purpleivy001","quality":2,"cat":12,"sub":112,"theme":1}
+{"id":227506,"name":"Violet Ivy Climber Curtain","icon":"housing_veg_els_purpleivy005","quality":3,"cat":12,"sub":112,"theme":1}
+{"id":227507,"name":"Bush, Violet Ivy","icon":"housing_veg_els_purpleivy007","quality":2,"cat":12,"sub":112,"theme":1}
+{"id":227508,"name":"Bush Cluster, Violet Ivy","icon":"housing_veg_els_purpleivy009","quality":3,"cat":12,"sub":112,"theme":1}
+{"id":227509,"name":"Fern, Four-Frond Monstero","icon":"housing_veg_fan_valplantsmall002","quality":2,"cat":12,"sub":149,"theme":1}
+{"id":227510,"name":"Plant, Paddle Palm Sprouts","icon":"housing_veg_sys_pingpongpaddleleaf001","quality":2,"cat":12,"sub":109,"theme":1}
+{"id":227511,"name":"Plant, Paddle Palm","icon":"housing_veg_sys_pingpongpaddleleaf002","quality":2,"cat":12,"sub":109,"theme":1}
+{"id":227512,"name":"Plant Cluster, Paddle Palm","icon":"housing_veg_sys_pingpongpaddleleaf005","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227554,"name":"Enormous Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear001","quality":5,"cat":7,"sub":107,"theme":8}
+{"id":227555,"name":"Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear002","quality":4,"cat":7,"sub":107,"theme":8}
+{"id":227606,"name":"Supply Crate, Blacksmithing","icon":"housing_sys_fur_housingchestblacksmith001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227609}
+{"id":227607,"name":"Supply Crate, Woodworking","icon":"housing_sys_fur_housingchestwoodwork001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227610}
+{"id":227608,"name":"Supply Crate, Provisioning","icon":"housing_sys_fur_housingchestprovision001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227611}
+{"id":227612,"name":"Shimmerfrost Fish, Purple","icon":"u51_furnishing_fish_violet","quality":5,"cat":14,"sub":162,"theme":1}
+{"id":227613,"name":"Shimmerfrost Fish, Blue","icon":"u51_furnishing_fish_blue","quality":5,"cat":14,"sub":162,"theme":1}
+{"id":227614,"name":"Shimmerfrost Fish, Green","icon":"u51_furnishing_fish_green","quality":5,"cat":14,"sub":162,"theme":1}
+{"id":227615,"name":"Necrom Cauldron, Large Stone","icon":"housing_tlv_exc_neccauldron001","quality":4,"cat":7,"sub":107,"theme":6}
+{"id":227616,"name":"Necrom Pedestal, Stone","icon":"housing_vrd_duc_stand001","quality":4,"cat":9,"sub":91,"theme":6}
+{"id":227617,"name":"Hand Bouquet, Pastels","icon":"housing_tlv_inc_necbouquet003","quality":3,"cat":12,"sub":111,"theme":1}
+{"id":227618,"name":"Banner of Mara, Ragged White","icon":"housing_nor_lsb_templebannermara001","quality":4,"cat":3,"sub":58,"theme":1}
+{"id":227619,"name":"Rock, Meteoric Wall","icon":"housing_rok_els_meteorrock001","quality":4,"cat":12,"sub":152,"theme":1}
