@@ -1894,6 +1894,7 @@ async function runBatchImport() {
 
   let candidates;
   const parseErrors = [];
+  const unfinished = new Set();
   if (looksLikeJSONL(text)) {
     candidates = [];
     const lines = text.split(/\r?\n/);
@@ -1912,7 +1913,8 @@ async function runBatchImport() {
           const discovery = parseDiscovery(obj);
           candidates.push({ ...discovery, category: "rumour", sourceName: null, lineNo: i + 1 });
         } catch (err) {
-          parseErrors.push({ lineNo: i + 1, message: err.message });
+          if (err.code === "UNFINALISED_FURNISHING") unfinished.add(obj.record.id);
+          else parseErrors.push({ lineNo: i + 1, message: err.message.startsWith("item ") ? err.message : `item ${obj?.record?.id ?? obj?.meta?.id ?? "?"}: ${err.message}` });
         }
         continue;
       }
@@ -1942,7 +1944,7 @@ async function runBatchImport() {
     }
   }
 
-  if (candidates.length === 0 && parseErrors.length === 0) {
+  if (candidates.length === 0 && parseErrors.length === 0 && unfinished.size === 0) {
     status.textContent = "nothing to import - paste at least one record.";
     return;
   }
@@ -1964,7 +1966,9 @@ async function runBatchImport() {
   let current = 0;
   let rumoured = 0;
   let asRecipe = 0;
-  const warnLines = [];
+  const warnLines = unfinished.size
+    ? [`The following furnishings do not seem to be finalised in the game yet (missing category metadata) and were skipped. Please dump them again after the next game update: ${[...unfinished].join(", ")}.`]
+    : [];
   const errorLines = [...parseErrors.map((e) => `line ${e.lineNo}: ${e.message}`)];
 
   for (const c of candidates) {

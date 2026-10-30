@@ -7,12 +7,22 @@ export function parseDiscovery(value) {
   if (!record || !positive(record.id) || (record.blueprint !== undefined && !positive(record.blueprint))) {
     throw new Error("discovery needs a furnishing id and an optional blueprint id");
   }
-  if (!meta || meta.id !== record.id || typeof meta.name !== "string" || !meta.name.trim()
-      || typeof meta.icon !== "string" || !meta.icon.startsWith("/esoui/art/icons/")
-      || !/\.dds$/i.test(meta.icon)
-      || !["quality", "cat", "sub", "theme"].every((k) => Number.isSafeInteger(meta[k]) && meta[k] >= 0)
-      || typeof locale !== "string" || !/^[a-z]{2,8}$/.test(locale) || !positive(apiVersion)) {
-    throw new Error("discovery metadata is missing or invalid");
+  const invalid = [];
+  if (!meta || meta.id !== record.id) invalid.push("meta.id");
+  if (typeof meta?.name !== "string" || !meta.name.trim()) invalid.push("meta.name");
+  if (typeof meta?.icon !== "string" || !meta.icon.startsWith("/esoui/art/icons/")
+      || !/\.dds$/i.test(meta.icon)) invalid.push("meta.icon");
+  for (const k of ["quality", "cat", "sub", "theme"]) {
+    if (!Number.isSafeInteger(meta?.[k]) || meta[k] < 0) invalid.push(`meta.${k}`);
+  }
+  if (typeof locale !== "string" || !/^[a-z]{2,8}$/.test(locale)) invalid.push("locale");
+  if (!positive(apiVersion)) invalid.push("apiVersion");
+  if (invalid.length) {
+    const err = new Error(`item ${record.id}: discovery metadata is missing or invalid: ${invalid.join(", ")}`);
+    if (meta && invalid.every((k) => ["meta.cat", "meta.sub"].includes(k) && meta[k.slice(5)] == null)) {
+      err.code = "UNFINALISED_FURNISHING";
+    }
+    throw err;
   }
   // Copy only the contract fields. Acquisition cannot be inferred from an ID scan.
   const cleanRecord = { id: record.id, ...(record.blueprint === undefined ? {} : { blueprint: record.blueprint }),

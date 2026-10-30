@@ -2750,6 +2750,29 @@ async function pasteImport(page, text) {
   return page.$eval("#adv-import-status", (e) => e.textContent);
 }
 
+test("discovery: unfinished furnishings are skipped while valid lines import", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const unfinished = { format: "furniture-discovery-v1", locale: "en", apiVersion: 101052,
+    record: { id: 225452 }, meta: { id: 225452, name: "Ambient Light", quality: 3, theme: 0,
+      icon: "/esoui/art/icons/icon_missing.dds" } };
+  const valid = { ...unfinished, record: { id: 9900092 },
+    meta: { ...unfinished.meta, id: 9900092, name: "Finished Light", cat: 11, sub: 120 } };
+  const invalid = { ...valid, record: { id: 9900093 }, meta: { ...valid.meta, id: 9900093, quality: -1 } };
+  const status = await pasteImport(page, [unfinished, valid, invalid, unfinished].map(JSON.stringify).join("\n"));
+  assert(status.includes("1 added"), status);
+  const report = await page.$eval("#adv-import-report", (e) => e.textContent);
+  assert(report.includes("not seem to be finalised") && report.includes("next game update: 225452"), report);
+  assertEq(report.split("225452").length - 1, 1, "unfinished ids should not repeat");
+  assert(report.includes("item 9900093") && report.includes("meta.quality"), report);
+  const changes = await diffLines(page);
+  assert(changes.some((line) => line.record?.id === 9900092), "valid item missing");
+  assert(!changes.some((line) => [225452, 9900093].includes(line.record?.id)), "invalid item imported");
+  await pasteImport(page, JSON.stringify(unfinished));
+  assert((await page.$eval("#adv-import-report", (e) => e.textContent)).includes("225452"), "warning missing for entirely unfinished dump");
+});
+
 test("issue diff: a pasted issue body loads its changes for review, only into an empty change list", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

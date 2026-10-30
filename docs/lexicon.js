@@ -22,7 +22,7 @@ const FIELDS = {
   "source.crate": ["Crown Crate season", "A Crown Crate season, such as Hidden Kindred. Use this for an item in that season's reward pool, not for an ordinary loot coffer."],
   "source.packs": ["Furnishing packs", "A Crown Store furnishing pack with a fixed collection, such as an Alinor pack"],
   "source.bundle": ["Bundle", "A named store offer containing several purchases, such as the Dwemer bundle"],
-  "source.tome": ["Tome pack", "The Tamriel Tomes reward pack it comes in, named as on UESP. A new pack is added under Names"],
+  "source.tome": ["Tome pack", "The Tamriel Tomes reward pack it comes in, named as on UESP. A new pack is added in Maintenance, Vocabulary"],
   "source.houses": ["Houses it comes with", "House collectible numbers, separated by commas."],
   "source.companion": ["Companion", "The companion whose rapport rewards it."],
   "source.quest": ["Quest ID", "a number, not its name. Use 0 when you know it needs one but not which."],

@@ -52,6 +52,17 @@ test("invalid metadata and unsupported formats fail instead of losing metadata",
     assert.throws(() => parseDiscovery({ ...sample, ...patch }));
   }
 });
+test("missing categories identify unfinished furnishings by id", () => {
+  for (const missing of [["cat"], ["sub"], ["cat", "sub"]]) {
+    const meta = { ...sample.meta };
+    for (const key of missing) delete meta[key];
+    assert.throws(() => parseDiscovery({ ...sample, meta }), (err) =>
+      err.code === "UNFINALISED_FURNISHING" && err.message.includes("400001")
+        && missing.every((key) => err.message.includes(`meta.${key}`)));
+  }
+  assert.throws(() => parseDiscovery({ ...sample, meta: { ...sample.meta, cat: -1 } }),
+    (err) => !err.code && err.message.includes("item 400001") && err.message.includes("meta.cat"));
+});
 if (process.env.DISCOVERY_JSONL) test("actual Lua dump validates and survives the web roundtrip", () => {
   const text = fs.readFileSync(process.env.DISCOVERY_JSONL, "utf8");
   assert(text.endsWith("\n"));
