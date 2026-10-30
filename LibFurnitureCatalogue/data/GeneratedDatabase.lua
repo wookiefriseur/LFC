@@ -8994,6 +8994,10 @@ rumours={
   [227617]=1, -- Hand Bouquet, Pastels
   [227618]=1, -- Banner of Mara, Ragged White
   [227619]=1, -- Rock, Meteoric Wall
+  [227620]=1, -- Rock, Meteoric Pillar
+  [227621]=1, -- Geode, Giant Amethyst
+  [227622]=1, -- Rock, Large Obsidian Shard
+  [227623]=1, -- Nedic Railing, Half
 },
 -- blueprints[blueprint id] = furnishing id
 blueprints={

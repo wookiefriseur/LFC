@@ -706,3 +706,7 @@
 {"id":227617,"name":"Hand Bouquet, Pastels","icon":"housing_tlv_inc_necbouquet003","quality":3,"cat":12,"sub":111,"theme":1}
 {"id":227618,"name":"Banner of Mara, Ragged White","icon":"housing_nor_lsb_templebannermara001","quality":4,"cat":3,"sub":58,"theme":1}
 {"id":227619,"name":"Rock, Meteoric Wall","icon":"housing_rok_els_meteorrock001","quality":4,"cat":12,"sub":152,"theme":1}
+{"id":227620,"name":"Rock, Meteoric Pillar","icon":"housing_rok_els_meteorrock002","quality":5,"cat":12,"sub":152,"theme":1}
+{"id":227621,"name":"Geode, Giant Amethyst","icon":"housing_rok_skr_giantgeode009","quality":5,"cat":12,"sub":161,"theme":1}
+{"id":227622,"name":"Rock, Large Obsidian Shard","icon":"housing_uni_exc_obsidianshard001","quality":3,"cat":12,"sub":136,"theme":1}
+{"id":227623,"name":"Nedic Railing, Half","icon":"housing_cra_duc_railingsmall01","quality":3,"cat":13,"sub":164,"theme":15}
