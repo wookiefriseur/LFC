@@ -207,7 +207,7 @@
 {"id":203596,"name":"Ferns, Desert Cluster","quality":2,"cat":12,"sub":149,"theme":10,"icon":"housing_veg_bsh_alikircluster005"}
 {"id":203597,"name":"Shrubs, Speckled Forest Cluster","quality":1,"cat":12,"sub":110,"theme":10,"icon":"housing_veg_bsh_bangkoraiisouthgreenscrub006"}
 {"id":203598,"name":"Flowers, Desert Blush","quality":1,"cat":12,"sub":111,"theme":10,"icon":"housing_veg_bsh_bansouthcactusclutter001"}
-{"id":203599,"name":"Redguard Fountain, Lion","quality":3,"cat":6,"sub":74,"theme":10,"icon":"housing_red_str_oasisfountain001"}
+{"id":203599,"name":"Redguard Fountain, Lion","quality":3,"cat":6,"sub":74,"theme":10,"icon":"housing_red_str_oasisfountain001","blueprint":227448}
 {"id":203600,"name":"Scribing Altar","quality":5,"cat":25,"sub":104,"icon":"housing_sum_str_housingscribingaltarcombo001"}
 {"id":203601,"name":"Haunted Dresser, Floating","quality":5,"cat":2,"sub":146,"theme":1,"icon":"housing_u43_haunteddresser"}
 {"id":203602,"name":"Haunted Door, Clattering","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_u43_haunteddoor"}
@@ -229,9 +229,9 @@
 {"id":203894,"name":"Bush, Cave Lichen","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_cavelichen001"}
 {"id":203895,"name":"Bush, Cave Lichen Cluster","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_cavelichen002"}
 {"id":203896,"name":"Bush, Cave Lichen Patch","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_cavelichen003"}
-{"id":203897,"name":"Redguard Tent, Blue Lean-To","quality":2,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset003"}
-{"id":203898,"name":"Redguard Tent, Rectangular Blue","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset006"}
-{"id":203899,"name":"Redguard Tent, Rectangular Silk","quality":5,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_vartentlarge002"}
+{"id":203897,"name":"Redguard Tent, Blue Lean-To","quality":2,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset003","blueprint":227452}
+{"id":203898,"name":"Redguard Tent, Rectangular Blue","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset006","blueprint":227453}
+{"id":203899,"name":"Redguard Tent, Rectangular Silk","quality":5,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_vartentlarge002","blueprint":227454}
 {"id":204407,"name":"Daedric Statue, Sanguine","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_sanguinestatue001"}
 {"id":204408,"name":"Target Serpent's Image, Trial","quality":5,"cat":25,"sub":98,"theme":13,"icon":"targetdummy_serpentboss"}
 {"id":204409,"name":"Dark Anchor Gateway","quality":5,"cat":7,"sub":106,"theme":13,"icon":"housing_cld_duc_portal002"}
@@ -260,8 +260,8 @@
 {"id":204432,"name":"Lily Pads, Flowering Cluster","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_mrklily001"}
 {"id":204433,"name":"Lily Pads, Flowering Patch","quality":3,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_aqa_mrklilycluster001"}
 {"id":204434,"name":"Breton Rowboat","quality":3,"cat":6,"sub":71,"theme":2,"icon":"housing_bre_csb_boatfishing002"}
-{"id":204455,"name":"Redguard Tent, Squared Blue","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset004"}
-{"id":204456,"name":"Redguard Oven, Clay","icon":"housing_red_inc_firepitsmall001","quality":5,"cat":25,"sub":104,"theme":10}
+{"id":204455,"name":"Redguard Tent, Squared Blue","quality":4,"cat":13,"sub":114,"theme":10,"icon":"housing_red_cmp_tentset004","blueprint":227455}
+{"id":204456,"name":"Redguard Oven, Clay","icon":"housing_red_inc_firepitsmall001","quality":5,"cat":25,"sub":104,"theme":10,"blueprint":227450}
 {"id":204499,"name":"Galen Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
 {"id":204618,"name":"Ayleid Arch, Wide","quality":4,"cat":13,"sub":117,"theme":14,"icon":"housing_iad_inc_ayliedarch001"}
 {"id":204619,"name":"Ayleid Window, Large","quality":4,"cat":7,"sub":107,"theme":14,"icon":"housing_iad_inc_ayliedlens001"}
