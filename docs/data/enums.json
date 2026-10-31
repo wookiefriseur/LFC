@@ -557,6 +557,11 @@
       "symbol": "WSKYRIM_SOLI_DH",
       "si": "SI_FURC_LOC_WSKYRIM_SOLI_DH",
       "name": "Solitude, Dragon's Hearth"
+    },
+    {
+      "symbol": "GRAHTWOOD_REDFUR",
+      "si": "SI_FURC_LOC_GRAHTWOOD_REDFUR",
+      "name": "Redfur Trading Post"
     }
   ],
   "vendors": [

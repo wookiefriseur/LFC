@@ -392,6 +392,7 @@ LFCGeneratedConstants={
       ["ANY"]=1, -- anywhere
       ["ANY_CAPITAL"]=2, -- any capital city
       ["ANY_CITY"]=3, -- any city
+      ["GRAHTWOOD_REDFUR"]=25, -- Redfur Trading Post
       ["GUILD_FIGHTERS"]=4, -- the Fighters' guild
       ["GUILD_MAGES"]=5, -- the Mages' guild
       ["LILANDRIL"]=6, -- Lilandril
@@ -857,6 +858,7 @@ LFCGeneratedConstants={
       [22]={["si"]="SI_FURC_LOC_VVARDENFELL_VIVEC_GQ"}, -- VVARDENFELL_VIVEC_GQ - Gladiator's Quarters
       [23]={["si"]="SI_FURC_LOC_VVARDENFELL_VIVEC_SDI"}, -- VVARDENFELL_VIVEC_SDI - Saint Delyn Inn
       [24]={["si"]="SI_FURC_LOC_WSKYRIM_SOLI_DH"}, -- WSKYRIM_SOLI_DH - Solitude, Dragon's Hearth
+      [25]={["si"]="SI_FURC_LOC_GRAHTWOOD_REDFUR"}, -- GRAHTWOOD_REDFUR - Redfur Trading Post
     },
     ["quest_reward_subtypes"]={},
     ["rarities"]={},
@@ -1374,6 +1376,7 @@ LFCGeneratedConstants={
       [22]="VVARDENFELL_VIVEC_GQ", -- Gladiator's Quarters
       [23]="VVARDENFELL_VIVEC_SDI", -- Saint Delyn Inn
       [24]="WSKYRIM_SOLI_DH", -- Solitude, Dragon's Hearth
+      [25]="GRAHTWOOD_REDFUR", -- Redfur Trading Post
     },
     ["quest_reward_subtypes"]={[1]="daily"},
     ["rarities"]={[1]="common",[2]="rare",[3]="extremely_rare"},
@@ -1487,5 +1490,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="957fa49e081bf0d77f0f679e43f0e99070c996eb779daa4fa1f85b016afb562e",
+  ["vocabulary"]="da7da6dd713b3e8fb1160110959ee9315f136cf0c5c49fd92ba93f44b3f58432",
 }

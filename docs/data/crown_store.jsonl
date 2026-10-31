@@ -107,7 +107,6 @@
 {"id":116420,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":1200}],"availability":{"version":"HOMESTEAD"}}
 {"id":116518,"source":{"type":"crown_store","packs":["MALACATH"]},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":116518,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":270}],"availability":{"version":"CLOCKWORK"}}
-{"id":117843,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117881,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":70}],"availability":{"version":"HOMESTEAD"}}
 {"id":117882,"source":{"type":"crown_store","packs":["CRAGBED"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117882,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":70}],"availability":{"version":"HOMESTEAD"}}
@@ -129,7 +128,6 @@
 {"id":117899,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":190}],"availability":{"version":"HOMESTEAD"}}
 {"id":117901,"source":{"type":"crown_store","packs":["HUBTREASURE"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117901,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"HOMESTEAD"}}
-{"id":117902,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117903,"source":{"type":"crown_store","packs":["CRAGPARLOUR"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":117903,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"HOMESTEAD"}}
 {"id":117904,"source":{"type":"crown_store","packs":["CRAGBED","HUBTREASURE"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -271,7 +269,6 @@
 {"id":120415,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":30}],"availability":{"version":"HOMESTEAD"}}
 {"id":120416,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":40}],"availability":{"version":"HOMESTEAD"}}
 {"id":120417,"source":{"type":"crown_store","packs":["CRAGKNICKS"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120417,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120420,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"HOMESTEAD"}}
 {"id":120426,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":1500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120427,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":1500}],"availability":{"version":"HOMESTEAD"}}
@@ -340,14 +337,12 @@
 {"id":121009,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121009,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":70}],"availability":{"version":"HOMESTEAD"}}
 {"id":121010,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":121010,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121012,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121012,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
 {"id":121013,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121014,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121014,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":20}],"availability":{"version":"HOMESTEAD"}}
 {"id":121015,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":121015,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121016,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121017,"source":{"type":"crown_store","packs":["TREES"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":121017,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
@@ -436,7 +431,6 @@
 {"id":126118,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126118,"source":{"type":"crown_store","bundle":"CHRYSAMERE"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126128,"source":{"type":"crown_store","packs":["AZURA"]},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":126128,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126138,"source":{"type":"crown_store","bundle":"DWEMER"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126140,"source":{"type":"crown_store","packs":["VIVEC"]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":126141,"source":{"type":"crown_store","packs":["VIVEC"]},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -480,7 +474,6 @@
 {"id":130079,"source":{"type":"crown_store","packs":["MOLAG"]},"cost":[],"availability":{"version":"REACH"}}
 {"id":130079,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":380}],"availability":{"version":"REACH"}}
 {"id":130080,"source":{"type":"crown_store","packs":["MOLAG"]},"cost":[],"availability":{"version":"REACH"}}
-{"id":130080,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"REACH"}}
 {"id":130081,"source":{"type":"crown_store","packs":["MOLAG"]},"cost":[],"availability":{"version":"REACH"}}
 {"id":130082,"source":{"type":"crown_store","packs":["MOLAG"]},"cost":[],"availability":{"version":"CLOCKWORK"}}
 {"id":130082,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":640}],"availability":{"version":"CLOCKWORK"}}
@@ -912,7 +905,6 @@
 {"id":145426,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145426,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":410}],"availability":{"version":"MURKM"}}
 {"id":145427,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
-{"id":145427,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145428,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145428,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":65}],"availability":{"version":"MURKM"}}
 {"id":145429,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":65}],"availability":{"version":"MURKM"}}
@@ -929,7 +921,7 @@
 {"id":145435,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145435,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":110}],"availability":{"version":"MURKM"}}
 {"id":145436,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
-{"id":145436,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145436,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":510}],"availability":{"version":"MURKM"}}
 {"id":145437,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145437,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":240}],"availability":{"version":"MURKM"}}
 {"id":145438,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
@@ -946,7 +938,6 @@
 {"id":145443,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":270}],"availability":{"version":"MURKM"}}
 {"id":145444,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":130}],"availability":{"version":"MURKM"}}
 {"id":145445,"source":{"type":"crown_store","packs":["DEEPMIRE"]},"cost":[],"availability":{"version":"MURKM"}}
-{"id":145445,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145446,"source":{"type":"crown_store","packs":["SWAMP"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145447,"source":{"type":"crown_store","packs":["SWAMP"]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145447,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":260}],"availability":{"version":"MURKM"}}
