@@ -25,6 +25,7 @@ local strings = {
   SI_FURC_ITEMPACK_CHRYSAMERE = "Chrysamere Style",
   SI_FURC_ITEMPACK_DAWNBREAKER = "Dawnbreaker Style",
   SI_FURC_ITEMPACK_FEARSTRUCK = "Fearstruck Style",
+  SI_FURC_LOC_GRAHTWOOD_REDFUR = "Redfur Trading Post",
   SI_FURC_TOMESPACK_UNDERCROFT = "Undercroft Bundle",
   -- END WEBINTERFACE STRINGS
 

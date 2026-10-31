@@ -38,7 +38,7 @@
 {"id":117994,"source":{"type":"vendor","vendor":"HGF","locations":[{"place":"ANY_CITY"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":117995,"source":{"type":"vendor","vendor":"HGF","subtype":"home_goods","locations":[{"location":"EASTMARCH"},{"location":"ALIKR"},{"location":"BETNIKH"},{"location":"KHENARTHI"},{"location":"GOLDCOAST"},{"location":"HEWSBANE"}]},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":118168,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"ALIKR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"FALLBAN"}}
-{"id":119578,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
+{"id":119578,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":119697,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"GOLDCOAST"}],"achievement":1435,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
 {"id":119823,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"AURIDON"}],"achievement":360,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
 {"id":119824,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"AURIDON"}],"achievement":361,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
@@ -674,7 +674,7 @@
 {"id":120718,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GLENUMBRA"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120720,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GLENUMBRA"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120725,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
-{"id":120741,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
+{"id":120741,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
 {"id":120742,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
 {"id":120948,"source":{"type":"vendor","vendor":"FIGHTERS_STEWARD","locations":[{"place":"GUILD_FIGHTERS"}],"achievement":318,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":100000}],"availability":{"version":"HOMESTEAD"}}
 {"id":120950,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"GOLDCOAST"}],"achievement":1443,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"HOMESTEAD"}}
