@@ -117,6 +117,9 @@ if env.LFCGeneratedDatabase then
     local ok, err = run(file)
     assert(ok, err)
   end
+  env.LibFurnitureCatalogue.Internal.Build.ResolveRecipe = function(id)
+    return nil, id
+  end
   env.LibFurnitureCatalogue.Internal.Generated.Install()
   local count = 0
   for id in pairs(env.LFCGeneratedDatabase.items) do

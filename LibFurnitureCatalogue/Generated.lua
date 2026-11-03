@@ -171,6 +171,24 @@ local function decode(record)
   end
   return source, kind
 end
+
+-- A blueprint this client cannot resolve is not in this game version yet/anymore (PTS data on live / removed item)
+local blueprintsExist = {}
+local function blueprintExists(blueprintId)
+  local exists = blueprintsExist[blueprintId]
+  if exists == nil then
+    local _, resolved = LFC.Internal.Build.ResolveRecipe(blueprintId)
+    exists = resolved ~= nil
+    blueprintsExist[blueprintId] = exists
+  end
+  return exists
+end
+
+---@return integer? blueprintId nil when the row has none or this client does not have it
+local function rowBlueprint(row)
+  return row[3] ~= 0 and blueprintExists(row[3]) and row[3] or nil
+end
+
 local function recordsFor(id, active)
   local row = data.items[id]
   if not row then
@@ -184,7 +202,9 @@ local function recordsFor(id, active)
     local record = row[i]
     local first = #result + 1
     local source, kind = decode(record)
-    if kind == "container" then
+    local blueprint = record[7] or (kind == "recipe" and row[3] ~= 0 and row[3])
+    if blueprint and kind ~= "container" and not blueprintExists(blueprint) then
+    elseif kind == "container" then
       for _, parent in ipairs(recordsFor(source.partOf, active)) do
         parent.source.partOf = source.partOf
         result[#result + 1] = parent
@@ -314,10 +334,14 @@ function generated.Install()
         bucket(vendor, row[2])[row[3] ~= 0 and row[3] or id] = compatibility
       end
     end
-    if row[3] ~= 0 then
+    local blueprint = rowBlueprint(row)
+    if blueprint then
       mask = build.AddSource(mask, src.CRAFTING)
     end
-    build.Upsert(id, { sources = mask, version = row[2], blueprint = row[3] ~= 0 and row[3] or nil })
+    -- only craftable, from a blueprint this client does not have: nothing to list
+    if mask ~= 0 or row[3] == 0 then
+      build.Upsert(id, { sources = mask, version = row[2], blueprint = blueprint })
+    end
     for i = 4, #row do
       if row[i][6] then
         containers[id] = { kind = vocabulary.containerKinds[row[i][6]], contents = {} }
