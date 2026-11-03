@@ -905,6 +905,8 @@ LFCGeneratedConstants={
     },
     ["versions"]={},
   },
+  ["recordFields"]={"type","version","cost","last_seen","rarity","container","blueprint"},
+  ["rowFields"]={"sources","version","blueprint"},
   ["sourceFieldOffset"]=7,
   ["sourceFields"]={
     "vendor",
@@ -1490,5 +1492,5 @@ LFCGeneratedConstants={
       {nil,2},
     },
   },
-  ["vocabulary"]="da7da6dd713b3e8fb1160110959ee9315f136cf0c5c49fd92ba93f44b3f58432",
+  ["vocabulary"]="ddcdf831b4ac704ff4b488b3ac7ff17b6333ce3e153430755ac070e4b7c545e1",
 }

@@ -10,14 +10,18 @@ import re
 import subprocess
 import tempfile
 from pathlib import Path
+from typing import Any
 
 from luaDoc_generateStr import extract_strings
 
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = 1
 LUA_MAX_EXACT_INTEGER = 2**53 - 1
-# Fixed record head before the SOURCE_FIELDS columns
-SOURCE_FIELD_OFFSET = 7
+# Fixed heads in column order, published so the reader addresses them by name
+ROW_FIELDS = ('sources', 'version', 'blueprint')
+# A record: these, then the SOURCE_FIELDS columns
+RECORD_FIELDS = ('type', 'version', 'cost', 'last_seen', 'rarity', 'container', 'blueprint')
+SOURCE_FIELD_OFFSET = len(RECORD_FIELDS)
 HEADER = '-- DO NOT MANUALLY EDIT THIS FILE, USE THE WEBINTERFACE PIPELINE INSTEAD\n\n'
 SOURCE_FIELDS = (
     'vendor', 'subtype', 'locations', 'achievement', 'quest', 'skill_line',
@@ -269,15 +273,19 @@ class Catalogue:
     def encode_record(self, record):
         source = record['source']
         av = record['availability']
-        head = [self.enum('source_types', source['type']), self.enum('versions', av['version']),
-                [[self.enum('currencies', c['currency']), c['amount']] for c in record['cost']],
-                av.get('last_seen'), self.enum('rarities', record['rarity']) if 'rarity' in record else None,
-                CONTAINER_KINDS.index(record['container']) + 1 if 'container' in record else None,
-                record.get('blueprint')]
-        require(len(head) == SOURCE_FIELD_OFFSET, 'record head changed; update SOURCE_FIELD_OFFSET')
-        return head + [self.source_value(source['type'], f, source[f]) if f in source else None for f in SOURCE_FIELDS]
+        head = {
+            'type': self.enum('source_types', source['type']),
+            'version': self.enum('versions', av['version']),
+            'cost': [[self.enum('currencies', c['currency']), c['amount']] for c in record['cost']],
+            'last_seen': av.get('last_seen'),
+            'rarity': self.enum('rarities', record['rarity']) if 'rarity' in record else None,
+            'container': CONTAINER_KINDS.index(record['container']) + 1 if 'container' in record else None,
+            'blueprint': record.get('blueprint'),
+        }
+        require(head.keys() == set(RECORD_FIELDS), 'record head changed; update RECORD_FIELDS')
+        return [head[f] for f in RECORD_FIELDS] + [self.source_value(source['type'], f, source[f]) if f in source else None for f in SOURCE_FIELDS]
 
-    def build(self, records):
+    def build(self, records) -> tuple[dict[str, Any], dict[str, Any], list[dict[str, Any]]]:
         projected = []
         identities = set()
         for record in records:
@@ -334,8 +342,12 @@ class Catalogue:
             require(not any(r['source']['type'] == 'ignored' for r in rows) or len(rows) == 1, f'ignored item {item} also has acquisition sources')
             types = {self.enum('source_types', r['source']['type']) for r in rows}
             mask = sum(2 ** (t - 1) for t in types)
-            version = min(self.enum('versions', r['availability']['version']) for r in rows)
-            items[item] = [mask, version, next(iter(item_blueprints), 0)] + [self.encode_record(r) for r in sorted(rows, key=canonical)]
+            # an unknown version is not an old one: the item is unversioned only when no record names a version
+            versions = {self.enum('versions', r['availability']['version']) for r in rows}
+            version = min(versions - {self.enum('versions', 'NONE')} or versions)
+            summary = {'sources': mask, 'version': version, 'blueprint': next(iter(item_blueprints), 0)}
+            require(summary.keys() == set(ROW_FIELDS), 'row head changed; update ROW_FIELDS')
+            items[item] = [summary[f] for f in ROW_FIELDS] + [self.encode_record(r) for r in sorted(rows, key=canonical)]
         metadata = {}
         for key in self.ids:
             metadata[key] = {}
@@ -352,6 +364,7 @@ class Catalogue:
         priority = [self.enum('item_sources', value) for value in self.enums['source_priority']]
         constants = {'vendorLocations': vendor_locations, 'currencyDefaults': currency_defaults, 'sourcePriority': priority,
                      'format': FORMAT, 'ids': self.ids, 'symbols': self.symbols, 'metadata': metadata,
+                     'rowFields': list(ROW_FIELDS), 'recordFields': list(RECORD_FIELDS),
                      'sourceFields': list(SOURCE_FIELDS), 'sourceFieldOffset': SOURCE_FIELD_OFFSET, 'sourceVocabularies': self.vocab_fields, 'containerKinds': list(CONTAINER_KINDS)}
         digest = hashlib.sha256(canonical(constants).encode()).hexdigest()
         constants['vocabulary'] = digest

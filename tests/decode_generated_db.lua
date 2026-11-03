@@ -79,6 +79,18 @@ assert(#constants.sourceFields == #fields)
 for index, field in ipairs(fields) do
   assert(constants.sourceFields[index] == field, "source field layout mismatch")
 end
+-- This decoder reads both heads by position, so the published layout has to be the one it knows
+local heads = {
+  rowFields = { "sources", "version", "blueprint" },
+  recordFields = { "type", "version", "cost", "last_seen", "rarity", "container", "blueprint" },
+}
+for name, expected in pairs(heads) do
+  assert(#constants[name] == #expected, name .. " layout mismatch")
+  for index, field in ipairs(expected) do
+    assert(constants[name][index] == field, name .. " layout mismatch")
+  end
+end
+assert(constants.sourceFieldOffset == #heads.recordFields, "source field offset mismatch")
 local function sourceValue(kind, field, value)
   local vocabulary = vocabularies[field] or (field == "subtype" and kind .. "_subtypes")
   if vocabulary then
@@ -110,6 +122,7 @@ local function sourceValue(kind, field, value)
   return value
 end
 local output = assert(io.open(destination, "w"))
+local unknownVersion = assert(constants.ids.versions.NONE)
 for id, row in pairs(database.items) do
   local seen, mask, version, blueprint = {}, 0, math.huge, nil
   for index = 4, #row do
@@ -120,7 +133,9 @@ for id, row in pairs(database.items) do
       mask = mask + 2 ^ (record[1] - 1)
       seen[record[1]] = true
     end
-    version = math.min(version, record[2])
+    if record[2] ~= unknownVersion then
+      version = math.min(version, record[2])
+    end
     if record[7] then
       assert(not blueprint or blueprint == record[7])
       blueprint = record[7]
@@ -149,6 +164,9 @@ for id, row in pairs(database.items) do
       end
     end
     output:write(json(decoded), "\n")
+  end
+  if version == math.huge then
+    version = unknownVersion
   end
   assert(row[1] == mask and row[2] == version and row[3] == (blueprint or 0), "item summary mismatch")
 end

@@ -131,6 +131,16 @@ class GeneratedDatabaseTests(unittest.TestCase):
                                     constants['ids']['versions']['TIDES'], [[1, 20000]],
                                     '2026-09-18', None, None, None, constants['ids']['vendors']['LUXF']])
 
+    def test_unknown_version_is_not_the_oldest(self):
+        versions = self.catalogue.ids['versions']
+        unknown = {'version': 'NONE'}
+        rows = [self.row(114327, {'type': 'recipe'}, blueprint=118991, availability=unknown),
+                self.row(114327, {'type': 'luxury', 'vendor': 'LUXF'}, availability={'version': 'TIDES'}),
+                self.row(114328, availability=unknown)]
+        _, database, _ = self.roundtrip(rows)
+        self.assertEqual(database['items'][114327][1], versions['TIDES'])
+        self.assertEqual(database['items'][114328][1], versions['NONE'])
+
     def test_same_source_multiple_offers(self):
         a = self.row(source={'type': 'crown_store', 'packs': ['ALCHEMIST']})
         b = self.row(source={'type': 'crown_store', 'packs': ['AMBITIONS']})

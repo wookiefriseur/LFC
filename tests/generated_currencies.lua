@@ -50,8 +50,14 @@ for name in pairs(expected) do
   symbols[count] = name
   items[count] = { 1, 2, 0, { 1, 2, { { count, 25 } } } }
 end
-env.LFCGeneratedConstants =
-  { sourceFields = {}, sourceVocabularies = {}, symbols = { source_types = { "drop" }, currencies = symbols } }
+env.LFCGeneratedConstants = {
+  rowFields = { "sources", "version", "blueprint" },
+  recordFields = { "type", "version", "cost", "last_seen", "rarity", "container", "blueprint" },
+  sourceFieldOffset = 7,
+  sourceFields = {},
+  sourceVocabularies = {},
+  symbols = { source_types = { "drop" }, currencies = symbols },
+}
 env.LFCGeneratedDatabase = { items = items }
 local chunk = assert(loadfile(root .. "/LibFurnitureCatalogue/Generated.lua"))
 setfenv(chunk, env)
