@@ -1336,10 +1336,10 @@
 {"id":182921,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":490}],"availability":{"version":"DEADL"}}
 {"id":182922,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":40}],"availability":{"version":"DEADL"}}
 {"id":182925,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":160}],"availability":{"version":"DEADL"}}
-{"id":182929,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":110}],"availability":{"version":"WAKE"}}
-{"id":182930,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":110}],"availability":{"version":"WAKE"}}
-{"id":182931,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"WAKE"}}
-{"id":182932,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":260}],"availability":{"version":"WAKE"}}
+{"id":182929,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":110}],"availability":{"version":"DEADL"}}
+{"id":182930,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":110}],"availability":{"version":"DEADL"}}
+{"id":182931,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"DEADL"}}
+{"id":182932,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":260}],"availability":{"version":"DEADL"}}
 {"id":182933,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":260}],"availability":{"version":"DEADL"}}
 {"id":182934,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"DEADL"}}
 {"id":182935,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"DEADL"}}
@@ -1725,3 +1725,4 @@
 {"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
 {"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
 {"id":223131,"source":{"type":"crown_store","packs":["WINTER"]},"cost":[],"availability":{"version":"WORMS2"}}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":80}],"availability":{"version":"HOMESTEAD"},"id":118053,"name_overrides":{"en":"Common Campfire, Outdoor"}}
