@@ -111,8 +111,9 @@ test("source moves preserve original identity, data notes and metadata through r
   assert.equal(JSON.parse(serialiseDiff(buffer)).category, "rumour", "delete still addresses the original file");
 });
 test("LFC and canonical ignored item identities agree", () => {
-  const lua = fs.readFileSync(new URL("../../LibFurnitureCatalogue/data/IgnoredItems.lua", import.meta.url), "utf8");
-  const ids = [...lua.matchAll(/^\s*\[(\d+)\]\s*=/gm)].map((m) => Number(m[1]));
+  const read = (name) => fs.readFileSync(new URL(`../../LibFurnitureCatalogue/data/${name}`, import.meta.url), "utf8");
+  const type = read("GeneratedConstants.lua").match(/\["ignored"\]=(\d+)/)[1];
+  const ids = [...read("GeneratedDatabase.lua").matchAll(new RegExp(`^\\s*\\[(\\d+)\\]=\\{\\d+,\\d+,\\d+,\\{${type},`, "gm"))].map((m) => Number(m[1]));
   assert.deepEqual(ids.sort((a,b) => a-b), ignoredRecords.map((r) => r.id).sort((a,b) => a-b));
 });
 

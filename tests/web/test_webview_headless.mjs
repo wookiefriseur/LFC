@@ -65,6 +65,7 @@ function serve(root) {
 // Test runner
 
 let refDataGate = null;
+let rumourFixture = "";
 // The stubbed GitHub commits endpoint: how often it was asked, and what it answers.
 let commitRequests = 0;
 let commitStatus = 200;
@@ -96,6 +97,27 @@ async function waitForBoot(page) {
   ).catch(() => {
     return page.waitForSelector(".panel:not([hidden])", { timeout: 5000 });
   });
+}
+
+const FIXTURE_ITEM = 999000101;
+const FIXTURE_BLUEPRINT = 999000102;
+const rumourLine = (identity) => `${JSON.stringify({ ...identity, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } })}\n`;
+
+async function reloadWithRumours(page, lines) {
+  rumourFixture = lines;
+  await page.evaluate(() => localStorage.removeItem("furcat-webview-cache-v8"));
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+}
+
+async function withRumourFixture(page, fn) {
+  await reloadWithRumours(page, rumourLine({ id: FIXTURE_ITEM }) + rumourLine({ blueprint: FIXTURE_BLUEPRINT, name_overrides: { en: "Fixture Blueprint" } }));
+  try {
+    await fn();
+  } finally {
+    await page.evaluate(() => window.__proto?.forgetPending());
+    await reloadWithRumours(page, "");
+  }
 }
 
 async function switchTab(page, id) {
@@ -1232,19 +1254,20 @@ test("health: the code-word filter finds what it claims to find", async (page) =
 });
 
 test("an unpaired blueprint opens Quick Edit titled by its blueprint", async (page) => {
-  await switchTab(page, "maintenance");
-  await page.click("#maint-tab-check");
-  await page.waitForSelector("#maint-filter", { timeout: 10000 });
-  await page.select("#maint-filter", "unpaired");
-  await page.waitForSelector("#maint-body .maint-fix", { timeout: 10000 });
-  const blueprint = await page.evaluate(() =>
-    window.__proto.records().find((r) => r.blueprint && r.id == null).blueprint);
-  await page.click("#maint-body .maint-fix");
-  await page.waitForSelector(".modal-title", { timeout: 10000 });
-  const title = await page.$eval(".modal-title", (e) => e.textContent);
-  await page.keyboard.press("Escape");
-  assert(!/undefined|unnamed item/.test(title), `title: ${title}`);
-  assert(title.includes(`#${blueprint}`), `title does not name blueprint ${blueprint}: ${title}`);
+  await withRumourFixture(page, async () => {
+    await switchTab(page, "maintenance");
+    await page.click("#maint-tab-check");
+    await page.waitForSelector("#maint-filter", { timeout: 10000 });
+    await page.select("#maint-filter", "unpaired");
+    await page.waitForSelector("#maint-body .maint-fix", { timeout: 10000 });
+    // Clicked in the page: the table can redraw while the freshly reloaded app settles, which detaches a held node.
+    await page.$eval("#maint-body .maint-fix", (b) => b.click());
+    await page.waitForSelector(".modal-title", { timeout: 10000 });
+    const title = await page.$eval(".modal-title", (e) => e.textContent);
+    await page.keyboard.press("Escape");
+    assert(!/undefined|unnamed item/.test(title), `title: ${title}`);
+    assert(title.includes(`#${FIXTURE_BLUEPRINT}`), `title does not name blueprint ${FIXTURE_BLUEPRINT}: ${title}`);
+  });
 });
 
 test("batch edit: Ctrl/Shift ticking, Selected only, links in the side pane", async (page) => {
@@ -2565,62 +2588,58 @@ async function selectRecord(page, key, number) {
 }
 
 test("delete and pair: a struck-through deletion stops clashing, and a pair replaces the unconfirmed records", async (page) => {
-  await page.reload({ waitUntil: "domcontentloaded" });
-  await waitForBoot(page);
-  await switchTab(page, "advanced");
-  // An item-only and a blueprint-only rumour with nothing else recorded: the data may change which ones those are.
-  const { item, bp } = await page.evaluate(() => {
-    const all = window.__proto.records();
-    const alone = (n) => all.filter((o) => o.id === n || o.blueprint === n).length === 1;
-    const rum = all.filter((r) => r.source?.type === "rumour");
-    const item = rum.find((r) => Number.isInteger(r.id) && r.blueprint === undefined && alone(r.id));
-    const bp = rum.find((r) => Number.isInteger(r.blueprint) && r.id === undefined && alone(r.blueprint));
-    return { item: { key: item._key, id: item.id }, bp: { key: bp._key, blueprint: bp.blueprint } };
+  await withRumourFixture(page, async () => {
+    await switchTab(page, "advanced");
+    const { item, bp } = await page.evaluate((itemId, blueprint) => {
+      const all = window.__proto.records();
+      return { item: { key: all.find((r) => r.id === itemId)._key, id: itemId },
+        bp: { key: all.find((r) => r.blueprint === blueprint)._key, blueprint } };
+    }, FIXTURE_ITEM, FIXTURE_BLUEPRINT);
+
+    // A confirmed record beside the rumour blocks sending until the rumour is deleted.
+    await pasteImport(page, JSON.stringify({ id: item.id, source: { type: "writ_vendor", vendor: "ROLIS" },
+      cost: [{ currency: "WRIT_VOUCHERS", amount: 125 }], availability: { version: "NONE" } }));
+    assert(await page.$("#table-body tr.dirty-error"), "the confirmed record beside a rumour is not red");
+    await selectRecord(page, item.key, item.id);
+    await page.click("#detail .form-actions .btn-danger");
+    await page.click("#detail-message .btn-danger");
+    await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
+    const struck = await page.$eval("#table-body tr.deleted td:nth-child(3)", (td) => getComputedStyle(td).textDecorationLine);
+    assertEq(struck, "line-through", "the deleted row is not struck through");
+    assertEq(await page.$("#table-body tr.dirty-error"), null, "a deleted rumour still blocks the confirmed record");
+    assert(await page.$eval("#detail", (d) => d.textContent.includes("Undo delete") && !d.querySelector("#adv-source-type")),
+      "a deleted row still opens the edit form");
+
+    // Undo restores the row; deleting it again leaves it deleted for the rest of the test.
+    await page.evaluate(() => [...document.querySelectorAll("#detail button")].find((b) => b.textContent === "Undo delete").click());
+    await page.waitForFunction(() => !document.querySelector("#table-body tr.deleted"), { timeout: 5000 });
+    await page.click("#detail .form-actions .btn-danger");
+    await page.click("#detail-message .btn-danger");
+    await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
+
+    // Pair the blueprint-only rumour with the item: one Crafting record replaces it, with no note for the maintainer.
+    await selectRecord(page, bp.key, bp.blueprint);
+    await page.click("#detail .form-pair");
+    await page.select("#adv-source-type", "recipe");
+    await page.evaluate((id) => {
+      const box = document.querySelector("#adv-id");
+      box.value = String(id);
+      box.dispatchEvent(new Event("input", { bubbles: true }));
+      box.dispatchEvent(new Event("change", { bubbles: true }));
+    }, item.id);
+    await page.click("#detail .btn-primary");
+    const lines = await diffLines(page);
+    const pair = lines.find((l) => l.op === "add" && l.category === "recipe" && l.record.blueprint === bp.blueprint);
+    assert(pair && pair.record.id === item.id && pair.record.notes === undefined, `pair line: ${JSON.stringify(pair)}`);
+    assert(lines.some((l) => l.op === "delete" && l.category === "rumour" && l.blueprint === bp.blueprint),
+      "the paired rumour was not deleted");
+
+    await page.click("#btn-submit");
+    await page.waitForSelector("#modal.open", { timeout: 10000 });
+    const findings = await page.$eval("#modal-validation", (e) => e.textContent);
+    assert(!findings.includes("Fix these changes"), `the send screen still blocks: ${findings}`);
+    await page.click("#modal-close");
   });
-
-  // A confirmed record beside the rumour blocks sending until the rumour is deleted.
-  await pasteImport(page, JSON.stringify({ id: item.id, source: { type: "writ_vendor", vendor: "ROLIS" },
-    cost: [{ currency: "WRIT_VOUCHERS", amount: 125 }], availability: { version: "NONE" } }));
-  assert(await page.$("#table-body tr.dirty-error"), "the confirmed record beside a rumour is not red");
-  await selectRecord(page, item.key, item.id);
-  await page.click("#detail .form-actions .btn-danger");
-  await page.click("#detail-message .btn-danger");
-  await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
-  const struck = await page.$eval("#table-body tr.deleted td:nth-child(3)", (td) => getComputedStyle(td).textDecorationLine);
-  assertEq(struck, "line-through", "the deleted row is not struck through");
-  assertEq(await page.$("#table-body tr.dirty-error"), null, "a deleted rumour still blocks the confirmed record");
-  assert(await page.$eval("#detail", (d) => d.textContent.includes("Undo delete") && !d.querySelector("#adv-source-type")),
-    "a deleted row still opens the edit form");
-
-  // Undo restores the row; deleting it again leaves it deleted for the rest of the test.
-  await page.evaluate(() => [...document.querySelectorAll("#detail button")].find((b) => b.textContent === "Undo delete").click());
-  await page.waitForFunction(() => !document.querySelector("#table-body tr.deleted"), { timeout: 5000 });
-  await page.click("#detail .form-actions .btn-danger");
-  await page.click("#detail-message .btn-danger");
-  await page.waitForSelector("#table-body tr.deleted", { timeout: 5000 });
-
-  // Pair the blueprint-only rumour with the item: one Crafting record replaces it, with no note for the maintainer.
-  await selectRecord(page, bp.key, bp.blueprint);
-  await page.click("#detail .form-pair");
-  await page.select("#adv-source-type", "recipe");
-  await page.evaluate((id) => {
-    const box = document.querySelector("#adv-id");
-    box.value = String(id);
-    box.dispatchEvent(new Event("input", { bubbles: true }));
-    box.dispatchEvent(new Event("change", { bubbles: true }));
-  }, item.id);
-  await page.click("#detail .btn-primary");
-  const lines = await diffLines(page);
-  const pair = lines.find((l) => l.op === "add" && l.category === "recipe" && l.record.blueprint === bp.blueprint);
-  assert(pair && pair.record.id === item.id && pair.record.notes === undefined, `pair line: ${JSON.stringify(pair)}`);
-  assert(lines.some((l) => l.op === "delete" && l.category === "rumour" && l.blueprint === bp.blueprint),
-    "the paired rumour was not deleted");
-
-  await page.click("#btn-submit");
-  await page.waitForSelector("#modal.open", { timeout: 10000 });
-  const findings = await page.$eval("#modal-validation", (e) => e.textContent);
-  assert(!findings.includes("Fix these changes"), `the send screen still blocks: ${findings}`);
-  await page.click("#modal-close");
 });
 
 test("folio: a master writ recipe pair moves into a listed folio or into a new one", async (page) => {
@@ -3347,6 +3366,12 @@ async function main() {
       // A test can hold the icon map back to see the page before it arrives.
       if (refDataGate && u.pathname.includes("/reference-data/")) {
         refDataGate.then(() => r.continue().catch(() => {}));
+        return;
+      }
+      if (rumourFixture && u.pathname.endsWith("/data/rumour.jsonl")) {
+        fs.readFile(path.join(ROOT, "data/rumour.jsonl"), "utf8")
+          .then((text) => r.respond({ status: 200, contentType: MIME[".jsonl"], body: text + rumourFixture }))
+          .catch(() => {});
         return;
       }
       r.continue().catch(() => {});
