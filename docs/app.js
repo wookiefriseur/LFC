@@ -161,6 +161,7 @@ async function init() {
     });
     bindTabMemory();
     renderFooter();
+    bindHomeLink();
     showSiteUpdated();
     state.buffer.onChange = () => {
       findingsCache = null;
@@ -224,25 +225,45 @@ function rememberTab(id) {
   } catch (_) { /* storage unavailable: the app just forgets */ }
 }
 
-// Get date of latest update from commit
+// Latest commit date. Unauthenticated GitHub API calls are limited to 60 per hour per IP, so a browser asks at most once per cooldown, failed attempts included.
 const UPDATED_KEY = "lfc.siteUpdated";
+const UPDATED_COOLDOWN_MS = 2 * 60 * 1000;
 async function showSiteUpdated() {
   const el = $("#site-updated");
-  let iso = null;
-  try { iso = sessionStorage.getItem(UPDATED_KEY); } catch (_) { /* storage unavailable */ }
-  if (!iso) {
+  let latest = null;
+  try { latest = JSON.parse(localStorage.getItem(UPDATED_KEY)); } catch (_) { /* storage unavailable */ }
+  if (!(Date.now() - latest?.checkedAt < UPDATED_COOLDOWN_MS)) {
+    let fresh = null;
     try {
       const res = await fetch(`https://api.github.com/repos/${ISSUE_REPO}/commits?path=docs&per_page=1`);
-      iso = res.ok ? (await res.json())[0]?.commit?.committer?.date : null;
+      const commit = res.ok ? (await res.json())[0] : null;
+      fresh = commit?.commit?.committer?.date
+        ? { date: commit.commit.committer.date, sha: commit.sha, url: commit.html_url }
+        : null;
     } catch (_) { /* offline */ }
-    if (!iso) return;
-    try { sessionStorage.setItem(UPDATED_KEY, iso); } catch (_) { /* fetched again next time */ }
+    // A failed attempt keeps the last known commit
+    latest = { ...latest, ...fresh, checkedAt: Date.now() };
+    try { localStorage.setItem(UPDATED_KEY, JSON.stringify(latest)); } catch (_) { /* fetched again next time */ }
   }
-  const date = new Date(iso);
+  if (!latest.date) return;
+  const date = new Date(latest.date);
   if (Number.isNaN(date.getTime())) return;
   el.dateTime = date.toISOString();
   el.textContent = `Updated ${date.toISOString().slice(0, 16).replace("T", " ")} UTC`;
   el.hidden = false;
+  const link = $("#site-commit");
+  if (typeof latest.sha === "string" && /^https:\/\/github\.com\//.test(latest.url || "")) {
+    link.href = latest.url;
+    link.textContent = latest.sha.slice(0, 7);
+    link.hidden = false;
+  }
+}
+
+// The title reloads the site on its landing tab; unsaved edits survive the reload like any other
+function bindHomeLink() {
+  $("#home-link").addEventListener("click", () => {
+    try { localStorage.removeItem(LAST_TAB_KEY); } catch (_) { /* storage unavailable: nothing is remembered anyway */ }
+  });
 }
 
 // masks.js has no switch callback, so the write hangs off a click on the bar and this module's own switchTo* helpers.

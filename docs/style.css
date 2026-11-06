@@ -34,6 +34,8 @@ header {
 }
 header h1 { margin: 0; font-size: 1.1rem; font-weight: 600; }
 header h1 small { display: block; color: var(--muted); font-size: .7rem; font-weight: 400; }
+#home-link { color: inherit; text-decoration: none; }
+#site-commit { margin-left: .4em; color: inherit; }
 
 .tabs { display: flex; gap: 0.25rem; margin-left: auto; }
 .tab {

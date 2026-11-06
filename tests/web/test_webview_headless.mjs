@@ -65,6 +65,9 @@ function serve(root) {
 // Test runner
 
 let refDataGate = null;
+// The stubbed GitHub commits endpoint: how often it was asked, and what it answers.
+let commitRequests = 0;
+let commitStatus = 200;
 
 const tests = [];
 const test = (name, fn) => tests.push({ name, fn });
@@ -127,6 +130,59 @@ test("the header shows the date of the last docs/ commit", async (page) => {
   const { text, datetime } = await page.$eval("#site-updated", (e) => ({ text: e.textContent, datetime: e.dateTime }));
   assert(text === "Updated 2026-10-19 01:56 UTC", `header text: ${text}`);
   assert(datetime === "2026-10-19T01:56:12.000Z", `datetime: ${datetime}`);
+  const commit = await page.$eval("#site-commit", (e) => ({ text: e.textContent, href: e.href, hidden: e.hidden }));
+  assert(!commit.hidden && commit.text === "0123abc", `commit link text: ${commit.text}`);
+  assert(commit.href === "https://github.com/wookiefriseur/LFC/commit/0123abcdef", `commit link: ${commit.href}`);
+});
+
+test("the update date is requested at most once per cooldown, failed attempts included", async (page) => {
+  const store = (entry) => page.evaluate((e) => localStorage.setItem("lfc.siteUpdated", JSON.stringify(e)), entry);
+  const stored = () => page.evaluate(() => JSON.parse(localStorage.getItem("lfc.siteUpdated")));
+  const reload = async () => { await page.reload({ waitUntil: "domcontentloaded" }); await waitForBoot(page); };
+  const shown = async () => {
+    await page.waitForSelector("#site-updated:not([hidden])", { timeout: 5000 });
+    return page.$eval("#site-updated", (e) => e.dateTime);
+  };
+  try {
+    await store({ date: "2020-01-01T00:00:00Z", checkedAt: Date.now() });
+    let requests = commitRequests;
+    await reload();
+    assertEq(await shown(), "2020-01-01T00:00:00.000Z", "date within the cooldown");
+    assertEq(commitRequests, requests, "requests within the cooldown");
+
+    await Promise.all([page.waitForNavigation({ waitUntil: "domcontentloaded" }), page.click("#home-link")]);
+    await waitForBoot(page);
+    assertEq(await shown(), "2020-01-01T00:00:00.000Z", "date after the title within the cooldown");
+    assertEq(commitRequests, requests, "requests after the title within the cooldown");
+
+    commitStatus = 403;
+    await store({ date: "2020-01-01T00:00:00Z", checkedAt: 0 });
+    await reload();
+    assertEq(await shown(), "2020-01-01T00:00:00.000Z", "date after a failed request");
+    assertEq(commitRequests, requests + 1, "requests after the cooldown");
+    assert(Date.now() - (await stored()).checkedAt < 60000, "a failed request starts the cooldown");
+    await reload();
+    assertEq(commitRequests, requests + 1, "requests after a failed request");
+  } finally {
+    commitStatus = 200;
+    await page.evaluate(() => localStorage.removeItem("lfc.siteUpdated"));
+    await reload();
+  }
+});
+
+test("the title reloads on the landing tab and asks for the update date again", async (page) => {
+  try {
+    await switchTab(page, "browse");
+    await page.evaluate(() => localStorage.setItem("lfc.siteUpdated", JSON.stringify({ date: "2020-01-01T00:00:00Z" })));
+    await Promise.all([page.waitForNavigation({ waitUntil: "domcontentloaded" }), page.click("#home-link")]);
+    await waitForBoot(page);
+    await page.waitForSelector("#panel-luxury:not([hidden])", { timeout: 10000 });
+    await page.waitForSelector("#site-updated:not([hidden])", { timeout: 5000 });
+    assertEq(await page.$eval("#site-updated", (e) => e.dateTime), "2026-10-19T01:56:12.000Z", "stale update date kept");
+  } finally {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
 });
 
 test("loads the v2 data set: records, enums and the file manifest", async (page) => {
@@ -3280,6 +3336,8 @@ async function main() {
   const pageErrors = [];
   page.on("pageerror", (e) => pageErrors.push(`pageerror: ${e.message}`));
   page.on("console", (m) => {
+    // The browser logs a refused GitHub request; the app handles that itself.
+    if (m.location().url?.startsWith("https://api.github.com/")) return;
     if (m.type() === "error") pageErrors.push(`console.error: ${m.text()}`);
   });
   await page.setRequestInterception(true);
@@ -3301,8 +3359,14 @@ async function main() {
       return;
     }
     if (u.hostname === "api.github.com" && u.pathname.endsWith("/commits")) {
+      commitRequests++;
+      if (commitStatus !== 200) {
+        r.respond({ status: commitStatus, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" }, body: "{}" }).catch(() => {});
+        return;
+      }
       r.respond({ status: 200, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" },
-        body: JSON.stringify([{ commit: { committer: { date: "2026-10-19T01:56:12Z" } } }]) }).catch(() => {});
+        body: JSON.stringify([{ sha: "0123abcdef", html_url: "https://github.com/wookiefriseur/LFC/commit/0123abcdef",
+          commit: { committer: { date: "2026-10-19T01:56:12Z" } } }]) }).catch(() => {});
       return;
     }
     r.abort().catch(() => {});
