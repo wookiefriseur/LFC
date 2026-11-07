@@ -198,7 +198,7 @@ test("the title reloads on the landing tab and asks for the update date again", 
     await page.evaluate(() => localStorage.setItem("lfc.siteUpdated", JSON.stringify({ date: "2020-01-01T00:00:00Z" })));
     await Promise.all([page.waitForNavigation({ waitUntil: "domcontentloaded" }), page.click("#home-link")]);
     await waitForBoot(page);
-    await page.waitForSelector("#panel-luxury:not([hidden])", { timeout: 10000 });
+    await page.waitForSelector("#panel-lists:not([hidden])", { timeout: 10000 });
     await page.waitForSelector("#site-updated:not([hidden])", { timeout: 5000 });
     assertEq(await page.$eval("#site-updated", (e) => e.dateTime), "2026-10-19T01:56:12.000Z", "stale update date kept");
   } finally {
@@ -715,9 +715,9 @@ test("icons: browsing paints game icons rather than the placeholder", async (pag
     "the page never asked the icon CDN for anything");
 });
 
-test("the tab bar is Luxury, Crown, Browse, Batch edit, Maintenance, Names, About", async (page) => {
+test("the tab bar is Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", async (page) => {
   const labels = await page.$$eval("#tab-bar > button", (bs) => bs.map((b) => b.textContent.trim()));
-  assertEq(labels.join(", "), "Luxury, Crown, Browse, Batch edit, Maintenance, Names, About", "the tab bar");
+  assertEq(labels.join(", "), "Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", "the tab bar");
   assertEq(await page.$("header input, header form"), null, "the header still has a search box");
   const footerAbout = await page.$$eval("footer a, footer button",
     (els) => els.filter((e) => /about/i.test(e.textContent)).length);
@@ -726,6 +726,76 @@ test("the tab bar is Luxury, Crown, Browse, Batch edit, Maintenance, Names, Abou
   await switchTab(page, "about");
   const stored = await page.evaluate(() => localStorage.getItem("furcat-last-tab"));
   assert(stored !== "about", "About was remembered as the landing tab");
+});
+
+test("lists: create, add from Browse in two clicks, pill, rename, copy and import back", async (page) => {
+  // No reload: later tests read the change buffer earlier ones left in the page. The test deletes its list again instead.
+  const deleteShown = () => page.evaluate(() => {
+    [...document.querySelectorAll("#lists-main .lists-head button")].find((b) => b.textContent === "Delete")?.click();
+    [...document.querySelectorAll("#lists-main .lists-confirm button")].find((b) => b.textContent === "Delete it")?.click();
+  });
+  try {
+    await switchTab(page, "lists");
+    assertEq(await page.$eval("#lists-transfer", (d) => d.open), false, "the import and export box starts open");
+    await page.type("#lists-new-name", "Kitchen");
+    await page.click("#lists-new button");
+    await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Kitchen");
+
+    await switchTab(page, "browse");
+    await page.evaluate(() => {
+      [...document.querySelectorAll("#browse-facet-list .browse-facet-link")].find((b) => /All items/.test(b.textContent))?.click();
+      document.querySelector("#browse-detail .browse-detail-close")?.click();
+      const b = document.querySelector("#browse-search");
+      b.value = "94116";
+      b.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    const card = "#browse-grid .browse-card";
+    await page.waitForFunction((sel) => [...document.querySelectorAll(sel)].some((c) => c.textContent.includes("#94116")), {}, card);
+    await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#94116")).querySelector(".browse-card-list").click());
+    await page.waitForSelector("dialog.list-pick[open]");
+    assertEq(await page.$eval(".list-pick-select", (s) => s.value), "Kitchen", "the dialog does not offer the only list first");
+    assertEq(await page.$eval("#browse-detail", (d) => d.hidden), true, "the + List button also opened the item");
+    await page.click(".list-pick-ok");
+    await page.waitForFunction((sel) => [...document.querySelectorAll(sel)]
+      .some((c) => c.textContent.includes("#94116") && c.querySelector(".lists-pill")?.textContent === "Kitchen"), {}, card);
+
+    await switchTab(page, "lists");
+    await page.waitForFunction(() => document.querySelector(".lists-item")?.textContent.includes("#94116"));
+    await page.click(".lists-item-name");
+    const ways = await page.$eval(".lists-item-ways", (u) => (u.hidden ? "" : u.textContent));
+    assert(ways.length > 0 && !ways.includes("Not in the catalogue"), `the item shows no way to get it: ${ways}`);
+    await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent === "Rename").click());
+    await page.$eval("#lists-main form input", (i) => { i.value = "Hall: west"; });
+    await page.$eval("#lists-main form", (f) => f.requestSubmit());
+    await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Hall: west");
+
+    await page.evaluate(() => {
+      window.__copied = null;
+      Object.defineProperty(navigator, "clipboard", {
+        value: { writeText: (t) => { window.__copied = t; return Promise.resolve(); } }, configurable: true,
+      });
+    });
+    await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent.endsWith("Copy")).click());
+    await page.waitForFunction(() => window.__copied !== null);
+    const text = await page.evaluate(() => window.__copied);
+    assertEq(text, "FURC LIST: Hall: west: 94116", "the export line");
+    assertEq(await page.$eval("#lists-transfer", (d) => d.open), true, "copying left the import and export box closed");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Copied to clipboard", "the copy confirmation");
+
+    await deleteShown();
+    await page.waitForFunction(() => document.querySelector("#lists-index")?.textContent.includes("No lists yet"));
+    await page.$eval("#lists-text", (t) => { t.value = ""; t.dispatchEvent(new Event("input")); });
+    assertEq(await page.$eval("#lists-import", (b) => b.disabled), true, "Import text is offered with nothing to import");
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
+    await page.click("#lists-import");
+    await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Hall: west"
+      && document.querySelector(".lists-item")?.textContent.includes("#94116"));
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.lists")));
+    assertEq(JSON.stringify(stored.lists), JSON.stringify([{ name: "Hall: west", ids: [94116] }]), "what is kept in the browser");
+  } finally {
+    await switchTab(page, "lists");
+    await deleteShown();
+  }
 });
 
 test("about: the page carries the landing page's links and the Luxury introduction", async (page) => {

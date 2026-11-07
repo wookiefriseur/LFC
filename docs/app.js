@@ -34,6 +34,7 @@ import { zanilPortrait } from "./zanil.js";
 import { crownCrateMask } from "./crown-crate.js";
 import { browseMask } from "./browse.js";
 import { crownStoreMask } from "./crown-store.js";
+import { listsMask } from "./lists.js";
 import { maintenanceMask } from "./maintenance.js";
 import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.js";
 import { clearIconCache } from "./icon-cache.js";
@@ -137,6 +138,9 @@ async function init() {
     bindSubmit();
 
     // Registration order is tab order.
+    registerMask(listsMask(maskDeps()));
+    browse = browseMask(maskDeps());
+    registerMask(browse);
     registerMask({ id: "luxury", label: "Luxury", render: renderLuxuryPanel });
     registerMask({
       id: "crown-store",
@@ -146,8 +150,6 @@ async function init() {
         crownCrateMask(maskDeps()),
       ],
     });
-    browse = browseMask(maskDeps());
-    registerMask(browse);
     registerMask({ id: "advanced", label: "Batch edit",
                    render: renderAdvancedPanel, onShow: () => renderTable() });
     registerMask(maintenanceMask(maskDeps()));
@@ -197,8 +199,8 @@ async function init() {
 
 // A stored id that no longer exists falls back to the landing tab rather than throwing out of mountMasks.
 const LAST_TAB_KEY = "furcat-last-tab";
-const DEFAULT_TAB = "luxury";
-const KNOWN_TABS = ["luxury", "crown-store", "browse", "maintenance", "names", "advanced"];
+const DEFAULT_TAB = "lists";
+const KNOWN_TABS = ["lists", "browse", "luxury", "crown-store", "maintenance", "names", "advanced"];
 
 function lastTab() {
   try {
@@ -2445,7 +2447,7 @@ function maskDeps() {
     openQuickEdit,
     // Find an item's detail list, the modal header's "record N of M" and Crown Store's "also:" note must agree, so they all read this.
     recordsForItem: (id) => recordsForItem(state.records, id, state.enums),
-    recordLocator, sourceDetail,
+    recordLocator, sourceDetail, formatCost,
     switchToBatchEdit, pairRecord, moveToFolio,
     switchToBrowse,
     // Without it the Crown Store panels' "Send now" is a silent no-op.

@@ -13,6 +13,7 @@ import {
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
+import { listsWith, onListsChange, openAddToList } from "./lists.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -21,6 +22,15 @@ const CARD_H = 92;
 const CARD_OVERSCAN = 6;
 
 const SOURCE_FIELD_ENUM = SOURCE_ENUM_FIELD;
+
+// A card names up to this many of the lists an item is on (one on a narrow screen), then just counts them.
+const MAX_LIST_PILLS = 5;
+const PILL_CHARS = 10;
+const wideCards = matchMedia("(min-width: 761px)");
+function pillText(name) {
+  const chars = [...name];
+  return chars.length > PILL_CHARS ? `${chars.slice(0, PILL_CHARS).join("")}…` : name;
+}
 
 // Identifying fields first; unlisted fields follow in record order.
 const FIELD_ORDER = [
@@ -102,6 +112,7 @@ export function browseMask(deps) {
   document.addEventListener("furcat:quick-edit-saved", () => {
     if ($("#browse-grid")) onShow();
   });
+  onListsChange(() => { if ($("#browse-grid")) renderGrid(); });
 
   function taxonomy() {
     view.tax = buildTaxonomy(state.enums || {}, state.records || []);
@@ -448,8 +459,27 @@ export function browseMask(deps) {
         card.title = `${containerLabel(container)} contains:\n${names.join("\n")}`;
         body.append(elem("div", { class: "container-preview" }, names.slice(0, 2).join("; ") + (names.length > 2 ? `; +${names.length - 2} more` : "")));
       }
+      const onLists = listsWith(item.id);
+      if (onLists.length) {
+        const pills = elem("span", {
+          class: "lists-pills",
+          title: `On your list${onLists.length === 1 ? "" : "s"}: ${onLists.map((l) => l.name).join(", ")}`,
+        });
+        if (onLists.length > (wideCards.matches ? MAX_LIST_PILLS : 1)) {
+          pills.append(elem("span", { class: "lists-pill" }, `${onLists.length} lists`));
+        } else {
+          for (const l of onLists) pills.append(elem("span", { class: "lists-pill" }, pillText(l.name)));
+        }
+        meta.append(pills);
+      }
       body.append(meta);
       card.append(body);
+      const toList = elem("button", { type: "button", class: "btn-mini browse-card-list", title: "Add to one of your lists" }, "+ List");
+      toList.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openAddToList(item.id, nameOf(item.id));
+      });
+      card.append(toList);
 
       card.addEventListener("click", () => {
         view.selectedKey = item.records[0]._key;
