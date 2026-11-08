@@ -19,7 +19,7 @@
 {"id":94111,"source":{"type":"housing","houses":[5756]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":94119,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":94132,"source":{"type":"housing","houses":[6140]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":94133,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":94133,"source":{"type":"housing","houses":[4794,1085,6140]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":94135,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":94136,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":94137,"source":{"type":"housing","houses":[1085,1086,5756,6752,9014]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -157,7 +157,7 @@
 {"id":118259,"source":{"type":"housing","houses":[10051]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118262,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118264,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":118277,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HARROW"}}
+{"id":118277,"source":{"type":"housing","houses":[6140,5756,7600]},"cost":[],"availability":{"version":"HARROW"}}
 {"id":118278,"source":{"type":"housing","houses":[7600]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":118282,"source":{"type":"housing","houses":[5461]},"cost":[],"availability":{"version":"REACH"}}
 {"id":118287,"source":{"type":"housing","houses":[8697,1445,5461]},"cost":[],"availability":{"version":"REACH"}}
@@ -419,7 +419,7 @@
 {"id":141853,"source":{"type":"housing","houses":[5461]},"cost":[],"availability":{"version":"WEREWOLF"}}
 {"id":141869,"source":{"type":"housing","houses":[5462]},"cost":[],"availability":{"version":"WEREWOLF"}}
 {"id":142003,"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"WEREWOLF"}}
-{"id":145428,"source":{"type":"housing","houses":[11172]},"cost":[],"availability":{"version":"MURKM"}}
+{"id":145428,"source":{"type":"housing","houses":[11172,14778]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145433,"source":{"type":"housing","houses":[5757]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145443,"source":{"type":"housing","houses":[5757]},"cost":[],"availability":{"version":"MURKM"}}
 {"id":145447,"source":{"type":"housing","houses":[5757]},"cost":[],"availability":{"version":"MURKM"}}

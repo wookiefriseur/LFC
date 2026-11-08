@@ -28,7 +28,7 @@
       "name": "vendor.jsonl",
       "type": "vendor",
       "records": 1386,
-      "digest": "68202c0f99cf9753"
+      "digest": "7edd0b2fa46bc9ff"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -45,8 +45,8 @@
     {
       "name": "luxury.jsonl",
       "type": "luxury",
-      "records": 669,
-      "digest": "ef5f369c5a13951d"
+      "records": 670,
+      "digest": "f429fdc554df4ee9"
     },
     {
       "name": "event_drop.jsonl",
@@ -69,8 +69,8 @@
     {
       "name": "crown_store.jsonl",
       "type": "crown_store",
-      "records": 1728,
-      "digest": "670ecb94ebd4028c"
+      "records": 1730,
+      "digest": "1d9ed2ca180aac56"
     },
     {
       "name": "recipe.jsonl",
@@ -100,7 +100,7 @@
       "name": "housing.jsonl",
       "type": "housing",
       "records": 697,
-      "digest": "d5aea8ecf1a4ddfd"
+      "digest": "7738bc1a14cd8335"
     },
     {
       "name": "companion.jsonl",
@@ -129,8 +129,8 @@
     {
       "name": "rumour.jsonl",
       "type": "rumour",
-      "records": 362,
-      "digest": "cd0707b61986b89a"
+      "records": 361,
+      "digest": "63c5ae3f7c3ed83a"
     },
     {
       "name": "ignored.jsonl",
@@ -139,9 +139,9 @@
       "digest": "9044139a448cc341"
     }
   ],
-  "digest": "5bde2ec562b535e8",
+  "digest": "2f28d8fbc7ff3803",
   "counts": {
-    "records": 10213,
+    "records": 10215,
     "ids": 12489,
     "files": 19,
     "rows_seen": 8791,
@@ -153,11 +153,11 @@
       "vendor": 1386,
       "pvp_vendor": 84,
       "writ_vendor": 56,
-      "luxury": 669,
+      "luxury": 670,
       "event_drop": 97,
       "event_vendor": 101,
       "crown_crate": 153,
-      "crown_store": 1728,
+      "crown_store": 1730,
       "recipe": 3448,
       "drop": 712,
       "quest_reward": 41,
@@ -167,7 +167,7 @@
       "guild_gift": 12,
       "tome_pack": 22,
       "container": 182,
-      "rumour": 362,
+      "rumour": 361,
       "ignored": 337
     }
   }

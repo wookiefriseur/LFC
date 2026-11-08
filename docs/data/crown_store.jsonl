@@ -32,7 +32,7 @@
 {"id":94130,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":220}],"availability":{"version":"HOMESTEAD"}}
 {"id":94131,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":220}],"availability":{"version":"HOMESTEAD"}}
 {"id":94132,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":150}],"availability":{"version":"HOMESTEAD"}}
-{"id":94133,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":150}],"availability":{"version":"HOMESTEAD"}}
+{"id":94133,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":220}],"availability":{"version":"HOMESTEAD"}}
 {"id":94134,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":220}],"availability":{"version":"HOMESTEAD"}}
 {"id":94135,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":160}],"availability":{"version":"HOMESTEAD"}}
 {"id":94136,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":160}],"availability":{"version":"HOMESTEAD"}}
@@ -754,17 +754,17 @@
 {"id":134944,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":340}],"availability":{"version":"DRAGONS"}}
 {"id":134945,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":200}],"availability":{"version":"DRAGONS"}}
 {"id":134946,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":340}],"availability":{"version":"DRAGONS"}}
-{"id":134947,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":100}],"availability":{"version":"DRAGONS"}}
-{"id":134948,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":400}],"availability":{"version":"DRAGONS"}}
+{"id":134947,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":200}],"availability":{"version":"DRAGONS"}}
+{"id":134948,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":200}],"availability":{"version":"DRAGONS"}}
 {"id":134950,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":30}],"availability":{"version":"DRAGONS"}}
 {"id":134951,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":30}],"availability":{"version":"DRAGONS"}}
 {"id":134952,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":30}],"availability":{"version":"DRAGONS"}}
 {"id":134953,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":340}],"availability":{"version":"DRAGONS"}}
 {"id":134961,"source":{"type":"crown_store","packs":["DIBELLA"]},"cost":[],"availability":{"version":"DRAGONS"}}
-{"id":134970,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":100}],"availability":{"version":"DRAGONS"}}
+{"id":134970,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":370}],"availability":{"version":"DRAGONS"}}
 {"id":134971,"source":{"type":"crown_store","packs":["HEART"]},"cost":[],"availability":{"version":"DRAGONS"}}
 {"id":134971,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":100}],"availability":{"version":"DRAGONS"}}
-{"id":134972,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":400}],"availability":{"version":"DRAGONS"}}
+{"id":134972,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":240}],"availability":{"version":"DRAGONS"}}
 {"id":134973,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":200}],"availability":{"version":"DRAGONS"}}
 {"id":134974,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":340}],"availability":{"version":"DRAGONS"}}
 {"id":139140,"source":{"type":"crown_store","packs":["MEPHALA"]},"cost":[],"availability":{"version":"DRAGONS"}}
@@ -1726,3 +1726,5 @@
 {"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
 {"id":223131,"source":{"type":"crown_store","packs":["WINTER"]},"cost":[],"availability":{"version":"WORMS2"}}
 {"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":80}],"availability":{"version":"HOMESTEAD"},"id":118053,"name_overrides":{"en":"Common Campfire, Outdoor"}}
+{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"HARROW"},"id":118277,"name_overrides":{"en":"Ram Horns, Mounted"}}
+{"source":{"type":"crown_store","packs":["DRUIDIC"]},"cost":[],"availability":{"version":"SCRIBE"},"name_overrides":{"en":"Galen Dogwood, Medium Cluster"},"id":194401}
