@@ -307,41 +307,46 @@ export function listsMask(deps) {
     const list = current;
 
     const head = elem("div", { class: "lists-head" });
-    const title = elem("h2", {}, list.name);
-    const rename = elem("button", { type: "button", class: "btn-mini" }, "Rename");
-    const del = elem("button", { type: "button", class: "btn-mini btn-danger" }, "Delete");
+    const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: "Click to rename" }, list.name);
+    const title = elem("h2", {}, titleBtn);
+    const del = elem("button", { type: "button", class: "btn-mini btn-danger" }, "🗑️ Delete");
     const copy = elem("button", { type: "button", class: "btn-mini", title: "Copy this list to the clipboard" }, "📋 Copy");
     const save = elem("button", { type: "button", class: "btn-mini", title: "Download this list as a text file" }, "💾 Download");
-    head.append(title, rename, copy, save, del);
+    head.append(title, copy, save, del);
     host.append(head);
 
-    const renameForm = elem("form", { class: "lists-inline", hidden: "" },
-      elem("input", { maxlength: String(MAX_NAME_LENGTH), "aria-label": "New name" }),
-      elem("button", { class: "btn-primary" }, "Save"),
-      elem("button", { type: "button" }, "Cancel"));
     const renameError = elem("p", { class: "warn", role: "alert", hidden: "" });
     const ask = elem("p", { class: "lists-confirm", hidden: "" },
       `Delete "${list.name}" and its ${list.ids.length} item${list.ids.length === 1 ? "" : "s"}? `,
       elem("button", { type: "button", class: "btn-mini btn-danger" }, "Delete it"),
       elem("button", { type: "button", class: "btn-mini" }, "Keep it"));
-    host.append(renameForm, renameError, ask);
+    host.append(renameError, ask);
 
-    const nameBox = renameForm.querySelector("input");
-    rename.addEventListener("click", () => {
-      renameForm.hidden = false;
-      nameBox.value = list.name;
-      nameBox.select();
-    });
-    renameForm.querySelector('button[type="button"]').addEventListener("click", () => {
-      renameForm.hidden = true;
-      renameError.hidden = true;
-    });
-    renameForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const r = renameList(list, nameBox.value);
-      renameError.hidden = !r.error;
-      renameError.textContent = r.error || "";
-      if (!r.error) drawMain();
+    // Rename in place, like the Names tab: Enter or leaving the field saves, Escape cancels.
+    titleBtn.addEventListener("click", () => {
+      const input = elem("input", { class: "lists-title-edit", maxlength: String(MAX_NAME_LENGTH), "aria-label": "List name" });
+      input.value = list.name;
+      let done = false;
+      const finish = (keep) => {
+        if (done) return;
+        if (keep && input.value.trim() !== list.name) {
+          const r = renameList(list, input.value);
+          renameError.hidden = !r.error;
+          renameError.textContent = r.error || "";
+          if (r.error) return;   // stay in the field; the next Enter or blur tries again
+        }
+        done = true;
+        renameError.hidden = true;
+        drawMain();
+      };
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); finish(true); }
+        else if (e.key === "Escape") { e.preventDefault(); finish(false); }
+      });
+      input.addEventListener("blur", () => finish(true));
+      title.replaceChildren(input);
+      input.focus();
+      input.select();
     });
     del.addEventListener("click", () => { ask.hidden = false; });
     const [yes, no] = ask.querySelectorAll("button");
@@ -400,6 +405,7 @@ export function listsMask(deps) {
       const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w)));
       toggle.addEventListener("click", () => {
         where.hidden = !where.hidden;
+        li.classList.toggle("is-open", !where.hidden);
         toggle.setAttribute("aria-expanded", String(!where.hidden));
       });
       const show = elem("button", { type: "button", class: "btn-mini" }, "Browse");

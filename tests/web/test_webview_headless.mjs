@@ -731,7 +731,7 @@ test("the tab bar is Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Name
 test("lists: create, add from Browse in two clicks, pill, rename, copy and import back", async (page) => {
   // No reload: later tests read the change buffer earlier ones left in the page. The test deletes its list again instead.
   const deleteShown = () => page.evaluate(() => {
-    [...document.querySelectorAll("#lists-main .lists-head button")].find((b) => b.textContent === "Delete")?.click();
+    [...document.querySelectorAll("#lists-main .lists-head button")].find((b) => b.textContent.endsWith("Delete"))?.click();
     [...document.querySelectorAll("#lists-main .lists-confirm button")].find((b) => b.textContent === "Delete it")?.click();
   });
   try {
@@ -764,9 +764,11 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
     await page.click(".lists-item-name");
     const ways = await page.$eval(".lists-item-ways", (u) => (u.hidden ? "" : u.textContent));
     assert(ways.length > 0 && !ways.includes("Not in the catalogue"), `the item shows no way to get it: ${ways}`);
-    await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent === "Rename").click());
-    await page.$eval("#lists-main form input", (i) => { i.value = "Hall: west"; });
-    await page.$eval("#lists-main form", (f) => f.requestSubmit());
+    assertEq(await page.$eval(".lists-item", (li) => li.classList.contains("is-open")), true, "the open item does not grow its icon");
+    await page.click("#lists-main .lists-title-button");
+    await page.$eval("#lists-main .lists-title-edit", (i) => { i.value = "Hall: west"; });
+    await page.focus("#lists-main .lists-title-edit");
+    await page.keyboard.press("Enter");
     await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Hall: west");
 
     await page.evaluate(() => {

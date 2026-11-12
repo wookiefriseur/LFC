@@ -2069,12 +2069,20 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 }
 
 /* Lists tab and the Browse "+ List" dialog */
-.panel-lists { overflow: auto; }
+.panel-lists { overflow: auto; container-type: size; }
+/* The side bar stays in view; its list index scrolls so "Create" is always reachable. */
+.lists-side {
+  position: sticky; top: 1.25rem; display: flex; flex-direction: column;
+  max-height: calc(100cqh - 2.5rem);
+}
+.lists-side > * { flex: 0 0 auto; }
+.lists-side > h2 { margin-bottom: 0; }   /* flex children keep both margins; this restores the collapsed gap */
+.lists-side > .lists-index { flex: 0 1 auto; min-height: 5rem; overflow-y: auto; }
 .lists-mask {
   display: grid; grid-template-columns: minmax(15rem, 18rem) 1fr; align-items: start; gap: 1rem 1.5rem;
   max-width: var(--screen-width); margin: 0 auto; padding: 1.25rem 1.5rem 3rem;
 }
-.lists-main { min-width: 0; }
+.lists-main { min-width: 0; padding: 0.85rem 1rem; background: white; border: 1px solid var(--border); border-radius: 6px; }
 .lists-transfer { margin: 0.6rem 0 1rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; background: white; }
 .lists-transfer > summary { font-weight: 600; cursor: pointer; }
 .lists-transfer[open] > summary { margin-bottom: 0.5rem; }
@@ -2093,14 +2101,19 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .btn-like { display: inline-flex; align-items: center; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; background: white; cursor: pointer; }
 .btn-like:focus-within { outline: 2px solid var(--accent); }
 .lists-head { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-.lists-head h2 { margin: 0 0.5rem 0 0; overflow-wrap: anywhere; }
+.lists-head h2 { margin: 0 0.5rem 0 0; overflow-wrap: anywhere; flex: 1 1 12rem; min-width: 0; }
+.lists-title-button { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; cursor: text; overflow-wrap: anywhere; }
+.lists-title-button:hover { background: none; text-decoration: underline dotted; }
+.lists-title-edit { width: 100%; box-sizing: border-box; font: inherit; }
 .lists-confirm { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
 .lists-confirm[hidden] { display: none; }
 #lists-search { width: 100%; box-sizing: border-box; margin-top: 0.8rem; }
 .lists-items { list-style: none; margin: 0; padding: 0; }
 .lists-item { padding: 0.3rem 0; border-bottom: 1px solid var(--border); }
 .lists-item-row { display: flex; align-items: center; gap: 0.6rem; }
-.lists-item .ext-icon, .lists-item .ext-icon-placeholder { width: 40px; height: 40px; flex: 0 0 auto; }
+.lists-item .ext-icon, .lists-item .ext-icon-placeholder { width: 40px; height: 40px; flex: 0 0 auto; transition: width 0.15s, height 0.15s; }
+.lists-item.is-open .ext-icon, .lists-item.is-open .ext-icon-placeholder { width: 64px; height: 64px; }
+.lists-item.is-open .lists-item-ways { margin-left: 4.7rem; }
 .lists-item-name {
   flex: 1 1 auto; min-width: 0; font: inherit; font-weight: 600; text-align: left; overflow-wrap: anywhere;
   background: none; border: 0; padding: 0; cursor: pointer;
@@ -2118,4 +2131,6 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .list-pick-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.6rem; }
 @media (max-width: 760px) {
   .lists-mask { grid-template-columns: 1fr; padding-inline: 1rem; }
+  .lists-side { position: static; max-height: none; }
+  .lists-side > .lists-index { max-height: 40dvh; }
 }
