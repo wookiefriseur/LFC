@@ -1,87 +1,62 @@
-Official library containing the database for [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL]. It is required for FurnitureCatalogue to work.
+Database library for [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL] (required).
 
-[COLOR=red][SIZE=4]Database updates ship in this library, independently of FurnitureCatalogue releases.[/SIZE][/COLOR]
+[COLOR=red][SIZE=4]Database updates ship here, independent of FurnitureCatalogue releases.[/SIZE][/COLOR]
 
-[COLOR=wheat][SIZE=6]AddOns that use this Lib[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=6]Links[/SIZE][/COLOR]
+[LIST]
+[*][URL="https://wookiefriseur.github.io/LFC/"]Web interface: browse, lists, contribute[/URL]
+[*][URL="https://github.com/wookiefriseur/LFC/blob/main/LibFurnitureCatalogue/Api.lua"]API reference[/URL]
+[*][URL="https://github.com/wookiefriseur/LFC"]GitHub: source and issues[/URL]
+[/LIST]
+
+[COLOR=wheat][SIZE=6]Used by[/SIZE][/COLOR]
 [LIST]
 [*][URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL]
-[*][URL="https://www.esoui.com/downloads/info1865-FurnitureShoppingListFurC2.0patch.html"]FurnitureShoppingList (FurC 2.0 patch)[/URL][/LIST]
-
-[COLOR=wheat][SIZE=6]References and contributions[/SIZE][/COLOR]
-
-[LIST]
-[*][URL="https://github.com/wookiefriseur/LFC/blob/main/LibFurnitureCatalogue/Api.lua"]API reference: every function's arguments, return fields and examples[/URL]
-[*][URL="https://wookiefriseur.github.io/LFC/"]Browse and contribute through the web interface[/URL]
-[*][URL="https://github.com/wookiefriseur/LFC"]Source and issues on GitHub[/URL]
+[*][URL="https://www.esoui.com/downloads/info1865-FurnitureShoppingListFurC2.0patch.html"]FurnitureShoppingList (FurC 2.0 patch)[/URL]
 [/LIST]
 
-
-[COLOR=wheat][SIZE=6]Look up an item in game[/SIZE][/COLOR]
-
-Type one of these commands in chat:
-
-[code]/lfc 203600
-/lfc raw 203600
-/lfc db[/code]
+[COLOR=wheat][SIZE=6]Chat commands[/SIZE][/COLOR]
 [LIST]
-[*][B]/lfc 203600[/B] shows the Scribing Altar's sources and any crafting materials.
-[*][B]/lfc raw 203600[/B] shows the underlying records, useful when checking or reporting data.
-[*][B]/lfc db[/B] shows the installed library version, loading state and item count.
+[*][B]/lfc [I]id|link[/I][/B] -> sources and mats
+[*][B]/lfc raw [I]id|link[/I][/B] -> raw record
+[*][B]/lfc db[/B] -> library version, loading state, item count
 [/LIST]
-Replace 203600 with another item ID, or insert an item link after the command. The catalogue describes how to obtain an item, it does not report whether your character owns it or has learned its recipe.
 
-[COLOR=wheat][SIZE=6]Use the API in your AddOn[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=6]API[/SIZE][/COLOR]
 
-
-Add this line to your AddOn's manifest (.txt or .addon file), so ESO loads the library first:
-
+Manifest:
 [code]## DependsOn: LibFurnitureCatalogue[/code]
-
-Then put this in your AddOn's Lua file:
 
 [highlight="lua"]local LFC = LibFurnitureCatalogue.API
 
 LFC.OnReady(function()
   local entry = LFC.GetEntry(203600)
-  if not entry then
-    d("No catalogue entry found")
-    return
+  if entry then
+    d(zo_strformat("<<C:1>>", GetItemLinkName(LFC.GetItemLink(entry.id))))
+    d(#LFC.GetSourceDetails(entry.id) .. " sources")
   end
-
-  local name = zo_strformat("<<C:1>>", GetItemLinkName(LFC.GetItemLink(entry.id)))
-  d(name)
-  d("Known ways to obtain it: " .. #LFC.GetSourceDetails(entry.id))
 end)[/highlight]
 
-[B]LFC[/B] is a short local name for [B]LibFurnitureCatalogue.API[/B]. [B]OnReady[/B] waits until the catalogue is available, then runs the function you supplied. If it is already ready, the function runs immediately.
+[COLOR=wheat][SIZE=3]Queries[/SIZE][/COLOR]
 
-The remaining examples assume you named your variable LFC too. Run item queries after IsReady() returns true or inside OnReady.
-
-[COLOR=wheat][SIZE=3]Choose the information you need[/SIZE][/COLOR]
-
+[I]id[/I] = item ID or link. A recipe resolves to its furnishing.
 [LIST]
-[*][B]Has(id)[/B]: does this lookup return an entry?
-[*][B]GetEntry(id)[/B]: one furnishing's ID, source types, update and recipe ID when known.
-[*][B]GetSourceDetails(id)[/B]: each recorded way to obtain it, with details such as vendor, location and price.
-[*][B]GetIngredients(id)[/B]: ingredient links and quantities, when a recipe can be resolved.
-[*][B]GetItemIds()[/B] and [B]GetEntryCount()[/B]: browse or count the catalogue.
+[*][B]Has(id)[/B]: entry exists
+[*][B]GetEntry(id)[/B]: id, sources (set), version, blueprint. A copy, safe to edit. nil on a miss
+[*][B]GetSourceDetails(id)[/B]: one record per way to obtain it (vendor, locations, cost). Read-only, ZO_DeepTableCopy to edit
+[*][B]GetIngredients(id)[/B]: ingredient link -> quantity
+[*][B]GetItemIds()[/B], [B]GetEntryCount()[/B]
 [/LIST]
 
-Item queries accept an item ID or link. A furniture recipe lookup resolves to the furnishing it makes. A record is a Lua table containing named fields and a source record describes 1 way to obtain the furnishing. Several offers can have the same source type.
-
-[COLOR=wheat][SIZE=3]Check a source type[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=3]Source type[/SIZE][/COLOR]
 
 [highlight="lua"]local entry = LFC.GetEntry(203600)
 local sources = LFC.GetSourceTypes()
 if entry and entry.sources[sources.PVP] then
-  d("This furnishing has a PvP source")
+  d("PvP source")
 end[/highlight]
 
-[B]entry.sources[/B] is a set: looking up a source ID gives true when it is present. Use the named constants returned by GetSourceTypes instead of copying numeric values from an example.
-
-The supported entry fields are id, sources, version and blueprint. GetEntry returns a copy you can edit without breaking anything.
-
-[COLOR=wheat][SIZE=3]Show vendors, locations and prices[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=3]Vendors, locations, prices[/SIZE][/COLOR]
 
 [highlight="lua"]for _, record in ipairs(LFC.GetSourceDetails(203600)) do
   local source = record.source
@@ -103,85 +78,54 @@ The supported entry fields are id, sources, version and blueprint. GetEntry retu
   end
 end[/highlight]
 
-This prints the available vendor, place and price fields.. The list uses the preferred display order, but it does not mean the first acquisition type is the best source.
+Records come in display order, not ranked.
 
-Treat source records as read-only: some nested values refer to shared library data. Use ZO_DeepTableCopy(record) if you need an editable copy.
-
-[COLOR=wheat][SIZE=3]Turn IDs into readable names[/SIZE][/COLOR]
-
-Different IDs need different ESO functions:
-
+[COLOR=wheat][SIZE=3]IDs to names[/SIZE][/COLOR]
 [LIST]
-[*]vendor, place and event are string IDs: use GetString.
-[*]location is a zone ID: use GetZoneNameById.
-[*]achievement is an achievement ID: GetAchievementInfo returns its name first.
-[*]quest uses GetQuestName, crate uses GetCrownCrateName.
-[*]houses contains collectible IDs: use GetCollectibleName for each one.
-[*]Item and ingredient links use GetItemLinkName.
+[*]vendor, place, event: GetString
+[*]location: GetZoneNameById
+[*]achievement: GetAchievementInfo
+[*]quest: GetQuestName
+[*]crate: GetCrownCrateName
+[*]houses (list of collectible IDs): GetCollectibleName
+[*]item and ingredient links: GetItemLinkName
 [/LIST]
+nil = no value. 0 = known to exist, ID unknown: check > 0.
 
-Fields can be nil, meaning no value was provided. For achievement, quest and crate, [B]0[/B] means a requirement or source exists but its ID is unknown. Check for a positive ID before looking it up (0 is truthy, so true is not enough).
-
-[COLOR=wheat][SIZE=3]Show crafting materials[/SIZE][/COLOR]
+[COLOR=wheat][SIZE=3]Crafting materials[/SIZE][/COLOR]
 
 [highlight="lua"]local materials = LFC.GetIngredients(118991) -- recipe: High Elf Stool, Curved
 for ingredientLink, quantity in pairs(materials) do
   d(quantity .. "x " .. zo_strformat("<<C:1>>", GetItemLinkName(ingredientLink)))
-end
-if next(materials) == nil then
-  d("No crafting ingredients found")
 end[/highlight]
 
-
-[COLOR=wheat][SIZE=3]Loading and later updates[/SIZE][/COLOR]
-
-[B]IsReady()[/B] only checks; it does not start loading. [B]OnReady[/B] starts loading if necessary. Before readiness, empty or incomplete results do not mean an item is absent.
-
-[B]GetState()[/B] distinguishes uninitialized, building, ready and failed.
-
-For a window that stays open, lifecycle callbacks keep its status current:
-
-[highlight="lua"]local function showStatus()
-  if LFC.IsReady() then
-    d("Catalogue: " .. LFC.GetEntryCount() .. " items")
-  else
-    local state, message = LFC.GetState()
-    d("Catalogue: " .. state .. " " .. tostring(message or ""))
-  end
-end
-
-LFC.RegisterCallback(LFC.Events.SCAN_STARTED, showStatus)
-LFC.RegisterCallback(LFC.Events.SCAN_COMPLETE, showStatus)
-LFC.RegisterCallback(LFC.Events.SCAN_FAILED, showStatus)
-LFC.OnReady(showStatus)
-showStatus()
-[/highlight]
-
-A status refresh may run more than once during startup. RegisterCallback keeps listening. OnReady runs once. To stop listening, call UnregisterCallback with the same event, function and optional argument used to register.
-
-If you cache query results, compare [B]GetDBRevision()[/B] before reusing them. A changed revision means you need fresh results.
-
-[COLOR=wheat][SIZE=3]Names, constants and versions[/SIZE][/COLOR]
-
+[COLOR=wheat][SIZE=3]Loading[/SIZE][/COLOR]
 [LIST]
-[*][B]GetSourceTypes()[/B]: source name to numeric ID, for comparisons.
-[*][B]GetSourceTypeInfo()[/B]: source ID to stable key and English description, for exports and logs. These labels are not translated UI text.
-[*][B]GetDataVersions()[/B]: game update name to the numeric ID used in entry.version.
-[*][B]GetDataVersionKeys()[/B]: update ID to its canonical name. LATEST resolves to the actual update name.
-[*][B]GetFurnitureCategories()[/B]: category ID to localised name, parent category and display order.
+[*][B]OnReady(fn)[/B]: loads if needed, runs fn once (at once if ready)
+[*][B]IsReady()[/B]: check only. Results before ready may be incomplete
+[*][B]GetState()[/B]: uninitialized, building, ready, failed
+[*][B]RegisterCallback(event, fn)[/B]: LFC.Events.SCAN_STARTED, SCAN_COMPLETE, SCAN_FAILED. UnregisterCallback with the same arguments
+[*][B]GetDBRevision()[/B]: changes when cached results are stale
 [/LIST]
 
-If you have to persist keys, use source and update [B]keys[/B], not their numeric values, which can change between releases. GetSourceDetails tells you which acquisition types apply to an item.
-
-[COLOR=wheat][SIZE=3]Coming from old calls[/SIZE][/COLOR]
-
+[COLOR=wheat][SIZE=3]Constants[/SIZE][/COLOR]
 [LIST]
-[*]FurC.Find -> LFC.GetEntry. A miss is now nil instead of an empty table.
-[*]FurC.GetItemId / FurC.GetItemLink -> LFC.GetItemId / LFC.GetItemLink.
-[*]FurC.GetIngredients / FurC.GetMats -> LFC.GetIngredients. Format the returned quantities yourself.
-[*]GetSources -> GetSourceDetails. Cost is one table or nil.
-[*]SourceType -> GetSourceTypes. Use entry.sources to check membership.
-[*]entry.origin -> inspect the first GetSourceDetails record, after checking the list is not empty.
-[*]record.source.location / place -> record.source.locations. A list of placements.
-[*]record.availability -> entry.version for the update, record.lastSeen for a luxury date.
+[*][B]GetSourceTypes()[/B]: source name -> ID
+[*][B]GetSourceTypeInfo()[/B]: source ID -> stable key, English description
+[*][B]GetDataVersions()[/B]: update name -> ID (entry.version)
+[*][B]GetDataVersionKeys()[/B]: update ID -> name
+[*][B]GetFurnitureCategories()[/B]: category ID -> localised name, parent, order
+[/LIST]
+Persist keys, not numeric IDs: those can change between releases.
+
+[COLOR=wheat][SIZE=3]Old calls[/SIZE][/COLOR]
+[LIST]
+[*]FurC.Find -> LFC.GetEntry (miss: nil, not an empty table)
+[*]FurC.GetItemId / FurC.GetItemLink -> LFC.GetItemId / LFC.GetItemLink
+[*]FurC.GetIngredients / FurC.GetMats -> LFC.GetIngredients (unformatted quantities)
+[*]GetSources -> GetSourceDetails (cost: one table or nil)
+[*]SourceType -> GetSourceTypes, check entry.sources
+[*]entry.origin -> first GetSourceDetails record
+[*]record.source.location / place -> record.source.locations (list)
+[*]record.availability -> entry.version (update), record.lastSeen (luxury date)
 [/LIST]

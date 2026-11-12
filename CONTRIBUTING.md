@@ -101,6 +101,7 @@ Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.jso
 
 - packaged from `./LibFurnitureCatalogue`, which is the AddOn as it ships
 - everything else here is tool or webinterface related stuff that stays out of the zip
+- `README.esoui` is a copy of the ESOUI description, which is the original: on discrepancies ESOUI wins
 
 Releases are done through workflows with automatic version bumps, manual packaging only for plan B:
 
