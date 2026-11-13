@@ -48,21 +48,17 @@ function parseLine(raw, lineNo) {
     return out;
   }
 
-  const parts = line.split(/[\s,;]+/).filter(Boolean);
-  if (parts.length === 0) return null;
-  out.id = parseIntLoose(parts[0]);
+  const [, idTok = "", rest = ""] = line.match(/^([^\s,;]+)[\s,;]*(.*)$/) || [];
+  out.id = parseIntLoose(idTok);
   if (out.id == null || out.id < 1) {
     out.error = `unrecognised line - expected "itemId, price", got "${raw.trim()}"`;
     return out;
   }
-  if (parts.length >= 2) {
-    out.price = parseIntLoose(parts[1]);
-    if (out.price == null) {
-      if (!out.comment) out.comment = parts.slice(1).join(" ");
-    } else if (parts.length >= 3 && !out.comment) {
-      out.comment = parts.slice(2).join(" ");
-    }
-  }
+  // Separator rule: one space, comma, dot or underscore followed by exactly three digits continues the price ("50,000", "50 000"); any other separator ends the field.
+  const priceM = rest.match(/^(?:\d{1,3}(?:[ ,._]\d{3})+|\d+)(?!\d)/);
+  if (priceM) out.price = parseIntLoose(priceM[0]);
+  const tail = (priceM ? rest.slice(priceM[0].length) : rest).replace(/^[\s,;]+/, "").trim();
+  if (tail && !out.comment) out.comment = tail.split(/[\s,;]+/).join(" ");
   return out;
 }
 
@@ -121,6 +117,20 @@ export function parseLuaBlocks(text) {
   }
   if (cur) rows.push(cur);
   return rows;
+}
+
+/**
+ * Map<id, {record, _key}> of the luxury records. Re-sell or previously rumoured. DirtyBuffer keeps the file's version as the change's `before`.
+ */
+export function luxuryIndex(records, buffer) {
+  const m = new Map();
+  for (const r of records) {
+    if (r._category !== "luxury" || m.has(r.id)) continue;
+    if (buffer.entries.get(r._key)?.op === "add") continue;
+    const record = Object.fromEntries(Object.entries(r).filter(([k]) => !k.startsWith("_")));
+    m.set(r.id, { record: JSON.parse(JSON.stringify(record)), _key: r._key });
+  }
+  return m;
 }
 
 export function parseLuxuryPaste(text) {

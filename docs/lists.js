@@ -44,11 +44,16 @@ export function cleanName(raw, own = null) {
   return { name };
 }
 
+function addList(name) {
+  const list = { name, ids: [] };
+  load().lists.push(list);
+  return list;
+}
+
 export function createList(raw) {
   const { name, error } = cleanName(raw);
   if (error) return { error };
-  const list = { name, ids: [] };
-  load().lists.push(list);
+  const list = addList(name);
   save();
   return { list };
 }
@@ -121,25 +126,41 @@ export function parseLists(text) {
   return { lists, skipped };
 }
 
-// Merges into a list of the same name, like the add-on's import: nothing is removed, new ids go to the end.
-export function importLists(text) {
+// Ids the catalogue does not know are left out and collected in `unknown`
+export function splitKnown(ids, known = () => true, unknown = []) {
+  const kept = [];
+  for (const id of ids) {
+    if (known(id)) kept.push(id);
+    else if (!unknown.includes(id)) unknown.push(id);
+  }
+  return kept;
+}
+
+// Merges into a list of the same name
+export function importLists(text, known) {
   const { lists, skipped } = parseLists(text);
-  const report = { created: 0, merged: 0, added: 0, skipped, errors: [] };
+  const report = { created: 0, merged: 0, added: 0, skipped, errors: [], unknown: [] };
   for (const incoming of lists) {
     let list = findList(incoming.name);
     if (list) report.merged++;
     else {
-      const made = createList(incoming.name);
-      if (made.error) { report.errors.push(made.error); continue; }
-      list = made.list;
+      const { name, error } = cleanName(incoming.name);
+      if (error) { report.errors.push(error); continue; }
+      list = addList(name);
       report.created++;
     }
-    for (const id of incoming.ids) {
+    for (const id of splitKnown(incoming.ids, known, report.unknown)) {
       if (!list.ids.includes(id)) { list.ids.push(id); report.added++; }
     }
   }
   if (lists.length) save();
   return report;
+}
+
+// "990001, 990002" for the status line, the rest only counted.
+export function unknownText(ids, max = 5) {
+  const shown = ids.slice(0, max).join(", ");
+  return ids.length > max ? `${shown} and ${ids.length - max} more` : shown;
 }
 
 // Short enough for the status line; `warn` when something was left out.
@@ -152,8 +173,10 @@ export function reportText(r) {
   parts.push(plural(r.added, "item"));
   let text = `Imported ${parts.join(", ")}`;
   if (r.skipped) text += `, ${plural(r.skipped, "line")} skipped`;
+  const unknown = r.unknown || [];
+  if (unknown.length) text += `. Not in the catalogue, left out: ${unknownText(unknown)}`;
   if (r.errors.length) text += `. ${r.errors[0]}`;
-  return { text, warn: Boolean(r.skipped || r.errors.length) };
+  return { text, warn: Boolean(r.skipped || r.errors.length || unknown.length) };
 }
 
 function download(filename, text) {
@@ -250,7 +273,8 @@ export function listsMask(deps) {
   }
 
   function runImport(text) {
-    const r = importLists(text);
+    const catalogued = new Set(state.records.map((r) => r.id));
+    const r = importLists(text, (id) => catalogued.has(id));
     const { text: message, warn } = reportText(r);
     status(message, warn);
     if (!current) current = getLists()[0] || null;

@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  parseLists, formatList, importLists, reportText, getLists, findList, createList, renameList, cleanName,
+  parseLists, formatList, importLists, reportText, getLists, findList, createList, renameList, cleanName, onListsChange,
 } from "../../docs/lists.js";
 
 test("the add-on's export line parses, with a colon in the name and an empty list", () => {
@@ -58,4 +58,20 @@ test("the import report is one short line, and a warning when something was left
   assert.deepEqual(reportText(importLists("FURC LIST: One: 1,2\nnonsense")), { text: "Imported 1 new list, 2 items, 1 line skipped", warn: true });
   assert.deepEqual(reportText(importLists("FURC LIST: one: 3")), { text: "Imported 1 merged, 1 item", warn: false });
   assert.deepEqual(reportText(importLists("hello")), { text: "No list lines found", warn: true });
+});
+
+test("ids the catalogue does not know are left out and named, the rest still imports", () => {
+  getLists().length = 0;
+  const r = importLists("FURC LIST: Mixed: 115647,990001", (id) => id === 115647);
+  assert.deepEqual(findList("Mixed").ids, [115647]);
+  assert.deepEqual(r.unknown, [990001]);
+  assert.deepEqual(reportText(r), { text: "Imported 1 new list, 1 item. Not in the catalogue, left out: 990001", warn: true });
+});
+
+test("an import saves and notifies once, however many lists it creates", () => {
+  getLists().length = 0;
+  let calls = 0;
+  onListsChange(() => calls++);
+  importLists("FURC LIST: A: 1\nFURC LIST: B: 2\nFURC LIST: C: 3");
+  assert.equal(calls, 1);
 });

@@ -22,7 +22,7 @@ import {
   ID_NOT_RECORDED,
 } from "./lexicon.js";
 import {
-  parseLuxuryPaste, parseLuaBlocks, computeLuxuryPlan, mostRecentFriday, snapToFriday,
+  parseLuxuryPaste, parseLuaBlocks, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
   LUX_ACTION_LABEL,
   LUX_ACTION, priceEffect, successPanelText,
 } from "./luxury.js";
@@ -330,15 +330,7 @@ function installTestHook() {
 
 // itemIds are unique within luxury.jsonl, so a flat id map is safe here, unlike the global index, which keys on _key because ids collide across categories.
 function buildLuxuryIndex() {
-  const m = new Map();
-  for (const r of state.records) {
-    if (r._category !== "luxury" || m.has(r.id)) continue;
-    // Live records already carry committed edits and added rows, but a re-sale is measured against the data file: an edited row is read from its pre-edit copy, and a row the change list added was never there to be re-sold.
-    const pending = state.buffer.entries.get(r._key);
-    if (pending && pending.op === "add") continue;
-    m.set(r.id, { record: clean(pending?.before || r), _key: r._key });
-  }
-  return m;
+  return luxuryIndex(state.records, state.buffer);
 }
 
 function renderLuxuryPanel(container) {
@@ -1820,7 +1812,7 @@ function commitEdit() {
     const after = deepClone(e);
     // Addressed to the file the row is in; the serializer emits delete + add for a source change.
     state.buffer.update(e._key, clean(before), clean(after), before._category);
-    Object.assign(before, after);
+    mirror(before, after);
   }
   state.names.setRecordName(e.id ?? e.blueprint, e.name_overrides?.en);
   applyFilters();

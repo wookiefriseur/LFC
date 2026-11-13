@@ -153,7 +153,8 @@ export function browseMask(deps) {
     const index = containerIndex(state.records);
     for (const [id, recs] of byId) {
       const contents = index.contents(id);
-      if (index.parentIds(recs).some((pid) => byId.has(pid))) continue;
+      // Shown inside its listed container, unless the item also has a record of its own.
+      if (recs.every((r) => index.parentIds([r]).some((pid) => byId.has(pid)))) continue;
       if (q) {
         const nm = nameOf(id).toLowerCase();
         if (!nm.includes(q) && !String(id).includes(q) && !recs.some(r => r.blueprint != null && String(r.blueprint).includes(q)) && !contents.some(r => nameOf(r.id ?? r.blueprint).toLowerCase().includes(q) || String(r.id ?? r.blueprint).includes(q) || String(r.blueprint || "").includes(q))) continue;

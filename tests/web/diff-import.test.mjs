@@ -185,3 +185,10 @@ test("item details round-trip through the diff and refuse an id the catalogue do
   assert.match(planDiff(readDiff(line({ op: "item", id, reference: { ...reference, meta: { ...reference.meta, id: 1 } } })).lines,
     ctxOf(replay)).errors[0], /metadata for that id/);
 });
+
+test("mirror removes a cleared field from the live record, so it stays cleared on the next edit", async () => {
+  const { mirror } = await import("../../docs/data.js");
+  const live = { id: 1, notes: "old", cost: [], _key: "luxury#0" };
+  mirror(live, { id: 1, cost: [] });
+  assert.deepEqual(live, { id: 1, cost: [], _key: "luxury#0" });
+});
