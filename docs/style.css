@@ -2122,7 +2122,8 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .lists-item-ways { margin: 0.3rem 0 0.2rem 3.2rem; padding-left: 1rem; font-size: 0.85rem; }
 .lists-pills { display: inline-flex; gap: 0.25rem; flex-wrap: wrap; }
 .lists-pill { font-weight: 700; color: #1e40af; background: #dbeafe; padding: 0 0.45rem; border-radius: 8px; white-space: nowrap; }
-.browse-card-list { flex: 0 0 auto; align-self: center; }
+.browse-card-list, .lists-fave { flex: 0 0 auto; align-self: center; }
+.lists-fave.is-on { color: #b45309; }
 .list-pick { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; max-width: min(24rem, calc(100vw - 2rem)); }
 .list-pick::backdrop { background: rgb(0 0 0 / 0.3); }
 .list-pick h3 { margin-top: 0; overflow-wrap: anywhere; }

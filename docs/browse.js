@@ -13,7 +13,7 @@ import {
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
-import { listsWith, onListsChange, openAddToList } from "./lists.js";
+import { listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -480,7 +480,7 @@ export function browseMask(deps) {
         e.stopPropagation();
         openAddToList(item.id, nameOf(item.id));
       });
-      card.append(toList);
+      card.append(starButton(item.id), toList);
 
       card.addEventListener("click", () => {
         view.selectedKey = item.records[0]._key;

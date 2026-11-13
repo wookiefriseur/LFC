@@ -790,13 +790,39 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
     assertEq(await page.$eval("#lists-import", (b) => b.disabled), true, "Import text is offered with nothing to import");
     await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
     await page.click("#lists-import");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Imported 1 list: 1 item added", "the import report");
     await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Hall: west"
       && document.querySelector(".lists-item")?.textContent.includes("#94116"));
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.lists")));
-    assertEq(JSON.stringify(stored.lists), JSON.stringify([{ name: "Hall: west", ids: [94116] }]), "what is kept in the browser");
+    assertEq(JSON.stringify(stored.lists), JSON.stringify([{ name: "Favorites", ids: [], faves: true }, { name: "Hall: west", ids: [94116] }]), "what is kept in the browser");
   } finally {
     await switchTab(page, "lists");
     await deleteShown();
+  }
+});
+
+test("favourites: the Browse star fills, the item shows under Favourites, which offers no rename or delete", async (page) => {
+  await switchTab(page, "browse");
+  await page.evaluate(() => {
+    [...document.querySelectorAll("#browse-facet-list .browse-facet-link")].find((b) => /All items/.test(b.textContent))?.click();
+    const b = document.querySelector("#browse-search");
+    b.value = "94116";
+    b.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  const card = "#browse-grid .browse-card";
+  await page.waitForFunction((sel) => [...document.querySelectorAll(sel)].some((c) => c.textContent.includes("#94116")), {}, card);
+  await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#94116")).querySelector(".lists-fave").click());
+  await page.waitForFunction((sel) => [...document.querySelectorAll(sel)]
+    .some((c) => c.textContent.includes("#94116") && c.querySelector(".lists-fave")?.textContent === "\u2605"), {}, card);
+  try {
+    await switchTab(page, "lists");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    await page.waitForFunction(() => document.querySelector(".lists-item")?.textContent.includes("#94116"));
+    assertEq(await page.$("#lists-main .lists-title-button"), null, "the favourites can be renamed");
+    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.some((b) => b.textContent.endsWith("Delete"))), false,
+      "the favourites can be deleted");
+  } finally {
+    await page.evaluate(() => document.querySelector("#lists-main .lists-item .lists-fave.is-on")?.click());
   }
 });
 

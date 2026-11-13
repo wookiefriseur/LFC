@@ -4,15 +4,25 @@ import { itemSearch } from "./crown-store.js";
 const STORE_KEY = "lfc.lists";
 export const MAX_NAME_LENGTH = 32;   // bytes: the add-on truncates longer names with Lua's byte-counting `#`
 const PREFIX = "FURC LIST";
+const FAVES_PREFIX = "FURC FAVES";
+export const FAVES_NAME = "Favorites";   // english name of SI_FURC_FILTER_SRC_FAVE
+export const MAX_IDS_PER_LINE = 1000;
+// `last` value naming the favourites, which have no name of their own to remember.
+const LAST_FAVES = "\u0000faves";
 
-// { lists: [{ name, ids: [itemId, ...] }], last: name of the list "Add to list" offers first }
+// { lists: [{ name, ids: [itemId, ...], faves?: true }], last: name of the list "Add to list" offers first }
+// The favourites are the one entry flagged `faves`, always first. Name lookups skip it, so a list a user already called "Favorites" stays an ordinary list beside it.
 let data = null;
 const listeners = new Set();
 
 function load() {
-  if (data) return data;
-  try { data = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (_) { /* storage unavailable or damaged */ }
-  if (!data || !Array.isArray(data.lists)) data = { lists: [], last: "" };
+  if (!data) {
+    try { data = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (_) { /* storage unavailable or damaged */ }
+    if (!data || !Array.isArray(data.lists)) data = { lists: [], last: "" };
+  }
+  const at = data.lists.findIndex((l) => l?.faves);
+  if (at !== 0) data.lists.unshift(at > 0 ? data.lists.splice(at, 1)[0] : { name: FAVES_NAME, ids: [], faves: true });
+  data.lists[0].name = FAVES_NAME;
   return data;
 }
 
@@ -23,10 +33,14 @@ function save() {
 
 export function onListsChange(fn) { listeners.add(fn); }
 export function getLists() { return load().lists; }
+export function favourites() { return load().lists[0]; }
+export function namedLists() { return getLists().filter((l) => !l.faves); }
+export function isFave(id) { return favourites().ids.includes(id); }
+export function toggleFave(id) { setItem(favourites(), id, !isFave(id)); }
 
 export function findList(name) {
   const lower = String(name ?? "").trim().toLowerCase();
-  return getLists().find((l) => l.name.toLowerCase() === lower) || null;
+  return namedLists().find((l) => l.name.toLowerCase() === lower) || null;
 }
 
 // The add-on's rules, as far as the site can check them: it also refuses a name equal to any of its (localised) source labels.
@@ -36,9 +50,13 @@ function fitName(raw) {
   return name.trim();
 }
 
+const isReserved = (name) => ["favorites", "favourites"].includes(name.toLowerCase());
+
+// `own` is the list being renamed; a stored list that already holds the reserved name may keep it.
 export function cleanName(raw, own = null) {
   const name = fitName(raw);
   if (!name) return { error: "A list needs a name." };
+  if (isReserved(name) && !(own && isReserved(own.name))) return { error: `"${name}" is reserved for ${FAVES_NAME}.` };
   const taken = findList(name);
   if (taken && taken !== own) return { error: `There already is a list called "${taken.name}".` };
   return { name };
@@ -59,6 +77,7 @@ export function createList(raw) {
 }
 
 export function renameList(list, raw) {
+  if (list.faves) return { error: `${FAVES_NAME} cannot be renamed.` };
   const { name, error } = cleanName(raw, list);
   if (error) return { error };
   if (load().last === list.name) data.last = name;
@@ -68,6 +87,7 @@ export function renameList(list, raw) {
 }
 
 export function deleteList(list) {
+  if (list.faves) return;
   const lists = load().lists;
   const i = lists.indexOf(list);
   if (i === -1) return;
@@ -84,99 +104,113 @@ export function setItem(list, id, on) {
   save();
 }
 
-export function listsWith(id) { return getLists().filter((l) => l.ids.includes(id)); }
-export function lastList() { return findList(load().last); }
+export function listsWith(id) { return namedLists().filter((l) => l.ids.includes(id)); }
+export function lastList() {
+  const last = load().last;
+  return last === LAST_FAVES ? favourites() : findList(last);
+}
 export function rememberList(list) {
-  if (load().last === list.name) return;
-  data.last = list.name;
+  const key = list.faves ? LAST_FAVES : list.name;
+  if (load().last === key) return;
+  data.last = key;
   save();
 }
 
 // Text form
 
-export function formatList(list) {
-  return `${PREFIX}: ${list.name}: ${list.ids.join(",")}`;
+function chunks(ids) {
+  const out = [];
+  for (let i = 0; i < ids.length; i += MAX_IDS_PER_LINE) out.push(ids.slice(i, i + MAX_IDS_PER_LINE));
+  return out.length ? out : [[]];
 }
 
+// One line per 1000 ids, each repeating the head, so the game's edit box never cuts one.
+export function formatList(list) {
+  const head = list.faves ? `${FAVES_PREFIX}:` : `${PREFIX}: ${list.name}:`;
+  return chunks(list.ids).map((ids) => `${head} ${ids.join(",")}`).join("\n");
+}
+
+// Empty favourites are left out: they are always there, so the line would carry nothing.
 export function formatLists(lists = getLists()) {
-  return lists.map(formatList).join("\n");
+  return lists.filter((l) => !l.faves || l.ids.length).map(formatList).join("\n");
 }
 
 // The add-on's line (the name runs to the last colon), plus `"name": {1, 2}` for hand-written files. Version 1 only, as in the add-on.
 const LINE = /^FURC LIST(?:\s+1)?\s*:\s*(.*):\s*([\d,\s]*)$/i;
+const FAVES_LINE = /^FURC FAVES(?:\s+1)?\s*:\s*([\d,\s]*)$/i;
 const BRACES = /^"((?:[^"\\]|\\.)*)"\s*:\s*\{([\d,\s]*)\}\s*,?$/;
 
+function idsOf(text) {
+  return (text.match(/\d+/g) || []).map(Number).filter((id) => id > 0 && Number.isSafeInteger(id));
+}
+
+// Ids are kept as written, repeats included, so the import can count them as duplicates.
 export function parseLists(text) {
   const lists = [];
   let skipped = 0;
   for (const raw of String(text ?? "").split(/\r?\n/)) {
     const line = raw.trim();
     if (!line) continue;
+    const fav = line.match(FAVES_LINE);
+    if (fav) { lists.push({ faves: true, ids: idsOf(fav[1]) }); continue; }
     const m = line.match(LINE) || line.match(BRACES);
     // Truncated before matching, as the add-on does, so an over-long name merges into the list it became.
     const name = m && fitName(m[0].startsWith('"') ? m[1].replace(/\\(.)/g, "$1") : m[1]);
     if (!name) { skipped++; continue; }
-    const ids = [];
-    for (const d of m[2].match(/\d+/g) || []) {
-      const id = Number(d);
-      if (id > 0 && Number.isSafeInteger(id) && !ids.includes(id)) ids.push(id);
-    }
-    lists.push({ name, ids });
+    lists.push({ name, ids: idsOf(m[2]) });
   }
   return { lists, skipped };
 }
 
-// Ids the catalogue does not know are left out and collected in `unknown`
-export function splitKnown(ids, known = () => true, unknown = []) {
-  const kept = [];
-  for (const id of ids) {
-    if (known(id)) kept.push(id);
-    else if (!unknown.includes(id)) unknown.push(id);
-  }
-  return kept;
-}
-
-// Merges into a list of the same name
-export function importLists(text, known) {
+/**
+ * Merges into the favourites or a list of the same name, like the add-on's import: nothing is removed, new ids go to the end. Saved and announced once, after the whole paste.
+ * @param resolve maps a furnishing or blueprint id to the furnishing id, or null when the catalogue does not know it; the default keeps every id.
+ */
+export function importLists(text, resolve = (id) => id) {
   const { lists, skipped } = parseLists(text);
-  const report = { created: 0, merged: 0, added: 0, skipped, errors: [], unknown: [] };
+  const report = { lists: 0, added: 0, duplicates: 0, unknown: 0, skipped, errors: [], first: null };
+  const touched = new Set();
   for (const incoming of lists) {
-    let list = findList(incoming.name);
-    if (list) report.merged++;
-    else {
+    let list = incoming.faves ? favourites() : findList(incoming.name);
+    if (!list) {
       const { name, error } = cleanName(incoming.name);
       if (error) { report.errors.push(error); continue; }
       list = addList(name);
-      report.created++;
     }
-    for (const id of splitKnown(incoming.ids, known, report.unknown)) {
-      if (!list.ids.includes(id)) { list.ids.push(id); report.added++; }
+    touched.add(list);
+    report.first ??= list;
+    for (const raw of incoming.ids) {
+      const id = resolve(raw);
+      if (id == null) report.unknown++;
+      else if (list.ids.includes(id)) report.duplicates++;
+      else { list.ids.push(id); report.added++; }
     }
   }
+  report.lists = touched.size;
   if (lists.length) save();
   return report;
 }
 
-// "990001, 990002" for the status line, the rest only counted.
-export function unknownText(ids, max = 5) {
-  const shown = ids.slice(0, max).join(", ");
-  return ids.length > max ? `${shown} and ${ids.length - max} more` : shown;
+// Furnishing ids answer for themselves, a blueprint for the furnishing it makes; anything else is unknown (null).
+export function catalogueResolver(records) {
+  const furnishing = new Map();
+  for (const r of records) if (Number.isInteger(r.id)) furnishing.set(r.id, r.id);
+  for (const r of records) {
+    if (Number.isInteger(r.blueprint) && !furnishing.has(r.blueprint)) furnishing.set(r.blueprint, r.id ?? r.blueprint);
+  }
+  return (id) => furnishing.get(id) ?? null;
 }
 
-// Short enough for the status line; `warn` when something was left out.
+// Counts only, short enough for the status line; `warn` when something was left out.
 export function reportText(r) {
   const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
-  if (!r.created && !r.merged && !r.errors.length) return { text: "No list lines found", warn: true };
-  const parts = [];
-  if (r.created) parts.push(plural(r.created, "new list"));
-  if (r.merged) parts.push(`${r.merged} merged`);
-  parts.push(plural(r.added, "item"));
-  let text = `Imported ${parts.join(", ")}`;
+  if (!r.lists && !r.errors.length) return { text: "No list lines found", warn: true };
+  let text = `Imported ${plural(r.lists, "list")}: ${plural(r.added, "item")} added`;
+  if (r.duplicates) text += `, ${plural(r.duplicates, "duplicate")}`;
+  if (r.unknown) text += `, ${r.unknown} unknown skipped`;
   if (r.skipped) text += `, ${plural(r.skipped, "line")} skipped`;
-  const unknown = r.unknown || [];
-  if (unknown.length) text += `. Not in the catalogue, left out: ${unknownText(unknown)}`;
   if (r.errors.length) text += `. ${r.errors[0]}`;
-  return { text, warn: Boolean(r.skipped || r.errors.length || unknown.length) };
+  return { text, warn: Boolean(r.skipped || r.errors.length || r.unknown) };
 }
 
 function download(filename, text) {
@@ -210,7 +244,7 @@ export function listsMask(deps) {
           <details id="lists-transfer" class="lists-transfer">
             <summary>Import and export</summary>
             <textarea id="lists-text" rows="3" spellcheck="false" aria-label="List text to import"
-              placeholder="FURC LIST: My list: 115647,118303"></textarea>
+              placeholder="FURC LIST: My list: 115647,118303&#10;FURC FAVES: 115647"></textarea>
             <div class="lists-row">
               <span class="lists-row-label">Import</span>
               <button id="lists-import" type="button" disabled title="Import the lists pasted into the box above">📝 Text</button>
@@ -254,11 +288,12 @@ export function listsMask(deps) {
     });
     $("#lists-copy-all").addEventListener("click", () => copyOut(formatLists()));
     $("#lists-download-all").addEventListener("click", () => {
-      if (getLists().length) download("furnishing-lists.txt", formatLists());
+      const all = formatLists();
+      if (all) download("furnishing-lists.txt", all);
       else status("No lists to export", true);
     });
     onListsChange(() => { if ($("#lists-index")) drawIndex(); });
-    current = lastList() || getLists()[0] || null;
+    current = defaultList();
     drawMain();
   }
 
@@ -273,11 +308,10 @@ export function listsMask(deps) {
   }
 
   function runImport(text) {
-    const catalogued = new Set(state.records.map((r) => r.id));
-    const r = importLists(text, (id) => catalogued.has(id));
+    const r = importLists(text, catalogueResolver(state.records));
     const { text: message, warn } = reportText(r);
     status(message, warn);
-    if (!current) current = getLists()[0] || null;
+    if (r.first && (!current || current.faves)) current = r.first;
     drawMain();
   }
 
@@ -306,13 +340,13 @@ export function listsMask(deps) {
   function drawIndex() {
     const ul = $("#lists-index");
     ul.innerHTML = "";
-    if (!getLists().length) ul.append(elem("li", { class: "muted" }, "No lists yet."));
     for (const list of getLists()) {
       const btn = elem("button", { type: "button", class: "lists-index-item" + (list === current ? " is-active" : "") },
-        elem("span", {}, list.name), elem("span", { class: "muted" }, String(list.ids.length)));
+        elem("span", {}, listLabel(list)), elem("span", { class: "muted" }, String(list.ids.length)));
       btn.addEventListener("click", () => select(list));
       ul.append(elem("li", {}, btn));
     }
+    if (!namedLists().length) ul.append(elem("li", { class: "muted" }, "No lists yet."));
   }
 
   function drawMain() {
@@ -321,22 +355,18 @@ export function listsMask(deps) {
     matches = [];   // the search box is rebuilt empty; Enter must not add a match it no longer shows
     activeMatch = -1;
     // The first list may have been made from Browse while this tab showed none.
-    if (!current || !getLists().includes(current)) current = lastList() || getLists()[0] || null;
+    if (!current || !getLists().includes(current)) current = defaultList();
     drawIndex();
-    if (!current) {
-      host.append(elem("p", { class: "muted lists-empty" },
-        "Create a list on the left, or use \"+ List\" on any item in Browse."));
-      return;
-    }
     const list = current;
 
     const head = elem("div", { class: "lists-head" });
     const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: "Click to rename" }, list.name);
-    const title = elem("h2", {}, titleBtn);
+    const title = elem("h2", {}, list.faves ? listLabel(list) : titleBtn);
     const del = elem("button", { type: "button", class: "btn-mini btn-danger" }, "🗑️ Delete");
     const copy = elem("button", { type: "button", class: "btn-mini", title: "Copy this list to the clipboard" }, "📋 Copy");
     const save = elem("button", { type: "button", class: "btn-mini", title: "Download this list as a text file" }, "💾 Download");
-    head.append(title, copy, save, del);
+    // The favourites cannot be renamed or deleted, so they get neither control.
+    head.append(title, copy, save, ...(list.faves ? [] : [del]));
     host.append(head);
 
     const renameError = elem("p", { class: "warn", role: "alert", hidden: "" });
@@ -376,7 +406,7 @@ export function listsMask(deps) {
     const [yes, no] = ask.querySelectorAll("button");
     yes.addEventListener("click", () => {
       deleteList(list);
-      select(getLists()[0] || null);
+      select(defaultList());
     });
     no.addEventListener("click", () => { ask.hidden = true; });
     copy.addEventListener("click", () => copyOut(formatList(list)));
@@ -415,6 +445,9 @@ export function listsMask(deps) {
       }
     });
 
+    if (list.faves && !list.ids.length) {
+      host.append(elem("p", { class: "muted lists-empty" }, "Star an item in Browse, or search for one above."));
+    }
     host.append(elem("p", { class: "muted lists-count" },
       `${list.ids.length} item${list.ids.length === 1 ? "" : "s"}`));
     const items = elem("ul", { class: "lists-items" });
@@ -436,7 +469,7 @@ export function listsMask(deps) {
       show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
       const remove = elem("button", { type: "button", class: "btn-mini", "aria-label": `Remove ${name || id}` }, "Remove");
       remove.addEventListener("click", () => { setItem(list, id, false); drawMain(); });
-      row.append(show, remove);
+      row.append(starButton(id, drawMain), show, remove);
       li.append(row, where);
       items.append(li);
     }
@@ -481,6 +514,27 @@ export function listsMask(deps) {
   return { id: "lists", label: "Lists", render, onShow: () => { if ($("#lists-main")) { drawIndex(); drawMain(); } } };
 }
 
+function defaultList() { return lastList() || namedLists()[0] || favourites(); }
+function listLabel(list) { return list.faves ? `\u2605 ${FAVES_NAME}` : list.name; }
+
+// Empty or filled star; `after` redraws whatever shows it (onListsChange already redraws Browse).
+export function starButton(id, after) {
+  const on = isFave(id);
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn-mini lists-fave" + (on ? " is-on" : "");
+  btn.textContent = on ? "\u2605" : "\u2606";
+  btn.title = on ? `Remove from ${FAVES_NAME}` : `Add to ${FAVES_NAME}`;
+  btn.setAttribute("aria-label", btn.title);
+  btn.setAttribute("aria-pressed", String(on));
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleFave(id);
+    after?.();
+  });
+  return btn;
+}
+
 // "Add to list" from Browse: a small dialog, the last used list preselected, so adding takes two clicks.
 
 let dialog = null;
@@ -508,12 +562,14 @@ export function openAddToList(id, itemName) {
   const select = q(".list-pick-select"), nameBox = q(".list-pick-name"), ok = q(".list-pick-ok"), msg = q(".list-pick-msg");
   q(".list-pick-title").textContent = `Add ${itemName || `#${id}`} to a list`;
   select.innerHTML = "";
-  for (const l of getLists()) select.append(new Option(l.ids.includes(id) ? `${l.name} (on it)` : l.name, l.name));
+  const valueOf = (l) => (l.faves ? LAST_FAVES : l.name);
+  const listOf = (v) => (v === NEW ? null : v === LAST_FAVES ? favourites() : findList(v));
+  for (const l of getLists()) select.append(new Option(l.ids.includes(id) ? `${listLabel(l)} (on it)` : listLabel(l), valueOf(l)));
   select.append(new Option("New list...", NEW));
-  select.value = (lastList() || getLists()[0])?.name ?? NEW;
+  select.value = valueOf(defaultList());
 
   const sync = () => {
-    const list = select.value === NEW ? null : findList(select.value);
+    const list = listOf(select.value);
     nameBox.hidden = Boolean(list);
     const on = list?.ids.includes(id);
     ok.textContent = on ? "Remove from list" : "Add";
@@ -522,7 +578,7 @@ export function openAddToList(id, itemName) {
   select.onchange = () => { sync(); if (select.value === NEW) nameBox.focus(); };
   q("form").onsubmit = (e) => {
     if (e.submitter?.value !== "ok") return;
-    let list = select.value === NEW ? null : findList(select.value);
+    let list = listOf(select.value);
     if (!list) {
       const made = createList(nameBox.value);
       if (made.error) { e.preventDefault(); msg.textContent = made.error; nameBox.focus(); return; }
