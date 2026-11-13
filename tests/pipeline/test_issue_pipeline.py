@@ -28,7 +28,7 @@ class FakeGitHub:
             return {'role_name': self.role}
         if method == 'GET' and path == 'issues/5':
             text = self.bodies.pop(0) if len(self.bodies) > 1 else self.bodies[0]
-            return {'number': 5, 'state': self.state, 'body': text}
+            return {'number': 5, 'state': self.state, 'title': 'Add the Dark Brotherhood', 'body': text}
         if path.startswith('pulls?head=owner:' + BRANCH):
             return self.prs
         if path.endswith('/commits?per_page=100'):
@@ -78,6 +78,8 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(plan.call_args.args[0], 'opening post')
         self.assertEqual(written, FILES)
         self.assertIn(('add', '--', 'docs/data/luxury.jsonl'), git.calls)
+        titles = [b['title'] for m, p, b in api.calls if m == 'POST' and p == 'pulls']
+        self.assertEqual(titles, ['Add the Dark Brotherhood (#5)'])
         self.assertEqual(git.pushed(), [('push', f'--force-with-lease=refs/heads/{BRANCH}:', 'origin',
                                          f'HEAD:refs/heads/{BRANCH}')])
         [(_, _, pr)] = api.wrote('POST', 'pulls')

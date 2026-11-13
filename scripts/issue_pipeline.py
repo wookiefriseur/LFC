@@ -146,7 +146,8 @@ def prepare(api, git, repo, number, actor, lua_command, root=ROOT):
         f'Opening post sha256 {body_hash}\nDiff payload sha256 {report["payload_sha256"]}')
     # The lease refuses the push if anyone moved the branch since it was inspected.
     git('push', f'--force-with-lease=refs/heads/{branch}:{lease}', 'origin', f'HEAD:refs/heads/{branch}')
-    title = f'Database edit from #{number}'
+    name = (issue.get('title') or '').strip() or 'Database edit'
+    title = f'{name} (#{number})'
     description = describe(number, actor, report, refreshed)
     if current:
         pr = api('PATCH', f'pulls/{current["number"]}', {'title': title, 'body': description})
