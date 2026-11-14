@@ -198,6 +198,9 @@ export function catalogueResolver(records) {
   for (const r of records) {
     if (Number.isInteger(r.blueprint) && !furnishing.has(r.blueprint)) furnishing.set(r.blueprint, r.id ?? r.blueprint);
   }
+  for (const r of records) {
+    if (r.source?.type === "ignored") for (const id of [r.id, r.blueprint]) furnishing.delete(id);
+  }
   return (id) => furnishing.get(id) ?? null;
 }
 

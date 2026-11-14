@@ -68,6 +68,9 @@ test("the resolver maps blueprints to their furnishing, drops unknown ids and co
   assert.deepEqual(findList("Mixed").ids, [115647, 224910]);
   assert.deepEqual([r.lists, r.added, r.duplicates, r.unknown], [1, 2, 1, 1]);
   assert.deepEqual(reportText(r), { text: "Imported 1 list: 2 items added, 1 duplicate, 1 unknown skipped", warn: true });
+  // An ignored item shows in no list, so it is dropped like an unknown id
+  const ignoring = catalogueResolver([{ id: 115647 }, { id: 119706, source: { type: "ignored" } }]);
+  assert.deepEqual([ignoring(115647), ignoring(119706)], [115647, null]);
 });
 
 test("an import saves and notifies once, however many lists it creates", () => {
