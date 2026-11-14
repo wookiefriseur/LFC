@@ -1,13 +1,9 @@
+import { parseDiscovery } from "./discovery.js";
 // The weekly luxury-furnishing update: a lenient paste parser (parseLuxuryPaste) and the price-update rule (computeLuxuryPlan), both pure. Zanil Theran (vendor LUXF, source.type "luxury") sells about five furnishings once a week.
 // A re-sale update deep-copies the stored record, so `source.note` or any other field this mask does not know about survives untouched.
 //
-// Paste formats, auto-detected by the `[<int>] = {` opener:
-// 1. The Lua-block dump of the in-game DevUtility (`AddAllFromTrader()` / `generateItemText()`):
-//   	[126560] = {		-- Dwarven Fountain, Forged
-//   		itemPrice = 50000,		-- Gold
-//   	},
-//    The opener's trailing comment is the item name; `itemPrice` (present only if > 0) carries the currency as its comment; an `achievement` line is surfaced as a note, not stored; a block with no `itemPrice` is a bare re-sale.
-// 2. One item per line:
+// Paste formats, one item per line:
+//   {"format":"furniture-discovery-v1",...,"offer":{"currency":"GOLD","amount":50000}}   a FurCDev trader dump line
 //   220369, 100000                  itemId, price
 //   220369, 100000, Horse Skeleton  itemId, price, comment (not stored)
 //   |H1:item:220369:...|h|h 100000  an ESO item link, optional price
@@ -26,7 +22,7 @@ function parseIntLoose(raw) {
   return Number.isFinite(n) ? n : null;
 }
 
-function parseLine(raw, lineNo) {
+export function parseLine(raw, lineNo) {
   const out = { lineNo, raw, id: null, price: null, comment: "", error: null };
   let line = raw.trim();
   if (!line) return null;
@@ -62,61 +58,24 @@ function parseLine(raw, lineNo) {
   return out;
 }
 
-const LUA_BLOCK_OPEN_RE = /^\s*\[\s*(\d+)\s*\]\s*=\s*\{\s*(?:--\s*(.*?)\s*)?$/;
-const LUA_ITEMPRICE_RE = /^\s*itemPrice\s*=\s*([\d,._]+)\s*,?\s*(?:--\s*(.*?)\s*)?$/i;
-const LUA_ACHIEVEMENT_RE = /^\s*achievement\s*=\s*(\d+)\s*,?\s*(?:--\s*(.*?)\s*)?$/i;
-
-function looksLikeLuaBlocks(text) {
-  return String(text).split(/\r?\n/).some((ln) => LUA_BLOCK_OPEN_RE.test(ln));
-}
-
-export function parseLuaBlocks(text) {
-  const rows = [];
-  const lines = String(text).split(/\r?\n/);
-  let cur = null;
-
-  for (let i = 0; i < lines.length; i++) {
-    const raw = lines[i];
-    const open = raw.match(LUA_BLOCK_OPEN_RE);
-    if (open) {
-      // A previous block that never closed is kept anyway: contributors may drop the `},`.
-      if (cur) rows.push(cur);
-      cur = {
-        lineNo: i + 1, raw: raw.trim(),
-        id: parseInt(open[1], 10),
-        price: null, comment: (open[2] || "").trim(), error: null,
-      };
-      if (!Number.isInteger(cur.id) || cur.id < 1) {
-        cur.error = `could not read itemId from "${raw.trim()}"`;
-      }
-      continue;
-    }
-    if (!cur) continue;
-
-    const priceM = raw.match(LUA_ITEMPRICE_RE);
-    if (priceM) {
-      cur.price = parseIntLoose(priceM[1]);
-      const currency = (priceM[2] || "").trim();
-      if (currency && !/^gold$/i.test(currency)) {
-        cur.error = `itemPrice currency is "${currency}", not Gold - luxury items must be Gold`;
-      }
-      continue;
-    }
-    const achM = raw.match(LUA_ACHIEVEMENT_RE);
-    if (achM) {
-      // Irrelevant to the Gold-only luxury flow. Surfaced so the contributor sees it was dropped.
-      const achName = (achM[2] || "").trim();
-      cur._achievementNote = `block carries achievement ${achM[1]}` +
-        (achName ? ` (${achName})` : "") + " - ignored for the luxury mask";
-      continue;
-    }
-    if (/^\s*\},?\s*$/.test(raw)) {
-      rows.push(cur);
-      cur = null;
-    }
+// A trader dump line: the id and, for a Gold offer, the price; the item name is a display fallback. An achievement gate is irrelevant to the Gold-only luxury flow and is only noted.
+function parseDiscoveryLine(raw, lineNo) {
+  const out = { lineNo, raw: raw.trim(), id: null, price: null, comment: "", error: null };
+  let found;
+  try {
+    found = parseDiscovery(JSON.parse(raw));
+  } catch (err) {
+    out.error = err.message;
+    return out;
   }
-  if (cur) rows.push(cur);
-  return rows;
+  const { record, reference, offer } = found;
+  out.id = record.id;
+  out.comment = reference.meta.name;
+  if (!offer) out.error = "no trader offer on this line - dump it from the Luxury Furnisher's store";
+  else if (offer.currency !== "GOLD") out.error = `offer currency is ${offer.currency}, not Gold - luxury items must be Gold`;
+  else out.price = offer.amount;
+  if (offer?.achievement) out._achievementNote = `offer is gated by achievement ${offer.achievement} - ignored for the luxury mask`;
+  return out;
 }
 
 /**
@@ -134,13 +93,10 @@ export function luxuryIndex(records, buffer) {
 }
 
 export function parseLuxuryPaste(text) {
-  if (looksLikeLuaBlocks(text)) {
-    return parseLuaBlocks(text);
-  }
   const rows = [];
   const lines = String(text).split(/\r?\n/);
   for (let i = 0; i < lines.length; i++) {
-    const parsed = parseLine(lines[i], i + 1);
+    const parsed = lines[i].trim().startsWith("{") ? parseDiscoveryLine(lines[i], i + 1) : parseLine(lines[i], i + 1);
     if (parsed) rows.push(parsed);
   }
   return rows;

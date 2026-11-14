@@ -22,7 +22,7 @@ import {
   ID_NOT_RECORDED,
 } from "./lexicon.js";
 import {
-  parseLuxuryPaste, parseLuaBlocks, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
+  parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
   LUX_ACTION_LABEL,
   LUX_ACTION, priceEffect, successPanelText,
 } from "./luxury.js";
@@ -40,7 +40,7 @@ import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.
 import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
+import { parseDiscovery, discoveryKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { PRESETS, presetById, applyPreset } from "./presets.js";
 import { ReferenceData } from "./reference-data.js";
@@ -378,17 +378,16 @@ function renderLuxuryPanel(container) {
 
           <div id="lux-paste-panel">
             <label class="lux-paste-label" for="lux-paste">Paste the in-game DevUtility export</label>
-            <textarea id="lux-paste" rows="8" placeholder="	[126560] = {		-- Dwarven Fountain, Forged&#10;		itemPrice = 50000,		-- Gold&#10;	},"></textarea>
+            <textarea id="lux-paste" rows="8" placeholder="{&quot;format&quot;:&quot;furniture-discovery-v1&quot;, ... ,&quot;offer&quot;:{&quot;currency&quot;:&quot;GOLD&quot;,&quot;amount&quot;:50000}}&#10;126560, 50000, Dwarven Fountain"></textarea>
             <details class="lux-format-help">
             <summary>What can I paste here?</summary>
             <ol class="lux-help-list muted">
               <li>
                 <p>Open the Luxury Furnisher's inventory in the game, open the
                 Dev Toolbox (the <code>/furcdev</code> command or its hotkey)
-                and use <em>Add all from trader</em>. Paste what it gives you:</p>
-                <pre><code>	[126560] = {		-- Dwarven Fountain, Forged
-		itemPrice = 50000,		-- Gold
-	},</code></pre>
+                and use <em>Add all from trader</em>. Paste the lines it gives you,
+                one per item; each carries the item's Gold price:</p>
+                <pre><code>{"format":"furniture-discovery-v1", ... ,"offer":{"currency":"GOLD","amount":50000}}</code></pre>
               </li>
               <li>
                 <p>Or type one item per line, mixing whichever of these you
@@ -710,7 +709,7 @@ function runLuxuryPreview() {
     state.luxPlan = null;
     return;
   }
-  // A Lua-block paste carries the item name in its `-- ` comment: a display-only fallback for ids the names file does not cover, never written into record data.
+  // A dump line carries the item name: a display-only fallback for ids the names file does not cover, never written into record data.
   for (const r of rows) {
     if (Number.isInteger(r.id) && r.comment) {
       state.names.addOverride(r.id, r.comment);
@@ -894,7 +893,7 @@ function renderAdvancedPanel(container) {
 
     <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump or Diff">
       <div class="adv-import-body">
-        <p class="muted">Paste output from DevUtility's Datamine text box. You can paste
+        <p class="muted">Paste the discovery lines from DevUtility's text box (one JSON object per item). You can paste
           several pages together. New discoveries arrive as Unconfirmed, choose their source
           if you know it. Existing entries are skipped.</p>
         <p class="muted">You can also use this to review a submitted issue: just paste the diff or whole raw text in here. The changes load into an empty change list and you can inspect and edit the entries.</p>
@@ -1867,7 +1866,7 @@ function idKnownAnywhere(id) {
   return false;
 }
 
-// JSONL is checked first because a Lua-block paste also contains `{`.
+// A dump is discovery lines and a record paste is JSONL; both open with `{`.
 function looksLikeJSONL(text) {
   for (const ln of String(text).split(/\r?\n/)) {
     const t = ln.trim();
@@ -1939,7 +1938,6 @@ async function runBatchImport() {
     return;
   }
   const targetCat = "";
-  let droppedPrices = 0;
   let knownDiscoveries = 0;
 
   let candidates;
@@ -1972,26 +1970,8 @@ async function runBatchImport() {
       candidates.push({ record: obj, category: cat, sourceName: null, lineNo: i + 1 });
     }
   } else {
-    // A dump has no source, so each block becomes a rumour record, which carries no cost: prices are dropped and counted. The version is the newest patch this data set knows.
-    const blocks = parseLuaBlocks(text);
-    candidates = [];
-    for (const b of blocks) {
-      if (b.error) {
-        parseErrors.push({ lineNo: b.lineNo, message: b.error });
-        continue;
-      }
-      if (b.price != null) droppedPrices++;
-      const rec = {
-        id: b.id,
-        source: { type: "rumour" },
-        cost: [],
-        availability: { version: latestVersion(state.enums) },
-      };
-      candidates.push({
-        record: rec, category: "rumour", sourceName: b.comment || null,
-        lineNo: b.lineNo, rumourFallback: true,
-      });
-    }
+    status.textContent = "Not imported: paste FurCDev discovery lines (one JSON object per line) or an issue's diff.";
+    return;
   }
 
   if (candidates.length === 0 && parseErrors.length === 0 && unfinished.size === 0) {
@@ -2045,9 +2025,7 @@ async function runBatchImport() {
       }
       continue;
     }
-    // A dump block is as much a scan as a discovery line: an item already catalogued is skipped either way.
-    if (c.reference ? discoveryKnown(rec, state.records)
-        : c.rumourFallback && dumpKnown(rec.id, state.records)) {
+    if (c.reference && discoveryKnown(rec, state.records)) {
       knownDiscoveries++;
       continue;
     }
@@ -2144,9 +2122,6 @@ async function runBatchImport() {
   if (offerCount.replaced) parts.push(`${offerCount.replaced} price(s) or gate(s) replaced from the dump`);
   if (offerCount.added) parts.push(`${offerCount.added} additional offer(s) added as new records (pick the trader)`);
   if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
-  if (droppedPrices) {
-    parts.push(`${droppedPrices} price(s) left out (a record with no source carries none)`);
-  }
   if (warnLines.length) parts.push(`${warnLines.length} warning(s)`);
   if (errorLines.length) parts.push(`${errorLines.length} error(s)`);
   status.textContent = parts.join(" · ") + ".";

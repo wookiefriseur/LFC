@@ -124,7 +124,7 @@ export function isPlaceholderName(name, id) {
   return false;
 }
 
-// Display-only name layer: a record's own name_overrides.en wins (a deliberate correction), then a real name from names.en.json, then a name a batch import carried in its Lua comment. Import names are never written into record data.
+// Display-only name layer: a record's own name_overrides.en wins (a deliberate correction), then a real name from names.en.json, then a name a pasted dump line or price line carried. Import names are never written into record data.
 export class NameStore {
   constructor(names = {}) {
     this.base = names;

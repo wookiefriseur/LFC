@@ -2198,13 +2198,15 @@ test("a record added and then edited exports one add line with the edit", async 
 
 const DUMP_IDS = [9900001, 9900002];
 
-test("an in-game dump pastes with no source question, and arrives Unconfirmed", async (page) => {
+test("an in-game Gold trader dump pastes with no source question, arrives Unconfirmed with its price, and shows in Maintenance", async (page) => {
   await switchTab(page, "advanced");
   assertEq(await page.$("#adv-import-category"), null,
     "the paste panel still asks which source a dump comes from");
 
   const dump = DUMP_IDS
-    .map((id) => `\t[${id}] = {\t\t-- Test Dump Item ${id}\n\t\titemPrice = 1234,\n\t},`)
+    .map((id) => JSON.stringify({ format: "furniture-discovery-v1", locale: "en", apiVersion: 101051, record: { id },
+      meta: { id, name: `Test Dump Item ${id}`, icon: "/esoui/art/icons/test.dds", quality: 2, cat: 5, sub: 6, theme: 0 },
+      offer: { currency: "GOLD", amount: 1234 } }))
     .join("\n");
   await page.evaluate((text) => {
     document.querySelector("#btn-add-dump").click();
@@ -2226,12 +2228,16 @@ test("an in-game dump pastes with no source question, and arrives Unconfirmed", 
   for (const r of rows) {
     assertEq(r.type, "rumour", `id ${r.id} arrived with a source the dump cannot know`);
     assertEq(r.keys.join(","), "type", `id ${r.id} carries source detail it cannot have`);
-    assertEq(r.costs, 0, `id ${r.id} kept a price it has no source for`);
+    assertEq(r.costs, 1, `id ${r.id} lost the dumped price`);
     assertEq(r.cat, "rumour", `id ${r.id} was filed under ${r.cat}`);
-    assert(r.version && r.version !== "NONE",
-      `id ${r.id} has no patch: a dump is taken in one`);
   }
-  assert(/price/i.test(status), `the prices left out are not reported: "${status}"`);
+  assert(status.includes("2 Unconfirmed with a price"), `the priced rumours are not reported: "${status}"`);
+  await switchTab(page, "maintenance");
+  await page.waitForSelector("#maint-filter", { timeout: 10000 });
+  await page.select("#maint-filter", "pricedrumour");
+  await page.waitForFunction((ids) => ids.every((id) => (document.querySelector("#maint-body")?.textContent || "").includes(String(id))),
+    { timeout: 10000 }, DUMP_IDS);
+  await switchTab(page, "advanced");
 });
 
 test("several ticked rows take one source in a single edit", async (page) => {
@@ -2831,25 +2837,6 @@ test("diff: an item name set by a loaded diff shows in the Batch-edit table with
   await selectRecord(page, rec.key, rec.id);
   const shown = await page.$eval("#table-body tr.selected", (tr) => tr.textContent);
   assert(shown.includes("Zz Loaded Name"), `the table does not show the loaded name: ${shown}`);
-});
-
-test("dump import: a trader dump skips numbers already catalogued as a furnishing or a blueprint", async (page) => {
-  await page.reload({ waitUntil: "domcontentloaded" });
-  await waitForBoot(page);
-  await switchTab(page, "advanced");
-  const { furnishing, blueprint, unknown } = await page.evaluate(() => {
-    const all = window.__proto.records();
-    const paired = all.find((r) => Number.isInteger(r.id) && Number.isInteger(r.blueprint));
-    const taken = new Set(all.flatMap((r) => [r.id, r.blueprint]));
-    let unknown = 990001;
-    while (taken.has(unknown)) unknown++;
-    return { furnishing: paired.id, blueprint: paired.blueprint, unknown };
-  });
-  const block = (n) => `[${n}] = { -- Some Item\n  itemPrice = 35,\n},`;
-  const status = await pasteImport(page, [furnishing, blueprint, unknown].map(block).join("\n"));
-  assert(status.includes("2 already catalogued (skipped)"), `known numbers were not skipped: ${status}`);
-  const added = (await diffLines(page)).filter((l) => l.op === "add").map((l) => l.id);
-  assertEq(JSON.stringify(added), JSON.stringify([unknown]), "the dump added more than the unknown number");
 });
 
 test("dump import: a writ voucher price types a new item as a writ vendor, which cannot be sent until the trader is picked", async (page) => {

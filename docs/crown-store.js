@@ -1,7 +1,7 @@
 // The "Crown store" mask: fast one-at-a-time manual entry of Crown prices. The Crown Store has no public price API, so a contributor types prices in with the game open beside the page; the loop is keyboard-driven and refocuses search after every save.
 // One id may own several legitimate crown_store records (bare price, pack, bundle, note). This mask only writes and edits the bare price source, so "does this item have a Crown price?" is asked of that source alone, never of "any crown_store record".
 
-import { parseLuaBlocks, successPanelText } from "./luxury.js";
+import { parseLine, successPanelText } from "./luxury.js";
 import { versionsDesc, versionLabel, latestVersion, labelOf } from "./data.js";
 import { labelFor, tipFor, sourceTypeLabel } from "./lexicon.js";
 import { messageFor } from "./validate.js";
@@ -170,17 +170,16 @@ export function crownStoreMask(deps) {
             <details class="cstore-batch-format">
               <summary>What can I paste here?</summary>
               <p class="muted">
-                The in-game DevUtility <code>Add data to textbox</code> dump -
-                blocks of <code>[itemId] = { … },</code>. Each block's
-                <code>itemPrice</code> is read as the Crown price. Blocks with
-                no price are skipped: a Crown item with no price is not useful.
-                An item that already has a Crown price is skipped; an item sold
-                only inside a pack or a bundle is not, because that is a
-                different way of getting it.
+                One item per line: the item id or an item link, then its Crown
+                price, optionally a name (<code>126560, 400, Some furnishing</code>).
+                Lines with no price are skipped: a Crown item with no price is
+                not useful. An item that already has a Crown price is skipped;
+                an item sold only inside a pack or a bundle is not, because
+                that is a different way of getting it.
               </p>
             </details>
             <textarea id="cstore-batch-paste" rows="6"
-              placeholder="	[126560] = {		-- Some Crown furnishing&#10;		itemPrice = 400,		-- Crowns&#10;	},"></textarea>
+              placeholder="126560, 400, Some Crown furnishing&#10;126561, 1200"></textarea>
             <div class="cstore-batch-actions">
               <button id="cstore-batch-run" class="btn-primary">Add batch to the change list</button>
               <button id="cstore-batch-clear">Clear</button>
@@ -512,16 +511,15 @@ export function crownStoreMask(deps) {
   function runBatch() {
     const text = $("#cstore-batch-paste").value;
     const version = $("#cstore-version").value;
-    const blocks = parseLuaBlocks(text);
+    const blocks = String(text).split(/\r?\n/).map((line, i) => parseLine(line, i + 1)).filter(Boolean);
     if (blocks.length === 0) {
-      $("#cstore-batch-status").textContent = "nothing to parse - paste Lua blocks.";
+      $("#cstore-batch-status").textContent = "nothing to parse - paste one \"id, price\" line per item.";
       return;
     }
     let added = 0, skippedNoPrice = 0, skippedDup = 0, skippedRepeat = 0, invalid = 0;
     const seen = new Set();
     for (const b of blocks) {
-      if (!Number.isInteger(b.id) || b.id < 1) { invalid++; continue; }
-      // parseLuaBlocks flags a non-Gold currency comment as an error; here "Crowns" is correct and the price is still in b.price.
+      if (b.error || !Number.isInteger(b.id) || b.id < 1) { invalid++; continue; }
       if (b.price == null || b.price <= 0) { skippedNoPrice++; continue; }
       if (seen.has(b.id)) { skippedRepeat++; continue; }
       seen.add(b.id);
