@@ -107,6 +107,7 @@ export const LUX_ACTION = {
   RESALE_DATE: "RE-SALE, date only",  // re-sale; price suppressed by the checkbox
   RESALE_PRICE: "RE-SALE + price",    // re-sale; price also updated
   PRICE_ADDED: "PRICE ADDED",         // re-sale; record had no price - price set
+  CURRENT: "UP TO DATE",              // re-sale already recorded with this date and price - nothing to send
   WARN: "WARN",                       // parse error / unknown id / price ignored
 };
 
@@ -116,6 +117,7 @@ export const LUX_ACTION_LABEL = {
   [LUX_ACTION.RESALE_DATE]: "date",
   [LUX_ACTION.RESALE_PRICE]: "price",
   [LUX_ACTION.PRICE_ADDED]: "price",
+  [LUX_ACTION.CURRENT]: "same",
   [LUX_ACTION.WARN]: "WARN",
 };
 
@@ -264,7 +266,9 @@ export function computeLuxuryPlan(parsedRows, opts) {
         entry.messages.push(`pasted ${row.price} ignored`);
       }
     }
-    entry.record = after;
+    // The record already says all of this (the same weekend pasted twice, or already published): no change to queue.
+    if (JSON.stringify(after) === JSON.stringify(before)) entry.action = LUX_ACTION.CURRENT;
+    else entry.record = after;
     plan.push(entry);
   }
   return plan;

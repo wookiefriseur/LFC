@@ -2616,6 +2616,18 @@ test("item details: Maintenance requests the ids, and a discovery of a published
   const rows = await page.$eval("#maint-count", (e) => parseInt(e.textContent.replace(/\D/g, ""), 10) || 0);
   const ids = await page.$eval("#maint-request-ids", (t) => t.value.split(" ").filter(Boolean));
   assertEq(ids.length, rows, "the request does not list every row");
+  // A stub row (placeholder icon, no category) is requested like a missing one; skipped once the data holds none.
+  const stub = await page.evaluate(async () => {
+    const manifest = await (await fetch("reference-data/manifest.json")).json();
+    const known = new Set(window.__proto.records().map((r) => r.id));
+    for (const shard of manifest.datasets.meta.shards) {
+      const rows = (await (await fetch(`reference-data/${shard.file}`)).text()).split("\n").filter(Boolean).map((l) => JSON.parse(l));
+      const row = rows.find((r) => known.has(r.id) && r.icon === "icon_missing" && r.cat == null);
+      if (row) return row.id;
+    }
+    return null;
+  });
+  if (stub) assert(ids.includes(String(stub)), `stub metadata of ${stub} is not requested`);
   await page.select("#maint-filter", "invalid");
   assertEq(await page.$eval("#maint-request", (b) => b.hidden), true, "a check without requests offers one");
 
@@ -2632,6 +2644,8 @@ test("item details: Maintenance requests the ids, and a discovery of a published
   assertEq(lines.length, 1, "the item change is not the only change");
   assertEq(lines[0].op, "item", "wrong operation");
   assertEq(lines[0].reference.meta.name, "Renamed by the game", "the game name was lost");
+  assert(await page.$eval("#filter-changed", (c) => c.checked)
+    && (await page.$$eval("#table-body tr:not(.spacer)", (r) => r.length)) > 0, "Changed only does not show the item whose details changed");
   assert((await pasteImport(page, line)).includes("1 item(s) already up to date"), "a repeat paste changed something");
 });
 

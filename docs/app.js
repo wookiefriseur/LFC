@@ -727,6 +727,7 @@ const LUX_BADGE_CLASS = {
   [LUX_ACTION.RESALE_DATE]: "b-resale",
   [LUX_ACTION.RESALE_PRICE]: "b-price",
   [LUX_ACTION.PRICE_ADDED]: "b-added",
+  [LUX_ACTION.CURRENT]: "b-resale",
   [LUX_ACTION.WARN]: "b-warn",
 };
 
@@ -796,7 +797,7 @@ function renderLuxuryPreview() {
   $("#lux-commit").disabled = committable === 0;
   $("#lux-commit-status").textContent =
     committable === 0
-      ? "no committable rows (all WARN)."
+      ? "nothing to add (every row is up to date or WARN)."
       : `${committable} record(s) will be added to the change list` +
         (invalid ? ` - ${invalid} have validation errors and are skipped.` : ".");
   $("#lux-preview-wrap").hidden = false;
@@ -809,8 +810,10 @@ function commitLuxuryPlan() {
   let updated = 0;
   let skipped = 0;
   let blocked = 0;
+  let current = 0;
 
   for (const p of plan) {
+    if (p.action === LUX_ACTION.CURRENT) { current++; continue; }
     if (p.action === LUX_ACTION.WARN || !p.record) { skipped++; continue; }
     const { errors } = validateRecord(p.record, state.enums);
     if (errors.length) { skipped++; continue; }
@@ -843,6 +846,7 @@ function commitLuxuryPlan() {
   }
 
   let msg = `Added to the change list: ${added} new, ${updated} re-sale update(s)`;
+  if (current) msg += `, ${current} already up to date`;
   if (skipped) msg += `, ${skipped} skipped (WARN / invalid)`;
   if (blocked) msg += `, ${blocked} BLOCKED (duplicate id)`;
   $("#lux-commit-status").textContent = msg + ".";
@@ -1111,7 +1115,8 @@ function presetPicker() {
 function applyFilters() {
   const q = state.search;
   state.filtered = state.records.filter((r) => {
-    if (state.changedOnly && !state.buffer.entries.has(r._key)) return false;
+    // An item-details change belongs to the item, so every record of that item counts as changed.
+    if (state.changedOnly && !state.buffer.entries.has(r._key) && !state.buffer.entries.has(`item:${r.id}`)) return false;
     if (state.selectedOnly && !state.ticked.has(r._key)) return false;
     if (state.sourceType && r.source?.type !== state.sourceType) return false;
     if (state.version && r.availability?.version !== state.version) return false;
@@ -2136,8 +2141,7 @@ async function runBatchImport() {
   status.textContent = parts.join(" · ") + ".";
   showImportReport(errorLines, warnLines);
 
-  if (refreshed > 0) renderFooter();
-  if (imported > 0 || updated > 0 || offerCount.filled + offerCount.replaced + offerCount.added > 0) {
+  if (imported > 0 || updated > 0 || refreshed > 0 || offerCount.filled + offerCount.replaced + offerCount.added > 0) {
     state.changedOnly = true;
     const cb = $("#filter-changed");
     if (cb) cb.checked = true;

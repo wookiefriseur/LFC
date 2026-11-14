@@ -26,6 +26,15 @@ test("a paste applies on top of an unsent edit to the same record", () => {
   assert.deepEqual(buffer.entries.get(live._key).before, published, "the change is still measured against the file");
 });
 
+test("a re-sale the record already states queues nothing, a new date or price still does", () => {
+  const stored = { id: 220369, source: { type: "luxury", vendor: "LUXF" }, cost: [{ currency: "GOLD", amount: 50000 }], availability: { version: "HOMESTEAD", last_seen: "2026-11-13" }, _category: "luxury", _key: "luxury#0" };
+  const plan = (text, more) => computeLuxuryPlan(parseLuxuryPaste(text), {
+    date: "2026-11-13", version: "HOMESTEAD", keepPrices: true, luxuryById: luxuryIndex([stored], new DirtyBuffer()), ...more })[0];
+  assert.deepEqual([plan("220369, 50000").action, plan("220369, 50000").record], ["UP TO DATE", null]);
+  assert.equal(plan("220369, 50000", { date: "2026-11-20" }).record.availability.last_seen, "2026-11-20");
+  assert.equal(plan("220369, 40000", { keepPrices: false }).record.cost[0].amount, 40000);
+});
+
 const trader = (id, offer, name = "Dwarven Fountain, Forged") => JSON.stringify({
   format: "furniture-discovery-v1", locale: "en", apiVersion: 101051,
   record: { id, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } },

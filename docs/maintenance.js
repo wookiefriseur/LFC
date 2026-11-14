@@ -538,7 +538,7 @@ export function maintenanceMask(deps) {
       label: "Missing a name or metadata",
       tip: "Items whose display name is effectively absent - empty, a " +
            "generated placeholder (\"Item 94091\"), or the bare id - or that " +
-           "have no item metadata (icon, quality, category). \"Copy id list\" " +
+           "have no or incomplete item metadata (icon, quality, category). \"Copy id list\" " +
            "gives the ids to request from the game.",
       requestable: true,
       compute() {
@@ -557,11 +557,15 @@ export function maintenanceMask(deps) {
           if (pending) waiting++;
           const noMeta = !pending && referenceData?.state === "ready" && !referenceData.publishedMeta(r.id)
             && !referenceData.discoveries.has(r.id);
-          if (!noName && !noMeta) continue;
+          // A placeholder icon will be overwritten by any dump that fills it
+          const meta = !pending && !referenceData?.discoveries.has(r.id) ? referenceData?.publishedMeta(r.id) : null;
+          const lacks = meta ? [(!meta.icon || meta.icon === "icon_missing") && "icon", meta.cat == null && "category"].filter(Boolean) : [];
+          if (!noName && !noMeta && !lacks.length) continue;
           const shown = String(nm == null ? "" : nm).trim();
           const said = [];
           if (noName) said.push(shown === "" ? "empty name" : `placeholder name "${shown}"`);
           if (noMeta) said.push("no item metadata");
+          if (lacks.length) said.push(`item metadata lacks ${lacks.join(" and ")}`);
           rows.push({ id: r.id, key: r._key, detail: said.join(", ") });
         }
         return { rows, summary: waiting ? `Still loading item metadata for ${waiting.toLocaleString()} item(s)...` : "" };
