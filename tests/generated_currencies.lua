@@ -35,7 +35,6 @@ local expected = {
   AP = 2,
   TEL_VAR = 3,
   WRIT_VOUCHERS = 4,
-  EVENT_TICKETS = 9,
   CROWNS = 7,
   CROWN_GEMS = 6,
   TRADE_BARS = 9,

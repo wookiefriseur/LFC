@@ -82,7 +82,7 @@ export function orderedSourceTypes(types = []) {
 const VALUES = {
   currencies: {
     GOLD: "Gold", AP: "Alliance Points", TEL_VAR: "Tel Var Stones",
-    WRIT_VOUCHERS: "Writ Vouchers", EVENT_TICKETS: "Event Tickets",
+    WRIT_VOUCHERS: "Writ Vouchers",
     CROWNS: "Crowns", CROWN_GEMS: "Crown Gems", SEALS: "Seals of Endeavour",
     UNDAUNTED_KEYS: "Undaunted Keys", ARCHIVAL_FORTUNES: "Archival Fortunes",
     TRADE_BARS: "Trade Bars",
