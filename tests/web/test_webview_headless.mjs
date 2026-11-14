@@ -2852,6 +2852,92 @@ test("dump import: a trader dump skips numbers already catalogued as a furnishin
   assertEq(JSON.stringify(added), JSON.stringify([unknown]), "the dump added more than the unknown number");
 });
 
+test("dump import: a writ voucher price types a new item as a writ vendor, which cannot be sent until the trader is picked", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const id = await page.evaluate(() => {
+    const taken = new Set(window.__proto.records().flatMap((r) => [r.id, r.blueprint]));
+    let n = 990101;
+    while (taken.has(n)) n++;
+    return n;
+  });
+  const line = JSON.stringify({ format: "furniture-discovery-v1", locale: "en", apiVersion: 101051, record: { id },
+    meta: { id, name: "Test Writ Item", icon: "/esoui/art/icons/test.dds", quality: 3, cat: 5, sub: 6, theme: 0 },
+    offer: { currency: "WRIT_VOUCHERS", amount: 800 } });
+  const status = await pasteImport(page, line);
+  assert(status.includes("1 typed from their price's currency"), `the typing is not reported: ${status}`);
+  const rec = await page.evaluate((n) => window.__proto.records().find((r) => r.id === n), id);
+  assertEq(JSON.stringify([rec?.source, rec?.cost]), JSON.stringify([{ type: "writ_vendor" }, [{ currency: "WRIT_VOUCHERS", amount: 800 }]]),
+    "the record did not take the type and price");
+  await page.click("#btn-submit");
+  const blocked = await page.evaluate(() => document.querySelector("#modal-validation .v-error") !== null);
+  assert(blocked, "a writ vendor record without its trader can be sent");
+  await page.evaluate(() => document.querySelector("#modal")?.classList.remove("open"));
+});
+
+test("dump import: a trader line replaces the price of the record in its currency, and another currency adds a record", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const { single, mixed, goldOnly } = await page.evaluate(() => {
+    const trader = new Set(["vendor", "pvp_vendor", "writ_vendor", "luxury", "event_vendor", "crown_store"]);
+    const byId = new Map();
+    for (const r of window.__proto.records()) {
+      if (!Number.isInteger(r.id)) continue;
+      if (!byId.has(r.id)) byId.set(r.id, []);
+      byId.get(r.id).push(r);
+    }
+    const sellersOf = (recs) => recs.filter((r) => trader.has(r.source?.type));
+    const gold = (r) => r.cost?.length === 1 && r.cost[0].currency === "GOLD";
+    const goldVendors = [...byId.values()].filter((recs) => recs.length === 1 && sellersOf(recs).length === 1 && gold(recs[0])
+      && recs[0].source.type === "vendor" && recs[0].source.achievement != null);
+    // Several trader records, one of them the only one priced in its currency.
+    const many = [...byId.values()].find((recs) => sellersOf(recs).length > 1 && sellersOf(recs).some((r) => r.cost?.length === 1
+      && sellersOf(recs).filter((o) => o.cost?.some((c) => c.currency === r.cost[0].currency)).length === 1));
+    const target = sellersOf(many).find((r) => r.cost?.length === 1
+      && sellersOf(many).filter((o) => o.cost?.some((c) => c.currency === r.cost[0].currency)).length === 1);
+    const one = goldVendors[0][0];
+    return { single: { id: one.id, amount: one.cost[0].amount, achievement: one.source.achievement },
+      mixed: { id: many[0].id, currency: target.cost[0].currency, amount: target.cost[0].amount,
+        others: JSON.stringify(sellersOf(many).filter((r) => r !== target).map((r) => r.cost)) },
+      goldOnly: { id: goldVendors[1][0].id, cost: JSON.stringify(goldVendors[1][0].cost) } };
+  });
+  const line = (id, currency, amount) => JSON.stringify({ format: "furniture-discovery-v1", locale: "en", apiVersion: 101051, record: { id },
+    meta: { id, name: `Item ${id}`, icon: "/esoui/art/icons/test.dds", quality: 2, cat: 5, sub: 6, theme: 0 },
+    offer: { currency, amount } });
+  const status = await pasteImport(page, [line(single.id, "GOLD", single.amount + 1), line(mixed.id, mixed.currency, mixed.amount + 1),
+    line(goldOnly.id, "AP", 300)].join("\n"));
+  assert(status.includes("2 price(s) or gate(s) replaced from the dump"), `the replacements are not reported: ${status}`);
+  assert(status.includes("1 additional offer(s) added as new records (pick the trader)"), `the added offer is not reported: ${status}`);
+  const after = await page.evaluate((s) => {
+    const recs = window.__proto.records();
+    const trader = new Set(["vendor", "pvp_vendor", "writ_vendor", "luxury", "event_vendor", "crown_store"]);
+    const target = recs.find((r) => r.id === s.mixed.id && r.cost?.[0]?.currency === s.mixed.currency);
+    return {
+      one: recs.find((r) => r.id === s.single.id),
+      target: target?.cost[0].amount,
+      others: JSON.stringify(recs.filter((r) => r.id === s.mixed.id && trader.has(r.source?.type) && r !== target).map((r) => r.cost)),
+      goldOnly: recs.filter((r) => r.id === s.goldOnly.id).map((r) => ({ source: r.source, cost: r.cost })),
+    };
+  }, { single, mixed, goldOnly });
+  assertEq(after.one.cost[0].amount, single.amount + 1, "the single trader record kept its old price");
+  assertEq(after.one.source.achievement, single.achievement, "a dump without a gate removed the record's gate");
+  assertEq(after.target, mixed.amount + 1, "the record in the offer's currency kept its old price");
+  assertEq(after.others, mixed.others, "a record in another currency was changed");
+  assertEq(JSON.stringify(after.goldOnly.map((r) => r.cost)), JSON.stringify([JSON.parse(goldOnly.cost), [{ currency: "AP", amount: 300 }]]),
+    "the gold record changed, or no Alliance Point record was added");
+  assertEq(after.goldOnly[1]?.source?.type, "pvp_vendor",
+    "an Alliance Point offer did not leave the gold record alone and add a Player vs Player trader record");
+  const lines = await diffLines(page);
+  assert(lines.some((l) => l.op === "update" && l.id === single.id && l.fields?.cost), "the replacement is not in the change list");
+  assert(lines.some((l) => l.op === "add" && l.id === goldOnly.id), "the added offer is not in the change list");
+  await page.click("#btn-submit");
+  const blocked = await page.evaluate(() => document.querySelector("#modal-validation .v-error") !== null);
+  assert(blocked, "an added trader record without its trader can be sent");
+  await page.evaluate(() => document.querySelector("#modal")?.classList.remove("open"));
+});
+
 test("vocabulary: the zone name search fills the zone id and symbol, and names an existing entry", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

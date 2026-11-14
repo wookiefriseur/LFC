@@ -40,7 +40,7 @@ import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.
 import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe, itemDetailsChanges } from "./discovery.js";
+import { parseDiscovery, discoveryKnown, dumpKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
 import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 import { PRESETS, presetById, applyPreset } from "./presets.js";
 import { ReferenceData } from "./reference-data.js";
@@ -1884,6 +1884,41 @@ function showImportReport(errorLines = [], warnLines = []) {
     ...warnLines.map((t) => elem("li", { class: "v-warning" }, t)));
 }
 
+// A trader line for a catalogued item, as `offerPlan` attributes it: the dump's price and gate go into the one record of its currency through the change list, replacing what differs and keeping what the dump does not bring; an offer no record states becomes a new record when its currency names the trader type, else a warning.
+function offerToCatalogue(c, warnLines, counts, typeSets) {
+  const id = c.record.id;
+  const lives = state.records.filter((r) => r.id === id && !state.buffer.isDeleted(r._key));
+  if (!lives.length) return;
+  const item = lives.map(clean);
+  const where = `line ${c.lineNo} (id ${id})`;
+  const offered = `${c.offer.amount} ${c.offer.currency}`;
+  const plan = offerPlan(item, c.offer, typeSets, state.enums.source_type_contracts);
+  if (plan.kind === "several") warnLines.push(`${where}: the dump offers ${offered}, which none of its ${plan.count} trader records in ${c.offer.currency} states - not changed`);
+  if (plan.kind === "unrecorded") warnLines.push(`${where}: also offered for ${offered} by a trader the catalogue does not record - not changed`);
+  if (plan.kind === "add") {
+    const type = plan.record.source.type;
+    const key = newKey(type);
+    state.buffer.add(key, plan.record, type);
+    const live = { ...plan.record, _category: type, _key: key };
+    state.records.push(live);
+    state.index.set(key, live);
+    counts.added++;
+  }
+  if (plan.kind === "apply") {
+    const live = lives[item.indexOf(plan.target)];
+    const { record, changed, replaced } = plan;
+    if (!changed) return;
+    state.buffer.update(live._key, clean(live), record, live._category);
+    mirror(live, record);
+    if (replaced.length) {
+      counts.replaced++;
+      warnLines.push(`${where}: replaced from the dump - ${replaced.join(", ")}; check it in the change list`);
+    } else {
+      counts.filled++;
+    }
+  }
+}
+
 // What an item-details change is measured against: the names file and the metadata row as published.
 function publishedItem(id) {
   return { name: state.names?.base[id] ?? null, meta: referenceData.publishedMeta(id) };
@@ -1981,6 +2016,11 @@ async function runBatchImport() {
   let current = 0;
   let rumoured = 0;
   let asRecipe = 0;
+  let typed = 0;
+  let pricedRumours = 0;
+  const offerCount = { filled: 0, replaced: 0, added: 0 };
+  const currencyTypes = offerTypes(state.records);
+  const typeSets = offerTypeSets(state.records);
   const warnLines = unfinished.size
     ? [`The following furnishings do not seem to be finalised in the game yet (missing category metadata) and were skipped. Please dump them again after the next game update: ${[...unfinished].join(", ")}.`]
     : [];
@@ -1992,6 +2032,7 @@ async function runBatchImport() {
       ignored++;
       continue;
     }
+    if (c.offer) offerToCatalogue(c, warnLines, offerCount, typeSets);
     // A discovery line for a catalogued furnishing becomes an item-details change when it says something the published data does not.
     if (refreshable(c)) {
       const queued = state.buffer.entries.get(`item:${rec.id}`)?.reference;
@@ -2019,6 +2060,14 @@ async function runBatchImport() {
       }
     }
     const where = `line ${c.lineNo} (id ${rec.id ?? "?"})`;
+    const fromOffer = c.reference && rec.source?.type === "rumour"
+      && recordFromOffer(rec, c.offer, currencyTypes, state.enums.source_type_contracts);
+    if (fromOffer) {
+      rec = fromOffer;
+      c.category = fromOffer.source.type;
+      if (c.category === "rumour") pricedRumours++;
+      else typed++;
+    }
 
     if (Number.isInteger(rec.id) && c.sourceName) {
       state.names.addOverride(rec.id, c.sourceName);
@@ -2046,10 +2095,13 @@ async function runBatchImport() {
     }
 
     const { errors, warnings } = validateRecord(rec, state.enums);
-    if (errors.length) {
-      errorLines.push(`${where}: ${errors.map((f) => messageFor(f)).join(" ")}`);
+    // A record typed from its price lacks the trader by design: imported, and blocked from sending until the contributor picks it.
+    const blocking = fromOffer ? errors.filter((f) => f.code !== "required_field_missing") : errors;
+    if (blocking.length) {
+      errorLines.push(`${where}: ${blocking.map((f) => messageFor(f)).join(" ")}`);
       continue;
     }
+    if (blocking.length !== errors.length) warnLines.push(`${where}: ${sourceTypeLabel(rec.source.type)} from its ${rec.cost[0]?.currency} price - ${errors.map((f) => messageFor(f)).join(" ")}`);
     for (const w of warnings) warnLines.push(`${where}: ${messageFor(w)}`);
     // Imported anyway: the row turns red and the change cannot be sent until it is fixed in the form.
     const clash = rumourClash(rec, state.records);
@@ -2086,6 +2138,11 @@ async function runBatchImport() {
   if (refreshed) parts.push(`${refreshed} item detail change(s) - see the change list`);
   if (current) parts.push(`${current} item(s) already up to date`);
   if (rumoured) parts.push(`${rumoured} as ${sourceTypeLabel("rumour")} (no source yet)`);
+  if (typed) parts.push(`${typed} typed from their price's currency (pick the trader)`);
+  if (pricedRumours) parts.push(`${pricedRumours} Unconfirmed with a price (see Maintenance: has a price but no trader)`);
+  if (offerCount.filled) parts.push(`${offerCount.filled} record(s) given the dump's price or gate`);
+  if (offerCount.replaced) parts.push(`${offerCount.replaced} price(s) or gate(s) replaced from the dump`);
+  if (offerCount.added) parts.push(`${offerCount.added} additional offer(s) added as new records (pick the trader)`);
   if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
   if (droppedPrices) {
     parts.push(`${droppedPrices} price(s) left out (a record with no source carries none)`);
@@ -2096,7 +2153,7 @@ async function runBatchImport() {
   showImportReport(errorLines, warnLines);
 
   if (refreshed > 0) renderFooter();
-  if (imported > 0 || updated > 0) {
+  if (imported > 0 || updated > 0 || offerCount.filled + offerCount.replaced + offerCount.added > 0) {
     state.changedOnly = true;
     const cb = $("#filter-changed");
     if (cb) cb.checked = true;

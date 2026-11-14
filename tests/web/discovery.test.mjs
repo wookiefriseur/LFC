@@ -3,7 +3,7 @@ import test from "node:test";
 import fs from "node:fs";
 import Ajv from "ajv/dist/2020.js";
 import { isIgnoredItem } from "../../docs/ignored-items.js";
-import { parseDiscovery, discoveryKnown, discoveryAsRecipe, dumpKnown } from "../../docs/discovery.js";
+import { parseDiscovery, discoveryKnown, discoveryAsRecipe, dumpKnown, applyOffer, offerTypes, offerTypeSets, offerPlan, recordFromOffer } from "../../docs/discovery.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
 import { ReferenceData } from "../../docs/reference-data.js";
 import { validateRecord, validateBuffer, rumourClash, messageFor } from "../../docs/validate.js";
@@ -181,4 +181,100 @@ test("a discovery of a catalogued item names exactly the details it changes", as
   assert.deepEqual(itemDetailsChanges(reference, { ...published, meta: { ...published.meta, theme: 4 } }), ["theme"]);
   assert.deepEqual(itemDetailsChanges(reference, { name: null, meta: null }), ["name", "icon", "quality", "cat", "sub", "theme"]);
   assert.deepEqual(itemDetailsChanges({ meta: { ...meta, icon: "/esoui/art/icons/icon_missing.dds" } }, published), [], "the placeholder never replaces a real icon");
+});
+
+test("a trader offer is read and checked; a bag line has none", () => {
+  assert.equal(parseDiscovery(sample).offer, undefined);
+  const { offer } = parseDiscovery({ ...sample, offer: { currency: "GOLD", amount: 50000, achievement: 77, extra: 1 } });
+  assert.deepEqual(offer, { currency: "GOLD", amount: 50000, achievement: 77 });
+  for (const bad of [{ currency: "gold", amount: 1 }, { currency: "GOLD", amount: 0 }, { currency: "GOLD", amount: 5, achievement: "x" }, null]) {
+    assert.throws(() => parseDiscovery({ ...sample, offer: bad }), /offer/);
+  }
+});
+
+test("an offer fills and replaces what the dump brings, and never strips what it does not", () => {
+  const contracts = enums.source_type_contracts;
+  const fresh = { id: 1, source: { type: "vendor", vendor: "HGF", subtype: "achievement" }, cost: [], availability: { version: "HOMESTEAD" } };
+  const filled = applyOffer(fresh, { currency: "GOLD", amount: 500, achievement: 42 }, contracts);
+  assert.deepEqual([filled.changed, filled.replaced], [true, []]);
+  assert.deepEqual([filled.record.cost, filled.record.source.achievement], [[{ currency: "GOLD", amount: 500 }], 42]);
+  assert.deepEqual(fresh.cost, [], "the input record is left alone");
+
+  const gated = { ...fresh, source: { ...fresh.source, achievement: 42 }, cost: [{ currency: "GOLD", amount: 500 }, { currency: "AP", amount: 9 }] };
+  const owner = applyOffer(gated, { currency: "GOLD", amount: 500 }, contracts);
+  assert.deepEqual([owner.changed, owner.record.source.achievement], [false, 42],
+    "a dump from a character who owns the achievement keeps the gate");
+
+  const repriced = applyOffer(gated, { currency: "GOLD", amount: 900, achievement: 43 }, contracts);
+  assert.equal(repriced.changed, true);
+  assert.deepEqual(repriced.record.cost, [{ currency: "GOLD", amount: 900 }, { currency: "AP", amount: 9 }], "only the offer's currency is replaced");
+  assert.equal(repriced.record.source.achievement, 43);
+  assert.equal(repriced.replaced.length, 2, "both replacements are described for the report");
+
+  const lux = applyOffer({ id: 2, source: { type: "luxury", vendor: "LUXF" }, cost: [], availability: { version: "HOMESTEAD" } },
+    { currency: "GOLD", amount: 9, achievement: 5 }, contracts);
+  assert.deepEqual([lux.record.cost[0].amount, lux.record.source.achievement], [9, undefined], "no gate where the type has none");
+  const rumour = applyOffer({ id: 3, source: { type: "rumour" }, cost: [], availability: { version: "NONE" } }, { currency: "GOLD", amount: 1, achievement: 5 }, contracts);
+  assert.deepEqual([rumour.record.cost, rumour.record.source], [[{ currency: "GOLD", amount: 1 }], { type: "rumour", achievement: 5 }],
+    "a rumour keeps price and gate");
+  assert.deepEqual(validateRecord(rumour.record, enums).errors, []);
+  assert.equal(applyOffer({ id: 4, source: { type: "drop" }, cost: [] }, { currency: "GOLD", amount: 1 }, contracts).changed, false);
+  assert.deepEqual(validateRecord(filled.record, enums).errors, []);
+});
+
+test("the catalogue names a source type for a currency only one trader type is priced in", () => {
+  const records = enums.source_types.flatMap((kind) => fs.readFileSync(new URL(`../../docs/data/${kind}.jsonl`, import.meta.url), "utf8")
+    .split("\n").filter(Boolean).map((line) => JSON.parse(line)));
+  const types = offerTypes(records);
+  assert.equal(types.get("WRIT_VOUCHERS"), "writ_vendor");
+  assert.equal(types.get("AP"), "pvp_vendor");
+  assert.equal(types.has("GOLD"), false, "Gold is shared by several trader types");
+  assert.equal(types.has("TRADE_BARS"), false, "Trade bars are shared by event vendors and the Crown Store");
+
+  const { record } = parseDiscovery(sample);
+  const writ = recordFromOffer(record, { currency: "WRIT_VOUCHERS", amount: 800, achievement: 42 }, types, enums.source_type_contracts);
+  assert.deepEqual([writ.source, writ.cost, writ.blueprint], [{ type: "writ_vendor", achievement: 42 }, [{ currency: "WRIT_VOUCHERS", amount: 800 }], 400002]);
+  assert.deepEqual(validateRecord(writ, enums).errors.map((f) => [f.code, f.field]), [["required_field_missing", "source.vendor"]],
+    "the trader stays for the contributor to pick, and the record cannot be sent without it");
+  const gold = recordFromOffer(record, { currency: "GOLD", amount: 5, achievement: 9 }, types, enums.source_type_contracts);
+  assert.deepEqual([gold.source, gold.cost], [{ type: "rumour", achievement: 9 }, [{ currency: "GOLD", amount: 5 }]],
+    "an ambiguous currency keeps the item Unconfirmed, with its price and gate");
+  assert.deepEqual(validateRecord(gold, enums).errors, []);
+  assert.equal(recordFromOffer(record, undefined, types, enums.source_type_contracts), null);
+});
+
+test("an offer in another currency is another trader: it never reprices a record of a different currency", () => {
+  const contracts = enums.source_type_contracts;
+  const sets = new Map([["GOLD", new Set(["vendor", "luxury"])], ["AP", new Set(["pvp_vendor"])], ["CROWNS", new Set(["crown_store"])]]);
+  // 117971: the Home Goods Furnisher sells it for gold, a trader in Cyrodiil for Alliance Points; the catalogue knew only the gold one.
+  const hgf = { id: 117971, source: { type: "vendor", vendor: "HGF", subtype: "home_goods", locations: [{ place: "ANY_CAPITAL" }] },
+    cost: [{ currency: "GOLD", amount: 100 }], availability: { version: "HOMESTEAD" } };
+  const ap = offerPlan([hgf], { currency: "AP", amount: 300 }, sets, contracts);
+  assert.equal(ap.kind, "add");
+  assert.deepEqual([ap.record.id, ap.record.source, ap.record.cost], [117971, { type: "pvp_vendor" }, [{ currency: "AP", amount: 300 }]]);
+  assert.deepEqual(validateRecord(ap.record, enums).errors.map((f) => f.code), ["required_field_missing"], "the trader is left to pick");
+  assert.deepEqual(hgf.cost, [{ currency: "GOLD", amount: 100 }], "the gold record is untouched");
+  const gold = offerPlan([hgf], { currency: "GOLD", amount: 100 }, sets, contracts);
+  assert.deepEqual([gold.kind, gold.target, gold.changed], ["apply", hgf, false], "the gold dump confirms the gold record");
+  assert.equal(offerPlan([{ ...hgf, source: { type: "pvp_vendor", vendor: "AF" }, cost: [{ currency: "AP", amount: 300 }] }],
+    { currency: "GOLD", amount: 100 }, sets, contracts).kind, "unrecorded", "gold names no trader type: only a warning");
+
+  const af = { id: 5, source: { type: "pvp_vendor", vendor: "AF", achievement: 2510 }, cost: [{ currency: "AP", amount: 2000000 }], availability: { version: "SCALES" } };
+  const both = [{ ...hgf, id: 5 }, af];
+  const one = offerPlan(both, { currency: "AP", amount: 2000000, achievement: 2511 }, sets, contracts);
+  assert.deepEqual([one.kind, one.target, one.record.source.achievement, one.replaced], ["apply", af, 2511, ["achievement 2510 -> 2511"]],
+    "the currency singles out one of two trader records");
+
+  const twice = [af, { ...af, source: { type: "pvp_vendor", vendor: "BGF" } }];
+  assert.deepEqual(offerPlan(twice, { currency: "AP", amount: 7 }, sets, contracts), { kind: "several", count: 2 }, "two records in the currency: only warned");
+  assert.equal(offerPlan(twice, { currency: "AP", amount: 2000000 }, sets, contracts).kind, "none", "one of them states the offer: nothing to say");
+
+  const pack = { id: 6, source: { type: "crown_store", packs: ["AZURA"] }, cost: [], availability: { version: "MORROWIND" } };
+  const fill = offerPlan([pack, { ...hgf, id: 6 }], { currency: "CROWNS", amount: 900 }, sets, contracts);
+  assert.deepEqual([fill.kind, fill.target, fill.record.cost, fill.replaced], ["apply", pack, [{ currency: "CROWNS", amount: 900 }], []],
+    "an unpriced record of a type priced in that currency is filled");
+  const rumour = { id: 7, source: { type: "rumour" }, cost: [{ currency: "GOLD", amount: 1 }], availability: { version: "NONE" } };
+  const r = offerPlan([rumour], { currency: "AP", amount: 2 }, sets, contracts);
+  assert.deepEqual([r.kind, r.record.cost], ["apply", [{ currency: "AP", amount: 2 }]], "a rumour still takes the dump");
+  assert.equal(offerTypeSets([hgf, af]).get("GOLD").has("vendor"), true);
 });
