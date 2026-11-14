@@ -185,6 +185,7 @@
     "rumour": {
       "required": [],
       "optional": [
+        "achievement",
         "note"
       ]
     },

@@ -161,6 +161,12 @@ class GeneratedDatabaseTests(unittest.TestCase):
         self.assertEqual(db['blueprints'][9000001], 0)
         self.assertIn(rumour, result)
 
+    def test_rumour_price_and_gate_stay_out_of_the_game_data(self):
+        bare = self.row(9900201, {'type': 'rumour'}, cost=[])
+        priced = self.row(9900201, {'type': 'rumour', 'achievement': 42}, cost=[{'currency': 'GOLD', 'amount': 500}])
+        constants, db, _ = self.roundtrip([priced])
+        self.assertEqual(render(constants, db, self.catalogue.labels), render(*self.catalogue.build([bare])[:2], self.catalogue.labels))
+
     def test_deterministic(self):
         first = render(*self.catalogue.build(self.records)[:2])
         shuffled = copy.deepcopy(self.records)

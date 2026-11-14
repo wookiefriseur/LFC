@@ -260,7 +260,10 @@ class Catalogue:
             require(record['container'] in CONTAINER_KINDS, 'unknown container kind')
         result = {k: v for k, v in record.items() if k not in WEB_FIELDS}
         if kind == 'rumour':
-            require(source == {'type': 'rumour'} and not record['cost'] and set(av) == {'version'}, 'rumour carries unsupported details')
+            require(set(source) <= {'type', 'achievement'} and set(av) == {'version'}, 'rumour carries unsupported details')
+            # A dumped price and gate wait on a rumour until its trader is known; like the web fields they stay out of the game data.
+            result['cost'] = []
+            result['source'] = {'type': 'rumour'}
             require(not (set(result) - {'id', 'blueprint', 'source', 'cost', 'availability'}), 'rumour carries unsupported fields')
         elif 'blueprint' in record:
             blueprint = record['blueprint']

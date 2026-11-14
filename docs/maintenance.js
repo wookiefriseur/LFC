@@ -5,7 +5,7 @@ import {
 import { buildTaxonomy, leafOf, renderSourcesSection } from "./taxonomy.js";
 // Imported rather than mirrored: validator and editor must agree on what "a value from a vocabulary" means.
 import { canonicalSource, messageFor, SOURCE_ENUM_FIELD } from "./validate.js";
-import { labelFor, sourceTypeLabel } from "./lexicon.js";
+import { labelFor, sourceTypeLabel, valueLabel } from "./lexicon.js";
 
 // Lists can be thousands of rows. The spacer arithmetic assumes a uniform ROW_H, which a wrapped detail cell breaks, so anything short enough to paint whole is painted whole.
 const ROW_H = 30;
@@ -517,6 +517,21 @@ export function maintenanceMask(deps) {
         return { rows: state.records.filter(r => r.blueprint && !r.id).map(r => ({
           id: r.blueprint, key: r._key, detail: "Furnishing not linked",
         })) };
+      },
+    },
+    pricedrumour: {
+      label: "Has a price but no trader",
+      tip: "Unconfirmed items that carry a price from a trader dump whose currency " +
+           "several kinds of trader use. Open one, pick its source type and trader; " +
+           "the price stays.",
+      compute() {
+        const rows = [];
+        for (const r of state.records) {
+          if (r.source?.type !== "rumour" || !Array.isArray(r.cost) || !r.cost.length) continue;
+          rows.push({ id: r.id ?? r.blueprint, key: r._key,
+            detail: r.cost.map((c) => `${c.amount.toLocaleString()} ${valueLabel("currencies", c.currency)}`).join(" + ") });
+        }
+        return { rows, summary: "" };
       },
     },
     missingname: {
