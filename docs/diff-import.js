@@ -4,6 +4,7 @@ import { canonicalSource, findDuplicateRecord } from "./validate.js";
 import { NAME_KINDS } from "./reference-data.js";
 import { mirror, newKey } from "./data.js";
 import { queueEnumValue } from "./maintenance.js";
+import { itemDetailsChanges } from "./discovery.js";
 
 const BEGIN = "[//]: # (diff-begin)";
 const END = "[//]: # (diff-end)";
@@ -107,6 +108,7 @@ export function planDiff(lines, ctx) {
   const ordered = [...lines].sort((a, b) => (b.line.op === "add-enum") - (a.line.op === "add-enum"));
   const touched = new Set();
   const added = new Set();
+  let published = 0;
   for (const { line, lineNo } of ordered) {
     try {
       checkEnvelope(line);
@@ -142,7 +144,13 @@ export function planDiff(lines, ctx) {
         if (!ctx.records.some((r) => r.id === line.id)) throw new Error(`item ${line.id} is not in the catalogue`);
         if (touched.has(`item:${line.id}`)) throw new Error(`item ${line.id}: details are changed twice`);
         touched.add(`item:${line.id}`);
-        steps.push({ op: "item", id: line.id, reference: clone(line.reference), previous: ctx.publishedItem?.(line.id) ?? null });
+        const previous = ctx.publishedItem?.(line.id) ?? null;
+        // Details the published data already has
+        if (!itemDetailsChanges(line.reference, previous, ctx.metaLocale).length) {
+          published++;
+          continue;
+        }
+        steps.push({ op: "item", id: line.id, reference: clone(line.reference), previous });
       } else if (line.op === "add") {
         const record = line.record;
         if (!record || typeof record !== "object" || record.source?.type !== line.category) throw new Error(`add ${identity(line)}: the record's source type must be ${line.category}`);
@@ -178,6 +186,7 @@ export function planDiff(lines, ctx) {
       errors.push(`line ${lineNo}: ${err.message}`);
     }
   }
+  if (published) warnings.push(`${published} item details already match the published data and were left out`);
   return errors.length ? { steps: [], errors, warnings } : { steps, errors, warnings };
 }
 

@@ -2157,7 +2157,7 @@ async function importDiff(lines, status, complete) {
   const { steps, errors, warnings } = planDiff(lines, {
     records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
     publishedName: (kind, id) => referenceData.publishedName(kind, id),
-    publishedItem,
+    publishedItem, metaLocale: referenceData.metaLocale,
   });
   if (errors.length) {
     status.textContent = `Diff not imported, nothing changed. ${errors.slice(0, 3).join("; ")}`
@@ -2235,11 +2235,17 @@ async function restorePending() {
     const { steps, errors } = planDiff(lines, {
       records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
       publishedName: (kind, id) => referenceData.publishedName(kind, id),
-      publishedItem,
+      publishedItem, metaLocale: referenceData.metaLocale,
     });
     if (errors.length) throw new Error(errors.slice(0, 3).join("; "));
     applySteps(steps, state, referenceData);
-    note.textContent = `Restored ${changeCountText()} you had not sent yet (from ${when}).`;
+    if (state.buffer.size()) {
+      note.textContent = `Restored ${changeCountText()} you had not sent yet (from ${when}).`;
+    } else {
+      // Every saved change is in the published data by now
+      localStorage.removeItem(PENDING_KEY);
+      note.textContent = `Your unsent changes from ${when} are already in the published DB, nothing left to send.`;
+    }
   } catch (err) {
     try {
       localStorage.setItem(PENDING_UNRESTORED_KEY, localStorage.getItem(PENDING_KEY));

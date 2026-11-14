@@ -180,6 +180,13 @@ test("item details round-trip through the diff and refuse an id the catalogue do
   assert.equal(serialiseDiff(replay.buffer), text);
   assert.deepEqual(state.names.last, [id, "Refreshed"]);
 
+  // Details the published data already has are left out: here a German dump whose only difference is the name
+  const meta = { icon: "x", quality: 2, cat: 1, sub: 2, theme: 3 };
+  const german = line({ op: "item", id, reference: { ...reference, locale: "de", meta: { ...reference.meta, name: "Aufgefrischt" } } });
+  const same = planDiff(readDiff(german).lines, { ...ctxOf(replay), metaLocale: "en", publishedItem: () => ({ name: `Item ${id}`, meta }) });
+  assert.deepEqual([same.steps, same.errors], [[], []]);
+  assert.match(same.warnings[0], /1 item details already match/);
+
   const stranger = line({ op: "item", id: 9999977, reference: { ...reference, meta: { ...reference.meta, id: 9999977 } } });
   assert.match(planDiff(readDiff(stranger).lines, ctxOf(replay)).errors[0], /not in the catalogue/);
   assert.match(planDiff(readDiff(line({ op: "item", id, reference: { ...reference, meta: { ...reference.meta, id: 1 } } })).lines,
