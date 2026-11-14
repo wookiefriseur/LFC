@@ -617,7 +617,7 @@
 {"id":120630,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120632,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120634,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
-{"id":120636,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
+{"id":120636,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN","place":"SHADOWFEN_CORIMONT"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
 {"id":120637,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"SHADOWFEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120638,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"MALABAL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120639,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"MALABAL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
@@ -673,9 +673,9 @@
 {"id":120717,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GLENUMBRA"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120718,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GLENUMBRA"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120720,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GLENUMBRA"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
-{"id":120725,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
+{"id":120725,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"HOMESTEAD"}}
 {"id":120741,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
-{"id":120742,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
+{"id":120742,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
 {"id":120948,"source":{"type":"vendor","vendor":"FIGHTERS_STEWARD","locations":[{"place":"GUILD_FIGHTERS"}],"achievement":318,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":100000}],"availability":{"version":"HOMESTEAD"}}
 {"id":120950,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"GOLDCOAST"}],"achievement":1443,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"HOMESTEAD"}}
 {"id":120951,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"RIVENSPIRE"}],"achievement":590,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
@@ -711,10 +711,10 @@
 {"id":121282,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"REAPER"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
 {"id":121283,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"REAPER"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
 {"id":121284,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"STONEFALLS"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
-{"id":121285,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
-{"id":121286,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
-{"id":121287,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
-{"id":121288,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
+{"id":121285,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD"}}
+{"id":121286,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
+{"id":121287,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD"}}
+{"id":121288,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"GRAHTWOOD","place":"GRAHTWOOD_REDFUR"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"HOMESTEAD"}}
 {"id":125481,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"MORROWIND"}}
 {"id":125483,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"MORROWIND"}}
 {"id":125587,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"MORROWIND"}}
@@ -1144,7 +1144,7 @@
 {"id":184204,"source":{"type":"vendor","vendor":"UNDAUNTED_QM","locations":[{"place":"UNDAUNTED"}],"achievement":3114,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"TIDES"}}
 {"id":187779,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"BRETON"}}
 {"id":187780,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":200}],"availability":{"version":"BRETON"}}
-{"id":187781,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
+{"id":187781,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
 {"id":187782,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":700}],"availability":{"version":"BRETON"}}
 {"id":187783,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":3000}],"availability":{"version":"BRETON"}}
 {"id":187784,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":2000}],"availability":{"version":"BRETON"}}
@@ -1157,7 +1157,7 @@
 {"id":187813,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3300,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"BRETON"}}
 {"id":187814,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":1000}],"availability":{"version":"BRETON"}}
 {"id":187815,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3269,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":2000}],"availability":{"version":"BRETON"}}
-{"id":187856,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"BRETON"}}
+{"id":187856,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"HIGHISLE"},{"location":"GALEN"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"BRETON"}}
 {"id":187866,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3304,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"BRETON"}}
 {"id":187867,"source":{"type":"vendor","vendor":"AF","locations":[{"location":"HIGHISLE"}],"achievement":3242,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"BRETON"}}
 {"id":189504,"source":{"type":"vendor","vendor":"UNDAUNTED_QM","locations":[{"place":"UNDAUNTED"}],"achievement":3375,"subtype":"achievement"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"DEPTHS"}}

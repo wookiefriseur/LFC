@@ -963,7 +963,7 @@
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":119405,"id":118050}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":119406,"id":118051}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":119407,"id":118052}
-{"source":{"type":"recipe"},"cost":[],"availability":{"version":"MORROWIND"},"blueprint":121098,"id":118053}
+{"source":{"type":"recipe","note":"Blueprint has been removed"},"cost":[],"availability":{"version":"MORROWIND"},"blueprint":121098,"id":118053}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":121104,"id":118063}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"MARKAT"},"blueprint":119408,"id":118067}
 {"source":{"type":"recipe"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":121120,"id":118080}
