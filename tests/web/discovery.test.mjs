@@ -180,4 +180,5 @@ test("a discovery of a catalogued item names exactly the details it changes", as
   assert.deepEqual(itemDetailsChanges(reference, { ...published, name: "Item 5" }), ["name"]);
   assert.deepEqual(itemDetailsChanges(reference, { ...published, meta: { ...published.meta, theme: 4 } }), ["theme"]);
   assert.deepEqual(itemDetailsChanges(reference, { name: null, meta: null }), ["name", "icon", "quality", "cat", "sub", "theme"]);
+  assert.deepEqual(itemDetailsChanges({ meta: { ...meta, icon: "/esoui/art/icons/icon_missing.dds" } }, published), [], "the placeholder never replaces a real icon");
 });

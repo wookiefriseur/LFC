@@ -114,6 +114,9 @@ def update_reference(files, line, record):
     put_meta(files, reference, record.get('blueprint'))
 
 
+PLACEHOLDER_ICON = 'icon_missing'
+
+
 def put_meta(files, reference, blueprint=None, overwrite_name=False):
     meta = copy.deepcopy(reference['meta'])
     manifest = files.obj('docs/reference-data/manifest.json')
@@ -130,6 +133,9 @@ def put_meta(files, reference, blueprint=None, overwrite_name=False):
     if blueprint is not None:
         meta['blueprint'] = blueprint
     existing = next((r for r in rows if r['id'] == meta['id']), None)
+    # The game's placeholder never replaces a real icon (early PTS dumps blanked 117 that way)
+    if existing is not None and meta['icon'] == PLACEHOLDER_ICON and existing.get('icon') not in (None, '', PLACEHOLDER_ICON):
+        del meta['icon']
     if existing is not None:
         existing.update(meta)
     else:

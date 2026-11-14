@@ -193,6 +193,18 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertIn('-- Refreshed name', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode())
         self.assertEqual(report['operations'], [{'op': 'item', 'id': item, 'name': 'Refreshed name'}])
 
+    def test_placeholder_icon_never_replaces_a_real_one(self):
+        names = json.loads((ROOT / 'docs/data/names.en.json').read_text())
+        item = next(int(k) for k, v in names.items() if v not in ('', f'Item {k}')
+                    and any(r.get('id') == int(k) for r in self.rows))
+        line = self.item_details(item, 'Refreshed name')
+        line['reference']['meta']['icon'] = '/esoui/art/icons/icon_missing.dds'
+        files, _ = self.run_plan(line)
+        shard = next(f for f in files if f.startswith('docs/reference-data/meta/'))
+        row = next(json.loads(s) for s in files[shard].decode().splitlines() if json.loads(s)['id'] == item)
+        self.assertNotEqual(row['icon'], 'icon_missing')
+        self.assertEqual((row['name'], row['quality']), ('Refreshed name', 3), 'the rest of the line still applies')
+
     def test_item_details_need_a_catalogued_item(self):
         with self.assertRaisesRegex(ValueError, 'not in the catalogue'):
             self.run_plan(self.item_details(999993, 'Nobody'))

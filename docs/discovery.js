@@ -45,6 +45,8 @@ export function itemDetailsChanges(reference, published) {
   const had = published?.meta;
   for (const k of DETAIL_FIELDS) {
     const want = k === "icon" ? iconLeaf(m.icon) : m[k];
+    // The game's placeholder never replaces a real icon; the pipeline skips it the same way.
+    if (k === "icon" && want === "icon_missing" && had?.icon && had.icon !== want) continue;
     if (!had || had[k] !== want) changed.push(k);
   }
   return changed;
