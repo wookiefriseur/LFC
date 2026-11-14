@@ -205,6 +205,31 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertNotEqual(row['icon'], 'icon_missing')
         self.assertEqual((row['name'], row['quality']), ('Refreshed name', 3), 'the rest of the line still applies')
 
+    def test_item_details_from_another_language_keep_the_english_name(self):
+        names = json.loads((ROOT / 'docs/data/names.en.json').read_text())
+        item = next(int(k) for k, v in names.items() if v not in ('', f'Item {k}')
+                    and any(r.get('id') == int(k) for r in self.rows))
+        line = self.item_details(item, 'Deutscher Name')
+        line['reference']['locale'] = 'de'
+        files, report = self.run_plan(line)
+        self.assertNotIn('docs/data/names.en.json', files, 'the English name stays')
+        shard = next(f for f in files if f.startswith('docs/reference-data/meta/'))
+        row = next(json.loads(s) for s in files[shard].decode().splitlines() if json.loads(s)['id'] == item)
+        self.assertEqual((row.get('name'), row['icon'], row['quality']), (names[str(item)], 'test', 3), 'the rest of the line applies')
+        self.assertEqual(report['operations'], [{'op': 'item', 'id': item, 'name': names[str(item)]}])
+
+    def test_new_item_from_another_language_has_no_name_yet(self):
+        row = {'id': 230125, 'source': {'type': 'rumour'}, 'cost': [], 'availability': {'version': 'NONE'}}
+        reference = {'format': 'furniture-discovery-v1', 'locale': 'de', 'apiVersion': 101051,
+                     'meta': {'id': row['id'], 'name': 'Neues Möbel', 'icon': '/esoui/art/icons/test.dds',
+                              'quality': 3, 'cat': 1, 'sub': 2, 'theme': 3}}
+        files, _ = self.run_plan({'v': 1, 'op': 'add', 'id': row['id'], 'category': 'rumour', 'record': row, 'reference': reference})
+        self.assertNotIn('230125', json.loads(files.get('docs/data/names.en.json', (ROOT / 'docs/data/names.en.json').read_bytes())))
+        meta = next(json.loads(s) for s in files['docs/reference-data/meta/meta-0230000-0239999.jsonl'].decode().splitlines()
+                    if json.loads(s)['id'] == row['id'])
+        self.assertEqual(meta, {'id': 230125, 'name': '', 'icon': 'test', 'quality': 3, 'cat': 1, 'sub': 2, 'theme': 3})
+        self.assertNotIn('Neues', files['LibFurnitureCatalogue/data/GeneratedDatabase.lua'].decode())
+
     def test_item_details_need_a_catalogued_item(self):
         with self.assertRaisesRegex(ValueError, 'not in the catalogue'):
             self.run_plan(self.item_details(999993, 'Nobody'))

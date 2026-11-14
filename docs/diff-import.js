@@ -223,7 +223,8 @@ export function applySteps(steps, state, referenceData) {
 
 // Shared with the dump import: the change list entry, and the new name and icon shown at once.
 export function applyItemDetails({ id, reference, previous }, state, referenceData) {
-  state.buffer.setItem(id, reference, previous);
+  const keepName = Boolean(referenceData.metaLocale) && reference.locale !== referenceData.metaLocale;
+  state.buffer.setItem(id, reference, previous, keepName);
   referenceData.addDiscovery(reference.meta);
-  state.names.setRefreshedName(id, reference.meta.name);
+  if (!keepName) state.names.setRefreshedName(id, reference.meta.name);
 }

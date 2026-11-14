@@ -176,6 +176,27 @@ test("a discovery of a catalogued item names exactly the details it changes", as
   assert.deepEqual(itemDetailsChanges({ meta: { ...meta, icon: "/esoui/art/icons/icon_missing.dds" } }, published), [], "the placeholder never replaces a real icon");
 });
 
+test("a discovery from a client in another language brings everything but the name", async () => {
+  const { itemDetailsChanges } = await import("../../docs/discovery.js");
+  const { changeRows } = await import("../../docs/changelist.js");
+  const { applyItemDetails } = await import("../../docs/diff-import.js");
+  const published = { name: "Rough Clothesline, Post", meta: { id: 117971, name: "Rough Clothesline, Post", icon: "housing_bad_inc_clothesline001", quality: 2, cat: 7, sub: 36, theme: 1 } };
+  const german = { format: "furniture-discovery-v1", locale: "de", apiVersion: 101051,
+    meta: { id: 117971, name: "Grobe Wäscheleine, Pfosten", icon: "/esoui/art/icons/housing_bad_inc_clothesline001.dds", quality: 2, cat: 7, sub: 36, theme: 1 } };
+  assert.deepEqual(itemDetailsChanges(german, published, "en"), [], "matching details: nothing to change");
+  const newIcon = { ...german, meta: { ...german.meta, icon: "/esoui/art/icons/housing_bad_inc_clothesline002.dds" } };
+  assert.deepEqual(itemDetailsChanges(newIcon, published, "en"), ["icon"], "only the icon changes");
+  assert.deepEqual(itemDetailsChanges({ ...newIcon, locale: "en" }, published, "en"), ["name", "icon"]);
+
+  const refreshed = [];
+  const state = { buffer: new DirtyBuffer(), names: { setRefreshedName: (id, name) => refreshed.push(name) } };
+  applyItemDetails({ id: 117971, reference: newIcon, previous: published }, state, { metaLocale: "en", addDiscovery() {} });
+  assert.deepEqual(refreshed, [], "the English name shown on the site stays");
+  const rows = changeRows(state.buffer);
+  assert.deepEqual(rows.map((r) => r.field), ["item.meta"], "no name change in the change list");
+  assert.equal(rows[0].item, "Rough Clothesline, Post (117971)");
+});
+
 test("a discovery whose furniture category is 0 is refused as not furniture", () => {
   // From the 2026-11-13 datamine (API 101051): equipment, not a furnishing.
   const line = {"format":"furniture-discovery-v1","locale":"en","apiVersion":101051,"record":{"id":101051,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}},"meta":{"cat":0,"icon":"/esoui/art/icons/icon_missing.dds","id":101051,"name":"Smuggler's Shoes","quality":1,"sub":0,"theme":0}};

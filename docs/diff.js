@@ -78,10 +78,10 @@ export class DirtyBuffer {
     this.changed();
     return key;
   }
-  // A catalogued item's metadata and game name from a discovery; `previous` is the published {name, meta}, for the change list only.
-  setItem(id, reference, previous) {
+  // A catalogued item's metadata and game name from a discovery; `previous` is the published {name, meta}, for the change list only. `keepName`: the discovery is in another language, so its name changes nothing.
+  setItem(id, reference, previous, keepName = false) {
     const key = `item:${id}`;
-    this.entries.set(key, { op: "item", key, id, reference, previous: previous ?? null });
+    this.entries.set(key, { op: "item", key, id, reference, previous: previous ?? null, ...(keepName ? { keepName } : {}) });
     this.changed();
     return key;
   }

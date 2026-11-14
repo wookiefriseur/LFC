@@ -118,11 +118,15 @@ PLACEHOLDER_ICON = 'icon_missing'
 
 
 def put_meta(files, reference, blueprint=None, overwrite_name=False):
+    """Returns whether the discovery's name was taken: a dump from a client in another language brings everything but the name, and the English name stays."""
     meta = copy.deepcopy(reference['meta'])
     manifest = files.obj('docs/reference-data/manifest.json')
     dataset = manifest['datasets']['meta']
-    require(reference['locale'] == dataset['locale'], 'discovery locale differs from the metadata dataset')
-    add_name(files, meta['id'], meta['name'], overwrite_name)
+    named = reference['locale'] == dataset['locale']
+    if named:
+        add_name(files, meta['id'], meta['name'], overwrite_name)
+    else:
+        del meta['name']
     size = manifest['shard_size']
     low = meta['id'] // size * size
     name = f'meta/meta-{low:07d}-{low + size - 1:07d}.jsonl'
@@ -139,7 +143,8 @@ def put_meta(files, reference, blueprint=None, overwrite_name=False):
     if existing is not None:
         existing.update(meta)
     else:
-        rows.append(meta)
+        # A row without a known name carries an empty one, as the rows of the unnamed items already do.
+        rows.append(meta if named else {'id': meta['id'], 'name': '', **meta})
     rows.sort(key=lambda r: r['id'])
     data = ''.join(json.dumps(r, ensure_ascii=False, separators=(',', ':')) + '\n' for r in rows).encode()
     files.put(path, data)
@@ -151,6 +156,7 @@ def put_meta(files, reference, blueprint=None, overwrite_name=False):
     dataset['shards'].sort(key=lambda s: s['id_min'])
     dataset['id_max'] = max(s['id_max'] for s in dataset['shards'])
     files.put_obj('docs/reference-data/manifest.json', manifest)
+    return named
 
 
 def update_name(files, line):
@@ -250,8 +256,9 @@ def apply(lines, root=ROOT, lua_command=None):
             # Item details refresh a catalogued item's metadata and game name from a discovery; records stay as they are
             require(line['reference']['meta']['id'] == line['id'], 'item details must address their own id')
             require(any(r.get('id') == line['id'] for rows in groups.values() for r in rows), f'item {line["id"]}: not in the catalogue')
-            put_meta(files, line['reference'], overwrite_name=True)
-            summaries.append({'op': 'item', 'id': line['id'], 'name': line['reference']['meta']['name']})
+            named = put_meta(files, line['reference'], overwrite_name=True)
+            name = line['reference']['meta']['name'] if named else files.obj('docs/data/names.en.json').get(str(line['id']), '')
+            summaries.append({'op': 'item', 'id': line['id'], 'name': name})
             continue
         kind = line['category']
         require(kind in groups, f'unknown source file: {kind}')

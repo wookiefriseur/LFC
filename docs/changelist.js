@@ -240,11 +240,13 @@ export function changeRows(bufferOrEntries, ctx = {}) {
       const now = entry.reference.meta;
       const had = entry.previous?.meta;
       const describe = (m) => (m ? `quality ${m.quality}, category ${m.cat}/${m.sub}, theme ${m.theme}, icon ${iconLeaf(m.icon)}` : "(none)");
+      // A discovery in another language brings no name: the English one stays.
+      const name = entry.keepName ? entry.previous?.name || "" : now.name;
       const common = {
-        entryKey: entry.key, op: entry.op, itemId: entry.id, itemName: now.name,
-        item: `${now.name} (${entry.id})`, record: "item details", markers: [], siteOnly: false,
+        entryKey: entry.key, op: entry.op, itemId: entry.id, itemName: name,
+        item: `${name} (${entry.id})`, record: "item details", markers: [], siteOnly: false,
       };
-      if (now.name !== (entry.previous?.name ?? null)) {
+      if (!entry.keepName && now.name !== (entry.previous?.name ?? null)) {
         rows.push({ ...common, field: "item.name", what: "Game name", before: entry.previous?.name || "(none)", after: now.name });
       }
       if (describe(had) !== describe(now)) {

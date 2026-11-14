@@ -2000,6 +2000,7 @@ async function runBatchImport() {
   let asRecipe = 0;
   let typed = 0;
   let pricedRumours = 0;
+  let foreignNames = 0;
   const offerCount = { filled: 0, replaced: 0, added: 0 };
   const currencyTypes = offerTypes(state.records);
   const typeSets = offerTypeSets(state.records);
@@ -2018,11 +2019,12 @@ async function runBatchImport() {
       continue;
     }
     if (c.offer) offerToCatalogue(c, warnLines, offerCount, typeSets);
+    if (c.reference && c.reference.locale !== referenceData.metaLocale && c.reference.meta.name !== (state.names?.base[rec.id] ?? null)) foreignNames++;
     // A discovery line for a catalogued furnishing becomes an item-details change when it says something the published data does not.
     if (refreshable(c)) {
       const queued = state.buffer.entries.get(`item:${rec.id}`)?.reference;
       if (JSON.stringify(queued?.meta) !== JSON.stringify(c.reference.meta)
-          && itemDetailsChanges(c.reference, publishedItem(rec.id)).length) {
+          && itemDetailsChanges(c.reference, publishedItem(rec.id), referenceData.metaLocale).length) {
         applyItemDetails({ id: rec.id, reference: c.reference, previous: publishedItem(rec.id) }, state, referenceData);
         refreshed++;
       } else {
@@ -2127,6 +2129,7 @@ async function runBatchImport() {
   if (offerCount.filled) parts.push(`${offerCount.filled} record(s) given the dump's price or gate`);
   if (offerCount.replaced) parts.push(`${offerCount.replaced} price(s) or gate(s) replaced from the dump`);
   if (offerCount.added) parts.push(`${offerCount.added} additional offer(s) added as new records (pick the trader)`);
+  if (foreignNames) parts.push(`${foreignNames} name(s) in another language left out (the English name stays)`);
   if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
   if (warnLines.length) parts.push(`${warnLines.length} warning(s)`);
   if (errorLines.length) parts.push(`${errorLines.length} error(s)`);

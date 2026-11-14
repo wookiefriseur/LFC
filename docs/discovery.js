@@ -49,11 +49,11 @@ export function iconLeaf(icon) {
 
 const DETAIL_FIELDS = ["icon", "quality", "cat", "sub", "theme"];
 
-// What a discovery of a catalogued item would change in the published {name, meta}: the changed field names, empty when it says nothing new.
-export function itemDetailsChanges(reference, published) {
+// What a discovery of a catalogued item would change in the published {name, meta}: the changed field names, empty when it says nothing new. A discovery in another language than `locale` (the site's metadata) brings everything but the name.
+export function itemDetailsChanges(reference, published, locale = reference.locale) {
   const m = reference.meta;
   const changed = [];
-  if (m.name !== (published?.name ?? null)) changed.push("name");
+  if (reference.locale === locale && m.name !== (published?.name ?? null)) changed.push("name");
   const had = published?.meta;
   for (const k of DETAIL_FIELDS) {
     const want = k === "icon" ? iconLeaf(m.icon) : m[k];

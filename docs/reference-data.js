@@ -108,6 +108,11 @@ export class ReferenceData {
     return this.manifest?.datasets?.names?.locale || "en";
   }
 
+  // The language of the item metadata and names: a discovery from a client in another language brings everything but the name.
+  get metaLocale() {
+    return this.manifest?.datasets?.meta?.locale || "en";
+  }
+
   // Resolves once the names are loaded, or known to be absent. Absent is not an error: callers show the id alone.
   loadNames() {
     if (this.names) return Promise.resolve(this.names);

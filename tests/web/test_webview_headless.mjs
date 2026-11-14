@@ -2635,6 +2635,34 @@ test("item details: Maintenance requests the ids, and a discovery of a published
   assert((await pasteImport(page, line)).includes("1 item(s) already up to date"), "a repeat paste changed something");
 });
 
+test("item details: a German dump brings everything but the name", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  const meta = await page.evaluate(async () => {
+    const manifest = await (await fetch("reference-data/manifest.json")).json();
+    const ids = new Set(window.__proto.records().filter((r) => Number.isInteger(r.id) && r.source?.type !== "ignored").map((r) => r.id));
+    for (const shard of manifest.datasets.meta.shards) {
+      const rows = (await (await fetch(`reference-data/${shard.file}`)).text()).split("\n").filter(Boolean).map((l) => JSON.parse(l));
+      const row = rows.find((r) => ids.has(r.id) && r.name && r.icon && r.icon !== "icon_missing" && !r.blueprint);
+      if (row) return row;
+    }
+    return null;
+  });
+  const line = (icon) => JSON.stringify({ format: "furniture-discovery-v1", locale: "de", apiVersion: 101051, record: { id: meta.id },
+    meta: { id: meta.id, name: "Deutscher Name", quality: meta.quality, cat: meta.cat, sub: meta.sub, theme: meta.theme,
+      icon: `/esoui/art/icons/${icon}.dds` } });
+  const same = await pasteImport(page, line(meta.icon));
+  assert(same.includes("1 name(s) in another language left out") && same.includes("1 item(s) already up to date"),
+    `a German dump of matching details changed something: "${same}"`);
+  const moved = await pasteImport(page, line("housing_test_de001"));
+  assert(moved.includes("1 item detail change"), `the new icon is not an item change: "${moved}"`);
+  const report = await page.evaluate(() => document.querySelector("#adv-import-report")?.textContent || "");
+  const lines = await diffLines(page);
+  assertEq(JSON.stringify(lines.map((l) => [l.op, l.reference?.locale])), JSON.stringify([["item", "de"]]), "not one German item line");
+  assert(!report.includes("Deutscher Name"), "the German name is reported as a change");
+});
+
 test("discovery: a new blueprint of a confirmed item becomes a recipe, and problems are named", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
