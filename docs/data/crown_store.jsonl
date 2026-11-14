@@ -317,7 +317,7 @@
 {"id":120751,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
 {"id":120752,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
 {"id":120756,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":10}],"availability":{"version":"HOMESTEAD"}}
-{"id":120760,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":50}],"availability":{"version":"HOMESTEAD"}}
+{"id":120760,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":20}],"availability":{"version":"HOMESTEAD"}}
 {"id":120765,"source":{"type":"crown_store","packs":["JESTER"]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120765,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":15}],"availability":{"version":"HOMESTEAD"}}
 {"id":120766,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":15}],"availability":{"version":"HOMESTEAD"}}
@@ -1103,7 +1103,7 @@
 {"id":151875,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":560}],"availability":{"version":"KITTY"}}
 {"id":151876,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":590}],"availability":{"version":"KITTY"}}
 {"id":151877,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":590}],"availability":{"version":"KITTY"}}
-{"id":151878,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":450}],"availability":{"version":"KITTY"}}
+{"id":151878,"source":{"type":"crown_store","subtype":"housing_editor","note":"Not currently in game."},"cost":[{"currency":"CROWNS","amount":450}],"availability":{"version":"KITTY"}}
 {"id":151879,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":560}],"availability":{"version":"KITTY"}}
 {"id":151880,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":640}],"availability":{"version":"KITTY"}}
 {"id":151881,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":640}],"availability":{"version":"KITTY"}}

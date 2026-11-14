@@ -214,7 +214,7 @@
 {"id":120732,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120733,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":120734,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120735,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
+{"id":120735,"source":{"type":"housing","houses":[1099,1086,1083,1096]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120736,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120737,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120738,"source":{"type":"housing","houses":[1099]},"cost":[],"availability":{"version":"HOMESTEAD"}}
