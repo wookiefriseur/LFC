@@ -176,6 +176,12 @@ test("a discovery of a catalogued item names exactly the details it changes", as
   assert.deepEqual(itemDetailsChanges({ meta: { ...meta, icon: "/esoui/art/icons/icon_missing.dds" } }, published), [], "the placeholder never replaces a real icon");
 });
 
+test("a discovery whose furniture category is 0 is refused as not furniture", () => {
+  // From the 2026-11-13 datamine (API 101051): equipment, not a furnishing.
+  const line = {"format":"furniture-discovery-v1","locale":"en","apiVersion":101051,"record":{"id":101051,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}},"meta":{"cat":0,"icon":"/esoui/art/icons/icon_missing.dds","id":101051,"name":"Smuggler's Shoes","quality":1,"sub":0,"theme":0}};
+  assert.throws(() => parseDiscovery(line), (err) => err.code === "NOT_FURNITURE" && err.message.includes("101051"));
+});
+
 test("a trader offer is read and checked; a bag line has none", () => {
   assert.equal(parseDiscovery(sample).offer, undefined);
   const { offer } = parseDiscovery({ ...sample, offer: { currency: "GOLD", amount: 50000, achievement: 77, extra: 1 } });

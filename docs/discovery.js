@@ -28,6 +28,12 @@ export function parseDiscovery(value) {
     }
     throw err;
   }
+  // Category 0 is no furniture category: a datamine also meets equipment (e.g. 101051 Smuggler's Shoes).
+  if (meta.cat === 0) {
+    const err = new Error(`item ${record.id}: "${meta.name}" is not a furnishing (furniture category 0)`);
+    err.code = "NOT_FURNITURE";
+    throw err;
+  }
   // Copy only the contract fields. Acquisition cannot be inferred from an ID scan.
   const cleanRecord = { id: record.id, ...(record.blueprint === undefined ? {} : { blueprint: record.blueprint }),
     source: { type: "rumour" }, cost: [], availability: { version: "NONE" } };
