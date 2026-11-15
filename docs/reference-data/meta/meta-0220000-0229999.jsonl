@@ -333,16 +333,16 @@
 {"id":224856,"name":"Tapestry of the Prince's Hunt","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_hircinetapestry001"}
 {"id":224857,"name":"Window of Divinity","quality":4,"cat":11,"sub":126,"theme":2,"icon":"housing_bre_str_housingstainglassint001"}
 {"id":224858,"name":"Zenithar Devotional Stele","quality":5,"cat":7,"sub":107,"theme":2,"icon":"housing_bre_exc_zenitharinset001"}
-{"id":224859,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224860,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224861,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224862,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224863,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224864,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224865,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224866,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224867,"name":"","quality":0,"icon":"icon_missing"}
-{"id":224868,"name":"","quality":0,"icon":"icon_missing"}
+{"id":224859,"name":"Necrom Brazier, Cold-Flame","quality":4,"icon":"housing_tlv_str_housingnecmlemarker001","cat":11,"sub":124,"theme":6}
+{"id":224860,"name":"Imperial Brazier, Cold-Flame","quality":4,"icon":"housing_col_str_housingmilemarkealtflame001","cat":11,"sub":124,"theme":11}
+{"id":224861,"name":"Ayleid Cage, Spiked","quality":4,"icon":"housing_iad_inc_cage002","cat":7,"sub":77,"theme":14}
+{"id":224862,"name":"Daedric Cage, Bladed","quality":3,"icon":"housing_cld_inc_cage001","cat":7,"sub":77,"theme":13}
+{"id":224863,"name":"Ichor Splatter","quality":2,"icon":"housing_uni_exc_icereachwitchdecal006","cat":14,"sub":167,"theme":1}
+{"id":224864,"name":"Witch's Infernal Hat, Decorative","quality":3,"icon":"housing_uni_inc_witchesinfernalhat001","cat":7,"sub":106,"theme":1}
+{"id":224865,"name":"Yokudan Burial Relief, Noble","quality":4,"icon":"housing_red_cem_housingyukodantombdoors004","cat":7,"sub":76,"theme":10}
+{"id":224866,"name":"Breton Monument, Tall Mossy","quality":3,"icon":"housing_sys_cem_monumenttall001","cat":7,"sub":76,"theme":2}
+{"id":224867,"name":"Orcish Statue, Blacksmith","quality":5,"icon":"housing_uni_inc_oathsworntotemwar001","cat":6,"sub":70,"theme":9}
+{"id":224868,"name":"Dark Elf Statue, Mage","quality":5,"icon":"housing_dun_exc_housinglightstatue001","cat":6,"sub":70,"theme":6}
 {"id":224869,"name":"Breton Drapes, Maroon","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_bre_inc_drapes002","blueprint":225089}
 {"id":224870,"name":"Breton Drapes, Sage","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_bre_inc_drapesa002","blueprint":225090}
 {"id":224871,"name":"Breton Trellis, Wooden","quality":4,"cat":13,"sub":164,"theme":2,"icon":"housing_bre_str_reminthousetrellece001","blueprint":225091}
@@ -432,7 +432,7 @@
 {"id":225025,"name":"Teeba-Enoo Ball, Patchwork Leather","quality":3,"cat":3,"sub":56,"theme":2,"icon":"housing_uni_exc_emoteu44teebatrickball001"}
 {"id":225026,"name":"Chef Hat, Decorative","quality":2,"cat":10,"sub":96,"theme":2,"icon":"housing_uni_exc_npcchefhat001"}
 {"id":225027,"name":"Cheese Crumbs, Echatere","quality":3,"cat":8,"sub":155,"theme":2,"icon":"housing_gen_inc_housingcheesecrumbs001"}
-{"id":225028,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225028,"name":"Witches Fest, Plunder Skull Basket","quality":3,"icon":"housing_uni_inc_emoteplunderskull001","cat":3,"sub":56,"theme":15}
 {"id":225029,"name":"Boulders, Mossy Cluster","quality":2,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tancluslgt003_rf"}
 {"id":225030,"name":"Boulder, Round Mossy Striated","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tanlgt006_rf"}
 {"id":225031,"name":"Boulder, Angular Mossy Striated","quality":3,"cat":12,"sub":152,"theme":1,"icon":"housing_rok_mos_tanlgt007_rf"}
@@ -510,49 +510,49 @@
 {"id":225195,"name":"Aspect of the Mad God, Anger","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfaceanger001"}
 {"id":225196,"name":"Aspect of the Mad God, Amusement","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfacegrin001"}
 {"id":225197,"name":"Aspect of the Mad God, Laughter","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_uni_exc_shiveringfacelaugh001"}
-{"id":225337,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225343,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225344,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225345,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225346,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225347,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225348,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225349,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225350,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225351,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225352,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225353,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225354,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225355,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225356,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225357,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225358,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225359,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225360,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225364,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225365,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225366,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225367,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225368,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225369,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225370,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225371,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225372,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225373,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225374,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225375,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225404,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225405,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225406,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225407,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225408,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225409,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225410,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225411,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225412,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225413,"name":"","quality":0,"icon":"icon_missing"}
-{"id":225414,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226738,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225337,"name":"Freaking Big Boi Butterfly!","quality":5,"icon":"icon_missing","cat":25,"sub":98,"theme":12}
+{"id":225343,"name":"Harbingers Door","quality":5,"icon":"housing_uni_str_recallofthedevoutdoor002","cat":13,"sub":163,"theme":1}
+{"id":225344,"name":"Harbingers Chandelier","quality":5,"icon":"housing_uni_lsb_stainedglasschandelier001","cat":11,"sub":125,"theme":1}
+{"id":225345,"name":"Harbingers Fireplace","quality":5,"icon":"housing_uni_str_gothicfireplacedoor001","cat":13,"sub":163,"theme":1}
+{"id":225346,"name":"Harbingers Candle, Giant","quality":5,"icon":"housing_uni_inc_u51giantdivinegothiccandle001","cat":11,"sub":129,"theme":1}
+{"id":225347,"name":"Harbingers Candle, Small","quality":5,"icon":"housing_cld_lsb_u51candlesticktalldark001","cat":11,"sub":129,"theme":1}
+{"id":225348,"name":"Harbingers Candle, Large","quality":5,"icon":"housing_cld_lsb_u51candlesticklargedark001","cat":11,"sub":129,"theme":1}
+{"id":225349,"name":"Harbingers Candles, Small Cluster","quality":5,"icon":"housing_cld_lsb_u51candlesetdark001","cat":11,"sub":129,"theme":1}
+{"id":225350,"name":"Harbingers Candles, Large Cluster","quality":5,"icon":"housing_cld_lsb_u51candlesetdark002","cat":11,"sub":129,"theme":1}
+{"id":225351,"name":"Aspect of the Mad God, Fury","quality":5,"icon":"housing_uni_exc_housingshiveringfaceanger001","cat":6,"sub":70,"theme":13}
+{"id":225352,"name":"Aspect of the Mad God, Dementia","quality":5,"icon":"housing_uni_exc_housingshiveringfacegrin001","cat":6,"sub":70,"theme":13}
+{"id":225353,"name":"Aspect of the Mad God, Mania","quality":5,"icon":"housing_uni_exc_housingshiveringfacelaugh001","cat":6,"sub":70,"theme":13}
+{"id":225354,"name":"Butterfly Flock, Ephemeral","quality":5,"icon":"housing_u51_ephemeralbutterflycluster","cat":14,"sub":167,"theme":13}
+{"id":225355,"name":"Target Butterfly, Ephemeral Monarch","quality":5,"icon":"housing_u51_ephemeralmonarch","cat":25,"sub":98,"theme":13}
+{"id":225356,"name":"Target Butterfly, Ephemeral Mara's Blush","quality":5,"icon":"housing_u51_ephemeralmorpho","cat":25,"sub":98,"theme":13}
+{"id":225357,"name":"Mushroom, Large Baldcap","quality":4,"icon":"housing_veg_fug_housingshiveringisles001","cat":12,"sub":143,"theme":13}
+{"id":225358,"name":"Mushroom, Medium Baldcap","quality":4,"icon":"housing_veg_fug_housingshiveringisles002","cat":12,"sub":143,"theme":13}
+{"id":225359,"name":"Mushroom, Giant Clawcap Cluster","quality":4,"icon":"housing_veg_fug_housingshiveringisles003","cat":12,"sub":143,"theme":13}
+{"id":225360,"name":"Mushroom, Small Baldcap","quality":4,"icon":"housing_veg_fug_housingshiveringisles004","cat":12,"sub":143,"theme":13}
+{"id":225364,"name":"Beauty Goddess Blanket","quality":4,"icon":"housing_uni_exc_heartsweekpicnicblanket001","cat":3,"sub":53,"theme":1}
+{"id":225365,"name":"Beauty Goddess Shade","quality":5,"icon":"housing_uni_exc_heartsweekparasol001","cat":3,"sub":56,"theme":1}
+{"id":225366,"name":"Beauty Goddess Cake","quality":5,"icon":"housing_uni_inc_heartsweekcake001","cat":8,"sub":156,"theme":1}
+{"id":225367,"name":"Beauty Goddess Cake Slice","quality":4,"icon":"housing_uni_inc_heartsweekcakeslice001","cat":8,"sub":156,"theme":1}
+{"id":225368,"name":"Beauty Goddess Lantern","quality":4,"icon":"housing_uni_lsb_heartsweeklantern001","cat":11,"sub":121,"theme":1}
+{"id":225369,"name":"Beauty Goddess Seat Cushion","quality":4,"icon":"housing_uni_exc_heartsweekpillow001","cat":2,"sub":51,"theme":1}
+{"id":225370,"name":"Beauty Goddess Picnic Basket","quality":4,"icon":"housing_uni_exc_heartsweekpicnicbasket001","cat":8,"sub":87,"theme":1}
+{"id":225371,"name":"Cherry Blossom Petals, Large Blanket","quality":4,"icon":"housing_uni_exc_cherryblossompetalcarpet001","cat":3,"sub":53,"theme":1}
+{"id":225372,"name":"Cherry Blossom Petals, Small Blanket","quality":4,"icon":"housing_uni_exc_cherryblossompetalcarpet002","cat":3,"sub":53,"theme":1}
+{"id":225373,"name":"Alinor Tree, Cherry Blossom","quality":4,"icon":"housing_tre_dec_housingcherryblossom001","cat":12,"sub":108,"theme":1}
+{"id":225374,"name":"Alinor Tree, Large Cherry Blossom","quality":4,"icon":"housing_tre_dec_housingcherryblossom004","cat":12,"sub":108,"theme":1}
+{"id":225375,"name":"Alinor Tree, Cherry Blossom Canopy","quality":4,"icon":"housing_tre_dec_housingcherryblossom002","cat":12,"sub":108,"theme":1}
+{"id":225404,"name":"Carnaval Tent, Enclosed","quality":4,"icon":"housing_sol_cmp_sanguinefairtentround001","cat":13,"sub":114,"theme":13}
+{"id":225405,"name":"Carnaval Wall, Long Rectangular Cloth","quality":3,"icon":"housing_sol_cmp_sanguinefairtentwall001","cat":13,"sub":164,"theme":13}
+{"id":225406,"name":"Carnaval Wagon, Covered","quality":4,"icon":"housing_sol_cmp_sanguinefairwagon001","cat":6,"sub":71,"theme":13}
+{"id":225407,"name":"Colovian Throne, Noble","quality":5,"icon":"housing_chl_fur_thronehigh001","cat":9,"sub":93,"theme":11}
+{"id":225408,"name":"Tapestry, Sanguine","quality":4,"icon":"housing_dae_lsb_bannersanguine001","cat":3,"sub":58,"theme":13}
+{"id":225409,"name":"Vines, Verdant Rose Ivy Swath","quality":4,"icon":"housing_veg_bad_housingredflowerivy001","cat":12,"sub":112,"theme":1}
+{"id":225410,"name":"Vines, Rose Ivy Curtain","quality":4,"icon":"housing_veg_bad_housingredflowerivy003","cat":12,"sub":112,"theme":1}
+{"id":225411,"name":"Vines, Rose Ivy Swath","quality":4,"icon":"housing_veg_bad_housingredflowerivy008","cat":12,"sub":112,"theme":1}
+{"id":225412,"name":"Vines, Rose Ivy Drape","quality":3,"icon":"housing_veg_bad_housingredflowerivy009","cat":12,"sub":112,"theme":1}
+{"id":225413,"name":"Flowers, Small Rose Ivy Patch","quality":3,"icon":"housing_veg_bad_housingredflowerivy011","cat":12,"sub":112,"theme":1}
+{"id":225414,"name":"Flowers, Large Rose Ivy Patch","quality":3,"icon":"housing_veg_bad_housingredflowerivy012","cat":12,"sub":112,"theme":1}
+{"id":226738,"name":"Dwarven Diving Chamber, Replica","quality":4,"icon":"housing_uni_exc_highseasdivebell001","cat":10,"sub":96,"theme":12}
 {"id":226739,"name":"Undaunted Tent, Elevated","icon":"housing_uni_cmp_undauntedtent001","quality":5,"cat":13,"sub":185,"theme":2}
 {"id":226740,"name":"Breton Bust, Veiled","icon":"housing_bre_inc_statuebust001","quality":5,"cat":9,"sub":92,"theme":2}
 {"id":226741,"name":"Breton Footbridge, Quaint","icon":"housing_bre_str_housingbridgefoot001","quality":5,"cat":13,"sub":117,"theme":2}
@@ -561,36 +561,36 @@
 {"id":226744,"name":"Cheese Pile, Impressive","icon":"housing_gen_inc_housingcheesepilegiant001","quality":5,"cat":8,"sub":155,"theme":2}
 {"id":226745,"name":"Token of Mara","icon":"housing_uni_exc_u47maraamulet001","quality":5,"cat":7,"sub":107,"theme":13}
 {"id":226746,"name":"Mural, Fluffy Clouds Tile","icon":"housing_vrd_str_housingceiling_sky001","quality":4,"cat":13,"sub":138,"theme":6}
-{"id":226747,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226748,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226749,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226750,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226751,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226752,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226753,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226754,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226747,"name":"Fossil, Giant Sea Beast Tail","quality":5,"icon":"housing_uni_exc_aquaticfossilmossosaurus002","cat":7,"sub":75,"theme":1}
+{"id":226748,"name":"Fossil, Giant Sea Beast Head","quality":5,"icon":"housing_uni_exc_aquaticfossilmossosaurus003","cat":7,"sub":75,"theme":1}
+{"id":226749,"name":"Fossil, Mudcrab","quality":4,"icon":"housing_uni_exc_aquaticfossilmudcrab001","cat":7,"sub":75,"theme":1}
+{"id":226750,"name":"Fossil, Mud Hopper","quality":4,"icon":"housing_uni_exc_aquaticfossilmudhopper001","cat":7,"sub":75,"theme":1}
+{"id":226751,"name":"Fossil, Slaughterfish","quality":4,"icon":"housing_uni_exc_aquaticfossilslaughterfish001","cat":7,"sub":75,"theme":1}
+{"id":226752,"name":"Fossil, Yaghra","quality":4,"icon":"housing_uni_exc_aquaticfossilyaghra001","cat":7,"sub":75,"theme":1}
+{"id":226753,"name":"Aquarium, Conjured Sphere","quality":5,"icon":"housing_uni_exc_fishsphere001","cat":14,"sub":162,"theme":1}
+{"id":226754,"name":"Cursed Ship's Bell","quality":2,"icon":"housing_uni_exc_highseasshipbell001","cat":3,"sub":55,"theme":2}
 {"id":226755,"name":"Driftwood Bowl","icon":"housing_uni_fur_hsotdriftwoodbowl001","quality":2,"cat":8,"sub":81,"theme":2}
 {"id":226756,"name":"Driftwood Divider, Folding","icon":"housing_uni_fur_hsotdriftwooddivider001","quality":3,"cat":2,"sub":47,"theme":2}
 {"id":226757,"name":"Driftwood Arrangement, Hanging","icon":"housing_uni_fur_hsotdriftwoodwalldeco001","quality":3,"cat":9,"sub":89,"theme":2}
-{"id":226758,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226759,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226760,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226761,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226758,"name":"Bountiful Treasure Chest","quality":5,"icon":"housing_uni_fur_hstreasurechest001","cat":9,"sub":91,"theme":2}
+{"id":226759,"name":"Book, Ship's Log","quality":4,"icon":"housing_uni_inc_captainslogbook001","cat":4,"sub":62,"theme":2}
+{"id":226760,"name":"Pirate Flag, Sea Elf","quality":4,"icon":"housing_uni_inc_highseasmaormerflag001","cat":3,"sub":58,"theme":1}
+{"id":226761,"name":"Golden King of the Abecean Sea","quality":5,"icon":"housing_uni_inc_hspirateskeleton001","cat":7,"sub":75,"theme":2}
 {"id":226762,"name":"Scrimshaw, Horn","icon":"housing_uni_inc_hsscrimshawcarving001","quality":3,"cat":3,"sub":56,"theme":2}
 {"id":226763,"name":"Scrimshaw, Skull","icon":"housing_uni_inc_hsscrimshawcarving002","quality":3,"cat":3,"sub":56,"theme":2}
 {"id":226764,"name":"Scrimshaw, Tooth","icon":"housing_uni_inc_hsscrimshawcarving003","quality":3,"cat":3,"sub":56,"theme":2}
-{"id":226765,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226765,"name":"Ship in a Bottle, Yokudan","quality":4,"icon":"housing_uni_inc_hsshipbottle001","cat":9,"sub":91,"theme":2}
 {"id":226766,"name":"Fountain, Grand Seashell","icon":"housing_uni_str_fountainseashell001","quality":5,"cat":6,"sub":74,"theme":1}
 {"id":226767,"name":"Sandcastle, Abecean Seafloor","icon":"housing_uni_inc_hsseashelldollhouse001","quality":4,"cat":3,"sub":56,"theme":1}
 {"id":226768,"name":"Ancient Dwarven Mechanism","icon":"housing_uni_inc_hsantikythera001","quality":5,"cat":10,"sub":159,"theme":1}
-{"id":226769,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226769,"name":"Ship Figurehead, Yokudan","quality":5,"icon":"housing_uni_exc_hsshipfigurehead001","cat":9,"sub":91,"theme":1}
 {"id":226770,"name":"Fish Bowl, Small","icon":"housing_uni_inc_fishbowl001","quality":5,"cat":14,"sub":162,"theme":1}
-{"id":226771,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226772,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226773,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226774,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226775,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226776,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226771,"name":"Driftwood Sculpture, Large","quality":3,"icon":"housing_uni_inc_driftwoodsculpture002","cat":9,"sub":91,"theme":1}
+{"id":226772,"name":"Nexus Orrery, Replica","quality":5,"icon":"housing_uni_exc_conformalmap001","cat":7,"sub":106,"theme":1}
+{"id":226773,"name":"Scrying Device, Untuned","quality":4,"icon":"housing_uni_inc_sageislescryingdevice001","cat":7,"sub":106,"theme":1}
+{"id":226774,"name":"Nowhere Vault Door, Replica","quality":5,"icon":"housing_uni_str_sageislevaultdoor001","cat":13,"sub":163,"theme":1}
+{"id":226775,"name":"Nexus Orrery Shard, Replica","quality":2,"icon":"housing_uni_exc_conformalmapcube001","cat":7,"sub":106,"theme":1}
+{"id":226776,"name":"Sage Voernet's Tome, Replica","quality":4,"icon":"housing_uni_inc_sagevoernotstome001","cat":4,"sub":62,"theme":1}
 {"id":226777,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226778,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226779,"name":"","quality":0,"icon":"icon_missing"}
@@ -598,7 +598,7 @@
 {"id":226781,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226782,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226783,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226784,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226784,"name":"Driftwood Log","quality":2,"icon":"housing_uni_inc_driftwoodsculpture001","cat":12,"sub":165,"theme":1}
 {"id":226785,"name":"Driftwood Archway","icon":"housing_uni_inc_driftwoodsculpture003","quality":3,"cat":12,"sub":165,"theme":1}
 {"id":226897,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226898,"name":"","quality":0,"icon":"icon_missing"}
@@ -611,20 +611,20 @@
 {"id":226905,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226906,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226907,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226918,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226923,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226924,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226925,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226926,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226927,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226928,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226929,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226930,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226931,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226932,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226933,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226936,"name":"","quality":0,"icon":"icon_missing"}
-{"id":226941,"name":"","quality":0,"icon":"icon_missing"}
+{"id":226918,"name":"Target Kargrym, Trial","quality":5,"icon":"housing_u51_targetkargrym","cat":25,"sub":98,"theme":13}
+{"id":226923,"name":"Cheese Stack, Large","quality":4,"icon":"housing_gen_inc_cheesestacklarge001","cat":8,"sub":155,"theme":1}
+{"id":226924,"name":"Cheese Stack, Medium","quality":3,"icon":"housing_gen_inc_cheesestackmedium001","cat":8,"sub":155,"theme":1}
+{"id":226925,"name":"Cheese Stack, Small","quality":2,"icon":"housing_gen_inc_cheesestacksmall001","cat":8,"sub":155,"theme":1}
+{"id":226926,"name":"Hanging Cheese, Long","quality":4,"icon":"housing_gen_inc_hangingcheeselarge001","cat":8,"sub":155,"theme":1}
+{"id":226927,"name":"Hanging Cheese, Medium","quality":3,"icon":"housing_gen_inc_hangingcheesemedium001","cat":8,"sub":155,"theme":1}
+{"id":226928,"name":"Hanging Cheese, Short","quality":2,"icon":"housing_gen_inc_hangingcheesesmall001","cat":8,"sub":155,"theme":1}
+{"id":226929,"name":"Hanging Cheese Stack, Long Aged","quality":4,"icon":"housing_gen_inc_stringbrcheeselargel001","cat":8,"sub":155,"theme":1}
+{"id":226930,"name":"Hanging Cheese Stack, Short Aged","quality":2,"icon":"housing_gen_inc_stringbrcheesesmall001","cat":8,"sub":155,"theme":1}
+{"id":226931,"name":"Hanging Cheese Stack, Long","quality":4,"icon":"housing_gen_inc_stringwhcheeselarge001","cat":8,"sub":155,"theme":1}
+{"id":226932,"name":"Hanging Cheese Stack, Short","quality":2,"icon":"housing_gen_inc_stringwhcheesesmall001","cat":8,"sub":155,"theme":1}
+{"id":226933,"name":"Cheese Pile, Massive","quality":5,"icon":"housing_gen_inc_cheesestackgiant002","cat":8,"sub":155,"theme":1}
+{"id":226936,"name":"School of fish Blue","quality":5,"icon":"u33_housing_jellyfish_purple","cat":14,"sub":162,"theme":1}
+{"id":226941,"name":"School of fish Green","quality":5,"icon":"u33_housing_jellyfish_purple","cat":14,"sub":162,"theme":1}
 {"id":227217,"name":"Bright-Throat Remembrance Garland, Curved","icon":"housing_uni_exc_marigoldgarland001","quality":5,"cat":9,"sub":89,"theme":4}
 {"id":227218,"name":"Bright-Throat Remembrance Garland, Straight","icon":"housing_uni_exc_marigoldgarland002","quality":5,"cat":9,"sub":89,"theme":4}
 {"id":227219,"name":"Sun Bird Rebirth Sculpture","icon":"housing_uni_lsb_flamerebirthsculpture001","quality":5,"cat":11,"sub":126,"theme":11}
