@@ -780,7 +780,7 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
     await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent.endsWith("Copy")).click());
     await page.waitForFunction(() => window.__copied !== null);
     const text = await page.evaluate(() => window.__copied);
-    assertEq(text, "FURC LIST: Hall: west: 94116", "the export line");
+    assertEq(text, "FURC LIST Hall: west: 94116", "the export line");
     assertEq(await page.$eval("#lists-transfer", (d) => d.open), true, "copying left the import and export box closed");
     assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Copied to clipboard", "the copy confirmation");
 

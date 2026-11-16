@@ -126,7 +126,7 @@ function chunks(ids) {
 
 // One line per 1000 ids, each repeating the head, so the game's edit box never cuts one.
 export function formatList(list) {
-  const head = list.faves ? `${FAVES_PREFIX}:` : `${PREFIX}: ${list.name}:`;
+  const head = list.faves ? `${FAVES_PREFIX}:` : `${PREFIX} ${list.name}:`;
   return chunks(list.ids).map((ids) => `${head} ${ids.join(",")}`).join("\n");
 }
 
@@ -136,8 +136,22 @@ export function formatLists(lists = getLists()) {
 }
 
 // The add-on's line (the name runs to the last colon), plus `"name": {1, 2}` for hand-written files. Version 1 only, as in the add-on.
-const LINE = /^FURC LIST(?:\s+1)?\s*:\s*(.*):\s*([\d,\s]*)$/i;
-const FAVES_LINE = /^FURC FAVES(?:\s+1)?\s*:\s*([\d,\s]*)$/i;
+// The prefix is read in every current and legacy spelling for now: "FURC LIST: ...", "[FURC LIST] ..." and "FURC LIST ..."
+function payloadOf(line, kind) {
+  const bracketed = line.match(/^\[\s*([^\]]*?)\s*\]\s*:?\s*(.*)$/);
+  if (bracketed) {
+    const head = bracketed[1].replace(/\s+/g, " ").toUpperCase().match(/^(.*?)(?: (\d+))?$/);
+    return head[1] === kind && (head[2] ?? "1") === "1" ? bracketed[2] : null;
+  }
+  const rest = line.match(new RegExp(`^${kind.replace(/ /g, "\\s+")}(?=$|[\\s:])(.*)$`, "i"))?.[1];
+  if (rest == null) return null;
+  // A number is the version only right before the colon: "FURC LIST 2 chairs: ..." is a list called "2 chairs".
+  const versioned = rest.match(/^\s+(\d+)\s*:\s*(.*)$/);
+  if (versioned) return versioned[1] === "1" ? versioned[2] : null;
+  return rest.replace(/^\s*:?\s*/, "");
+}
+const LINE = /^(.*):\s*([\d,\s]*)$/;
+const FAVES_LINE = /^([\d,\s]*)$/;
 const BRACES = /^"((?:[^"\\]|\\.)*)"\s*:\s*\{([\d,\s]*)\}\s*,?$/;
 
 function idsOf(text) {
@@ -151,9 +165,9 @@ export function parseLists(text) {
   for (const raw of String(text ?? "").split(/\r?\n/)) {
     const line = raw.trim();
     if (!line) continue;
-    const fav = line.match(FAVES_LINE);
+    const fav = payloadOf(line, FAVES_PREFIX)?.match(FAVES_LINE);
     if (fav) { lists.push({ faves: true, ids: idsOf(fav[1]) }); continue; }
-    const m = line.match(LINE) || line.match(BRACES);
+    const m = payloadOf(line, PREFIX)?.match(LINE) || line.match(BRACES);
     // Truncated before matching, as the add-on does, so an over-long name merges into the list it became.
     const name = m && fitName(m[0].startsWith('"') ? m[1].replace(/\\(.)/g, "$1") : m[1]);
     if (!name) { skipped++; continue; }
@@ -247,7 +261,7 @@ export function listsMask(deps) {
           <details id="lists-transfer" class="lists-transfer">
             <summary>Import and export</summary>
             <textarea id="lists-text" rows="3" spellcheck="false" aria-label="List text to import"
-              placeholder="FURC LIST: My list: 115647,118303&#10;FURC FAVES: 115647"></textarea>
+              placeholder="FURC LIST My list: 115647,118303&#10;FURC FAVES: 115647"></textarea>
             <div class="lists-row">
               <span class="lists-row-label">Import</span>
               <button id="lists-import" type="button" disabled title="Import the lists pasted into the box above">📝 Text</button>

@@ -12,10 +12,23 @@ test("the add-on's export line parses, with a colon in the name and an empty lis
   assert.equal(skipped, 2, "a stray line and an unknown version are skipped, not guessed");
 });
 
+test("every spelling the add-on has given the prefix is read", () => {
+  const { lists, skipped } = parseLists([
+    "FURC LIST Hall: west wing: 1,2", "[FURC LIST] Hall: 3", "[furc  list 1] Hall: 4", "FURC LIST 2 chairs: 5", "FURC LIST 1: Hall: 6",
+    "[FURC FAVES] 7", "[FURC FAVES]: 8", "FURC FAVES 9,10",
+    "[FURC LIST 2] Later: 1", "FURC LISTS: no: 1", "[FURC OTHER] no: 1",
+  ].join("\n"));
+  assert.deepEqual(lists, [
+    { name: "Hall: west wing", ids: [1, 2] }, { name: "Hall", ids: [3] }, { name: "Hall", ids: [4] }, { name: "2 chairs", ids: [5] },
+    { name: "Hall", ids: [6] }, { faves: true, ids: [7] }, { faves: true, ids: [8] }, { faves: true, ids: [9, 10] },
+  ]);
+  assert.equal(skipped, 3, "another version and another prefix stay unread");
+});
+
 test("the brace shape is read, never written", () => {
   const { lists } = parseLists('"Say \\"hi\\"": {1, 2, 3},');
   assert.deepEqual(lists, [{ name: 'Say "hi"', ids: [1, 2, 3] }]);
-  assert.equal(formatList(lists[0]), 'FURC LIST: Say "hi": 1,2,3');
+  assert.equal(formatList(lists[0]), 'FURC LIST Say "hi": 1,2,3');
 });
 
 test("export, wipe and import gives the same name and order back", () => {
@@ -87,8 +100,8 @@ test("export wraps at 1000 ids a line, and the wrapped lines import back into on
   for (let id = 1; id <= 2 * MAX_IDS_PER_LINE + 1; id++) made.ids.push(id);
   const lines = formatList(made).split("\n");
   assert.equal(lines.length, 3);
-  assert.ok(lines.every((l) => l.startsWith("FURC LIST: Big: ") && l.length < 8000));
-  assert.equal(lines[2], `FURC LIST: Big: ${2 * MAX_IDS_PER_LINE + 1}`);
+  assert.ok(lines.every((l) => l.startsWith("FURC LIST Big: ") && l.length < 8000));
+  assert.equal(lines[2], `FURC LIST Big: ${2 * MAX_IDS_PER_LINE + 1}`);
   const text = formatList(made);
   getLists().length = 0;
   const r = importLists(text);
@@ -111,10 +124,10 @@ test("the favourites line parses, builds, wraps and merges into the favourites",
 test("Export all writes the favourites beside the lists, and leaves out empty favourites", () => {
   getLists().length = 0;
   createList("Hall").list.ids.push(7);
-  assert.equal(formatLists(), "FURC LIST: Hall: 7");
+  assert.equal(formatLists(), "FURC LIST Hall: 7");
   toggleFave(5);
   assert.ok(isFave(5));
-  assert.equal(formatLists(), "FURC FAVES: 5\nFURC LIST: Hall: 7");
+  assert.equal(formatLists(), "FURC FAVES: 5\nFURC LIST Hall: 7");
 });
 
 test("the favourites cannot be renamed or deleted, and no list may take their name", () => {
