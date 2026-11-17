@@ -13,7 +13,7 @@ import {
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
-import { listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
+import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -469,7 +469,7 @@ export function browseMask(deps) {
         if (onLists.length > (wideCards.matches ? MAX_LIST_PILLS : 1)) {
           pills.append(elem("span", { class: "lists-pill" }, `${onLists.length} lists`));
         } else {
-          for (const l of onLists) pills.append(elem("span", { class: "lists-pill" }, pillText(l.name)));
+          for (const l of onLists) pills.append(elem("span", { class: "lists-pill" }, pillText(leafOf(l))));
         }
         meta.append(pills);
       }

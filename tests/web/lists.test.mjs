@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   parseLists, formatList, formatLists, importLists, reportText, getLists, findList, createList, renameList, cleanName, onListsChange,
   deleteList, favourites, namedLists, toggleFave, isFave, catalogueResolver, MAX_IDS_PER_LINE,
+  normPath, moveList, canMove, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
 } from "../../docs/lists.js";
 
 test("the add-on's export line parses, with a colon in the name and an empty list", () => {
@@ -152,4 +153,159 @@ test("a stored list already called Favorites stays an ordinary list beside the f
   const r = importLists("FURC LIST: Favorites: 8\nFURC FAVES: 4");
   assert.deepEqual([findList("Favorites").ids, favourites().ids], [[9, 8], [4]]);
   assert.equal(r.first, findList("Favorites"), "the first list the import touched");
+});
+
+// Sublists
+
+const names = () => namedLists().map((l) => l.name);
+
+test("a path is written with ' > ', its parts trimmed and cut to 32 bytes each", () => {
+  assert.equal(normPath(" Guildhall>Entrance  >  Left "), "Guildhall > Entrance > Left");
+  assert.equal(normPath("A > > B >"), "A > B", "empty parts are dropped");
+  const long = normPath(`${"a".repeat(40)} > ${"ä".repeat(40)}`).split(" > ");
+  assert.deepEqual(long.map((p) => new TextEncoder().encode(p).length), [32, 32]);
+});
+
+test("a path deeper than three levels is folded into the third", () => {
+  assert.equal(normPath("A > B > C > D"), "A > B > C / D");
+  assert.equal(normPath("A>B>C>D>E"), "A > B > C / D / E");
+  getLists().length = 0;
+  const r = importLists("FURC LIST A > B > C > D: 1");
+  assert.deepEqual(names(), ["A", "A > B", "A > B > C / D"]);
+  assert.deepEqual([r.lists, findList("A > B > C / D").ids], [1, [1]]);
+  assert.equal(depthOf(findList("A > B > C / D")), 3);
+});
+
+test("New list with a path makes the sublist and every missing parent", () => {
+  getLists().length = 0;
+  const made = createList("Guildhall > Entrance").list;
+  assert.deepEqual(names(), ["Guildhall", "Guildhall > Entrance"]);
+  assert.equal(parentOf(made), findList("guildhall"));
+  assert.equal(leafOf(made), "Entrance");
+  assert.ok(createList("guildhall > entrance").error, "the full path is the identity, without case");
+  assert.equal(createList("GUILDHALL > Poles > Daedric").list.name, "Guildhall > Poles > Daedric", "an existing parent keeps its spelling");
+  assert.ok(!createList("Other > Entrance").error, "the same name may sit under another parent");
+});
+
+test("a new sublist goes below its parent's last one, wherever the parent stands", () => {
+  getLists().length = 0;
+  for (const n of ["A", "B", "A > x", "A > x > deep", "A > y", "C > z"]) createList(n);
+  assert.deepEqual(names(), ["A", "A > x", "A > x > deep", "A > y", "B", "C", "C > z"]);
+});
+
+test("the export of sublists: one line each with the full path, parents first, an empty parent without ids", () => {
+  getLists().length = 0;
+  createList("Guildhall > Stripper Poles > Daedric").list.ids.push(789);
+  findList("Guildhall > Stripper Poles").ids.push(123, 456);
+  createList("Guildhall > Entrance").list.ids.push(321);
+  assert.equal(formatLists(), [
+    "FURC LIST Guildhall:", "FURC LIST Guildhall > Stripper Poles: 123,456",
+    "FURC LIST Guildhall > Stripper Poles > Daedric: 789", "FURC LIST Guildhall > Entrance: 321",
+  ].join("\n"));
+});
+
+test("Export all imported into an empty store gives the same grouping, order and items", () => {
+  getLists().length = 0;
+  for (const n of ["B", "A > y", "A > x > deep", "B > q"]) createList(n).list.ids.push(n.length);
+  toggleFave(5);
+  moveList(findList("A > x"), -1);
+  moveList(findList("A"), -1);
+  const before = JSON.stringify(getLists());
+  const text = formatLists();
+  getLists().length = 0;
+  importLists(text);
+  assert.deepEqual(names(), ["A", "A > x", "A > x > deep", "A > y", "B", "B > q"]);
+  assert.equal(JSON.stringify(getLists()), before);
+});
+
+test("an imported sublist whose parent is missing gets it as an empty list", () => {
+  getLists().length = 0;
+  const r = importLists("FURC LIST Hall > Entrance: 321\nFURC LIST Hall>Entrance : 5");
+  assert.deepEqual(names(), ["Hall", "Hall > Entrance"]);
+  assert.deepEqual([findList("Hall").ids, findList("Hall > Entrance").ids, r.lists], [[], [321, 5], 1]);
+});
+
+test("renaming changes one part, turns > into / and takes everything below along", () => {
+  getLists().length = 0;
+  for (const n of ["Hall > West > Corner", "Hall > East", "Hallway"]) createList(n);
+  rememberList(findList("Hall > West > Corner"));
+  const hall = findList("Hall");
+  assert.equal(renameList(hall, "Guild > hall").list.name, "Guild / hall");
+  assert.deepEqual(names(), ["Guild / hall", "Guild / hall > West", "Guild / hall > West > Corner", "Guild / hall > East", "Hallway"]);
+  assert.equal(lastList().name, "Guild / hall > West > Corner", "the remembered list follows its parent's rename");
+  assert.equal(renameList(findList("Guild / hall > West"), "North").list.name, "Guild / hall > North");
+  assert.ok(findList("Guild / hall > North > Corner"));
+  assert.ok(renameList(findList("Guild / hall > East"), "north").error, "a sibling's name is taken");
+  assert.ok(!renameList(findList("Hallway"), "North").error, "but free at another level");
+});
+
+test("deleting a list with sublists empties it and keeps it until they are gone", () => {
+  getLists().length = 0;
+  const hall = createList("Hall").list;
+  hall.ids.push(1, 2);
+  const entrance = createList("Hall > Entrance").list;
+  assert.ok(hasChildren(hall));
+  deleteList(hall);
+  assert.deepEqual([names(), findList("Hall").ids], [["Hall", "Hall > Entrance"], []]);
+  deleteList(entrance);
+  deleteList(hall);
+  assert.deepEqual(names(), []);
+});
+
+test("a list moves among its siblings with everything below it, and stops at either end", () => {
+  getLists().length = 0;
+  for (const n of ["A > x > deep", "A > y", "B", "C"]) createList(n);
+  const a = findList("A"), x = findList("A > x"), y = findList("A > y");
+  assert.deepEqual([canMove(a, -1), canMove(x, -1), canMove(y, 1), canMove(findList("C"), 1), canMove(favourites(), 1)], [false, false, false, false, false]);
+  assert.ok(moveList(a, 1));
+  assert.deepEqual(names(), ["B", "A", "A > x", "A > x > deep", "A > y", "C"]);
+  assert.ok(moveList(y, -1));
+  assert.deepEqual(names(), ["B", "A", "A > y", "A > x", "A > x > deep", "C"]);
+  assert.ok(moveList(findList("C"), -1));
+  assert.deepEqual(names(), ["B", "C", "A", "A > y", "A > x", "A > x > deep"]);
+  assert.equal(moveList(findList("A > x > deep"), 1), false, "an only child has nowhere to go");
+  assert.equal(getLists()[0], favourites());
+});
+
+test("a line of ids without a prefix goes into the selected list, and is refused without one", () => {
+  getLists().length = 0;
+  const hall = createList("Hall").list;
+  const r = importLists("123,456\n\n456, 789", undefined, hall);
+  assert.deepEqual([hall.ids, r.lists, r.added, r.duplicates, r.first], [[123, 456, 789], 1, 3, 1, hall]);
+  const refused = importLists("1,2");
+  assert.deepEqual([refused.lists, refused.errors.length, hall.ids.length], [0, 1, 3]);
+  assert.deepEqual(reportText(refused), { text: "Ids without a list name need a selected list.", warn: true });
+});
+
+test("ids right below a prefixed line continue it, as after the game's line break", () => {
+  const { lists, skipped } = parseLists("FURC LIST A > B: 1,2,\n3,4\nFURC FAVES: 5\n6\n\n7");
+  assert.deepEqual(lists, [{ name: "A > B", ids: [1, 2, 3, 4] }, { faves: true, ids: [5, 6] }, { bare: true, ids: [7] }]);
+  assert.equal(skipped, 0);
+});
+
+test("the favourites take no sublists, and a stored list called Favorites may have them", () => {
+  getLists().length = 0;
+  assert.ok(createList("Favorites > Best").error);
+  assert.ok(importLists("FURC LIST Favourites > Best: 1").errors.length);
+  assert.deepEqual(names(), []);
+  getLists().push({ name: "Favorites", ids: [9] });
+  assert.equal(createList("Favorites > Best").list.name, "Favorites > Best");
+  assert.deepEqual(favourites().ids, []);
+});
+
+test("a store from before sublists is grouped on first load: parents made, sublists gathered under them", async () => {
+  const stored = { last: "Hall>West", lists: [
+    { name: "Hall>West", ids: [1] }, { name: "Other", ids: [2] }, { name: "Favorites", ids: [3], faves: true },
+    { name: "Hall > East > a > b", ids: [4] }, { name: "hall > west", ids: [1, 5] },
+  ] };
+  globalThis.localStorage = { getItem: () => JSON.stringify(stored), setItem() {} };
+  try {
+    const fresh = await import("../../docs/lists.js?first-load");
+    assert.deepEqual(fresh.getLists().map((l) => [l.name, l.ids]), [
+      ["Favorites", [3]], ["Hall", []], ["Hall > West", [1, 5]], ["Hall > East", []], ["Hall > East > a / b", [4]], ["Other", [2]],
+    ]);
+    assert.equal(fresh.lastList().name, "Hall > West");
+  } finally {
+    delete globalThis.localStorage;
+  }
 });

@@ -801,6 +801,91 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
   }
 });
 
+test("lists: sublists are created, imported, renamed, emptied, moved and exported with their grouping", async (page) => {
+  const index = () => page.$$eval("#lists-index .lists-index-item", (bs) => bs.slice(1).map((b) => b.title));
+  const heading = (text) => page.waitForFunction((t) => document.querySelector("#lists-main h2")?.textContent === t, {}, text);
+  const pick = async (name) => {
+    await page.$$eval("#lists-index .lists-index-item", (bs, n) => bs.find((b) => b.title === n).click(), name);
+    await heading(name);
+  };
+  const headButton = (label) => page.$$eval("#lists-main .lists-head button",
+    (bs, l) => bs.find((b) => b.textContent.endsWith(l) || b.getAttribute("aria-label") === l).click(), label);
+  const importText = async (text) => {
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
+    await page.click("#lists-import");
+    return page.$eval("#lists-status", (p) => p.textContent);
+  };
+  // The module instance the page runs, for wiping the store without a reload.
+  const wipe = () => page.evaluate(async () => {
+    const m = await import("./lists.js");
+    for (const l of m.namedLists().reverse()) m.deleteList(l);
+  });
+  try {
+    await switchTab(page, "lists");
+    await page.type("#lists-new-name", "Guildhall > Entrance");
+    await page.click("#lists-new button");
+    await heading("Guildhall > Entrance");
+    await headButton("+ Sublist");
+    assertEq(await page.$eval("#lists-new-name", (i) => i.value), "Guildhall > Entrance > ", "what + Sublist starts the new name with");
+    await page.type("#lists-new-name", "Left");
+    await page.click("#lists-new button");
+    await heading("Guildhall > Entrance > Left");
+    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.some((b) => b.textContent === "+ Sublist")), false,
+      "a third-level list offers a fourth level");
+    assertEq(JSON.stringify(await index()), JSON.stringify(["Guildhall", "Guildhall > Entrance", "Guildhall > Entrance > Left"]), "the lists made from two paths");
+    assertEq(await page.$$eval("#lists-index .lists-index-item", (bs) => bs.map((b) => b.firstChild.textContent).join("|")),
+      "★ Favorites|Guildhall|Entrance|Left", "the column's labels");
+
+    // A parent holds items of its own beside its sublists; a bare line of ids lands in it.
+    await pick("Guildhall");
+    assertEq(await importText("94116"), "Imported 1 list: 1 item added", "the report for a bare line of ids");
+    await page.waitForFunction(() => document.querySelector("#lists-main .lists-item")?.textContent.includes("#94116"));
+    assertEq(await importText("FURC LIST Guildhall > A > B > C: 94116"), "Imported 1 list: 1 item added", "the report for a four-level line");
+    assertEq((await index()).at(-1), "Guildhall > A > B / C", "the four-level line's list");
+
+    await page.click("#lists-main .lists-title-button");
+    await page.$eval("#lists-main .lists-title-edit", (i) => { i.value = "Hall>x"; });
+    await page.focus("#lists-main .lists-title-edit");
+    await page.keyboard.press("Enter");
+    await heading("Hall/x");
+    assertEq(JSON.stringify(await index()), JSON.stringify(
+      ["Hall/x", "Hall/x > Entrance", "Hall/x > Entrance > Left", "Hall/x > A", "Hall/x > A > B / C"]), "the lists after renaming their parent");
+
+    await headButton("Delete");
+    await page.$$eval("#lists-main .lists-confirm button", (bs) => bs.find((b) => b.textContent === "Empty it").click());
+    await page.waitForFunction(() => document.querySelector("#lists-main .lists-count")?.textContent === "0 items");
+    assertEq((await index()).length, 5, "the number of lists after deleting a parent with sublists");
+
+    await pick("Hall/x > A");
+    await headButton("Move up");
+    await page.waitForFunction(() => document.querySelectorAll("#lists-index .lists-index-item")[2]?.title === "Hall/x > A");
+    const order = ["Hall/x", "Hall/x > A", "Hall/x > A > B / C", "Hall/x > Entrance", "Hall/x > Entrance > Left"];
+    assertEq(JSON.stringify(await index()), JSON.stringify(order), "the order after moving a sublist up");
+    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.getAttribute("aria-label") === "Move up").disabled), true,
+      "the first sublist can move further up");
+
+    await page.evaluate(() => {
+      window.__copied = null;
+      Object.defineProperty(navigator, "clipboard", {
+        value: { writeText: (t) => { window.__copied = t; return Promise.resolve(); } }, configurable: true,
+      });
+    });
+    await page.click("#lists-copy-all");
+    await page.waitForFunction(() => window.__copied !== null);
+    const all = await page.evaluate(() => window.__copied);
+    assertEq(all, ["FURC LIST Hall/x:", "FURC LIST Hall/x > A:", "FURC LIST Hall/x > A > B / C: 94116", "FURC LIST Hall/x > Entrance:",
+      "FURC LIST Hall/x > Entrance > Left:"].join("\n"), "Export all");
+    await wipe();
+    await page.waitForFunction(() => document.querySelector("#lists-index")?.textContent.includes("No lists yet"));
+    assertEq(await importText(all), "Imported 5 lists: 1 item added", "the report for importing the export");
+    assertEq(JSON.stringify(await index()), JSON.stringify(order), "grouping and order after export and import");
+  } finally {
+    await wipe();
+    await switchTab(page, "lists");
+  }
+});
+
 test("favourites: the Browse star fills, the item shows under Favourites, which offers no rename or delete", async (page) => {
   await switchTab(page, "browse");
   await page.evaluate(() => {
