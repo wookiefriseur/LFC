@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   parseLists, formatList, formatLists, importLists, reportText, getLists, findList, createList, renameList, cleanName, onListsChange,
   deleteList, favourites, namedLists, toggleFave, isFave, catalogueResolver, MAX_IDS_PER_LINE,
-  normPath, moveList, canMove, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
+  paginate, PAGE_BYTES, normPath, moveList, canMove, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
 } from "../../docs/lists.js";
 
 test("the add-on's export line parses, with a colon in the name and an empty list", () => {
@@ -308,4 +308,22 @@ test("a store from before sublists is grouped on first load: parents made, subli
   } finally {
     delete globalThis.localStorage;
   }
+});
+
+test("a long export is packed into pages of whole lines that fit the game's box, and the pages import back complete", () => {
+  getLists().length = 0;
+  const made = createList("Hall > Long").list;
+  for (let id = 100000; id < 107008; id++) made.ids.push(id);
+  createList("Short").list.ids.push(1);
+  const text = formatLists();
+  const pages = paginate(text);
+  assert.equal(pages.length, 4);
+  assert.ok(pages.every((p) => new TextEncoder().encode(p).length <= PAGE_BYTES));
+  assert.equal(pages.join("\n"), text, "pages cut between lines only");
+  assert.deepEqual(paginate("FURC LIST A: 1"), ["FURC LIST A: 1"], "a short export is one page");
+  assert.deepEqual(paginate(""), [""]);
+  assert.deepEqual(paginate("aaaa\nbb\ncc\ndddddddd", 6), ["aaaa", "bb\ncc", "dddddddd"], "a line over the limit gets a page of its own");
+  getLists().length = 0;
+  for (const p of pages) importLists(p);
+  assert.deepEqual(namedLists().map((l) => [l.name, l.ids.length]), [["Hall", 0], ["Hall > Long", 7008], ["Short", 1]]);
 });

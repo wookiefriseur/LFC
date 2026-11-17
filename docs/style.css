@@ -2098,6 +2098,7 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .lists-inline input { flex: 1 1 10rem; min-width: 0; }
 .lists-row { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-top: 0.4rem; }
 .lists-row-gap { flex: 1 1 0; }
+.lists-row[hidden] { display: none; }
 .lists-help { margin-top: 0.5rem; font-size: 0.85rem; }
 .lists-help p { margin: 0.25rem 0; }
 .lists-index-all { margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }

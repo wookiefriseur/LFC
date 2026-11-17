@@ -898,6 +898,49 @@ test("lists: sublists are created, imported, renamed, emptied, moved and exporte
   }
 });
 
+test("lists: a long export is shown and copied in pages that fit the game's box", async (page) => {
+  const wipe = () => page.evaluate(async () => {
+    const m = await import("./lists.js");
+    for (const l of m.namedLists().reverse()) m.deleteList(l);
+  });
+  const box = () => page.$eval("#lists-text", (t) => t.value);
+  try {
+    await switchTab(page, "lists");
+    await page.evaluate(async () => {
+      const m = await import("./lists.js");
+      m.importLists(`FURC LIST Paged: ${Array.from({ length: 6000 }, (_, i) => 100000 + i).join(",")}\nFURC LIST Short: 94116`);
+    });
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    assertEq(await page.$eval("#lists-pager", (p) => p.hidden), false, "the pager is hidden for an export of several pages");
+    assertEq(await page.$eval("#lists-page-pos", (p) => p.textContent), "Page 1 of 3", "the page position");
+    const pages = [await box()];
+    await page.evaluate(() => {
+      window.__copied = null;
+      Object.defineProperty(navigator, "clipboard", {
+        value: { writeText: (t) => { window.__copied = t; return Promise.resolve(); } }, configurable: true,
+      });
+    });
+    await page.click("#lists-copy");
+    await page.waitForFunction(() => window.__copied !== null);
+    assertEq(await page.evaluate(() => window.__copied), pages[0], "what Copy takes from a paged export");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Copied page 1 of 3", "the copy confirmation for a page");
+    await page.click("#lists-page-next");
+    pages.push(await box());
+    await page.click("#lists-page-next");
+    pages.push(await box());
+    assertEq(await page.$eval("#lists-page-next", (b) => b.disabled), true, "Next page is offered on the last page");
+    assert(pages.every((p) => new TextEncoder().encode(p).length < 20000), "a page is larger than the game's box");
+    const whole = await page.evaluate(async () => (await import("./lists.js")).formatLists());
+    assertEq(pages.join("\n"), whole, "the pages together");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "Short").click());
+    assertEq(await page.$eval("#lists-pager", (p) => p.hidden), true, "the pager shows for a one-page export");
+    assertEq(await box(), "FURC LIST Short: 94116", "the box for a short list after a paged one");
+  } finally {
+    await wipe();
+  }
+});
+
 test("favourites: the Browse star fills, the item shows under Favourites, which offers no rename or delete", async (page) => {
   await switchTab(page, "browse");
   await page.evaluate(() => {

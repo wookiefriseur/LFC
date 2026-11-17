@@ -9,6 +9,8 @@ const PREFIX = "FURC LIST";
 const FAVES_PREFIX = "FURC FAVES";
 export const FAVES_NAME = "Favorites";   // english name of SI_FURC_FILTER_SRC_FAVE
 export const MAX_IDS_PER_LINE = 1000;
+// The add-on's import box holds 20000 characters and treats a paste that fills it as cut off. A page stays clear of that, with room for line breaks pasted as two characters.
+export const PAGE_BYTES = 19000;
 // `last` value naming the favourites, which have no name of their own to remember.
 const LAST_FAVES = "\u0000faves";
 
@@ -225,6 +227,21 @@ export function formatLists(lists = getLists()) {
   return lists.filter((l) => !l.faves || l.ids.length).map(formatList).join("\n");
 }
 
+// Whole lines packed into pages for the game's box, as the add-on pages its own export. A line longer than a page gets one of its own.
+export function paginate(text, maxBytes = PAGE_BYTES) {
+  const size = (t) => new TextEncoder().encode(t).length;
+  const pages = [];
+  let page = [], used = 0;
+  for (const line of String(text ?? "").split("\n")) {
+    const bytes = size(line) + 1;
+    if (page.length && used + bytes > maxBytes) { pages.push(page.join("\n")); page = []; used = 0; }
+    page.push(line);
+    used += bytes;
+  }
+  pages.push(page.join("\n"));
+  return pages;
+}
+
 // The add-on's line (the path runs to the last colon), plus `"name": {1, 2}` for hand-written files.
 // The line carries no version. The prefix is still read in every earlier spelling: "FURC LIST: ...", "[FURC LIST] ..." and a version 1 before the colon.
 function payloadOf(line, kind) {
@@ -378,17 +395,24 @@ export function listsMask(deps) {
           <details id="lists-transfer" class="lists-transfer">
             <summary>Import and export</summary>
             <textarea id="lists-text" rows="4" spellcheck="false" aria-label="The selected list as text; paste list text here to import it"></textarea>
+            <div id="lists-pager" class="lists-row" hidden>
+              <button id="lists-page-prev" type="button" class="btn-mini">◀ Previous page</button>
+              <strong id="lists-page-pos"></strong>
+              <button id="lists-page-next" type="button" class="btn-mini">Next page ▶</button>
+              <span class="muted">Each page fits the game's import box.</span>
+            </div>
             <div class="lists-row">
               <button id="lists-import" type="button" class="btn-primary" disabled title="Import the text in the box">Import</button>
               <label class="btn-like" title="Import lists from a text file">📂 Import file ...<input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
               <span class="lists-row-gap"></span>
-              <button id="lists-copy" type="button" title="Copy the text in the box to the clipboard">📋 Copy</button>
-              <button id="lists-download" type="button" title="Download the selection as a text file">💾 Download</button>
+              <button id="lists-copy" type="button" title="Copy the text in the box (one page of a long export) to the clipboard">📋 Copy</button>
+              <button id="lists-download" type="button" title="Download the whole selection as one text file">💾 Download</button>
               <button id="lists-help-toggle" type="button" class="btn-mini" aria-expanded="false" aria-controls="lists-help" aria-label="How import and export work" title="How import and export work">?</button>
             </div>
             <div id="lists-help" class="lists-help muted" hidden>
               <p>The currently active list is shown in the box (select "All lists" to show all).</p>
               <p>Copy the text into FurnitureCatalogue's Import window, or keep it as a file.</p>
+              <p>Long exports are split into pages that fit FC's Import window: copy and import them one by one. Download saves everything in one file.</p>
               <p>To import, paste text from FC and press Import.</p>
               <p>Lists of the same name are merged (nothing is removed).</p>
               <p>You can also import just ids (<code>115647,118303</code>), they go into the currently selected list.</p>
@@ -425,6 +449,8 @@ export function listsMask(deps) {
       if (file) runImport(await file.text());
     });
     $("#lists-copy").addEventListener("click", copyOut);
+    $("#lists-page-prev").addEventListener("click", () => showPage(page - 1));
+    $("#lists-page-next").addEventListener("click", () => showPage(page + 1));
     $("#lists-download").addEventListener("click", () => {
       const out = exportText();
       if (out) download(current === ALL ? "furnishing-lists.txt" : fileName(current.name), out);
@@ -449,10 +475,22 @@ export function listsMask(deps) {
   let edited = false;
   const exportText = () => (current === ALL ? formatLists() : formatList(current));
   function syncImport() { $("#lists-import").disabled = !edited || !$("#lists-text").value.trim(); }
+  let pages = [""];
+  let page = 0;
   function fillBox(force = false) {
     if (edited && !force) return;
+    pages = paginate(exportText());
+    showPage(page);
+  }
+  // Also takes the box back from whatever was typed into it.
+  function showPage(n) {
+    page = Math.max(0, Math.min(pages.length - 1, n));
     edited = false;
-    $("#lists-text").value = exportText();
+    $("#lists-text").value = pages[page];
+    $("#lists-pager").hidden = pages.length < 2;
+    $("#lists-page-pos").textContent = `Page ${page + 1} of ${pages.length}`;
+    $("#lists-page-prev").disabled = page === 0;
+    $("#lists-page-next").disabled = page === pages.length - 1;
     syncImport();
   }
 
@@ -472,7 +510,7 @@ export function listsMask(deps) {
     box.select();
     try {
       await navigator.clipboard.writeText(box.value);
-      status("Copied to clipboard");
+      status(pages.length > 1 && !edited ? `Copied page ${page + 1} of ${pages.length}` : "Copied to clipboard");
     } catch (_) {
       status("Press Ctrl+C to copy", true);
     }
@@ -482,6 +520,7 @@ export function listsMask(deps) {
     current = list;
     matches = [];
     edited = false;
+    page = 0;
     drawMain();
   }
 
