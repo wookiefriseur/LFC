@@ -251,31 +251,32 @@ function idsOf(text) {
 
 /**
  * Ids are kept as written, repeats included, so the import can count them as duplicates.
- * A line of ids without a prefix continues the line right above it (the game breaks a long pasted line in two); standing alone it is a `bare` entry for the selected list.
+ * A line of ids without a prefix continues the line right above it, joined as it stands: the game breaks a long pasted line in two, also in the middle of an id. Standing alone it is a `bare` entry for the selected list.
  */
 export function parseLists(text) {
   const lists = [];
   let skipped = 0;
   let above = null;
+  const entry = (head, ids) => { lists.push(above = { ...head, ids }); };
   for (const raw of String(text ?? "").split(/\r?\n/)) {
     const line = raw.trim();
-    const entry = above;
+    const open = above;
     above = null;
     if (!line) continue;
     if (BARE.test(line)) {
-      above = entry || { bare: true, ids: [] };
-      if (!entry) lists.push(above);
-      above.ids.push(...idsOf(line));
+      if (open) (above = open).ids += line;
+      else entry({ bare: true }, line);
       continue;
     }
     const fav = payloadOf(line, FAVES_PREFIX)?.match(FAVES_LINE);
-    if (fav) { lists.push(above = { faves: true, ids: idsOf(fav[1]) }); continue; }
+    if (fav) { entry({ faves: true }, fav[1]); continue; }
     const m = payloadOf(line, PREFIX)?.match(LINE) || line.match(BRACES);
     // Brought into its written form before matching, as the add-on does, so an over-long or over-deep path merges into the list it became.
     const name = m && normPath(m[0].startsWith('"') ? m[1].replace(/\\(.)/g, "$1") : m[1]);
     if (!name) { skipped++; continue; }
-    lists.push(above = { name, ids: idsOf(m[2]) });
+    entry({ name }, m[2]);
   }
+  for (const l of lists) l.ids = idsOf(l.ids);
   return { lists, skipped };
 }
 
@@ -350,10 +351,13 @@ function fileName(name) {
 
 // The Lists tab
 
+const ROWS_PER_BATCH = 100;
+
 export function listsMask(deps) {
   const { state, $, elem, nameOf, itemIconImg } = deps;
   const searchItems = itemSearch(state, nameOf);
   let current = null;
+  let rowWatch = null;
   let matches = [];
   let activeMatch = -1;
 
@@ -362,23 +366,7 @@ export function listsMask(deps) {
       <section class="lists-mask">
         <aside class="lists-side">
           <h2>Lists</h2>
-          <p class="muted">Furnishing lists stored in your browser. Export them to a file or FurnitureCatalogue to keep them safe.</p>
-          <details id="lists-transfer" class="lists-transfer">
-            <summary>Import and export</summary>
-            <textarea id="lists-text" rows="3" spellcheck="false" aria-label="List text to import"
-              placeholder="FURC LIST My list: 115647,118303&#10;FURC FAVES: 115647"></textarea>
-            <div class="lists-row">
-              <span class="lists-row-label">Import</span>
-              <button id="lists-import" type="button" disabled title="Import the lists pasted into the box above">📝 Text</button>
-              <label class="btn-like" title="Import lists from a text file">📂 File ...<input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
-            </div>
-            <div class="lists-row">
-              <span class="lists-row-label">Export all</span>
-              <button id="lists-copy-all" type="button" title="Copy every list to the clipboard">📋 Text</button>
-              <button id="lists-download-all" type="button" title="Download every list as a text file">💾 File</button>
-            </div>
-            <p id="lists-status" class="lists-status" role="status"></p>
-          </details>
+          <p class="muted">Stored in your browser. Save them to a file or FurnitureCatalogue to keep them safe.</p>
           <ul id="lists-index" class="lists-index"></ul>
           <form id="lists-new" class="lists-inline">
             <input id="lists-new-name" placeholder="New list, or List > Sublist" aria-label="New list name" title="A name with > makes a sublist and every list above it, ${MAX_DEPTH} levels at most">
@@ -386,7 +374,29 @@ export function listsMask(deps) {
           </form>
           <p id="lists-new-error" class="warn" role="alert" hidden></p>
         </aside>
-        <div id="lists-main" class="lists-main"></div>
+        <div class="lists-col">
+          <details id="lists-transfer" class="lists-transfer">
+            <summary>Import and export</summary>
+            <textarea id="lists-text" rows="4" spellcheck="false" aria-label="The selected list as text; paste list text here to import it"></textarea>
+            <div class="lists-row">
+              <button id="lists-import" type="button" class="btn-primary" disabled title="Import the text in the box">Import</button>
+              <label class="btn-like" title="Import lists from a text file">📂 Import file ...<input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
+              <span class="lists-row-gap"></span>
+              <button id="lists-copy" type="button" title="Copy the text in the box to the clipboard">📋 Copy</button>
+              <button id="lists-download" type="button" title="Download the selection as a text file">💾 Download</button>
+              <button id="lists-help-toggle" type="button" class="btn-mini" aria-expanded="false" aria-controls="lists-help" aria-label="How import and export work" title="How import and export work">?</button>
+            </div>
+            <div id="lists-help" class="lists-help muted" hidden>
+              <p>The currently active list is shown in the box (select "All lists" to show all).</p>
+              <p>Copy the text into FurnitureCatalogue's Import window, or keep it as a file.</p>
+              <p>To import, paste text from FC and press Import.</p>
+              <p>Lists of the same name are merged (nothing is removed).</p>
+              <p>You can also import just ids (<code>115647,118303</code>), they go into the currently selected list.</p>
+            </div>
+          </details>
+          <p id="lists-status" class="lists-status" role="status"></p>
+          <div id="lists-main" class="lists-main"></div>
+        </div>
       </section>`;
 
     $("#lists-new").addEventListener("submit", (e) => {
@@ -400,21 +410,27 @@ export function listsMask(deps) {
       $("#lists-search")?.focus();
     });
     const text = $("#lists-text");
-    const syncImport = () => { $("#lists-import").disabled = !text.value.trim(); };
-    text.addEventListener("input", syncImport);
+    text.addEventListener("input", () => { edited = true; syncImport(); });
+    // The whole export is what gets copied, and what a paste replaces.
+    text.addEventListener("focus", () => { if (!edited) text.select(); });
     $("#lists-import").addEventListener("click", () => runImport(text.value));
+    $("#lists-help-toggle").addEventListener("click", (e) => {
+      const help = $("#lists-help");
+      help.hidden = !help.hidden;
+      e.currentTarget.setAttribute("aria-expanded", String(!help.hidden));
+    });
     $("#lists-file").addEventListener("change", async (e) => {
       const file = e.target.files[0];
       e.target.value = "";
       if (file) runImport(await file.text());
     });
-    $("#lists-copy-all").addEventListener("click", () => copyOut(formatLists()));
-    $("#lists-download-all").addEventListener("click", () => {
-      const all = formatLists();
-      if (all) download("furnishing-lists.txt", all);
+    $("#lists-copy").addEventListener("click", copyOut);
+    $("#lists-download").addEventListener("click", () => {
+      const out = exportText();
+      if (out) download(current === ALL ? "furnishing-lists.txt" : fileName(current.name), out);
       else status("No lists to export", true);
     });
-    onListsChange(() => { if ($("#lists-index")) drawIndex(); });
+    onListsChange(() => { if ($("#lists-index")) { drawIndex(); fillBox(); } });
     current = defaultList();
     drawMain();
   }
@@ -429,23 +445,33 @@ export function listsMask(deps) {
     if (!warn) statusTimer = setTimeout(() => { el.textContent = ""; }, 5000);
   }
 
+  // The box is the export of the selection until the visitor types or pastes into it; then it is theirs until imported or another row is chosen.
+  let edited = false;
+  const exportText = () => (current === ALL ? formatLists() : formatList(current));
+  function syncImport() { $("#lists-import").disabled = !edited || !$("#lists-text").value.trim(); }
+  function fillBox(force = false) {
+    if (edited && !force) return;
+    edited = false;
+    $("#lists-text").value = exportText();
+    syncImport();
+  }
+
   function runImport(text) {
-    const r = importLists(text, catalogueResolver(state.records), current);
+    const r = importLists(text, catalogueResolver(state.records), current === ALL ? null : current);
     const { text: message, warn } = reportText(r);
     status(message, warn);
-    if (r.first && (!current || current.faves)) current = r.first;
+    if (r.first && current !== ALL && current.faves) current = r.first;
+    // A refused paste stays in the box to be corrected; an imported one gives way to the fresh export.
+    if (r.lists) edited = false;
     drawMain();
   }
 
-  async function copyOut(text) {
-    $("#lists-transfer").open = true;
-    if (!text) { status("No lists to export", true); return; }
+  async function copyOut() {
     const box = $("#lists-text");
-    box.value = text;
-    box.dispatchEvent(new Event("input"));
+    if (!box.value.trim()) { status("No lists to export", true); return; }
     box.select();
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(box.value);
       status("Copied to clipboard");
     } catch (_) {
       status("Press Ctrl+C to copy", true);
@@ -455,13 +481,17 @@ export function listsMask(deps) {
   function select(list) {
     current = list;
     matches = [];
-    drawIndex();
+    edited = false;
     drawMain();
   }
 
   function drawIndex() {
     const ul = $("#lists-index");
     ul.innerHTML = "";
+    const all = elem("button", { type: "button", class: "lists-index-item" + (current === ALL ? " is-active" : ""), title: "Every list, for import and export" },
+      elem("span", {}, ALL.name), elem("span", { class: "muted" }, String(namedLists().length)));
+    all.addEventListener("click", () => select(ALL));
+    ul.append(elem("li", { class: "lists-index-all" }, all));
     for (const list of getLists()) {
       const btn = elem("button", { type: "button", class: "lists-index-item" + (list === current ? " is-active" : ""), title: list.name },
         elem("span", {}, listLabel(list)), elem("span", { class: "muted" }, String(list.ids.length)));
@@ -478,9 +508,16 @@ export function listsMask(deps) {
     matches = [];   // the search box is rebuilt empty; Enter must not add a match it no longer shows
     activeMatch = -1;
     // The first list may have been made from Browse while this tab showed none.
-    if (!current || !getLists().includes(current)) current = defaultList();
+    if (!current || (current !== ALL && !getLists().includes(current))) current = defaultList();
     drawIndex();
+    fillBox();
     const list = current;
+    if (list === ALL) {
+      const n = namedLists().length;
+      host.append(elem("div", { class: "lists-head" }, elem("h2", {}, ALL.name)),
+        elem("p", { class: "muted" }, `${n} list${n === 1 ? "" : "s"} and ${FAVES_NAME}. Select one on the left to see or change its items.`));
+      return;
+    }
 
     const head = elem("div", { class: "lists-head" });
     const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: "Click to rename" }, listLabel(list));
@@ -501,10 +538,8 @@ export function listsMask(deps) {
       box.focus();
     });
     const parent = hasChildren(list);
-    const copy = elem("button", { type: "button", class: "btn-mini", title: "Copy this list to the clipboard" }, "📋 Copy");
-    const save = elem("button", { type: "button", class: "btn-mini", title: "Download this list as a text file" }, "💾 Download");
     // The favourites cannot be renamed or deleted, so they get neither control.
-    head.append(title, ...(list.faves ? [] : [up, down]), ...(list.faves || depthOf(list) >= MAX_DEPTH ? [] : [sub]), copy, save, ...(list.faves ? [] : [del]));
+    head.append(title, ...(list.faves ? [] : [up, down]), ...(list.faves || depthOf(list) >= MAX_DEPTH ? [] : [sub]), ...(list.faves ? [] : [del]));
     host.append(head);
 
     const renameError = elem("p", { class: "warn", role: "alert", hidden: "" });
@@ -550,8 +585,6 @@ export function listsMask(deps) {
       select(getLists().includes(list) ? list : above || defaultList());
     });
     no.addEventListener("click", () => { ask.hidden = true; });
-    copy.addEventListener("click", () => copyOut(formatList(list)));
-    save.addEventListener("click", () => download(fileName(list.name), formatList(list)));
 
     const search = elem("input", {
       id: "lists-search", type: "search", autocomplete: "off",
@@ -589,17 +622,22 @@ export function listsMask(deps) {
     if (list.faves && !list.ids.length) {
       host.append(elem("p", { class: "muted lists-empty" }, "Star an item in Browse, or search for one above."));
     }
-    host.append(elem("p", { class: "muted lists-count" },
-      `${list.ids.length} item${list.ids.length === 1 ? "" : "s"}`));
+    const count = elem("p", { class: "muted lists-count" });
+    const drawCount = () => { count.textContent = `${list.ids.length} item${list.ids.length === 1 ? "" : "s"}`; };
+    drawCount();
     const items = elem("ul", { class: "lists-items" });
-    for (const id of list.ids) {
+    host.append(count, items);
+
+    // Changing one row does not rebuild the list: a long one would lose its place and stall the page.
+    const drop = (li) => { li.remove(); drawCount(); };
+    const row = (id) => {
       const name = nameOf(id);
       const ways = waysToGet(id);
       const li = elem("li", { class: "lists-item" });
-      const row = elem("div", { class: "lists-item-row", title: ways.join("\n") });
-      row.append(itemIconImg(id, name || `item ${id}`));
+      const line = elem("div", { class: "lists-item-row", title: ways.join("\n") });
+      line.append(itemIconImg(id, name || `item ${id}`));
       const toggle = elem("button", { type: "button", class: "lists-item-name", "aria-expanded": "false" }, name || "(unknown item)");
-      row.append(toggle, elem("span", { class: "muted" }, `#${id}`));
+      line.append(toggle, elem("span", { class: "muted" }, `#${id}`));
       const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w)));
       toggle.addEventListener("click", () => {
         where.hidden = !where.hidden;
@@ -609,12 +647,32 @@ export function listsMask(deps) {
       const show = elem("button", { type: "button", class: "btn-mini" }, "Browse");
       show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
       const remove = elem("button", { type: "button", class: "btn-mini", "aria-label": `Remove ${name || id}` }, "Remove");
-      remove.addEventListener("click", () => { setItem(list, id, false); drawMain(); });
-      row.append(starButton(id, drawMain), show, remove);
-      li.append(row, where);
-      items.append(li);
+      remove.addEventListener("click", () => { setItem(list, id, false); drop(li); });
+      const star = () => starButton(id, () => {
+        if (list.faves) drop(li);
+        else line.querySelector(".lists-fave").replaceWith(star());
+      });
+      line.append(star(), show, remove);
+      li.append(line, where);
+      return li;
+    };
+
+    // Rows are built a screenful at a time, the next batch when the end of the last one comes near.
+    const todo = [...list.ids];
+    const more = elem("li", { class: "lists-more", "aria-hidden": "true" });
+    const watch = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) fill(); }, { rootMargin: "800px" });
+    function fill() {
+      // Observed anew after each batch: an observer reports changes only, and a marker still in view after a batch is none.
+      watch.unobserve(more);
+      more.remove();
+      items.append(...todo.splice(0, ROWS_PER_BATCH).map(row));
+      if (!todo.length) return;
+      items.append(more);
+      watch.observe(more);
     }
-    host.append(items);
+    rowWatch?.disconnect();
+    rowWatch = watch;
+    fill();
   }
 
   // One line per way to get the item, in the order Browse lists them.
@@ -655,6 +713,8 @@ export function listsMask(deps) {
   return { id: "lists", label: "Lists", render, onShow: () => { if ($("#lists-main")) { drawIndex(); drawMain(); } } };
 }
 
+// The row above the lists: selects every list for import and export, and holds no items itself.
+const ALL = { name: "All lists", ids: [] };
 function defaultList() { return lastList() || namedLists()[0] || favourites(); }
 function listLabel(list) { return list.faves ? `\u2605 ${FAVES_NAME}` : leafOf(list); }
 // A select cannot indent its options with CSS, so the level is written as spaces.

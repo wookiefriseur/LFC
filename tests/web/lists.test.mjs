@@ -270,16 +270,16 @@ test("a list moves among its siblings with everything below it, and stops at eit
 test("a line of ids without a prefix goes into the selected list, and is refused without one", () => {
   getLists().length = 0;
   const hall = createList("Hall").list;
-  const r = importLists("123,456\n\n456, 789", undefined, hall);
+  const r = importLists("123,456,\n456, 789", undefined, hall);
   assert.deepEqual([hall.ids, r.lists, r.added, r.duplicates, r.first], [[123, 456, 789], 1, 3, 1, hall]);
   const refused = importLists("1,2");
   assert.deepEqual([refused.lists, refused.errors.length, hall.ids.length], [0, 1, 3]);
   assert.deepEqual(reportText(refused), { text: "Ids without a list name need a selected list.", warn: true });
 });
 
-test("ids right below a prefixed line continue it, as after the game's line break", () => {
-  const { lists, skipped } = parseLists("FURC LIST A > B: 1,2,\n3,4\nFURC FAVES: 5\n6\n\n7");
-  assert.deepEqual(lists, [{ name: "A > B", ids: [1, 2, 3, 4] }, { faves: true, ids: [5, 6] }, { bare: true, ids: [7] }]);
+test("ids right below a prefixed line continue it as they stand, undoing the game's line break even inside an id", () => {
+  const { lists, skipped } = parseLists("FURC LIST A > B: 1,2,\r\n3,4\nFURC FAVES: 5,11\n56,6\n\n7");
+  assert.deepEqual(lists, [{ name: "A > B", ids: [1, 2, 3, 4] }, { faves: true, ids: [5, 1156, 6] }, { bare: true, ids: [7] }]);
   assert.equal(skipped, 0);
 });
 

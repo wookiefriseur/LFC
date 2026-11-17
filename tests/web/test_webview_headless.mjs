@@ -777,20 +777,31 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
         value: { writeText: (t) => { window.__copied = t; return Promise.resolve(); } }, configurable: true,
       });
     });
-    await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent.endsWith("Copy")).click());
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    assertEq(await page.$eval("#lists-text", (t) => t.value), "FURC LIST Hall: west: 94116", "the box for the selected list");
+    assertEq(await page.$eval("#lists-import", (b) => b.disabled), true, "Import is offered for the untouched export");
+    await page.click("#lists-copy");
     await page.waitForFunction(() => window.__copied !== null);
     const text = await page.evaluate(() => window.__copied);
     assertEq(text, "FURC LIST Hall: west: 94116", "the export line");
-    assertEq(await page.$eval("#lists-transfer", (d) => d.open), true, "copying left the import and export box closed");
     assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Copied to clipboard", "the copy confirmation");
+    const labels = await page.$$eval("#panel-lists button, #panel-lists .btn-like", (bs) => bs.filter((b) => b.offsetParent && !b.closest(".lists-items")).map((b) => b.textContent.trim()));
+    assertEq(labels.filter((l, i) => labels.indexOf(l) !== i).join(", "), "", "labels shared by two controls on the Lists tab");
 
     await deleteShown();
     await page.waitForFunction(() => document.querySelector("#lists-index")?.textContent.includes("No lists yet"));
-    await page.$eval("#lists-text", (t) => { t.value = ""; t.dispatchEvent(new Event("input")); });
-    assertEq(await page.$eval("#lists-import", (b) => b.disabled), true, "Import text is offered with nothing to import");
+    assertEq(await page.$eval("#lists-text", (t) => t.value), "FURC FAVES:", "the box once the list is gone and the favourites are shown");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, "1,2");
+    await page.click("#lists-import");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Ids without a list name need a selected list.", "a bare line with All lists selected");
+    assertEq(await page.$eval("#lists-text", (t) => t.value), "1,2", "the refused text in the box");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[1].click());
     await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
     await page.click("#lists-import");
     assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Imported 1 list: 1 item added", "the import report");
+    assertEq(await page.$eval("#lists-text", (t) => t.value), text, "the box after the import, showing the selection again");
+    assertEq(await page.$eval("#lists-import", (b) => b.disabled), true, "Import stays offered after the import");
     await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Hall: west"
       && document.querySelector(".lists-item")?.textContent.includes("#94116"));
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.lists")));
@@ -802,7 +813,7 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
 });
 
 test("lists: sublists are created, imported, renamed, emptied, moved and exported with their grouping", async (page) => {
-  const index = () => page.$$eval("#lists-index .lists-index-item", (bs) => bs.slice(1).map((b) => b.title));
+  const index = () => page.$$eval("#lists-index .lists-index-item", (bs) => bs.slice(2).map((b) => b.title));
   const heading = (text) => page.waitForFunction((t) => document.querySelector("#lists-main h2")?.textContent === t, {}, text);
   const pick = async (name) => {
     await page.$$eval("#lists-index .lists-index-item", (bs, n) => bs.find((b) => b.title === n).click(), name);
@@ -835,7 +846,7 @@ test("lists: sublists are created, imported, renamed, emptied, moved and exporte
       "a third-level list offers a fourth level");
     assertEq(JSON.stringify(await index()), JSON.stringify(["Guildhall", "Guildhall > Entrance", "Guildhall > Entrance > Left"]), "the lists made from two paths");
     assertEq(await page.$$eval("#lists-index .lists-index-item", (bs) => bs.map((b) => b.firstChild.textContent).join("|")),
-      "★ Favorites|Guildhall|Entrance|Left", "the column's labels");
+      "All lists|★ Favorites|Guildhall|Entrance|Left", "the column's labels");
 
     // A parent holds items of its own beside its sublists; a bare line of ids lands in it.
     await pick("Guildhall");
@@ -859,7 +870,7 @@ test("lists: sublists are created, imported, renamed, emptied, moved and exporte
 
     await pick("Hall/x > A");
     await headButton("Move up");
-    await page.waitForFunction(() => document.querySelectorAll("#lists-index .lists-index-item")[2]?.title === "Hall/x > A");
+    await page.waitForFunction(() => document.querySelectorAll("#lists-index .lists-index-item")[3]?.title === "Hall/x > A");
     const order = ["Hall/x", "Hall/x > A", "Hall/x > A > B / C", "Hall/x > Entrance", "Hall/x > Entrance > Left"];
     assertEq(JSON.stringify(await index()), JSON.stringify(order), "the order after moving a sublist up");
     assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.getAttribute("aria-label") === "Move up").disabled), true,
@@ -871,7 +882,8 @@ test("lists: sublists are created, imported, renamed, emptied, moved and exporte
         value: { writeText: (t) => { window.__copied = t; return Promise.resolve(); } }, configurable: true,
       });
     });
-    await page.click("#lists-copy-all");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    await page.click("#lists-copy");
     await page.waitForFunction(() => window.__copied !== null);
     const all = await page.evaluate(() => window.__copied);
     assertEq(all, ["FURC LIST Hall/x:", "FURC LIST Hall/x > A:", "FURC LIST Hall/x > A > B / C: 94116", "FURC LIST Hall/x > Entrance:",
@@ -901,7 +913,7 @@ test("favourites: the Browse star fills, the item shows under Favourites, which 
     .some((c) => c.textContent.includes("#94116") && c.querySelector(".lists-fave")?.textContent === "\u2605"), {}, card);
   try {
     await switchTab(page, "lists");
-    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[1].click());
     await page.waitForFunction(() => document.querySelector(".lists-item")?.textContent.includes("#94116"));
     assertEq(await page.$("#lists-main .lists-title-button"), null, "the favourites can be renamed");
     assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.some((b) => b.textContent.endsWith("Delete"))), false,

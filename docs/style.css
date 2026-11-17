@@ -2083,7 +2083,8 @@ input, select, textarea { min-width: 0; max-width: 100%; }
   max-width: var(--screen-width); margin: 0 auto; padding: 1.25rem 1.5rem 3rem;
 }
 .lists-main { min-width: 0; padding: 0.85rem 1rem; background: white; border: 1px solid var(--border); border-radius: 6px; }
-.lists-transfer { margin: 0.6rem 0 1rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; background: white; }
+.lists-col { min-width: 0; }
+.lists-transfer { margin: 0 0 0.75rem; padding: 0.4rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; background: white; }
 .lists-transfer > summary { font-weight: 600; cursor: pointer; }
 .lists-transfer[open] > summary { margin-bottom: 0.5rem; }
 .lists-transfer textarea { width: 100%; box-sizing: border-box; font-family: monospace; font-size: 0.8rem; }
@@ -2095,9 +2096,12 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .lists-inline { display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 0.4rem 0; }
 .lists-inline[hidden] { display: none; }
 .lists-inline input { flex: 1 1 10rem; min-width: 0; }
-.lists-row { display: flex; gap: 0.4rem; align-items: center; margin-top: 0.4rem; }
-.lists-row-label { flex: 0 0 5.5rem; font-weight: 600; }
-.lists-status { margin: 0.5rem 0 0; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; color: #15803d; background: #dcfce7; }
+.lists-row { display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; margin-top: 0.4rem; }
+.lists-row-gap { flex: 1 1 0; }
+.lists-help { margin-top: 0.5rem; font-size: 0.85rem; }
+.lists-help p { margin: 0.25rem 0; }
+.lists-index-all { margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.lists-status { margin: 0 0 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; color: #15803d; background: #dcfce7; }
 .lists-status.is-warn { color: #a16207; background: #fef9c3; }
 .lists-status:empty { display: none; }
 .btn-like { display: inline-flex; align-items: center; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; background: white; cursor: pointer; }
