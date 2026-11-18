@@ -40,7 +40,7 @@
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
       "records": 56,
-      "digest": "9c5c49a017c31632"
+      "digest": "27482050faeb1a4d"
     },
     {
       "name": "luxury.jsonl",
@@ -124,7 +124,7 @@
       "name": "container.jsonl",
       "type": "container",
       "records": 182,
-      "digest": "ca247cfb1318e3a4"
+      "digest": "5c59e69f76a653c2"
     },
     {
       "name": "rumour.jsonl",
@@ -139,7 +139,7 @@
       "digest": "3fc76eaadb5f56ce"
     }
   ],
-  "digest": "a0dbe38e0adf1897",
+  "digest": "53bdd74b97b9c856",
   "counts": {
     "records": 10215,
     "ids": 12489,
