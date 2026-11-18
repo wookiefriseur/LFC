@@ -1,5 +1,9 @@
 // Named furnishing lists, kept in this browser only. The text form is FurnitureCatalogue's own list line, so a list copied here pastes into the add-on's import window, and an add-on export pastes back here.
 import { itemSearch } from "./crown-store.js";
+import { tradingLinkAnchor } from "./external-links.js";
+import {
+  forgetKnowledge, getKnowledge, importKnowledge, kindReport, kindStatus, knowledgeLine, knowledgeMarker, knowledgeOf, missingPages, onKnowledgeChange, recipeResolver,
+} from "./knowledge.js";
 
 const STORE_KEY = "lfc.lists";
 export const MAX_NAME_LENGTH = 32;   // bytes, for each part of a path
@@ -269,12 +273,14 @@ function idsOf(text) {
 /**
  * Ids are kept as written, repeats included, so the import can count them as duplicates.
  * A line of ids without a prefix continues the line right above it, joined as it stands: the game breaks a long pasted line in two, also in the middle of an id. Standing alone it is a `bare` entry for the selected list.
+ * Crafting knowledge lines go to `knowledge`, as `{ knowledge: "known" | "unknown", page, pages, ids }`.
  */
 export function parseLists(text) {
   const lists = [];
+  const knowledge = [];
   let skipped = 0;
   let above = null;
-  const entry = (head, ids) => { lists.push(above = { ...head, ids }); };
+  const entry = (head, ids, into = lists) => { into.push(above = { ...head, ids }); };
   for (const raw of String(text ?? "").split(/\r?\n/)) {
     const line = raw.trim();
     const open = above;
@@ -285,6 +291,9 @@ export function parseLists(text) {
       else entry({ bare: true }, line);
       continue;
     }
+    const known = knowledgeLine(line);
+    if (known?.bad) { skipped++; continue; }
+    if (known) { entry({ knowledge: known.kind, page: known.page, pages: known.pages }, known.ids, knowledge); continue; }
     const fav = payloadOf(line, FAVES_PREFIX)?.match(FAVES_LINE);
     if (fav) { entry({ faves: true }, fav[1]); continue; }
     const m = payloadOf(line, PREFIX)?.match(LINE) || line.match(BRACES);
@@ -293,18 +302,20 @@ export function parseLists(text) {
     if (!name) { skipped++; continue; }
     entry({ name }, m[2]);
   }
-  for (const l of lists) l.ids = idsOf(l.ids);
-  return { lists, skipped };
+  for (const l of [...lists, ...knowledge]) l.ids = idsOf(l.ids);
+  return { lists, knowledge, skipped };
 }
 
 /**
  * Merges into the favourites or the list at the same path, like the add-on's import: nothing is removed, new ids go to the end, missing parents are made empty. Saved and announced once, after the whole paste.
  * @param resolve maps a furnishing or blueprint id to the furnishing id, or null when the catalogue does not know it; the default keeps every id.
  * @param target the selected list, which takes lines of ids that name no list; without one they are refused.
+ * @param craftable the same for crafting knowledge lines, which name craftables only.
  */
-export function importLists(text, resolve = (id) => id, target = null) {
-  const { lists, skipped } = parseLists(text);
-  const report = { lists: 0, added: 0, duplicates: 0, unknown: 0, skipped, errors: [], first: null };
+export function importLists(text, resolve = (id) => id, target = null, craftable = (id) => id) {
+  const { lists, knowledge, skipped } = parseLists(text);
+  const report = { lists: 0, added: 0, duplicates: 0, unknown: 0, skipped, errors: [], first: null, knowledge: null };
+  if (knowledge.length) report.knowledge = importKnowledge(knowledge, craftable);
   const touched = new Set();
   for (const incoming of lists) {
     let list = incoming.faves ? favourites() : incoming.bare ? target : findList(incoming.name);
@@ -344,13 +355,21 @@ export function catalogueResolver(records) {
 // Counts only, short enough for the status line; `warn` when something was left out.
 export function reportText(r) {
   const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
-  if (!r.lists) return { text: r.errors[0] || "No list lines found", warn: true };
-  let text = `Imported ${plural(r.lists, "list")}: ${plural(r.added, "item")} added`;
-  if (r.duplicates) text += `, ${plural(r.duplicates, "duplicate")}`;
-  if (r.unknown) text += `, ${r.unknown} unknown skipped`;
+  const k = r.knowledge;
+  if (!r.lists && !k) return { text: r.errors[0] || "No list lines found", warn: true };
+  const parts = [];
+  if (r.lists) {
+    let text = `Imported ${plural(r.lists, "list")}: ${plural(r.added, "item")} added`;
+    if (r.duplicates) text += `, ${plural(r.duplicates, "duplicate")}`;
+    if (r.unknown) text += `, ${r.unknown} unknown skipped`;
+    parts.push(text);
+  }
+  if (k) parts.push(`Crafting knowledge: ${k.kinds.map(kindReport).join("; ")}` + (k.notCraftable ? `, ${k.notCraftable} not craftable skipped` : ""));
+  let text = parts.join(". ");
   if (r.skipped) text += `, ${plural(r.skipped, "line")} skipped`;
   if (r.errors.length) text += `. ${r.errors[0]}`;
-  return { text, warn: Boolean(r.skipped || r.errors.length || r.unknown) };
+  const gaps = k?.kinds.some((kind) => missingPages(kind).length);
+  return { text, warn: Boolean(r.skipped || r.errors.length || r.unknown || k?.notCraftable || gaps) };
 }
 
 function download(filename, text) {
@@ -390,6 +409,7 @@ export function listsMask(deps) {
             <button class="btn-primary">Create</button>
           </form>
           <p id="lists-new-error" class="warn" role="alert" hidden></p>
+          <div id="lists-knowledge" class="lists-knowledge"></div>
         </aside>
         <div class="lists-col">
           <details id="lists-transfer" class="lists-transfer">
@@ -457,6 +477,7 @@ export function listsMask(deps) {
       else status("No lists to export", true);
     });
     onListsChange(() => { if ($("#lists-index")) { drawIndex(); fillBox(); } });
+    onKnowledgeChange(() => { if ($("#lists-index")) drawIndex(); });
     current = defaultList();
     drawMain();
   }
@@ -473,7 +494,7 @@ export function listsMask(deps) {
 
   // The box is the export of the selection until the visitor types or pastes into it; then it is theirs until imported or another row is chosen.
   let edited = false;
-  const exportText = () => (current === ALL ? formatLists() : formatList(current));
+  const exportText = () => (current === ALL ? formatLists() : current === KNOWLEDGE ? "" : formatList(current));
   function syncImport() { $("#lists-import").disabled = !edited || !$("#lists-text").value.trim(); }
   let pages = [""];
   let page = 0;
@@ -495,12 +516,12 @@ export function listsMask(deps) {
   }
 
   function runImport(text) {
-    const r = importLists(text, catalogueResolver(state.records), current === ALL ? null : current);
+    const r = importLists(text, catalogueResolver(state.records), current === ALL || current === KNOWLEDGE ? null : current, recipeResolver(state.records));
     const { text: message, warn } = reportText(r);
     status(message, warn);
     if (r.first && current !== ALL && current.faves) current = r.first;
     // A refused paste stays in the box to be corrected; an imported one gives way to the fresh export.
-    if (r.lists) edited = false;
+    if (r.lists || r.knowledge) edited = false;
     drawMain();
   }
 
@@ -539,6 +560,65 @@ export function listsMask(deps) {
       ul.append(elem("li", {}, btn));
     }
     if (!namedLists().length) ul.append(elem("li", { class: "muted" }, "No lists yet."));
+    drawKnowledge();
+  }
+
+  // Apart from the lists, as the add-on's manager shows it. Selecting it shows what the markers mean and offers Forget; it never takes bare ids.
+  function drawKnowledge() {
+    const host = $("#lists-knowledge");
+    const k = getKnowledge();
+    const kinds = ["known", "unknown"].filter((kind) => k[kind]);
+    const btn = elem("button", { type: "button", class: "lists-index-item" + (current === KNOWLEDGE ? " is-active" : ""), title: "Which furnishing plans your character knows" },
+      elem("span", {}, KNOWLEDGE.name));
+    btn.addEventListener("click", () => select(KNOWLEDGE));
+    const lines = kinds.map((kind) => elem("p", {}, kindStatus(kind)));
+    if (k.learned.length) lines.push(elem("p", {}, `Learned since: ${k.learned.length}`));
+    if (kinds.length === 1) {
+      const other = kinds[0] === "known" ? "unknown" : "known";
+      lines.push(elem("p", {}, `Import ${other.toUpperCase()} to mark those as well.`));
+    }
+    if (!kinds.length) lines.push(elem("p", {}, KNOWLEDGE_SOURCE));
+    host.replaceChildren(btn, elem("div", { class: "muted lists-knowledge-status" }, lines));
+  }
+
+  let knowledgeFilter = "all";
+  function drawKnowledgeMain(host) {
+    const forget = elem("button", {
+      type: "button", class: "btn-mini btn-danger", title: "Reset your crafting knowledge to import a different account or character, or for a clean import.",
+    }, "Forget");
+    host.append(elem("div", { class: "lists-head" }, elem("h2", {}, KNOWLEDGE.name), forget));
+    const ask = elem("p", { class: "lists-confirm", hidden: "" }, "Forget all crafting knowledge and its markers? ",
+      elem("button", { type: "button", class: "btn-mini btn-danger" }, "Forget it"),
+      elem("button", { type: "button", class: "btn-mini" }, "Keep it"));
+    const [yes, no] = ask.querySelectorAll("button");
+    forget.addEventListener("click", () => { ask.hidden = false; });
+    yes.addEventListener("click", () => { forgetKnowledge(); drawMain(); status("Crafting knowledge forgotten"); });
+    no.addEventListener("click", () => { ask.hidden = true; });
+    const k = getKnowledge();
+    forget.disabled = !k.known && !k.unknown && !k.learned.length;
+    host.append(ask, elem("p", {}, "Paste your whole knowledge export from FurnitureCatalogue into the import box above."));
+    const all = [...new Set([...(k.known?.ids || []), ...k.learned, ...(k.unknown?.ids || [])])];
+    if (!all.length) { host.append(elem("p", { class: "muted" }, KNOWLEDGE_SOURCE)); return; }
+
+    const choices = { all: "All", known: "Known", unknown: "Unknown" };
+    const pick = elem("div", { class: "lists-switch", role: "radiogroup", "aria-label": "Show" },
+      Object.entries(choices).map(([value, label]) => {
+        const radio = elem("input", { type: "radio", name: "lists-knowledge-filter", value });
+        radio.checked = value === knowledgeFilter;
+        radio.addEventListener("change", () => { knowledgeFilter = value; drawItems(); });
+        return elem("label", {}, radio, ` ${label}`);
+      }));
+    const count = elem("p", { class: "muted lists-count" });
+    const items = elem("ul", { class: "lists-items" });
+    host.append(pick, count, items);
+    const byName = all.map((id) => [id, nameOf(id) || ""]).sort((a, b) => a[1].localeCompare(b[1]) || a[0] - b[0]).map(([id]) => id);
+    function drawItems() {
+      const ids = knowledgeFilter === "all" ? byName : byName.filter((id) => knowledgeOf(id) === knowledgeFilter);
+      count.textContent = `${ids.length} item${ids.length === 1 ? "" : "s"}`;
+      items.replaceChildren();
+      drawRows(items, ids, (id) => itemRow(id, null));
+    }
+    drawItems();
   }
 
   function drawMain() {
@@ -547,7 +627,7 @@ export function listsMask(deps) {
     matches = [];   // the search box is rebuilt empty; Enter must not add a match it no longer shows
     activeMatch = -1;
     // The first list may have been made from Browse while this tab showed none.
-    if (!current || (current !== ALL && !getLists().includes(current))) current = defaultList();
+    if (!current || (current !== ALL && current !== KNOWLEDGE && !getLists().includes(current))) current = defaultList();
     drawIndex();
     fillBox();
     const list = current;
@@ -557,6 +637,7 @@ export function listsMask(deps) {
         elem("p", { class: "muted" }, `${n} list${n === 1 ? "" : "s"} and ${FAVES_NAME}. Select one on the left to see or change its items.`));
       return;
     }
+    if (list === KNOWLEDGE) { drawKnowledgeMain(host); return; }
 
     const head = elem("div", { class: "lists-head" });
     const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: "Click to rename" }, listLabel(list));
@@ -636,7 +717,10 @@ export function listsMask(deps) {
       clearTimeout(timer);
       timer = setTimeout(() => {
         searchItems.reset();   // names and records can change while the tab is open
-        matches = searchItems(search.value);
+        // A blueprint stands for the furnishing it makes, as in an import; ids the catalogue does not know are not offered.
+        const resolve = catalogueResolver(state.records);
+        const ids = new Set(searchItems(search.value).map((m) => resolve(m.id)).filter((id) => id != null));
+        matches = [...ids].map((id) => ({ id, name: nameOf(id) || "" }));
         activeMatch = -1;
         drawMatches();
       }, 120);
@@ -669,42 +753,57 @@ export function listsMask(deps) {
 
     // Changing one row does not rebuild the list: a long one would lose its place and stall the page.
     const drop = (li) => { li.remove(); drawCount(); };
-    const row = (id) => {
-      const name = nameOf(id);
-      const ways = waysToGet(id);
-      const li = elem("li", { class: "lists-item" });
-      const line = elem("div", { class: "lists-item-row", title: ways.join("\n") });
-      line.append(itemIconImg(id, name || `item ${id}`));
-      const toggle = elem("button", { type: "button", class: "lists-item-name", "aria-expanded": "false" }, name || "(unknown item)");
-      line.append(toggle, elem("span", { class: "muted" }, `#${id}`));
-      const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w)));
-      toggle.addEventListener("click", () => {
-        where.hidden = !where.hidden;
-        li.classList.toggle("is-open", !where.hidden);
-        toggle.setAttribute("aria-expanded", String(!where.hidden));
-      });
-      const show = elem("button", { type: "button", class: "btn-mini" }, "Browse");
-      show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
-      const remove = elem("button", { type: "button", class: "btn-mini", "aria-label": `Remove ${name || id}` }, "Remove");
-      remove.addEventListener("click", () => { setItem(list, id, false); drop(li); });
-      const star = () => starButton(id, () => {
-        if (list.faves) drop(li);
-        else line.querySelector(".lists-fave").replaceWith(star());
-      });
-      line.append(star(), show, remove);
-      li.append(line, where);
-      return li;
-    };
+    drawRows(items, list.ids, (id) => itemRow(id, list, drop));
+  }
 
-    // Rows are built a screenful at a time, the next batch when the end of the last one comes near.
-    const todo = [...list.ids];
+  // `list` null: a row of no list, as the knowledge view shows them, without Remove.
+  function itemRow(id, list, drop) {
+    const name = nameOf(id);
+    const ways = waysToGet(id);
+    const li = elem("li", { class: "lists-item" });
+    const line = elem("div", { class: "lists-item-row", title: ways.join("\n") });
+    line.append(itemIconImg(id, name || `item ${id}`));
+    // The marker goes inside, right before the name, so it is not taken for a button of its own.
+    const mark = knowledgeMarker(id);
+    const toggle = elem("button", { type: "button", class: "lists-item-name", "aria-expanded": "false" }, mark ? [mark, " "] : [], name || "(unknown item)");
+    line.append(toggle);
+    const recs = deps.recordsForItem?.(id) || [];
+    const blueprint = recs.some((r) => r.id) ? recs.find((r) => r.blueprint)?.blueprint : null;
+    const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w)));
+    toggle.addEventListener("click", () => {
+      where.hidden = !where.hidden;
+      li.classList.toggle("is-open", !where.hidden);
+      toggle.setAttribute("aria-expanded", String(!where.hidden));
+    });
+    const show = elem("button", { type: "button", class: "btn-mini", title: "Show in Browse", "aria-label": `Show ${name || id} in Browse` }, "🔍");
+    show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
+    let remove = [];
+    if (list) {
+      remove = elem("button", {
+        type: "button", class: "btn-mini lists-remove", "aria-label": `Remove ${name || id}`, title: `Remove from ${list.faves ? FAVES_NAME : "this list"}`,
+      }, "🗑️");
+      remove.addEventListener("click", () => { setItem(list, id, false); drop(li); });
+    }
+    // In the favourites the star would only do what Remove does.
+    const star = () => starButton(id, () => line.querySelector(".lists-fave").replaceWith(star()));
+    // One group, so at narrow widths it wraps whole and keeps its order; the trader icon, which every row has, stays beside the id.
+    line.append(elem("span", { class: "lists-item-tail" },
+      blueprint ? tradingLinkAnchor(blueprint, "blueprint") : [], tradingLinkAnchor(id), elem("span", { class: "muted" }, `#${id}`),
+      show, list?.faves ? [] : star(), remove));
+    li.append(line, where);
+    return li;
+  }
+
+  // Rows are built a screenful at a time, the next batch when the end of the last one comes near.
+  function drawRows(items, ids, rowOf) {
+    const todo = [...ids];
     const more = elem("li", { class: "lists-more", "aria-hidden": "true" });
     const watch = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) fill(); }, { rootMargin: "800px" });
     function fill() {
       // Observed anew after each batch: an observer reports changes only, and a marker still in view after a batch is none.
       watch.unobserve(more);
       more.remove();
-      items.append(...todo.splice(0, ROWS_PER_BATCH).map(row));
+      items.append(...todo.splice(0, ROWS_PER_BATCH).map(rowOf));
       if (!todo.length) return;
       items.append(more);
       watch.observe(more);
@@ -754,6 +853,8 @@ export function listsMask(deps) {
 
 // The row above the lists: selects every list for import and export, and holds no items itself.
 const ALL = { name: "All lists", ids: [] };
+const KNOWLEDGE = { name: "Crafting knowledge", ids: [] };
+const KNOWLEDGE_SOURCE = "Export it in FurnitureCatalogue (/furcexport or the list manager) and import it here.";
 function defaultList() { return lastList() || namedLists()[0] || favourites(); }
 function listLabel(list) { return list.faves ? `\u2605 ${FAVES_NAME}` : leafOf(list); }
 // A select cannot indent its options with CSS, so the level is written as spaces.

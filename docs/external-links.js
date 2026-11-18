@@ -5,8 +5,8 @@ import { dropCachedIconURL, getCachedIconURL, putCachedIconURL } from "./icon-ca
 const ESO_LINKS = {
   UESP_ITEM:       (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}`,
   UESP_ITEM_EMBED: (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}&embed`,
-  // Keyed by name slug, not itemId; ESO-Hub's slug rules are not guaranteed stable.
-  ESOHUB_FURNITURE: (slug) => `https://eso-hub.com/en/furniture/${slug}`,
+  // The site appends the name after the id; the id alone is enough.
+  ESOHUB_TRADING:  (id) => `https://eso-hub.com/en/trading/${id}`,
 };
 
 export function bareIconURL(iconPath) {
@@ -18,17 +18,7 @@ export function bareIconURL(iconPath) {
   return `https://esoicons.uesp.net/esoui/art/icons/${p}.png`;
 }
 
-// Best-effort ESO-Hub slug; not authoritative.
-function esohubSlug(name) {
-  return String(name)
-    .toLowerCase()
-    .replace(/['’]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-export function itemPageURL(id, name, variant = 'uesp') {
-  if (variant === 'esohub' && name) return ESO_LINKS.ESOHUB_FURNITURE(esohubSlug(name));
+export function itemPageURL(id) {
   return ESO_LINKS.UESP_ITEM(id);
 }
 
@@ -70,13 +60,32 @@ export function itemIcon(id) {
   return Number.isInteger(numId) ? getCachedIconURL(numId) : null;
 }
 
-export function itemLinkAnchor(id, text) {
+function extLink(href, text) {
   const a = document.createElement('a');
-  a.href = itemPageURL(id);
+  a.href = href;
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
   a.textContent = String(text);
   a.className = 'ext-link';
+  return a;
+}
+
+export function itemLinkAnchor(id, text) {
+  return extLink(itemPageURL(id), text);
+}
+
+export const TRADING_ICONS = {
+  item:      { glyph: '💰', label: 'Guild store prices on ESO-HUB' },
+  blueprint: { glyph: '📜', label: 'Blueprint prices on ESO-HUB' },
+};
+
+/** @param kind "item", or "blueprint" for the recipe of a paired craftable */
+export function tradingLinkAnchor(id, kind = 'item') {
+  const { glyph, label } = TRADING_ICONS[kind];
+  const a = extLink(ESO_LINKS.ESOHUB_TRADING(id), glyph);
+  a.classList.add('trade-link');
+  a.title = label;
+  a.setAttribute('aria-label', label);
   return a;
 }
 

@@ -79,6 +79,8 @@ export function mountMasks({ tabBar, panelHost, defaultId }) {
       btn.setAttribute("aria-selected", "false");
       btn.setAttribute("aria-controls", `panel-${m.id}`);
       btn.textContent = m.label;
+      // The glyph is decoration; the tab's name stays the label.
+      if (m.icon) btn.prepend(Object.assign(document.createElement("span"), { textContent: `${m.icon} `, ariaHidden: "true" }));
       btn.addEventListener("click", () => switchMask(m.id));
       tabBar.append(btn);
     }

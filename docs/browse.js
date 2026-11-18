@@ -14,11 +14,13 @@ import {
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
+import { knowledgeMarker, onKnowledgeChange } from "./knowledge.js";
+import { tradingLinkAnchor } from "./external-links.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
-// Must match the rendered card height.
-const CARD_H = 92;
+// A card's least height plus its bottom margin; the guess for a card not drawn yet. Cards grow with their content, so drawn ones are measured.
+const CARD_H = 98;
 const CARD_OVERSCAN = 6;
 
 const SOURCE_FIELD_ENUM = SOURCE_ENUM_FIELD;
@@ -113,6 +115,11 @@ export function browseMask(deps) {
     if ($("#browse-grid")) onShow();
   });
   onListsChange(() => { if ($("#browse-grid")) renderGrid(); });
+  onKnowledgeChange(() => {
+    if (!$("#browse-grid")) return;
+    renderGrid();
+    if (view._detailItem) renderDetail();
+  });
 
   function taxonomy() {
     view.tax = buildTaxonomy(state.enums || {}, state.records || []);
@@ -392,18 +399,40 @@ export function browseMask(deps) {
     return node;
   }
 
+  // Measured card heights by item id, valid for one grid width; the others are guessed from their mean.
+  const cardHeights = new Map();
+  let heightsWidth = 0, heightSum = 0;
+
   function renderGrid() {
     const grid = $("#browse-grid");
     const scroller = $("#browse-scroller");
     if (!grid || !scroller) return;
     const total = view.list.length;
+    if (grid.clientWidth !== heightsWidth) { cardHeights.clear(); heightSum = 0; heightsWidth = grid.clientWidth; }
+    const guess = cardHeights.size ? heightSum / cardHeights.size : CARD_H;
+    const heightOf = (i) => cardHeights.get(view.list[i].id) ?? guess;
 
     const scrollTop = scroller.scrollTop;
     const viewH = scroller.clientHeight || 600;
-    let first = Math.floor(scrollTop / CARD_H) - CARD_OVERSCAN;
-    if (first < 0) first = 0;
-    const visible = Math.ceil(viewH / CARD_H) + CARD_OVERSCAN * 2;
-    const last = Math.min(total, first + visible);
+    // Scrolled to the end, the grid is drawn from its last card back, since the guessed heights below would leave it short of the end.
+    const atEnd = scrollTop > 0 && scrollTop + viewH >= scroller.scrollHeight - 1;
+    let first = 0, top = 0, last = total, rest = 0, anchor = null, anchorTop = 0;
+    if (atEnd) {
+      first = total;
+      for (let h = 0; first > 0 && h < viewH;) h += heightOf(--first);
+      first = Math.max(0, first - CARD_OVERSCAN);
+      for (let i = 0; i < first; i++) top += heightOf(i);
+    } else {
+      while (first < total - 1 && top + heightOf(first) <= scrollTop) top += heightOf(first++);
+      // The first card in view keeps its place once the cards above it are measured.
+      anchor = first;
+      anchorTop = top;
+      for (let n = 0; n < CARD_OVERSCAN && first > 0; n++) top -= heightOf(--first);
+      let bottom = top;
+      for (last = first; last < total && bottom < scrollTop + viewH;) bottom += heightOf(last++);
+      last = Math.min(total, last + CARD_OVERSCAN);
+      for (let i = last; i < total; i++) rest += heightOf(i);
+    }
 
     grid.innerHTML = "";
     if (total === 0) {
@@ -411,7 +440,7 @@ export function browseMask(deps) {
       $("#browse-count").textContent = "0 items";
       return;
     }
-    if (first > 0) grid.append(spacer(first * CARD_H));
+    if (first > 0) grid.append(spacer(top));
 
     for (let i = first; i < last; i++) {
       const item = view.list[i];
@@ -424,8 +453,8 @@ export function browseMask(deps) {
       card.append(iconWrap);
 
       const body = elem("div", { class: "browse-card-body" });
-      body.append(elem("div", { class: "browse-card-name" },
-        nameOf(item.id) || "(no name)"));
+      const mark = knowledgeMarker(item.id);
+      body.append(elem("div", { class: "browse-card-name" }, mark ? [mark, " "] : [], nameOf(item.id) || "(no name)"));
       const meta = elem("div", { class: "browse-card-meta muted" });
       const blueprint = item.records.find(r => r.blueprint)?.blueprint;
       meta.append(elem("span", {
@@ -492,7 +521,8 @@ export function browseMask(deps) {
       grid.append(card);
     }
 
-    if (last < total) grid.append(spacer((total - last) * CARD_H));
+    if (last < total) grid.append(spacer(rest));
+    measureCards(grid, scroller, first, anchor, anchorTop);
 
     $("#browse-count").textContent =
       `${total.toLocaleString()} item${total === 1 ? "" : "s"}` +
@@ -510,6 +540,26 @@ export function browseMask(deps) {
       renderGrid();
     });
     return button;
+  }
+
+  function measureCards(grid, scroller, first, anchor, anchorTop) {
+    const cards = grid.querySelectorAll(".browse-card");
+    if (!cards.length) return;
+    const gap = parseFloat(getComputedStyle(cards[0]).marginBottom) || 0;
+    cards.forEach((card, n) => {
+      const id = view.list[first + n].id;
+      // Whole pixels, so the sums stay exact and a redraw that measures nothing new changes no spacer.
+      const h = Math.round(card.getBoundingClientRect().height + gap);
+      heightSum += h - (cardHeights.get(id) ?? 0);
+      cardHeights.set(id, h);
+    });
+    if (anchor == null) {
+      const end = scroller.scrollHeight - scroller.clientHeight;
+      if (Math.abs(scroller.scrollTop - end) > 1) scroller.scrollTop = end;
+      return;
+    }
+    const actual = cards[anchor - first].getBoundingClientRect().top - grid.getBoundingClientRect().top;
+    if (Math.abs(actual - anchorTop) > 1) scroller.scrollTop += actual - anchorTop;
   }
 
   function spacer(heightPx) {
@@ -539,12 +589,13 @@ export function browseMask(deps) {
     const titleWrap = elem("div", {});
     titleWrap.append(itemIconImg(item.id, nameOf(item.id) || `item ${item.id}`));
     const title = elem("div", { class: "browse-detail-title" });
-    title.append(elem("h3", {}, nameOf(item.id) || "(no name)"));
+    const mark = knowledgeMarker(item.id);
+    title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || "(no name)"));
     const blueprint = item.records.find(r => r.blueprint)?.blueprint;
-    title.append(itemLinkAnchor(item.id, `#${item.id}`));
+    title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", tradingLinkAnchor(item.id));
     if (blueprint && item.records.some(r => r.id)) {
       const from = elem("span", { class: "browse-detail-recipe muted" }, "from recipe ");
-      from.append(itemLinkAnchor(blueprint, `#${blueprint}`));
+      from.append(itemLinkAnchor(blueprint, `#${blueprint}`), " ", tradingLinkAnchor(blueprint, "blueprint"));
       title.append(from);
     }
     titleWrap.append(title);
@@ -825,5 +876,5 @@ export function browseMask(deps) {
     applyFilter(filter);
   }
 
-  return { id: "browse", label: "Browse", render, onShow, focus };
+  return { id: "browse", label: "Browse", icon: "🔍", render, onShow, focus };
 }

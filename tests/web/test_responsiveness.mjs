@@ -55,9 +55,19 @@ try {
     if (await page.$('#batch-filters') && !await page.$eval('#batch-filters', e => e.open)) await page.click('#batch-filters summary');
   };
   const fill = (selector, value) => page.$eval(selector, (e, value) => { e.value = value; e.dispatchEvent(new Event('input', { bubbles: true })); }, value);
+  const cardsFit = async (width, what) => {
+    const out = await page.$$eval('#browse-grid .browse-card', cards => cards.length && !cards[0].getClientRects().length ? ['the grid is not shown'] : cards.flatMap(card => {
+      const b = card.getBoundingClientRect();
+      return [...card.querySelectorAll('*')].filter(e => e.getClientRects().length).filter(e => {
+        const r = e.getBoundingClientRect();
+        return r.top < b.top - 1 || r.bottom > b.bottom + 1 || r.left < b.left - 1 || r.right > b.right + 1;
+      }).map(e => `${card.querySelector('.browse-card-id')?.textContent} .${e.className}`);
+    }));
+    if (out.length) errors.push(`Browse card content outside its card in ${what} at ${width}px: ${out.slice(0, 5).join(', ')}`);
+  };
   const capture = async (name, width) => {
     await page.evaluate(name => {
-      const selectors = { 'luxury-preview': '#lux-preview-wrap', 'batch-loaded-form': '#detail', 'names-pending': '#names-table', maintenance: '#maint-body', advanced: '#panel-advanced table' };
+      const selectors = { 'luxury-preview': '#lux-preview-wrap', 'batch-loaded-form': '#detail', 'names-pending': '#names-table', maintenance: '#maint-body', advanced: '#panel-advanced table', 'lists-knowledge': '.lists-items', 'lists-knowledge-view': '.lists-switch' };
       if (selectors[name]) document.querySelector(selectors[name])?.scrollIntoView({ block: 'start' });
       else window.scrollTo(0, 0);
     }, name);
@@ -202,6 +212,53 @@ try {
     await page.waitForSelector('.qe-backdrop');
     await capture('browse-quick-edit', width);
     await page.keyboard.press('Escape');
+    await tab('lists');
+    await page.$eval('#lists-transfer', d => { d.open = true; });
+    await fill('#lists-text', 'FURC KNOWN 1/1: 132173,227465\nFURC LIST Fit test: 130326,118278\nFURC LIST Second list: 118278');
+    await click('#lists-import');
+    await page.waitForSelector('.lists-item .knowledge-mark');
+    // The panel scrolls, so a row wider than the list would not show as page overflow.
+    const wideRows = await page.$$eval('.lists-item-row', rows => rows.filter(r => [...r.children].some(c => c.getBoundingClientRect().right > r.getBoundingClientRect().right + 1)).length);
+    if (wideRows) errors.push(`List rows wider than the list at ${width}px`);
+    const tailOrder = await page.$eval('.lists-item-tail', t => [...t.children].every((c, i, cs) => !i || c.getBoundingClientRect().left >= cs[i - 1].getBoundingClientRect().right));
+    if (!tailOrder) errors.push(`List row controls out of order at ${width}px`);
+    await capture('lists-knowledge', width);
+    await click('#lists-knowledge .lists-index-item');
+    await page.waitForSelector('#lists-main .lists-switch');
+    const wideKnowledgeRows = await page.$$eval('#lists-main .lists-item-row', rows => rows.filter(r => [...r.children].some(c => c.getBoundingClientRect().right > r.getBoundingClientRect().right + 1)).length);
+    if (wideKnowledgeRows) errors.push(`Knowledge rows wider than the list at ${width}px`);
+    await capture('lists-knowledge-view', width);
+    // The fullest card: a knowledge marker, a recipe footnote, several ways to get it and two list pills.
+    await tab('browse');
+    await page.evaluate(() => document.querySelector('#browse-detail:not([hidden]) .browse-detail-close')?.click());
+    await fill('#browse-search', '118278');
+    await page.waitForFunction(() => document.querySelector('#browse-grid .browse-card .knowledge-mark') && document.querySelector('#browse-grid .browse-card .lists-pill'));
+    await capture('browse-full-card', width);
+    await cardsFit(width, 'a full card');
+    await fill('#browse-search', '');
+    await page.waitForFunction(() => document.querySelectorAll('#browse-grid .browse-card').length > 5);
+    await cardsFit(width, 'the unfiltered grid');
+    // Cards differ in height, so the virtual grid must still reach the end and never leave the view empty.
+    for (const at of [0.37, 0.71, 1]) {
+      await page.$eval('#browse-scroller', (s, at) => { s.scrollTop = (s.scrollHeight - s.clientHeight) * at; }, at);
+      await new Promise(resolve => setTimeout(resolve, 150));
+      const shown = await page.$eval('#browse-scroller', s => {
+        const v = s.getBoundingClientRect();
+        return [...s.querySelectorAll('.browse-card')].some(c => { const r = c.getBoundingClientRect(); return r.bottom > v.top && r.top < v.bottom; });
+      });
+      if (!shown) errors.push(`Browse grid shows no card at ${at} of its height at ${width}px`);
+    }
+    // A redraw that changes nothing must not cause another: the grid settles.
+    const redraws = await page.evaluate(() => new Promise(resolve => {
+      let n = 0;
+      const mo = new MutationObserver(() => n++);
+      mo.observe(document.querySelector('#browse-grid'), { childList: true });
+      setTimeout(() => { mo.disconnect(); resolve(n); }, 500);
+    }));
+    if (redraws) errors.push(`Browse grid keeps redrawing at its end at ${width}px (${redraws} times in 0.5 s)`);
+    const count = await page.$eval('#browse-count', e => e.textContent);
+    if (!/^(\d+) items - showing \d+–\1$/.test(count.replace(/,/g, ''))) errors.push(`Browse grid does not reach its last item at ${width}px: ${count}`);
+    await cardsFit(width, 'the end of the grid');
     await tab('luxury');
     await fill('#lux-date', '2026-10-16');
     await fill('#lux-paste', '126560, 50000, Dwarven Fountain\n126561, 99999, Second furnishing');

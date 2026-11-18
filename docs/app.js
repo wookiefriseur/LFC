@@ -35,6 +35,7 @@ import { crownCrateMask } from "./crown-crate.js";
 import { browseMask } from "./browse.js";
 import { crownStoreMask } from "./crown-store.js";
 import { listsMask } from "./lists.js";
+import { setCraftableLookup } from "./knowledge.js";
 import { maintenanceMask } from "./maintenance.js";
 import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.js";
 import { clearIconCache } from "./icon-cache.js";
@@ -137,6 +138,8 @@ async function init() {
     applyFilters();
     bindSubmit();
 
+    // Read on every call, so a record changed while the page is open counts at once.
+    setCraftableLookup((id) => state.records.some((r) => Number.isInteger(r.blueprint) && (r.id ?? r.blueprint) === id));
     // Registration order is tab order.
     registerMask(listsMask(maskDeps()));
     browse = browseMask(maskDeps());

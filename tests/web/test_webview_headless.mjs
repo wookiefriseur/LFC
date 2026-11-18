@@ -717,7 +717,8 @@ test("icons: browsing paints game icons rather than the placeholder", async (pag
 
 test("the tab bar is Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", async (page) => {
   const labels = await page.$$eval("#tab-bar > button", (bs) => bs.map((b) => b.textContent.trim()));
-  assertEq(labels.join(", "), "Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", "the tab bar");
+  assertEq(labels.join(", "), "Lists, \u{1F50D} Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", "the tab bar");
+  assertEq(await page.$eval("#tab-browse > span", (s) => s.getAttribute("aria-hidden")), "true", "the Browse glyph is hidden from screen readers");
   assertEq(await page.$("header input, header form"), null, "the header still has a search box");
   const footerAbout = await page.$$eval("footer a, footer button",
     (els) => els.filter((e) => /about/i.test(e.textContent)).length);
@@ -809,6 +810,143 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
   } finally {
     await switchTab(page, "lists");
     await deleteShown();
+  }
+});
+
+test("lists: crafting knowledge marks Browse and list rows, links go to ESO-HUB, Forget clears it", async (page) => {
+  const importText = async (text) => {
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
+    await page.click("#lists-import");
+  };
+  const hub = (id) => `https://eso-hub.com/en/trading/${id}`;
+  try {
+    await switchTab(page, "lists");
+    await importText("FURC KNOWN 1/1: 132173,94116\nFURC UNKNOWN 1/2: 118991\nFURC LIST Knowledge test: 130326,114327");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent),
+      "Imported 1 list: 2 items added. Crafting knowledge: 1 known; 1 unknown, page 1 of 2 (page 2 missing), 1 not craftable skipped", "the import report, a rumour skipped");
+    assertEq(await page.$eval("#lists-knowledge .lists-knowledge-status", (d) => d.textContent), "Known: 1Unknown: 1 (page 2 of 2 missing)", "the knowledge entry");
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.knowledge")));
+    assertEq(JSON.stringify(stored), JSON.stringify({ learned: [], known: { total: 1, pages: [1], ids: [130326] }, unknown: { total: 2, pages: [1], ids: [114327] } }), "what is kept in the browser");
+
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "Knowledge test").click());
+    await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 2);
+    const rows = await page.$$eval(".lists-item-row", (rs) => rs.map((r) => [r.querySelector(".knowledge-mark")?.getAttribute("aria-label"),
+      ...[...r.querySelectorAll("a.trade-link")].map((a) => `${a.textContent} ${a.getAttribute("aria-label")} ${a.href}`)]));
+    assertEq(JSON.stringify(rows), JSON.stringify([
+      ["You can craft this", `\u{1F4DC} Blueprint prices on ESO-HUB ${hub(132173)}`, `\u{1F4B0} Guild store prices on ESO-HUB ${hub(130326)}`],
+      ["You cannot craft this yet", `\u{1F4DC} Blueprint prices on ESO-HUB ${hub(118991)}`, `\u{1F4B0} Guild store prices on ESO-HUB ${hub(114327)}`],
+    ]), "row markers and trading links");
+    assertEq(await page.$eval(".lists-item-row a.trade-link", (a) => `${a.target} ${a.rel}`), "_blank noopener noreferrer", "a trading link opens a new tab");
+    const order = await page.$eval(".lists-item-row", (r) => [...r.querySelectorAll("img, .ext-icon, .lists-item-name, .knowledge-mark, a, .lists-item-tail > span, button:not(.lists-item-name)")]
+      .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
+      .map((e) => (e.matches(".lists-item-name") ? e.lastChild.textContent : e.getAttribute("aria-label") || e.textContent)).join(" | "));
+    assertEq(order.replace(/^[^|]*\| /, ""), "Witches Brazier, Primitive Log | You can craft this | Blueprint prices on ESO-HUB | Guild store prices on ESO-HUB | #130326 | "
+      + "Show Witches Brazier, Primitive Log in Browse | Add to Favorites | Remove Witches Brazier, Primitive Log", "the order of a row");
+    assertEq(await page.$eval(".lists-item-row button[title='Show in Browse']", (b) => b.textContent), "\u{1F50D}", "the Browse button is an icon");
+    // The marker stands directly before the name's first word, on its line.
+    const hug = (sel) => page.$$eval(sel, (ms) => ms.map((m) => {
+      if (m.parentElement.lastChild.previousSibling?.previousSibling !== m) return "not right before the name";
+      const range = document.createRange();
+      range.selectNodeContents(m.parentElement.lastChild);
+      const text = range.getClientRects()[0], r = m.getBoundingClientRect();
+      return Math.round(text.left - r.right) + (Math.abs(r.top - text.top) < text.height ? "" : " on another line");
+    }));
+    assert((await hug(".lists-item-row .knowledge-mark")).every((d) => /^\d+$/.test(d) && d < 12), `list row markers sit apart from the name: ${await hug(".lists-item-row .knowledge-mark")}`);
+    assertEq(await page.$$eval(".lists-item-row .knowledge-mark", (ms) => ms.map((m) => m.textContent + (getComputedStyle(m).filter.includes("grayscale") ? " grey" : "")).join(", ")),
+      "\u2705, \u2705 grey", "one glyph, greyed out for an unknown plan");
+    assertEq(await page.$eval(".lists-item-row .lists-remove", (b) => `${b.textContent}|${b.getAttribute("aria-label")}|${b.title}|${b.classList.contains("btn-danger")}`),
+      "\u{1F5D1}\uFE0F|Remove Witches Brazier, Primitive Log|Remove from this list|false", "the remove button");
+
+    const search = async (q) => {
+      await page.$eval("#lists-search", (i, v) => { i.value = v; i.dispatchEvent(new Event("input")); }, q);
+      await page.waitForFunction(() => document.querySelector("#lists-matches li"));
+      return page.$$eval("#lists-matches .cstore-match-id", (ss) => ss.map((s) => s.textContent));
+    };
+    assertEq((await search("207829")).join(" "), "#204645", "a blueprint's number offers its furnishing");
+    assert((await search("Colovian Cheese Rack, Rustic")).filter((t) => t === "#204645").length === 1, "the furnishing is offered once for its name and its blueprint's");
+    assert(!(await search("Colovian Cheese Rack, Rustic")).includes("#207829"), "the blueprint is not offered");
+    await page.keyboard.press("Escape");
+
+    await switchTab(page, "browse");
+    await page.evaluate(() => {
+      [...document.querySelectorAll("#browse-facet-list .browse-facet-link")].find((b) => /All items/.test(b.textContent))?.click();
+      document.querySelector("#browse-detail .browse-detail-close")?.click();
+      const b = document.querySelector("#browse-search");
+      b.value = "130326";
+      b.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    const card = "#browse-grid .browse-card";
+    await page.waitForFunction((sel) => [...document.querySelectorAll(sel)].some((c) => c.textContent.includes("#130326")), {}, card);
+    assertEq(await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#130326")).querySelector(".knowledge-mark")?.title), "You can craft this", "the card marker");
+    await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#130326")).click());
+    await page.waitForSelector("#browse-detail:not([hidden])");
+    const links = await page.$$eval("#browse-detail .browse-detail-title a.trade-link", (as) => as.map((a) => `${a.title} ${a.href}`));
+    assertEq(links.join(", "), `Guild store prices on ESO-HUB ${hub(130326)}, Blueprint prices on ESO-HUB ${hub(132173)}`, "detail trading links for the item and its recipe");
+    assertEq(await page.$eval("#browse-detail .knowledge-mark", (m) => m.getAttribute("role") + " " + m.textContent), "img \u2705", "the detail marker");
+    assertEq(await page.$eval("#browse-detail .knowledge-mark", (m) => m.parentElement.tagName), "H3", "the detail marker follows the name");
+    assertEq(await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#130326")).querySelector(".knowledge-mark").parentElement.className), "browse-card-name", "the card marker follows the name");
+    assert((await hug("#browse-detail .knowledge-mark, #browse-grid .knowledge-mark")).every((d) => /^\d+$/.test(d) && d < 12), "a Browse marker sits apart from the name");
+    // A craftable no import named is "missing", rumour pairs included; anything else has no marker.
+    const cardMark = async (id) => {
+      await page.evaluate((id) => {
+        document.querySelector("#browse-detail .browse-detail-close")?.click();
+        const b = document.querySelector("#browse-search");
+        b.value = id;
+        b.dispatchEvent(new Event("input", { bubbles: true }));
+      }, String(id));
+      await page.waitForFunction((id) => [...document.querySelectorAll("#browse-grid .browse-card")].some((c) => c.textContent.includes(`#${id}`)), {}, id);
+      return page.$$eval("#browse-grid .browse-card", (cs, id) => {
+        const m = cs.find((c) => c.textContent.includes(`#${id}`)).querySelector(".browse-card-name .knowledge-mark");
+        return m ? `${m.textContent} ${m.getAttribute("aria-label")}${getComputedStyle(m).filter.includes("grayscale") ? " grey" : ""}` : "none";
+      }, id);
+    };
+    const missing = "\u2753 Missing craftable knowledge. Either you didn't import it or it's not in the current game version. grey";
+    assertEq(await cardMark(118278), missing, "a recipe outside the import");
+    assertEq(await cardMark(117765), missing, "a rumour pair outside the import");
+    assertEq(await cardMark(94116), "none", "a non-craftable");
+
+    await switchTab(page, "lists");
+    await page.click("#lists-knowledge .lists-index-item");
+    await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "Crafting knowledge");
+    await importText("1,2");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Ids without a list name need a selected list.", "the knowledge entry takes no bare ids");
+    assertEq(await page.$$eval("#lists-main > p:not(.lists-count):not([hidden])", (ps) => ps.map((p) => p.textContent).join(" | ")),
+      "Paste your whole knowledge export from FurnitureCatalogue into the import box above.", "the knowledge view's text");
+    const shown = async (choice) => {
+      if (choice) await page.$eval(`#lists-main input[name="lists-knowledge-filter"][value="${choice}"]`, (r) => r.click());
+      return page.$eval("#lists-main", (m) => [m.querySelector(".lists-count").textContent,
+        ...[...m.querySelectorAll(".lists-item")].map((li) => `${li.querySelector(".lists-item-tail .muted").textContent} ${li.querySelector(".knowledge-mark").title}`
+          + (li.querySelector(".lists-remove") ? " with Remove" : ""))].join(" | "));
+    };
+    assertEq(await shown(), "2 items | #114327 You cannot craft this yet | #130326 You can craft this", "All, by name, without Remove");
+    assertEq(await shown("known"), "1 item | #130326 You can craft this", "Known only");
+    assertEq(await shown("unknown"), "1 item | #114327 You cannot craft this yet", "Unknown only");
+    assertEq(await shown("all"), "2 items | #114327 You cannot craft this yet | #130326 You can craft this", "All again");
+    const forgetKnowledge = () => page.evaluate(() => {
+      [...document.querySelectorAll("#lists-main button")].find((b) => b.textContent === "Forget").click();
+      [...document.querySelectorAll("#lists-main .lists-confirm button")].find((b) => b.textContent === "Forget it").click();
+    });
+    assertEq(await page.$$eval("#lists-main button", (bs) => bs.find((b) => b.textContent === "Forget").title),
+      "Reset your crafting knowledge to import a different account or character, or for a clean import.", "the Forget button's title");
+    await forgetKnowledge();
+    assertEq(await page.$eval("#lists-main", (m) => [m.querySelector(".lists-switch"), m.querySelector(".lists-item")].filter(Boolean).length), 0, "a switch or rows with nothing stored");
+    await importText("FURC KNOWN 1/1: 132173");
+    assert((await page.$eval("#lists-knowledge", (d) => d.textContent)).includes("Import UNKNOWN to mark those as well."), "the hint for the other kind");
+    await forgetKnowledge();
+    assertEq(await page.evaluate(() => localStorage.getItem("lfc.knowledge")), JSON.stringify({ learned: [] }), "nothing kept after Forget");
+    await switchTab(page, "browse");
+    await page.$eval("#browse-search", (b) => { b.value = "118278"; b.dispatchEvent(new Event("input", { bubbles: true })); });
+    await page.waitForFunction(() => document.querySelector("#browse-grid .browse-card")?.textContent.includes("#118278"));
+    assertEq(await page.$$eval("#browse-grid .knowledge-mark, #browse-detail:not([hidden]) .knowledge-mark", (ms) => ms.length), 0, "markers after Forget, the missing one included");
+  } finally {
+    await switchTab(page, "lists");
+    await page.evaluate(() => {
+      [...document.querySelectorAll("#lists-index .lists-index-item")].find((b) => b.title === "Knowledge test")?.click();
+      [...document.querySelectorAll("#lists-main .lists-head button")].find((b) => b.textContent.endsWith("Delete"))?.click();
+      [...document.querySelectorAll("#lists-main .lists-confirm button")].find((b) => b.textContent === "Delete it")?.click();
+      localStorage.removeItem("lfc.knowledge");
+    });
   }
 });
 
@@ -962,7 +1100,10 @@ test("favourites: the Browse star fills, the item shows under Favourites, which 
     assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.some((b) => b.textContent.endsWith("Delete"))), false,
       "the favourites can be deleted");
   } finally {
-    await page.evaluate(() => document.querySelector("#lists-main .lists-item .lists-fave.is-on")?.click());
+    assertEq(await page.$("#lists-main .lists-item .lists-fave"), null, "a star on a favourites row");
+    const gap = await page.$eval("#lists-main .lists-item .lists-remove", (b) => b.getBoundingClientRect().left - b.previousElementSibling.getBoundingClientRect().right);
+    assert(gap >= 16, `the remove button sits ${gap}px from its neighbour`);
+    await page.evaluate(() => document.querySelector("#lists-main .lists-item .lists-remove")?.click());
   }
 });
 
