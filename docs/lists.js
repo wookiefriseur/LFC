@@ -191,6 +191,49 @@ export function moveList(list, delta) {
   return true;
 }
 
+// Where a list goes when it moves out of its parent (-1, after the parent's whole subtree) or into the sibling directly above (+1, as its last sublist), taking everything below along; null when it cannot. Levels are never folded.
+function shiftTarget(list, delta) {
+  const lists = load().lists;
+  const i = lists.indexOf(list);
+  if (i < 1 || list.faves) return null;
+  const depth = depthOf(list);
+  const end = subtreeEnd(lists, i);
+  if (delta < 0) {
+    const parent = parentOf(list);
+    if (!parent) return null;
+    return { name: [...partsOf(parent.name).slice(0, -1), leafOf(list)].join(SEP), to: subtreeEnd(lists, lists.indexOf(parent)), end, via: parent };
+  }
+  let j = i - 1;
+  while (j > 0 && depthOf(lists[j]) > depth) j--;
+  if (j < 1 || depthOf(lists[j]) !== depth) return null;
+  if (Math.max(...lists.slice(i, end).map(depthOf)) >= MAX_DEPTH) return null;
+  return { name: lists[j].name + SEP + leafOf(list), to: end, end, via: lists[j] };
+}
+
+// { ok, via: the parent left or the list entered, reason: only for what the tree does not show }
+export function canShift(list, delta) {
+  const t = shiftTarget(list, delta);
+  if (!t) return { ok: false };
+  if (!t.name.includes(SEP) && isReserved(t.name)) return { ok: false, via: t.via, reason: `"${t.name}" is reserved for ${FAVES_NAME}.` };
+  const taken = findList(t.name);
+  if (taken) return { ok: false, via: t.via, reason: `There already is a list called "${taken.name}".` };
+  return { ok: true, via: t.via };
+}
+
+export function shiftList(list, delta) {
+  if (!canShift(list, delta).ok) return false;
+  const { name, to, end } = shiftTarget(list, delta);
+  const lists = data.lists;
+  const i = lists.indexOf(list);
+  const old = list.name;
+  const moved = (n) => name + n.slice(old.length);
+  if (data.last === old || isUnder({ name: data.last }, list)) data.last = moved(data.last);
+  for (const l of lists.slice(i, end)) l.name = moved(l.name);
+  if (to > end) lists.splice(to - (end - i), 0, ...lists.splice(i, end - i));
+  save();
+  return true;
+}
+
 export function setItem(list, id, on) {
   const at = list.ids.indexOf(id);
   if (on && at === -1) list.ids.push(id);
@@ -651,7 +694,18 @@ export function listsMask(deps) {
     down.disabled = !canMove(list, 1);
     up.addEventListener("click", () => { moveList(list, -1); drawMain(); });
     down.addEventListener("click", () => { moveList(list, 1); drawMain(); });
+    const shift = (delta) => {
+      const can = canShift(list, delta);
+      const label = can.via ? `Move ${delta < 0 ? "out of" : "into"} "${leafOf(can.via)}"` : delta < 0 ? "Move out of its parent list" : "Move into the list above";
+      const deep = delta > 0 && !can.ok && getLists().some((l) => (l === list || isUnder(l, list)) && depthOf(l) >= MAX_DEPTH);
+      const btn = elem("button", { type: "button", class: "btn-mini", title: can.reason || (deep ? "Cannot move deeper" : label), "aria-label": label }, delta < 0 ? "\u25C4" : "\u25BA");   // not U+25C0/U+25B6, which many systems draw as emoji
+      btn.disabled = !can.ok;
+      btn.addEventListener("click", () => { shiftList(list, delta); drawMain(); });
+      return btn;
+    };
     const sub = elem("button", { type: "button", class: "btn-mini", title: "Start a sublist of this list" }, "+ Sublist");
+    // Shown but disabled on the last level, so the buttons beside it keep their place.
+    if (depthOf(list) >= MAX_DEPTH) { sub.disabled = true; sub.title = "Cannot go deeper"; }
     sub.addEventListener("click", () => {
       const box = $("#lists-new-name");
       box.value = list.name + SEP;
@@ -659,7 +713,8 @@ export function listsMask(deps) {
     });
     const parent = hasChildren(list);
     // The favourites cannot be renamed or deleted, so they get neither control.
-    head.append(title, ...(list.faves ? [] : [up, down]), ...(list.faves || depthOf(list) >= MAX_DEPTH ? [] : [sub]), ...(list.faves ? [] : [del]));
+    // The four arrows wrap as one group.
+    head.append(title, ...(list.faves ? [] : [elem("span", { class: "lists-arrows" }, up, down, shift(-1), shift(1))]), ...(list.faves ? [] : [sub, del]));
     host.append(head);
 
     const renameError = elem("p", { class: "warn", role: "alert", hidden: "" });

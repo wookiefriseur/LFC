@@ -980,8 +980,10 @@ test("lists: sublists are created, imported, renamed, emptied, moved and exporte
     await page.type("#lists-new-name", "Left");
     await page.click("#lists-new button");
     await heading("Guildhall > Entrance > Left");
-    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.some((b) => b.textContent === "+ Sublist")), false,
-      "a third-level list offers a fourth level");
+    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((b) => b.textContent === "+ Sublist")?.disabled), true,
+      "a third-level list shows + Sublist disabled");
+    assertEq(await page.$$eval("#lists-main .lists-head button", (bs) => ["+ Sublist", "\u25BA"].map((t) => bs.find((b) => b.textContent === t)?.title).join(" | ")),
+      "Cannot go deeper | Cannot move deeper", "why a third-level list goes no deeper");
     assertEq(JSON.stringify(await index()), JSON.stringify(["Guildhall", "Guildhall > Entrance", "Guildhall > Entrance > Left"]), "the lists made from two paths");
     assertEq(await page.$$eval("#lists-index .lists-index-item", (bs) => bs.map((b) => b.firstChild.textContent).join("|")),
       "All lists|★ Favorites|Guildhall|Entrance|Left", "the column's labels");
@@ -1074,6 +1076,47 @@ test("lists: a long export is shown and copied in pages that fit the game's box"
     await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "Short").click());
     assertEq(await page.$eval("#lists-pager", (p) => p.hidden), true, "the pager shows for a one-page export");
     assertEq(await box(), "FURC LIST Short: 94116", "the box for a short list after a paged one");
+  } finally {
+    await wipe();
+  }
+});
+
+test("lists: a list moves into the list above and out again with its sublists, and says why when it cannot", async (page) => {
+  const index = () => page.$$eval("#lists-index .lists-index-item", (bs) => bs.slice(2).map((b) => b.title).join(" | "));
+  const heading = (text) => page.waitForFunction((t) => document.querySelector("#lists-main h2")?.textContent === t, {}, text);
+  const arrow = (glyph) => page.$$eval("#lists-main .lists-head button", (bs, g) => {
+    const b = bs.find((x) => x.textContent === g);
+    return `${b.disabled ? "off" : "on"} | ${b.getAttribute("aria-label")} | ${b.title}`;
+  }, glyph);
+  const click = (glyph) => page.$$eval("#lists-main .lists-head button", (bs, g) => bs.find((x) => x.textContent === g).click(), glyph);
+  const wipe = () => page.evaluate(async () => {
+    const m = await import("./lists.js");
+    for (const l of m.namedLists().reverse()) m.deleteList(l);
+  });
+  try {
+    await switchTab(page, "lists");
+    await wipe();
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, "FURC LIST A:\nFURC LIST a > B:\nFURC LIST B: 94116\nFURC LIST B > x:");
+    await page.click("#lists-import");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "B").click());
+    await heading("B");
+    assertEq(await arrow("\u25C4"), "off | Move out of its parent list | Move out of its parent list", "outdent on a root list");
+    assertEq(await arrow("\u25BA"), 'off | Move into "A" | There already is a list called "A > B".', "indent onto a taken name says why");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "A > B").click());
+    await heading("A > B");
+    assertEq(await arrow("\u25C4"), 'off | Move out of "A" | There already is a list called "B".', "outdent onto a taken name says why");
+    await page.evaluate(async () => { const m = await import("./lists.js"); m.deleteList(m.findList("A > B")); });
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "B").click());
+    await heading("B");
+    assertEq(await arrow("\u25BA"), 'on | Move into "A" | Move into "A"', "indent under the list above");
+    await click("\u25BA");
+    await heading("A > B");
+    assertEq(await index(), "A | A > B | A > B > x", "B and its sublist moved under A");
+    await click("\u25C4");
+    await heading("B");
+    assertEq(await index(), "A | B | B > x", "back out again");
+    assertEq(await page.$eval("#lists-text", (t) => t.value), "FURC LIST B: 94116", "the box shows the moved list with its item");
   } finally {
     await wipe();
   }

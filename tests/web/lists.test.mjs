@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   parseLists, formatList, formatLists, importLists, reportText, getLists, findList, createList, renameList, cleanName, onListsChange,
   deleteList, favourites, namedLists, toggleFave, isFave, catalogueResolver, MAX_IDS_PER_LINE,
-  paginate, PAGE_BYTES, normPath, moveList, canMove, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
+  paginate, PAGE_BYTES, normPath, moveList, canMove, canShift, shiftList, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
 } from "../../docs/lists.js";
 
 test("the add-on's export line parses, with a colon in the name and an empty list", () => {
@@ -326,4 +326,57 @@ test("a long export is packed into pages of whole lines that fit the game's box,
   getLists().length = 0;
   for (const p of pages) importLists(p);
   assert.deepEqual(namedLists().map((l) => [l.name, l.ids.length]), [["Hall", 0], ["Hall > Long", 7008], ["Short", 1]]);
+});
+
+const tree = () => getLists().filter((l) => !l.faves).map((l) => `${l.name}: ${l.ids.join(",")}`);
+const fresh = (text) => { getLists().length = 0; importLists(text); };
+
+test("indent a root list with its sublist under the list above, outdent it again", () => {
+  fresh("FURC LIST A: 1\nFURC LIST B: 2\nFURC LIST B > x: 3\nFURC LIST C: 4");
+  rememberList(findList("B > x"));
+  const b = findList("B");
+  assert.deepEqual(canShift(b, 1), { ok: true, via: findList("A") });
+  assert.ok(shiftList(b, 1));
+  assert.deepEqual(tree(), ["A: 1", "A > B: 2", "A > B > x: 3", "C: 4"]);
+  assert.equal(lastList().name, "A > B > x", "the remembered list follows");
+  assert.ok(shiftList(b, -1));
+  assert.deepEqual(tree(), ["A: 1", "B: 2", "B > x: 3", "C: 4"]);
+  assert.equal(lastList().name, "B > x");
+});
+
+test("outdent a middle child: it lands after the parent's whole subtree, its later siblings stay", () => {
+  fresh(["P: 1", "P > a: 2", "P > b: 3", "P > b > deep: 4", "P > c: 5", "Q: 6"].map((l) => `FURC LIST ${l}`).join("\n"));
+  assert.ok(shiftList(findList("P > b"), -1));
+  assert.deepEqual(tree(), ["P: 1", "P > a: 2", "P > c: 5", "b: 3", "b > deep: 4", "Q: 6"]);
+});
+
+test("every case that cannot shift answers false and changes nothing", () => {
+  fresh(["P: 1", "P > a: 2", "P > q: 3", "P > favourites: 4", "X: 5", "X > y: 6", "X > y > z: 7", "Q: 8"].map((l) => `FURC LIST ${l}`).join("\n"));
+  const before = formatLists();
+  const no = (name, delta) => {
+    const r = canShift(findList(name), delta);
+    assert.equal(r.ok, false, `${name} ${delta}`);
+    assert.equal(shiftList(findList(name), delta), false);
+    return r.reason;
+  };
+  assert.equal(no("P", -1), undefined, "a root list has no parent to leave");
+  assert.equal(no("P", 1), undefined, "no sibling above the first list");
+  assert.equal(no("P > a", 1), undefined, "no sibling above the first sublist");
+  assert.equal(no("X", 1), undefined, "X > y > z would land on a fourth level");
+  assert.equal(no("P > q", -1), 'There already is a list called "Q".', "the name is taken, ignoring case");
+  assert.equal(no("P > favourites", -1), '"favourites" is reserved for Favorites.');
+  assert.equal(canShift(favourites(), 1).ok, false);
+  assert.equal(formatLists(), before);
+});
+
+test("a moved tree exports and imports into an empty store unchanged", () => {
+  fresh("FURC LIST A: 1\nFURC LIST B: 2\nFURC LIST B > x: 3\nFURC LIST C: 4");
+  shiftList(findList("B"), 1);
+  shiftList(findList("C"), 1);
+  const text = formatLists();
+  const want = tree();
+  getLists().length = 0;
+  importLists(text);
+  assert.deepEqual(tree(), want);
+  assert.deepEqual(want, ["A: 1", "A > B: 2", "A > B > x: 3", "A > C: 4"]);
 });
