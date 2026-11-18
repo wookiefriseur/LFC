@@ -238,6 +238,51 @@ try {
     await fill('#browse-search', '');
     await page.waitForFunction(() => document.querySelectorAll('#browse-grid .browse-card').length > 5);
     await cardsFit(width, 'the unfiltered grid');
+    // Real wheel input, as a user scrolls: the grid follows it, and comes to rest when the input stops.
+    const sb = await page.$eval('#browse-scroller', s => { s.scrollTop = 0; const r = s.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    await page.mouse.move(sb.x, sb.y);
+    const view = () => page.$eval('#browse-scroller', s => {
+      const v = s.getBoundingClientRect();
+      const c = [...s.querySelectorAll('.browse-card')].find(c => c.getBoundingClientRect().bottom > v.top);
+      return { top: s.scrollTop, first: c?.querySelector('.browse-card-id')?.textContent };
+    });
+    const wheel = async (notches, dy, pause = 60) => {
+      for (let i = 0; i < notches; i++) { await page.mouse.wheel({ deltaY: dy }); if (pause) await new Promise(r => setTimeout(r, pause)); }
+    };
+    // Every frame for 0.6 s, after 0.3 s for the input to land: nothing may move.
+    const settled = async (what) => {
+      await new Promise(r => setTimeout(r, 300));
+      const states = await page.evaluate(() => new Promise(resolve => {
+        const s = document.querySelector('#browse-scroller'), out = [], t0 = performance.now();
+        const tick = () => {
+          const v = s.getBoundingClientRect();
+          const c = [...s.querySelectorAll('.browse-card')].find(c => c.getBoundingClientRect().bottom > v.top);
+          out.push(`${s.scrollTop} ${c?.querySelector('.browse-card-id')?.textContent}`);
+          if (performance.now() - t0 < 600) requestAnimationFrame(tick); else resolve(out);
+        };
+        requestAnimationFrame(tick);
+      }));
+      const distinct = [...new Set(states)];
+      if (distinct.length > 1) errors.push(`Browse grid moves by itself after ${what} at ${width}px: ${distinct.slice(0, 4).join(' -> ')}`);
+      return view();
+    };
+    await wheel(3, 100); await new Promise(r => setTimeout(r, 400));
+    await wheel(3, 100); await new Promise(r => setTimeout(r, 400));
+    await wheel(15, 100, 0);
+    const rest = await settled('notches and a burst');
+    await wheel(3, 100);
+    const down = await settled('wheeling down');
+    if (!(down.top > rest.top)) errors.push(`Wheeling down did not move the grid down at ${width}px: ${rest.top} -> ${down.top}`);
+    await wheel(3, -100);
+    const up = await settled('wheeling up');
+    if (!(up.top < down.top)) errors.push(`Wheeling up did not move the grid up at ${width}px: ${down.top} -> ${up.top}`);
+    // correct scroll only once
+    await page.$eval('#browse-scroller', s => { s.scrollTop = s.scrollHeight * 0.4; });
+    const mid = await settled('a jump into unmeasured cards');
+    await wheel(8, -100);
+    const back = await settled('wheeling up through unmeasured cards');
+    if (!(back.top < mid.top)) errors.push(`Wheeling up through unmeasured cards did not move the grid up at ${width}px: ${mid.top} -> ${back.top}`);
+
     // Cards differ in height, so the virtual grid must still reach the end and never leave the view empty.
     for (const at of [0.37, 0.71, 1]) {
       await page.$eval('#browse-scroller', (s, at) => { s.scrollTop = (s.scrollHeight - s.clientHeight) * at; }, at);

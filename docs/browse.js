@@ -399,24 +399,23 @@ export function browseMask(deps) {
     return node;
   }
 
-  // Measured card heights by item id, valid for one grid width; the others are guessed from their mean.
+  // Measured card heights by item id, valid for one grid width
   const cardHeights = new Map();
-  let heightsWidth = 0, heightSum = 0;
+  let heightsWidth = 0, guess = CARD_H, guessed = false;
 
   function renderGrid() {
     const grid = $("#browse-grid");
     const scroller = $("#browse-scroller");
     if (!grid || !scroller) return;
     const total = view.list.length;
-    if (grid.clientWidth !== heightsWidth) { cardHeights.clear(); heightSum = 0; heightsWidth = grid.clientWidth; }
-    const guess = cardHeights.size ? heightSum / cardHeights.size : CARD_H;
+    if (grid.clientWidth !== heightsWidth) { cardHeights.clear(); heightsWidth = grid.clientWidth; guess = CARD_H; guessed = false; }
     const heightOf = (i) => cardHeights.get(view.list[i].id) ?? guess;
 
     const scrollTop = scroller.scrollTop;
     const viewH = scroller.clientHeight || 600;
     // Scrolled to the end, the grid is drawn from its last card back, since the guessed heights below would leave it short of the end.
     const atEnd = scrollTop > 0 && scrollTop + viewH >= scroller.scrollHeight - 1;
-    let first = 0, top = 0, last = total, rest = 0, anchor = null, anchorTop = 0;
+    let first = 0, top = 0, last = total, rest = 0, anchor = null;
     if (atEnd) {
       first = total;
       for (let h = 0; first > 0 && h < viewH;) h += heightOf(--first);
@@ -426,7 +425,6 @@ export function browseMask(deps) {
       while (first < total - 1 && top + heightOf(first) <= scrollTop) top += heightOf(first++);
       // The first card in view keeps its place once the cards above it are measured.
       anchor = first;
-      anchorTop = top;
       for (let n = 0; n < CARD_OVERSCAN && first > 0; n++) top -= heightOf(--first);
       let bottom = top;
       for (last = first; last < total && bottom < scrollTop + viewH;) bottom += heightOf(last++);
@@ -522,7 +520,7 @@ export function browseMask(deps) {
     }
 
     if (last < total) grid.append(spacer(rest));
-    measureCards(grid, scroller, first, anchor, anchorTop);
+    measureCards(grid, scroller, first, anchor, heightOf);
 
     $("#browse-count").textContent =
       `${total.toLocaleString()} item${total === 1 ? "" : "s"}` +
@@ -542,24 +540,33 @@ export function browseMask(deps) {
     return button;
   }
 
-  function measureCards(grid, scroller, first, anchor, anchorTop) {
-    const cards = grid.querySelectorAll(".browse-card");
+  // `assumed` is the height each card was laid out with in this render. Scroll is only corrected for cards above the first one in view whose height turned out different, so a render that measures nothing new writes nothing, and the next one finds the same layout: a fixed point.
+  function measureCards(grid, scroller, first, anchor, assumed) {
+    const cards = [...grid.querySelectorAll(".browse-card")];
     if (!cards.length) return;
     const gap = parseFloat(getComputedStyle(cards[0]).marginBottom) || 0;
+    const tops = cards.map((c) => c.getBoundingClientRect().top);
+    let shift = 0;
     cards.forEach((card, n) => {
-      const id = view.list[first + n].id;
-      // Whole pixels, so the sums stay exact and a redraw that measures nothing new changes no spacer.
-      const h = Math.round(card.getBoundingClientRect().height + gap);
-      heightSum += h - (cardHeights.get(id) ?? 0);
-      cardHeights.set(id, h);
+      const i = first + n;
+      // The distance to the next card, so fractional heights and margins add up exactly as laid out.
+      const h = n + 1 < cards.length ? tops[n + 1] - tops[n] : card.getBoundingClientRect().height + gap;
+      if (anchor != null && i < anchor) shift += h - assumed(i);
+      cardHeights.set(view.list[i].id, h);
     });
+    if (!guessed) {
+      // Drawn away from the top (a width change), the cards above move with the new guess.
+      const next = [...cardHeights.values()].reduce((a, b) => a + b, 0) / cardHeights.size;
+      for (let i = 0; i < first; i++) if (!cardHeights.has(view.list[i].id)) shift += next - guess;
+      guess = next;
+      guessed = true;
+    }
     if (anchor == null) {
       const end = scroller.scrollHeight - scroller.clientHeight;
-      if (Math.abs(scroller.scrollTop - end) > 1) scroller.scrollTop = end;
-      return;
+      if (scroller.scrollTop < end - 1) scroller.scrollTop = end;
+    } else if (Math.abs(shift) >= 0.5) {
+      scroller.scrollTop += shift;
     }
-    const actual = cards[anchor - first].getBoundingClientRect().top - grid.getBoundingClientRect().top;
-    if (Math.abs(actual - anchorTop) > 1) scroller.scrollTop += actual - anchorTop;
   }
 
   function spacer(heightPx) {
