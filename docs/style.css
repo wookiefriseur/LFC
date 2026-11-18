@@ -77,6 +77,8 @@ header h1 small { display: block; color: var(--muted); font-size: .7rem; font-we
   font-weight: 600;
 }
 .panel-crown-store { display: flex; flex-direction: column; }
+/* In line with the content box of the subpanels below. */
+.panel-crown-store > .subtabs { width: 100%; max-width: var(--screen-width); margin: 0 auto; box-sizing: border-box; padding-inline: 1.5rem; }
 .subtab-head:empty { display: none; }
 .subpanel { flex: 1 1 auto; min-height: 0; overflow: auto; }
 .subpanel[hidden] { display: none; }
@@ -591,7 +593,8 @@ a.is-disabled {
 }
 .lc-checkbox { flex-direction: row; align-items: flex-start; gap: 0.4rem; flex-wrap: wrap; }
 .lc-checkbox input { margin-top: 0.15rem; }
-.lc-checkbox > span { font-weight: 600; cursor: help; }
+.lc-checkbox > span { font-weight: 600; cursor: pointer; }
+.lc-checkbox > span[title] { cursor: help; }   /* only where there is a hint to read */
 .lc-checkbox small { flex-basis: 100%; }
 .lc-icons { margin: 0; }
 .lc-icons > span { font-weight: 400; cursor: default; }
@@ -1989,6 +1992,7 @@ input, select, textarea { min-width: 0; max-width: 100%; }
   .cost-row, .edit-form.is-open .cost-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; }
   .form-fieldset { padding: .6rem; }
   .luxury-mask, .crate-mask, .cstore-mask, .maint-mask, .about { padding: .75rem; }
+  .panel-crown-store > .subtabs { padding-inline: .75rem; }
   .lux-step, .lux-preview-wrap, .luxury-controls, .maint-section { padding: .65rem; }
   .luxury-controls { gap: .75rem; }
   .lc-field { flex: 1 1 100%; }

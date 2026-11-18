@@ -3916,6 +3916,69 @@ test("submit split: each part has its own copy, preview and numbered issue link"
   await page.click("#modal-close");
 });
 
+// Last, because it reloads the page: earlier tests share what the page holds in memory.
+test("router: every page opens from its fragment, switching writes it, reload keeps it, Back returns, and unknown parts are ignored", async (page) => {
+  const loadAt = async (hash) => {
+    await page.evaluate((h) => { history.replaceState(null, "", location.pathname + h); }, hash);
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  };
+  const shown = async (id) => {
+    // Maintenance takes long on its first show.
+    if (id) await page.waitForSelector(`#panel-${id}:not([hidden])`, { timeout: 60000 });
+    return page.$eval(".panel:not([hidden])", (p) => p.id.replace(/^panel-/, ""));
+  };
+  const hash = () => page.evaluate(() => location.hash);
+  try {
+    for (const id of ["lists", "browse", "luxury", "crown-store", "advanced", "maintenance", "names", "about"]) {
+      await loadAt(`#${id}`);
+      assertEq(await shown(id), id, `the page for #${id}`);
+    }
+    await loadAt("#LISTS");
+    assertEq(await shown("lists"), "lists", "#LISTS, compared without case");
+
+    await switchTab(page, "browse");
+    assertEq(await hash(), "#browse", "a tab click writes the fragment");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    assertEq(await shown("browse"), "browse", "reload keeps the page");
+    await switchTab(page, "names");
+    await page.evaluate(() => history.back());
+    assertEq(await shown("browse"), "browse", "Back returns to the page before");
+    await page.evaluate(() => history.forward());
+    assertEq(await shown("names"), "names", "Forward goes to it again");
+    await page.evaluate(() => { location.hash = "#luxury"; });
+    assertEq(await shown("luxury"), "luxury", "a fragment changed in place");
+    await page.evaluate(async () => (await import("./masks.js")).switchMask("browse"));
+    assertEq(await hash(), "#browse", "a switch made by the app writes the fragment");
+
+    await loadAt("#browse~itm~223344");
+    assertEq(await shown("browse"), "browse", "a pair this version does not know is ignored");
+    assertEq(await hash(), "#browse~itm~223344", "and left in the address");
+
+    await loadAt("#maintenance~tab~sources");
+    assertEq(await shown("maintenance"), "maintenance", "the Maintenance page");
+    await page.waitForSelector("#maint-sources:not([hidden])", { timeout: 60000 });
+    await page.click("#maint-tab-vocab");
+    assertEq(await hash(), "#maintenance~tab~vocab", "a Maintenance section click writes the fragment");
+    await page.evaluate(() => history.back());
+    await page.waitForSelector("#maint-sources:not([hidden])");
+    await loadAt("#crown-store~TAB~crate-seasons");
+    await page.waitForSelector("#subpanel-crown-store-crate-seasons:not([hidden])");
+    await page.click("#subtab-crown-store-add-prices");
+    assertEq(await hash(), "#crown-store~tab~add-prices", "a subtab click writes the fragment");
+    await loadAt("#maintenance~tab~nonsense");
+    assertEq(await shown("maintenance"), "maintenance", "an unknown tab value still opens the page");
+
+    await page.evaluate(() => localStorage.removeItem("furcat-last-tab"));
+    await loadAt("#nonsense~x~1");
+    assertEq(await shown("lists"), "lists", "an unknown page opens the start page");
+    assertEq(await hash(), "#nonsense~x~1", "and is not rewritten");
+  } finally {
+    await loadAt("");
+  }
+});
+
 async function main() {
   const { server, port } = await serve(ROOT);
   const browser = await puppeteer.launch({

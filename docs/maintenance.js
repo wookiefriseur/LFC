@@ -3,6 +3,7 @@ import {
   symbolOf, entryOf, isNoteSymbol,
 } from "./data.js";
 import { buildTaxonomy, leafOf, renderSourcesSection } from "./taxonomy.js";
+import { tabChanged } from "./masks.js";
 // Imported rather than mirrored: validator and editor must agree on what "a value from a vocabulary" means.
 import { canonicalSource, messageFor, SOURCE_ENUM_FIELD } from "./validate.js";
 import { labelFor, sourceTypeLabel, valueLabel } from "./lexicon.js";
@@ -10,7 +11,8 @@ import { labelFor, sourceTypeLabel, valueLabel } from "./lexicon.js";
 // Lists can be thousands of rows. The spacer arithmetic assumes a uniform ROW_H, which a wrapped detail cell breaks, so anything short enough to paint whole is painted whole.
 const ROW_H = 30;
 const OVERSCAN = 8;
-const VIRT_MIN = 600;
+// Above this many rows only those in view are drawn. Every shard that lands redraws the table, and 350 full rows each time kept the first open busy for seconds.
+const VIRT_MIN = 100;
 
 // A note is a promotion candidate when it is shaped like a stored symbol rather than like something a player would read.
 const CODE_WORD_RE = /^[A-Z][A-Z0-9_]*$/;
@@ -209,6 +211,9 @@ export function queueEnumValue(state, enumName, symbol, meta = null) {
   else state.enums[enumName].push(symbol);
   return { ok: true, key };
 }
+
+// The sections are also the `tab` values of the page's address.
+const SECTIONS = ["check", "sources", "vocab"];
 
 export function maintenanceMask(deps) {
   const mobileTable = window.matchMedia("(max-width: 900px)");
@@ -666,9 +671,7 @@ export function maintenanceMask(deps) {
         </div>
       </section>`;
 
-    $("#maint-tab-check").addEventListener("click", () => showSection("check"));
-    $("#maint-tab-sources").addEventListener("click", () => showSection("sources"));
-    $("#maint-tab-vocab").addEventListener("click", () => showSection("vocab"));
+    for (const name of SECTIONS) $(`#maint-tab-${name}`).addEventListener("click", () => { showSection(name); tabChanged(); });
 
     const fsel = $("#maint-filter");
     for (const [k, f] of Object.entries(FILTERS)) {
@@ -709,13 +712,14 @@ export function maintenanceMask(deps) {
     if (deps.onRefDataShard) {
       let again = null;
       deps.onRefDataShard(() => {
-        if (!$("#maint-body")) return;
-        // Metadata gaps are only known once their shards are in.
-        if (view.section === "check" && FILTERS[view.filter].requestable) {
-          if (!again) again = requestAnimationFrame(() => { again = null; rebuildRows(); renderTable(); labelFilterCounts(); });
-        } else {
-          renderTable();
-        }
+        // Hidden, onShow rebuilds; shown, shards landing together cost one redraw.
+        if (!$("#maint-body") || $("#maint-body").closest(".panel").hidden || again) return;
+        again = requestAnimationFrame(() => {
+          again = null;
+          // Metadata gaps are only known once their shards are in.
+          if (view.section === "check" && FILTERS[view.filter].requestable) { rebuildRows(); renderTable(); labelFilterCounts(); }
+          else renderTable();
+        });
       });
     }
 
@@ -756,7 +760,7 @@ export function maintenanceMask(deps) {
 
   function showSection(which) {
     view.section = which;
-    for (const name of ["check", "sources", "vocab"]) {
+    for (const name of SECTIONS) {
       $(`#maint-${name}`).hidden = which !== name;
       $(`#maint-tab-${name}`).classList.toggle("is-active", which === name);
     }
@@ -1373,7 +1377,10 @@ export function maintenanceMask(deps) {
     renderPendingEnums();
   }
 
-  return { id: "maintenance", label: "Maintenance", render, onShow };
+  return {
+    id: "maintenance", label: "Maintenance", render, onShow,
+    tab: { get: () => view.section, set: (id) => { if (SECTIONS.includes(id)) showSection(id); } },
+  };
 }
 
 // Shared helpers

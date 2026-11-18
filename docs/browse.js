@@ -406,7 +406,8 @@ export function browseMask(deps) {
   function renderGrid() {
     const grid = $("#browse-grid");
     const scroller = $("#browse-scroller");
-    if (!grid || !scroller) return;
+    // A hidden grid has no width to lay out in; onShow draws it when it comes back.
+    if (!grid || !scroller || !grid.clientWidth) return;
     const total = view.list.length;
     if (grid.clientWidth !== heightsWidth) { cardHeights.clear(); heightsWidth = grid.clientWidth; guess = CARD_H; guessed = false; }
     const heightOf = (i) => cardHeights.get(view.list[i].id) ?? guess;

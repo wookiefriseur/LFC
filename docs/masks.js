@@ -1,7 +1,10 @@
 // A mask is one tab page: render(container) runs once, lazily, on first show. onShow(container) runs on every later show. With subtabs, render is optional and draws chrome above the subtab bar. The first subtab is the default.
+// A mask with tabs of its own instead offers `tab: { get(), set(id) }` (set ignores an id it does not know) and calls tabChanged() when the user picks one.
+// The address fragment names the page: `#<mask id>`, then `~key~value` pairs, of which only `tab` is read; anything else is left for later versions and ignored.
 
 const masks = [];
 let activeId = null;
+let startId = null;
 let tabBarEl = null;
 let panelHostEl = null;
 const rendered = new Set();
@@ -93,10 +96,43 @@ export function mountMasks({ tabBar, panelHost, defaultId }) {
     panelHost.append(panel);
   }
 
-  switchMask(defaultId || masks[0].id);
+  // A page named in the address wins over the remembered one.
+  if (!route()) switchMask(defaultId || masks[0].id, true);
+  startId = activeId;
+  addEventListener("hashchange", () => {
+    // Back to the entry the visit started on, which had no fragment.
+    if (!route() && !location.hash.slice(1)) switchMask(startId, true);
+  });
 }
 
-export function switchMask(id) {
+// The only place that reads the fragment. Returns the mask it named, or null for an empty or unknown one, which changes nothing.
+function route() {
+  let parts;
+  try { parts = decodeURIComponent(location.hash.slice(1)).split("~"); } catch (_) { return null; }
+  const mask = masks.find((m) => m.id === parts[0].toLowerCase());
+  if (!mask) return null;
+  let tab = null;
+  for (let i = 1; i + 1 < parts.length; i += 2) if (parts[i].toLowerCase() === "tab") tab = parts[i + 1].toLowerCase();
+  if (mask.id !== activeId) switchMask(mask.id, true);
+  if (tab) {
+    if (mask.subtabs?.some((s) => s.id === tab)) switchSubtab(mask.id, tab, true);
+    else mask.tab?.set(tab);
+  }
+  return mask;
+}
+
+// The only place that writes it: a new history entry, so Back returns to the page before. The hashchange it causes finds that page already shown.
+function writeHash() {
+  const mask = masks.find((m) => m.id === activeId);
+  const tab = mask.subtabs?.length ? activeSub.get(mask.id) : mask.tab?.get();
+  const hash = `#${mask.id}${tab ? `~tab~${tab}` : ""}`;
+  if (location.hash !== hash) location.hash = hash;
+}
+
+export function tabChanged() { writeHash(); }
+
+// `quiet`: the switch follows the address and must not write it.
+export function switchMask(id, quiet = false) {
   const mask = masks.find((m) => m.id === id);
   if (!mask) throw new Error(`switchMask: unknown mask "${id}"`);
   activeId = id;
@@ -128,6 +164,7 @@ export function switchMask(id) {
       if (st && subBody && typeof st.onShow === "function") st.onShow(subBody);
     }
   }
+  if (!quiet) writeHash();
 }
 
 function renderSubtabbed(mask, panel) {
@@ -169,10 +206,10 @@ function renderSubtabbed(mask, panel) {
     switchSubtab(mask.id, mask.subtabs[next].id);
   });
 
-  switchSubtab(mask.id, mask.subtabs[0].id);
+  switchSubtab(mask.id, mask.subtabs[0].id, true);
 }
 
-export function switchSubtab(maskId, subId) {
+export function switchSubtab(maskId, subId, quiet = false) {
   const mask = masks.find((m) => m.id === maskId);
   if (!mask || !Array.isArray(mask.subtabs)) {
     throw new Error(`switchSubtab: "${maskId}" is not a subtabbed mask`);
@@ -201,6 +238,7 @@ export function switchSubtab(maskId, subId) {
   } else if (typeof st.onShow === "function") {
     st.onShow(body);
   }
+  if (!quiet) writeHash();
 }
 
 export function activeSubtabId(maskId) {
