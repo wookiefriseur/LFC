@@ -1,6 +1,6 @@
 // Named furnishing lists, kept in this browser only. The text form is FurnitureCatalogue's own list line, so a list copied here pastes into the add-on's import window, and an add-on export pastes back here.
 import { itemSearch } from "./crown-store.js";
-import { tradingLinkAnchor } from "./external-links.js";
+import { tradingLinkAnchor, isTradeable } from "./external-links.js";
 import {
   forgetKnowledge, getKnowledge, importKnowledge, kindReport, kindStatus, knowledgeLine, knowledgeMarker, knowledgeOf, missingPages, onKnowledgeChange, recipeResolver,
 } from "./knowledge.js";
@@ -859,9 +859,9 @@ export function listsMask(deps) {
     }
     // In the favourites the star would only do what Remove does.
     const star = () => starButton(id, () => line.querySelector(".lists-fave").replaceWith(star()));
-    // One group, so at narrow widths it wraps whole and keeps its order; the trader icon, which every row has, stays beside the id.
+    // One group, so at narrow widths it wraps whole and keeps its order; trader icon stays beside the id
     line.append(elem("span", { class: "lists-item-tail" },
-      blueprint ? tradingLinkAnchor(blueprint, "blueprint") : [], tradingLinkAnchor(id), elem("span", { class: "muted" }, `#${id}`),
+      blueprint ? tradingLinkAnchor(blueprint, "blueprint") : [], isTradeable(recs) ? tradingLinkAnchor(id) : [], elem("span", { class: "muted" }, `#${id}`),
       show, list?.faves ? [] : star(), remove));
     li.append(line, where);
     return li;

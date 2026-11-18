@@ -394,3 +394,15 @@ test("delete all lists keeps the favourites, and `last` only when it names them"
   assert.equal(lastList(), favourites());
   assert.deepEqual(getLists().map((l) => l.name), ["Favorites"]);
 });
+
+test("only items with a source outside the Crown Store, crates and houses get a guild store link", async () => {
+  const { isTradeable } = await import("../../docs/external-links.js");
+  const rec = (type, subtype) => ({ source: { type, ...(subtype && { subtype }) } });
+  assert.equal(isTradeable([rec("crown_store", "housing_editor")]), false, "Housing Editor only");
+  assert.equal(isTradeable([rec("housing")]), false, "comes with a house");
+  assert.equal(isTradeable([rec("crown_crate")]), false, "crown crate");
+  assert.equal(isTradeable([rec("crown_store"), rec("housing")]), false, "several bound sources");
+  assert.equal(isTradeable([rec("housing"), rec("quest_reward")]), true, "also a quest reward");
+  assert.equal(isTradeable([rec("crown_store"), rec("recipe")]), true, "also craftable");
+  assert.equal(isTradeable([]), true, "an id the catalogue does not know keeps its link");
+});

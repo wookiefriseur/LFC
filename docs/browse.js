@@ -15,7 +15,7 @@ import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 import { knowledgeMarker, onKnowledgeChange } from "./knowledge.js";
-import { tradingLinkAnchor } from "./external-links.js";
+import { tradingLinkAnchor, isTradeable } from "./external-links.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -600,7 +600,7 @@ export function browseMask(deps) {
     const mark = knowledgeMarker(item.id);
     title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || "(no name)"));
     const blueprint = item.records.find(r => r.blueprint)?.blueprint;
-    title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", tradingLinkAnchor(item.id));
+    title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", isTradeable(item.records) ? tradingLinkAnchor(item.id) : []);
     if (blueprint && item.records.some(r => r.id)) {
       const from = elem("span", { class: "browse-detail-recipe muted" }, "from recipe ");
       from.append(itemLinkAnchor(blueprint, `#${blueprint}`), " ", tradingLinkAnchor(blueprint, "blueprint"));

@@ -79,6 +79,12 @@ export const TRADING_ICONS = {
   blueprint: { glyph: '📜', label: 'Blueprint prices on ESO-HUB' },
 };
 
+const BOUND_SOURCES = new Set(['crown_store', 'crown_crate', 'housing']);
+
+export function isTradeable(records) {
+  return !records.length || records.some((r) => !BOUND_SOURCES.has(r.source?.type));
+}
+
 /** @param kind "item", or "blueprint" for the recipe of a paired craftable */
 export function tradingLinkAnchor(id, kind = 'item') {
   const { glyph, label } = TRADING_ICONS[kind];
