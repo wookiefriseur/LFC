@@ -1122,6 +1122,43 @@ test("lists: a list moves into the list above and out again with its sublists, a
   }
 });
 
+test("lists: Delete all lists asks once, removes every list and keeps the favourites and the crafting knowledge", async (page) => {
+  const danger = () => page.$$eval("#lists-main .lists-head button", (bs) => {
+    const b = bs.find((x) => x.textContent === "Delete all lists");
+    return `${b.disabled ? "off" : "on"} | ${b.title}`;
+  });
+  try {
+    await switchTab(page, "lists");
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); },
+      "FURC KNOWN 1/1: 132173\nFURC FAVES: 94116\nFURC LIST Del A: 130326\nFURC LIST Del A > b:\nFURC LIST Del C:");
+    await page.click("#lists-import");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    await page.waitForFunction(() => document.querySelector("#lists-main h2")?.textContent === "All lists");
+    assertEq(await danger(), "on | Delete every list. Favorites and crafting knowledge stay.", "the button with lists present");
+    await page.$$eval("#lists-main .lists-head button", (bs) => bs.find((x) => x.textContent === "Delete all lists").click());
+    assertEq(await page.$eval("#lists-main .lists-confirm", (p) => (p.hidden ? "" : p.firstChild.textContent)), "Delete all 3 lists and their items? ", "the one confirmation");
+    assert((await page.$eval("#lists-index", (u) => u.textContent)).includes("Del C"), "a list went before the confirmation");
+    await page.$$eval("#lists-main .lists-confirm button", (bs) => bs.find((b) => b.textContent === "Delete them").click());
+    await page.waitForFunction(() => document.querySelector("#lists-index")?.textContent.includes("No lists yet"));
+    assertEq(await page.$$eval("#lists-index .lists-index-item", (bs) => bs.length), 2, "only All lists and the favourites left");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "All lists deleted", "the confirmation line");
+    assertEq(await danger(), "off | Delete every list. Favorites and crafting knowledge stay.", "the button with no list left");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[1].click());
+    await page.waitForFunction(() => document.querySelector("#lists-main .lists-item")?.textContent.includes("#94116"));
+    await page.click("#lists-knowledge .lists-index-item");
+    await page.waitForFunction(() => [...document.querySelectorAll("#lists-main .lists-item")].some((li) => li.textContent.includes("#130326")
+      && li.querySelector(".knowledge-mark")?.title === "You can craft this"));
+  } finally {
+    await page.evaluate(async () => {
+      const lists = await import("./lists.js");
+      if (lists.isFave(94116)) lists.toggleFave(94116);
+      for (const l of lists.namedLists().reverse()) lists.deleteList(l);
+      (await import("./knowledge.js")).forgetKnowledge();
+    });
+  }
+});
+
 test("favourites: the Browse star fills, the item shows under Favourites, which offers no rename or delete", async (page) => {
   await switchTab(page, "browse");
   await page.evaluate(() => {

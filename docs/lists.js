@@ -166,6 +166,13 @@ export function deleteList(list) {
   save();
 }
 
+// Every named list goes; the favourites stay, and so does `last` when it names them.
+export function deleteAllLists() {
+  load().lists.splice(1);
+  if (data.last !== LAST_FAVES) data.last = "";
+  save();
+}
+
 // [start, length, destination] for moving a list, with everything below it, past the sibling before (-1) or after (+1) it; null at either end.
 function moveSpan(list, delta) {
   const lists = load().lists;
@@ -625,21 +632,28 @@ export function listsMask(deps) {
   }
 
   let knowledgeFilter = "all";
-  function drawKnowledgeMain(host) {
-    const forget = elem("button", {
-      type: "button", class: "btn-mini btn-danger", title: "Reset your crafting knowledge to import a different account or character, or for a clean import.",
-    }, "Forget");
-    host.append(elem("div", { class: "lists-head" }, elem("h2", {}, KNOWLEDGE.name), forget));
-    const ask = elem("p", { class: "lists-confirm", hidden: "" }, "Forget all crafting knowledge and its markers? ",
-      elem("button", { type: "button", class: "btn-mini btn-danger" }, "Forget it"),
+  // A heading with a danger button that asks once, inline, before `act`.
+  function headWithDanger(host, heading, { label, title, question, yes, done, disabled, act }) {
+    const btn = elem("button", { type: "button", class: "btn-mini btn-danger", title }, label);
+    btn.disabled = disabled;
+    const ask = elem("p", { class: "lists-confirm", hidden: "" }, question,
+      elem("button", { type: "button", class: "btn-mini btn-danger" }, yes),
       elem("button", { type: "button", class: "btn-mini" }, "Keep it"));
-    const [yes, no] = ask.querySelectorAll("button");
-    forget.addEventListener("click", () => { ask.hidden = false; });
-    yes.addEventListener("click", () => { forgetKnowledge(); drawMain(); status("Crafting knowledge forgotten"); });
+    const [ok, no] = ask.querySelectorAll("button");
+    btn.addEventListener("click", () => { ask.hidden = false; });
+    ok.addEventListener("click", () => { act(); drawMain(); status(done); });
     no.addEventListener("click", () => { ask.hidden = true; });
+    host.append(elem("div", { class: "lists-head" }, elem("h2", {}, heading), btn), ask);
+  }
+
+  function drawKnowledgeMain(host) {
     const k = getKnowledge();
-    forget.disabled = !k.known && !k.unknown && !k.learned.length;
-    host.append(ask, elem("p", {}, "Paste your whole knowledge export from FurnitureCatalogue into the import box above."));
+    headWithDanger(host, KNOWLEDGE.name, {
+      label: "Forget", title: "Reset your crafting knowledge to import a different account or character, or for a clean import.",
+      question: "Forget all crafting knowledge and its markers? ", yes: "Forget it", done: "Crafting knowledge forgotten",
+      disabled: !k.known && !k.unknown && !k.learned.length, act: forgetKnowledge,
+    });
+    host.append(elem("p", {}, "Paste your whole knowledge export from FurnitureCatalogue into the import box above."));
     const all = [...new Set([...(k.known?.ids || []), ...k.learned, ...(k.unknown?.ids || [])])];
     if (!all.length) { host.append(elem("p", { class: "muted" }, KNOWLEDGE_SOURCE)); return; }
 
@@ -676,8 +690,12 @@ export function listsMask(deps) {
     const list = current;
     if (list === ALL) {
       const n = namedLists().length;
-      host.append(elem("div", { class: "lists-head" }, elem("h2", {}, ALL.name)),
-        elem("p", { class: "muted" }, `${n} list${n === 1 ? "" : "s"} and ${FAVES_NAME}. Select one on the left to see or change its items.`));
+      headWithDanger(host, ALL.name, {
+        label: "Delete all lists", title: `Delete every list. ${FAVES_NAME} and crafting knowledge stay.`,
+        question: `Delete all ${n} list${n === 1 ? "" : "s"} and their items? `, yes: "Delete them", done: "All lists deleted",
+        disabled: !n, act: deleteAllLists,
+      });
+      host.append(elem("p", { class: "muted" }, `${n} list${n === 1 ? "" : "s"} and ${FAVES_NAME}. Select one on the left to see or change its items.`));
       return;
     }
     if (list === KNOWLEDGE) { drawKnowledgeMain(host); return; }

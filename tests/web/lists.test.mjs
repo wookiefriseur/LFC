@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   parseLists, formatList, formatLists, importLists, reportText, getLists, findList, createList, renameList, cleanName, onListsChange,
   deleteList, favourites, namedLists, toggleFave, isFave, catalogueResolver, MAX_IDS_PER_LINE,
-  paginate, PAGE_BYTES, normPath, moveList, canMove, canShift, shiftList, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
+  paginate, PAGE_BYTES, normPath, moveList, canMove, canShift, shiftList, deleteAllLists, parentOf, hasChildren, depthOf, leafOf, lastList, rememberList,
 } from "../../docs/lists.js";
 
 test("the add-on's export line parses, with a colon in the name and an empty list", () => {
@@ -379,4 +379,18 @@ test("a moved tree exports and imports into an empty store unchanged", () => {
   importLists(text);
   assert.deepEqual(tree(), want);
   assert.deepEqual(want, ["A: 1", "A > B: 2", "A > B > x: 3", "A > C: 4"]);
+});
+
+test("delete all lists keeps the favourites, and `last` only when it names them", () => {
+  fresh("FURC FAVES: 7\nFURC LIST A: 1\nFURC LIST A > x: 2\nFURC LIST B: 3");
+  let heard = 0;
+  onListsChange(() => heard++);
+  rememberList(findList("A > x"));
+  deleteAllLists();
+  assert.deepEqual([namedLists().length, favourites().ids, lastList(), heard > 0], [0, [7], null, true], "the remembered list is forgotten");
+  createList("C");
+  rememberList(favourites());
+  deleteAllLists();
+  assert.equal(lastList(), favourites());
+  assert.deepEqual(getLists().map((l) => l.name), ["Favorites"]);
 });
