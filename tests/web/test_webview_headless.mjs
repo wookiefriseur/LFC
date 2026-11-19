@@ -3868,6 +3868,30 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   }
 });
 
+test("theme: follows the system, a choice overrides it and survives a reload", async (page) => {
+  const bodyBg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  const brightness = async () => (await bodyBg()).match(/\d+/g).slice(0, 3).reduce((a, b) => a + Number(b), 0);
+  try {
+    await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "dark" }]);
+    assert(await brightness() < 150, `system dark is not followed: ${await bodyBg()}`);
+    await page.select("#theme-select", "light");
+    assert(await brightness() > 600, `light does not override a dark system: ${await bodyBg()}`);
+    await page.emulateMediaFeatures([{ name: "prefers-color-scheme", value: "light" }]);
+    await page.select("#theme-select", "dark");
+    assert(await brightness() < 150, `dark does not override a light system: ${await bodyBg()}`);
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    assert(await brightness() < 150, "the chosen theme did not survive a reload");
+    assertEq(await page.$eval("#theme-select", (el) => el.value), "dark", "the select forgot the choice");
+    await page.select("#theme-select", "system");
+    assert(await brightness() > 600, "System does not return to the system setting");
+    assertEq(await page.evaluate(() => document.documentElement.hasAttribute("data-theme")), false);
+  } finally {
+    await page.emulateMediaFeatures([]);
+    await page.evaluate(() => localStorage.removeItem("furcat-prefs-v1"));
+  }
+});
+
 test("names: another game language has its own names, and an id it has none for shows the English one as such", async (page) => {
   const manifestURL = "/reference-data/manifest.json";
   const namesURL = "/reference-data/names.de.json";

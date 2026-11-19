@@ -2,6 +2,7 @@ import "./responsive-tables.js";
 
 // Every mask shares one dirty buffer (state.buffer) and one Review & Submit flow (quick-edit modal is a reduced view of the same write path)
 
+import { bindThemeSelect } from "./prefs.js";
 import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
@@ -123,6 +124,7 @@ const OVERSCAN = 8;     // extra rows above/below the viewport
 const $ = (sel) => document.querySelector(sel);
 
 async function init() {
+  bindThemeSelect($("#theme-select"));
   try {
     const { enums, records, names, errors, manifest } = await loadAll();
     state.enums = enums;

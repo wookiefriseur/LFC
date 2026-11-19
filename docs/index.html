@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <title>Furniture Catalogue</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./style.css?v=e44960694b1c">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232563eb'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <script>try { const t = JSON.parse(localStorage.getItem("furcat-prefs-v1") || "{}").theme; if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (_) {}</script>
+  <link rel="stylesheet" href="./style.css?v=6c8870c753e4">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%237a5714'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <script type="importmap">
   {
     "imports": {
       "./about.js": "./about.js?v=5cbcba6b8262",
-      "./app.js": "./app.js?v=19be117c3398",
+      "./app.js": "./app.js?v=e81fb76c431a",
       "./browse.js": "./browse.js?v=f24e556ef59d",
       "./changelist.js": "./changelist.js?v=0990e47809bc",
       "./containers.js": "./containers.js?v=3d2af7b127b1",
@@ -33,6 +34,7 @@
       "./masks.js": "./masks.js?v=f514b425744e",
       "./names-dump.js": "./names-dump.js?v=e7887711c110",
       "./names.js": "./names.js?v=e2c8480a491a",
+      "./prefs.js": "./prefs.js?v=b648265f3ee0",
       "./presets.js": "./presets.js?v=548ea9ae4b02",
       "./quick-edit.js": "./quick-edit.js?v=cce0fd5c3c88",
       "./reference-data.js": "./reference-data.js?v=917af5685ce7",
@@ -71,6 +73,13 @@
         </svg>
       </a>
     </span>
+    <label class="theme-pick muted">Theme
+      <select id="theme-select" aria-label="Colour theme">
+        <option value="system">System</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>
     <span id="status" class="muted"></span>
     <span class="footer-actions">
       <span id="pending-count">Nothing to send yet.</span>
@@ -125,6 +134,6 @@
     </div>
   </div>
 
-  <script type="module" src="./app.js?v=19be117c3398"></script>
+  <script type="module" src="./app.js?v=e81fb76c431a"></script>
 </body>
 </html>
