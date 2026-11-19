@@ -1,4 +1,5 @@
 import copy
+import json
 import os
 import random
 import subprocess
@@ -16,6 +17,7 @@ from generate_db import (
     read_json,
     render,
     render_locale,
+    render_strings,
     verify,
 )
 from luaDoc_generateStr import extract_strings, merge_translation
@@ -55,6 +57,14 @@ class GeneratedDatabaseTests(unittest.TestCase):
         result = subprocess.run([*self.command, str(ROOT / 'tests/generated_currencies.lua'), str(ROOT)],
                                 text=True, capture_output=True, timeout=30, check=False)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_web_strings_keep_only_what_a_translation_changes(self):
+        english = 'local strings = {\n  SI_FURC_A = "one^n,from", -- remark\n  SI_FURC_B = "two \\"x\\"",\n}\n'
+        german = 'local strings = {\n  SI_FURC_A = "eins^m,von",\n  SI_FURC_B = "two \\"x\\"",\n}\n'
+        self.assertEqual(json.loads(render_strings({'en': english, 'de': german})),
+                         {'en': {'SI_FURC_A': 'one^n,from', 'SI_FURC_B': 'two "x"'}, 'de': {'SI_FURC_A': 'eins^m,von'}})
+        with self.assertRaisesRegex(ValueError, 'SI_FURC_C'):
+            render_strings({'en': english, 'de': 'SI_FURC_C = "drei",\n'})
 
     def test_missing_event_string_and_locale_tools(self):
         english = (ROOT / 'LibFurnitureCatalogue/locale/en.lua').read_text()

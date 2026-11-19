@@ -206,8 +206,46 @@ export function setZoneNameLookup(fn) {
   if (typeof fn === "function") zoneName = fn;
 }
 
-export function labelOf(enums, key, symbol) {
+// Strings, { language: { string id: text } } (strings.json) and the language labels are shown in.
+// English is the fallback of every other language.
+let strings = {};
+let stringLanguage = "en";
+export function setStrings(all, language) {
+  if (all && typeof all === "object") strings = all;
+  if (language) stringLanguage = language;
+}
+
+/** Every language's strings as loaded, { language: { string id: text } }, grammar suffixes included. */
+export function libraryStrings() {
+  return strings;
+}
+
+const PLACEHOLDER = /<<[^>]*>>/g;
+
+/** A translation of one library string: throws what is wrong with it, else gives the published text as { before }. */
+export function checkTranslation(locale, id, text) {
+  const english = strings.en?.[id];
+  if (typeof english !== "string") throw new Error(`${id} is not one of the library's strings`);
+  if (locale === "en" || !strings[locale]) throw new Error(`the library has no translation file for ${locale}`);
+  if (typeof text !== "string" || !text.trim()) throw new Error("a translation needs text");
+  const marks = (s) => (s.match(PLACEHOLDER) || []).sort().join(" ");
+  if (marks(text) !== marks(english)) throw new Error(`the translation must keep ${marks(english) || "the text free of <<n>> placeholders"}`);
+  return { before: strings[locale][id] ?? null };
+}
+
+const STRING_ID = /^SI_FURC_[A-Z0-9_]+$/;
+
+// Null for an id no language defines.
+export function stringOf(id) {
+  const text = strings[stringLanguage]?.[id] ?? strings.en?.[id];
+  return typeof text === "string" ? stripMarker(text) : null;
+}
+
+/** Label in user's language. `english` gives the vocabulary's own name, which is what an edit changes. */
+export function labelOf(enums, key, symbol, { english = false } = {}) {
   const entry = entryOf(enums, key, symbol);
+  const translated = !english && stringLanguage !== "en" && strings[stringLanguage]?.[entry?.si];
+  if (typeof translated === "string" && translated !== "") return stripMarker(translated);
   const name = entry && entry.name;
   if (typeof name === "string" && name !== "") return stripMarker(name);
   if (key === "locations" && Number.isInteger(entry?.zone)) return zoneName(entry.zone) || String(symbol ?? "");
@@ -244,7 +282,8 @@ export function isNoteSymbol(enums, note) {
 export function noteLabel(enums, note) {
   if (note == null) return "";
   if (isNoteSymbol(enums, note)) return labelOf(enums, "places", note);
-  return String(note);
+  // A note may name a string instead of carrying text
+  return (STRING_ID.test(note) && stringOf(note)) || String(note);
 }
 
 export function placementText(enums, p) {

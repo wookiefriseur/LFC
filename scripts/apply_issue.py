@@ -13,7 +13,8 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from generate_db import ROOT, canonical, load_inputs, lua, read_json, render, render_locale, require, verify
+from generate_db import (ROOT, canonical, load_inputs, lua, read_json, locale_strings, read_locales, render, render_locale,
+                         render_strings, require, set_translation, verify)
 from import_names import GAME_LOCALES, MANIFEST, english, manifest_entry, names_file, with_fallback
 from jsonschema import Draft202012Validator
 
@@ -267,6 +268,14 @@ def apply(lines, root=ROOT, lua_command=None):
             update_name(files, line)
             summaries.append(line)
             continue
+        if op == 'string':
+            # A translation of one library string; the English text changes through enum-name or by hand
+            name = f'LibFurnitureCatalogue/locale/{line["locale"]}.lua'
+            require((root / name).is_file(), f'no locale file for {line["locale"]}')
+            english = locale_strings(files.read('LibFurnitureCatalogue/locale/en.lua').decode())
+            files.put(name, set_translation(files.read(name).decode(), english, line['id'], line['text']).encode())
+            summaries.append(line)
+            continue
         if op == 'item':
             # Item details refresh a catalogued item's metadata and game name from a discovery; records stay as they are
             require(line['reference']['meta']['id'] == line['id'], 'item details must address their own id')
@@ -335,6 +344,8 @@ def apply(lines, root=ROOT, lua_command=None):
             english = re.sub(rf'^(\s*{key}\s*=\s*)"([^"\\^\n]*)(\^[^"\\\n]*)?"',
                              lambda m: m.group(1) + lua(name + (m.group(3) or '')), english, flags=re.M)
         files.put(locale, english.encode())
+        files.put('docs/data/strings.json',
+                  render_strings(read_locales(lambda name: files.read(name).decode(), root / 'LibFurnitureCatalogue/locale')).encode())
         for name, content in outputs.items():
             files.put('LibFurnitureCatalogue/data/' + name, content.encode())
     return files.changed, {'payload_sha256': payload_hash(lines), 'operations': summaries,

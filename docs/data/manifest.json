@@ -82,7 +82,7 @@
       "name": "drop.jsonl",
       "type": "drop",
       "records": 712,
-      "digest": "1b33db8bd9a11e79"
+      "digest": "661dbe85422defd8"
     },
     {
       "name": "quest_reward.jsonl",
@@ -94,7 +94,7 @@
       "name": "dungeon_drop.jsonl",
       "type": "dungeon_drop",
       "records": 120,
-      "digest": "b59436239338f7de"
+      "digest": "93c8e1550a2f594f"
     },
     {
       "name": "housing.jsonl",
@@ -139,7 +139,7 @@
       "digest": "3fc76eaadb5f56ce"
     }
   ],
-  "digest": "53bdd74b97b9c856",
+  "digest": "d76678f4f437d678",
   "counts": {
     "records": 10215,
     "ids": 12489,

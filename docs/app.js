@@ -7,7 +7,7 @@ import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
   labelOf, entryOf, noteLabel, crateLabel, recordsForItem, placementsText,
-  isUnknownId, setZoneNameLookup, mirror,
+  isUnknownId, setZoneNameLookup, setStrings, mirror,
 } from "./data.js";
 import { renderForm, partitionFields, SITE_ONLY_FIELDS, MIXED } from "./form.js";
 import {
@@ -178,7 +178,7 @@ async function init() {
     await restorePending();
     installTestHook();
     bindLanguageSelect($("#language-select"), applyLanguage);
-    if (language() !== referenceData.namesLocale) applyLanguage(language());
+    applyLanguage(language());
     // A name pasted out of the game can carry no-break spaces; every search box takes them as plain spaces.
     document.addEventListener("input", (e) => {
       const box = e.target;
@@ -2723,12 +2723,22 @@ function nameOf(id) {
   return state.names ? state.names.get(id) : "";
 }
 
-// Item names in the visitor's game language. The page is drawn in English first and redrawn when the names land,
-// so a language file never delays the first paint.
+// The library's strings in every language it ships (labels stay English)
+let stringsLoad = null;
+function loadStrings() {
+  stringsLoad ||= fetch("./data/strings.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  return stringsLoad;
+}
+
+// Item names, vocabulary labels and game names in the selected language (drawn in English first and redrawn when the names land, so there is no delay on load)
 async function applyLanguage(locale) {
-  let names = null;
-  if (locale !== referenceData.namesLocale) names = (await referenceData.loadTranslation(locale)).names.items;
-  if (locale !== language()) return; // the visitor chose another one while this loaded
+  const [translation, strings] = await Promise.all([
+    locale === referenceData.namesLocale ? null : referenceData.loadTranslation(locale), loadStrings()]);
+  if (locale !== language()) return; // user chose another one while it loaded
+  const names = translation?.names.items;
+  setStrings(strings, locale);
+  referenceData.language = locale;
   state.names.setTranslation(names && names.size ? names : null, locale);
   document.documentElement.dataset.nameLanguage = locale;
   luxSearchIndex = null;

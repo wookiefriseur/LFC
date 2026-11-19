@@ -3808,6 +3808,38 @@ test("names: vocabulary labels can be edited, restored after reload, cancelled a
   assert(await page.$eval("#btn-submit", (e) => e.disabled), "reverted change is still submit-able");
 });
 
+test("names: a library string is translated, checked for its placeholders, and reverted", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "names");
+  await page.select("#names-locale", "de");
+  await page.waitForSelector('#names-lists [data-list="strings:library"]', { timeout: 10000 });
+  await page.click('#names-lists [data-list="strings:library"]');
+  const row = (id) => `#names-table td.names-editable[data-name-id="${id}"]`;
+  // untranslated strings come first, and say what the English text is
+  assertEq(await page.$eval("#names-table tbody tr td:nth-child(2)", (e) => e.textContent), "Translate", "the list does not start with what is untranslated");
+  const edit = async (id, text) => {
+    await page.click(`${row(id)} .names-edit-button`);
+    await page.$eval(`${row(id)} input`, (e, t) => { e.value = t; e.dispatchEvent(new Event("input")); }, text);
+  };
+  await edit("SI_FURC_RANK", "Stufe");
+  assertEq(await page.$eval(`${row("SI_FURC_RANK")} input`, (e) => e.getAttribute("aria-invalid")), "true", "a translation without its placeholder is accepted");
+  await page.keyboard.press("Escape");
+  await edit("SI_FURC_RANK", "Stufe <<1>>");
+  await page.keyboard.press("Enter");
+  assertEq(await page.$eval(row("SI_FURC_RANK"), (e) => e.textContent), "Stufe <<1>>", "the edited translation");
+  const lines = await diffLines(page);
+  assert(lines.some((l) => l.op === "string" && l.locale === "de" && l.id === "SI_FURC_RANK" && l.text === "Stufe <<1>>"), "missing translation line");
+  assert(await page.$eval('#names-lists [data-list="strings:library"]', (b) => b.classList.contains("is-pending")), "the list is not marked as changed");
+  await page.click("#names-table tr.is-pending .names-revert");
+  assertEq(await page.$eval(row("SI_FURC_RANK"), (e) => e.textContent), "Rang <<1>>", "the reverted translation");
+  assert(await page.$eval("#btn-submit", (e) => e.disabled), "the reverted translation is still submit-able");
+  // English is the master: listed, not edited here
+  await page.select("#names-locale", "en");
+  await page.waitForFunction(() => document.querySelectorAll("#names-table td.names-editable").length === 0, { timeout: 5000 })
+    .catch(() => { throw new Error("the English strings are editable"); });
+});
+
 test("names: the tab lists the game names, a pasted dump becomes name lines, and Browse shows house names", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
@@ -3937,6 +3969,33 @@ test("language: German names show and are found in Browse, and a list copies out
     overrides.delete(manifestURL);
     overrides.delete(namesURL);
     await page.evaluate(() => { localStorage.removeItem("furcat-prefs-v1"); document.querySelector("#panel-browse .browse-card .lists-fave.is-on")?.click(); });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
+test("language: vocabulary labels, zone names and string-id notes follow the language, English where it has none", async (page) => {
+  const detailOf = async (id) => {
+    await page.$eval("#browse-search", (e) => { e.value = ""; });
+    await page.type("#browse-search", String(id));
+    await page.waitForFunction((n) => { const cards = document.querySelectorAll("#panel-browse .browse-card"); return cards.length === 1 && cards[0].textContent.includes(`#${n}`); }, { timeout: 5000 }, id);
+    await page.click("#panel-browse .browse-card");
+    await page.waitForFunction((n) => document.querySelector("#browse-detail:not([hidden])")?.textContent.includes(`#${n}`), { timeout: 5000 }, id);
+    return page.$eval("#browse-detail", (d) => d.textContent);
+  };
+  try {
+    await switchTab(page, "browse");
+    await page.select("#language-select", "de");
+    await page.waitForFunction(() => document.documentElement.dataset.nameLanguage === "de", { timeout: 10000 });
+    assert((await detailOf(116506)).includes("Luxusausstatter"), "the vendor is not named in German");
+    const vault = await detailOf(194419);
+    assert(vault.includes("Die Halle der Schriftmeister"), "the zone is not named in German");
+    assert(vault.includes("vault chests") && !vault.includes("SI_FURC_"), "a note without a German text does not show the English one");
+    await page.select("#language-select", "en");
+    await page.waitForFunction(() => document.documentElement.dataset.nameLanguage === "en", { timeout: 10000 });
+    assert((await detailOf(116506)).includes("Luxury Furnisher"), "the vendor is not named in English again");
+  } finally {
+    await page.evaluate(() => localStorage.removeItem("furcat-prefs-v1"));
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
   }

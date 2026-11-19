@@ -12,7 +12,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from luaDoc_generateStr import extract_strings
+from luaDoc_generateStr import TRANSL_END_MARKER, TRANSL_START_MARKER, extract_strings
 
 ROOT = Path(__file__).resolve().parents[1]
 FORMAT = 1
@@ -60,6 +60,57 @@ def render_locale(enums, english):
             generated[key] = name
     body = ''.join(f'  {key} = {lua(value)},\n' for key, value in sorted(generated.items()))
     return before + LOCALE_BEGIN + body + LOCALE_END + after
+
+
+def lua_text(literal):
+    """The text of a double-quoted Lua string literal."""
+    return re.sub(r'\\(\d{1,3}|.)', lambda m: chr(int(m[1])) if m[1].isdigit() else {'n': '\n', 't': '\t'}.get(m[1], m[1]), literal[1:-1])
+
+
+def locale_strings(text):
+    """{string id: text} of a locale file."""
+    return {key: lua_text(value) for key, value in extract_strings(text.splitlines()).items() if value.startswith('"')}
+
+
+PLACEHOLDER = re.compile(r'<<[^>]*>>')
+
+
+def set_translation(text, english, key, value):
+    """A translation file with one string set. Its line moves into the translated block, which stays sorted."""
+    require(key in english, f'{key} is not a string of the English locale')
+    require(value.strip() and all(ord(c) >= 32 or c == '\n' for c in value), f'{key}: a translation needs text and no control characters')
+    require(sorted(PLACEHOLDER.findall(value)) == sorted(PLACEHOLDER.findall(english[key])),
+            f'{key}: the translation must keep the placeholders of the English text')
+    lines = text.splitlines(keepends=True)
+    marks = [i for i, line in enumerate(lines) if line.strip() in (TRANSL_START_MARKER, TRANSL_END_MARKER)]
+    require(len(marks) == 2, 'translation file needs its START and END markers')
+    region = lines[marks[0] + 1:marks[1]]
+    split = next((i for i, line in enumerate(region) if 'ENTRIES UNTRANSLATED/IDENTICAL' in line), len(region))
+    mine = re.compile(rf'\s*{key}\s*=')
+    translated = sorted([line for line in region[:split] if not mine.match(line)] + [f'  {key} = {lua(value)},\n'])
+    rest = [line for line in region[split:] if not mine.match(line)]
+    if len(rest) < len(region) - split:
+        rest[0] = re.sub(r'\d+', lambda m: str(int(m[0]) - 1), rest[0], count=1)
+    if len(rest) == 1:
+        rest = []  # nothing left under the heading
+    return ''.join(lines[:marks[0] + 1] + translated + rest + lines[marks[1]:])
+
+
+def render_strings(locales):
+    """docs/data/strings.json from {language: locale file text}: the library's strings as the web interface reads them.
+    A translation holds only what differs from English; everything else falls back to it."""
+    strings = {code: locale_strings(text) for code, text in sorted(locales.items())}
+    english = strings.pop('en')
+    result = {'en': english}
+    for code, table in strings.items():
+        require(table.keys() <= english.keys(), f'{code} translates strings English does not define: {sorted(table.keys() - english.keys())}')
+        result[code] = {key: value for key, value in table.items() if value != english[key]}
+    return json.dumps(result, ensure_ascii=False, indent=1, sort_keys=True) + '\n'
+
+
+def read_locales(read, directory):
+    """{language: text} of every locale file; `read` takes a path relative to the repository."""
+    return {path.stem: read(f'LibFurnitureCatalogue/locale/{path.name}') for path in sorted(directory.glob('*.lua'))}
 
 
 def canonical(value):
@@ -477,6 +528,9 @@ def main():
         verify(candidate, projection, command)
         outputs = {args.output / name: content for name, content in artifacts.items()}
         outputs[locale] = english
+        if args.data == ROOT / 'docs/data':
+            locales = read_locales(lambda name: (ROOT / name).read_text(encoding='utf-8'), locale.parent)
+            outputs[args.data / 'strings.json'] = render_strings({**locales, 'en': english})
         for path, content in outputs.items():
             if args.check:
                 require(path.is_file() and path.read_bytes() == content.encode(), f'outdated artifact: {path}')

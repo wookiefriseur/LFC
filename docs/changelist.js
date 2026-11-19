@@ -219,6 +219,13 @@ export function changeRows(bufferOrEntries, ctx = {}) {
         before: entry.before, after: entry.name, markers: [], siteOnly: false });
       continue;
     }
+    if (entry.op === "string") {
+      rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
+        item: `Translation: ${entry.id}`, record: entry.locale, field: `string.${entry.id}`,
+        what: entry.before ? "Translation" : "New translation",
+        before: entry.before || "(none)", after: entry.text, markers: [], siteOnly: false });
+      continue;
+    }
     if (entry.op === "name") {
       rows.push({
         entryKey: entry.key,

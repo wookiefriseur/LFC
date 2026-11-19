@@ -1,7 +1,7 @@
 // Names tab: every id -> name table the site shows, the game names from the reference data, per game language, and the vocabularies from enums.json. A names dump from FurCDev updates the game names of its language through the change list.
 import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { parseNamesDump, diffNames } from "./names-dump.js";
-import { labelOf } from "./data.js";
+import { labelOf, libraryStrings, checkTranslation } from "./data.js";
 import { titleCase } from "./lexicon.js";
 import { language } from "./prefs.js";
 
@@ -28,6 +28,10 @@ function vocabularies(enums) {
   }
   return out.sort();
 }
+
+// A library string is edited on one line; its line breaks show as \n
+const oneLine = (text) => text.replaceAll("\n", "\\n");
+const manyLines = (text) => text.replaceAll("\\n", "\n");
 
 export function namesMask(deps) {
   const { state, $, elem, renderFooter, referenceData } = deps;
@@ -78,6 +82,22 @@ export function namesMask(deps) {
         };
       });
     }
+    if (group === "strings") {
+      const all = libraryStrings(), english = all.en || {}, mine = all[locale()];
+      const translating = locale() !== "en";
+      const list = Object.keys(english).sort().map((id) => {
+        const pending = state.buffer.entries.get(`string:${locale()}:${id}`);
+        return {
+          id,
+          name: oneLine(translating ? pending?.text ?? mine?.[id] ?? "" : english[id]),
+          extra: translating ? `English: ${oneLine(english[id])}${pending?.before ? ` - was: ${oneLine(pending.before)}` : ""}` : "",
+          pending: !!pending,
+          editable: translating && !!mine,
+        };
+      });
+      // What still needs a translation comes first
+      return translating ? [...list.filter((r) => !r.name), ...list.filter((r) => r.name)] : list;
+    }
     const enums = state.enums || {};
     return (enums[key] || []).map((entry) => {
       if (typeof entry === "string") return { id: entry, name: "", extra: "", pending: false };
@@ -86,7 +106,7 @@ export function namesMask(deps) {
         .map(([k, v]) => `${k}: ${typeof v === "object" ? JSON.stringify(v) : v}`)
         .join(", ");
       const pending = state.buffer.entries.get(`enum-name:${key}:${entry.symbol}`);
-      return { id: entry.symbol, name: pending?.name ?? labelOf(enums, key, entry.symbol),
+      return { id: entry.symbol, name: pending?.name ?? labelOf(enums, key, entry.symbol, { english: true }),
         extra: pending ? `was: ${pending.before}` : extra, pending: !!pending,
         editable: typeof entry.name === "string" };
     });
@@ -99,6 +119,7 @@ export function namesMask(deps) {
       const [group, key] = id.split(":");
       const pending = [...state.buffer.entries.values()].some((e) => group === "game"
         ? e.op === "name" && e.kind === key && e.locale === locale()
+        : group === "strings" ? e.op === "string" && e.locale === locale()
         : e.op === "enum-name" && e.enumName === key);
       const btn = elem("button", {
         type: "button",
@@ -123,6 +144,14 @@ export function namesMask(deps) {
     for (const key of vocabularies(state.enums)) {
       ul.append(item(`vocab:${key}`, titleCase(key), state.enums[key].length));
     }
+    // The library's own strings, which the game shows; a language without a locale file has none to edit
+    const all = libraryStrings(), total = Object.keys(all.en || {}).length;
+    if (total) {
+      ul.append(elem("li", { class: "names-group" }, `Translation (${locale()})`));
+      const mine = all[locale()];
+      ul.append(item("strings:library", "Library strings",
+        locale() === "en" ? total : mine ? `${Object.keys(mine).length} of ${total}` : "no file"));
+    }
   }
 
   function renderTable() {
@@ -144,7 +173,8 @@ export function namesMask(deps) {
     }
     const table = elem("table", { class: "names-list" });
     const head = elem("tr", {});
-    for (const h of [game ? "Id" : "Symbol", "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
+    const strings = view.list.startsWith("strings:");
+    for (const h of [game ? "Id" : strings ? "String" : "Symbol", strings ? "Text" : "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
     table.append(elem("thead", {}, head));
     const body = elem("tbody", {});
     for (const r of hits.slice(0, ROW_LIMIT)) {
@@ -155,7 +185,7 @@ export function namesMask(deps) {
         nameCell.dataset.nameId = r.id;
         nameCell.title = "Edit this name";
         const edit = elem("button", { type: "button", class: "names-edit-button",
-          "aria-label": `Edit name for ${r.id}` }, r.name || "Add name");
+          "aria-label": `Edit name for ${r.id}` }, r.name || (strings ? "Translate" : "Add name"));
         edit.addEventListener("click", () => editName(nameCell, game ? Number(r.id) : r.id, r.name));
         nameCell.replaceChildren(edit);
       }
@@ -165,6 +195,7 @@ export function namesMask(deps) {
           "aria-label": `Revert name for ${r.id}` }, "Revert");
         revert.addEventListener("click", () => {
           if (game) setName(kindOfList(), Number(r.id), "");
+          else if (strings) setString(r.id, "");
           else {
             const vocab = view.list.slice("vocab:".length);
             const published = state.enums[vocab].find((e) => e.symbol === r.id).name;
@@ -201,10 +232,20 @@ export function namesMask(deps) {
     renderTable();
   }
 
+  // One translation into the change list. The published text, or an empty box, drops the change.
+  function setString(id, text) {
+    const published = libraryStrings()[locale()]?.[id] ?? null;
+    state.buffer.setString(locale(), id, manyLines(text.trim()) || published || "", published);
+    renderFooter();
+    renderSidebar();
+    renderTable();
+  }
+
   function editName(cell, id, current) {
     if (cell.querySelector("input")) return;
     const kind = kindOfList();
     const vocab = view.list.startsWith("vocab:") ? view.list.slice("vocab:".length) : null;
+    const strings = view.list.startsWith("strings:");
     const input = elem("input", { type: "text", class: "names-edit", "aria-label": `Name for ${id}` });
     input.value = current;
     let done = false;
@@ -217,17 +258,24 @@ export function namesMask(deps) {
         renderFooter();
         renderSidebar();
         renderTable();
-      } else if (save && input.value.trim() !== current) setName(kind, id, input.value);
+      } else if (save && input.value.trim() !== current && strings) setString(id, input.value);
+      else if (save && input.value.trim() !== current) setName(kind, id, input.value);
       else renderTable();
       const restored = [...$("#names-table").querySelectorAll(".names-editable")]
         .find((el) => el.dataset.nameId === String(id));
       if (refocus) restored?.querySelector(".names-edit-button")?.focus();
     };
-    // pipeline keeps the existing grammar suffix
-    const invalid = () => vocab && input.value.includes("^");
+    // A vocabulary name: the pipeline keeps the existing grammar suffix. A translation carries its own.
+    const problem = () => {
+      if (vocab && input.value.includes("^")) return "A name cannot contain ^";
+      if (!strings || !input.value.trim()) return "";
+      try { checkTranslation(locale(), id, manyLines(input.value.trim())); } catch (e) { return e.message; }
+      return "";
+    };
+    const invalid = () => problem() !== "";
     input.addEventListener("input", () => {
       input.setAttribute("aria-invalid", String(invalid()));
-      input.title = invalid() ? "A name cannot contain ^" : "";
+      input.title = problem();
     });
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter" && !invalid()) { e.preventDefault(); finish(true); }

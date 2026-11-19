@@ -79,6 +79,27 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertIn('SI_FURC_TRADERS_LUXF = "Luxury Furnishings Vendor^Nd,from"', english)
         self.assertEqual(english.count('SI_FURC_TRADERS_LUXF ='), 1)
 
+    def test_string_translates_one_library_string_and_the_web_copy_follows(self):
+        # untranslated today, so the line moves out of the untranslated block and its count drops
+        line = {'v': 1, 'op': 'string', 'locale': 'de', 'id': 'SI_FURC_SRC_VAULT_CHESTS', 'text': 'Tresortruhen "x"^p,aus'}
+        before = (ROOT / 'LibFurnitureCatalogue/locale/de.lua').read_text()
+        count = int(re.search(r'-- (\d+) ENTRIES UNTRANSLATED', before).group(1))
+        files, _ = self.run_plan(line)
+        self.assertEqual(set(files), {'LibFurnitureCatalogue/locale/de.lua', 'docs/data/strings.json'})
+        german = files['LibFurnitureCatalogue/locale/de.lua'].decode()
+        self.assertEqual(german.count('SI_FURC_SRC_VAULT_CHESTS ='), 1)
+        self.assertLess(german.index('SI_FURC_SRC_VAULT_CHESTS ='), german.index('ENTRIES UNTRANSLATED'))
+        self.assertIn(f'-- {count - 1} ENTRIES UNTRANSLATED', german)
+        self.assertEqual(len(german.splitlines()), len(before.splitlines()))
+        self.assertEqual(json.loads(files['docs/data/strings.json'])['de'][line['id']], line['text'])
+        # an already translated string is rewritten in place
+        again, _ = self.run_plan({**line, 'id': 'SI_FURC_RANK', 'text': 'Stufe <<1>>'})
+        self.assertIn('  SI_FURC_RANK = "Stufe <<1>>",\n', again['LibFurnitureCatalogue/locale/de.lua'].decode())
+        for bad in ({'id': 'SI_FURC_NOT_A_STRING'}, {'locale': 'zh'}, {'locale': 'en'}, {'text': ' '},
+                    {'id': 'SI_FURC_RANK', 'text': 'Stufe'}):
+            with self.assertRaises(ValueError):
+                self.run_plan({**line, **bad})
+
     def test_fourteen_updates(self):
         ids = [120815, 120816, 120817, 120818, 120823, 134831, 145476,
                145477, 156654, 171826, 184201, 196204, 203592, 212580]

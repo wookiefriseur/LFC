@@ -2,6 +2,10 @@
 
 Initially generated from the LibFurnitureCatalogue Lua data files but will now be the only source of truth and Lua is generated from that.
 
+## Strings
+
+`strings.json` is generated from `LibFurnitureCatalogue/locale/*.lua`. Labels carry an `si` string id and have a `source.note` (localised). See CONTRIBUTING, section on generation.
+
 ## Names
 
 `names.en.json` covers every emitted id. Two sources, export wins: the game export `itemName`

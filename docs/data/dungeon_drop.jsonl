@@ -15,32 +15,32 @@
 {"id":147642,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
 {"id":147643,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
 {"id":147644,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_FV"}]},"cost":[],"availability":{"version":"DEADL"},"rarity":"rare"}
-{"id":194419,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194420,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194421,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194422,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194423,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194439,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194440,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194441,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194442,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194443,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194444,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194445,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194446,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194447,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194448,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194449,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194450,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194451,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194452,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194453,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194454,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194455,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194456,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194458,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194459,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
-{"id":194460,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"vault chests"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194419,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194420,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194421,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194422,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194423,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194439,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194440,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194441,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194442,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194443,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194444,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194445,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194446,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194447,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194448,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194449,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194450,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194451,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194452,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194453,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194454,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194455,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194456,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194458,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194459,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
+{"id":194460,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_SCRIV"}],"note":"SI_FURC_SRC_VAULT_CHESTS"},"cost":[],"availability":{"version":"SCRIBE"}}
 {"id":197917,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
 {"id":197918,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}
 {"id":197919,"source":{"type":"dungeon_drop","locations":[{"location":"DUNG_NYMIC"}],"subtype":"chest"},"cost":[],"availability":{"version":"NECROM"}}

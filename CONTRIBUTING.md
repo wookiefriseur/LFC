@@ -102,7 +102,9 @@ Use Lua 5.1 or ESOLua. With ESOLua, also pass `--esoui /path/to/esoui` to the ge
 
 Every generation validates the data and verifies the generated Lua by decoding it back to JSONL before writing the outputs. Add `--check` to verify that existing outputs match a fresh build.
 
-Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.json` inside the `WEBINTERFACE STRINGS` comment markers in `locale/en.lua`. If you run into issues ingame check for missing strings first. Handwritten definitions outside the markers stay authoritative, game-owned string IDs are not generated.
+Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.json` inside the `WEBINTERFACE STRINGS` comment markers in `locale/en.lua`.
+
+Both also write `docs/data/strings.json`, the web interface's copy of `locale/*.lua`: `{language: {string id: text}}`. The locale files are the only place a string is edited. A translation holds only the strings whose text differs from English (English as fallback). Item, zone, quest, achievement and house names are not in it: those are dumped from the game, through the names files.
 
 ## Release
 

@@ -70,6 +70,14 @@ export class DirtyBuffer {
     this.changed();
     return key;
   }
+  // A translation of one library string. Setting it back to the published text drops the entry.
+  setString(locale, id, text, published) {
+    const key = `string:${locale}:${id}`;
+    if (!text || text === published) this.entries.delete(key);
+    else this.entries.set(key, { op: "string", key, locale, id, text, before: published ?? null });
+    this.changed();
+    return key;
+  }
   // Changes the label of an existing vocabulary entry (restoring the published label drops the change)
   setEnumName(enumName, value, name, published) {
     const key = `enum-name:${enumName}:${value}`;
@@ -228,6 +236,8 @@ export function serialiseDiff(buffer) {
       lines.push(JSON.stringify(line));
     } else if (entry.op === "enum-name") {
       lines.push(JSON.stringify({ v: DIFF_VERSION, op: "enum-name", enum: entry.enumName, value: entry.value, name: entry.name }));
+    } else if (entry.op === "string") {
+      lines.push(JSON.stringify({ v: DIFF_VERSION, op: "string", locale: entry.locale, id: entry.id, text: entry.text }));
     } else if (entry.op === "item") {
       // Targets the item metadata and the catalogue's names, not a data file.
       lines.push(JSON.stringify({ v: DIFF_VERSION, op: "item", id: entry.id, reference: entry.reference }));
@@ -274,6 +284,7 @@ export function buildIssueParts(buffer, allRecords, ctx) {
     if (e.op === "enum-name") return `Enum name ${e.enumName}.${e.value}`;
     if (e.op === "add-enum") return `Enum ${e.enumName}.${e.value}`;
     if (e.op === "name") return `${e.kind} name ${e.id}`;
+    if (e.op === "string") return `Translation ${e.locale} ${e.id}`;
     if (e.op === "item") return `ID ${e.id}`;
     const record = e.before ?? e.after;
     return record.id === undefined ? `Blueprint ${record.blueprint}` : `ID ${record.id}`;
@@ -330,11 +341,12 @@ export function suggestTitle(buffer) {
     if (e.op === "enum-name") return `DB enum name: ${e.enumName}.${e.value}`;
     if (e.op === "add-enum") return `DB add-enum: ${e.enumName}.${e.value}`;
     if (e.op === "name") return `DB name: ${e.kind} ${e.id}`;
+    if (e.op === "string") return `DB translation: ${e.locale} ${e.id}`;
     if (e.op === "item") return `DB item details: ${e.id}`;
     const id = (e.after ?? e.before).id;
     return `DB ${e.op}: ${id}`;
   }
-  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, "enum-name": 0, name: 0, item: 0 };
+  const counts = { update: 0, add: 0, delete: 0, "add-enum": 0, "enum-name": 0, name: 0, string: 0, item: 0 };
   for (const e of entries) counts[e.op]++;
   const parts = [];
   if (counts["enum-name"]) parts.push(`${counts["enum-name"]} vocabulary name${counts["enum-name"] > 1 ? "s" : ""}`);
@@ -343,6 +355,7 @@ export function suggestTitle(buffer) {
   if (counts.delete) parts.push(`${counts.delete} delete${counts.delete > 1 ? "s" : ""}`);
   if (counts["add-enum"]) parts.push(`${counts["add-enum"]} enum value${counts["add-enum"] > 1 ? "s" : ""}`);
   if (counts.name) parts.push(`${counts.name} name${counts.name > 1 ? "s" : ""}`);
+  if (counts.string) parts.push(`${counts.string} translation${counts.string > 1 ? "s" : ""}`);
   if (counts.item) parts.push(`${counts.item} item detail${counts.item > 1 ? "s" : ""}`);
   return `DB update: ${parts.join(", ")}`;
 }

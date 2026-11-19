@@ -2,7 +2,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
-import { NameStore } from "../../docs/data.js";
+import { NameStore, labelOf, noteLabel, setStrings, checkTranslation } from "../../docs/data.js";
+import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
 import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
 
@@ -55,4 +56,34 @@ test("the item search follows a change of language", () => {
   names.setTranslation(new Map([[1, "Kaiserlicher Stuhl"]]));
   assert.deepEqual(search("stuhl").map((e) => e.id), [1]);
   assert.deepEqual(search("chair"), []);
+});
+
+test("a vocabulary label and a string-id note follow the language, English where the language has none", () => {
+  const enums = { vendors: [{ symbol: "LUXF", si: "SI_FURC_TRADERS_LUXF", name: "Luxury Furnisher" },
+    { symbol: "ROLIS", si: "SI_FURC_TRADERS_ROLIS", name: "Rolis Hlaalu" }] };
+  setStrings({ en: { SI_FURC_TRADERS_LUXF: "Luxury Furnisher^Nd,from", SI_FURC_TOMBS: "tombs^p" },
+    de: { SI_FURC_TRADERS_LUXF: "Luxusausstatter^n,von" } }, "de");
+  assert.equal(labelOf(enums, "vendors", "LUXF"), "Luxusausstatter");
+  assert.equal(labelOf(enums, "vendors", "LUXF", { english: true }), "Luxury Furnisher");
+  assert.equal(labelOf(enums, "vendors", "ROLIS"), "Rolis Hlaalu");
+  assert.equal(noteLabel(enums, "SI_FURC_TOMBS"), "tombs");
+  assert.equal(noteLabel(enums, "SI_FURC_NOT_DEFINED"), "SI_FURC_NOT_DEFINED");
+  assert.equal(noteLabel(enums, "Aetherius Art"), "Aetherius Art");
+  setStrings(null, "en");
+  assert.equal(labelOf(enums, "vendors", "LUXF"), "Luxury Furnisher");
+});
+
+test("a translation keeps the placeholders of the English text and becomes one string line", () => {
+  setStrings({ en: { SI_FURC_RANK: "rank <<1>>", SI_FURC_ESO_PLUS: "ESO+" }, de: { SI_FURC_RANK: "Rang <<1>>" } }, "en");
+  assert.deepEqual(checkTranslation("de", "SI_FURC_RANK", "Stufe <<1>>"), { before: "Rang <<1>>" });
+  assert.deepEqual(checkTranslation("de", "SI_FURC_ESO_PLUS", "ESO+"), { before: null });
+  assert.throws(() => checkTranslation("de", "SI_FURC_RANK", "Stufe"), /<<1>>/);
+  assert.throws(() => checkTranslation("de", "SI_FURC_NONE", "x"), /not one of/);
+  assert.throws(() => checkTranslation("zh", "SI_FURC_RANK", "x <<1>>"), /no translation file/);
+  assert.throws(() => checkTranslation("en", "SI_FURC_RANK", "x <<1>>"), /no translation file/);
+  const buffer = new DirtyBuffer();
+  buffer.setString("de", "SI_FURC_RANK", "Stufe <<1>>", "Rang <<1>>");
+  assert.deepEqual(JSON.parse(serialiseDiff(buffer)), { v: 1, op: "string", locale: "de", id: "SI_FURC_RANK", text: "Stufe <<1>>" });
+  buffer.setString("de", "SI_FURC_RANK", "Rang <<1>>", "Rang <<1>>");
+  assert.equal(buffer.list().length, 0);
 });

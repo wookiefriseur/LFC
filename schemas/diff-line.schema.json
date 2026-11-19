@@ -12,9 +12,9 @@
       "const": 1
     },
     "op": {
-      "description": "Operation. `add-enum` and `enum-name` target enums.json and carry no id/category; `enum-name` corrects the English label of an existing vocabulary entry. `name` targets the names reference data (reference-data/names.<locale>.json). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
+      "description": "Operation. `add-enum` and `enum-name` target enums.json and carry no id/category; `enum-name` corrects the English label of an existing vocabulary entry. `name` targets the names reference data (reference-data/names.<locale>.json). `string` translates one of the library's strings (locale/<locale>.lua). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
       "type": "string",
-      "enum": ["update", "add", "delete", "add-enum", "enum-name", "name", "item"]
+      "enum": ["update", "add", "delete", "add-enum", "enum-name", "name", "string", "item"]
     }
   },
   "oneOf": [
@@ -188,6 +188,25 @@
           "description": "The name as the game shows it.",
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    {
+      "title": "string",
+      "additionalProperties": false,
+      "required": ["v", "op", "locale", "id", "text"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "string" },
+        "locale": {
+          "description": "The language translated into. English is the master and is not translated.",
+          "enum": ["de", "fr", "es", "ru", "jp", "zh"]
+        },
+        "id": { "type": "string", "pattern": "^SI_FURC_[A-Z0-9_]+$" },
+        "text": {
+          "description": "The translation as the locale file holds it, grammar suffix (^n,from) and placeholders (<<1>>) included.",
+          "type": "string",
+          "pattern": "\\S"
         }
       }
     },

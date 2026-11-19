@@ -60,7 +60,7 @@
 {"id":125590,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125595,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125596,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
-{"id":125597,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"shroom beetles"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"extremely_rare"}
+{"id":125597,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"note":"SI_FURC_SRC_MOBS_SHROOM_BEETLES"},"cost":[],"availability":{"version":"MORROWIND"},"rarity":"extremely_rare"}
 {"id":125600,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and Alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125606,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest","note":"Cloth and alchemy"},"cost":[],"availability":{"version":"MORROWIND"}}
 {"id":125608,"source":{"type":"drop","locations":[{"location":"VVARDENFELL"}],"subtype":"harvest"},"cost":[],"availability":{"version":"MORROWIND"}}
@@ -361,7 +361,7 @@
 {"id":166013,"source":{"type":"drop","locations":[{"location":"RIFT"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166014,"source":{"type":"drop","locations":[{"location":"SELSWEYR"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166015,"source":{"type":"drop","locations":[{"location":"KHENARTHI"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
-{"id":166027,"source":{"type":"drop","locations":[{"location":"BLACKREACH_GMC"}],"note":"chaurus mobs"},"cost":[],"availability":{"version":"DEADL"}}
+{"id":166027,"source":{"type":"drop","locations":[{"location":"BLACKREACH_GMC"}],"note":"SI_FURC_SRC_MOBS_CHAURUS"},"cost":[],"availability":{"version":"DEADL"}}
 {"id":166434,"source":{"type":"drop","locations":[{"location":"ALIKR"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166435,"source":{"type":"drop","locations":[{"location":"WSKYRIM"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166436,"source":{"type":"drop","locations":[{"location":"WROTHGAR"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
@@ -384,7 +384,7 @@
 {"id":166473,"source":{"type":"drop","locations":[{"location":"GREENSHADE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166474,"source":{"type":"drop","locations":[{"location":"CRAGLORN"}],"subtype":"scryable"},"cost":[],"availability":{"version":"SKYRIM"}}
 {"id":166960,"source":{"type":"drop","locations":[{"location":"WSKYRIM"}],"note":"SI_FURC_SRC_STONEHUSK"},"cost":[],"availability":{"version":"DEADL"}}
-{"id":171428,"source":{"type":"drop","locations":[{"location":"REACH"}],"note":"Harrowstorms","subtype":"scryable"},"cost":[],"availability":{"version":"MARKAT"}}
+{"id":171428,"source":{"type":"drop","locations":[{"location":"REACH"}],"note":"SI_FURC_SRC_HARROWSTORMS","subtype":"scryable"},"cost":[],"availability":{"version":"MARKAT"}}
 {"id":171429,"source":{"type":"drop","locations":[{"location":"REACH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"MARKAT"}}
 {"id":171431,"source":{"type":"drop","locations":[{"location":"REACH"}],"subtype":"scryable"},"cost":[],"availability":{"version":"MARKAT"}}
 {"id":175728,"source":{"type":"drop","locations":[{"location":"BLACKWOOD"}],"subtype":"scryable"},"cost":[],"availability":{"version":"BLACKW"}}
@@ -653,11 +653,11 @@
 {"id":223154,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223155,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223156,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"scryable"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223157,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223158,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223159,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223160,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223161,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223157,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223158,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223159,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223160,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223161,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223162,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"fish"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223163,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"fish"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223164,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"fish"},"cost":[],"availability":{"version":"WORMS2"}}
@@ -671,8 +671,8 @@
 {"id":223172,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"Woodworking","subtype":"harvest"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223173,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"Woodworking","subtype":"harvest"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223174,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"subtype":"chest"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223176,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
-{"id":223177,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"mobs in public dungeons and delves"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223176,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
+{"id":223177,"source":{"type":"drop","locations":[{"location":"SOLSTICE"}],"note":"SI_FURC_SRC_MOBS_PUBLIC"},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223867,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223868,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223869,"source":{"type":"drop","locations":[{"location":"COLDH"}],"subtype":"scryable","note":"Night Market"},"cost":[],"availability":{"version":"ZERO"}}

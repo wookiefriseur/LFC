@@ -51,6 +51,8 @@ export class ReferenceData {
     this._pendingName = () => null;
     this.translations = new Map();
     this._translationInflight = new Map();
+    // The language gameName() answers in (English as fallback)
+    this.language = null;
   }
 
   onShardLoaded(fn) {
@@ -157,6 +159,8 @@ export class ReferenceData {
 
   // Null until the file is in; asking starts the load, and the shard listeners hear when it lands.
   gameName(kind, id) {
+    const translated = this.translations.get(this.language)?.names[kind]?.get(id);
+    if (translated) return translated;
     const pending = this._pendingName(kind, id);
     if (pending) return pending;
     if (!this.names) {
