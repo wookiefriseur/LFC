@@ -149,9 +149,12 @@
         "houses": 124,
         "quests": 3431,
         "achievements": 3913,
-        "zones": 1103
+        "zones": 1103,
+        "themes": 18,
+        "categories": 172,
+        "skills": 8
       },
-      "digest": "eecdf2a92430",
+      "digest": "832da96df6c7",
       "translations": {
         "de": {
           "file": "names.de.json",
@@ -161,9 +164,12 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "cab629fdd7dd",
+          "digest": "fab4df5825bc",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         },
@@ -175,9 +181,12 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "f3c50947ec89",
+          "digest": "2a9793ccf5ce",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         },
@@ -189,9 +198,12 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "806d07f0d4f2",
+          "digest": "cc58c38f1bca",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         },
@@ -203,9 +215,12 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "752247092be8",
+          "digest": "2e0317327e62",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         },
@@ -217,9 +232,12 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "672561232285",
+          "digest": "ffc5af917b90",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         },
@@ -231,15 +249,24 @@
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
-            "zones": 1103
+            "zones": 1103,
+            "categories": 172,
+            "themes": 18,
+            "skills": 8
           },
-          "digest": "56f6aa1bb02b",
+          "digest": "19109d26e638",
           "dumped": "2026-11-19",
           "apiVersion": 101051
         }
       },
       "dumped": "2026-11-19",
       "apiVersion": 101051
+    },
+    "crafts": {
+      "description": "The crafting skill that makes a furnishing, {furnishing id: skill id}. Skill names are the `skills` table of the names files.",
+      "file": "crafts.json",
+      "count": 3444,
+      "digest": "0b995e09da76"
     }
   }
 }
