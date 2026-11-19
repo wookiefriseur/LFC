@@ -172,18 +172,17 @@
         "v": { "const": 1 },
         "op": { "const": "name" },
         "kind": {
-          "description": "Which names table: house collectibles, quests, achievements or zones.",
-          "enum": ["houses", "quests", "achievements", "zones"]
+          "description": "Which names table: items (any language but English, whose item names come from item details), house collectibles, quests, achievements or zones.",
+          "enum": ["items", "houses", "quests", "achievements", "zones"]
         },
         "id": {
-          "description": "The game id the name belongs to (collectible, quest, achievement or zone id).",
+          "description": "The game id the name belongs to (item, collectible, quest, achievement or zone id).",
           "type": "integer",
           "minimum": 1
         },
         "locale": {
-          "description": "Client language the name was read in.",
-          "type": "string",
-          "pattern": "^[a-z]{2}$"
+          "description": "Client language the name was read in, as the game names it.",
+          "enum": ["en", "de", "fr", "es", "ru", "jp", "zh"]
         },
         "name": {
           "description": "The name as the game shows it.",

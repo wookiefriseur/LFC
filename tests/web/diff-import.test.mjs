@@ -130,7 +130,8 @@ test("nothing is planned when any line fails", () => {
   const cases = {
     "found 0": line({ op: "delete", id: 999999999, category: "luxury" }),
     "already in luxury": line({ op: "add", id: 184200, category: "luxury", record: strip(lux) }),
-    "not the site's": line({ op: "name", kind: "houses", id: 1, locale: "de", name: "Haus" }),
+    "not a game language": line({ op: "name", kind: "houses", id: 1, locale: "xx", name: "Haus" }),
+    "comes from item details": line({ op: "name", kind: "items", id: 94097, locale: "en", name: "Bed" }),
     "delete plus an add": line({ op: "update", id: 184200, category: "luxury", fields: { source: { type: "drop" } } }),
     "unsupported diff version": JSON.stringify({ v: 2, op: "delete", id: 1, category: "luxury" }),
     "changeable keys": line({ op: "update", id: 184200, category: "luxury", fields: { id: 5 } }),
@@ -198,4 +199,15 @@ test("mirror removes a cleared field from the live record, so it stays cleared o
   const live = { id: 1, notes: "old", cost: [], _key: "luxury#0" };
   mirror(live, { id: 1, cost: [] });
   assert.deepEqual(live, { id: 1, cost: [], _key: "luxury#0" });
+});
+
+test("a name line of another game language is compared with that language's names", () => {
+  const state = { records: [], enums: {} };
+  const asked = [];
+  const ctx = { ...ctxOf(state), publishedName: (kind, id, locale) => { asked.push([kind, id, locale]); return "Alt"; } };
+  const text = JSON.stringify({ v: 1, op: "name", kind: "items", id: 94097, locale: "de", name: "Kaiserliches Bett" });
+  const { steps, errors } = planDiff(readDiff(text).lines, ctx);
+  assert.deepEqual(errors, []);
+  assert.deepEqual(asked, [["items", 94097, "de"]]);
+  assert.equal(steps[0].before, "Alt");
 });

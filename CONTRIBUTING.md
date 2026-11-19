@@ -20,6 +20,13 @@ New discoveries appear as **UNCONFIRMED**. Existing catalogue items are skipped.
 
 In **Names**, click the name of a vocabulary entry to change its label. Enter or clicking outside saves it to the change list, ESC cancels (you can also restore the name to remove the change). Pipeline updates the enum and the Lua strings (it keeps any grammar suffix such as `^n,from`).
 
+## Names in other game languages
+
+- Ingame, on a client in that language: **FurCDev -> Dump -> All names to file**, reload the UI
+- Website: **Names -> Import a names dump**, choose the SavedVariables file. The tab switches to the dump's language
+- Single names: **Names**, pick the language, click a name. Rows marked `English:` have no name in that language yet
+- A first full dump (thousands of names) is too large for an issue: run `python3 scripts/import_names.py <SAVED_VARS_LOCATION>/FurnitureCatalogue_DevUtility.lua`
+
 ## Correct sources and obsolete IDs
 
 Search by name or ID. Open a record in **Batch edit** to change its source or other details.

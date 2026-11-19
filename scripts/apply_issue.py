@@ -14,6 +14,7 @@ import tempfile
 from pathlib import Path
 
 from generate_db import ROOT, canonical, load_inputs, lua, read_json, render, render_locale, require, verify
+from import_names import GAME_LOCALES, MANIFEST, english, manifest_entry, names_file, with_fallback
 from jsonschema import Draft202012Validator
 
 BEGIN = '[//]: # (diff-begin)'
@@ -159,17 +160,31 @@ def put_meta(files, reference, blueprint=None, overwrite_name=False):
     return named
 
 
-def update_name(files, line):
-    manifest = files.obj('docs/reference-data/manifest.json')
-    dataset = manifest['datasets']['names']
-    require(line['locale'] == dataset['locale'], 'name locale is not published by this site')
-    name = f"docs/reference-data/names.{line['locale']}.json"
-    names = files.obj(name)
-    names.setdefault(line['kind'], {})[str(line['id'])] = line['name']
+def put_names(files, manifest, locale, names):
+    name = names_file(locale)
     files.put_obj(name, names, 0)
-    dataset['counts'] = {k: len(v) for k, v in names.items()}
-    dataset['digest'] = digest(files.read(name), 12)
-    files.put_obj('docs/reference-data/manifest.json', manifest)
+    manifest_entry(manifest['datasets']['names'], locale, names, files.read(name))
+
+
+def update_name(files, line):
+    locale, kind = line['locale'], line['kind']
+    require(locale in GAME_LOCALES, f'name locale {locale} is not a game language')
+    require(locale != 'en' or kind != 'items', 'an English item name comes from item details, not a name line')
+    name = names_file(locale)
+    names = files.obj(name) if (files.root / name).exists() or name in files.changed else {}
+    names.setdefault(kind, {})[str(line['id'])] = line['name']
+    manifest = files.obj(MANIFEST)
+    put_names(files, manifest, locale, names if locale == 'en' else with_fallback(names, english(files.obj)))
+    files.put_obj(MANIFEST, manifest)
+
+
+def refresh_fallbacks(files):
+    """An English name added or changed anywhere moves the fallback of every other language."""
+    manifest = files.obj(MANIFEST)
+    en = english(files.obj)
+    for locale in manifest['datasets']['names'].get('translations', {}):
+        put_names(files, manifest, locale, with_fallback(files.obj(names_file(locale)), en))
+    files.put_obj(MANIFEST, manifest)
 
 
 def refresh_manifest(files, groups):
@@ -292,6 +307,7 @@ def apply(lines, root=ROOT, lua_command=None):
         encoded = ''.join(originals[kind].get(canonical(r), json.dumps(r, ensure_ascii=False, separators=(',', ':')) + '\n') for r in rows)
         files.put(f'docs/data/{kind}.jsonl', encoded.encode())
     refresh_manifest(files, groups)
+    refresh_fallbacks(files)
     command = lua_command or [os.environ.get('LUA', str(root / 'bin/lua'))]
     with tempfile.TemporaryDirectory() as tmp:
         candidate = Path(tmp)

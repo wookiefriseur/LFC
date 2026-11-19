@@ -3868,6 +3868,53 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   }
 });
 
+test("names: another game language has its own names, and an id it has none for shows the English one as such", async (page) => {
+  const manifestURL = "/reference-data/manifest.json";
+  const namesURL = "/reference-data/names.de.json";
+  const manifest = JSON.parse(await fs.readFile(path.join(ROOT, "reference-data", "manifest.json"), "utf8"));
+  manifest.datasets.names.translations = { ...manifest.datasets.names.translations, de: { file: "names.de.json" } };
+  overrides.set(manifestURL, JSON.stringify(manifest));
+  overrides.set(namesURL, JSON.stringify({
+    items: { 94097: "Kaiserliches Bett, Koje" }, houses: {}, quests: {}, achievements: {}, zones: { 3: "Glenumbra" },
+    fallback: { items: { 94098: "Imperial Carpet, Arkay" }, zones: { 19: "Stormhaven" } },
+  }));
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "names");
+    assert(!await page.$('#names-lists [data-list="game:items"]'), "English lists item names");
+    await page.select("#names-locale", "de");
+    await page.waitForSelector('#names-lists [data-list="game:items"]', { timeout: 10000 });
+    await page.click('#names-lists [data-list="game:items"]');
+    const rowOf = (id) => page.$$eval("#names-table tbody tr", (rs, want) =>
+      rs.find((r) => r.querySelector(".names-id").textContent === want)?.textContent ?? null, String(id));
+    assert((await rowOf(94097)).includes("Kaiserliches Bett, Koje"), "the German item name is missing");
+    assert((await rowOf(94098)).includes("English: Imperial Carpet, Arkay"), `fallback row: ${await rowOf(94098)}`);
+    await page.click('#names-lists [data-list="game:zones"]');
+    // the same text as the English name, but read from a German client: a name, not a fallback
+    assert(!(await rowOf(3)).includes("English:"), `translated row: ${await rowOf(3)}`);
+    assert((await rowOf(19)).includes("English: Stormhaven"), "the zone fallback is missing");
+
+    if (!await page.$eval("#names-import", (s) => !s.hidden)) await page.click("#names-import-toggle");
+    await page.select("#names-locale", "en");
+    await page.$eval("#names-import-paste", (e, text) => { e.value = text; },
+      '-- items, de, API 101048, 2 names\nitems = {\n  [94097] = "Kaiserliches Bett, Koje",\n  [94098] = "Imperial Carpet, Arkay",\n}');
+    await page.click("#names-import-read");
+    await page.waitForFunction(() => !document.querySelector("#names-import-apply").hidden, { timeout: 10000 });
+    assertEq(await page.$eval("#names-locale", (s) => s.value), "de", "the tab did not follow the dump's language");
+    const report = await page.$eval("#names-import-report", (e) => e.textContent);
+    assert(report.includes("1 new, 0 changed, 1 unchanged"), `report: ${report}`);
+    await page.click("#names-import-apply");
+    const german = (await diffLines(page)).filter((l) => l.op === "name" && l.locale === "de");
+    assertEq(german.length, 1, "German name lines");
+    assertEq(german[0].kind, "items", "the name kind");
+    assertEq(german[0].name, "Imperial Carpet, Arkay", "a name equal to the English one is still a name");
+  } finally {
+    overrides.delete(manifestURL);
+    overrides.delete(namesURL);
+  }
+});
+
 test("submit split: each part has its own copy, preview and numbered issue link", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

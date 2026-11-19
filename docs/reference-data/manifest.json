@@ -151,7 +151,23 @@
         "achievements": 3417,
         "zones": 1102
       },
-      "digest": "3e6f975b842e"
+      "digest": "3e6f975b842e",
+      "translations": {
+        "de": {
+          "file": "names.de.json",
+          "fallback": 72,
+          "counts": {
+            "items": 12369,
+            "houses": 124,
+            "quests": 3431,
+            "achievements": 3913,
+            "zones": 1103
+          },
+          "digest": "cab629fdd7dd",
+          "dumped": "2026-11-19",
+          "apiVersion": 101051
+        }
+      }
     }
   }
 }

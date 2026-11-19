@@ -1,5 +1,5 @@
-// Names tab: every id -> name table the site shows, the game names from the reference data and the vocabularies from enums.json. A names dump from FurCDev updates the game names through the change list.
-import { NAME_KINDS } from "./reference-data.js";
+// Names tab: every id -> name table the site shows, the game names from the reference data, per game language, and the vocabularies from enums.json. A names dump from FurCDev updates the game names of its language through the change list.
+import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { parseNamesDump, diffNames } from "./names-dump.js";
 import { labelOf } from "./data.js";
 import { titleCase } from "./lexicon.js";
@@ -7,8 +7,11 @@ import { titleCase } from "./lexicon.js";
 // Past this many matches the table asks for a narrower search; a full achievement list is thousands of rows.
 const ROW_LIMIT = 500;
 
+// Past this many changes a dump no longer fits one contribution; a first full dump of a language goes in by script.
+const ISSUE_LIMIT = 2000;
+
 const KIND_LABELS = {
-  houses: "Houses", quests: "Quests", achievements: "Achievements", zones: "Zones",
+  items: "Items", houses: "Houses", quests: "Quests", achievements: "Achievements", zones: "Zones",
 };
 
 // The vocabularies worth reading as a name list: object entries with a symbol, or flat string lists.
@@ -26,18 +29,39 @@ function vocabularies(enums) {
 
 export function namesMask(deps) {
   const { state, $, elem, renderFooter, referenceData } = deps;
-  const view = { list: "game:houses", search: "" };
+  const view = { list: "game:houses", search: "", locale: referenceData.namesLocale };
 
   function locale() {
-    return referenceData.namesLocale;
+    return view.locale;
+  }
+
+  // { names, fallback } of the shown language, null while it loads
+  function store() {
+    return referenceData.namesOf(locale());
+  }
+
+  // English item names are the catalogue's own and are not edited here
+  function kinds() {
+    return NAME_KINDS.filter((kind) => kind !== "items" || locale() !== referenceData.namesLocale);
+  }
+
+  async function setLocale(next) {
+    view.locale = next;
+    const select = $("#names-locale");
+    if (select) select.value = next;
+    if (!kinds().includes(kindOfList()) && view.list.startsWith("game:")) view.list = "game:houses";
+    await referenceData.loadTranslation(next);
+    renderSidebar();
+    renderTable();
   }
 
   // Rows for the selected list: [{ id, name, extra, pending }]
   function rows() {
     const [group, key] = view.list.split(":");
     if (group === "game") {
-      const table = referenceData.names?.[key] || new Map();
-      const ids = new Set(table.keys());
+      const table = store()?.names[key] || new Map();
+      const english = store()?.fallback[key] || new Map();
+      const ids = new Set([...table.keys(), ...english.keys()]);
       for (const e of state.buffer.entries.values()) {
         if (e.op === "name" && e.kind === key && e.locale === locale()) ids.add(e.id);
       }
@@ -46,7 +70,8 @@ export function namesMask(deps) {
         return {
           id: String(id),
           name: pending?.name ?? table.get(id) ?? "",
-          extra: pending ? (pending.before ? `was: ${pending.before}` : "new") : "",
+          extra: pending ? (pending.before ? `was: ${pending.before}` : "new")
+            : (!table.has(id) && english.has(id) ? `English: ${english.get(id)}` : ""),
           pending: !!pending,
         };
       });
@@ -89,8 +114,8 @@ export function namesMask(deps) {
       return li;
     };
     ul.append(elem("li", { class: "names-group" }, `Game names (${locale()})`));
-    for (const kind of NAME_KINDS) {
-      ul.append(item(`game:${kind}`, KIND_LABELS[kind], referenceData.names?.[kind]?.size));
+    for (const kind of kinds()) {
+      ul.append(item(`game:${kind}`, KIND_LABELS[kind], store()?.names[kind].size));
     }
     ul.append(elem("li", { class: "names-group" }, "Vocabularies"));
     for (const key of vocabularies(state.enums)) {
@@ -108,7 +133,7 @@ export function namesMask(deps) {
       : all;
     const game = view.list.startsWith("game:");
     $("#names-add").hidden = !game;
-    if (game && !referenceData.names) {
+    if (game && !store()) {
       $("#names-count").textContent = referenceData.state === "unavailable" ? "names not available" : "loading…";
     } else {
       $("#names-count").textContent = hits.length === all.length
@@ -167,7 +192,7 @@ export function namesMask(deps) {
 
   // One name into the change list. The published name, or an empty box, drops the change.
   function setName(kind, id, name) {
-    const published = referenceData.publishedName(kind, id);
+    const published = referenceData.publishedName(kind, id, locale());
     state.buffer.setName(kind, id, locale(), name.trim() || published || "", published);
     renderFooter();
     renderSidebar();
@@ -224,7 +249,7 @@ export function namesMask(deps) {
       return;
     }
     setName(kind, id, name);
-    status.textContent = referenceData.publishedName(kind, id) ? `Changed ${id}.` : `Added ${id}.`;
+    status.textContent = referenceData.publishedName(kind, id, locale()) ? `Changed ${id}.` : `Added ${id}.`;
     idBox.value = "";
     nameBox.value = "";
     idBox.focus();
@@ -236,9 +261,20 @@ export function namesMask(deps) {
   async function readDump(text) {
     const status = $("#names-import-status");
     const parsed = parseNamesDump(text);
+    const dumpLocale = parsed.locale || locale();
+    const englishItems = dumpLocale === referenceData.namesLocale && parsed.kinds.items;
+    if (englishItems) delete parsed.kinds.items;
     const kinds = Object.keys(parsed.kinds);
+    if (!GAME_LOCALES.includes(dumpLocale)) {
+      status.textContent = `This dump is in "${dumpLocale}", which is not a game language.`;
+      $("#names-import-report").innerHTML = "";
+      $("#names-import-apply").hidden = true;
+      lastImport = null;
+      return;
+    }
     if (kinds.length === 0) {
-      status.textContent = parsed.skipped
+      status.textContent = englishItems ? "English item names come from item details, not from a names dump."
+        : parsed.skipped
         ? "These lines do not say which table they belong to. Paste the page including its first line."
         : "No names found. Paste a page from FurCDev's Dump tab, or choose the saved names file.";
       $("#names-import-report").innerHTML = "";
@@ -246,12 +282,9 @@ export function namesMask(deps) {
       lastImport = null;
       return;
     }
-    await referenceData.init();
-    await referenceData.loadNames();
-    const dumpLocale = parsed.locale || locale();
-    // Only one locale is published so far; another locale's names are all new.
-    const current = dumpLocale === locale() ? referenceData.names : {};
-    const diff = diffNames(parsed, current);
+    // The tab follows the dump's language, so the report compares against that language's names
+    await setLocale(dumpLocale);
+    const diff = diffNames(parsed, store().names);
     lastImport = { locale: dumpLocale, diff };
 
     const report = $("#names-import-report");
@@ -269,7 +302,8 @@ export function namesMask(deps) {
       report.append(li);
     }
     status.textContent = `Read ${kinds.map((k) => parsed.kinds[k].size).reduce((a, b) => a + b, 0)} names (${dumpLocale})`
-      + (parsed.skipped ? `, skipped ${parsed.skipped} lines that name no table` : "") + ".";
+      + (parsed.skipped ? `, skipped ${parsed.skipped} lines that name no table` : "") + "."
+      + (total > ISSUE_LIMIT ? ` ${total} changes are too many for one contribution: a maintainer imports a full dump with scripts/import_names.py.` : "");
     const apply = $("#names-import-apply");
     apply.hidden = total === 0;
     apply.textContent = `Add ${total} change${total === 1 ? "" : "s"} to the change list`;
@@ -308,13 +342,15 @@ export function namesMask(deps) {
               <button id="names-search-clear" type="button" class="search-clear"
                       aria-label="Clear the search" hidden>×</button>
             </span>
+            <label class="names-locale">Language
+              <select id="names-locale">${GAME_LOCALES.map((l) => `<option value="${l}">${l}</option>`).join("")}</select></label>
             <span id="names-count" class="muted"></span>
             <button id="names-import-toggle" type="button" class="btn-dump" aria-expanded="false" aria-controls="names-import">Import a names dump</button>
           </div>
           <section id="names-import" class="names-import" hidden aria-label="Import a names dump">
-            <p class="muted">Paste pages from FurCDev's Dump tab (Houses, Quests, Achievements or Zones names),
-              or choose the SavedVariables file "All names to file" wrote. Only names that are new or
-              different become changes.</p>
+            <p class="muted">Paste pages from FurCDev's Dump tab (Item, Houses, Quests, Achievements or Zones names),
+              or choose the SavedVariables file "All names to file" wrote. The dump says which game language
+              it is in. Only names that are new or different become changes.</p>
             <textarea id="names-import-paste" rows="6" placeholder="Paste the dump here"></textarea>
             <div class="names-import-actions">
               <button id="names-import-read" type="button" class="btn-primary">Read</button>
@@ -360,6 +396,8 @@ export function namesMask(deps) {
       box.dispatchEvent(new Event("input"));
       box.focus();
     });
+    $("#names-locale").value = locale();
+    $("#names-locale").addEventListener("change", (e) => setLocale(e.target.value));
     $("#names-import-toggle").addEventListener("click", (e) => {
       const section = $("#names-import");
       section.hidden = !section.hidden;
@@ -384,7 +422,7 @@ export function namesMask(deps) {
     });
     renderSidebar();
     renderTable();
-    referenceData.init().then(() => referenceData.loadNames());
+    referenceData.loadTranslation(locale());
   }
 
   function onShow() {

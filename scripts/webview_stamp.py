@@ -63,8 +63,9 @@ def main(argv):
     for dataset in manifest["datasets"].values():
         for entry in dataset.get("shards", []):
             entry["digest"] = digest(manifest_path.parent / entry["file"])
-        if "file" in dataset:
-            dataset["digest"] = digest(manifest_path.parent / dataset["file"])
+        for entry in [dataset, *dataset.get("translations", {}).values()]:
+            if "file" in entry:
+                entry["digest"] = digest(manifest_path.parent / entry["file"])
     new = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
     if new != old:
         stale.append("reference-data/manifest.json")

@@ -57,3 +57,12 @@ test("the diff: new and different names, unchanged and missing only counted", ()
   assert.equal(d.same, 1);
   assert.equal(d.missing, 1);
 });
+
+test("item names: a page from the Dump tab, with its language", () => {
+  const p = parseNamesDump('-- items, de, API 101048, 2 names\nitems = {\n  [94097] = "Kaiserliches Bett, Koje",\n  [94098] = "Kaiserlicher Stuhl",\n}');
+  assert.equal(p.locale, "de");
+  assert.equal(p.kinds.items.get(94097), "Kaiserliches Bett, Koje");
+  // a name equal to the English one is still new for a language that has none
+  const d = diffNames(p, { items: new Map() });
+  assert.equal(d.items.added.length, 2);
+});

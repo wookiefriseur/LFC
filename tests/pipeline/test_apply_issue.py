@@ -1,6 +1,7 @@
 import copy
 import datetime
 import json
+import re
 import os
 import shutil
 import sys
@@ -149,11 +150,37 @@ class IssueApplicationTests(unittest.TestCase):
     def test_name_preserves_other_names_and_does_not_change_lua(self):
         files, _ = self.run_plan({'v': 1, 'op': 'name', 'kind': 'houses', 'id': 99999,
                                  'locale': 'en', 'name': 'Test house'})
-        self.assertEqual(set(files), {'docs/reference-data/names.en.json', 'docs/reference-data/manifest.json'})
+        # a new English name also lands in the fallback of every other language file
+        other = {f for f in files if re.fullmatch(r'docs/reference-data/names\.(?!en\.)\w+\.json', f)}
+        self.assertEqual(set(files) - other,
+                         {'docs/reference-data/names.en.json', 'docs/reference-data/manifest.json'})
         names = json.loads(files['docs/reference-data/names.en.json'])
         old = json.loads((ROOT / 'docs/reference-data/names.en.json').read_text())
         self.assertEqual(names['achievements'], old['achievements'])
         self.assertEqual(names['houses']['99999'], 'Test house')
+
+    def test_name_in_another_language_gets_its_own_file_with_an_english_fallback(self):
+        en = json.loads((ROOT / 'docs/reference-data/names.en.json').read_text())
+        house = next(iter(en['houses']))
+        files, _ = self.run_plan(
+            # the same text as the English name is still a translation
+            {'v': 1, 'op': 'name', 'kind': 'houses', 'id': int(house), 'locale': 'zh', 'name': en['houses'][house]},
+            {'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'zh', 'name': 'Bett'})
+        self.assertEqual(set(files), {'docs/reference-data/names.zh.json', 'docs/reference-data/manifest.json'})
+        names = json.loads(files['docs/reference-data/names.zh.json'])
+        self.assertEqual(names['houses'], {house: en['houses'][house]})
+        self.assertEqual(names['items'], {'94097': 'Bett'})
+        self.assertNotIn(house, names['fallback']['houses'])
+        self.assertNotIn('94097', names['fallback']['items'])
+        self.assertEqual(len(names['fallback']['houses']), len(en['houses']) - 1)
+        self.assertEqual(names['fallback']['quests'], en['quests'])
+        entry = json.loads(files['docs/reference-data/manifest.json'])['datasets']['names']['translations']['zh']
+        self.assertEqual((entry['file'], entry['counts']['items'], entry['digest']),
+                         ('names.zh.json', 1, digest(files['docs/reference-data/names.zh.json'], 12)))
+
+    def test_english_item_name_line_is_refused(self):
+        with self.assertRaisesRegex(ValueError, 'item details'):
+            self.run_plan({'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'en', 'name': 'Bed'})
 
     def test_discovery_adds_shard_and_recipe_without_dropping_references(self):
         row = {'id': 230123, 'blueprint': 230124, 'source': {'type': 'recipe'}, 'cost': [],

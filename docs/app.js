@@ -2153,17 +2153,23 @@ async function runBatchImport() {
   }
 }
 
+// Name lines are compared against the names of their own language, which load on demand
+function loadNameLocales(lines) {
+  const locales = new Set(lines.filter(({ line }) => line.op === "name").map(({ line }) => line.locale));
+  return Promise.all([...locales].map((l) => referenceData.loadTranslation(l)));
+}
+
 // A pasted contribution diff replays into the change list all or nothing, so its change list is exactly the issue's
 async function importDiff(lines, status, complete) {
   if (state.buffer.size()) {
     status.textContent = `Diff not imported: send or discard your ${changeCountText()} first, so the change list shows only this diff.`;
     return;
   }
-  if (lines.some(({ line }) => line.op === "name")) await referenceData.loadNames();
+  await loadNameLocales(lines);
   await loadItemMeta(lines);
   const { steps, errors, warnings } = planDiff(lines, {
-    records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
-    publishedName: (kind, id) => referenceData.publishedName(kind, id),
+    records: state.records, enums: state.enums,
+    publishedName: (kind, id, locale) => referenceData.publishedName(kind, id, locale),
     publishedItem, metaLocale: referenceData.metaLocale,
   });
   if (errors.length) {
@@ -2234,14 +2240,11 @@ async function restorePending() {
   const when = new Date(saved.savedAt).toLocaleString();
   try {
     const { lines } = readDiff(saved.diff);
-    if (lines.some(({ line }) => line.op === "name")) {
-      await referenceData.init();
-      await referenceData.loadNames();
-    }
+    await loadNameLocales(lines);
     await loadItemMeta(lines);
     const { steps, errors } = planDiff(lines, {
-      records: state.records, enums: state.enums, namesLocale: referenceData.namesLocale,
-      publishedName: (kind, id) => referenceData.publishedName(kind, id),
+      records: state.records, enums: state.enums,
+      publishedName: (kind, id, locale) => referenceData.publishedName(kind, id, locale),
       publishedItem, metaLocale: referenceData.metaLocale,
     });
     if (errors.length) throw new Error(errors.slice(0, 3).join("; "));

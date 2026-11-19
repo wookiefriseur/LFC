@@ -14,5 +14,14 @@ reference-data/
 │   └── meta-*.jsonl                  ← furniture-meta shards (real data, carries `icon`)
 ├── recipes.json                      ← blueprint id -> furnishing (real data)
 ├── categories.en.json                ← category taxonomy (real data, en)
-└── names.en.json                     ← game names: houses, quests, achievements, zones (real data, en)
+├── names.en.json                     ← game names: houses, quests, achievements, zones (real data, en)
+└── names.<locale>.json               ← the same plus items, one file per other game language (de, fr, es, ru, jp, zh)
 ```
+
+## Names in other languages
+
+- `names.<locale>.json`: names read from a client in that language, per table
+- `fallback` inside it: English names of the ids that have none yet. Generated, never edited
+- First full dump of a language: `python3 scripts/import_names.py <SavedVariables file>`, then `python3 scripts/webview_stamp.py`
+- Later corrections: Names tab, through the change list
+- `manifest.json` records per language: counts, `dumped` (date) and `apiVersion` of the last full dump

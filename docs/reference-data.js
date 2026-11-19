@@ -12,11 +12,25 @@ const SUPPORTED_FORMATS = {
   meta: "furniture-meta-v1",
   // Blueprint id -> furnishing id. Unsharded, because the furnishing's shard is not the one the blueprint's id falls in.
   recipes: "furniture-recipes-v1",
-  // {houses|quests|achievements|zones: {id: name}} for one locale. Unsharded and fetched on first ask.
+  // {items|houses|quests|achievements|zones: {id: name}} for one locale, English without the items (those are the catalogue's own names). Another language's file also has `fallback`: the English names of the ids it has no name for. Unsharded and fetched on first ask.
   names: "furniture-names-v1",
 };
 
-export const NAME_KINDS = ["houses", "quests", "achievements", "zones"];
+export const NAME_KINDS = ["items", "houses", "quests", "achievements", "zones"];
+// The game's own language codes (its Language.2 setting). A browser's codes differ (ja, zh-Hans) and are mapped onto these where a visitor's language is read.
+export const GAME_LOCALES = ["en", "de", "fr", "es", "ru", "jp", "zh"];
+
+function nameMaps(obj) {
+  const names = {};
+  for (const kind of NAME_KINDS) {
+    names[kind] = new Map();
+    for (const [id, name] of Object.entries(obj?.[kind] || {})) {
+      const n = Number(id);
+      if (Number.isInteger(n) && typeof name === "string") names[kind].set(n, name);
+    }
+  }
+  return names;
+}
 
 const LS_PREFIX = "furcat-refdata-";
 
@@ -35,6 +49,8 @@ export class ReferenceData {
     this.names = null;
     this._namesInflight = null;
     this._pendingName = () => null;
+    this.translations = new Map();
+    this._translationInflight = new Map();
   }
 
   onShardLoaded(fn) {
@@ -124,20 +140,11 @@ export class ReferenceData {
       const r = await fetch(`./reference-data/${file}${dataset.digest ? `?v=${encodeURIComponent(dataset.digest)}` : ""}`,
         { cache: dataset.digest ? "default" : "no-cache" });
       if (!r.ok) throw new Error(`${file} ${r.status}`);
-      const obj = JSON.parse(await r.text());
-      const names = {};
-      for (const kind of NAME_KINDS) {
-        names[kind] = new Map();
-        for (const [id, name] of Object.entries(obj[kind] || {})) {
-          const n = Number(id);
-          if (Number.isInteger(n) && typeof name === "string") names[kind].set(n, name);
-        }
-      }
-      this.names = names;
-      return names;
+      this.names = nameMaps(JSON.parse(await r.text()));
+      return this.names;
     })()
       .catch((e) => {
-        this.names = Object.fromEntries(NAME_KINDS.map((k) => [k, new Map()]));
+        this.names = nameMaps({});
         console.info(`reference-data ${file} unavailable (${e.message})`);
         return this.names;
       })
@@ -159,8 +166,47 @@ export class ReferenceData {
     return this.names[kind]?.get(id) ?? null;
   }
 
-  publishedName(kind, id) {
-    return this.names?.[kind]?.get(id) ?? null;
+  // The names of one game language, { names, fallback }: what a client in that language showed, and the English name of every other id. A language nothing was imported for yet has neither. Never rejects.
+  async loadTranslation(locale) {
+    await this.init();
+    if (locale === this.namesLocale) {
+      await this.loadNames();
+      return this.namesOf(locale);
+    }
+    if (this.translations.has(locale)) return this.translations.get(locale);
+    if (this._translationInflight.has(locale)) return this._translationInflight.get(locale);
+    const dataset = this._datasetUsable("names") ? this.manifest.datasets.names.translations?.[locale] : null;
+    const p = (async () => {
+      let obj = {};
+      try {
+        if (dataset?.file) {
+          const r = await fetch(`./reference-data/${dataset.file}${dataset.digest ? `?v=${encodeURIComponent(dataset.digest)}` : ""}`,
+            { cache: dataset.digest ? "default" : "no-cache" });
+          if (!r.ok) throw new Error(`${dataset.file} ${r.status}`);
+          obj = JSON.parse(await r.text());
+        }
+      } catch (e) {
+        console.info(`reference-data names for ${locale} unavailable (${e.message})`);
+      }
+      const loaded = { names: nameMaps(obj), fallback: nameMaps(obj.fallback) };
+      this.translations.set(locale, loaded);
+      this._translationInflight.delete(locale);
+      this._fireShardLoaded();
+      return loaded;
+    })();
+    this._translationInflight.set(locale, p);
+    return p;
+  }
+
+  // Null until that language is loaded.
+  namesOf(locale) {
+    if (locale === this.namesLocale) return this.names ? { names: this.names, fallback: nameMaps({}) } : null;
+    return this.translations.get(locale) ?? null;
+  }
+
+  // The fallback is not a published name: a translation that equals the English text is still one.
+  publishedName(kind, id, locale = this.namesLocale) {
+    return this.namesOf(locale)?.names[kind]?.get(id) ?? null;
   }
 
   setPendingNameSource(fn) {

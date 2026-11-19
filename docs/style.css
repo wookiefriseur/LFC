@@ -1845,6 +1845,7 @@ tbody tr.selected.dirty.dirty-error { background: #fecaca; }
 .names-group { margin: 0.8rem 0 0.2rem; font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; }
 .names-group:first-child { margin-top: 0; }
 .names-mask #names-import-toggle { margin-left: auto; }
+.names-locale { display: inline-flex; align-items: center; gap: 0.35rem; }
 .names-import { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); background: white; }
 .names-import textarea { width: 100%; box-sizing: border-box; font-family: monospace; }
 .names-import-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 0.4rem 0; }
