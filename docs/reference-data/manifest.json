@@ -166,6 +166,20 @@
           "digest": "cab629fdd7dd",
           "dumped": "2026-11-19",
           "apiVersion": 101051
+        },
+        "fr": {
+          "file": "names.fr.json",
+          "fallback": 72,
+          "counts": {
+            "items": 12369,
+            "houses": 124,
+            "quests": 3431,
+            "achievements": 3913,
+            "zones": 1103
+          },
+          "digest": "f3c50947ec89",
+          "dumped": "2026-11-19",
+          "apiVersion": 101051
         }
       },
       "dumped": "2026-11-19",

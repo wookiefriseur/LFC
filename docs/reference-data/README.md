@@ -22,6 +22,6 @@ reference-data/
 
 - `names.<locale>.json`: names read from a client in that language, per table
 - `fallback` inside it: English names of the ids that have none yet. Generated, never edited
-- First full dump of a language: `python3 scripts/import_names.py <SavedVariables file>`, then `python3 scripts/webview_stamp.py`
+- First full dump of a language: `python3 scripts/import_names.py <SavedVariables file>` (updates the manifest too)
 - Later corrections: Names tab, through the change list
 - `manifest.json` records per language: counts, `dumped` (date) and `apiVersion` of the last full dump

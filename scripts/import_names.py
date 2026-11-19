@@ -4,7 +4,7 @@
     python3 scripts/import_names.py <FurnitureCatalogue_DevUtility.lua> [--date YYYY-MM-DD]
 
 The dump's own locale decides the file, docs/reference-data/names.<locale>.json. A name in the dump replaces
-the stored one; an id the dump does not carry keeps its name. Run scripts/webview_stamp.py afterwards.
+the stored one; an id the dump does not carry keeps its name. The manifest is updated with it.
 
 A language file other than English holds two things: the names read from a client in that language, per table,
 and under "fallback" the English names of every id that has none. The fallback is generated here and by
@@ -153,7 +153,7 @@ def main():
     if dump['apiVersion']:
         entry['apiVersion'] = int(dump['apiVersion'])
     (args.root / MANIFEST).write_bytes(dumps(manifest, 2))
-    print(f'wrote {path.relative_to(args.root)} ({locale}). Run scripts/webview_stamp.py next.')
+    print(f'wrote {path.relative_to(args.root)} ({locale}) and the manifest.')
 
 
 if __name__ == '__main__':
