@@ -146,12 +146,12 @@
       "locale": "en",
       "file": "names.en.json",
       "counts": {
-        "houses": 123,
+        "houses": 124,
         "quests": 3431,
-        "achievements": 3417,
-        "zones": 1102
+        "achievements": 3913,
+        "zones": 1103
       },
-      "digest": "3e6f975b842e",
+      "digest": "eecdf2a92430",
       "translations": {
         "de": {
           "file": "names.de.json",
@@ -167,7 +167,9 @@
           "dumped": "2026-11-19",
           "apiVersion": 101051
         }
-      }
+      },
+      "dumped": "2026-11-19",
+      "apiVersion": 101051
     }
   }
 }
