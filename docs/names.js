@@ -3,6 +3,7 @@ import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { parseNamesDump, diffNames } from "./names-dump.js";
 import { labelOf } from "./data.js";
 import { titleCase } from "./lexicon.js";
+import { language } from "./prefs.js";
 
 // Past this many matches the table asks for a narrower search; a full achievement list is thousands of rows.
 const ROW_LIMIT = 500;
@@ -423,9 +424,17 @@ export function namesMask(deps) {
     renderSidebar();
     renderTable();
     referenceData.loadTranslation(locale());
+    if (language() !== followed) onShow();
   }
 
+  // The tab opens in the language chosen for the site and follows a change of it; its own select still overrides.
+  let followed = referenceData.namesLocale;
   function onShow() {
+    if (language() !== followed) {
+      followed = language();
+      setLocale(followed);
+      return;
+    }
     renderSidebar();
     renderTable();
   }

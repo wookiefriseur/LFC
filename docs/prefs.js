@@ -24,6 +24,47 @@ export function setPref(name, value) {
   try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (_) { /* kept for this visit only */ }
 }
 
+// The game's own language codes, with the name each language gives itself
+export const LANGUAGES = [
+  ["en", "English"], ["de", "Deutsch"], ["fr", "Français"], ["es", "Español"],
+  ["ru", "Русский"], ["jp", "日本語"], ["zh", "中文"],
+];
+// Browser codes that differ from the game's
+const BROWSER_TO_GAME = { ja: "jp" };
+
+/** The game language if they match the browser (default = en) */
+export function gameLanguage(browserLanguages = []) {
+  for (const tag of browserLanguages) {
+    const base = String(tag).toLowerCase().split("-")[0];
+    const code = BROWSER_TO_GAME[base] || base;
+    if (LANGUAGES.some(([game]) => game === code)) return code;
+  }
+  return "en";
+}
+
+/** The language item names are shown and searched in: the visitor's choice, else the browser's. */
+export function language() {
+  const stored = getPref("language");
+  if (LANGUAGES.some(([code]) => code === stored)) return stored;
+  return gameLanguage(typeof navigator === "undefined" ? [] : navigator.languages || [navigator.language]);
+}
+
+export function bindLanguageSelect(select, onChange) {
+  if (!select) return;
+  select.replaceChildren(...LANGUAGES.map(([code, label]) => {
+    const option = document.createElement("option");
+    option.value = code;
+    option.lang = code === "jp" ? "ja" : code;
+    option.textContent = label;
+    return option;
+  }));
+  select.value = language();
+  select.addEventListener("change", () => {
+    setPref("language", select.value);
+    onChange(select.value);
+  });
+}
+
 export function theme() {
   const stored = getPref("theme", "system");
   return THEMES.includes(stored) ? stored : "system";

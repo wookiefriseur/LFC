@@ -132,9 +132,24 @@ export class NameStore {
     this.recordNames = new Map();
     // Game names an unsent item-details change brings; they replace the file's name, as the pipeline will.
     this.refreshed = new Map();
+    // The visitor's game language, when it is not English: id -> name. EN as fallback
+    this.translated = null;
   }
   get(id) {
+    return this.translated?.get(Number(id)) || this.english(id);
+  }
+  english(id) {
     return this.recordNames.get(id) || this.gameName(id);
+  }
+  // A no-break space (RU+FR) normalised to regular space. First letter capitalised, as the game shows a name
+  // (it stores "kaiserlicher Teppich" and formats it on display).
+  setTranslation(names, locale) {
+    const tag = { jp: "ja" }[locale] || locale;
+    const shown = (name) => {
+      const first = String.fromCodePoint(name.codePointAt(0) ?? 32);
+      return (first.toLocaleUpperCase(tag) + name.slice(first.length)).replace(/\u00a0/g, " ");
+    };
+    this.translated = names ? new Map([...names].map(([id, name]) => [id, name && shown(name)])) : null;
   }
   setRecordName(id, name) {
     if (id == null) return;

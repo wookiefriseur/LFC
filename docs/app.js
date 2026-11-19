@@ -2,7 +2,7 @@ import "./responsive-tables.js";
 
 // Every mask shares one dirty buffer (state.buffer) and one Review & Submit flow (quick-edit modal is a reduced view of the same write path)
 
-import { bindThemeSelect } from "./prefs.js";
+import { bindThemeSelect, bindLanguageSelect, language } from "./prefs.js";
 import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
@@ -177,6 +177,13 @@ async function init() {
     addEventListener("pagehide", savePending);
     await restorePending();
     installTestHook();
+    bindLanguageSelect($("#language-select"), applyLanguage);
+    if (language() !== referenceData.namesLocale) applyLanguage(language());
+    // A name pasted out of the game can carry no-break spaces; every search box takes them as plain spaces.
+    document.addEventListener("input", (e) => {
+      const box = e.target;
+      if (box instanceof HTMLInputElement && box.value.includes("\u00a0")) box.value = box.value.replace(/\u00a0/g, " ");
+    }, true);
 
     // Warm the optional modules so the first "Fix this" / "Send it" does not wait on a network round trip.
     importOptional("./quick-edit.js");
@@ -1408,10 +1415,10 @@ function renderDetail() {
   if (state.editing._pairFrom) {
     host.append(elem("p", { class: "muted" }, "Saving replaces the record you started from, and any Unconfirmed record for either ID, with this one record. The replaced records are shown struck through and can be restored with Undo delete."));
     const original = state.index.get(state.editing._pairFrom);
-    const wanted = nameOf(original.id ?? original.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
+    const wanted = state.names.english(original.id ?? original.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
     const candidates = [...new Set(state.records.filter(r => original.id ? (r.blueprint && !r.id) : r.id)
       .filter(r => {
-        const name = nameOf(r.id ?? r.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
+        const name = state.names.english(r.id ?? r.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
         return wanted && name && (name === wanted || (wanted.length >= 5 && (name.includes(wanted) || wanted.includes(name))));
       }).map(r => original.id ? r.blueprint : r.id))].slice(0, 8);
     if (candidates.length) {
@@ -2714,6 +2721,21 @@ function setBatchFilters({ search = "", sourceType = "", version = "", changedOn
 
 function nameOf(id) {
   return state.names ? state.names.get(id) : "";
+}
+
+// Item names in the visitor's game language. The page is drawn in English first and redrawn when the names land,
+// so a language file never delays the first paint.
+async function applyLanguage(locale) {
+  let names = null;
+  if (locale !== referenceData.namesLocale) names = (await referenceData.loadTranslation(locale)).names.items;
+  if (locale !== language()) return; // the visitor chose another one while this loaded
+  state.names.setTranslation(names && names.size ? names : null, locale);
+  document.documentElement.dataset.nameLanguage = locale;
+  luxSearchIndex = null;
+  applyFilters();
+  renderTable();
+  renderDetail();
+  switchMask(activeMaskId(), true);
 }
 
 function elem(tag, attrs = {}, ...kids) {

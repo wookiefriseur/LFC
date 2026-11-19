@@ -10,11 +10,14 @@ export const CROWN_STORE_CATEGORY = "crown_store";
 
 // Item search shared by the Prices and Crate seasons loops: every id a record or the names file knows, matched by id digits or by name. `reset()` drops the index after the records change.
 export function itemSearch(state, nameOf, limit = 40) {
-  let index = null;
+  let index = null, indexedNames = null;
   const search = (raw) => {
     const q = String(raw).trim().toLowerCase();
     if (!q) return [];
+    // another name language is another index
+    if (indexedNames !== state.names?.translated) index = null;
     if (!index) {
+      indexedNames = state.names?.translated;
       const ids = new Set();
       for (const r of state.records) if (Number.isInteger(r.id)) ids.add(r.id);
       // Names-file ids with no record yet: an item may be brand new to the DB.

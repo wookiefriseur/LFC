@@ -3868,6 +3868,45 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   }
 });
 
+test("language: German names show and are found in Browse, and the Names tab follows", async (page) => {
+  const manifestURL = "/reference-data/manifest.json";
+  const namesURL = "/reference-data/names.de.json";
+  const manifest = JSON.parse(await fs.readFile(path.join(ROOT, "reference-data", "manifest.json"), "utf8"));
+  manifest.datasets.names.translations = { ...manifest.datasets.names.translations, de: { file: "names.de.json" } };
+  overrides.set(manifestURL, JSON.stringify(manifest));
+  // the game's own no-break space, which a typed search must still match
+  overrides.set(namesURL, JSON.stringify({
+    items: { 94097: "kaiserliches Testbett,\u00a0Koje" }, houses: {}, quests: {}, achievements: {}, zones: {},
+    fallback: { items: {}, houses: {}, quests: {}, achievements: {}, zones: {} },
+  }));
+  const isGerman = () => page.waitForFunction(() => document.documentElement.dataset.nameLanguage === "de", { timeout: 10000 });
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "browse");
+    await page.select("#language-select", "de");
+    await isGerman();
+    await page.click("#browse-search", { clickCount: 3 });
+    await page.type("#browse-search", "testbett, koje");
+    await page.waitForFunction(() => document.querySelectorAll("#panel-browse .browse-card").length === 1, { timeout: 5000 })
+      .catch(() => { throw new Error("the German search does not narrow Browse to the one item"); });
+    assertEq(await page.$eval("#panel-browse .browse-card-name", (e) => e.textContent.trim()), "Kaiserliches Testbett, Koje");
+    await switchTab(page, "names");
+    await page.waitForFunction(() => document.querySelector("#names-locale")?.value === "de", { timeout: 5000 })
+      .catch(() => { throw new Error("the Names tab does not open in the chosen language"); });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await isGerman();
+    assertEq(await page.$eval("#language-select", (el) => el.value), "de", "the language was not remembered");
+  } finally {
+    overrides.delete(manifestURL);
+    overrides.delete(namesURL);
+    await page.evaluate(() => localStorage.removeItem("furcat-prefs-v1"));
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
 test("theme: follows the system, a choice overrides it and survives a reload", async (page) => {
   const bodyBg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   const brightness = async () => (await bodyBg()).match(/\d+/g).slice(0, 3).reduce((a, b) => a + Number(b), 0);
