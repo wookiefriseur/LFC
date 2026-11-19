@@ -1122,6 +1122,35 @@ test("lists: a list moves into the list above and out again with its sublists, a
   }
 });
 
+test("lists: crafting knowledge copies out as names, the selection shown: All, Known or Unknown", async (page) => {
+  const box = () => page.$eval("#lists-text", (t) => t.value);
+  const shown = () => page.$$eval(".lists-item-name", (ns) => ns.map((n) => n.lastChild.textContent.trim()));
+  try {
+    await switchTab(page, "lists");
+    await page.$eval("#lists-transfer", (d) => { d.open = true; });
+    await page.$eval("#lists-text", (t) => { t.value = "FURC KNOWN 1/1: 132173\nFURC UNKNOWN 1/1: 118991"; t.dispatchEvent(new Event("input")); });
+    await page.click("#lists-import");
+    await page.click("#lists-knowledge .lists-index-item");
+    await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 2);
+    assertEq(await box(), "", "the game format has no knowledge export here");
+    await page.select("#lists-format", "names");
+    const all = await shown();
+    assertEq(all.length, 2);
+    assertEq(await box(), ["Crafting knowledge: All", ...all].join("\n"), "All as names");
+    await page.click('input[name="lists-knowledge-filter"][value="unknown"]');
+    await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 1);
+    assertEq(await box(), ["Crafting knowledge: Unknown", ...await shown()].join("\n"), "Unknown as names");
+    await page.click('input[name="lists-knowledge-filter"][value="known"]');
+    assertEq(await box(), ["Crafting knowledge: Known", ...await shown()].join("\n"), "Known as names");
+  } finally {
+    await page.evaluate(() => {
+      [...document.querySelectorAll("#lists-main button")].find((b) => b.textContent === "Forget")?.click();
+      [...document.querySelectorAll("#lists-main .lists-confirm button")].find((b) => b.textContent === "Forget it")?.click();
+    });
+    await page.select("#lists-format", "ids");
+  }
+});
+
 test("lists: Delete all lists asks once, removes every list and keeps the favourites and the crafting knowledge", async (page) => {
   const danger = () => page.$$eval("#lists-main .lists-head button", (bs) => {
     const b = bs.find((x) => x.textContent === "Delete all lists");
@@ -3868,7 +3897,7 @@ test("names: the tab lists the game names, a pasted dump becomes name lines, and
   }
 });
 
-test("language: German names show and are found in Browse, and the Names tab follows", async (page) => {
+test("language: German names show and are found in Browse, and a list copies out as German names", async (page) => {
   const manifestURL = "/reference-data/manifest.json";
   const namesURL = "/reference-data/names.de.json";
   const manifest = JSON.parse(await fs.readFile(path.join(ROOT, "reference-data", "manifest.json"), "utf8"));
@@ -3891,6 +3920,12 @@ test("language: German names show and are found in Browse, and the Names tab fol
     await page.waitForFunction(() => document.querySelectorAll("#panel-browse .browse-card").length === 1, { timeout: 5000 })
       .catch(() => { throw new Error("the German search does not narrow Browse to the one item"); });
     assertEq(await page.$eval("#panel-browse .browse-card-name", (e) => e.textContent.trim()), "Kaiserliches Testbett, Koje");
+    await page.click("#panel-browse .browse-card .lists-fave");
+    await switchTab(page, "lists");
+    await page.select("#lists-format", "names");
+    assertEq(await page.$eval("#lists-text", (el) => el.value), "Favorites\nKaiserliches Testbett, Koje", "the names export");
+    await page.select("#lists-format", "ids");
+    assert((await page.$eval("#lists-text", (el) => el.value)).includes("94097"), "the game export lost the id");
     await switchTab(page, "names");
     await page.waitForFunction(() => document.querySelector("#names-locale")?.value === "de", { timeout: 5000 })
       .catch(() => { throw new Error("the Names tab does not open in the chosen language"); });
@@ -3901,7 +3936,7 @@ test("language: German names show and are found in Browse, and the Names tab fol
   } finally {
     overrides.delete(manifestURL);
     overrides.delete(namesURL);
-    await page.evaluate(() => localStorage.removeItem("furcat-prefs-v1"));
+    await page.evaluate(() => { localStorage.removeItem("furcat-prefs-v1"); document.querySelector("#panel-browse .browse-card .lists-fave.is-on")?.click(); });
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
   }

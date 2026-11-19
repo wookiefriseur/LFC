@@ -1,8 +1,9 @@
-// Item names in the visitor's game language: which language, which name, and how they are searched.
+// Item names in the visitor's game language: which language, which name, and lists copied out as names.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
 import { NameStore } from "../../docs/data.js";
+import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
 
 test("the browser's language maps onto the game's codes, English when the game does not ship it", () => {
@@ -38,6 +39,12 @@ test("a name the game stores in lowercase is shown capitalised, as the game show
   assert.equal(names.get(1), "Kaiserlicher Teppich, Arkay");
   assert.equal(names.get(2), "Étagère impériale");
   assert.equal(names.get(3), "Skizze: Stuhl");
+});
+
+test("a list copies out as its name and one item name per line; an unnamed id stays an id", () => {
+  const nameOf = (id) => ({ 1: "Kaiserlicher Stuhl", 2: "Kaiserlicher Teppich" })[id] || "";
+  assert.equal(formatListNames({ name: "Küche", ids: [2, 1, 9] }, nameOf), "Küche\nKaiserlicher Teppich\nKaiserlicher Stuhl\n#9");
+  assert.equal(formatListNames({ faves: true, name: "x", ids: [1] }, nameOf), "Favorites\nKaiserlicher Stuhl");
 });
 
 test("the item search follows a change of language", () => {

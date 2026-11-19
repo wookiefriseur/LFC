@@ -275,8 +275,11 @@ export function formatList(list) {
   return chunks(list.ids).map((ids) => `${head} ${ids.join(",")}`.trimEnd()).join("\n");
 }
 
-// In display order, a parent before its sublists, so an import into an empty store restores grouping and order.
-// Empty favourites are left out: they are always there, so the line would carry nothing.
+export function formatListNames(list, nameOf) {
+  const title = list.faves ? "Favorites" : list.name;
+  return [title, ...list.ids.map((id) => nameOf(id) || `#${id}`)].join("\n");
+}
+
 export function formatLists(lists = getLists()) {
   return lists.filter((l) => !l.faves || l.ids.length).map(formatList).join("\n");
 }
@@ -475,6 +478,10 @@ export function listsMask(deps) {
               <button id="lists-import" type="button" class="btn-primary" disabled title="Import the text in the box">Import</button>
               <label class="btn-like" title="Import lists from a text file">📂 Import file ...<input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
               <span class="lists-row-gap"></span>
+              <select id="lists-format" aria-label="What the export holds" title="Ids are what the game imports. Names are used for spreadsheets, messages or trading sites.">
+                <option value="ids">For the game (ids)</option>
+                <option value="names">Item names</option>
+              </select>
               <button id="lists-copy" type="button" title="Copy the text in the box (one page of a long export) to the clipboard">📋 Copy</button>
               <button id="lists-download" type="button" title="Download the whole selection as one text file">💾 Download</button>
               <button id="lists-help-toggle" type="button" class="btn-mini" aria-expanded="false" aria-controls="lists-help" aria-label="How import and export work" title="How import and export work">?</button>
@@ -485,6 +492,7 @@ export function listsMask(deps) {
               <p>Long exports are split into pages that fit FC's Import window: copy and import them one by one. Download saves everything in one file.</p>
               <p>To import, paste text from FC and press Import.</p>
               <p>Lists of the same name are merged (nothing is removed).</p>
+              <p>"Item names" exports the names instead of ids, in the currently selected language. Not used for imports anywhere. For "Crafting knowledge" it holds the plans shown there: All, Known or Unknown.</p>
               <p>You can also import just ids (<code>115647,118303</code>), they go into the currently selected list.</p>
             </div>
           </details>
@@ -521,6 +529,7 @@ export function listsMask(deps) {
     $("#lists-copy").addEventListener("click", copyOut);
     $("#lists-page-prev").addEventListener("click", () => showPage(page - 1));
     $("#lists-page-next").addEventListener("click", () => showPage(page + 1));
+    $("#lists-format").addEventListener("change", () => { page = 0; fillBox(true); });
     $("#lists-download").addEventListener("click", () => {
       const out = exportText();
       if (out) download(current === ALL ? "furnishing-lists.txt" : fileName(current.name), out);
@@ -544,13 +553,24 @@ export function listsMask(deps) {
 
   // The box is the export of the selection until the visitor types or pastes into it; then it is theirs until imported or another row is chosen.
   let edited = false;
-  const exportText = () => (current === ALL ? formatLists() : current === KNOWLEDGE ? "" : formatList(current));
+  const asNames = () => $("#lists-format")?.value === "names";
+  const exportText = () => {
+    // the game's own knowledge export comes from the add-on; as names, the shown selection (All, Known, Unknown) goes out
+    if (current === KNOWLEDGE) {
+      const ids = asNames() ? knowledgeIds() : [];
+      return ids.length ? formatListNames({ name: `${KNOWLEDGE.name}: ${KNOWLEDGE_CHOICES[knowledgeFilter]}`, ids }, nameOf) : "";
+    }
+    if (!asNames()) return current === ALL ? formatLists() : formatList(current);
+    const lists = current === ALL ? getLists().filter((l) => !l.faves || l.ids.length) : [current];
+    return lists.map((l) => formatListNames(l, nameOf)).join("\n\n");
+  };
   function syncImport() { $("#lists-import").disabled = !edited || !$("#lists-text").value.trim(); }
   let pages = [""];
   let page = 0;
   function fillBox(force = false) {
     if (edited && !force) return;
-    pages = paginate(exportText());
+    // pages are the game's import box; names go elsewhere, in one piece
+    pages = asNames() ? [exportText()] : paginate(exportText());
     showPage(page);
   }
   // Also takes the box back from whatever was typed into it.
@@ -632,6 +652,13 @@ export function listsMask(deps) {
   }
 
   let knowledgeFilter = "all";
+  // The ids the knowledge view shows: the chosen selection, by name
+  function knowledgeIds() {
+    const k = getKnowledge();
+    const all = [...new Set([...(k.known?.ids || []), ...k.learned, ...(k.unknown?.ids || [])])];
+    return all.map((id) => [id, nameOf(id) || ""]).sort((a, b) => a[1].localeCompare(b[1]) || a[0] - b[0])
+      .map(([id]) => id).filter((id) => knowledgeFilter === "all" || knowledgeOf(id) === knowledgeFilter);
+  }
   // A heading with a danger button that asks once, inline, before `act`.
   function headWithDanger(host, heading, { label, title, question, yes, done, disabled, act }) {
     const btn = elem("button", { type: "button", class: "btn-mini btn-danger", title }, label);
@@ -654,23 +681,20 @@ export function listsMask(deps) {
       disabled: !k.known && !k.unknown && !k.learned.length, act: forgetKnowledge,
     });
     host.append(elem("p", {}, "Paste your whole knowledge export from FurnitureCatalogue into the import box above."));
-    const all = [...new Set([...(k.known?.ids || []), ...k.learned, ...(k.unknown?.ids || [])])];
-    if (!all.length) { host.append(elem("p", { class: "muted" }, KNOWLEDGE_SOURCE)); return; }
+    if (!k.known?.ids.length && !k.learned.length && !k.unknown?.ids.length) { host.append(elem("p", { class: "muted" }, KNOWLEDGE_SOURCE)); return; }
 
-    const choices = { all: "All", known: "Known", unknown: "Unknown" };
     const pick = elem("div", { class: "lists-switch", role: "radiogroup", "aria-label": "Show" },
-      Object.entries(choices).map(([value, label]) => {
+      Object.entries(KNOWLEDGE_CHOICES).map(([value, label]) => {
         const radio = elem("input", { type: "radio", name: "lists-knowledge-filter", value });
         radio.checked = value === knowledgeFilter;
-        radio.addEventListener("change", () => { knowledgeFilter = value; drawItems(); });
+        radio.addEventListener("change", () => { knowledgeFilter = value; drawItems(); fillBox(); });
         return elem("label", {}, radio, ` ${label}`);
       }));
     const count = elem("p", { class: "muted lists-count" });
     const items = elem("ul", { class: "lists-items" });
     host.append(pick, count, items);
-    const byName = all.map((id) => [id, nameOf(id) || ""]).sort((a, b) => a[1].localeCompare(b[1]) || a[0] - b[0]).map(([id]) => id);
     function drawItems() {
-      const ids = knowledgeFilter === "all" ? byName : byName.filter((id) => knowledgeOf(id) === knowledgeFilter);
+      const ids = knowledgeIds();
       count.textContent = `${ids.length} item${ids.length === 1 ? "" : "s"}`;
       items.replaceChildren();
       drawRows(items, ids, (id) => itemRow(id, null));
@@ -927,6 +951,7 @@ export function listsMask(deps) {
 // The row above the lists: selects every list for import and export, and holds no items itself.
 const ALL = { name: "All lists", ids: [] };
 const KNOWLEDGE = { name: "Crafting knowledge", ids: [] };
+const KNOWLEDGE_CHOICES = { all: "All", known: "Known", unknown: "Unknown" };
 const KNOWLEDGE_SOURCE = "Export it in FurnitureCatalogue (/furcexport or the list manager) and import it here.";
 function defaultList() { return lastList() || namedLists()[0] || favourites(); }
 function listLabel(list) { return list.faves ? `\u2605 ${FAVES_NAME}` : leafOf(list); }
