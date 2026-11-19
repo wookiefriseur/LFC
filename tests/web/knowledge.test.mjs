@@ -84,11 +84,13 @@ test("craftables only: a recipe blueprint marks its furnishing; rumours, other i
   const records = [
     { id: 100, blueprint: 200, source: { type: "recipe" } }, { id: 101, source: { type: "recipe" } },
     { id: 102, blueprint: 202, source: { type: "rumour" } }, { id: 103, source: { type: "rumour" } }, { id: 104, source: { type: "vendor" } },
+    // A blueprint that is sold or comes in a folio has no recipe record of its own.
+    { id: 105, blueprint: 205, source: { type: "writ_vendor" } }, { id: 106, blueprint: 206, source: { type: "container", part_of: 300 } },
   ];
-  const r = importLists("FURC KNOWN 1/2: 200,101,102,202,103,104,999", catalogueResolver(records), null, recipeResolver(records));
-  assert.deepEqual([ids("known"), r.knowledge.notCraftable], [[100, 101], 5]);
+  const r = importLists("FURC KNOWN 1/2: 200,101,102,202,103,104,999,105,206", catalogueResolver(records), null, recipeResolver(records));
+  assert.deepEqual([ids("known"), r.knowledge.notCraftable], [[100, 101, 105, 106], 5]);
   assert.deepEqual([102, 202, 103, 104].map(knowledgeOf), [null, null, null, null]);
-  assert.deepEqual(reportText(r), { text: "Crafting knowledge: 2 known, page 1 of 2 (page 2 missing), 5 not craftable skipped", warn: true });
+  assert.deepEqual(reportText(r), { text: "Crafting knowledge: 4 known, page 1 of 2 (page 2 missing), 5 not craftable skipped", warn: true });
   listsUntouched();
 });
 

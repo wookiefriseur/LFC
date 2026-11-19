@@ -82,11 +82,11 @@ export function knowledgeLine(line) {
   return { kind: head[1].toLowerCase(), page, pages, ids: m[3] };
 }
 
-// The game keeps knowledge for craftables only: a recipe record's furnishing answers for itself and for its blueprint; anything else (rumours too) is null.
+// The game keeps knowledge for craftables only: the furnishing of a recipe record, or of any record with a blueprint, answers for itself and for its blueprint, whatever the source (the blueprint may be sold or come in a folio); rumours and anything else are null.
 export function recipeResolver(records) {
   const to = new Map();
   for (const r of records) {
-    if (r.source?.type !== "recipe") continue;
+    if (r.source?.type === "rumour" || !(r.source?.type === "recipe" || Number.isInteger(r.blueprint))) continue;
     const id = r.id ?? r.blueprint;
     for (const k of [r.id, r.blueprint]) if (Number.isInteger(k)) to.set(k, id);
   }
