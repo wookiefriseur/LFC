@@ -176,12 +176,13 @@ export function browseMask(deps) {
     if (!cat || !gameGroups) return;
     const byName = (kind) => (a, b) => groupName(kind, a).localeCompare(groupName(kind, b));
     const option = (value, label) => elem("option", { value }, label);
-    cat.replaceChildren(option("", "Any category"), ...[...gameGroups.categories.keys()].sort(byName("categories")).map((c) => {
-      const group = elem("optgroup", { label: groupName("categories", c) });
-      group.append(option(`c:${c}`, `${groupName("categories", c)} (all)`),
-        ...[...gameGroups.categories.get(c)].sort(byName("categories")).map((s) => option(`s:${s}`, groupName("categories", s))));
-      return group;
-    }));
+    // A category is its own "all of it" choice. An <optgroup> label cannot be chosen, so the heading is an option,
+    // set off in bold, and its subcategories are indented below it. The values carry the ids, never a position.
+    cat.replaceChildren(option("", "Any category"), ...[...gameGroups.categories.keys()].sort(byName("categories")).flatMap((c) => [
+      elem("option", { value: `c:${c}`, class: "browse-category-head" }, groupName("categories", c)),
+      ...[...gameGroups.categories.get(c)].sort(byName("categories"))
+        .map((s) => option(`s:${s}`, `\u00a0└\u00a0${groupName("categories", s)}`)),
+    ]));
     style.replaceChildren(option("", "Any style"),
       ...[...gameGroups.styles].sort(byName("themes")).map((t) => option(String(t), groupName("themes", t))));
     skill.replaceChildren(option("", "Any crafting skill"),

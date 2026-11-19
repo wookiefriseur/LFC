@@ -3945,7 +3945,7 @@ test("language: German names show and are found in Browse, and a list copies out
 test("browse: the game's category, subcategory and style narrow the grid, and only groups with items are offered", async (page) => {
   const count = () => page.$eval("#browse-count", (e) => Number(e.textContent.replace(/,/g, "").match(/\d+/)[0]));
   const pick = async (selector, label) => {
-    const value = await page.$eval(selector, (el, want) => [...el.options].find((o) => o.textContent === want)?.value, label);
+    const value = await page.$eval(selector, (el, want) => [...el.options].find((o) => o.textContent.replace(/^[\s└]+/, "") === want)?.value, label);
     assert(value, `${selector} offers no "${label}"`);
     const before = await page.$eval("#browse-count", (e) => e.textContent);
     await page.select(selector, value);
@@ -3955,10 +3955,10 @@ test("browse: the game's category, subcategory and style narrow the grid, and on
     await switchTab(page, "browse");
     await page.waitForFunction(() => document.querySelector("#browse-category")?.options.length > 1, { timeout: 20000 });
     const all = await count();
-    const groups = await page.$$eval("#browse-category optgroup", (gs) => gs.map((g) => g.label));
+    const groups = await page.$$eval("#browse-category option.browse-category-head", (os) => os.map((o) => o.textContent));
     assert(groups.includes("Suite") && groups.includes("Lighting"), `categories offered: ${groups}`);
     assert(!groups.includes("Mounts") && !groups.includes("Horses"), "a category without furnishings is offered");
-    await pick("#browse-category", "Suite (all)");
+    await pick("#browse-category", "Suite");
     const suite = await count();
     assert(suite > 0 && suite < all, `Suite holds ${suite} of ${all}`);
     await pick("#browse-category", "Bedding");

@@ -188,6 +188,7 @@ header h1 small { display: block; color: var(--muted); font-size: .7rem; font-we
   border-bottom: 1px solid var(--border);
   justify-content: flex-end;
 }
+.browse-category-head { font-weight: 700; }
 .adv-controls input:not([type="checkbox"]), .adv-controls select, .browse-toolbar select {
   padding: 0.35rem 0.5rem;
   border: 1px solid var(--border);
