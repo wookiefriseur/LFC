@@ -194,6 +194,20 @@
           "digest": "806d07f0d4f2",
           "dumped": "2026-11-19",
           "apiVersion": 101051
+        },
+        "ru": {
+          "file": "names.ru.json",
+          "fallback": 72,
+          "counts": {
+            "items": 12369,
+            "houses": 124,
+            "quests": 3431,
+            "achievements": 3913,
+            "zones": 1103
+          },
+          "digest": "752247092be8",
+          "dumped": "2026-11-19",
+          "apiVersion": 101051
         }
       },
       "dumped": "2026-11-19",
