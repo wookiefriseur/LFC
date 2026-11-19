@@ -123,7 +123,10 @@ def main():
     def obj(name):
         return json.loads((args.root / name).read_text(encoding='utf-8'))
 
-    dump = parse(args.dump.read_text(encoding='utf-8'))
+    try:
+        dump = parse(args.dump.read_text(encoding='utf-8'))
+    except UnicodeDecodeError as e:
+        sys.exit(f'the dump is not valid UTF-8 ({e}) - dumped with an old FurCDev? Nothing was written.')
     locale = dump['locale']
     if locale not in GAME_LOCALES:
         sys.exit(f'the dump names no game language (locale: {locale})')
