@@ -222,6 +222,20 @@
           "digest": "672561232285",
           "dumped": "2026-11-19",
           "apiVersion": 101051
+        },
+        "zh": {
+          "file": "names.zh.json",
+          "fallback": 72,
+          "counts": {
+            "items": 12369,
+            "houses": 124,
+            "quests": 3431,
+            "achievements": 3913,
+            "zones": 1103
+          },
+          "digest": "56f6aa1bb02b",
+          "dumped": "2026-11-19",
+          "apiVersion": 101051
         }
       },
       "dumped": "2026-11-19",
