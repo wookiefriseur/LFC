@@ -58,9 +58,9 @@ class GeneratedDatabaseTests(unittest.TestCase):
                                 text=True, capture_output=True, timeout=30, check=False)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
-    def test_web_strings_keep_only_what_a_translation_changes(self):
+    def test_web_strings_hold_what_each_locale_file_defines(self):
         english = 'local strings = {\n  SI_FURC_A = "one^n,from", -- remark\n  SI_FURC_B = "two \\"x\\"",\n}\n'
-        german = 'local strings = {\n  SI_FURC_A = "eins^m,von",\n  SI_FURC_B = "two \\"x\\"",\n}\n'
+        german = 'local strings = {\n  SI_FURC_A = "eins^m,von",\n}\n'
         self.assertEqual(json.loads(render_strings({'en': english, 'de': german})),
                          {'en': {'SI_FURC_A': 'one^n,from', 'SI_FURC_B': 'two "x"'}, 'de': {'SI_FURC_A': 'eins^m,von'}})
         with self.assertRaisesRegex(ValueError, 'SI_FURC_C'):

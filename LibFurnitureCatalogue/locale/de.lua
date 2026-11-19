@@ -1,4 +1,5 @@
 -- Auto-synced from locale/en.lua by luaDoc_generateStr.py
+-- (translated strings only, copy missing ones from en.lua)
 -- Edit values between START/END markers
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
@@ -109,49 +110,6 @@ local strings = {
   SI_FURC_TRADERS_HGF = "Hausaustatter^n,von",
   SI_FURC_TRADERS_HOLIDAY = "Festtagsausstatter^n,von",
   SI_FURC_TRADERS_LUXF = "Luxusausstatter^n,von",
-  -- 42 ENTRIES UNTRANSLATED/IDENTICAL
-  SI_FURC_ESO_PLUS = "ESO+",
-  SI_FURC_GRAMMAR_PREP_LOC_DEFAULT = "in",
-  SI_FURC_GUILD_PSIJIC_NALIRSEWEN = "Nalirsewen",
-  SI_FURC_HOUSE_MORE = "<<1>> and <<2>> more",
-  SI_FURC_ITEMPACK_BITTERMERCY = "Spear of Bitter Mercy Style",
-  SI_FURC_ITEMPACK_CHRYSAMERE = "Chrysamere Style",
-  SI_FURC_ITEMPACK_DAWNBREAKER = "Dawnbreaker Style",
-  SI_FURC_ITEMPACK_DWEMER = "Dwemer",
-  SI_FURC_ITEMPACK_EBONY = "Ebony Blade Style",
-  SI_FURC_ITEMPACK_FEARSTRUCK = "Fearstruck Style",
-  SI_FURC_ITEMPACK_FIRSTBLADE = "Firstblade Style",
-  SI_FURC_ITEMPACK_JYGGALAG = "Sword of Jyggalag Style",
-  SI_FURC_ITEMPACK_RAZOR = "Mehrunes' Razor",
-  SI_FURC_ITEMPACK_STABLE = "Steadfast Stablemaster Bundle",
-  SI_FURC_LOC_GRAHTWOOD_REDFUR = "Redfur Trading Post",
-  SI_FURC_LOC_LILANDRIL = "Lilandril",
-  SI_FURC_LOC_MURKMIRE_LIL = "Lilmoth",
-  SI_FURC_LOC_SUMMERSET_ALINOR = "Alinor",
-  SI_FURC_LOC_VVARDENFELL_ALDRUHN = "Ald'ruhn",
-  SI_FURC_LOC_VVARDENFELL_SURAN = "Suran",
-  SI_FURC_NPC_ECHATERE = "Echatere^n",
-  SI_FURC_SRC_CABINET = "cabinets^P,from",
-  SI_FURC_SRC_COLLECTIBLE = "Collectible",
-  SI_FURC_SRC_EDITOR_TAG = "<<1>> (<<2>>)",
-  SI_FURC_SRC_HARROWSTORMS = "Harrowstorms",
-  SI_FURC_SRC_IGNORED = "FurnitureCatalogue does not track this item on purpose",
-  SI_FURC_SRC_LEADS = "several leads",
-  SI_FURC_SRC_MOBS_CHAURUS = "chaurus mobs",
-  SI_FURC_SRC_MOBS_PUBLIC = "mobs in public dungeons and delves",
-  SI_FURC_SRC_MOBS_SHROOM_BEETLES = "shroom beetles",
-  SI_FURC_SRC_PLAYER_GUILD = "player guild^n,from",
-  SI_FURC_SRC_STONEHUSK = "combining Stone Husk Fragments from the Labyrinthian",
-  SI_FURC_SRC_VAULT_CHESTS = "vault chests",
-  SI_FURC_SRC_WARDROBE = "wardrobes^P,from",
-  SI_FURC_TOMESPACK_ARMOR = "Armor Principles",
-  SI_FURC_TOMESPACK_DAWN = "Dawn and Dusk",
-  SI_FURC_TOMESPACK_LOGIC = "Study of Wisdom and Logic",
-  SI_FURC_TOMESPACK_UNDERCROFT = "Undercroft Bundle",
-  SI_FURC_TRADERS_COLL_MERCH = "Collectibles Merchant",
-  SI_FURC_TRADERS_FAUSTINA = "Faustina Curio",
-  SI_FURC_TRADERS_NM = "Night Market Vendors^n,from",
-  SI_FURC_TRADERS_ROLIS = "Rolis Hlaalu",
   -- ////// END   : DON'T REMOVE THIS LINE
 }
 

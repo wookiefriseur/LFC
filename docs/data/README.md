@@ -4,7 +4,7 @@ Initially generated from the LibFurnitureCatalogue Lua data files but will now b
 
 ## Strings
 
-`strings.json` is generated from `LibFurnitureCatalogue/locale/*.lua`. Labels carry an `si` string id and have a `source.note` (localised). See CONTRIBUTING, section on generation.
+`strings.json` is generated from `LibFurnitureCatalogue/locale/*.lua`. It holds text for `si` strings and for `source.note` (where localised). See CONTRIBUTING, section on generation.
 
 ## Names
 

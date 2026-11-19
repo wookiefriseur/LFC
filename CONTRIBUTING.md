@@ -104,7 +104,7 @@ Every generation validates the data and verifies the generated Lua by decoding i
 
 Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.json` inside the `WEBINTERFACE STRINGS` comment markers in `locale/en.lua`.
 
-Both also write `docs/data/strings.json`, the web interface's copy of `locale/*.lua`: `{language: {string id: text}}`. The locale files are the only place a string is edited. A translation holds only the strings whose text differs from English (English as fallback). Item, zone, quest, achievement and house names are not in it: those are dumped from the game, through the names files.
+Both also write `docs/data/strings.json`, the web interface's copy of `locale/*.lua`: `{language: {string id: text}}`. The locale files are the only place a string is edited. A translation file holds only the strings somebody translated, one whose text equals English included; a string it lacks is untranslated and shows the English text. A string that was deleted from en.lua will disappear from the translation as well. Item, zone, quest, achievement and house names are not in it: those are dumped from the game, through the names files.
 
 ## Release
 

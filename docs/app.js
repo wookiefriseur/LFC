@@ -2723,7 +2723,7 @@ function nameOf(id) {
   return state.names ? state.names.get(id) : "";
 }
 
-// The library's strings in every language it ships (labels stay English)
+// The library's strings in every language it ships (labels stay English when missing)
 let stringsLoad = null;
 function loadStrings() {
   stringsLoad ||= fetch("./data/strings.json", { cache: "no-cache" })

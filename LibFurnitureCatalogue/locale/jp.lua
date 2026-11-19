@@ -1,4 +1,5 @@
 -- Auto-synced from locale/en.lua by luaDoc_generateStr.py
+-- (translated strings only, copy missing ones from en.lua)
 -- Edit values between START/END markers
 local strings = {
   -- ////// START : DON'T REMOVE THIS LINE
@@ -110,48 +111,6 @@ local strings = {
   SI_FURC_TRADERS_HOLIDAY = "ホリデーの実績家具商人^n,from",
   SI_FURC_TRADERS_LUXF = "高級家具商人^Nd,from",
   SI_FURC_TRADERS_ROLIS = "ロリス・フラール",
-  -- 41 ENTRIES UNTRANSLATED/IDENTICAL
-  SI_FURC_CHAT_BAD_ITEM = "<<1>> is not an item link or an item id",
-  SI_FURC_CHAT_BUILDING = "The database is still being built, please try again in a moment.",
-  SI_FURC_CHAT_MATS = "Mats:",
-  SI_FURC_CHAT_NO_MATS = "Not craftable.",
-  SI_FURC_CHAT_NO_SOURCE = "No known source.",
-  SI_FURC_CHAT_UNKNOWN = "<<1>> is not in the database",
-  SI_FURC_CHAT_USAGE = "Commands:",
-  SI_FURC_ESO_PLUS = "ESO+",
-  SI_FURC_EVENT_ORSINIUM = "Orsinium Celebration 2019",
-  SI_FURC_HOUSE = "Included in: <<1>>",
-  SI_FURC_HOUSE_MORE = "<<1>> and <<2>> more",
-  SI_FURC_ITEMPACK_BITTERMERCY = "Spear of Bitter Mercy Style",
-  SI_FURC_ITEMPACK_CHRYSAMERE = "Chrysamere Style",
-  SI_FURC_ITEMPACK_DAWNBREAKER = "Dawnbreaker Style",
-  SI_FURC_ITEMPACK_EBONY = "Ebony Blade Style",
-  SI_FURC_ITEMPACK_FEARSTRUCK = "Fearstruck Style",
-  SI_FURC_ITEMPACK_FIRSTBLADE = "Firstblade Style",
-  SI_FURC_ITEMPACK_JYGGALAG = "Sword of Jyggalag Style",
-  SI_FURC_ITEMPACK_RAZOR = "Mehrunes' Razor",
-  SI_FURC_ITEMPACK_STABLE = "Steadfast Stablemaster Bundle",
-  SI_FURC_LOC_GRAHTWOOD_REDFUR = "Redfur Trading Post",
-  SI_FURC_NPC_ECHATERE = "Echatere^n",
-  SI_FURC_SRC_CABINET = "cabinets^P,from",
-  SI_FURC_SRC_COLLECTIBLE = "Collectible",
-  SI_FURC_SRC_EDITOR_TAG = "<<1>> (<<2>>)",
-  SI_FURC_SRC_HARROWSTORMS = "Harrowstorms",
-  SI_FURC_SRC_IGNORED = "FurnitureCatalogue does not track this item on purpose",
-  SI_FURC_SRC_LEADS = "several leads",
-  SI_FURC_SRC_MOBS_CHAURUS = "chaurus mobs",
-  SI_FURC_SRC_MOBS_PUBLIC = "mobs in public dungeons and delves",
-  SI_FURC_SRC_MOBS_SHROOM_BEETLES = "shroom beetles",
-  SI_FURC_SRC_PLAYER_GUILD = "player guild^n,from",
-  SI_FURC_SRC_STONEHUSK = "combining Stone Husk Fragments from the Labyrinthian",
-  SI_FURC_SRC_VAULT_CHESTS = "vault chests",
-  SI_FURC_SRC_WARDROBE = "wardrobes^P,from",
-  SI_FURC_TOMESPACK_ARMOR = "Armor Principles",
-  SI_FURC_TOMESPACK_DAWN = "Dawn and Dusk",
-  SI_FURC_TOMESPACK_LOGIC = "Study of Wisdom and Logic",
-  SI_FURC_TOMESPACK_UNDERCROFT = "Undercroft Bundle",
-  SI_FURC_TRADERS_COLL_MERCH = "Collectibles Merchant",
-  SI_FURC_TRADERS_NM = "Night Market Vendors^n,from",
   -- ////// END   : DON'T REMOVE THIS LINE
 }
 

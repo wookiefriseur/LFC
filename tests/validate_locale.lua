@@ -2,7 +2,7 @@
 --   * every SI_FURC_ string id a shipped file reads is declared in locale/en.lua,
 --     so a renamed constant fails here instead of rendering as a blank in a tooltip
 --   * every string en.lua declares is read by a shipped file
---   * a translation declares exactly the keys the master declares
+--   * a translation declares only keys the master declares; one it lacks is untranslated and counted
 -- Called by run_static.sh
 
 local here = ((arg and arg[0]) or ""):match("^(.*[/\\])") or ""
