@@ -16,7 +16,7 @@ const SUPPORTED_FORMATS = {
   names: "furniture-names-v1",
 };
 
-export const NAME_KINDS = ["items", "houses", "quests", "achievements", "zones"];
+export const NAME_KINDS = ["items", "houses", "quests", "achievements", "zones", "categories", "themes", "skills"];
 // The game's own language codes (its Language.2 setting). A browser's codes differ (ja, zh-Hans) and are mapped onto these where a visitor's language is read.
 export const GAME_LOCALES = ["en", "de", "fr", "es", "ru", "jp", "zh"];
 
@@ -196,6 +196,25 @@ export class ReferenceData {
     })();
     this._translationInflight.set(locale, p);
     return p;
+  }
+
+  // Map<furnishing id, crafting skill id>, empty while no dump has brought it. Never rejects.
+  async loadCrafts() {
+    await this.init();
+    if (this.crafts) return this.crafts;
+    const dataset = this.manifest?.datasets?.crafts;
+    this.crafts = new Map();
+    try {
+      if (dataset?.file) {
+        const r = await fetch(`./reference-data/${dataset.file}${dataset.digest ? `?v=${encodeURIComponent(dataset.digest)}` : ""}`,
+          { cache: dataset.digest ? "default" : "no-cache" });
+        if (!r.ok) throw new Error(`${dataset.file} ${r.status}`);
+        for (const [id, skill] of Object.entries(JSON.parse(await r.text()))) this.crafts.set(Number(id), skill);
+      }
+    } catch (e) {
+      console.info(`reference-data crafts unavailable (${e.message})`);
+    }
+    return this.crafts;
   }
 
   // Null until that language is loaded.

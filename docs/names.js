@@ -13,6 +13,7 @@ const ISSUE_LIMIT = 2000;
 
 const KIND_LABELS = {
   items: "Items", houses: "Houses", quests: "Quests", achievements: "Achievements", zones: "Zones",
+  categories: "Furnishing categories", themes: "Furnishing styles", skills: "Crafting skills",
 };
 
 // The vocabularies worth reading as a name list: object entries with a symbol, or flat string lists.

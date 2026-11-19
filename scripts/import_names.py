@@ -21,11 +21,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 # The game's own codes, as the Language.2 setting reports them
 GAME_LOCALES = ('en', 'de', 'fr', 'es', 'ru', 'jp', 'zh')
-KINDS = ('items', 'houses', 'quests', 'achievements', 'zones')
+KINDS = ('items', 'houses', 'quests', 'achievements', 'zones', 'categories', 'themes', 'skills')
+# Not names, but in the same dump: [furnishing id] = id of the crafting skill that makes it. The same in every language.
+CRAFTS = 'docs/reference-data/crafts.json'
 ITEMS = 'docs/data/names.en.json'
 MANIFEST = 'docs/reference-data/manifest.json'
 
-KIND_RE = re.compile(r'^\s*(?:\["(%s)"\]|(%s))\s*=' % ('|'.join(KINDS), '|'.join(KINDS)))
+TABLES = KINDS + ('crafts',)
+KIND_RE = re.compile(r'^\s*(?:\["(%s)"\]|(%s))\s*=' % ('|'.join(TABLES), '|'.join(TABLES)))
+CRAFT_RE = re.compile(r'^\s*\[(\d+)\]\s*=\s*(\d+)\s*,?\s*$')
 ENTRY_RE = re.compile(r'^\s*\[(\d+)\]\s*=\s*"(.*)"\s*,?\s*$')
 FIELD_RE = re.compile(r'^\s*\["(locale|apiVersion)"\]\s*=\s*"?([a-z0-9]+)"?')
 ESCAPES = {'n': '\n', 't': '\t', 'r': '\r', '\\': '\\', '"': '"', "'": "'", '\n': '\n'}
@@ -61,7 +65,7 @@ def unescape(body):
 
 def parse(text):
     """-> {'locale', 'apiVersion', 'kinds': {kind: {id: name}}}"""
-    dump = {'locale': None, 'apiVersion': None, 'kinds': {}}
+    dump = {'locale': None, 'apiVersion': None, 'kinds': {}, 'crafts': {}}
     kind = None
     for line in text.splitlines():
         m = KIND_RE.match(line)
@@ -72,8 +76,12 @@ def parse(text):
         if m:
             dump[m.group(1)] = dump[m.group(1)] or m.group(2)
             continue
+        m = CRAFT_RE.match(line)
+        if m and kind == 'crafts':
+            dump['crafts'][m.group(1)] = int(m.group(2))
+            continue
         m = ENTRY_RE.match(line)
-        if m and kind:
+        if m and kind and kind != 'crafts':
             name = unescape(m.group(2)).strip()
             if name:
                 dump['kinds'].setdefault(kind, {})[m.group(1)] = name
@@ -106,6 +114,16 @@ def manifest_entry(dataset, locale, names, data):
     entry['counts'] = {k: len(v) for k, v in names.items() if k != 'fallback'}
     entry['digest'] = hashlib.sha256(data).hexdigest()[:12]
     return entry
+
+
+def refresh_fallbacks(root, manifest, en):
+    """New English names move the fallback of every other language file."""
+    for other in manifest['datasets']['names'].get('translations', {}):
+        path = root / names_file(other)
+        names = with_fallback(json.loads(path.read_text(encoding='utf-8')), en)
+        data = dumps(names, 0)
+        path.write_bytes(data)
+        manifest_entry(manifest['datasets']['names'], other, names, data)
 
 
 def dumps(value, indent):
@@ -152,9 +170,19 @@ def main():
 
     manifest = obj(MANIFEST)
     entry = manifest_entry(manifest['datasets']['names'], locale, names, data)
+    if locale == 'en':
+        refresh_fallbacks(args.root, manifest, english(obj))
     entry['dumped'] = args.date
     if dump['apiVersion']:
         entry['apiVersion'] = int(dump['apiVersion'])
+    if dump['crafts']:
+        data = dumps(by_id(dump['crafts']), 0)
+        (args.root / CRAFTS).write_bytes(data)
+        manifest['datasets']['crafts'] = {
+            'description': 'The crafting skill that makes a furnishing, {furnishing id: skill id}. Skill names are the `skills` table of the names files.',
+            'file': CRAFTS.rsplit('/', 1)[-1], 'count': len(dump['crafts']),
+            'digest': hashlib.sha256(data).hexdigest()[:12]}
+        print(f'{"crafts":13} {len(dump["crafts"]):6} furnishings with their crafting skill')
     (args.root / MANIFEST).write_bytes(dumps(manifest, 2))
     print(f'wrote {path.relative_to(args.root)} ({locale}) and the manifest.')
 

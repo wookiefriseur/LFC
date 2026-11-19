@@ -3942,6 +3942,69 @@ test("language: German names show and are found in Browse, and a list copies out
   }
 });
 
+test("browse: the game's category, subcategory and style narrow the grid, and only groups with items are offered", async (page) => {
+  const count = () => page.$eval("#browse-count", (e) => Number(e.textContent.replace(/,/g, "").match(/\d+/)[0]));
+  const pick = async (selector, label) => {
+    const value = await page.$eval(selector, (el, want) => [...el.options].find((o) => o.textContent === want)?.value, label);
+    assert(value, `${selector} offers no "${label}"`);
+    const before = await page.$eval("#browse-count", (e) => e.textContent);
+    await page.select(selector, value);
+    await page.waitForFunction((b) => document.querySelector("#browse-count").textContent !== b, { timeout: 5000 }, before);
+  };
+  try {
+    await switchTab(page, "browse");
+    await page.waitForFunction(() => document.querySelector("#browse-category")?.options.length > 1, { timeout: 20000 });
+    const all = await count();
+    const groups = await page.$$eval("#browse-category optgroup", (gs) => gs.map((g) => g.label));
+    assert(groups.includes("Suite") && groups.includes("Lighting"), `categories offered: ${groups}`);
+    assert(!groups.includes("Mounts") && !groups.includes("Horses"), "a category without furnishings is offered");
+    await pick("#browse-category", "Suite (all)");
+    const suite = await count();
+    assert(suite > 0 && suite < all, `Suite holds ${suite} of ${all}`);
+    await pick("#browse-category", "Bedding");
+    const bedding = await count();
+    assert(bedding > 0 && bedding < suite, `Bedding holds ${bedding} of Suite's ${suite}`);
+    await pick("#browse-style", "High Elf");
+    const elven = await count();
+    assert(elven > 0 && elven < bedding, `High Elf bedding: ${elven} of ${bedding}`);
+    assert(!await page.$$eval("#browse-style option", (os) => os.some((o) => o.textContent === "All Themes")), "the game's catch-all is offered as a style");
+  } finally {
+    await page.select("#browse-category", "");
+    await page.select("#browse-style", "");
+  }
+});
+
+test("browse: a crafting skill filter appears once the reference data says which skill makes what", async (page) => {
+  const manifestURL = "/reference-data/manifest.json";
+  const manifest = JSON.parse(await fs.readFile(path.join(ROOT, "reference-data", "manifest.json"), "utf8"));
+  try {
+    delete manifest.datasets.crafts;
+    overrides.set(manifestURL, JSON.stringify(manifest));
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "browse");
+    await page.waitForFunction(() => document.querySelector("#browse-category")?.options.length > 1, { timeout: 20000 });
+    assert(await page.$eval("#browse-skill", (el) => el.hidden), "the skill filter shows without data");
+
+    manifest.datasets.crafts = { file: "crafts.json" };
+    overrides.set(manifestURL, JSON.stringify(manifest));
+    overrides.set("/reference-data/crafts.json", JSON.stringify({ 114327: 6, 114328: 6, 130326: 2 }));
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await switchTab(page, "browse");
+    await page.waitForFunction(() => document.querySelector("#browse-skill")?.options.length === 3, { timeout: 20000 });
+    assertEq(await page.$eval("#browse-skill", (el) => el.hidden), false, "the skill filter stays hidden");
+    await page.select("#browse-skill", "6");
+    await page.waitForFunction(() => document.querySelectorAll("#panel-browse .browse-card").length === 2, { timeout: 5000 })
+      .catch(() => { throw new Error("skill 6 does not narrow Browse to its two furnishings"); });
+  } finally {
+    overrides.delete(manifestURL);
+    overrides.delete("/reference-data/crafts.json");
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
 test("theme: follows the system, a choice overrides it and survives a reload", async (page) => {
   const bodyBg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   const brightness = async () => (await bodyBg()).match(/\d+/g).slice(0, 3).reduce((a, b) => a + Number(b), 0);

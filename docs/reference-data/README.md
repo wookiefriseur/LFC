@@ -14,7 +14,7 @@ reference-data/
 │   └── meta-*.jsonl                  ← furniture-meta shards (real data, carries `icon`)
 ├── recipes.json                      ← blueprint id -> furnishing (real data)
 ├── categories.en.json                ← category taxonomy (real data, en)
-├── names.en.json                     ← game names: houses, quests, achievements, zones (real data, en)
+├── names.en.json                     ← game names: houses, quests, achievements, zones, furnishing categories, themes and crafting skills (real data, en)
 └── names.<locale>.json               ← the same plus items, one file per other game language (de, fr, es, ru, jp, zh)
 ```
 

@@ -144,7 +144,7 @@ try {
       }
       if (id === 'browse') {
         await page.waitForSelector('.browse-card');
-        if (await page.$eval('#browse-filters summary', e => e.textContent.trim()) !== 'Category filter') errors.push('Browse does not label the category filter');
+        if (await page.$eval('#browse-filters summary', e => e.textContent.trim()) !== 'Source filter') errors.push('Browse does not label the source filter');
       }
       await capture(id, width);
     }

@@ -173,7 +173,7 @@
         "op": { "const": "name" },
         "kind": {
           "description": "Which names table: items (any language but English, whose item names come from item details), house collectibles, quests, achievements or zones.",
-          "enum": ["items", "houses", "quests", "achievements", "zones"]
+          "enum": ["items", "houses", "quests", "achievements", "zones", "categories", "themes", "skills"]
         },
         "id": {
           "description": "The game id the name belongs to (item, collectible, quest, achievement or zone id).",

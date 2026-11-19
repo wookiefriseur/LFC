@@ -159,24 +159,26 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual(names['achievements'], old['achievements'])
         self.assertEqual(names['houses']['99999'], 'Test house')
 
-    def test_name_in_another_language_gets_its_own_file_with_an_english_fallback(self):
+    def test_name_in_another_language_changes_that_language_only_and_keeps_its_fallback(self):
         en = json.loads((ROOT / 'docs/reference-data/names.en.json').read_text())
+        old = json.loads((ROOT / 'docs/reference-data/names.zh.json').read_text())
         house = next(iter(en['houses']))
         files, _ = self.run_plan(
-            # the same text as the English name is still a translation
+            # Two name corrections for the Chinese file. The texts are made up; zh is only a language that has a file.
+            # First: a house named exactly like the English one, which still counts as translated.
             {'v': 1, 'op': 'name', 'kind': 'houses', 'id': int(house), 'locale': 'zh', 'name': en['houses'][house]},
-            {'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'zh', 'name': 'Bett'})
+            # Second: a furnishing style ("themes" is the game's word for it), a table that may still be empty.
+            {'v': 1, 'op': 'name', 'kind': 'themes', 'id': 3, 'locale': 'zh', 'name': 'Made-up style name'})
         self.assertEqual(set(files), {'docs/reference-data/names.zh.json', 'docs/reference-data/manifest.json'})
         names = json.loads(files['docs/reference-data/names.zh.json'])
-        self.assertEqual(names['houses'], {house: en['houses'][house]})
-        self.assertEqual(names['items'], {'94097': 'Bett'})
+        self.assertEqual(names['houses'], {**old['houses'], house: en['houses'][house]})
+        self.assertEqual(names['themes'], {**old['themes'], '3': 'Made-up style name'})
+        self.assertEqual(names['items'], old['items'])
         self.assertNotIn(house, names['fallback']['houses'])
-        self.assertNotIn('94097', names['fallback']['items'])
-        self.assertEqual(len(names['fallback']['houses']), len(en['houses']) - 1)
-        self.assertEqual(names['fallback']['quests'], en['quests'])
+        self.assertEqual(names['fallback']['items'], old['fallback']['items'])
         entry = json.loads(files['docs/reference-data/manifest.json'])['datasets']['names']['translations']['zh']
-        self.assertEqual((entry['file'], entry['counts']['items'], entry['digest']),
-                         ('names.zh.json', 1, digest(files['docs/reference-data/names.zh.json'], 12)))
+        self.assertEqual((entry['file'], entry['counts']['themes'], entry['digest']),
+                         ('names.zh.json', len(names['themes']), digest(files['docs/reference-data/names.zh.json'], 12)))
 
     def test_english_item_name_line_is_refused(self):
         with self.assertRaisesRegex(ValueError, 'item details'):

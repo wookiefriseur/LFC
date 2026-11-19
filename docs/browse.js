@@ -16,6 +16,7 @@ import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 import { knowledgeMarker, onKnowledgeChange } from "./knowledge.js";
 import { tradingLinkAnchor, isTradeable } from "./external-links.js";
+import { language } from "./prefs.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
 
@@ -103,6 +104,9 @@ export function browseMask(deps) {
     value: "",
     leaves: [],
     search: "",
+    category: "", // "c:<id>" a category, "s:<id>" a subcategory
+    style: "",
+    skill: "",
     list: [],
     selectedKey: null,
     tax: null,
@@ -138,6 +142,68 @@ export function browseMask(deps) {
       .filter((l) => l === type || l.startsWith(`${type}:`));
   }
 
+  // The game's own grouping of a furnishing (category, subcategory, style), from the reference metadata.
+  // Only groups that hold a catalogued item are offered; the game's id space also covers mounts, pets and assistants.
+  const referenceData = deps.referenceData;
+  let gameGroups = null; // { categories: Map<cat, Set<sub>>, styles: Set<theme>, skills: Set<skill> }, once the metadata has loaded
+  let crafts = new Map(); // furnishing id -> crafting skill id
+  const groupName = (kind, id) => referenceData.namesOf(language())?.names[kind].get(id)
+    || referenceData.namesOf(referenceData.namesLocale)?.names[kind].get(id) || `#${id}`;
+
+  async function loadGameGroups() {
+    if (!referenceData?.loadMeta) return;
+    const ids = [...new Set(state.records.map((r) => r.id ?? r.blueprint).filter(Number.isInteger))];
+    [crafts] = await Promise.all([referenceData.loadCrafts(), referenceData.loadMeta(ids),
+      referenceData.loadTranslation(referenceData.namesLocale), referenceData.loadTranslation(language())]);
+    const categories = new Map(), styles = new Set();
+    for (const id of ids) {
+      const m = referenceData.meta(id);
+      if (!m?.cat) continue;
+      if (!categories.has(m.cat)) categories.set(m.cat, new Set());
+      if (m.sub) categories.get(m.cat).add(m.sub);
+      if (m.theme) styles.add(m.theme); // 0 is the game's "All Themes"
+    }
+    // a crafted record is keyed by its blueprint; the skill belongs to the furnishing it makes
+    const skills = new Set(ids.map(skillOf).filter(Boolean));
+    gameGroups = { categories, styles, skills };
+    fillGameGroups();
+  }
+
+  const skillOf = (id) => crafts.get(id) ?? crafts.get(craftedItem(id));
+
+  function fillGameGroups() {
+    const cat = $("#browse-category"), style = $("#browse-style"), skill = $("#browse-skill");
+    if (!cat || !gameGroups) return;
+    const byName = (kind) => (a, b) => groupName(kind, a).localeCompare(groupName(kind, b));
+    const option = (value, label) => elem("option", { value }, label);
+    cat.replaceChildren(option("", "Any category"), ...[...gameGroups.categories.keys()].sort(byName("categories")).map((c) => {
+      const group = elem("optgroup", { label: groupName("categories", c) });
+      group.append(option(`c:${c}`, `${groupName("categories", c)} (all)`),
+        ...[...gameGroups.categories.get(c)].sort(byName("categories")).map((s) => option(`s:${s}`, groupName("categories", s))));
+      return group;
+    }));
+    style.replaceChildren(option("", "Any style"),
+      ...[...gameGroups.styles].sort(byName("themes")).map((t) => option(String(t), groupName("themes", t))));
+    skill.replaceChildren(option("", "Any crafting skill"),
+      ...[...gameGroups.skills].sort(byName("skills")).map((s) => option(String(s), groupName("skills", s))));
+    skill.hidden = gameGroups.skills.size === 0; // no dump has brought the skills yet
+    cat.value = view.category;
+    style.value = view.style;
+    skill.value = view.skill;
+    cat.disabled = style.disabled = false;
+  }
+
+  function inGameGroup(id) {
+    if (view.skill && skillOf(id) !== Number(view.skill)) return false;
+    if (!view.category && !view.style) return true;
+    const m = referenceData.meta(id);
+    if (!m) return false;
+    if (view.style && m.theme !== Number(view.style)) return false;
+    if (!view.category) return true;
+    const [level, value] = view.category.split(":");
+    return (level === "c" ? m.cat : m.sub) === Number(value);
+  }
+
   // One grid card per item id; an id shows under a group if any of its records matches.
   function filteredRecords() {
     if (!view.leaves.length) return state.records;
@@ -166,6 +232,7 @@ export function browseMask(deps) {
         const nm = nameOf(id).toLowerCase();
         if (!nm.includes(q) && !String(id).includes(q) && !recs.some(r => r.blueprint != null && String(r.blueprint).includes(q)) && !contents.some(r => nameOf(r.id ?? r.blueprint).toLowerCase().includes(q) || String(r.id ?? r.blueprint).includes(q) || String(r.blueprint || "").includes(q))) continue;
       }
+      if (!inGameGroup(id)) continue;
       out.push({ id, records: recs, contents });
     }
     out.sort((a, b) => a.id - b.id);
@@ -208,7 +275,7 @@ export function browseMask(deps) {
       <section class="browse-mask">
         <aside class="browse-sidebar">
           <details id="browse-filters" class="browse-filters">
-            <summary>Category filter</summary>
+            <summary>Source filter</summary>
             <ul id="browse-facet-list" class="browse-facet-list"></ul>
           </details>
         </aside>
@@ -220,6 +287,9 @@ export function browseMask(deps) {
               <button id="browse-search-clear" type="button" class="search-clear"
                       aria-label="Clear the search" hidden>×</button>
             </span>
+            <select id="browse-category" aria-label="Furnishing category" title="The game's furnishing categories" disabled><option value="">Any category</option></select>
+            <select id="browse-style" aria-label="Furnishing style" title="The game's furnishing styles (themes)" disabled><option value="">Any style</option></select>
+            <select id="browse-skill" aria-label="Crafting skill" title="The skill that crafts the furnishing" hidden><option value="">Any crafting skill</option></select>
             <span id="browse-count" class="muted"
                   title="Items, not records. One item can have several sources."></span>
           </div>
@@ -262,6 +332,16 @@ export function browseMask(deps) {
       box.dispatchEvent(new Event("input"));
       box.focus();
     });
+
+    for (const [selector, key] of [["#browse-category", "category"], ["#browse-style", "style"], ["#browse-skill", "skill"]]) {
+      $(selector).addEventListener("change", (e) => {
+        view[key] = e.target.value;
+        buildItemList();
+        $("#browse-scroller").scrollTop = 0;
+        renderGrid();
+      });
+    }
+    loadGameGroups();
 
     let raf = null;
     $("#browse-scroller").addEventListener("scroll", () => {
@@ -861,6 +941,7 @@ export function browseMask(deps) {
   // Records may have changed in another mask (an add or a modal save).
   function onShow() {
     if (!$("#browse-grid")) return;
+    loadGameGroups(); // the labels follow the language
     taxonomy();
     if (pendingFilter) {
       const f = pendingFilter;
