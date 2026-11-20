@@ -1,5 +1,4 @@
 import { containerContents, containerParents, containerIndex, containerLabel } from "./containers.js";
-import { ignoredMessage } from "./ignored-items.js";
 import {
   versionLabel, labelOf, entryOf, isNoteSymbol, noteLabel, placementsText,
   effectivePlacementsText, sortBySourcePriority, isUnknownId,
@@ -696,7 +695,7 @@ export function browseMask(deps) {
       ? recordsForItem(item.id)
       : sortBySourcePriority(item.records, state.enums);
     if (ordered.some((r) => r.source?.type === "ignored")) {
-      host.append(elem("p", {}, ignoredMessage));
+      host.append(elem("p", {}, t("finding.ignored_item")));
     }
     const n = ordered.length;
     host.append(elem("div", {

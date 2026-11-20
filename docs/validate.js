@@ -5,7 +5,7 @@ import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
 // `code` is the stable half and messageFor() the plain-English half: `message` interpolates values, so presentation keyed on it would silently break on a wording change. Nothing keys on `message`.
 
 import { symbolsOf, entryOf, unknownIdFields, isSourceSlug } from "./data.js";
-import { labelFor, sourceTypeLabel } from "./lexicon.js";
+import { labelFor, sourceTypeLabel, t } from "./lexicon.js";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -93,77 +93,57 @@ function typeLabel(f) {
   return sourceTypeLabel(f.type);
 }
 
+// Finding code -> its sentence in the master file, under finding.<code>
 const CODE_MESSAGES = {
-  container_kind_invalid: () => "Choose a book collection or furnishing folio.",
-  container_self: () => "An item cannot contain itself.",
-  container_missing: () => "Add the parent container first, or check its item ID.",
-  version_required: () => "Pick which game update this record belongs to.",
-  version_unknown: () => "That game update is not in the list.",
-  type_required: () => "This record has no source. Open it in Batch edit.",
-  wrong_file: () =>
-    "This record is filed under the wrong kind of source. Open it in Batch edit.",
-  required_field_missing: (f) => `${fieldLabel(f)} is needed for a ${typeLabel(f)} record.`,
-  cost_amount_invalid: () => "A price has to be a whole number, 1 or more.",
-  cost_currency_repeated: () =>
-    "Two prices in the same currency are two offers. Keep one here and add a second record for the other.",
-  crown_offer_mixed: () =>
-    "A furnishing pack and a Crown Store bundle are separate offers. Keep one here and add a second record for the other, with its own price.",
-  value_missing: (f) => `${fieldLabel(f)} is still empty. Pick one.`,
-  crown_set_priced: () =>
-    "A pack or bundle price is for the whole set, not this furnishing. Leave the price empty; " +
-    "if the furnishing is also sold on its own, add a separate Crown Store record with that price.",
-  id_invalid: () => "That item number is not valid.",
-  blueprint_invalid: () => "That blueprint number is not valid.",
-  identity_required: () => "This record needs a positive item number or blueprint number.",
-  note_separator: () => "Put one thing in Extra detail, not two joined together.",
-  composite_duplicate: () => "There is already a record exactly like this one.",
-  unknown_symbol: (f) => `${fieldLabel(f)}: "${f.value}" is not in the list.`,
-  undefined_in_library: () => "Known problem in the source data - not something you did.",
-  // Fires only for a key the model does not know at all
-  field_not_allowed: (f) =>
-    `${fieldLabel(f)} is not a field this site recognises. Remove it to save.`,
-
-  source_required: () => "This record has no source. Open it in Batch edit.",
-  availability_required: () =>
-    "This record does not say when it was available. Open it in Batch edit.",
-  type_unknown: (f) => `"${f.value}" is not a kind of source this site knows.`,
-  no_contract: () =>
-    "This site does not know what this kind of source needs. Open it in Batch edit.",
-  cost_invalid: () => "The price has to be a list of amounts, or nothing at all.",
-  currency_required: () => "Pick which currency the price is in.",
-  date_format: (f) => `${fieldLabel(f)} has to be a date, written like 2024-03-31.`,
-  note_invalid: () => "Extra detail has to be some words, or nothing at all.",
-  note_packed: () =>
-    "Extra detail has parts joined with ^. Say one thing here and put the rest in its own field.",
-  note_is_zone: (f) => `"${f.value}" is a game zone - put it in Zone.`,
-  note_is_place: (f) => `"${f.value}" is a known place - put it in Place.`,
-  location_is_place: (f) => `"${f.value}" is a place, not a game zone - put it in Place.`,
-  place_is_zone: (f) => `"${f.value}" is a game zone - put it in Zone.`,
-  subtype_not_subtyped: () => "This kind of source has no sub-kinds to pick from.",
-  locations_invalid: () => "Several places have to be a list, one zone or place per row.",
-  placement_empty: () => "Each row of the place list needs a zone or a place.",
-  cost_entry_invalid: () =>
-    "Each price needs an amount and a currency. One of them is empty.",
-  int_required: (f) => `${fieldLabel(f)} has to be a whole number.`,
-  bool_required: (f) => `${fieldLabel(f)} is either ticked or left out.`,
-  id_zero_not_allowed: (f) =>
-    `${fieldLabel(f)} cannot be 0. Some fields use 0 for "needed, but not ` +
-    `recorded"; this is not one of them.`,
-  int_list_required: (f) => `${fieldLabel(f)} has to be whole numbers, separated by commas.`,
-  id_cross_file: (f) =>
-    `This item also has ${f.value.split(", ").map(sourceTypeLabel).join(", ")} records - check this is another source.`,
-  rumour_confirmed: (f) => f.blueprint
-    ? `This item already has a confirmed source (${sourceTypeLabel(f.value)}), so a blueprint for it is a ` +
-      `${sourceTypeLabel("recipe")} record, not ${sourceTypeLabel("rumour")}. Change its source to ${sourceTypeLabel("recipe")}.`
-    : `This item already has a confirmed source (${sourceTypeLabel(f.value)}), so it cannot also be ` +
-      `${sourceTypeLabel("rumour")}. Remove this record.`,
-  confirmed_has_rumour: () =>
-    `This item also has an ${sourceTypeLabel("rumour")} record. Remove that record, or change its source ` +
-    `(a blueprint becomes ${sourceTypeLabel("recipe")}).`,
+  container_kind_invalid: () => t("finding.container_kind_invalid"),
+  container_self: () => t("finding.container_self"),
+  container_missing: () => t("finding.container_missing"),
+  version_required: () => t("finding.version_required"),
+  version_unknown: () => t("finding.version_unknown"),
+  type_required: () => t("finding.type_required"),
+  wrong_file: () => t("finding.wrong_file"),
+  required_field_missing: (f) => t("finding.required_field_missing", { field: fieldLabel(f), kind: typeLabel(f) }),
+  cost_amount_invalid: () => t("crown.error.price"),
+  cost_currency_repeated: () => t("finding.cost_currency_repeated"),
+  crown_offer_mixed: () => t("finding.crown_offer_mixed"),
+  value_missing: (f) => t("finding.value_missing", { field: fieldLabel(f) }),
+  crown_set_priced: () => t("finding.crown_set_priced"),
+  id_invalid: () => t("finding.id_invalid"),
+  blueprint_invalid: () => t("finding.blueprint_invalid"),
+  identity_required: () => t("finding.identity_required"),
+  note_separator: () => t("finding.note_separator"),
+  composite_duplicate: () => t("finding.composite_duplicate"),
+  unknown_symbol: (f) => t("finding.unknown_symbol", { field: fieldLabel(f), value: f.value }),
+  undefined_in_library: () => t("browse.known_problem"),
+  field_not_allowed: (f) => t("finding.field_not_allowed", { field: fieldLabel(f) }),
+  source_required: () => t("finding.type_required"),
+  availability_required: () => t("finding.availability_required"),
+  type_unknown: (f) => t("finding.type_unknown", { value: f.value }),
+  no_contract: () => t("finding.no_contract"),
+  cost_invalid: () => t("finding.cost_invalid"),
+  currency_required: () => t("finding.currency_required"),
+  date_format: (f) => t("finding.date_format", { field: fieldLabel(f) }),
+  note_invalid: () => t("finding.note_invalid"),
+  note_packed: () => t("finding.note_packed"),
+  note_is_zone: (f) => t("finding.note_is_zone", { value: f.value }),
+  note_is_place: (f) => t("finding.note_is_place", { value: f.value }),
+  location_is_place: (f) => t("finding.location_is_place", { value: f.value }),
+  place_is_zone: (f) => t("finding.note_is_zone", { value: f.value }),
+  subtype_not_subtyped: () => t("finding.subtype_not_subtyped"),
+  locations_invalid: () => t("finding.locations_invalid"),
+  placement_empty: () => t("finding.placement_empty"),
+  cost_entry_invalid: () => t("finding.cost_entry_invalid"),
+  int_required: (f) => t("finding.int_required", { field: fieldLabel(f) }),
+  bool_required: (f) => t("finding.bool_required", { field: fieldLabel(f) }),
+  id_zero_not_allowed: (f) => t("finding.id_zero_not_allowed", { field: fieldLabel(f) }),
+  int_list_required: (f) => t("finding.int_list_required", { field: fieldLabel(f) }),
+  id_cross_file: (f) => t("finding.id_cross_file", { kinds: f.value.split(", ").map(sourceTypeLabel).join(", ") }),
+  confirmed_has_rumour: (f) => t("finding.confirmed_has_rumour", { rumour: sourceTypeLabel("rumour"), recipe: sourceTypeLabel("recipe") }),
+  same_id_other_source: () => t("finding.same_id_other_source"),
+  rumour_confirmed: (f) => t(f.blueprint ? "finding.rumour_confirmed.blueprint" : "finding.rumour_confirmed",
+    { kind: sourceTypeLabel(f.value), rumour: sourceTypeLabel("rumour"), recipe: sourceTypeLabel("recipe") }),
   // Raised by the masks: the same id with a different source is the normal multi-source case, worth a look but never a block.
-  ignored_item: () => ignoredMessage,
-  same_id_other_source: () =>
-    "This item already has other records here - check you are not adding the same one twice.",
+  ignored_item: () => t("finding.ignored_item"),
 };
 
 // An unknown code degrades to the raw `message`, so a code added without a sentence is visible but not fatal.

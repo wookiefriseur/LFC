@@ -43,7 +43,7 @@ import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
 import { parseDiscovery, discoveryKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
-import { isIgnoredItem, ignoredMessage } from "./ignored-items.js";
+import { isIgnoredItem } from "./ignored-items.js";
 import { PRESETS, presetById, applyPreset } from "./presets.js";
 import { ReferenceData } from "./reference-data.js";
 import { namesMask } from "./names.js";
@@ -1756,7 +1756,7 @@ function editingFindings() {
 function commitEdit() {
   const e = state.editing;
   if (e._isNew && e.source?.type !== "ignored" && isIgnoredItem(e, state.records)) {
-    formMessage(ignoredMessage);
+    formMessage(t("finding.ignored_item"));
     return;
   }
   // The data file is derived from source.type on every save, so a type change here is a file change.
