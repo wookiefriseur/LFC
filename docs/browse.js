@@ -9,7 +9,7 @@ import {
 } from "./taxonomy.js";
 import {
   labelFor, tipFor, sourceTypeLabel, valueLabel, subtypeVocab,
-  NOT_IN_GAME_DATA, ID_NOT_RECORDED, t, translateTree,
+  NOT_IN_GAME_DATA, ID_NOT_RECORDED, t, tn, translateTree,
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
@@ -476,7 +476,7 @@ export function browseMask(deps) {
     // A failed load (complete, no pixels) already replaced itself with a placeholder; build a new one.
     const failed = kept && kept.complete && kept.naturalWidth === 0;
     if (kept && !failed && !kept.isConnected) return kept;
-    const node = itemIconImg(id, nameOf(id) || t("browse.item_fallback", { id }));
+    const node = itemIconImg(id, nameOf(id) || t("common.item_fallback", { id }));
     if (node.tagName === "IMG") iconNodes.set(id, node);
     return node;
   }
@@ -518,7 +518,7 @@ export function browseMask(deps) {
     grid.innerHTML = "";
     if (total === 0) {
       grid.append(emptyState());
-      $("#browse-count").textContent = t("browse.count_items", { n: 0 });
+      $("#browse-count").textContent = tn(0, "common.count_items");
       return;
     }
     if (first > 0) grid.append(spacer(top));
@@ -535,7 +535,7 @@ export function browseMask(deps) {
 
       const body = elem("div", { class: "browse-card-body" });
       const mark = knowledgeMarker(item.id);
-      body.append(elem("div", { class: "browse-card-name" }, mark ? [mark, " "] : [], nameOf(item.id) || t("browse.no_name")));
+      body.append(elem("div", { class: "browse-card-name" }, mark ? [mark, " "] : [], nameOf(item.id) || t("common.no_name")));
       const meta = elem("div", { class: "browse-card-meta muted" });
       const blueprint = item.records.find(r => r.blueprint)?.blueprint;
       meta.append(elem("span", {
@@ -559,7 +559,7 @@ export function browseMask(deps) {
         meta.append(elem("span", {
           class: "browse-card-n",
           title: t("browse.source_count.tip"),
-        }, t("browse.source_count", { n: item.records.length })));
+        }, tn(item.records.length, "browse.source_count")));
       }
       const container = item.records.find(r => r.container);
       if (container) {
@@ -576,7 +576,7 @@ export function browseMask(deps) {
           title: `${onLists.length === 1 ? t("browse.on_list") : t("browse.on_lists")} ${onLists.map((l) => l.name).join(", ")}`,
         });
         if (onLists.length > (wideCards.matches ? MAX_LIST_PILLS : 1)) {
-          pills.append(elem("span", { class: "lists-pill" }, t("browse.list_count", { n: onLists.length })));
+          pills.append(elem("span", { class: "lists-pill" }, tn(onLists.length, "common.count_lists")));
         } else {
           for (const l of onLists) pills.append(elem("span", { class: "lists-pill" }, pillText(leafOf(l))));
         }
@@ -605,7 +605,7 @@ export function browseMask(deps) {
     measureCards(grid, scroller, first, anchor, heightOf);
 
     $("#browse-count").textContent =
-      (total === 1 ? t("browse.count_item") : t("browse.count_items", { n: total.toLocaleString() })) +
+      tn(total, "common.count_items", { n: total.toLocaleString() }) +
       ` - ${t("browse.showing", { first: first + 1, last })}`;
   }
 
@@ -676,10 +676,10 @@ export function browseMask(deps) {
     });
     head.append(closeBtn);
     const titleWrap = elem("div", {});
-    titleWrap.append(itemIconImg(item.id, nameOf(item.id) || t("browse.item_fallback", { id: item.id })));
+    titleWrap.append(itemIconImg(item.id, nameOf(item.id) || t("common.item_fallback", { id: item.id })));
     const title = elem("div", { class: "browse-detail-title" });
     const mark = knowledgeMarker(item.id);
-    title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || t("browse.no_name")));
+    title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || t("common.no_name")));
     const blueprint = item.records.find(r => r.blueprint)?.blueprint;
     title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", isTradeable(item.records) ? tradingLinkAnchor(item.id) : []);
     if (blueprint && item.records.some(r => r.id)) {
@@ -702,7 +702,7 @@ export function browseMask(deps) {
     host.append(elem("div", {
       class: "muted browse-detail-sub",
       title: t("browse.source_count.tip"),
-    }, n === 1 ? t("browse.source_count_one") : t("browse.source_count", { n })));
+    }, tn(n, "browse.source_count")));
 
     const container = item.records.find(r => r.container);
     if (container) {

@@ -31,6 +31,7 @@ MASTER = "locale/en.js"
 ENTRY_LINE = re.compile(r'\s*("(?:[^"\\]|\\.)*"): ("(?:[^"\\]|\\.)*"),(?:\s*//.*)?')
 TEXT_ID = re.compile(r'[a-z]+\.[A-Za-z0-9_.@\[\]-]+')
 USED = (re.compile(r'(?<![\w.$])t\(\s*"([^"]*)"'), re.compile(r'\bdata-t(?:-[a-z-]+)?="([^"]*)"'))
+COUNTED = re.compile(r'(?<![\w.$])tn\([^,]+,\s*"([^"]*)"')
 # Ids the code builds from a record's own keys, so no page names them literally
 BUILT = ("tab.", "kind.", "group.", "field.", "tip.", "value.")
 
@@ -66,8 +67,11 @@ def text_problems(docs):
             continue
         source = path.read_text(encoding="utf-8")
         literals.update(re.findall(r'"([^"\n]*)"', source))
+        # A counted text is two entries
+        counted = [key + suffix for key in COUNTED.findall(source) for suffix in ("", "_one")]
+        literals.update(counted)
         problems += [f"{path.name}: {key!r} is not in {MASTER}"
-                     for pattern in USED for key in pattern.findall(source) if key not in english]
+                     for key in [*counted, *(key for pattern in USED for key in pattern.findall(source))] if key not in english]
     problems += [f"{MASTER}: {key!r} is used nowhere" for key in english
                  if key not in literals and not key.startswith(BUILT)]
     for path in sorted((docs / "locale").glob("*.json")):

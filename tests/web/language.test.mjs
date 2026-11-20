@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
 import { NameStore, labelOf, noteLabel, setStrings, checkTranslation } from "../../docs/data.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
-import { t, checkInterfaceText, setInterfaceTranslation, englishTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
+import { t, tn, checkInterfaceText, setInterfaceTranslation, englishTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
 import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
 
@@ -113,13 +113,17 @@ test("interface text follows its translation, English where there is none, and b
 });
 
 test("a page text fills its holes in either language, and a translation keeps the holes of a known id", () => {
-  setInterfaceTranslation({ "browse.source_count": "{n} Bezugsquellen" });
+  setInterfaceTranslation({ "browse.source_count": "{n} Bezugsquellen", "browse.source_count_one": "1 Bezugsquelle" });
   assert.equal(t("browse.source_count", { n: 3 }), "3 Bezugsquellen");
-  assert.equal(t("browse.count_items", { n: 0 }), "0 items");
-  assert.equal(t("browse.count_items", {}), "{n} items");
+  assert.equal(t("common.count_items", { n: 0 }), "0 items");
+  assert.equal(t("common.count_items", {}), "{n} items");
+  // a counted text has its own entry for exactly one
+  assert.equal(tn(1, "browse.source_count"), "1 Bezugsquelle");
+  assert.equal(tn(2, "browse.source_count"), "2 Bezugsquellen");
+  assert.equal(tn(1234, "common.count_items", { n: "1,234" }), "1,234 items");
   setInterfaceTranslation(null);
-  checkInterfaceText("browse.count_items", "{n} Gegenstände");
-  assert.throws(() => checkInterfaceText("browse.count_items", "Gegenstände"), /\{n\}/);
+  checkInterfaceText("common.count_items", "{n} Gegenstände");
+  assert.throws(() => checkInterfaceText("common.count_items", "Gegenstände"), /\{n\}/);
   assert.throws(() => checkInterfaceText("browse.all_items", "Alle {n}"), /free of/);
   assert.throws(() => checkInterfaceText("browse.no_such_text", "x"), /not a text/);
 });

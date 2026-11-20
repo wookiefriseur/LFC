@@ -101,11 +101,11 @@ class IssueApplicationTests(unittest.TestCase):
 
     def test_text_translates_one_interface_text(self):
         line = {'v': 1, 'op': 'text', 'locale': 'fr', 'id': 'field.cost', 'text': 'Prix'}
-        files, _ = self.run_plan(line, {**line, 'id': 'browse.count_items', 'text': '{n} objets'})
+        files, _ = self.run_plan(line, {**line, 'id': 'common.count_items', 'text': '{n} objets'})
         self.assertEqual(set(files), {'docs/locale/fr.json'})
-        self.assertEqual(json.loads(files['docs/locale/fr.json']), {'browse.count_items': '{n} objets', 'field.cost': 'Prix'})
+        self.assertEqual(json.loads(files['docs/locale/fr.json']), {'common.count_items': '{n} objets', 'field.cost': 'Prix'})
         for bad in ({'locale': 'en'}, {'text': ' '}, {'id': ''}, {'text': 'a\nb'}, {'id': 'field.no_such_text'},
-                    {'id': 'browse.count_items', 'text': 'objets'}):
+                    {'id': 'common.count_items', 'text': 'objets'}):
             with self.assertRaises(ValueError):
                 self.run_plan({**line, **bad})
 

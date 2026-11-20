@@ -4,6 +4,7 @@ import { tradingLinkAnchor, isTradeable } from "./external-links.js";
 import {
   forgetKnowledge, getKnowledge, importKnowledge, kindReport, kindStatus, knowledgeLine, knowledgeMarker, knowledgeOf, missingPages, onKnowledgeChange, recipeResolver,
 } from "./knowledge.js";
+import { t, tn, translateTree } from "./lexicon.js";
 
 const STORE_KEY = "lfc.lists";
 export const MAX_NAME_LENGTH = 32;   // bytes, for each part of a path
@@ -121,11 +122,11 @@ export function cleanName(raw, own = null) {
     const leaf = fitName(String(raw ?? "").replace(/>/g, "/"));
     name = leaf && [...partsOf(own.name).slice(0, -1), leaf].join(SEP);
   }
-  if (!name) return { error: "A list needs a name." };
+  if (!name) return { error: t("lists.error.no_name") };
   const root = partsOf(name)[0];
-  if (isReserved(root) && !findList(root)) return { error: `"${root}" is reserved for ${FAVES_NAME}.` };
+  if (isReserved(root) && !findList(root)) return { error: t("lists.error.reserved", { name: root, favourites: t("lists.favourites") }) };
   const taken = findList(name);
-  if (taken && taken !== own) return { error: `There already is a list called "${taken.name}".` };
+  if (taken && taken !== own) return { error: t("lists.error.taken", { name: taken.name }) };
   return { name };
 }
 
@@ -139,7 +140,7 @@ export function createList(raw) {
 
 // Renames the list for everything below it as well.
 export function renameList(list, raw) {
-  if (list.faves) return { error: `${FAVES_NAME} cannot be renamed.` };
+  if (list.faves) return { error: t("lists.error.faves_rename", { favourites: t("lists.favourites") }) };
   const { name, error } = cleanName(raw, list);
   if (error) return { error };
   const old = list.name;
@@ -219,12 +220,12 @@ function shiftTarget(list, delta) {
 
 // { ok, via: the parent left or the list entered, reason: only for what the tree does not show }
 export function canShift(list, delta) {
-  const t = shiftTarget(list, delta);
-  if (!t) return { ok: false };
-  if (!t.name.includes(SEP) && isReserved(t.name)) return { ok: false, via: t.via, reason: `"${t.name}" is reserved for ${FAVES_NAME}.` };
-  const taken = findList(t.name);
-  if (taken) return { ok: false, via: t.via, reason: `There already is a list called "${taken.name}".` };
-  return { ok: true, via: t.via };
+  const to = shiftTarget(list, delta);
+  if (!to) return { ok: false };
+  if (!to.name.includes(SEP) && isReserved(to.name)) return { ok: false, via: to.via, reason: t("lists.error.reserved", { name: to.name, favourites: t("lists.favourites") }) };
+  const taken = findList(to.name);
+  if (taken) return { ok: false, via: to.via, reason: t("lists.error.taken", { name: taken.name }) };
+  return { ok: true, via: to.via };
 }
 
 export function shiftList(list, delta) {
@@ -286,7 +287,7 @@ export function formatLists(lists = getLists()) {
 
 // Whole lines packed into pages for the game's box, as the add-on pages its own export. A line longer than a page gets one of its own.
 export function paginate(text, maxBytes = PAGE_BYTES) {
-  const size = (t) => new TextEncoder().encode(t).length;
+  const size = (line) => new TextEncoder().encode(line).length;
   const pages = [];
   let page = [], used = 0;
   for (const line of String(text ?? "").split("\n")) {
@@ -372,7 +373,7 @@ export function importLists(text, resolve = (id) => id, target = null, craftable
   const touched = new Set();
   for (const incoming of lists) {
     let list = incoming.faves ? favourites() : incoming.bare ? target : findList(incoming.name);
-    if (!list && incoming.bare) { report.errors.push("Ids without a list name need a selected list."); continue; }
+    if (!list && incoming.bare) { report.errors.push(t("lists.error.bare_ids")); continue; }
     if (!list) {
       const { name, error } = cleanName(incoming.name);
       if (error) { report.errors.push(error); continue; }
@@ -407,19 +408,18 @@ export function catalogueResolver(records) {
 
 // Counts only, short enough for the status line; `warn` when something was left out.
 export function reportText(r) {
-  const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
   const k = r.knowledge;
-  if (!r.lists && !k) return { text: r.errors[0] || "No list lines found", warn: true };
+  if (!r.lists && !k) return { text: r.errors[0] || t("lists.report.none"), warn: true };
   const parts = [];
   if (r.lists) {
-    let text = `Imported ${plural(r.lists, "list")}: ${plural(r.added, "item")} added`;
-    if (r.duplicates) text += `, ${plural(r.duplicates, "duplicate")}`;
-    if (r.unknown) text += `, ${r.unknown} unknown skipped`;
+    let text = t("lists.report.imported", { lists: tn(r.lists, "common.count_lists"), items: tn(r.added, "lists.report.added") });
+    if (r.duplicates) text += `, ${tn(r.duplicates, "lists.report.duplicates")}`;
+    if (r.unknown) text += `, ${t("lists.report.unknown", { n: r.unknown })}`;
     parts.push(text);
   }
-  if (k) parts.push(`Crafting knowledge: ${k.kinds.map(kindReport).join("; ")}` + (k.notCraftable ? `, ${k.notCraftable} not craftable skipped` : ""));
+  if (k) parts.push(t("lists.report.knowledge", { kinds: k.kinds.map(kindReport).join("; ") }) + (k.notCraftable ? `, ${t("lists.report.not_craftable", { n: k.notCraftable })}` : ""));
   let text = parts.join(". ");
-  if (r.skipped) text += `, ${plural(r.skipped, "line")} skipped`;
+  if (r.skipped) text += `, ${tn(r.skipped, "lists.report.lines_skipped")}`;
   if (r.errors.length) text += `. ${r.errors[0]}`;
   const gaps = k?.kinds.some((kind) => missingPages(kind).length);
   return { text, warn: Boolean(r.skipped || r.errors.length || r.unknown || k?.notCraftable || gaps) };
@@ -454,52 +454,53 @@ export function listsMask(deps) {
     container.innerHTML = `
       <section class="lists-mask">
         <aside class="lists-side">
-          <h2>Lists</h2>
-          <p class="muted">Stored in your browser. Save them to a file or FurnitureCatalogue to keep them safe.</p>
+          <h2 data-t="tab.lists"></h2>
+          <p class="muted" data-t="lists.stored"></p>
           <ul id="lists-index" class="lists-index"></ul>
           <form id="lists-new" class="lists-inline">
-            <input id="lists-new-name" placeholder="New list, or List > Sublist" aria-label="New list name" title="A name with > makes a sublist and every list above it, ${MAX_DEPTH} levels at most">
-            <button class="btn-primary">Create</button>
+            <input id="lists-new-name" data-t-placeholder="lists.new.placeholder" data-t-aria-label="lists.new.label">
+            <button class="btn-primary" data-t="lists.create"></button>
           </form>
           <p id="lists-new-error" class="warn" role="alert" hidden></p>
           <div id="lists-knowledge" class="lists-knowledge"></div>
         </aside>
         <div class="lists-col">
           <details id="lists-transfer" class="lists-transfer">
-            <summary>Import and export</summary>
-            <textarea id="lists-text" rows="4" spellcheck="false" aria-label="The selected list as text; paste list text here to import it"></textarea>
+            <summary data-t="lists.transfer"></summary>
+            <textarea id="lists-text" rows="4" spellcheck="false" data-t-aria-label="lists.text.label"></textarea>
             <div id="lists-pager" class="lists-row" hidden>
-              <button id="lists-page-prev" type="button" class="btn-mini">◀ Previous page</button>
+              <button id="lists-page-prev" type="button" class="btn-mini" data-t="lists.page_prev"></button>
               <strong id="lists-page-pos"></strong>
-              <button id="lists-page-next" type="button" class="btn-mini">Next page ▶</button>
-              <span class="muted">Each page fits the game's import box.</span>
+              <button id="lists-page-next" type="button" class="btn-mini" data-t="lists.page_next"></button>
+              <span class="muted" data-t="lists.page_hint"></span>
             </div>
             <div class="lists-row">
-              <button id="lists-import" type="button" class="btn-primary" disabled title="Import the text in the box">Import</button>
-              <label class="btn-like" title="Import lists from a text file">📂 Import file ...<input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
+              <button id="lists-import" type="button" class="btn-primary" disabled data-t-title="lists.import.tip" data-t="lists.import"></button>
+              <label class="btn-like" data-t-title="lists.import_file.tip"><span data-t="lists.import_file"></span><input id="lists-file" type="file" accept=".txt,text/plain" hidden></label>
               <span class="lists-row-gap"></span>
-              <select id="lists-format" aria-label="What the export holds" title="Ids are what the game imports. Names are used for spreadsheets, messages or trading sites.">
-                <option value="ids">For the game (ids)</option>
-                <option value="names">Item names</option>
+              <select id="lists-format" data-t-aria-label="lists.format.label" data-t-title="lists.format.tip">
+                <option value="ids" data-t="lists.format.ids"></option>
+                <option value="names" data-t="lists.format.names"></option>
               </select>
-              <button id="lists-copy" type="button" title="Copy the text in the box (one page of a long export) to the clipboard">📋 Copy</button>
-              <button id="lists-download" type="button" title="Download the whole selection as one text file">💾 Download</button>
-              <button id="lists-help-toggle" type="button" class="btn-mini" aria-expanded="false" aria-controls="lists-help" aria-label="How import and export work" title="How import and export work">?</button>
+              <button id="lists-copy" type="button" data-t-title="lists.copy.tip" data-t="lists.copy"></button>
+              <button id="lists-download" type="button" data-t-title="lists.download.tip" data-t="lists.download"></button>
+              <button id="lists-help-toggle" type="button" class="btn-mini" aria-expanded="false" aria-controls="lists-help" data-t-aria-label="lists.help.label" data-t-title="lists.help.label">?</button>
             </div>
             <div id="lists-help" class="lists-help muted" hidden>
-              <p>The currently active list is shown in the box (select "All lists" to show all).</p>
-              <p>Copy the text into FurnitureCatalogue's Import window, or keep it as a file.</p>
-              <p>Long exports are split into pages that fit FC's Import window: copy and import them one by one. Download saves everything in one file.</p>
-              <p>To import, paste text from FC and press Import.</p>
-              <p>Lists of the same name are merged (nothing is removed).</p>
-              <p>"Item names" exports the names instead of ids, in the currently selected language. Not used for imports anywhere. For "Crafting knowledge" it holds the plans shown there: All, Known or Unknown.</p>
-              <p>You can also import just ids (<code>115647,118303</code>), they go into the currently selected list.</p>
+              <p data-t="lists.help.box"></p>
+              <p data-t="lists.help.copy"></p>
+              <p data-t="lists.help.pages"></p>
+              <p data-t="lists.help.import"></p>
+              <p data-t="lists.help.merge"></p>
+              <p data-t="lists.help.names"></p>
+              <p data-t="lists.help.ids"><code data-hole="example">115647,118303</code></p>
             </div>
           </details>
           <p id="lists-status" class="lists-status" role="status"></p>
           <div id="lists-main" class="lists-main"></div>
         </div>
       </section>`;
+    translateTree(container);
 
     $("#lists-new").addEventListener("submit", (e) => {
       e.preventDefault();
@@ -532,8 +533,8 @@ export function listsMask(deps) {
     $("#lists-format").addEventListener("change", () => { page = 0; fillBox(true); });
     $("#lists-download").addEventListener("click", () => {
       const out = exportText();
-      if (out) download(current === ALL ? "furnishing-lists.txt" : fileName(current.name), out);
-      else status("No lists to export", true);
+      if (out) download(current === ALL ? "furnishing-lists.txt" : fileName(current === KNOWLEDGE ? t("lists.knowledge") : current.name), out);
+      else status(t("lists.nothing_to_export"), true);
     });
     onListsChange(() => { if ($("#lists-index")) { drawIndex(); fillBox(); } });
     onKnowledgeChange(() => { if ($("#lists-index")) drawIndex(); });
@@ -558,7 +559,7 @@ export function listsMask(deps) {
     // the game's own knowledge export comes from the add-on; as names, the shown selection (All, Known, Unknown) goes out
     if (current === KNOWLEDGE) {
       const ids = asNames() ? knowledgeIds() : [];
-      return ids.length ? formatListNames({ name: `${KNOWLEDGE.name}: ${KNOWLEDGE_CHOICES[knowledgeFilter]}`, ids }, nameOf) : "";
+      return ids.length ? formatListNames({ name: `${t("lists.knowledge")}: ${t(KNOWLEDGE_CHOICES[knowledgeFilter])}`, ids }, nameOf) : "";
     }
     if (!asNames()) return current === ALL ? formatLists() : formatList(current);
     const lists = current === ALL ? getLists().filter((l) => !l.faves || l.ids.length) : [current];
@@ -579,7 +580,7 @@ export function listsMask(deps) {
     edited = false;
     $("#lists-text").value = pages[page];
     $("#lists-pager").hidden = pages.length < 2;
-    $("#lists-page-pos").textContent = `Page ${page + 1} of ${pages.length}`;
+    $("#lists-page-pos").textContent = t("lists.page_pos", { page: page + 1, pages: pages.length });
     $("#lists-page-prev").disabled = page === 0;
     $("#lists-page-next").disabled = page === pages.length - 1;
     syncImport();
@@ -597,13 +598,13 @@ export function listsMask(deps) {
 
   async function copyOut() {
     const box = $("#lists-text");
-    if (!box.value.trim()) { status("No lists to export", true); return; }
+    if (!box.value.trim()) { status(t("lists.nothing_to_export"), true); return; }
     box.select();
     try {
       await navigator.clipboard.writeText(box.value);
-      status(pages.length > 1 && !edited ? `Copied page ${page + 1} of ${pages.length}` : "Copied to clipboard");
+      status(pages.length > 1 && !edited ? t("lists.copied_page", { page: page + 1, pages: pages.length }) : t("lists.copied"));
     } catch (_) {
-      status("Press Ctrl+C to copy", true);
+      status(t("lists.copy_manual"), true);
     }
   }
 
@@ -618,8 +619,9 @@ export function listsMask(deps) {
   function drawIndex() {
     const ul = $("#lists-index");
     ul.innerHTML = "";
-    const all = elem("button", { type: "button", class: "lists-index-item" + (current === ALL ? " is-active" : ""), title: "Every list, for import and export" },
-      elem("span", {}, ALL.name), elem("span", { class: "muted" }, String(namedLists().length)));
+    $("#lists-new-name").title = t("lists.new.tip", { n: MAX_DEPTH });
+    const all = elem("button", { type: "button", class: "lists-index-item" + (current === ALL ? " is-active" : ""), title: t("lists.all.tip") },
+      elem("span", {}, t("lists.all")), elem("span", { class: "muted" }, String(namedLists().length)));
     all.addEventListener("click", () => select(ALL));
     ul.append(elem("li", { class: "lists-index-all" }, all));
     for (const list of getLists()) {
@@ -629,7 +631,7 @@ export function listsMask(deps) {
       btn.addEventListener("click", () => select(list));
       ul.append(elem("li", {}, btn));
     }
-    if (!namedLists().length) ul.append(elem("li", { class: "muted" }, "No lists yet."));
+    if (!namedLists().length) ul.append(elem("li", { class: "muted" }, t("lists.none")));
     drawKnowledge();
   }
 
@@ -638,16 +640,16 @@ export function listsMask(deps) {
     const host = $("#lists-knowledge");
     const k = getKnowledge();
     const kinds = ["known", "unknown"].filter((kind) => k[kind]);
-    const btn = elem("button", { type: "button", class: "lists-index-item" + (current === KNOWLEDGE ? " is-active" : ""), title: "Which furnishing plans your character knows" },
-      elem("span", {}, KNOWLEDGE.name));
+    const btn = elem("button", { type: "button", class: "lists-index-item" + (current === KNOWLEDGE ? " is-active" : ""), title: t("lists.knowledge.tip") },
+      elem("span", {}, t("lists.knowledge")));
     btn.addEventListener("click", () => select(KNOWLEDGE));
     const lines = kinds.map((kind) => elem("p", {}, kindStatus(kind)));
-    if (k.learned.length) lines.push(elem("p", {}, `Learned since: ${k.learned.length}`));
+    if (k.learned.length) lines.push(elem("p", {}, t("lists.knowledge.learned", { n: k.learned.length })));
     if (kinds.length === 1) {
       const other = kinds[0] === "known" ? "unknown" : "known";
-      lines.push(elem("p", {}, `Import ${other.toUpperCase()} to mark those as well.`));
+      lines.push(elem("p", {}, t("lists.knowledge.import_other", { kind: other.toUpperCase() })));
     }
-    if (!kinds.length) lines.push(elem("p", {}, KNOWLEDGE_SOURCE));
+    if (!kinds.length) lines.push(elem("p", {}, t("lists.knowledge.source")));
     host.replaceChildren(btn, elem("div", { class: "muted lists-knowledge-status" }, lines));
   }
 
@@ -665,7 +667,7 @@ export function listsMask(deps) {
     btn.disabled = disabled;
     const ask = elem("p", { class: "lists-confirm", hidden: "" }, question,
       elem("button", { type: "button", class: "btn-mini btn-danger" }, yes),
-      elem("button", { type: "button", class: "btn-mini" }, "Keep it"));
+      elem("button", { type: "button", class: "btn-mini" }, t("lists.keep")));
     const [ok, no] = ask.querySelectorAll("button");
     btn.addEventListener("click", () => { ask.hidden = false; });
     ok.addEventListener("click", () => { act(); drawMain(); status(done); });
@@ -675,27 +677,27 @@ export function listsMask(deps) {
 
   function drawKnowledgeMain(host) {
     const k = getKnowledge();
-    headWithDanger(host, KNOWLEDGE.name, {
-      label: "Forget", title: "Reset your crafting knowledge to import a different account or character, or for a clean import.",
-      question: "Forget all crafting knowledge and its markers? ", yes: "Forget it", done: "Crafting knowledge forgotten",
+    headWithDanger(host, t("lists.knowledge"), {
+      label: t("lists.knowledge.forget"), title: t("lists.knowledge.forget.tip"),
+      question: `${t("lists.knowledge.forget.ask")} `, yes: t("lists.knowledge.forget.yes"), done: t("lists.knowledge.forgotten"),
       disabled: !k.known && !k.unknown && !k.learned.length, act: forgetKnowledge,
     });
-    host.append(elem("p", {}, "Paste your whole knowledge export from FurnitureCatalogue into the import box above."));
-    if (!k.known?.ids.length && !k.learned.length && !k.unknown?.ids.length) { host.append(elem("p", { class: "muted" }, KNOWLEDGE_SOURCE)); return; }
+    host.append(elem("p", {}, t("lists.knowledge.paste")));
+    if (!k.known?.ids.length && !k.learned.length && !k.unknown?.ids.length) { host.append(elem("p", { class: "muted" }, t("lists.knowledge.source"))); return; }
 
-    const pick = elem("div", { class: "lists-switch", role: "radiogroup", "aria-label": "Show" },
+    const pick = elem("div", { class: "lists-switch", role: "radiogroup", "aria-label": t("lists.knowledge.show") },
       Object.entries(KNOWLEDGE_CHOICES).map(([value, label]) => {
         const radio = elem("input", { type: "radio", name: "lists-knowledge-filter", value });
         radio.checked = value === knowledgeFilter;
         radio.addEventListener("change", () => { knowledgeFilter = value; drawItems(); fillBox(); });
-        return elem("label", {}, radio, ` ${label}`);
+        return elem("label", {}, radio, ` ${t(label)}`);
       }));
     const count = elem("p", { class: "muted lists-count" });
     const items = elem("ul", { class: "lists-items" });
     host.append(pick, count, items);
     function drawItems() {
       const ids = knowledgeIds();
-      count.textContent = `${ids.length} item${ids.length === 1 ? "" : "s"}`;
+      count.textContent = tn(ids.length, "common.count_items");
       items.replaceChildren();
       drawRows(items, ids, (id) => itemRow(id, null));
     }
@@ -714,40 +716,41 @@ export function listsMask(deps) {
     const list = current;
     if (list === ALL) {
       const n = namedLists().length;
-      headWithDanger(host, ALL.name, {
-        label: "Delete all lists", title: `Delete every list. ${FAVES_NAME} and crafting knowledge stay.`,
-        question: `Delete all ${n} list${n === 1 ? "" : "s"} and their items? `, yes: "Delete them", done: "All lists deleted",
+      const favourites = t("lists.favourites");
+      headWithDanger(host, t("lists.all"), {
+        label: t("lists.delete_all"), title: t("lists.delete_all.tip", { favourites }),
+        question: `${tn(n, "lists.delete_all.ask")} `, yes: t("lists.delete_all.yes"), done: t("lists.delete_all.done"),
         disabled: !n, act: deleteAllLists,
       });
-      host.append(elem("p", { class: "muted" }, `${n} list${n === 1 ? "" : "s"} and ${FAVES_NAME}. Select one on the left to see or change its items.`));
+      host.append(elem("p", { class: "muted" }, tn(n, "lists.all.summary", { favourites })));
       return;
     }
     if (list === KNOWLEDGE) { drawKnowledgeMain(host); return; }
 
     const head = elem("div", { class: "lists-head" });
-    const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: "Click to rename" }, listLabel(list));
+    const titleBtn = elem("button", { type: "button", class: "lists-title-button", title: t("lists.rename.tip") }, listLabel(list));
     // Only the last part is the button: a rename changes this list's own name, not where it sits.
     const crumb = () => elem("span", { class: "lists-crumb muted" }, list.name.slice(0, -leafOf(list).length));
     const title = elem("h2", {}, list.faves ? listLabel(list) : [crumb(), titleBtn]);
-    const del = elem("button", { type: "button", class: "btn-mini btn-danger" }, "🗑️ Delete");
-    const up = elem("button", { type: "button", class: "btn-mini", title: "Move up", "aria-label": "Move up" }, "▲");
-    const down = elem("button", { type: "button", class: "btn-mini", title: "Move down", "aria-label": "Move down" }, "▼");
+    const del = elem("button", { type: "button", class: "btn-mini btn-danger" }, t("lists.delete"));
+    const up = elem("button", { type: "button", class: "btn-mini", title: t("lists.move_up"), "aria-label": t("lists.move_up") }, "▲");
+    const down = elem("button", { type: "button", class: "btn-mini", title: t("lists.move_down"), "aria-label": t("lists.move_down") }, "▼");
     up.disabled = !canMove(list, -1);
     down.disabled = !canMove(list, 1);
     up.addEventListener("click", () => { moveList(list, -1); drawMain(); });
     down.addEventListener("click", () => { moveList(list, 1); drawMain(); });
     const shift = (delta) => {
       const can = canShift(list, delta);
-      const label = can.via ? `Move ${delta < 0 ? "out of" : "into"} "${leafOf(can.via)}"` : delta < 0 ? "Move out of its parent list" : "Move into the list above";
+      const label = can.via ? t(delta < 0 ? "lists.move_out_of" : "lists.move_into", { name: leafOf(can.via) }) : delta < 0 ? t("lists.move_out") : t("lists.move_in");
       const deep = delta > 0 && !can.ok && getLists().some((l) => (l === list || isUnder(l, list)) && depthOf(l) >= MAX_DEPTH);
-      const btn = elem("button", { type: "button", class: "btn-mini", title: can.reason || (deep ? "Cannot move deeper" : label), "aria-label": label }, delta < 0 ? "\u25C4" : "\u25BA");   // not U+25C0/U+25B6, which many systems draw as emoji
+      const btn = elem("button", { type: "button", class: "btn-mini", title: can.reason || (deep ? t("lists.move_too_deep") : label), "aria-label": label }, delta < 0 ? "\u25C4" : "\u25BA");   // not U+25C0/U+25B6, which many systems draw as emoji
       btn.disabled = !can.ok;
       btn.addEventListener("click", () => { shiftList(list, delta); drawMain(); });
       return btn;
     };
-    const sub = elem("button", { type: "button", class: "btn-mini", title: "Start a sublist of this list" }, "+ Sublist");
+    const sub = elem("button", { type: "button", class: "btn-mini", title: t("lists.sublist.tip") }, t("lists.sublist"));
     // Shown but disabled on the last level, so the buttons beside it keep their place.
-    if (depthOf(list) >= MAX_DEPTH) { sub.disabled = true; sub.title = "Cannot go deeper"; }
+    if (depthOf(list) >= MAX_DEPTH) { sub.disabled = true; sub.title = t("lists.sublist.too_deep"); }
     sub.addEventListener("click", () => {
       const box = $("#lists-new-name");
       box.value = list.name + SEP;
@@ -762,15 +765,15 @@ export function listsMask(deps) {
     const renameError = elem("p", { class: "warn", role: "alert", hidden: "" });
     const ask = elem("p", { class: "lists-confirm", hidden: "" },
       parent
-        ? `"${list.name}" has sublists, so it is emptied (${list.ids.length} item${list.ids.length === 1 ? "" : "s"}) and stays. Delete its sublists first to remove it. `
-        : `Delete "${list.name}" and its ${list.ids.length} item${list.ids.length === 1 ? "" : "s"}? `,
-      elem("button", { type: "button", class: "btn-mini btn-danger" }, parent ? "Empty it" : "Delete it"),
-      elem("button", { type: "button", class: "btn-mini" }, "Keep it"));
+        ? `${t("lists.delete.ask_parent", { name: list.name, items: tn(list.ids.length, "common.count_items") })} `
+        : `${t("lists.delete.ask", { name: list.name, items: tn(list.ids.length, "common.count_items") })} `,
+      elem("button", { type: "button", class: "btn-mini btn-danger" }, parent ? t("lists.delete.empty") : t("lists.delete.yes")),
+      elem("button", { type: "button", class: "btn-mini" }, t("lists.keep")));
     host.append(renameError, ask);
 
     // Rename in place, like the Names tab: Enter or leaving the field saves, Escape cancels.
     titleBtn.addEventListener("click", () => {
-      const input = elem("input", { class: "lists-title-edit", maxlength: String(MAX_NAME_LENGTH), "aria-label": "List name" });
+      const input = elem("input", { class: "lists-title-edit", maxlength: String(MAX_NAME_LENGTH), "aria-label": t("lists.name.label") });
       input.value = leafOf(list);
       let done = false;
       const finish = (keep) => {
@@ -805,7 +808,7 @@ export function listsMask(deps) {
 
     const search = elem("input", {
       id: "lists-search", type: "search", autocomplete: "off",
-      placeholder: "Add an item: search by name or id", "aria-label": "Add an item",
+      placeholder: t("lists.search.placeholder"), "aria-label": t("lists.search.label"),
     });
     const results = elem("ul", { id: "lists-matches", class: "cstore-matches" });
     host.append(search, results);
@@ -840,10 +843,10 @@ export function listsMask(deps) {
     });
 
     if (list.faves && !list.ids.length) {
-      host.append(elem("p", { class: "muted lists-empty" }, "Star an item in Browse, or search for one above."));
+      host.append(elem("p", { class: "muted lists-empty" }, t("lists.faves_empty")));
     }
     const count = elem("p", { class: "muted lists-count" });
-    const drawCount = () => { count.textContent = `${list.ids.length} item${list.ids.length === 1 ? "" : "s"}`; };
+    const drawCount = () => { count.textContent = tn(list.ids.length, "common.count_items"); };
     drawCount();
     const items = elem("ul", { class: "lists-items" });
     host.append(count, items);
@@ -859,10 +862,10 @@ export function listsMask(deps) {
     const ways = waysToGet(id);
     const li = elem("li", { class: "lists-item" });
     const line = elem("div", { class: "lists-item-row", title: ways.join("\n") });
-    line.append(itemIconImg(id, name || `item ${id}`));
+    line.append(itemIconImg(id, name || t("common.item_fallback", { id })));
     // The marker goes inside, right before the name, so it is not taken for a button of its own.
     const mark = knowledgeMarker(id);
-    const toggle = elem("button", { type: "button", class: "lists-item-name", "aria-expanded": "false" }, mark ? [mark, " "] : [], name || "(unknown item)");
+    const toggle = elem("button", { type: "button", class: "lists-item-name", "aria-expanded": "false" }, mark ? [mark, " "] : [], name || t("lists.unknown_item"));
     line.append(toggle);
     const recs = deps.recordsForItem?.(id) || [];
     const blueprint = recs.some((r) => r.id) ? recs.find((r) => r.blueprint)?.blueprint : null;
@@ -872,12 +875,12 @@ export function listsMask(deps) {
       li.classList.toggle("is-open", !where.hidden);
       toggle.setAttribute("aria-expanded", String(!where.hidden));
     });
-    const show = elem("button", { type: "button", class: "btn-mini", title: "Show in Browse", "aria-label": `Show ${name || id} in Browse` }, "🔍");
+    const show = elem("button", { type: "button", class: "btn-mini", title: t("lists.show_in_browse"), "aria-label": t("lists.show_in_browse.label", { name: name || id }) }, "🔍");
     show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
     let remove = [];
     if (list) {
       remove = elem("button", {
-        type: "button", class: "btn-mini lists-remove", "aria-label": `Remove ${name || id}`, title: `Remove from ${list.faves ? FAVES_NAME : "this list"}`,
+        type: "button", class: "btn-mini lists-remove", "aria-label": t("lists.remove.label", { name: name || id }), title: list.faves ? t("lists.fave.remove", { favourites: t("lists.favourites") }) : t("lists.remove.from_list"),
       }, "🗑️");
       remove.addEventListener("click", () => { setItem(list, id, false); drop(li); });
     }
@@ -913,7 +916,7 @@ export function listsMask(deps) {
   // One line per way to get the item, in the order Browse lists them.
   function waysToGet(id) {
     const recs = deps.recordsForItem?.(id) || [];
-    if (!recs.length) return ["Not in the catalogue."];
+    if (!recs.length) return [t("lists.not_in_catalogue")];
     return recs.map((r) => {
       const cost = deps.formatCost ? deps.formatCost(r.cost) : "-";
       return cost === "-" ? deps.recordLocator(r) : `${deps.recordLocator(r)}: ${cost}`;
@@ -926,11 +929,11 @@ export function listsMask(deps) {
     ul.innerHTML = "";
     matches.forEach((m, i) => {
       const li = elem("li", { class: "cstore-match" + (i === activeMatch ? " is-active" : "") });
-      li.append(itemIconImg(m.id, m.name || `item ${m.id}`));
+      li.append(itemIconImg(m.id, m.name || t("common.item_fallback", { id: m.id })));
       const txt = elem("span", { class: "cstore-match-txt" },
-        elem("span", { class: "cstore-match-name" }, m.name || "(no name)"),
+        elem("span", { class: "cstore-match-name" }, m.name || t("common.no_name")),
         elem("span", { class: "cstore-match-id muted" }, `#${m.id}`));
-      if (current?.ids.includes(m.id)) txt.append(elem("span", { class: "cstore-match-has" }, "on this list"));
+      if (current?.ids.includes(m.id)) txt.append(elem("span", { class: "cstore-match-has" }, t("lists.on_this_list")));
       li.append(txt);
       li.addEventListener("click", () => addMatch(m));
       ul.append(li);
@@ -948,13 +951,13 @@ export function listsMask(deps) {
   return { id: "lists", render, onShow: () => { if ($("#lists-main")) { drawIndex(); drawMain(); } } };
 }
 
-// The row above the lists: selects every list for import and export, and holds no items itself.
-const ALL = { name: "All lists", ids: [] };
-const KNOWLEDGE = { name: "Crafting knowledge", ids: [] };
-const KNOWLEDGE_CHOICES = { all: "All", known: "Known", unknown: "Unknown" };
-const KNOWLEDGE_SOURCE = "Export it in FurnitureCatalogue (/furcexport or the list manager) and import it here.";
+// Markers for the two rows that are no list; neither holds items.
+const ALL = { ids: [] };
+const KNOWLEDGE = { ids: [] };
+// Text ids
+const KNOWLEDGE_CHOICES = { all: "lists.knowledge.choice_all", known: "lists.knowledge.choice_known", unknown: "lists.knowledge.choice_unknown" };
 function defaultList() { return lastList() || namedLists()[0] || favourites(); }
-function listLabel(list) { return list.faves ? `\u2605 ${FAVES_NAME}` : leafOf(list); }
+function listLabel(list) { return list.faves ? `\u2605 ${t("lists.favourites")}` : leafOf(list); }
 // A select cannot indent its options with CSS, so the level is written as spaces.
 function optionLabel(list) { return "\u00a0\u00a0\u00a0".repeat(depthOf(list) - 1) + listLabel(list); }
 
@@ -965,7 +968,7 @@ export function starButton(id, after) {
   btn.type = "button";
   btn.className = "btn-mini lists-fave" + (on ? " is-on" : "");
   btn.textContent = on ? "\u2605" : "\u2606";
-  btn.title = on ? `Remove from ${FAVES_NAME}` : `Add to ${FAVES_NAME}`;
+  btn.title = t(on ? "lists.fave.remove" : "lists.fave.add", { favourites: t("lists.favourites") });
   btn.setAttribute("aria-label", btn.title);
   btn.setAttribute("aria-pressed", String(on));
   btn.addEventListener("click", (e) => {
@@ -988,33 +991,34 @@ export function openAddToList(id, itemName) {
     dialog.innerHTML = `
       <form method="dialog">
         <h3 id="list-pick-title" class="list-pick-title"></h3>
-        <label>List <select class="list-pick-select"></select></label>
-        <input class="list-pick-name" placeholder="New list, or List > Sublist" aria-label="New list name">
+        <label><span data-t="lists.pick.list"></span> <select class="list-pick-select"></select></label>
+        <input class="list-pick-name" data-t-placeholder="lists.new.placeholder" data-t-aria-label="lists.new.label">
         <p class="list-pick-msg muted" role="status"></p>
         <div class="list-pick-actions">
-          <button class="btn-primary list-pick-ok" value="ok">Add</button>
-          <button value="cancel" formnovalidate>Cancel</button>
+          <button class="btn-primary list-pick-ok" value="ok"></button>
+          <button value="cancel" formnovalidate data-t="common.cancel"></button>
         </div>
       </form>`;
     document.body.append(dialog);
   }
+  translateTree(dialog);
   const NEW = "\u0000new";
   const q = (sel) => dialog.querySelector(sel);
   const select = q(".list-pick-select"), nameBox = q(".list-pick-name"), ok = q(".list-pick-ok"), msg = q(".list-pick-msg");
-  q(".list-pick-title").textContent = `Add ${itemName || `#${id}`} to a list`;
+  q(".list-pick-title").textContent = t("lists.pick.title", { name: itemName || `#${id}` });
   select.innerHTML = "";
   const valueOf = (l) => (l.faves ? LAST_FAVES : l.name);
   const listOf = (v) => (v === NEW ? null : v === LAST_FAVES ? favourites() : findList(v));
-  for (const l of getLists()) select.append(new Option(l.ids.includes(id) ? `${optionLabel(l)} (on it)` : optionLabel(l), valueOf(l)));
-  select.append(new Option("New list...", NEW));
+  for (const l of getLists()) select.append(new Option(l.ids.includes(id) ? t("lists.pick.on_it", { list: optionLabel(l) }) : optionLabel(l), valueOf(l)));
+  select.append(new Option(t("lists.pick.new"), NEW));
   select.value = valueOf(defaultList());
 
   const sync = () => {
     const list = listOf(select.value);
     nameBox.hidden = Boolean(list);
     const on = list?.ids.includes(id);
-    ok.textContent = on ? "Remove from list" : "Add";
-    msg.textContent = on ? "Already on this list." : "";
+    ok.textContent = on ? t("lists.pick.remove") : t("lists.pick.add");
+    msg.textContent = on ? t("lists.pick.already") : "";
   };
   select.onchange = () => { sync(); if (select.value === NEW) nameBox.focus(); };
   q("form").onsubmit = (e) => {

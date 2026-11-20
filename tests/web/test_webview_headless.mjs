@@ -3851,6 +3851,12 @@ test("language: tab names and source kinds follow the interface translation, and
     // no tab or subtab shows a bare text id
     const bare = await page.$$eval(".tab, .subtab", (els) => els.map((e) => e.textContent).filter((text) => /\btab\./.test(text)));
     assertEq(bare.join("; "), "", "tabs without a text in the master file");
+    // Lists is the landing page: fixed markup, drawn text, and markup inside a translated sentence
+    await switchTab(page, "lists");
+    assertEq(await page.$eval("#lists-new button", (e) => e.textContent), "Anlegen", "the Create button");
+    assertEq(await page.$eval("#lists-index .lists-index-all span", (e) => e.textContent), "Alle Listen", "the All lists row");
+    assertEq(await page.$eval("#lists-help p:last-child", (e) => `${e.textContent} | ${e.querySelector("code")?.textContent}`),
+      "Es lassen sich auch nur IDs importieren (115647,118303); sie landen in der gerade gewählten Liste. | 115647,118303", "the help line keeps its example");
     // a page's own text: fixed markup, drawn text and a filled hole, and back to English without a reload
     await switchTab(page, "browse");
     await page.waitForFunction(() => /Gegenstände/.test(document.querySelector("#browse-count")?.textContent || ""), { timeout: 10000 })

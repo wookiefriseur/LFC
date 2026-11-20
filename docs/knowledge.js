@@ -1,11 +1,14 @@
 // Which furnishing plans the game says this character knows, from the add-on's knowledge export. Kept apart from the lists: it never becomes one and is never exported from here.
 
+import { t, tn } from "./lexicon.js";
+
 const STORE_KEY = "lfc.knowledge";
 const KINDS = ["known", "unknown"];
+// `title` is a text id
 export const MARKS = {
-  known: { glyph: "✅", title: "You can craft this" },
-  unknown: { glyph: "✅", title: "You cannot craft this yet" },   // greyed out by its class
-  missing: { glyph: "❓", title: "Missing craftable knowledge. Either you didn't import it or it's not in the current game version." },
+  known: { glyph: "✅", title: "knowledge.mark.known" },
+  unknown: { glyph: "✅", title: "knowledge.mark.unknown" },   // greyed out by its class
+  missing: { glyph: "❓", title: "knowledge.mark.missing" },
 };
 
 // { known?: { total, pages: [n, ...], ids }, unknown?: { total, pages, ids, previous?: ids }, learned: ids }
@@ -139,14 +142,15 @@ export function importKnowledge(entries, resolve = (id) => id) {
   return report;
 }
 
-const pagesText = (ps) => `page${ps.length === 1 ? "" : "s"} ${ps.join(", ")}`;
+const pagesText = (ps) => tn(ps.length, "knowledge.pages", { pages: ps.join(", ") });
 
 // "2301 known, page 1 of 2 (page 2 missing)"
 export function kindReport(kind) {
   const k = load()[kind];
   if (!k) return "";
   const missing = missingPages(kind);
-  return `${k.ids.length} ${kind}` + (missing.length ? `, ${pagesText(k.pages)} of ${k.total} (${pagesText(missing)} missing)` : "");
+  const count = t(kind === "known" ? "knowledge.report.known" : "knowledge.report.unknown", { n: k.ids.length });
+  return missing.length ? t("knowledge.report.partial", { count, pages: pagesText(k.pages), total: k.total, missing: pagesText(missing) }) : count;
 }
 
 // "Known: 2301 (page 2 of 2 missing)"
@@ -154,14 +158,16 @@ export function kindStatus(kind) {
   const k = load()[kind];
   if (!k) return "";
   const missing = missingPages(kind);
-  return `${kind === "known" ? "Known" : "Unknown"}: ${k.ids.length}` + (missing.length ? ` (${pagesText(missing)} of ${k.total} missing)` : "");
+  const status = t(kind === "known" ? "knowledge.status.known" : "knowledge.status.unknown", { n: k.ids.length });
+  return missing.length ? t("knowledge.status.partial", { status, missing: pagesText(missing), total: k.total }) : status;
 }
 
 // Read-only marker for an id with a stored state; null otherwise.
 export function knowledgeMarker(id) {
   const state = knowledgeOf(id);
   if (!state) return null;
-  const { glyph, title } = MARKS[state];
+  const { glyph } = MARKS[state];
+  const title = t(MARKS[state].title);
   const mark = document.createElement("span");
   mark.className = `knowledge-mark is-${state}`;
   mark.setAttribute("role", "img");

@@ -37,6 +37,11 @@ export function t(id, values) {
 
 const HOLE = /\{(\w+)\}/g;
 
+/** A counted text: `<id>_one` for exactly one, `<id>` for any other number; `{n}` is the number unless `values` gives it. */
+export function tn(n, id, values) {
+  return t(n === 1 ? `${id}_one` : id, { n, ...values });
+}
+
 /** The English texts by id, which is what the Translation list offers. */
 export function englishTexts() {
   return en;
@@ -54,7 +59,11 @@ const MARKED = ["title", "placeholder", "aria-label"];
 
 /** Writes the chosen language into every marked element under `root`. */
 export function translateTree(root) {
-  for (const el of root.querySelectorAll("[data-t]")) el.textContent = t(el.dataset.t);
+  for (const el of root.querySelectorAll("[data-t]")) {
+    // A child marked data-hole="name" stands where the text has {name}, so markup inside a sentence survives translation.
+    const kept = [...el.querySelectorAll(":scope > [data-hole]")];
+    el.replaceChildren(...t(el.dataset.t).split(/(\{\w+\})/).map((part) => kept.find((k) => `{${k.dataset.hole}}` === part) || part));
+  }
   for (const attr of MARKED) {
     for (const el of root.querySelectorAll(`[data-t-${attr}]`)) el.setAttribute(attr, t(el.getAttribute(`data-t-${attr}`)));
   }
