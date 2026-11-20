@@ -1,6 +1,6 @@
 // The quick-edit modal is a view: it renders through the same renderForm() as Batch edit with a reduced partition, validates with validateRecord() and saves through state.buffer.update(). Which fields a record shows is renderForm()'s decision; no per-type field list lives here.
 
-import { labelFor, sourceTypeLabel, subtypeVocab } from "./lexicon.js";
+import { labelFor, sourceTypeLabel, subtypeVocab, t, tn } from "./lexicon.js";
 import { entryOf, mirror } from "./data.js";
 import { messageFor, sourceEnumFields } from "./validate.js";
 
@@ -106,12 +106,12 @@ function render(key) {
   ui.inner.append(body);
 
   ui.status = elem("p", { class: "modal-status" });
-  ui.saveBtn = elem("button", { class: "btn-primary modal-save" }, "Save change");
+  ui.saveBtn = elem("button", { class: "btn-primary modal-save" }, t("quick.save"));
   ui.saveBtn.addEventListener("click", () => save());
-  const cancelBtn = elem("button", { class: "modal-cancel" }, "Cancel");
+  const cancelBtn = elem("button", { class: "modal-cancel" }, t("common.cancel"));
   cancelBtn.addEventListener("click", () => closeQuickEdit());
   const batchLink = elem("button", { class: "modal-batch", type: "button" },
-    "Batch edit");
+    t("tab.advanced"));
   batchLink.addEventListener("click", () => jumpToBatchEdit());
   ui.inner.append(elem("div", { class: "modal-footer" },
     ui.status, batchLink, cancelBtn, ui.saveBtn));
@@ -126,7 +126,7 @@ function renderHeader(live) {
   const { elem, nameOf } = deps;
   const head = elem("header", { class: "modal-header" });
   const itemId = live.id ?? live.blueprint;
-  const name = nameOf(itemId) || "(unnamed item)";
+  const name = nameOf(itemId) || t("common.unnamed_item");
   head.append(deps.itemIconImg(itemId, name));
 
   const lines = elem("div", { class: "modal-headings" });
@@ -143,12 +143,12 @@ function renderHeader(live) {
   const n = siblings.findIndex((r) => r._key === live._key) + 1;
   const m = siblings.length || 1;
   lines.append(elem("p", { class: "modal-ordinal" },
-    `record ${n || 1} of ${m} for this item`));
+    t("quick.ordinal", { n: n || 1, m })));
 
   // The item's other records, clickable: this stops a price being typed into the wrong record of the same item.
   const others = siblings.filter((r) => r._key !== live._key);
   if (others.length) {
-    const also = elem("p", { class: "modal-also" }, elem("span", {}, "also:"));
+    const also = elem("p", { class: "modal-also" }, elem("span", {}, t("quick.also")));
     for (const other of others) {
       const oloc = locatorLine(other);
       const btn = elem("button", { class: "modal-also-link", type: "button" },
@@ -161,7 +161,7 @@ function renderHeader(live) {
   }
   head.append(lines);
 
-  const closeBtn = elem("button", { class: "modal-close", "aria-label": "close" }, "×");
+  const closeBtn = elem("button", { class: "modal-close", "aria-label": t("common.close") }, "×");
   closeBtn.addEventListener("click", () => closeQuickEdit());
   head.append(closeBtn);
   return head;
@@ -224,7 +224,7 @@ function paint() {
 
   const blocked = fresh.length > 0;
   ui.saveBtn.disabled = blocked;
-  ui.status.textContent = blocked ? "Fix the highlighted field to save." : "";
+  ui.status.textContent = blocked ? t("quick.blocked") : "";
   ui.status.className = blocked ? "modal-status warn" : "modal-status";
 }
 
@@ -233,12 +233,9 @@ function preexistingLine(f, live) {
   const type = live.source?.type;
   const field = bareField(f.field);
   const value = live.source ? live.source[field] : undefined;
-  const opener = "This record already had a problem before you opened it: ";
-  let text = opener + findingText(f);
+  let text = t("quick.preexisting", { problem: findingText(f) });
   if (isLibraryUndefined(field, value, type, ui.deps.state.enums)) {
-    text = `${opener}the ` +
-      `${labelFor(`source.${field}`, type)} ${value} is not in the game data. ` +
-      "That is a known problem in the source data, not something you did.";
+    text = t("quick.preexisting.library", { field: labelFor(`source.${field}`, type), value });
   }
   return ui.deps.elem("p", { class: "muted modal-preexisting" }, text);
 }
@@ -315,18 +312,18 @@ function save() {
 }
 
 function showToast(deps) {
-  document.querySelectorAll(".qe-toast").forEach((t) => t.remove());
+  document.querySelectorAll(".qe-toast").forEach((old) => old.remove());
   const n = deps.state.buffer.size();
   const toast = deps.elem("div", { class: "toast qe-toast", role: "status" },
     deps.elem("span", { class: "toast-text" },
-      `Saved. ${n} change${n === 1 ? "" : "s"} ready to send.`));
-  const send = deps.elem("button", { class: "btn-mini btn-primary" }, "Send now");
+      t("batch.saved", { changes: tn(n, "common.count_changes") })));
+  const send = deps.elem("button", { class: "btn-mini btn-primary" }, t("common.send_now"));
   send.addEventListener("click", () => {
     toast.remove();
     const btn = deps.$("#btn-submit");
     if (btn) btn.click();
   });
-  const keep = deps.elem("button", { class: "btn-mini" }, "Keep editing");
+  const keep = deps.elem("button", { class: "btn-mini" }, t("quick.keep"));
   keep.addEventListener("click", () => toast.remove());
   toast.append(send, keep);
   document.body.append(toast);

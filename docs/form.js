@@ -38,10 +38,11 @@ export const SITE_ONLY_FIELDS = ["notes", "name_overrides"];
 
 // Where the ticked records disagree. No vocabulary contains it, and the caller writes only paths moved off their starting value, so a field left on it is never written.
 export const MIXED = "\u0000mixed";
-const MIXED_LABEL = "(mixed - leave unchanged)";
+const mixedLabel = () => t("form.mixed");
 
+// Text ids
 const NOTE_PLACEHOLDER = {
-  guild_gift: "the guild's name, e.g. Aetherius Art",
+  guild_gift: "form.note.placeholder.guild_gift",
 };
 
 // Visibility rule
@@ -161,7 +162,7 @@ function tipAffordance(ctx, text, labelText, path = "") {
   const id = ctx.uid(`tip${ctx.seq++}`);
   const btn = h("button", {
     type: "button", class: "tip-btn", "aria-describedby": id,
-    "aria-expanded": "false", "aria-label": `Explain: ${labelText}`,
+    "aria-expanded": "false", "aria-label": t("form.explain", { field: labelText }),
   }, "?");
   const bubble = h("span", { class: "tip-bubble", role: "tooltip", id }, text,
     path && h("code", { class: "tip-path" }, path));
@@ -232,11 +233,11 @@ function markRow(r) {
 }
 
 function readonlyValue(text) {
-  return h("div", { class: "readonly-value" }, text === "" || text == null ? "(none)" : text);
+  return h("div", { class: "readonly-value" }, text === "" || text == null ? t("form.none") : text);
 }
 
 function clearLink(onClear) {
-  const a = h("button", { type: "button", class: "clear-link" }, "clear");
+  const a = h("button", { type: "button", class: "clear-link" }, t("form.clear"));
   a.addEventListener("click", onClear);
   return a;
 }
@@ -265,15 +266,15 @@ function flatPairs(enums, key) {
 function selectFromPairs(name, value, pairs, opts = {}) {
   const sel = h("select", { name, "data-field": name });
   if (value === MIXED) {
-    const o = h("option", { value: MIXED }, MIXED_LABEL);
+    const o = h("option", { value: MIXED }, mixedLabel());
     o.selected = true;
     sel.append(o);
   }
-  if (opts.empty !== false) sel.append(h("option", { value: "" }, "(none)"));
+  if (opts.empty !== false) sel.append(h("option", { value: "" }, t("form.none")));
   const v = value === MIXED ? "" : value ?? "";
   if (v !== "" && !pairs.some((p) => p.value === v)) {
     // A stored value the vocabulary lacks is kept and marked: the editor must surface it.
-    pairs = [{ value: v, label: `${v} - not in the list` }, ...pairs];
+    pairs = [{ value: v, label: t("form.not_in_list", { value: v }) }, ...pairs];
   }
   // A label "Group: name" sorts into an optgroup of that name, after the ungrouped options
   const groups = new Map();
@@ -317,7 +318,7 @@ function renderIntList(ctx, field, id) {
   const input = h("input", {
     type: "text", id,
     value: formatIntList(source[field]),
-    placeholder: "(comma-separated ids)",
+    placeholder: t("form.int_list.placeholder"),
     "data-field": `source.${field}`,
   });
   const warn = h("p", { class: "field-error", hidden: true });
@@ -325,7 +326,7 @@ function renderIntList(ctx, field, id) {
     const { values, invalid } = parseIntList(e.target.value);
     if (values.length === 0) delete source[field];
     else source[field] = values;
-    warn.textContent = invalid.length ? `not a number, ignored: ${invalid.join(", ")}` : "";
+    warn.textContent = invalid.length ? t("form.int_list.invalid", { values: invalid.join(", ") }) : "";
     warn.hidden = invalid.length === 0;
     wrap.classList.toggle("is-invalid", invalid.length > 0);
     ctx.onChange();
@@ -361,7 +362,7 @@ function placementRow(ctx, index, repaint) {
     return sel;
   };
 
-  const remove = h("button", { type: "button", class: "clear-link" }, "remove");
+  const remove = h("button", { type: "button", class: "clear-link" }, t("form.remove"));
   remove.addEventListener("click", () => {
     list.splice(index, 1);
     if (list.length === 0) delete ctx.record.source.locations;
@@ -369,8 +370,8 @@ function placementRow(ctx, index, repaint) {
     ctx.onChange();
   });
 
-  row_.append(h("label", {}, "Zone", bind("location", "locations")), h("label", {}, "Place", bind("place", "places")), remove);
-  row_.title = "Zone: Murkmire. Place: Lilmoth. Use both for a vendor in Lilmoth, Murkmire.";
+  row_.append(h("label", {}, t("form.place.zone"), bind("location", "locations")), h("label", {}, t("form.place.place"), bind("place", "places")), remove);
+  row_.title = t("form.place.tip");
   return row_;
 }
 
@@ -391,14 +392,14 @@ function renderPackList(ctx, id) {
     const list = packs();
     list.forEach((pack, i) => {
       const sel = selectFromPairs(`source.packs.${i}`, pack, optionPairs(ctx.enums, "packs", pack));
-      sel.setAttribute("aria-label", `Furnishing pack ${i + 1}`);
+      sel.setAttribute("aria-label", t("form.pack.label", { n: i + 1 }));
       sel.addEventListener("change", (e) => {
         const next = packs();
         if (e.target.value === "") next.splice(i, 1);
         else next[i] = e.target.value;
         write(next);
       });
-      const remove = h("button", { type: "button", class: "clear-link" }, "remove");
+      const remove = h("button", { type: "button", class: "clear-link" }, t("form.remove"));
       remove.addEventListener("click", () => {
         const next = packs();
         next.splice(i, 1);
@@ -407,8 +408,8 @@ function renderPackList(ctx, id) {
       wrap.append(h("div", { class: "pack-row" }, sel, remove));
     });
     const add = selectFromPairs("source.packs.new", "", optionPairs(ctx.enums, "packs", ""));
-    add.setAttribute("aria-label", list.length ? "Add another furnishing pack" : "Furnishing pack");
-    add.options[0].textContent = list.length ? "(add another pack)" : "(none)";
+    add.setAttribute("aria-label", list.length ? t("form.pack.add.label") : t("form.pack.first.label"));
+    add.options[0].textContent = list.length ? t("form.pack.add") : t("form.none");
     add.addEventListener("change", (e) => {
       if (e.target.value) write([...packs(), e.target.value]);
     });
@@ -432,20 +433,18 @@ function renderPlacements(ctx, id) {
     wrap.classList.toggle("is-invalid", empty);
     if (empty) {
       wrap.append(h("p", { class: "field-error" },
-        "Each row needs a zone or a place."));
+        t("form.place.error")));
     }
 
     if (!list.length) {
       const { placements, inherited, vendor } = effectivePlacements(ctx.enums, source);
       if (inherited) {
         wrap.append(h("p", { class: "field-hint" },
-          `Inherited from ${labelOf(ctx.enums, "vendors", vendor) || vendor}: `
-          + `${placementsText(ctx.enums, placements)}. `
-          + "Add a place to override it."));
+          t("form.place.inherited", { vendor: labelOf(ctx.enums, "vendors", vendor) || vendor, places: placementsText(ctx.enums, placements) })));
       }
     }
 
-    const add = h("button", { type: "button", class: "clear-link" }, "add a place");
+    const add = h("button", { type: "button", class: "clear-link" }, t("form.place.add"));
     add.addEventListener("click", () => {
       if (!Array.isArray(source.locations)) source.locations = [];
       source.locations.push({});
@@ -476,7 +475,7 @@ function renderCostSingle(ctx, id) {
     type: "number", step: 1, min: 1, id,
     value: cost[0]?.amount ?? "",
     // An amount left empty is not written.
-    placeholder: ctx.opts.mixed?.has("cost") ? MIXED_LABEL : null,
+    placeholder: ctx.opts.mixed?.has("cost") ? mixedLabel() : null,
     "data-field": "cost.0.amount",
     "aria-label": labelFor("cost[].amount"),
   });
@@ -530,7 +529,7 @@ function renderCostRows(ctx) {
         cost[i].amount = parseInt(e.target.value, 10) || 0;
         ctx.onChange();
       });
-      const rm = h("button", { type: "button", class: "btn-mini", "aria-label": "Remove this price" }, "x");
+      const rm = h("button", { type: "button", class: "btn-mini", "aria-label": t("form.cost.remove") }, "x");
       rm.addEventListener("click", () => {
         cost.splice(i, 1);
         ctx.onChange();
@@ -541,8 +540,8 @@ function renderCostRows(ctx) {
     // A second price is for a second currency of the same offer or should be an additional record
     const add = h("button", {
       type: "button", class: "btn-mini",
-      title: "Same offer, paid in another currency as well. A different offer needs its own record.",
-    }, "+ price in another currency");
+      title: t("form.cost.add.tip"),
+    }, t("form.cost.add"));
     add.addEventListener("click", () => {
       const used = new Set(cost.map((c) => c.currency));
       const preferred = defaultCurrency(enums, ctx.record.source?.type);
@@ -568,8 +567,8 @@ function renderNoteField(ctx, id) {
   const txt = h("input", {
     type: "text", id,
     value: mixed ? "" : source.note ?? "",
-    placeholder: mixed ? MIXED_LABEL
-      : NOTE_PLACEHOLDER[source.type] || "a one-off qualifier, in a few words",
+    placeholder: mixed ? mixedLabel()
+      : t(NOTE_PLACEHOLDER[source.type] || "form.note.placeholder"),
     "data-field": "source.note",
   });
   const empty = () => {
@@ -640,7 +639,7 @@ function sourceControl(ctx, field, id) {
       type: INT_FIELDS.has(field) ? "number" : "text",
       step: INT_FIELDS.has(field) ? 1 : null,
       value: mixed ? "" : value, id, "data-field": name,
-      placeholder: mixed ? MIXED_LABEL : null,
+      placeholder: mixed ? mixedLabel() : null,
     });
   }
   if (widget.tagName === "SELECT") widget.id = id;
@@ -684,7 +683,7 @@ function sourceRow(ctx, field) {
     return r;
   }
   if (source[field] === MIXED && (field === "locations" || INT_LIST_FIELDS.has(field))) {
-    return row(fieldLabel(ctx, path, { required }), readonlyValue(MIXED_LABEL));
+    return row(fieldLabel(ctx, path, { required }), readonlyValue(mixedLabel()));
   }
 
   const { widget, block } = sourceControl(ctx, field, id);
@@ -752,7 +751,7 @@ function dateInput(ctx, path, onPaint) {
   const mixed = av[key] === MIXED;
   const input = h("input", {
     type: "date", id, value: mixed ? "" : av[key] ?? "", "data-field": path,
-    title: mixed ? MIXED_LABEL : null,
+    title: mixed ? mixedLabel() : null,
   });
   input.addEventListener("input", (e) => {
     const raw = e.target.value;
@@ -775,7 +774,7 @@ function datesGroup(ctx, paths) {
   for (const path of paths) {
     const { id, input } = dateInput(ctx, path, () => {});
     const hint = ctx.record.availability[path.slice("availability.".length)] === MIXED
-      ? h("span", { class: "muted" }, ` ${MIXED_LABEL}`) : null;
+      ? h("span", { class: "muted" }, ` ${mixedLabel()}`) : null;
     wrap.append(row(fieldLabel(ctx, path, { forId: id }), hint ? h("span", {}, input, hint) : input, findingLines(ctx, path)));
   }
   return wrap;
@@ -798,7 +797,7 @@ function orphanRow(ctx, path) {
   const field = path.slice("source.".length);
   const value = ctx.record.source[field];
   const label = fieldLabel(ctx, path);
-  const rm = h("button", { type: "button", class: "btn-mini btn-remove" }, "Remove");
+  const rm = h("button", { type: "button", class: "btn-mini btn-remove" }, t("form.orphan.remove"));
   rm.addEventListener("click", () => {
     delete ctx.record.source[field];
     ctx.onChange();
@@ -813,7 +812,7 @@ function orphanRow(ctx, path) {
 
 function batchNoteRow(ctx) {
   const notes = h("textarea", { rows: 2, "data-field": "notes",
-    placeholder: ctx.record.notes === MIXED ? MIXED_LABEL : "Why are these records changing?" });
+    placeholder: ctx.record.notes === MIXED ? mixedLabel() : t("form.batch_note.placeholder") });
   notes.value = ctx.record.notes === MIXED ? "" : ctx.record.notes ?? "";
   notes.addEventListener("input", () => {
     if (notes.value.trim()) ctx.record.notes = notes.value;
@@ -829,7 +828,7 @@ function batchNoteRow(ctx) {
 function siteOnlyFieldset(ctx) {
   const mode = ctx.opts.webviewOnly || "edit";
   const fs = h("fieldset", { class: "form-fieldset form-fieldset-site" },
-    h("legend", {}, "Only on this site"));
+    h("legend", {}, t("form.site_only")));
   const record = ctx.record;
 
   if (mode === "readonly") {
@@ -842,14 +841,14 @@ function siteOnlyFieldset(ctx) {
         : record[field];
       fs.append(row(fieldLabel(ctx, field), readonlyValue(v), [], true));
     }
-    if (!any) fs.append(h("p", { class: "muted site-only-empty" }, "Nothing site-only on this record."));
+    if (!any) fs.append(h("p", { class: "muted site-only-empty" }, t("form.site_only.empty")));
     return fs;
   }
 
   const notesId = ctx.uid("notes");
   const notes = h("textarea", {
     rows: 2, id: notesId,
-    placeholder: "(optional)",
+    placeholder: t("form.optional"),
     "data-field": "notes",
   });
   notes.value = record.notes ?? "";
@@ -867,7 +866,7 @@ function siteOnlyFieldset(ctx) {
   const no = h("input", {
     type: "text", id: noId,
     value: record.name_overrides?.en ?? known,
-    placeholder: "(no name yet)",
+    placeholder: t("form.name.placeholder"),
     "data-field": "name_overrides.en",
   });
   no.addEventListener("input", (e) => {
@@ -937,7 +936,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
     const part = partitionFields(record, enums.source_type_contracts, ctx.findings);
 
     const game = h("fieldset", { class: "form-fieldset form-fieldset-game" },
-      h("legend", {}, "Ships to the game database"));
+      h("legend", {}, t("form.game")));
 
     // The reduced partition omits the id and source-type rows: the quick-edit header already states both.
     const reduced = opts.partition === "reduced";
@@ -959,22 +958,22 @@ export function renderForm(record, enums, onChange, opts = {}) {
         idInput.classList.add("is-readonly");
       }
       if (!reduced && !batch) {
-        game.append(row(h("label", { for: idId }, field === "id" ? "Furnishing ID" : "Blueprint ID"), idInput,
+        game.append(row(h("label", { for: idId }, field === "id" ? t("form.id") : t("form.blueprint")), idInput,
           findingLines(ctx, field)));
       }
     }
     if (!reduced && !batch && opts.allowIdEdit) {
-      game.append(h("p", { class: "muted" }, "Enter a furnishing ID, a blueprint ID, or both when the pair is known."));
+      game.append(h("p", { class: "muted" }, t("form.id.hint")));
     }
     if (!reduced && !batch && typeof opts.onPair === "function"
         && (record.source?.type === "recipe" || record.blueprint != null)) {
       const pair = h("button", { type: "button", class: "btn-mini form-pair" },
-        "Link a blueprint and furnishing");
+        t("browse.pair"));
       pair.addEventListener("click", () => opts.onPair());
       game.append(row(h("span", {}), pair));
     }
     if (!reduced && !batch && typeof opts.onFolio === "function" && canMoveToFolio(record)) {
-      const folio = h("button", { type: "button", class: "btn-mini form-folio" }, "Move into a folio");
+      const folio = h("button", { type: "button", class: "btn-mini form-folio" }, t("browse.move_to_folio"));
       folio.addEventListener("click", () => opts.onFolio());
       game.append(row(h("span", {}), folio));
     }
@@ -1012,20 +1011,19 @@ export function renderForm(record, enums, onChange, opts = {}) {
     // A preset already says what the record is, and none of them is a container.
     if (!batch && !reduced && !opts.hideContainerKind) {
       const kind = selectFromPairs("container", record.container || "", [
-        { value: "", label: "Not a container" }, { value: "books", label: "Book collection" }, { value: "folio", label: "Furnishing folio" },
+        { value: "", label: t("form.container.none") }, { value: "books", label: t("form.container.books") }, { value: "folio", label: t("folio.fallback") },
       ]);
       kind.addEventListener("change", () => {
         if (kind.value) record.container = kind.value; else delete record.container;
         ctx.onChange();
       });
-      game.append(row(h("label", {}, "Container kind"), kind));
+      game.append(row(h("label", {}, t("form.container")), kind));
     }
 
     // No one contract to lay mixed source kinds out by, so only what every kind has is offered.
     if (batch && record.source.type === MIXED) {
       game.append(h("p", { class: "muted" },
-        "These records come from different kinds of source. Pick one above to " +
-        "set it on all of them; their details stay as they are."));
+        t("form.mixed_kinds")));
       game.append(costRow(ctx), versionRow(ctx), datesGroup(ctx, AVAIL_DATES), batchNoteRow(ctx));
       form.append(game);
       return;
@@ -1033,8 +1031,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
 
     if (part.noContract) {
       game.append(h("p", { class: "no-contract" },
-        `This site has no rule for "${record.source.type}" sources, so this ` +
-        "record cannot be edited here. Pick a kind of source from the list."));
+        t("form.no_contract", { kind: record.source.type })));
       for (const path of part.orphans) game.append(orphanRow(ctx, path));
       form.append(game);
       if ((opts.webviewOnly || "edit") !== "hidden") form.append(siteOnlyFieldset(ctx));
@@ -1080,7 +1077,7 @@ export function renderForm(record, enums, onChange, opts = {}) {
         }
       }
       const det = h("details", { class: "add-detail" },
-        h("summary", {}, `Add a detail (${addable.length} possible)`), body);
+        h("summary", {}, t("form.add_detail", { n: addable.length })), body);
       det.open = ctx.expanderOpen === true;
       det.addEventListener("toggle", () => {
         ctx.expanderOpen = det.open;

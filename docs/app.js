@@ -1107,7 +1107,7 @@ function addNewRecord(opts = {}) {
 function presetPicker() {
   const sel = elem("select", { id: "adv-preset" },
     elem("option", { value: "" }, t("batch.preset.none")),
-    ...PRESETS.map((p) => elem("option", { value: p.id }, p.label)));
+    ...PRESETS.map((p) => elem("option", { value: p.id }, t(p.label))));
   sel.value = state.editing._preset || "";
   sel.addEventListener("change", () => {
     const preset = presetById(sel.value);

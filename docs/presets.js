@@ -4,7 +4,7 @@
 export const PRESETS = [
   {
     id: "impresario",
-    label: "Event vendor: Impresario (TB)",
+    label: "preset.impresario",
     source: { type: "event_vendor", event: "", vendor: "EVENT" },
     cost: [{ currency: "TRADE_BARS" }],
   },
@@ -16,13 +16,13 @@ export const PRESETS = [
 //  },
   {
     id: "event-box",
-    label: "Event drop: from event container",
+    label: "preset.event-box",
     source: { type: "event_drop", event: "", container: "" },
     cost: [],
   },
   {
     id: "housing-editor",
-    label: "Crown Store: Housing Editor",
+    label: "preset.housing-editor",
     source: { type: "crown_store", subtype: "housing_editor" },
     cost: [{ currency: "CROWNS" }],
   },
@@ -52,13 +52,13 @@ export const PRESETS = [
 //    },
   {
     id: "tome",
-    label: "Tamriel Tomes",
+    label: "preset.tome",
     source: { type: "tome_pack", tome: "" },
     cost: [],
   },
   {
     id: "rolis",
-    label: "Master writ vendor (Vouchers)",
+    label: "preset.rolis",
     source: { type: "writ_vendor", vendor: "ROLIS" },
     cost: [{ currency: "WRIT_VOUCHERS" }],
   },
