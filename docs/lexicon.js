@@ -1,5 +1,34 @@
 // Contributor-facing labels. Every lookup falls back to a title-cased rendering of the key, so a value appended to enums.json gets a rough label and is never hidden. A tooltip may explain but never warn: anything whose absence would let a wrong record through belongs in visible text.
 
+// The interface's own text in other languages: locale/<lang>.json, { English text: translation }. The English text in
+// the code is the key and the fallback, so a text nobody translated is simply absent from the file.
+const translations = new Map(); // language -> { English: translation }, once loaded
+let translation = {};
+
+/** Resolves with that language's translations, {} when it has none. Never rejects. */
+export function loadInterfaceTranslation(language) {
+  if (language === "en") return Promise.resolve({});
+  if (translations.has(language)) return Promise.resolve(translations.get(language));
+  return fetch(`./locale/${language}.json`, { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
+    .then((map) => { translations.set(language, map); return map; });
+}
+
+/** What is loaded of that language, {} before loadInterfaceTranslation() brought it. */
+export function interfaceTranslationOf(language) {
+  return translations.get(language) || {};
+}
+
+export function setInterfaceTranslation(map) {
+  translation = map && typeof map === "object" ? map : {};
+}
+
+/** The text in the chosen language, the English text where it has none. */
+export function t(text) {
+  const hit = translation[text];
+  return typeof hit === "string" && hit ? hit : text;
+}
+
 const FIELDS = {
   "id": ["Item ID", "It identifies the item and is never edited here."],
   "source.type": ["Source", "Way of getting this item. 1 item can have several records, each a different way."],
@@ -114,14 +143,14 @@ export function titleCase(key) {
 export function labelFor(path, sourceType) {
   const byType = FIELD_BY_TYPE[sourceType];
   const hit = (byType && byType[path]) || FIELDS[path];
-  return hit ? hit[0] : titleCase(path);
+  return hit ? t(hit[0]) : titleCase(path);
 }
 
 export function tipFor(path, sourceType) {
   const byType = FIELD_BY_TYPE[sourceType];
   const hit = (byType && byType[path]) || FIELDS[path];
-  if (hit) return hit[1] || "";
-  return path.startsWith("source.") ? ORPHAN_TIP : "";
+  if (hit) return hit[1] ? t(hit[1]) : "";
+  return path.startsWith("source.") ? t(ORPHAN_TIP) : "";
 }
 
 export function isKnownField(path, sourceType) {
@@ -130,13 +159,13 @@ export function isKnownField(path, sourceType) {
 }
 
 export function sourceTypeLabel(type) {
-  return SOURCE_TYPES[type] || titleCase(type);
+  return SOURCE_TYPES[type] ? t(SOURCE_TYPES[type]) : titleCase(type);
 }
 
 export function valueLabel(vocab, symbol) {
   const table = VALUES[vocab];
   const hit = table && table[symbol];
-  return hit || titleCase(symbol);
+  return hit ? t(hit) : titleCase(symbol);
 }
 
 export function subtypeVocab(sourceType) {
@@ -148,6 +177,15 @@ export const NOT_IN_GAME_DATA = " (not in the game data)";
 
 // Never the number: "0" in an achievement column is indistinguishable from bad data.
 export const ID_NOT_RECORDED = "required, but not recorded";
+
+/** Every text of the tables above, which is what the Translation list offers; `more` adds text kept elsewhere. */
+export function interfaceTexts(more = []) {
+  const texts = new Set([ORPHAN_TIP, ...Object.values(SOURCE_TYPES), ...more]);
+  for (const table of [FIELDS, ...Object.values(FIELD_BY_TYPE)]) for (const pair of Object.values(table)) pair.forEach((s) => texts.add(s));
+  for (const table of Object.values(VALUES)) Object.values(table).forEach((s) => texts.add(s));
+  texts.delete("");
+  return [...texts].sort();
+}
 
 export function knownPaths() {
   return Object.keys(FIELDS);

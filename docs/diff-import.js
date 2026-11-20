@@ -4,12 +4,14 @@ import { canonicalSource, findDuplicateRecord } from "./validate.js";
 import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { mirror, newKey, checkTranslation } from "./data.js";
 import { queueEnumValue } from "./maintenance.js";
+import { interfaceTexts, interfaceTranslationOf } from "./lexicon.js";
+import { maskLabels } from "./masks.js";
 import { itemDetailsChanges } from "./discovery.js";
 
 const BEGIN = "[//]: # (diff-begin)";
 const END = "[//]: # (diff-end)";
 const FENCE = /^```\w*$/;
-const OPS = new Set(["update", "add", "delete", "add-enum", "enum-name", "name", "string", "item"]);
+const OPS = new Set(["update", "add", "delete", "add-enum", "enum-name", "name", "string", "text", "item"]);
 const SYMBOL = /^[A-Z][A-Z0-9_]*$/;
 
 function count(text, marker) {
@@ -130,6 +132,11 @@ export function planDiff(lines, ctx) {
         if (typeof entry?.name !== "string") throw new Error(`${line.enum}.${line.value} is not a named vocabulary entry`);
         if (typeof line.name !== "string" || !line.name.trim() || line.name.includes("^")) throw new Error("a vocabulary name needs text and no ^");
         steps.push({ op: "enum-name", enumName: line.enum, value: line.value, name: line.name, before: entry.name });
+      } else if (line.op === "text") {
+        if (!GAME_LOCALES.includes(line.locale) || line.locale === "en") throw new Error(`${line.locale} is not a language the interface is translated into`);
+        if (!interfaceTexts(maskLabels()).includes(line.key)) throw new Error(`${JSON.stringify(line.key)} is not a text of this interface`);
+        if (typeof line.text !== "string" || !line.text.trim()) throw new Error("a translation needs text");
+        steps.push({ op: "text", locale: line.locale, english: line.key, text: line.text, before: interfaceTranslationOf(line.locale)[line.key] ?? null });
       } else if (line.op === "string") {
         steps.push({ op: "string", locale: line.locale, id: line.id, text: line.text, ...checkTranslation(line.locale, line.id, line.text) });
       } else if (line.op === "name") {
@@ -200,6 +207,8 @@ export function applySteps(steps, state, referenceData) {
       queueEnumValue(state, step.enumName, step.value, step.meta);
     } else if (step.op === "enum-name") {
       state.buffer.setEnumName(step.enumName, step.value, step.name, step.before);
+    } else if (step.op === "text") {
+      state.buffer.setText(step.locale, step.english, step.text, step.before);
     } else if (step.op === "string") {
       state.buffer.setString(step.locale, step.id, step.text, step.before);
     } else if (step.op === "name") {

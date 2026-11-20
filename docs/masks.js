@@ -11,6 +11,33 @@ const rendered = new Set();
 const subRendered = new Set();
 const activeSub = new Map();
 
+// Tab names are drawn through this, so they follow the interface language
+let translate = (text) => text;
+
+function labelTab(btn, mask) {
+  btn.textContent = translate(mask.label);
+  // The glyph is decoration; the tab's name stays the label.
+  if (mask.icon) btn.prepend(Object.assign(document.createElement("span"), { textContent: `${mask.icon} `, ariaHidden: "true" }));
+}
+
+/** Every tab and subtab name, in English. */
+export function maskLabels() {
+  return masks.flatMap((m) => [m.label, ...(m.subtabs || []).map((s) => s.label)]).filter(Boolean);
+}
+
+/** Redraws the tab names with a new translator. */
+export function relabelMasks(fn) {
+  translate = fn;
+  for (const m of masks) {
+    const btn = document.getElementById(`tab-${m.id}`);
+    if (btn) labelTab(btn, m);
+    for (const st of m.subtabs || []) {
+      const sub = document.getElementById(`subtab-${m.id}-${st.id}`);
+      if (sub) sub.textContent = translate(st.label);
+    }
+  }
+}
+
 export function registerMask(mask) {
   if (!mask || typeof mask !== "object") {
     throw new Error("registerMask: mask must be an object");
@@ -81,9 +108,7 @@ export function mountMasks({ tabBar, panelHost, defaultId }) {
       btn.setAttribute("role", "tab");
       btn.setAttribute("aria-selected", "false");
       btn.setAttribute("aria-controls", `panel-${m.id}`);
-      btn.textContent = m.label;
-      // The glyph is decoration; the tab's name stays the label.
-      if (m.icon) btn.prepend(Object.assign(document.createElement("span"), { textContent: `${m.icon} `, ariaHidden: "true" }));
+      labelTab(btn, m);
       btn.addEventListener("click", () => switchMask(m.id));
       tabBar.append(btn);
     }
@@ -137,7 +162,7 @@ export function switchMask(id, quiet = false) {
   if (!mask) throw new Error(`switchMask: unknown mask "${id}"`);
   activeId = id;
   if (tabBarEl.hasAttribute("popover") && tabBarEl.matches(":popover-open")) tabBarEl.hidePopover();
-  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Navigation, current page: ${mask.label}`);
+  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Navigation, current page: ${translate(mask.label)}`);
 
   for (const m of masks) {
     const isActive = m.id === id;
@@ -185,7 +210,7 @@ function renderSubtabbed(mask, panel) {
     btn.setAttribute("role", "tab");
     btn.setAttribute("aria-selected", "false");
     btn.setAttribute("aria-controls", `subpanel-${mask.id}-${st.id}`);
-    btn.textContent = st.label;
+    btn.textContent = translate(st.label);
     btn.addEventListener("click", () => switchSubtab(mask.id, st.id));
     bar.append(btn);
 

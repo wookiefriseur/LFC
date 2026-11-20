@@ -259,6 +259,7 @@
   "SI_FURC_TRADERS_NM": "Night Market Vendors^n,from",
   "SI_FURC_TRADERS_ROLIS": "Rolis Hlaalu"
  },
+ "es": {},
  "fr": {
   "SI_FURC_ACHIEVEMENT_UNKNOWN": "succès^n",
   "SI_FURC_DB": "Le vendeur de fournitures de la Confrérie noire les distribue ",
@@ -483,5 +484,6 @@
   "SI_FURC_SRC_STEAL": "воровство^N,from",
   "SI_FURC_SRC_TOMESPACK": "Часть набора предметов Тома Тамриэля [<<1>>] ",
   "SI_FURC_TRADERS_EVENT": "импресарио^Nd,from"
- }
+ },
+ "zh": {}
 }

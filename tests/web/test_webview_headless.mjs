@@ -3840,6 +3840,47 @@ test("names: a library string is translated, checked for its placeholders, and r
     .catch(() => { throw new Error("the English strings are editable"); });
 });
 
+test("language: tab names and source kinds follow the interface translation, and an interface text is translated in Names", async (page) => {
+  try {
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await page.select("#language-select", "de");
+    await page.waitForFunction(() => document.querySelector("#tab-lists")?.textContent === "Listen", { timeout: 10000 })
+      .catch(() => { throw new Error("the tab names are not German"); });
+    assertEq(await page.$eval("#tab-browse", (b) => b.textContent.trim()), "\uD83D\uDD0D Katalog", "the Browse tab keeps its glyph");
+    // every key of every locale file is a text the interface has
+    const strays = await page.evaluate(async () => {
+      const { interfaceTexts } = await import("./lexicon.js");
+      const { maskLabels } = await import("./masks.js");
+      const known = new Set(interfaceTexts(maskLabels()));
+      const out = [];
+      for (const lang of ["de", "fr", "es", "ru", "jp", "zh"]) {
+        const map = await (await fetch(`./locale/${lang}.json`)).json();
+        for (const key of Object.keys(map)) if (!known.has(key)) out.push(`${lang}: ${key}`);
+      }
+      return out;
+    });
+    assertEq(strays.join("; "), "", "locale files translate texts the interface does not have");
+    await switchTab(page, "names");
+    await page.select("#names-locale", "fr");
+    await page.waitForSelector('#names-lists [data-list="strings:interface"]', { timeout: 10000 });
+    await page.click('#names-lists [data-list="strings:interface"]');
+    const cell = '#names-table td.names-editable[data-name-id="Price"]';
+    await page.click(`${cell} .names-edit-button`);
+    await page.$eval(`${cell} input`, (e) => { e.value = "Prix"; });
+    await page.keyboard.press("Enter");
+    assertEq(await page.$eval(cell, (e) => e.textContent), "Prix", "the edited interface text");
+    const lines = await diffLines(page);
+    assert(lines.some((l) => l.op === "text" && l.locale === "fr" && l.key === "Price" && l.text === "Prix"), "missing interface text line");
+    await page.click("#names-table tr.is-pending .names-revert");
+    assert(await page.$eval("#btn-submit", (e) => e.disabled), "the reverted interface text is still submit-able");
+  } finally {
+    await page.evaluate(() => localStorage.removeItem("furcat-prefs-v1"));
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
 test("names: the tab lists the game names, a pasted dump becomes name lines, and Browse shows house names", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);

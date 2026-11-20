@@ -2,7 +2,8 @@
 import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { parseNamesDump, diffNames } from "./names-dump.js";
 import { labelOf, libraryStrings, checkTranslation } from "./data.js";
-import { titleCase } from "./lexicon.js";
+import { titleCase, interfaceTexts, interfaceTranslationOf, loadInterfaceTranslation } from "./lexicon.js";
+import { maskLabels } from "./masks.js";
 import { language } from "./prefs.js";
 
 // Past this many matches the table asks for a narrower search; a full achievement list is thousands of rows.
@@ -56,7 +57,7 @@ export function namesMask(deps) {
     const select = $("#names-locale");
     if (select) select.value = next;
     if (!kinds().includes(kindOfList()) && view.list.startsWith("game:")) view.list = "game:houses";
-    await referenceData.loadTranslation(next);
+    await Promise.all([referenceData.loadTranslation(next), loadInterfaceTranslation(next)]);
     renderSidebar();
     renderTable();
   }
@@ -81,6 +82,20 @@ export function namesMask(deps) {
           pending: !!pending,
         };
       });
+    }
+    if (view.list === "strings:interface") {
+      const mine = interfaceTranslationOf(locale()), translating = locale() !== "en";
+      const list = interfaceTexts(maskLabels()).map((english) => {
+        const pending = state.buffer.entries.get(`text:${locale()}:${english}`);
+        return {
+          id: english,
+          name: translating ? pending?.text ?? mine[english] ?? "" : english,
+          extra: pending?.before ? `was: ${pending.before}` : "",
+          pending: !!pending,
+          editable: translating,
+        };
+      });
+      return translating ? [...list.filter((r) => !r.name), ...list.filter((r) => r.name)] : list;
     }
     if (group === "strings") {
       const all = libraryStrings(), english = all.en || {}, mine = all[locale()];
@@ -119,6 +134,7 @@ export function namesMask(deps) {
       const [group, key] = id.split(":");
       const pending = [...state.buffer.entries.values()].some((e) => group === "game"
         ? e.op === "name" && e.kind === key && e.locale === locale()
+        : id === "strings:interface" ? e.op === "text" && e.locale === locale()
         : group === "strings" ? e.op === "string" && e.locale === locale()
         : e.op === "enum-name" && e.enumName === key);
       const btn = elem("button", {
@@ -152,6 +168,11 @@ export function namesMask(deps) {
       ul.append(item("strings:library", "Library strings",
         locale() === "en" ? total : mine ? `${Object.keys(mine).length} of ${total}` : "no file"));
     }
+    // The web interface's own text; only what its label tables hold so far
+    const texts = interfaceTexts(maskLabels());
+    if (!total) ul.append(elem("li", { class: "names-group" }, `Translation (${locale()})`));
+    ul.append(item("strings:interface", "Interface text", locale() === "en" ? texts.length
+      : `${texts.filter((text) => interfaceTranslationOf(locale())[text]).length} of ${texts.length}`));
   }
 
   function renderTable() {
@@ -174,7 +195,8 @@ export function namesMask(deps) {
     const table = elem("table", { class: "names-list" });
     const head = elem("tr", {});
     const strings = view.list.startsWith("strings:");
-    for (const h of [game ? "Id" : strings ? "String" : "Symbol", strings ? "Text" : "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
+    const texts = view.list === "strings:interface";
+    for (const h of [game ? "Id" : texts ? "English" : strings ? "String" : "Symbol", strings ? "Text" : "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
     table.append(elem("thead", {}, head));
     const body = elem("tbody", {});
     for (const r of hits.slice(0, ROW_LIMIT)) {
@@ -195,6 +217,7 @@ export function namesMask(deps) {
           "aria-label": `Revert name for ${r.id}` }, "Revert");
         revert.addEventListener("click", () => {
           if (game) setName(kindOfList(), Number(r.id), "");
+          else if (texts) setText(r.id, "");
           else if (strings) setString(r.id, "");
           else {
             const vocab = view.list.slice("vocab:".length);
@@ -207,7 +230,7 @@ export function namesMask(deps) {
         });
         details.append(" ", revert);
       }
-      tr.append(elem("td", { class: "names-id" }, r.id), nameCell, details);
+      tr.append(elem("td", { class: texts ? "names-english" : "names-id" }, r.id), nameCell, details);
       body.append(tr);
     }
     table.append(body);
@@ -241,11 +264,21 @@ export function namesMask(deps) {
     renderTable();
   }
 
+  // One interface text into the change list. The published translation, or an empty box, drops the change.
+  function setText(english, text) {
+    const published = interfaceTranslationOf(locale())[english] ?? null;
+    state.buffer.setText(locale(), english, text.trim() || published || "", published);
+    renderFooter();
+    renderSidebar();
+    renderTable();
+  }
+
   function editName(cell, id, current) {
     if (cell.querySelector("input")) return;
     const kind = kindOfList();
     const vocab = view.list.startsWith("vocab:") ? view.list.slice("vocab:".length) : null;
     const strings = view.list.startsWith("strings:");
+    const texts = view.list === "strings:interface";
     const input = elem("input", { type: "text", class: "names-edit", "aria-label": `Name for ${id}` });
     input.value = current;
     let done = false;
@@ -258,7 +291,8 @@ export function namesMask(deps) {
         renderFooter();
         renderSidebar();
         renderTable();
-      } else if (save && input.value.trim() !== current && strings) setString(id, input.value);
+      } else if (save && input.value.trim() !== current && texts) setText(id, input.value);
+      else if (save && input.value.trim() !== current && strings) setString(id, input.value);
       else if (save && input.value.trim() !== current) setName(kind, id, input.value);
       else renderTable();
       const restored = [...$("#names-table").querySelectorAll(".names-editable")]
@@ -268,7 +302,7 @@ export function namesMask(deps) {
     // A vocabulary name: the pipeline keeps the existing grammar suffix. A translation carries its own.
     const problem = () => {
       if (vocab && input.value.includes("^")) return "A name cannot contain ^";
-      if (!strings || !input.value.trim()) return "";
+      if (!strings || texts || !input.value.trim()) return "";
       try { checkTranslation(locale(), id, manyLines(input.value.trim())); } catch (e) { return e.message; }
       return "";
     };

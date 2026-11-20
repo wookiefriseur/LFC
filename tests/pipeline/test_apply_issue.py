@@ -94,8 +94,18 @@ class IssueApplicationTests(unittest.TestCase):
         # an already translated string is rewritten in place
         again, _ = self.run_plan({**line, 'id': 'SI_FURC_RANK', 'text': 'Stufe <<1>>'})
         self.assertIn('  SI_FURC_RANK = "Stufe <<1>>",\n', again['LibFurnitureCatalogue/locale/de.lua'].decode())
-        for bad in ({'id': 'SI_FURC_NOT_A_STRING'}, {'locale': 'zh'}, {'locale': 'en'}, {'text': ' '},
+        for bad in ({'id': 'SI_FURC_NOT_A_STRING'}, {'locale': 'pl'}, {'locale': 'en'}, {'text': ' '},
                     {'id': 'SI_FURC_RANK', 'text': 'Stufe'}):
+            with self.assertRaises(ValueError):
+                self.run_plan({**line, **bad})
+
+    def test_text_translates_one_interface_text(self):
+        line = {'v': 1, 'op': 'text', 'locale': 'fr', 'key': 'Price', 'text': 'Prix'}
+        files, _ = self.run_plan(line, {**line, 'key': 'Amount', 'text': 'Montant'})
+        self.assertEqual(set(files), {'docs/locale/fr.json'})
+        self.assertEqual(list(json.loads(files['docs/locale/fr.json']).items())[:1], [('Amount', 'Montant')])
+        self.assertEqual(json.loads(files['docs/locale/fr.json'])['Price'], 'Prix')
+        for bad in ({'locale': 'en'}, {'text': ' '}, {'key': ''}, {'text': 'a\nb'}):
             with self.assertRaises(ValueError):
                 self.run_plan({**line, **bad})
 

@@ -268,6 +268,15 @@ def apply(lines, root=ROOT, lua_command=None):
             update_name(files, line)
             summaries.append(line)
             continue
+        if op == 'text':
+            # ponytail: the key is not checked against the interface's texts, which only its JavaScript can list;
+            # the web unit tests fail on a key the interface does not have
+            name = f'docs/locale/{line["locale"]}.json'
+            texts = files.obj(name) if (files.root / name).exists() or name in files.changed else {}
+            texts[line['key']] = line['text']
+            files.put_obj(name, dict(sorted(texts.items())), 1)
+            summaries.append(line)
+            continue
         if op == 'string':
             # A translation of one library string; the English text changes through enum-name or by hand
             name = f'LibFurnitureCatalogue/locale/{line["locale"]}.lua'

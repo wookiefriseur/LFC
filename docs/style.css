@@ -1955,6 +1955,7 @@ table.names-list { width: 100%; border-collapse: collapse; }
 table.names-list th { position: sticky; top: 0; background: var(--surface-2); text-align: left; }
 table.names-list th, table.names-list td { padding: 0.25rem 0.5rem; border-bottom: 1px solid var(--border); vertical-align: top; }
 table.names-list td.names-id { font-family: monospace; white-space: nowrap; width: 1%; }
+table.names-list td.names-english { width: 45%; }
 table.names-list tr.is-pending td { background: var(--selected); }
 .names-add { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); background: var(--surface); }
 .names-add[hidden] { display: none; }

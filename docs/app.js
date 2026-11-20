@@ -20,7 +20,7 @@ import {
 } from "./validate.js";
 import {
   labelFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA,
-  ID_NOT_RECORDED,
+  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t,
 } from "./lexicon.js";
 import {
   parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
@@ -30,7 +30,7 @@ import {
 import {
   itemLinkAnchor, itemIconImg, setIconPathLookup, setIconPendingLookup, refreshLoadingIcons,
 } from "./external-links.js";
-import { registerMask, mountMasks, switchMask, activeMaskId } from "./masks.js";
+import { registerMask, mountMasks, switchMask, activeMaskId, relabelMasks } from "./masks.js";
 import { zanilPortrait } from "./zanil.js";
 import { crownCrateMask } from "./crown-crate.js";
 import { browseMask } from "./browse.js";
@@ -2165,7 +2165,8 @@ async function runBatchImport() {
 // Name lines are compared against the names of their own language, which load on demand
 function loadNameLocales(lines) {
   const locales = new Set(lines.filter(({ line }) => line.op === "name").map(({ line }) => line.locale));
-  return Promise.all([...locales].map((l) => referenceData.loadTranslation(l)));
+  const texts = new Set(lines.filter(({ line }) => line.op === "text").map(({ line }) => line.locale));
+  return Promise.all([...[...locales].map((l) => referenceData.loadTranslation(l)), ...[...texts].map(loadInterfaceTranslation)]);
 }
 
 // A pasted contribution diff replays into the change list all or nothing, so its change list is exactly the issue's
@@ -2733,11 +2734,14 @@ function loadStrings() {
 
 // Item names, vocabulary labels and game names in the selected language (drawn in English first and redrawn when the names land, so there is no delay on load)
 async function applyLanguage(locale) {
-  const [translation, strings] = await Promise.all([
-    locale === referenceData.namesLocale ? null : referenceData.loadTranslation(locale), loadStrings()]);
+  const [translation, strings, interfaceText] = await Promise.all([
+    locale === referenceData.namesLocale ? null : referenceData.loadTranslation(locale), loadStrings(),
+    loadInterfaceTranslation(locale)]);
   if (locale !== language()) return; // user chose another one while it loaded
   const names = translation?.names.items;
   setStrings(strings, locale);
+  setInterfaceTranslation(interfaceText);
+  relabelMasks(t);
   referenceData.language = locale;
   state.names.setTranslation(names && names.size ? names : null, locale);
   document.documentElement.dataset.nameLanguage = locale;

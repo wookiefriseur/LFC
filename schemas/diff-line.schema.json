@@ -12,9 +12,9 @@
       "const": 1
     },
     "op": {
-      "description": "Operation. `add-enum` and `enum-name` target enums.json and carry no id/category; `enum-name` corrects the English label of an existing vocabulary entry. `name` targets the names reference data (reference-data/names.<locale>.json). `string` translates one of the library's strings (locale/<locale>.lua). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
+      "description": "Operation. `add-enum` and `enum-name` target enums.json and carry no id/category; `enum-name` corrects the English label of an existing vocabulary entry. `name` targets the names reference data (reference-data/names.<locale>.json). `string` translates one of the library's strings (locale/<locale>.lua). `text` translates one text of the web interface (docs/locale/<locale>.json). `item` refreshes a catalogued item's metadata and game name from a discovery, without a record change.",
       "type": "string",
-      "enum": ["update", "add", "delete", "add-enum", "enum-name", "name", "string", "item"]
+      "enum": ["update", "add", "delete", "add-enum", "enum-name", "name", "string", "text", "item"]
     }
   },
   "oneOf": [
@@ -208,6 +208,21 @@
           "type": "string",
           "pattern": "\\S"
         }
+      }
+    },
+    {
+      "title": "text",
+      "additionalProperties": false,
+      "required": ["v", "op", "locale", "key", "text"],
+      "properties": {
+        "v": { "const": 1 },
+        "op": { "const": "text" },
+        "locale": { "enum": ["de", "fr", "es", "ru", "jp", "zh"] },
+        "key": {
+          "description": "The English text as the web interface's code holds it.",
+          "type": "string", "minLength": 1, "maxLength": 500, "pattern": "^[^\\n]+$"
+        },
+        "text": { "type": "string", "maxLength": 1000, "pattern": "^(?=.*\\S)[^\\n]+$" }
       }
     },
     {

@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
 import { NameStore, labelOf, noteLabel, setStrings, checkTranslation } from "../../docs/data.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
+import { t, setInterfaceTranslation, interfaceTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
 import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
 
@@ -86,4 +87,21 @@ test("a translation keeps the placeholders of the English text and becomes one s
   assert.deepEqual(JSON.parse(serialiseDiff(buffer)), { v: 1, op: "string", locale: "de", id: "SI_FURC_RANK", text: "Stufe <<1>>" });
   buffer.setString("de", "SI_FURC_RANK", "Rang <<1>>", "Rang <<1>>");
   assert.equal(buffer.list().length, 0);
+});
+
+test("interface text follows its translation, English where there is none, and becomes one text line", () => {
+  setInterfaceTranslation({ "Luxury Furnisher": "Luxusausstatter", Rare: "Selten", Price: "Preis", "Blank means no price.": "" });
+  assert.equal(sourceTypeLabel("luxury"), "Luxusausstatter");
+  assert.equal(sourceTypeLabel("vendor"), "Vendor");
+  assert.equal(valueLabel("rarities", "rare"), "Selten");
+  assert.equal(labelFor("cost"), "Preis");
+  assert.equal(tipFor("cost"), "Blank means no price.");
+  assert.equal(t("not in any table"), "not in any table");
+  setInterfaceTranslation(null);
+  assert.equal(sourceTypeLabel("luxury"), "Luxury Furnisher");
+  const texts = interfaceTexts(["Lists"]);
+  for (const text of ["Luxury Furnisher", "Rare", "Price", "Blank means no price.", "Lists"]) assert.ok(texts.includes(text), text);
+  const buffer = new DirtyBuffer();
+  buffer.setText("fr", "Price", "Prix", null);
+  assert.deepEqual(JSON.parse(serialiseDiff(buffer)), { v: 1, op: "text", locale: "fr", key: "Price", text: "Prix" });
 });
