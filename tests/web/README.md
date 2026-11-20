@@ -14,4 +14,4 @@ After editing web modules, CSS or reference data, run `python3 scripts/webview_s
 
 Run `npm run test:responsive` for the responsive UI sweep (375, 768 and 1280 px)
 
-Set `CHROMIUM` to a browser executable, `WEBVIEW_ROOT` to an alternate docs tree, and `RESPONSIVE_OUTPUT` to the screenshot/results directory (default: `lfc-responsive` in temp dir).
+Set `RESPONSIVE_THEME=dark` to run the sweep in the dark theme, `CHROMIUM` to a browser executable, `WEBVIEW_ROOT` to an alternate docs tree, and `RESPONSIVE_OUTPUT` to the screenshot/results directory (default: `lfc-responsive` in temp dir).

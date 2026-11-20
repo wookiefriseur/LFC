@@ -43,6 +43,25 @@ export function parseDiscovery(value) {
   return { record: cleanRecord, reference: { format: value.format, locale, apiVersion, meta: cleanMeta }, offer: cleanOffer };
 }
 
+// First line of every page FurCDev's "Detect deleted" writes: the catalogued ids the game client does not know.
+export const MISSING_IDS_HEADER = "furniture-missing-ids-v1";
+
+/**
+ * @returns {null | {ids: number[], other: number}} null when the text is not such a list; `other` counts the lines that are neither its header nor an id
+ */
+export function parseMissingIds(text) {
+  const lines = String(text ?? "").split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  if (lines[0] !== MISSING_IDS_HEADER) return null;
+  const ids = new Set();
+  let other = 0;
+  for (const line of lines) {
+    if (line === MISSING_IDS_HEADER) continue; // each pasted page repeats it
+    if (/^[1-9]\d*$/.test(line) && Number.isSafeInteger(Number(line))) ids.add(Number(line));
+    else other++;
+  }
+  return { ids: [...ids].sort((a, b) => a - b), other };
+}
+
 export function iconLeaf(icon) {
   return String(icon ?? "").replace(/^.*\//, "").replace(/\.dds$/i, "");
 }

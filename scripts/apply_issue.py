@@ -13,9 +13,30 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from generate_db import (ROOT, canonical, load_inputs, lua, read_json, locale_strings, read_locales, render, render_locale,
-                         render_strings, require, set_translation, verify)
-from import_names import GAME_LOCALES, MANIFEST, english, manifest_entry, names_file, with_fallback
+from generate_db import (
+    ROOT,
+    canonical,
+    load_inputs,
+    locale_strings,
+    lua,
+    read_json,
+    read_locales,
+    render,
+    render_locale,
+    render_strings,
+    require,
+    set_translation,
+    verify,
+)
+from import_names import (
+    GAME_LOCALES,
+    MANIFEST,
+    data_digest,
+    english,
+    manifest_entry,
+    names_file,
+    with_fallback,
+)
 from jsonschema import Draft202012Validator
 from webview_stamp import holes, interface_texts
 
@@ -192,18 +213,14 @@ def refresh_fallbacks(files):
 def refresh_manifest(files, groups):
     name = 'docs/data/manifest.json'
     manifest = files.obj(name)
-    fingerprint = hashlib.sha256()
     counts = {}
     for entry in manifest['files']:
         kind = entry['type']
         require(entry['name'] == kind + '.jsonl' and kind in groups, 'invalid data manifest entry')
         entry['records'] = counts[kind] = len(groups[kind])
         entry['digest'] = digest(files.read('docs/data/' + entry['name']))
-        fingerprint.update(f"{entry['name']}:{entry['digest']}\n".encode())
     require(set(counts) == set(groups), 'data manifest does not cover the catalogue')
-    for extra in ('enums.json', 'names.en.json'):
-        fingerprint.update(f'{extra}:{digest(files.read("docs/data/" + extra))}\n'.encode())
-    manifest['digest'] = fingerprint.hexdigest()[:16]
+    manifest['digest'] = data_digest(manifest, files.read)
     manifest['counts'].update(records=sum(counts.values()), files=len(counts), by_type=counts,
                               ids=len({r[k] for rows in groups.values() for r in rows for k in ('id', 'blueprint') if k in r}))
     files.put_obj(name, manifest)
@@ -353,7 +370,7 @@ def apply(lines, root=ROOT, lua_command=None):
         # A hand-written definition outside the generated block wins over enums.json, so a rename rewrites it in place, keeping its grammar suffix (^n,from)
         for key, name in renamed.items():
             english = re.sub(rf'^(\s*{key}\s*=\s*)"([^"\\^\n]*)(\^[^"\\\n]*)?"',
-                             lambda m: m.group(1) + lua(name + (m.group(3) or '')), english, flags=re.M)
+                             lambda m: m.group(1) + lua(name + (m.group(3) or '')), english, flags=re.MULTILINE)
         files.put(locale, english.encode())
         files.put('docs/data/strings.json',
                   render_strings(read_locales(lambda name: files.read(name).decode(), root / 'LibFurnitureCatalogue/locale')).encode())

@@ -336,6 +336,20 @@ test("browse: the grid renders and an item detail lists every source record", as
   assertAtLeast(rows, 1, "source records in the item detail");
 });
 
+test("a price shows its currency's icon, named in its alternative text, and the name itself when the icon does not load", async (page) => {
+  await switchTab(page, "browse");
+  await page.$eval("#browse-search", (e) => { e.value = "87709"; e.dispatchEvent(new Event("input", { bubbles: true })); });
+  await page.waitForFunction(() => document.querySelectorAll("#browse-grid .browse-card").length === 1, { timeout: 10000 });
+  await page.click("#browse-grid .browse-card");
+  await page.waitForSelector("#browse-detail .cost .currency-icon", { timeout: 10000 });
+  const icon = await page.$eval("#browse-detail .cost .currency-icon", (e) => ({ src: e.src, alt: e.alt, title: e.title }));
+  assertEq(icon.alt, "Crowns", "alternative text");
+  assertEq(icon.title, "Crowns", "tooltip");
+  assert(icon.src.startsWith("https://esoicons.uesp.net/esoui/art/currency/"), `the icon is not hotlinked from UESP: ${icon.src}`);
+  await page.$eval("#browse-detail .cost .currency-icon", (e) => e.dispatchEvent(new Event("error")));
+  assertEq(await page.$eval("#browse-detail .cost", (e) => e.textContent), "65\u00a0Crowns", "price without its icon");
+});
+
 test("maintenance/Sources: every leaf is placed or falls into the computed catch-all", async (page) => {
   await switchTab(page, "maintenance");
   await page.click("#maint-tab-sources");
@@ -3498,6 +3512,33 @@ test("discovery: ignored items and recipes never enter the change buffer", async
   const status = await page.$eval("#adv-import-status", (e) => e.textContent);
   assert(status.includes("0 added") && status.includes("2 ignored (skipped)"), status);
   assert(await page.$eval("#btn-submit", (e) => e.hidden && e.disabled), "ignored items reached the change buffer");
+});
+
+test("missing ids: a pasted list from Detect deleted is reviewed, and only confirming turns it into delete lines", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  // 116442 has two records, 191611 is ignored, 227445 is the blueprint of 117765 (not listed), 99999999 is not catalogued
+  const status = await pasteImport(page, "furniture-missing-ids-v1\n116442\n191611\nfurniture-missing-ids-v1\n227445\n99999999\n116442\n");
+  assert(status.includes("4 missing id(s) read, 3 record(s) would be deleted"), status);
+  const review = await page.$$eval("#adv-import-report li", (items) => items.map((e) => e.textContent));
+  assertEq(review.length, 4, review.join(" | "));
+  assert(review[0].startsWith("116442 ") && review[0].includes("would be deleted - ") && review[0].includes("; "), review[0]);
+  assert(review[1].startsWith("191611 Jewelry Station") && review[1].endsWith("would be removed from the ignored list"), review[1]);
+  assert(review[2].startsWith("227445: blueprint of ") && review[2].includes("(#117765)") && review[2].includes("record kept"), review[2]);
+  assertEq(review[3], "Not in the catalogue, skipped: 99999999", "an id the catalogue does not hold must be reported");
+  assert(await page.$eval("#btn-submit", (e) => e.hidden && e.disabled), "the review alone must not change anything");
+  await page.click("#adv-import-status .btn-danger");
+  assert((await page.$eval("#adv-import-status", (e) => e.textContent)).startsWith("3 delete line(s) are in the change list"), "confirming did not report the delete lines");
+  const lines = await diffLines(page);
+  assertEq(lines.map((l) => `${l.op} ${l.id}`).sort().join(","), "delete 116442,delete 116442,delete 191611", "one delete line per record of a missing id");
+  assertEq(lines.find((l) => l.id === 191611).category, "ignored", "an ignored id leaves ignored.jsonl");
+  // a second paste finds nothing left to delete
+  const again = await pasteImport(page, "furniture-missing-ids-v1\n116442\n");
+  assertEq(again, "1 missing id(s) read, no record to delete.", "a deleted record must not be listed twice");
+  // a list with anything but ids is refused whole
+  const refused = await pasteImport(page, "furniture-missing-ids-v1\n116457\n{\"id\":1}\n");
+  assert(refused.startsWith("Not read: the list of missing ids has 1 line(s)"), refused);
 });
 
 test("discovery: ignored catalogue entries are searchable and can be restored", async (page) => {

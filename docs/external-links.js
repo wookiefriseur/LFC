@@ -1,7 +1,7 @@
 // Do not fetch() these URLs: esoicons.uesp.net sends no ACAO header and sits behind a Cloudflare challenge, so only <a href> and <img src> work. Only resolved icon URL strings are cached, never image bytes.
 
 import { dropCachedIconURL, getCachedIconURL, putCachedIconURL } from "./icon-cache.js";
-import { t } from "./lexicon.js";
+import { t, valueLabel } from "./lexicon.js";
 
 const ESO_LINKS = {
   UESP_ITEM:       (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}`,
@@ -95,6 +95,45 @@ export function tradingLinkAnchor(id, kind = 'item') {
   a.title = label;
   a.setAttribute('aria-label', label);
   return a;
+}
+
+// The game's own currency icons under esoui/art/currency/, kept by hand: currencies change rarely.
+const CURRENCY_ICONS = {
+  GOLD: "currency_gold_32",
+  AP: "alliancepoints_32",
+  TEL_VAR: "currency_telvar_32",
+  WRIT_VOUCHERS: "currency_writvoucher",
+  CROWNS: "currency_crowns_32",
+  CROWN_GEMS: "currency_crown_gems",
+  SEALS: "currency_seals_of_endeavor_32",
+  UNDAUNTED_KEYS: "undauntedkey",
+  ARCHIVAL_FORTUNES: "archivalfragments_32",
+  TRADE_BARS: "u49_tt_tradebars_32",
+};
+
+function currencyNode(symbol) {
+  const name = valueLabel("currencies", symbol);
+  const path = CURRENCY_ICONS[symbol];
+  if (!path) return name;
+  const img = document.createElement("img");
+  img.src = `https://esoicons.uesp.net/esoui/art/currency/${path}.png`;
+  img.alt = name;
+  img.title = name;
+  img.className = "currency-icon";
+  // An icon that does not load must not leave a bare amount.
+  img.onerror = () => img.replaceWith(name);
+  return img;
+}
+
+/** A price list as amounts with their currency icons; the icon names its currency as tooltip and alternative text. */
+export function costNode(cost) {
+  const span = document.createElement("span");
+  span.className = "cost";
+  cost.forEach((c, i) => {
+    const amount = Number.isFinite(c?.amount) ? c.amount.toLocaleString() : String(c?.amount ?? "");
+    span.append(i ? " / " : "", amount, amount ? "\u00a0" : "", currencyNode(c?.currency));
+  });
+  return span;
 }
 
 export function itemIconImg(id, alt, retry = 0) {

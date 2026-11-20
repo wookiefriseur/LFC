@@ -28,7 +28,7 @@ import {
   LUX_ACTION, priceEffect, successPanelText,
 } from "./luxury.js";
 import {
-  itemLinkAnchor, itemIconImg, setIconPathLookup, setIconPendingLookup, refreshLoadingIcons,
+  itemLinkAnchor, itemIconImg, setIconPathLookup, setIconPendingLookup, refreshLoadingIcons, costNode,
 } from "./external-links.js";
 import { registerMask, mountMasks, switchMask, activeMaskId, relabelMasks } from "./masks.js";
 import { zanilPortrait } from "./zanil.js";
@@ -42,7 +42,7 @@ import { readDiff, planDiff, applySteps, applyItemDetails } from "./diff-import.
 import { clearIconCache } from "./icon-cache.js";
 import { renderAbout } from "./about.js";
 import { buildTaxonomy } from "./taxonomy.js";
-import { parseDiscovery, discoveryKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
+import { parseDiscovery, parseMissingIds, discoveryKnown, discoveryAsRecipe, offerPlan, offerTypes, offerTypeSets, recordFromOffer, itemDetailsChanges } from "./discovery.js";
 import { isIgnoredItem } from "./ignored-items.js";
 import { PRESETS, presetById, applyPreset } from "./presets.js";
 import { ReferenceData } from "./reference-data.js";
@@ -919,6 +919,7 @@ function renderAdvancedPanel(container) {
       <div class="adv-import-body">
         <p class="muted" data-t="batch.import.help"></p>
         <p class="muted" data-t="batch.import.help_diff"></p>
+        <p class="muted" data-t="batch.import.help_missing"></p>
         <textarea id="adv-import-paste" rows="7" data-t-placeholder="batch.import.placeholder"></textarea>
         <div class="adv-import-actions">
           <button id="adv-import-run" class="btn-primary" data-t="batch.import.run"></button>
@@ -1256,10 +1257,11 @@ function renderTable() {
       `<td class="cell-clamp cell-source-detail" title="${escapeHTML(detailTitle)}"><div class="clamp2">` +
         (note ? `<span class="note-glyph" title="${escapeHTML(t("batch.row.note.tip"))}">✎</span> ` : "") +
         `${escapeHTML(detail.text)}</div></td>` +
-      `<td class="cell-clamp" title="${escapeHTML(formatCost(r.cost))}"><div class="clamp2">` +
+      `<td class="cell-clamp" title="${escapeHTML(formatCost(r.cost))}"><div class="clamp2 cell-cost">` +
         `${escapeHTML(formatCost(r.cost))}</div></td>` +
       `<td title="${escapeHTML(versionLabel(state.enums, r.availability?.version || ""))}">` +
         `${escapeHTML(r.availability?.version || "")}</td>`;
+    if (r.cost?.length) rest.content.querySelector(".cell-cost").replaceChildren(costNode(r.cost));
     tr.append(rest.content);
 
     // Shift would otherwise extend a text selection across the rows.
@@ -1941,6 +1943,67 @@ function publishedItem(id) {
   return { name: state.names?.base[id] ?? null, meta: referenceData.publishedMeta(id) };
 }
 
+// A list of ids the game no longer knows, from FurCDev's "Detect deleted": shows what would go and deletes nothing until confirmed.
+// A record goes with its furnishing id, and with its blueprint only when it names no furnishing; a record whose furnishing the list does not name is kept.
+function reviewMissingIds({ ids, other }, status) {
+  if (other || !ids.length) {
+    status.textContent = other ? t("import.missing.refused", { n: other }) : t("import.missing.none");
+    showImportReport();
+    return;
+  }
+  const listed = new Set(ids);
+  const live = liveRecords();
+  const named = (id) => nameOf(id) || t("common.no_name");
+  const doomed = [];
+  const lines = [];
+  const warnLines = [];
+  const unknown = [];
+  for (const id of ids) {
+    const own = live.filter((r) => (r.id ?? r.blueprint) === id);
+    const makes = live.filter((r) => r.blueprint === id && r.id != null);
+    const ignored = own.filter((r) => r.source?.type === "ignored");
+    const plain = own.filter((r) => r.source?.type !== "ignored");
+    doomed.push(...own);
+    if (ignored.length) lines.push(t("import.missing.ignored", { id, name: named(id) }));
+    if (plain.length) lines.push(t("import.missing.delete", { id, name: named(id), records: plain.map(recordLocator).join("; ") }));
+    for (const r of makes) {
+      const values = { id, item: r.id, name: named(r.id), record: recordLocator(r) };
+      if (listed.has(r.id)) lines.push(t("import.missing.blueprint_gone", values));
+      else warnLines.push(t("import.missing.blueprint_kept", values));
+    }
+    if (!own.length && !makes.length) {
+      if (state.records.some((r) => r.id === id || r.blueprint === id)) lines.push(t("import.missing.pending", { id, name: named(id) }));
+      else unknown.push(id);
+    }
+  }
+  if (unknown.length) warnLines.push(t("import.missing.unknown", { ids: unknown.join(", ") }));
+  showImportReport([], warnLines);
+  $("#adv-import-report").prepend(...lines.map((line) => elem("li", {}, line)));
+  if (!doomed.length) {
+    status.textContent = t("import.missing.nothing", { ids: ids.length });
+    return;
+  }
+  const yes = elem("button", { class: "btn-danger" }, t("import.missing.confirm", { n: doomed.length }));
+  const no = elem("button", {}, t("import.missing.keep"));
+  yes.addEventListener("click", () => {
+    // The change list may have moved on while the review stood there.
+    const still = doomed.filter((r) => state.index.get(r._key) === r && !state.buffer.isDeleted(r._key));
+    for (const r of still) {
+      const kept = deleteRecord(r);
+      if (r._key !== state.selectedKey) continue;
+      state.editing = kept ? deepClone(r) : null;
+      if (!kept) state.selectedKey = null;
+    }
+    renderAfterBufferChange();
+    status.textContent = t("import.missing.done", { n: still.length });
+  });
+  no.addEventListener("click", () => {
+    status.textContent = t("import.missing.kept");
+    showImportReport();
+  });
+  status.replaceChildren(t("import.missing.status", { ids: ids.length, n: doomed.length }), " ", yes, " ", no);
+}
+
 async function runBatchImport() {
   const text = $("#adv-import-paste").value;
   const status = $("#adv-import-status");
@@ -1953,6 +2016,11 @@ async function runBatchImport() {
   }
   if (diff) {
     importDiff(diff.lines, status, diff.complete);
+    return;
+  }
+  const missing = parseMissingIds(text);
+  if (missing) {
+    reviewMissingIds(missing, status);
     return;
   }
   const targetCat = "";

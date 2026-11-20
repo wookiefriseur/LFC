@@ -1,6 +1,6 @@
 // Named furnishing lists, kept in this browser only. The text form is FurnitureCatalogue's own list line, so a list copied here pastes into the add-on's import window, and an add-on export pastes back here.
 import { itemSearch } from "./crown-store.js";
-import { tradingLinkAnchor, isTradeable } from "./external-links.js";
+import { tradingLinkAnchor, isTradeable, costNode } from "./external-links.js";
 import {
   forgetKnowledge, getKnowledge, importKnowledge, kindReport, kindStatus, knowledgeLine, knowledgeMarker, knowledgeOf, missingPages, onKnowledgeChange, recipeResolver,
 } from "./knowledge.js";
@@ -861,7 +861,7 @@ export function listsMask(deps) {
     const name = nameOf(id);
     const ways = waysToGet(id);
     const li = elem("li", { class: "lists-item" });
-    const line = elem("div", { class: "lists-item-row", title: ways.join("\n") });
+    const line = elem("div", { class: "lists-item-row", title: ways.map((w) => w.text + w.price).join("\n") });
     line.append(itemIconImg(id, name || t("common.item_fallback", { id })));
     // The marker goes inside, right before the name, so it is not taken for a button of its own.
     const mark = knowledgeMarker(id);
@@ -869,7 +869,7 @@ export function listsMask(deps) {
     line.append(toggle);
     const recs = deps.recordsForItem?.(id) || [];
     const blueprint = recs.some((r) => r.id) ? recs.find((r) => r.blueprint)?.blueprint : null;
-    const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w)));
+    const where = elem("ul", { class: "lists-item-ways", hidden: "" }, ways.map((w) => elem("li", {}, w.text, w.cost ? [": ", costNode(w.cost)] : [])));
     toggle.addEventListener("click", () => {
       where.hidden = !where.hidden;
       li.classList.toggle("is-open", !where.hidden);
@@ -916,10 +916,11 @@ export function listsMask(deps) {
   // One line per way to get the item, in the order Browse lists them.
   function waysToGet(id) {
     const recs = deps.recordsForItem?.(id) || [];
-    if (!recs.length) return [t("lists.not_in_catalogue")];
+    if (!recs.length) return [{ text: t("lists.not_in_catalogue"), price: "" }];
+    // `price` is the tooltip's text form of `cost`.
     return recs.map((r) => {
-      const cost = deps.formatCost ? deps.formatCost(r.cost) : "-";
-      return cost === "-" ? deps.recordLocator(r) : `${deps.recordLocator(r)}: ${cost}`;
+      const cost = r.cost?.length ? r.cost : null;
+      return { text: deps.recordLocator(r), cost, price: cost ? `: ${deps.formatCost(cost)}` : "" };
     });
   }
 

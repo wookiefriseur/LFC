@@ -252,7 +252,7 @@ th, td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-th { background: var(--surface-2); position: sticky; top: 0; font-weight: 600; }
+th { background: var(--surface-2); position: sticky; top: 0; z-index: 1; font-weight: 600; }
 tbody tr { cursor: pointer; }
 tbody tr:hover { background: var(--surface-2); }
 tbody tr.selected { background: var(--selected); }
@@ -640,6 +640,13 @@ a.is-disabled {
   /* the game's renders are dark: on the dark theme they need a lighter tile than the surface around them */
   background: var(--icon-bg);
   border-radius: 3px;
+}
+/* Beside an amount, at text size. Some are plain white (Crowns), so the outline is what shows them on a light surface. */
+.currency-icon {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.25em;
+  filter: drop-shadow(0 0 1px var(--fg)) drop-shadow(0 0 1px var(--fg));
 }
 .ext-icon-placeholder {
   display: inline-block;

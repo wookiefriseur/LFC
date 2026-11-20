@@ -14,7 +14,7 @@ import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 import { knowledgeMarker, onKnowledgeChange } from "./knowledge.js";
-import { tradingLinkAnchor, isTradeable } from "./external-links.js";
+import { tradingLinkAnchor, isTradeable, costNode } from "./external-links.js";
 import { language } from "./prefs.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
@@ -825,7 +825,7 @@ export function browseMask(deps) {
 
     const cost = Array.isArray(r.cost) ? r.cost : [];
     if (cost.length) {
-      appendRow(dl, labelFor("cost"), tipFor("cost"), textNode(costText(cost)));
+      appendRow(dl, labelFor("cost"), tipFor("cost"), costNode(cost));
     } else {
       appendRow(dl, labelFor("cost.empty"), tipFor("cost.empty"), textNode("-"));
     }
@@ -898,12 +898,6 @@ export function browseMask(deps) {
       return Object.entries(v).map(([k, x]) => `${k}: ${x}`).join(" · ");
     }
     return String(v);
-  }
-
-  function costText(cost) {
-    return cost
-      .map((c) => `${(c.amount ?? 0).toLocaleString()} ${valueLabel("currencies", c.currency)}`)
-      .join(" / ");
   }
 
   function valueOf(key, value, type, enums) {

@@ -36,6 +36,7 @@ try {
   browser = await puppeteer.launch({ executablePath: process.env.CHROMIUM || '/usr/bin/chromium', args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'], headless: true });
   const page = await browser.newPage();
   page.setDefaultTimeout(15000);
+  if (process.env.RESPONSIVE_THEME) await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: process.env.RESPONSIVE_THEME }]);
   page.on('pageerror', error => errors.push(error.message));
   await page.setRequestInterception(true);
   page.on('request', r => new URL(r.url()).hostname === '127.0.0.1' ? r.continue() : r.abort());

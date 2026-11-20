@@ -3,7 +3,7 @@ import test from "node:test";
 import fs from "node:fs";
 import Ajv from "ajv/dist/2020.js";
 import { isIgnoredItem } from "../../docs/ignored-items.js";
-import { parseDiscovery, discoveryKnown, discoveryAsRecipe, applyOffer, offerTypes, offerTypeSets, offerPlan, recordFromOffer } from "../../docs/discovery.js";
+import { parseDiscovery, parseMissingIds, discoveryKnown, discoveryAsRecipe, applyOffer, offerTypes, offerTypeSets, offerPlan, recordFromOffer } from "../../docs/discovery.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
 import { ReferenceData } from "../../docs/reference-data.js";
 import { validateRecord, validateBuffer, rumourClash, messageFor } from "../../docs/validate.js";
@@ -297,4 +297,14 @@ test("an offer in another currency is another trader: it never reprices a record
   const r = offerPlan([rumour], { currency: "AP", amount: 2 }, sets, contracts);
   assert.deepEqual([r.kind, r.record.cost], ["apply", [{ currency: "AP", amount: 2 }]], "a rumour still takes the dump");
   assert.equal(offerTypeSets([hgf, af]).get("GOLD").has("vendor"), true);
+});
+
+test("a missing-ids list is known by its first line, repeats it per page, and counts what is not an id", () => {
+  assert.deepEqual(parseMissingIds("\nfurniture-missing-ids-v1\r\n200\n100\nfurniture-missing-ids-v1\n100\n"), { ids: [100, 200], other: 0 });
+  assert.deepEqual(parseMissingIds("furniture-missing-ids-v1\n"), { ids: [], other: 0 });
+  assert.deepEqual(parseMissingIds("furniture-missing-ids-v1\n100, 200\n0\n{\"id\":3}\n7"), { ids: [7], other: 3 });
+  // ids to request and discovery lines are something else
+  assert.equal(parseMissingIds("100\n200\n"), null);
+  assert.equal(parseMissingIds(JSON.stringify(sample)), null);
+  assert.equal(parseMissingIds(""), null);
 });
