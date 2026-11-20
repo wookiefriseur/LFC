@@ -1,4 +1,4 @@
-import { orderedSourceTypes, sourceTypeLabel, valueLabel } from "./lexicon.js";
+import { orderedSourceTypes, sourceTypeLabel, valueLabel, groupLabel } from "./lexicon.js";
 // The database ships a flat set of leaf sources; grouping belongs to each consumer. Leaves this tree fails to place land in a computed catch-all (Other), so a new source type can never blank the UI.
 
 /** An illegal subtype yields a leaf the enumeration does not know, which buildTaxonomy() surfaces as drift. */
@@ -56,7 +56,7 @@ export function deriveTree(enums) {
     const members = byPrefix.get(prefix);
     const group = {
       id: prefix,
-      label: humanise(prefix),
+      label: groupLabel(prefix) || humanise(prefix),
       note: members.length > 1
         ? `Source types beginning ${prefix}_.`
         : `Source type ${members[0]}.`,
@@ -71,7 +71,7 @@ export function deriveTree(enums) {
     }
     for (const type of members) {
       group.subgroups.push({
-        id: type, label: humanise(type),
+        id: type, label: sourceTypeLabel(type),
         leaves: [type, ...subLeaves(type)],
       });
     }

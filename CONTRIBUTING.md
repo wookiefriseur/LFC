@@ -104,7 +104,9 @@ Every generation validates the data and verifies the generated Lua by decoding i
 
 Both the generator and IssueToPR add missing `SI_FURC_*` strings from `enums.json` inside the `WEBINTERFACE STRINGS` comment markers in `locale/en.lua`.
 
-Both also write `docs/data/strings.json`, the web interface's copy of `locale/*.lua`: `{language: {string id: text}}`. The locale files are the only place a string is edited. A translation file holds only the strings somebody translated, one whose text equals English included; a string it lacks is untranslated and shows the English text. A string that was deleted from en.lua will disappear from the translation as well. Item, zone, quest, achievement and house names are not in it: those are dumped from the game, through the names files.
+Both also write `docs/data/strings.json`, the web interface's copy of `locale/*.lua`: `{language: {string id: text}}`. The locale files are the only place a string is edited. A translation file holds only the strings somebody explicitly translated. A string it lacks is untranslated and shows the English text. A string that was deleted from en.lua will disappear from the translation as well. Item, zone, quest, achievement and house names are not in it: those are dumped from the game, through the names files.
+
+Webinterface translation is separate (buttons, menues, etc): `docs/locale/en.js` holds the English master, and `docs/locale/<language>.json` the translations (lowercase ids). `SI_` ids are only for strings dumped from the game. `scripts/webview_stamp.py` fails when a page uses an id the master lacks, the master holds an id nothing uses, or a translation drops a `{name}` placeholder.
 
 ## Release
 

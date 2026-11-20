@@ -1,7 +1,7 @@
 // A diff line is after-only, but the buffer holds before and after, so the review screen can say which item, which record and whether the change reaches the game. The submit modal and the issue body are both projections of changeRows(), so contributor and reviewer read the same sentences.
 
 import {
-  labelFor, sourceTypeLabel, valueLabel, subtypeVocab, titleCase, NOT_IN_GAME_DATA,
+  labelFor, sourceTypeLabel, valueLabel, subtypeVocab, titleCase, NOT_IN_GAME_DATA, t,
 } from "./lexicon.js";
 import {
   entryOf, labelOf, noteLabel, placementsText, versionLabel,
@@ -47,7 +47,7 @@ function formatSymbol(enums, vocab, symbol) {
   const label = labelOf(enums, vocab, symbol);
   const entry = entryOf(enums, vocab, symbol);
   const base = label && label !== symbol ? `${label} (${symbol})` : String(symbol);
-  return entry && entry.undefined_in_library ? base + NOT_IN_GAME_DATA : base;
+  return entry && entry.undefined_in_library ? base + t(NOT_IN_GAME_DATA) : base;
 }
 
 // Two long texts that differ near their end read as identical when both are cut at the same length, so cut around the first difference instead.
@@ -221,7 +221,7 @@ export function changeRows(bufferOrEntries, ctx = {}) {
     }
     if (entry.op === "text") {
       rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
-        item: `Interface text: ${entry.english}`, record: entry.locale, field: "text",
+        item: `Interface text: ${entry.id}`, record: entry.locale, field: "text",
         what: entry.before ? "Translation" : "New translation",
         before: entry.before || "(none)", after: entry.text, markers: [], siteOnly: false });
       continue;

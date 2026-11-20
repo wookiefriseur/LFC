@@ -100,12 +100,12 @@ class IssueApplicationTests(unittest.TestCase):
                 self.run_plan({**line, **bad})
 
     def test_text_translates_one_interface_text(self):
-        line = {'v': 1, 'op': 'text', 'locale': 'fr', 'key': 'Price', 'text': 'Prix'}
-        files, _ = self.run_plan(line, {**line, 'key': 'Amount', 'text': 'Montant'})
+        line = {'v': 1, 'op': 'text', 'locale': 'fr', 'id': 'field.cost', 'text': 'Prix'}
+        files, _ = self.run_plan(line, {**line, 'id': 'browse.count_items', 'text': '{n} objets'})
         self.assertEqual(set(files), {'docs/locale/fr.json'})
-        self.assertEqual(list(json.loads(files['docs/locale/fr.json']).items())[:1], [('Amount', 'Montant')])
-        self.assertEqual(json.loads(files['docs/locale/fr.json'])['Price'], 'Prix')
-        for bad in ({'locale': 'en'}, {'text': ' '}, {'key': ''}, {'text': 'a\nb'}):
+        self.assertEqual(json.loads(files['docs/locale/fr.json']), {'browse.count_items': '{n} objets', 'field.cost': 'Prix'})
+        for bad in ({'locale': 'en'}, {'text': ' '}, {'id': ''}, {'text': 'a\nb'}, {'id': 'field.no_such_text'},
+                    {'id': 'browse.count_items', 'text': 'objets'}):
             with self.assertRaises(ValueError):
                 self.run_plan({**line, **bad})
 

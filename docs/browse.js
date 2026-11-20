@@ -9,7 +9,7 @@ import {
 } from "./taxonomy.js";
 import {
   labelFor, tipFor, sourceTypeLabel, valueLabel, subtypeVocab,
-  NOT_IN_GAME_DATA, ID_NOT_RECORDED,
+  NOT_IN_GAME_DATA, ID_NOT_RECORDED, t, translateTree,
 } from "./lexicon.js";
 import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
@@ -59,7 +59,7 @@ function namedId(kind, id, fallback) {
 }
 
 function valueText(key, value, type, enums) {
-  if (isUnknownId(enums, key, value)) return ID_NOT_RECORDED;
+  if (isUnknownId(enums, key, value)) return t(ID_NOT_RECORDED);
   if (NAMED_ID_KINDS[key] && Number.isInteger(value)) return namedId(NAMED_ID_KINDS[key], value, String(value));
   if (key === "subtype" && typeof value === "string") {
     return valueLabel(subtypeVocab(type), value);
@@ -76,13 +76,13 @@ function valueText(key, value, type, enums) {
   if (vocab && typeof value === "string") {
     const entry = entryOf(enums, vocab, value);
     const label = plainLabel(labelOf(enums, vocab, value)) || value;
-    return entry && entry.undefined_in_library ? label + NOT_IN_GAME_DATA : label;
+    return entry && entry.undefined_in_library ? label + t(NOT_IN_GAME_DATA) : label;
   }
   // Empty means "comes furnished with a house nobody has named yet", not "no house"
   if (key === "houses" && Array.isArray(value)) {
     return value.length
-      ? value.map((id) => namedId("houses", id, `collectible ${id}`)).join(", ")
-      : "a house not yet identified";
+      ? value.map((id) => namedId("houses", id, t("browse.collectible", { id }))).join(", ")
+      : t("browse.house_unknown");
   }
   if (Array.isArray(value)) return value.join(", ");
   return String(value);
@@ -178,14 +178,14 @@ export function browseMask(deps) {
     const option = (value, label) => elem("option", { value }, label);
     // A category is its own "all of it" choice. An <optgroup> label cannot be chosen, so the heading is an option,
     // set off in bold, and its subcategories are indented below it. The values carry the ids, never a position.
-    cat.replaceChildren(option("", "Any category"), ...[...gameGroups.categories.keys()].sort(byName("categories")).flatMap((c) => [
+    cat.replaceChildren(option("", t("browse.any_category")), ...[...gameGroups.categories.keys()].sort(byName("categories")).flatMap((c) => [
       elem("option", { value: `c:${c}`, class: "browse-category-head" }, groupName("categories", c)),
       ...[...gameGroups.categories.get(c)].sort(byName("categories"))
         .map((s) => option(`s:${s}`, `\u00a0└\u00a0${groupName("categories", s)}`)),
     ]));
-    style.replaceChildren(option("", "Any style"),
-      ...[...gameGroups.styles].sort(byName("themes")).map((t) => option(String(t), groupName("themes", t))));
-    skill.replaceChildren(option("", "Any crafting skill"),
+    style.replaceChildren(option("", t("browse.any_style")),
+      ...[...gameGroups.styles].sort(byName("themes")).map((s) => option(String(s), groupName("themes", s))));
+    skill.replaceChildren(option("", t("browse.any_skill")),
       ...[...gameGroups.skills].sort(byName("skills")).map((s) => option(String(s), groupName("skills", s))));
     skill.hidden = gameGroups.skills.size === 0; // no dump has brought the skills yet
     cat.value = view.category;
@@ -250,13 +250,13 @@ export function browseMask(deps) {
     const q = view.search.trim();
     if (q) {
       wrap.append(elem("p", { class: "browse-empty-lead" },
-        "No items match your search."));
+        t("browse.empty_search")));
       wrap.append(elem("p", { class: "muted" },
-        `Nothing called “${q}” under the current filter - try fewer letters, or clear the filter.`));
+        t("browse.empty_search.hint", { name: q })));
     } else {
-      wrap.append(elem("p", { class: "browse-empty-lead" }, "Nothing here yet."));
+      wrap.append(elem("p", { class: "browse-empty-lead" }, t("browse.empty")));
       wrap.append(elem("p", { class: "muted" },
-        "This kind of source is real but has no records so far - the first contribution starts the list."));
+        t("browse.empty.hint")));
     }
     return wrap;
   }
@@ -264,7 +264,7 @@ export function browseMask(deps) {
   function sourceSummary(item) {
     const labels = [];
     for (const r of item.records) {
-      const l = r.source?.type ? sourceTypeLabel(r.source.type) : "Unknown source";
+      const l = r.source?.type ? sourceTypeLabel(r.source.type) : t("browse.unknown_source");
       if (!labels.includes(l)) labels.push(l);
     }
     if (labels.length <= 3) return labels.join(", ");
@@ -276,7 +276,7 @@ export function browseMask(deps) {
       <section class="browse-mask">
         <aside class="browse-sidebar">
           <details id="browse-filters" class="browse-filters">
-            <summary>Source filter</summary>
+            <summary data-t="browse.source_filter"></summary>
             <ul id="browse-facet-list" class="browse-facet-list"></ul>
           </details>
         </aside>
@@ -284,15 +284,15 @@ export function browseMask(deps) {
         <div class="browse-main">
           <div class="browse-toolbar">
             <span class="search-box">
-              <input id="browse-search" type="search" placeholder="search by id or name…">
+              <input id="browse-search" type="search" data-t-placeholder="browse.search">
               <button id="browse-search-clear" type="button" class="search-clear"
-                      aria-label="Clear the search" hidden>×</button>
+                      data-t-aria-label="browse.search_clear" hidden>×</button>
             </span>
-            <select id="browse-category" aria-label="Furnishing category" title="The game's furnishing categories" disabled><option value="">Any category</option></select>
-            <select id="browse-style" aria-label="Furnishing style" title="The game's furnishing styles (themes)" disabled><option value="">Any style</option></select>
-            <select id="browse-skill" aria-label="Crafting skill" title="The skill that crafts the furnishing" hidden><option value="">Any crafting skill</option></select>
+            <select id="browse-category" data-t-aria-label="browse.category" data-t-title="browse.category.tip" disabled><option value="" data-t="browse.any_category"></option></select>
+            <select id="browse-style" data-t-aria-label="browse.style" data-t-title="browse.style.tip" disabled><option value="" data-t="browse.any_style"></option></select>
+            <select id="browse-skill" data-t-aria-label="browse.skill" data-t-title="browse.skill.tip" hidden><option value="" data-t="browse.any_skill"></option></select>
             <span id="browse-count" class="muted"
-                  title="Items, not records. One item can have several sources."></span>
+                  data-t-title="browse.count.tip"></span>
           </div>
           <div id="browse-scroller" class="browse-scroller">
             <div id="browse-grid" class="browse-grid"></div>
@@ -301,6 +301,7 @@ export function browseMask(deps) {
 
         <aside id="browse-detail" class="browse-detail" hidden></aside>
       </section>`;
+    translateTree(container);
 
     const narrow = window.matchMedia("(max-width: 760px)");
     const filters = $("#browse-filters");
@@ -441,13 +442,13 @@ export function browseMask(deps) {
       refresh();
     };
 
-    mkItem("", "All items", state.records.length)
+    mkItem("", t("browse.all_items"), state.records.length)
       .addEventListener("click", () => select("", []));
 
-    const t = view.tax || taxonomy();
-    const countOf = (leaves) => leaves.reduce((n, l) => n + (t.counts[l] || 0), 0);
+    const tax = view.tax || taxonomy();
+    const countOf = (leaves) => leaves.reduce((n, l) => n + (tax.counts[l] || 0), 0);
 
-    for (const g of t.groups) {
+    for (const g of tax.groups) {
       const own = [...g.leaves, ...(g.subgroups || []).flatMap((sg) => sg.leaves)];
       mkItem(`grp:${g.id}`, g.label, countOf(own))
         .addEventListener("click", () => select(`grp:${g.id}`, own));
@@ -458,12 +459,12 @@ export function browseMask(deps) {
     }
 
     // Every leaf is placed by construction, so "Other" only appears for a leaf the derivation missed.
-    if (!t.catchAll.length) return;
-    const other = mkItem("grp:other", "Other", countOf(t.catchAll));
-    other.title = "Sources this site has not sorted into a group yet.";
-    other.addEventListener("click", () => select("grp:other", t.catchAll));
-    for (const leaf of t.catchAll) {
-      mkItem(`leaf:${leaf}`, leafLabel(leaf), t.counts[leaf] || 0, "is-sub")
+    if (!tax.catchAll.length) return;
+    const other = mkItem("grp:other", t("browse.group_other"), countOf(tax.catchAll));
+    other.title = t("browse.group_other.tip");
+    other.addEventListener("click", () => select("grp:other", tax.catchAll));
+    for (const leaf of tax.catchAll) {
+      mkItem(`leaf:${leaf}`, leafLabel(leaf), tax.counts[leaf] || 0, "is-sub")
         .addEventListener("click", () => select(`leaf:${leaf}`, [leaf]));
     }
   }
@@ -475,7 +476,7 @@ export function browseMask(deps) {
     // A failed load (complete, no pixels) already replaced itself with a placeholder; build a new one.
     const failed = kept && kept.complete && kept.naturalWidth === 0;
     if (kept && !failed && !kept.isConnected) return kept;
-    const node = itemIconImg(id, nameOf(id) || `item ${id}`);
+    const node = itemIconImg(id, nameOf(id) || t("browse.item_fallback", { id }));
     if (node.tagName === "IMG") iconNodes.set(id, node);
     return node;
   }
@@ -517,7 +518,7 @@ export function browseMask(deps) {
     grid.innerHTML = "";
     if (total === 0) {
       grid.append(emptyState());
-      $("#browse-count").textContent = "0 items";
+      $("#browse-count").textContent = t("browse.count_items", { n: 0 });
       return;
     }
     if (first > 0) grid.append(spacer(top));
@@ -534,7 +535,7 @@ export function browseMask(deps) {
 
       const body = elem("div", { class: "browse-card-body" });
       const mark = knowledgeMarker(item.id);
-      body.append(elem("div", { class: "browse-card-name" }, mark ? [mark, " "] : [], nameOf(item.id) || "(no name)"));
+      body.append(elem("div", { class: "browse-card-name" }, mark ? [mark, " "] : [], nameOf(item.id) || t("browse.no_name")));
       const meta = elem("div", { class: "browse-card-meta muted" });
       const blueprint = item.records.find(r => r.blueprint)?.blueprint;
       meta.append(elem("span", {
@@ -543,40 +544,39 @@ export function browseMask(deps) {
       if (blueprint) {
         meta.append(elem("span", {
           class: "browse-card-recipe",
-          title: "The blueprint that teaches this furnishing.",
-        }, item.records.some(r => r.id) ? `from recipe #${blueprint}` : "Unpaired blueprint"));
+          title: t("browse.recipe.tip"),
+        }, item.records.some(r => r.id) ? t("browse.from_recipe_id", { id: blueprint }) : t("browse.unpaired_blueprint")));
       }
       // An item whose only record is a rumour has no confirmed source and must not look as settled as a verified row.
       const unconfirmed = item.records.every((r) => r.source?.type === "rumour");
       meta.append(elem("span", {
         class: unconfirmed ? "browse-card-src browse-card-unverified" : "browse-card-src",
         ...(unconfirmed ? {
-          title: "Only heard of - nobody has recorded where this actually " +
-                 "comes from yet. If you know, that is a contribution.",
+          title: t("browse.unconfirmed.tip"),
         } : {}),
       }, sourceSummary(item)));
       if (item.records.length > 1) {
         meta.append(elem("span", {
           class: "browse-card-n",
-          title: "Each one is a separate record you can correct.",
-        }, `${item.records.length} ways to get it`));
+          title: t("browse.source_count.tip"),
+        }, t("browse.source_count", { n: item.records.length })));
       }
       const container = item.records.find(r => r.container);
       if (container) {
         const contents = containerContents(state.records, item.id);
-        body.prepend(elem("strong", { class: "container-label" }, `${containerLabel(container)} - ${contents.length} contents`));
+        body.prepend(elem("strong", { class: "container-label" }, t("browse.container_contents", { container: containerLabel(container), n: contents.length })));
         const names = contents.map(r => nameOf(r.id ?? r.blueprint) || `#${r.id ?? r.blueprint}`);
-        card.title = `${containerLabel(container)} contains:\n${names.join("\n")}`;
-        body.append(elem("div", { class: "container-preview" }, names.slice(0, 2).join("; ") + (names.length > 2 ? `; +${names.length - 2} more` : "")));
+        card.title = `${t("browse.container_contains", { container: containerLabel(container) })}\n${names.join("\n")}`;
+        body.append(elem("div", { class: "container-preview" }, names.slice(0, 2).join("; ") + (names.length > 2 ? `; ${t("browse.more", { n: names.length - 2 })}` : "")));
       }
       const onLists = listsWith(item.id);
       if (onLists.length) {
         const pills = elem("span", {
           class: "lists-pills",
-          title: `On your list${onLists.length === 1 ? "" : "s"}: ${onLists.map((l) => l.name).join(", ")}`,
+          title: `${onLists.length === 1 ? t("browse.on_list") : t("browse.on_lists")} ${onLists.map((l) => l.name).join(", ")}`,
         });
         if (onLists.length > (wideCards.matches ? MAX_LIST_PILLS : 1)) {
-          pills.append(elem("span", { class: "lists-pill" }, `${onLists.length} lists`));
+          pills.append(elem("span", { class: "lists-pill" }, t("browse.list_count", { n: onLists.length })));
         } else {
           for (const l of onLists) pills.append(elem("span", { class: "lists-pill" }, pillText(leafOf(l))));
         }
@@ -584,7 +584,7 @@ export function browseMask(deps) {
       }
       body.append(meta);
       card.append(body);
-      const toList = elem("button", { type: "button", class: "btn-mini browse-card-list", title: "Add to one of your lists" }, "+ List");
+      const toList = elem("button", { type: "button", class: "btn-mini browse-card-list", title: t("browse.add_to_list.tip") }, t("browse.add_to_list"));
       toList.addEventListener("click", (e) => {
         e.stopPropagation();
         openAddToList(item.id, nameOf(item.id));
@@ -605,8 +605,8 @@ export function browseMask(deps) {
     measureCards(grid, scroller, first, anchor, heightOf);
 
     $("#browse-count").textContent =
-      `${total.toLocaleString()} item${total === 1 ? "" : "s"}` +
-      (total > 0 ? ` - showing ${first + 1}–${last}` : "");
+      (total === 1 ? t("browse.count_item") : t("browse.count_items", { n: total.toLocaleString() })) +
+      ` - ${t("browse.showing", { first: first + 1, last })}`;
   }
 
   function itemButton(id) {
@@ -676,14 +676,14 @@ export function browseMask(deps) {
     });
     head.append(closeBtn);
     const titleWrap = elem("div", {});
-    titleWrap.append(itemIconImg(item.id, nameOf(item.id) || `item ${item.id}`));
+    titleWrap.append(itemIconImg(item.id, nameOf(item.id) || t("browse.item_fallback", { id: item.id })));
     const title = elem("div", { class: "browse-detail-title" });
     const mark = knowledgeMarker(item.id);
-    title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || "(no name)"));
+    title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || t("browse.no_name")));
     const blueprint = item.records.find(r => r.blueprint)?.blueprint;
     title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", isTradeable(item.records) ? tradingLinkAnchor(item.id) : []);
     if (blueprint && item.records.some(r => r.id)) {
-      const from = elem("span", { class: "browse-detail-recipe muted" }, "from recipe ");
+      const from = elem("span", { class: "browse-detail-recipe muted" }, t("browse.from_recipe"), " ");
       from.append(itemLinkAnchor(blueprint, `#${blueprint}`), " ", tradingLinkAnchor(blueprint, "blueprint"));
       title.append(from);
     }
@@ -701,35 +701,35 @@ export function browseMask(deps) {
     const n = ordered.length;
     host.append(elem("div", {
       class: "muted browse-detail-sub",
-      title: "Each one is a separate record you can correct.",
-    }, n === 1 ? "1 way to get it" : `${n} ways to get it`));
+      title: t("browse.source_count.tip"),
+    }, n === 1 ? t("browse.source_count_one") : t("browse.source_count", { n })));
 
     const container = item.records.find(r => r.container);
     if (container) {
       host.append(elem("h3", { class: "container-label" }, containerLabel(container)));
-      host.append(elem("p", { class: "muted" }, "The price below buys the whole collection."));
+      host.append(elem("p", { class: "muted" }, t("browse.collection_price")));
       const list = elem("ul", { class: "container-contents" });
       for (const child of containerContents(state.records, item.id)) {
         const li = elem("li", {});
         li.append(itemButton(child.id ?? child.blueprint));
-        if (child.blueprint) li.append(" (recipe)");
+        if (child.blueprint) li.append(` ${t("browse.recipe_mark")}`);
         list.append(li);
       }
-      host.append(elem("h4", {}, "Contents"), list);
+      host.append(elem("h4", {}, t("browse.contents")), list);
     }
     for (const parent of containerParents(state.records, item.records)) {
-      host.append(elem("p", { class: "container-parent" }, "Part of ", itemButton(parent.id)));
+      host.append(elem("p", { class: "container-parent" }, t("browse.part_of"), " ", itemButton(parent.id)));
     }
     ordered.forEach((r) => host.append(sourceBlock(r)));
 
     if (deps.pairRecord && !container) {
-      const pair = elem("button", { class: "btn-mini browse-pair" }, "Link a blueprint and furnishing");
+      const pair = elem("button", { class: "btn-mini browse-pair" }, t("browse.pair"));
       pair.addEventListener("click", () => deps.pairRecord(item.records[0]._key));
       host.append(pair);
     }
 
     const add = elem("button", { class: "btn-mini browse-add-way" },
-      "+ Add another way to get this item");
+      t("browse.add_source"));
     add.addEventListener("click", () => {
       if (typeof deps.addRecordForItem === "function") deps.addRecordForItem(item.id);
     });
@@ -744,15 +744,14 @@ export function browseMask(deps) {
     recHead.append(elem("h4", {
       class: "browse-source-type",
       ...(type === "rumour" ? {
-        title: "The exclusive fallback: it exists in the catalogue, but no " +
-               "confirmed way to get it has been recorded.",
+        title: t("browse.rumour.tip"),
       } : {}),
-    }, type ? sourceTypeLabel(type) : "No source"));
+    }, type ? sourceTypeLabel(type) : t("browse.no_source")));
     if (state.buffer.isDeleted(r._key)) {
       block.classList.add("browse-source-deleted");
-      recHead.append(elem("span", { class: "browse-source-dirty" }, "to be deleted"));
+      recHead.append(elem("span", { class: "browse-source-dirty" }, t("browse.to_be_deleted")));
     } else if (state.buffer.entries.has(r._key)) {
-      recHead.append(elem("span", { class: "browse-source-dirty" }, "edited"));
+      recHead.append(elem("span", { class: "browse-source-dirty" }, t("browse.edited")));
     }
     block.append(recHead);
 
@@ -771,7 +770,7 @@ export function browseMask(deps) {
     if (siteOnly.length) {
       const box = elem("div", { class: "browse-siteonly" });
       box.append(elem("div", { class: "browse-siteonly-legend" },
-        "Only on this site - the build removes these"));
+        t("browse.site_only")));
       const dl = elem("dl", { class: "browse-source-fields" });
       for (const f of siteOnly) {
         appendRow(dl, labelFor(f), tipFor(f), textNode(fieldText(r[f])));
@@ -784,19 +783,19 @@ export function browseMask(deps) {
 
     const actions = elem("div", { class: "browse-rec-actions" });
     const fix = elem("button", { class: "btn-mini btn-primary browse-fix-this" },
-      "Quick Edit");
+      t("browse.quick_edit"));
     fix.addEventListener("click", () => {
       if (typeof deps.openQuickEdit === "function") deps.openQuickEdit(r._key);
     });
     actions.append(fix);
     const batch = elem("button", { class: "btn-mini browse-batch-edit" },
-      "Batch edit");
+      t("tab.advanced"));
     batch.addEventListener("click", () => {
       if (typeof deps.switchToBatchEdit === "function") deps.switchToBatchEdit(r._key);
     });
     actions.append(batch);
     if (typeof deps.moveToFolio === "function" && canMoveToFolio(r) && !state.buffer.isDeleted(r._key)) {
-      const folio = elem("button", { class: "btn-mini browse-folio" }, "Move into a folio");
+      const folio = elem("button", { class: "btn-mini browse-folio" }, t("browse.move_to_folio"));
       folio.addEventListener("click", () => deps.moveToFolio(r._key));
       actions.append(folio);
     }
@@ -870,7 +869,7 @@ export function browseMask(deps) {
     }
     if (known) {
       block.append(elem("p", { class: "muted browse-source-known" },
-        "Known problem in the source data - not something you did."));
+        t("browse.known_problem")));
     }
   }
 
@@ -966,5 +965,5 @@ export function browseMask(deps) {
     applyFilter(filter);
   }
 
-  return { id: "browse", label: "Browse", icon: "🔍", render, onShow, focus };
+  return { id: "browse", icon: "🔍", render, onShow, focus };
 }

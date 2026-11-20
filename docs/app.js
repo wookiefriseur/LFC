@@ -20,7 +20,7 @@ import {
 } from "./validate.js";
 import {
   labelFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA,
-  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t,
+  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t, translateTree,
 } from "./lexicon.js";
 import {
   parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
@@ -146,21 +146,20 @@ async function init() {
     registerMask(listsMask(maskDeps()));
     browse = browseMask(maskDeps());
     registerMask(browse);
-    registerMask({ id: "luxury", label: "Luxury", render: renderLuxuryPanel });
+    registerMask({ id: "luxury", render: renderLuxuryPanel });
     registerMask({
       id: "crown-store",
-      label: "Crown",
       subtabs: [
         crownStoreMask(maskDeps()),   // default subtab
         crownCrateMask(maskDeps()),
       ],
     });
-    registerMask({ id: "advanced", label: "Batch edit",
+    registerMask({ id: "advanced",
                    render: renderAdvancedPanel, onShow: () => renderTable() });
     registerMask(maintenanceMask(maskDeps()));
     registerMask(namesMask(maskDeps()));
     // Not in KNOWN_TABS, so it is never remembered as the landing tab.
-    registerMask({ id: "about", label: "About", render: renderAbout });
+    registerMask({ id: "about", render: renderAbout });
     mountMasks({
       tabBar:    $("#tab-bar"),
       panelHost: $("#panel-host"),
@@ -1145,7 +1144,7 @@ const SOURCE_VOCAB = SOURCE_ENUM_FIELD;
 
 // Unknown key, symbol or vocabulary falls through to the raw value: enums.json is the source of truth and this table may lag it.
 function sourceValueText(key, value, sourceType) {
-  if (isUnknownId(state.enums, key, value)) return ID_NOT_RECORDED;
+  if (isUnknownId(state.enums, key, value)) return t(ID_NOT_RECORDED);
   if (key === "locations" && Array.isArray(value)) {
     return placementsText(state.enums, value);
   }
@@ -1161,7 +1160,7 @@ function sourceValueText(key, value, sourceType) {
   const label = vocab === "crates" ? crateLabel(state.enums, raw)
                                    : labelOf(state.enums, vocab, raw);
   // A value the library does not define (crates.IRONY) says so wherever it is shown: a known problem in the source data, not a typo.
-  return entry && entry.undefined_in_library ? label + NOT_IN_GAME_DATA : label;
+  return entry && entry.undefined_in_library ? label + t(NOT_IN_GAME_DATA) : label;
 }
 
 // One id routinely owns several records of the same type, so without this column the table shows identical-looking rows that are not duplicates. Values go in the cell, lexicon labels in the title.
@@ -2742,6 +2741,7 @@ async function applyLanguage(locale) {
   setStrings(strings, locale);
   setInterfaceTranslation(interfaceText);
   relabelMasks(t);
+  translateTree(document.body);
   referenceData.language = locale;
   state.names.setTranslation(names && names.size ? names : null, locale);
   document.documentElement.dataset.nameLanguage = locale;

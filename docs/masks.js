@@ -11,18 +11,13 @@ const rendered = new Set();
 const subRendered = new Set();
 const activeSub = new Map();
 
-// Tab names are drawn through this, so they follow the interface language
-let translate = (text) => text;
+// Tab names are text ids, tab.<mask id> and tab.<mask id>.<subtab id>, drawn through this translator
+let translate = (id) => id;
 
 function labelTab(btn, mask) {
-  btn.textContent = translate(mask.label);
+  btn.textContent = translate(`tab.${mask.id}`);
   // The glyph is decoration; the tab's name stays the label.
   if (mask.icon) btn.prepend(Object.assign(document.createElement("span"), { textContent: `${mask.icon} `, ariaHidden: "true" }));
-}
-
-/** Every tab and subtab name, in English. */
-export function maskLabels() {
-  return masks.flatMap((m) => [m.label, ...(m.subtabs || []).map((s) => s.label)]).filter(Boolean);
 }
 
 /** Redraws the tab names with a new translator. */
@@ -33,7 +28,7 @@ export function relabelMasks(fn) {
     if (btn) labelTab(btn, m);
     for (const st of m.subtabs || []) {
       const sub = document.getElementById(`subtab-${m.id}-${st.id}`);
-      if (sub) sub.textContent = translate(st.label);
+      if (sub) sub.textContent = translate(`tab.${m.id}.${st.id}`);
     }
   }
 }
@@ -162,7 +157,7 @@ export function switchMask(id, quiet = false) {
   if (!mask) throw new Error(`switchMask: unknown mask "${id}"`);
   activeId = id;
   if (tabBarEl.hasAttribute("popover") && tabBarEl.matches(":popover-open")) tabBarEl.hidePopover();
-  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Navigation, current page: ${translate(mask.label)}`);
+  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Navigation, current page: ${translate(`tab.${mask.id}`)}`);
 
   for (const m of masks) {
     const isActive = m.id === id;
@@ -210,7 +205,7 @@ function renderSubtabbed(mask, panel) {
     btn.setAttribute("role", "tab");
     btn.setAttribute("aria-selected", "false");
     btn.setAttribute("aria-controls", `subpanel-${mask.id}-${st.id}`);
-    btn.textContent = translate(st.label);
+    btn.textContent = translate(`tab.${mask.id}.${st.id}`);
     btn.addEventListener("click", () => switchSubtab(mask.id, st.id));
     bar.append(btn);
 

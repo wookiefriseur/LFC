@@ -178,7 +178,7 @@ export function crownStoreMask(deps) {
                 Lines with no price are skipped: a Crown item with no price is
                 not useful. An item that already has a Crown price is skipped;
                 an item sold only inside a pack or a bundle is not, because
-                that is a different way of getting it.
+                that is a different source.
               </p>
             </details>
             <textarea id="cstore-batch-paste" rows="6"
@@ -306,7 +306,7 @@ export function crownStoreMask(deps) {
     const priceInput = $("#cstore-price");
     const sibNote = siblings.length
       ? ` It is also sold as ${siblings.map(siblingTag).join(", ")} - those are` +
-        ` separate ways to get it and are left alone.`
+        ` separate sources and are left alone.`
       : "";
 
     if (existing) {
@@ -329,8 +329,8 @@ export function crownStoreMask(deps) {
         const types = [...new Set(otherRecs.map((r) => r.source?.type))]
           .filter(Boolean).map(sourceTypeLabel).join(", ");
         note.textContent =
-          (types ? `This item can also be got another way (${types}). ` : "") +
-          `A Crown price is one more way to get it, not a duplicate.` + sibNote;
+          (types ? `This item also has another source (${types}). ` : "") +
+          `A Crown price is one more source, not a duplicate.` + sibNote;
         note.className = "cstore-price-note";
       } else {
         note.textContent = "This is the first Crown price for this item.";
@@ -569,5 +569,5 @@ export function crownStoreMask(deps) {
     if (s) s.focus();
   }
 
-  return { id: "add-prices", label: "Prices", render, onShow };
+  return { id: "add-prices", render, onShow };
 }

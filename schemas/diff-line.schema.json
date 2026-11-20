@@ -213,14 +213,14 @@
     {
       "title": "text",
       "additionalProperties": false,
-      "required": ["v", "op", "locale", "key", "text"],
+      "required": ["v", "op", "locale", "id", "text"],
       "properties": {
         "v": { "const": 1 },
         "op": { "const": "text" },
         "locale": { "enum": ["de", "fr", "es", "ru", "jp", "zh"] },
-        "key": {
-          "description": "The English text as the web interface's code holds it.",
-          "type": "string", "minLength": 1, "maxLength": 500, "pattern": "^[^\\n]+$"
+        "id": {
+          "description": "The text's id in the web interface's master file (docs/locale/en.js).",
+          "type": "string", "maxLength": 200, "pattern": "^[a-z]+\\.[A-Za-z0-9_.@\\[\\]-]+$"
         },
         "text": { "type": "string", "maxLength": 1000, "pattern": "^(?=.*\\S)[^\\n]+$" }
       }

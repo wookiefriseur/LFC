@@ -2,8 +2,7 @@
 import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
 import { parseNamesDump, diffNames } from "./names-dump.js";
 import { labelOf, libraryStrings, checkTranslation } from "./data.js";
-import { titleCase, interfaceTexts, interfaceTranslationOf, loadInterfaceTranslation } from "./lexicon.js";
-import { maskLabels } from "./masks.js";
+import { titleCase, englishTexts, interfaceTranslationOf, loadInterfaceTranslation, checkInterfaceText } from "./lexicon.js";
 import { language } from "./prefs.js";
 
 // Past this many matches the table asks for a narrower search; a full achievement list is thousands of rows.
@@ -85,12 +84,13 @@ export function namesMask(deps) {
     }
     if (view.list === "strings:interface") {
       const mine = interfaceTranslationOf(locale()), translating = locale() !== "en";
-      const list = interfaceTexts(maskLabels()).map((english) => {
-        const pending = state.buffer.entries.get(`text:${locale()}:${english}`);
+      const english = englishTexts();
+      const list = Object.keys(english).sort().map((id) => {
+        const pending = state.buffer.entries.get(`text:${locale()}:${id}`);
         return {
-          id: english,
-          name: translating ? pending?.text ?? mine[english] ?? "" : english,
-          extra: pending?.before ? `was: ${pending.before}` : "",
+          id,
+          name: translating ? pending?.text ?? mine[id] ?? "" : english[id],
+          extra: translating ? `English: ${english[id]}${pending?.before ? ` - was: ${pending.before}` : ""}` : "",
           pending: !!pending,
           editable: translating,
         };
@@ -168,11 +168,11 @@ export function namesMask(deps) {
       ul.append(item("strings:library", "Library strings",
         locale() === "en" ? total : mine ? `${Object.keys(mine).length} of ${total}` : "no file"));
     }
-    // The web interface's own text; only what its label tables hold so far
-    const texts = interfaceTexts(maskLabels());
+    // The web interface's own text; only the pages already moved into the master file
+    const texts = Object.keys(englishTexts());
     if (!total) ul.append(elem("li", { class: "names-group" }, `Translation (${locale()})`));
     ul.append(item("strings:interface", "Interface text", locale() === "en" ? texts.length
-      : `${texts.filter((text) => interfaceTranslationOf(locale())[text]).length} of ${texts.length}`));
+      : `${texts.filter((id) => interfaceTranslationOf(locale())[id]).length} of ${texts.length}`));
   }
 
   function renderTable() {
@@ -196,7 +196,7 @@ export function namesMask(deps) {
     const head = elem("tr", {});
     const strings = view.list.startsWith("strings:");
     const texts = view.list === "strings:interface";
-    for (const h of [game ? "Id" : texts ? "English" : strings ? "String" : "Symbol", strings ? "Text" : "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
+    for (const h of [game ? "Id" : strings ? "String" : "Symbol", strings ? "Text" : "Name", game ? "" : "Details"]) head.append(elem("th", {}, h));
     table.append(elem("thead", {}, head));
     const body = elem("tbody", {});
     for (const r of hits.slice(0, ROW_LIMIT)) {
@@ -230,7 +230,7 @@ export function namesMask(deps) {
         });
         details.append(" ", revert);
       }
-      tr.append(elem("td", { class: texts ? "names-english" : "names-id" }, r.id), nameCell, details);
+      tr.append(elem("td", { class: "names-id" }, r.id), nameCell, details);
       body.append(tr);
     }
     table.append(body);
@@ -265,9 +265,9 @@ export function namesMask(deps) {
   }
 
   // One interface text into the change list. The published translation, or an empty box, drops the change.
-  function setText(english, text) {
-    const published = interfaceTranslationOf(locale())[english] ?? null;
-    state.buffer.setText(locale(), english, text.trim() || published || "", published);
+  function setText(id, text) {
+    const published = interfaceTranslationOf(locale())[id] ?? null;
+    state.buffer.setText(locale(), id, text.trim() || published || "", published);
     renderFooter();
     renderSidebar();
     renderTable();
@@ -302,7 +302,8 @@ export function namesMask(deps) {
     // A vocabulary name: the pipeline keeps the existing grammar suffix. A translation carries its own.
     const problem = () => {
       if (vocab && input.value.includes("^")) return "A name cannot contain ^";
-      if (!strings || texts || !input.value.trim()) return "";
+      if (!strings || !input.value.trim()) return "";
+      if (texts) { try { checkInterfaceText(id, input.value.trim()); } catch (e) { return e.message; } return ""; }
       try { checkTranslation(locale(), id, manyLines(input.value.trim())); } catch (e) { return e.message; }
       return "";
     };
@@ -522,5 +523,5 @@ export function namesMask(deps) {
     renderTable();
   }
 
-  return { id: "names", label: "Names", render, onShow };
+  return { id: "names", render, onShow };
 }

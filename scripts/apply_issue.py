@@ -17,6 +17,7 @@ from generate_db import (ROOT, canonical, load_inputs, lua, read_json, locale_st
                          render_strings, require, set_translation, verify)
 from import_names import GAME_LOCALES, MANIFEST, english, manifest_entry, names_file, with_fallback
 from jsonschema import Draft202012Validator
+from webview_stamp import holes, interface_texts
 
 BEGIN = '[//]: # (diff-begin)'
 END = '[//]: # (diff-end)'
@@ -269,11 +270,12 @@ def apply(lines, root=ROOT, lua_command=None):
             summaries.append(line)
             continue
         if op == 'text':
-            # ponytail: the key is not checked against the interface's texts, which only its JavaScript can list;
-            # the web unit tests fail on a key the interface does not have
+            master = interface_texts(files.read('docs/locale/en.js').decode())
+            require(line['id'] in master, f'{line["id"]} is not a text of the web interface')
+            require(holes(line['text']) == holes(master[line['id']]), 'a translation must keep the {name} holes of its text')
             name = f'docs/locale/{line["locale"]}.json'
             texts = files.obj(name) if (files.root / name).exists() or name in files.changed else {}
-            texts[line['key']] = line['text']
+            texts[line['id']] = line['text']
             files.put_obj(name, dict(sorted(texts.items())), 1)
             summaries.append(line)
             continue

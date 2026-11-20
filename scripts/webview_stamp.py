@@ -5,9 +5,14 @@
 
 webview_serve.py runs this before serving docs/.
 
-    python3 scripts/webview_stamp.py [--check]
+    python3 scripts/webview_stamp.py [--check | --texts]
 
---check changes nothing and exits 1 when the stamp is out of date, for CI.
+It also checks the interface's text: every id a page passes to t("...") or names in a data-t
+attribute is in docs/locale/en.js, every id there is used, and each translation in
+docs/locale/<language>.json has a known id and keeps the {name} holes of its English text.
+
+--check changes nothing and exits 1 when the stamp is out of date or the text has a problem, for CI.
+--texts checks the text alone, for a pull request, whose stamp the bot brings up to date after the merge.
 """
 import hashlib
 import json
@@ -22,13 +27,67 @@ STYLE = re.compile(r'<link rel="stylesheet" href="(?:\./)?style\.css(?:\?v=[0-9a
 IMPORT_MAP = re.compile(r'\n?[ \t]*<script type="importmap">.*?</script>', re.DOTALL)
 
 
+MASTER = "locale/en.js"
+ENTRY_LINE = re.compile(r'\s*("(?:[^"\\]|\\.)*"): ("(?:[^"\\]|\\.)*"),(?:\s*//.*)?')
+TEXT_ID = re.compile(r'[a-z]+\.[A-Za-z0-9_.@\[\]-]+')
+USED = (re.compile(r'(?<![\w.$])t\(\s*"([^"]*)"'), re.compile(r'\bdata-t(?:-[a-z-]+)?="([^"]*)"'))
+# Ids the code builds from a record's own keys, so no page names them literally
+BUILT = ("tab.", "kind.", "group.", "field.", "tip.", "value.")
+
+
+def holes(text):
+    return sorted(re.findall(r'\{\w+\}', text))
+
+
+def interface_texts(source):
+    """{id: English text} of the master file, which is one "id": "text", line per text besides comments and blank lines."""
+    lines = source.splitlines()
+    start, end = lines.index("export default {"), lines.index("};")
+    texts = {}
+    for n, line in enumerate(lines[start + 1:end], start + 2):
+        if not line.strip() or line.lstrip().startswith("//"):
+            continue
+        m = ENTRY_LINE.fullmatch(line)
+        if not m:
+            raise SystemExit(f'{MASTER}:{n}: expected "id": "text",')
+        key, text = json.loads(m[1]), json.loads(m[2])
+        if not TEXT_ID.fullmatch(key) or key in texts or not text:
+            raise SystemExit(f"{MASTER}:{n}: {key!r} is not a new id with a text")
+        texts[key] = text
+    return texts
+
+
+def text_problems(docs):
+    """What disagrees between the master file, the pages that use its ids and the translations."""
+    english = interface_texts((docs / MASTER).read_text(encoding="utf-8"))
+    problems, literals = [], set()
+    for path in sorted(docs.iterdir()):
+        if path.suffix not in (".js", ".html"):
+            continue
+        source = path.read_text(encoding="utf-8")
+        literals.update(re.findall(r'"([^"\n]*)"', source))
+        problems += [f"{path.name}: {key!r} is not in {MASTER}"
+                     for pattern in USED for key in pattern.findall(source) if key not in english]
+    problems += [f"{MASTER}: {key!r} is used nowhere" for key in english
+                 if key not in literals and not key.startswith(BUILT)]
+    for path in sorted((docs / "locale").glob("*.json")):
+        for key, text in json.loads(path.read_text(encoding="utf-8")).items():
+            if key not in english:
+                problems.append(f"locale/{path.name}: {key!r} is not in {MASTER}")
+            elif holes(text) != holes(english[key]):
+                problems.append(f"locale/{path.name}: {key!r} must keep {' '.join(holes(english[key])) or 'free of {name} holes'}")
+    return problems
+
+
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()[:12]
 
 
 def versions(docs):
-    return {p.name: digest(p) for p in sorted(docs.iterdir())
-            if p.is_file() and (p.suffix == ".js" or p.name == "style.css")}
+    v = {p.name: digest(p) for p in sorted(docs.iterdir())
+         if p.is_file() and (p.suffix == ".js" or p.name == "style.css")}
+    v[MASTER] = digest(docs / MASTER)
+    return v
 
 
 def stamp(html, v, name):
@@ -55,8 +114,14 @@ def stamp(html, v, name):
 
 def main(argv):
     check = "--check" in argv
-    v = versions(DOCS)
     stale = []
+    # Reported, but the stamp is still written: stale module versions break more than a text that shows its id
+    problems = text_problems(DOCS)
+    if problems:
+        print("\n".join(problems))
+    if "--texts" in argv:
+        return 1 if problems else 0
+    v = versions(DOCS)
     manifest_path = DOCS / "reference-data" / "manifest.json"
     old = manifest_path.read_text(encoding="utf-8")
     manifest = json.loads(old)
@@ -84,9 +149,9 @@ def main(argv):
             print("out of date: " + ", ".join(stale) + " - run scripts/webview_stamp.py")
             return 1
         print("stamp is current")
-        return 0
+        return 1 if problems else 0
     print(("restamped " + ", ".join(stale)) if stale else "stamp was already current")
-    return 0
+    return 1 if problems else 0
 
 
 if __name__ == "__main__":

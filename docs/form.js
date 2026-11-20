@@ -6,7 +6,7 @@ import {
   symbolOf, symbolsOf, entryOf, labelOf, placementsText, effectivePlacements,
 } from "./data.js";
 import {
-  labelFor, tipFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA,
+  labelFor, tipFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA, t,
 } from "./lexicon.js";
 import { messageFor, SOURCE_ENUM_FIELD, allowedSourceFields } from "./validate.js";
 
@@ -246,7 +246,7 @@ function clearLink(onClear) {
 function optionText(enums, key, symbol) {
   const label = labelOf(enums, key, symbol);
   const base = label && label !== symbol ? `${label} (${symbol})` : symbol;
-  return entryOf(enums, key, symbol)?.undefined_in_library ? base + NOT_IN_GAME_DATA : base;
+  return entryOf(enums, key, symbol)?.undefined_in_library ? base + t(NOT_IN_GAME_DATA) : base;
 }
 
 // An entry the library does not define is offered only when the record already carries it.
@@ -610,7 +610,7 @@ function sourceControl(ctx, field, id) {
       .map((sym) => ({
         value: sym,
         label: crateLabel(enums, sym) +
-          (isUndefinedInLibrary(enums, "crates", sym) ? NOT_IN_GAME_DATA : ""),
+          (isUndefinedInLibrary(enums, "crates", sym) ? t(NOT_IN_GAME_DATA) : ""),
       }));
     widget = selectFromPairs(name, value, pairs);
   } else if (field === "subtype") {

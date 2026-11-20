@@ -4,7 +4,7 @@ import { successPanelText } from "./luxury.js";
 import {
   versionsDesc, versionLabel, cratesDesc, crateLabel, latestVersion, entryOf,
 } from "./data.js";
-import { labelFor, tipFor, NOT_IN_GAME_DATA } from "./lexicon.js";
+import { labelFor, tipFor, NOT_IN_GAME_DATA, t } from "./lexicon.js";
 import { queueEnumValue, nextFreeIntFor } from "./maintenance.js";
 import { itemSearch } from "./crown-store.js";
 
@@ -201,7 +201,7 @@ export function crownCrateMask(deps) {
         || ("crate" in meta && meta.crate == null);
       return {
         value: c.symbol,
-        label: crateLabel(state.enums, c.symbol) + (broken ? NOT_IN_GAME_DATA : ""),
+        label: crateLabel(state.enums, c.symbol) + (broken ? t(NOT_IN_GAME_DATA) : ""),
         broken,
       };
     });
@@ -679,5 +679,5 @@ export function crownCrateMask(deps) {
     }
   }
 
-  return { id: "crate-seasons", label: "Crate seasons", render };
+  return { id: "crate-seasons", render };
 }

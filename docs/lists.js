@@ -945,7 +945,7 @@ export function listsMask(deps) {
     $("#lists-search").focus();
   }
 
-  return { id: "lists", label: "Lists", render, onShow: () => { if ($("#lists-main")) { drawIndex(); drawMain(); } } };
+  return { id: "lists", render, onShow: () => { if ($("#lists-main")) { drawIndex(); drawMain(); } } };
 }
 
 // The row above the lists: selects every list for import and export, and holds no items itself.

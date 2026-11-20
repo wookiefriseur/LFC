@@ -14,6 +14,7 @@ on:
       - 'docs/reference-data/**'
       - 'LibFurnitureCatalogue/data/**'
       - 'docs/*.js'
+      - 'docs/locale/**'
       - 'docs/style.css'
       - 'docs/index.html'
       - 'docs/404.html'
@@ -37,8 +38,9 @@ jobs:
       - uses: ./.github/actions/setup-lua
       - name: Regenerate out-of-date files
         run: python scripts/apply_issue.py --refresh
+      # A problem with the interface text does not hold the stamp back; the last step reports it
       - name: Restamp the web interface
-        run: python scripts/webview_stamp.py
+        run: python scripts/webview_stamp.py || true
       - name: Commit to main, or open a PR when main is protected
         env:
           GH_TOKEN: ${{ github.token }}
@@ -55,3 +57,5 @@ jobs:
             || gh pr create --base main --head "$BRANCH" \
                  --title "Regenerate manifests, generated Lua and the web interface stamp" \
                  --body "main has generated files out of date with its data, usually after two db-edit PRs were merged side by side, or a stale web interface stamp. This only regenerates them."
+      - name: Check the stamp and the interface text
+        run: python scripts/webview_stamp.py --check

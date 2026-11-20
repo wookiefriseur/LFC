@@ -79,7 +79,7 @@ def describe(number, actor, report, refreshed=()):
         if op['op'] == 'name':
             target, fields = f'{op["kind"]} {op["id"]}', op['name']
         elif op['op'] == 'text':
-            target, fields = f'{op["locale"]} interface text', f'{op["key"]} -> {op["text"]}'
+            target, fields = f'{op["locale"]} interface text', f'{op["id"]} -> {op["text"]}'
         elif op['op'] == 'string':
             target, fields = f'{op["locale"]} {op["id"]}', op['text']
         elif op['op'] == 'item':

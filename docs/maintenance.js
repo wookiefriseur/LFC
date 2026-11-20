@@ -1378,7 +1378,7 @@ export function maintenanceMask(deps) {
   }
 
   return {
-    id: "maintenance", label: "Maintenance", render, onShow,
+    id: "maintenance", render, onShow,
     tab: { get: () => view.section, set: (id) => { if (SECTIONS.includes(id)) showSection(id); } },
   };
 }

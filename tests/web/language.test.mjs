@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
 import { NameStore, labelOf, noteLabel, setStrings, checkTranslation } from "../../docs/data.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
-import { t, setInterfaceTranslation, interfaceTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
+import { t, checkInterfaceText, setInterfaceTranslation, englishTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
 import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
 
@@ -90,18 +90,36 @@ test("a translation keeps the placeholders of the English text and becomes one s
 });
 
 test("interface text follows its translation, English where there is none, and becomes one text line", () => {
-  setInterfaceTranslation({ "Luxury Furnisher": "Luxusausstatter", Rare: "Selten", Price: "Preis", "Blank means no price.": "" });
+  setInterfaceTranslation({ "kind.luxury": "Luxusausstatter", "value.rarities.rare": "Selten", "field.cost": "Preis", "tip.cost": "" });
   assert.equal(sourceTypeLabel("luxury"), "Luxusausstatter");
   assert.equal(sourceTypeLabel("vendor"), "Vendor");
   assert.equal(valueLabel("rarities", "rare"), "Selten");
   assert.equal(labelFor("cost"), "Preis");
   assert.equal(tipFor("cost"), "Blank means no price.");
-  assert.equal(t("not in any table"), "not in any table");
+  assert.equal(t("no.such_id"), "no.such_id");
   setInterfaceTranslation(null);
   assert.equal(sourceTypeLabel("luxury"), "Luxury Furnisher");
-  const texts = interfaceTexts(["Lists"]);
-  for (const text of ["Luxury Furnisher", "Rare", "Price", "Blank means no price.", "Lists"]) assert.ok(texts.includes(text), text);
+  // a source kind's own wording of a field, a field nobody described, and a detail its kind no longer allows
+  assert.equal(labelFor("source.subtype", "vendor"), "Vendor kind");
+  assert.equal(labelFor("source.subtype", "drop"), "How it is found");
+  assert.equal(labelFor("source.made_up"), "Made Up");
+  assert.match(tipFor("source.made_up"), /no longer allowed/);
+  assert.equal(valueLabel("rarities", "made_up"), "Made Up");
+  const english = englishTexts();
+  for (const id of ["kind.luxury", "value.rarities.rare", "field.cost", "tip.cost", "tab.lists", "browse.source_count"]) assert.ok(english[id], id);
   const buffer = new DirtyBuffer();
-  buffer.setText("fr", "Price", "Prix", null);
-  assert.deepEqual(JSON.parse(serialiseDiff(buffer)), { v: 1, op: "text", locale: "fr", key: "Price", text: "Prix" });
+  buffer.setText("fr", "field.cost", "Prix", null);
+  assert.deepEqual(JSON.parse(serialiseDiff(buffer)), { v: 1, op: "text", locale: "fr", id: "field.cost", text: "Prix" });
+});
+
+test("a page text fills its holes in either language, and a translation keeps the holes of a known id", () => {
+  setInterfaceTranslation({ "browse.source_count": "{n} Bezugsquellen" });
+  assert.equal(t("browse.source_count", { n: 3 }), "3 Bezugsquellen");
+  assert.equal(t("browse.count_items", { n: 0 }), "0 items");
+  assert.equal(t("browse.count_items", {}), "{n} items");
+  setInterfaceTranslation(null);
+  checkInterfaceText("browse.count_items", "{n} Gegenstände");
+  assert.throws(() => checkInterfaceText("browse.count_items", "Gegenstände"), /\{n\}/);
+  assert.throws(() => checkInterfaceText("browse.all_items", "Alle {n}"), /free of/);
+  assert.throws(() => checkInterfaceText("browse.no_such_text", "x"), /not a text/);
 });

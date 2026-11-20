@@ -1,8 +1,10 @@
 // Contributor-facing labels. Every lookup falls back to a title-cased rendering of the key, so a value appended to enums.json gets a rough label and is never hidden. A tooltip may explain but never warn: anything whose absence would let a wrong record through belongs in visible text.
 
-// The interface's own text in other languages: locale/<lang>.json, { English text: translation }. The English text in
-// the code is the key and the fallback, so a text nobody translated is simply absent from the file.
-const translations = new Map(); // language -> { English: translation }, once loaded
+// The interface's own text: locale/en.js holds the English text by id, locale/<lang>.json the translations, { id: translation }.
+// A text nobody translated is simply absent from that file and shows in English.
+import en from "./locale/en.js";
+
+const translations = new Map(); // language -> { id: translation }, once loaded
 let translation = {};
 
 /** Resolves with that language's translations, {} when it has none. Never rejects. */
@@ -23,114 +25,51 @@ export function setInterfaceTranslation(map) {
   translation = map && typeof map === "object" ? map : {};
 }
 
-/** The text in the chosen language, the English text where it has none. */
-export function t(text) {
-  const hit = translation[text];
-  return typeof hit === "string" && hit ? hit : text;
+const has = (id) => Object.hasOwn(en, id);
+
+/** The text of that id in the chosen language, in English where it has none. `{name}` in it is filled from `values`. */
+export function t(id, values) {
+  const hit = translation[id];
+  // An id the master file lacks shows as itself, which is how a mistyped one is noticed.
+  const out = (typeof hit === "string" && hit) || (has(id) ? en[id] : id);
+  return values ? out.replace(HOLE, (hole, name) => (name in values ? values[name] : hole)) : out;
 }
 
-const FIELDS = {
-  "id": ["Item ID", "It identifies the item and is never edited here."],
-  "source.type": ["Source", "Way of getting this item. 1 item can have several records, each a different way."],
-  "cost": ["Price", "Blank means no price."],
-  "cost.empty": ["Price - none", "Free, or not bought at all."],
-  "cost[].amount": ["Amount", "A whole number, no separators."],
-  "cost[].currency": ["Currency", "Gold, Crowns, Writ Vouchers and so on."],
-  "availability.version": ["Version", "Game update this belongs to, not necessarily when the item first appeared"],
-  "availability.last_seen": ["Last seen", "Date this item was last offered (only relevant for Luxury furnishings)"],
-  "rarity": ["Drop rarity", "How rare the drop is. Usually not needed. Blank means ordinary."],
-  "notes": ["Data note - why this record looks like this", "Written script or a maintainer"],
-  "name_overrides": ["Item name", "The name this site shows for the item."],
-  "_category": ["Data file", "Which file the record lives in. Always the same as where it comes from."],
-  "source.vendor": ["Sold by", "The NPC who sells it"],
-  "source.locations": ["Where", "Zone is the map area (Murkmire etc). Place is more precise, such as Lilmoth (but also any capital city). Use both for a vendor in Lilmoth, Murkmire. Leave blank to use the vendor's location."],
-  "source.note": ["Extra detail", "This source's own description, shown in the game (a known place belongs in Place). Don't use it to join two sources together: a second source is a second record"],
-  "source.event": ["Event", "The event this record is tied to"],
-  "source.container": ["Found in", "Containers with a drop chance (like daily reward coffers). Use Part of container for a fixed collection such as a furnishing folio."],
-  "source.part_of": ["Part of container", "The item ID of a box that always contains this item (like book collections)"],
-  "source.crate": ["Crown Crate season", "A Crown Crate season, such as Hidden Kindred. Use this for an item in that season's reward pool, not for an ordinary loot coffer."],
-  "source.packs": ["Furnishing packs", "A Crown Store furnishing pack with a fixed collection, such as an Alinor pack"],
-  "source.bundle": ["Bundle", "A named store offer containing several purchases, such as the Dwemer bundle"],
-  "source.tome": ["Tome pack", "The Tamriel Tomes reward pack it comes in, named as on UESP. A new pack is added in Maintenance, Vocabulary"],
-  "source.houses": ["Houses it comes with", "House collectible numbers, separated by commas."],
-  "source.companion": ["Companion", "The companion whose rapport rewards it."],
-  "source.quest": ["Quest ID", "a number, not its name. Use 0 when you know it needs one but not which."],
-  "source.achievement": ["Achievement ID", "a number, not its name. Use 0 when you know it needs one but not which."],
-  "source.collectible": ["Collectible it comes with", "The collectible number"],
-  "source.skill_line": ["Skill line", "The skill line you need."],
-  "source.skill_rank": ["Rank required", "How far up that skill line."],
-  "source.npc_class": ["Dropped by", "The kind of NPC that drops it."],
-  "source.npc_group": ["Dropped by (group)", "A broad group of NPCs rather than one kind - \"random enemies\"."],
-  "source.subtype": ["How it is found", "Chest, fishing, pickpocketing and so on."],
-  "source.leads": ["Several leads", "Ticked when the furnishing takes more than one antiquity lead."],
-};
+const HOLE = /\{(\w+)\}/g;
 
-// Per-source-type overrides; on the two types whose whole payload is `note`, the generic wording says nothing.
-const FIELD_BY_TYPE = {
-  vendor: { "source.subtype": ["Vendor kind", "Home Goods stock varies by location and needs no achievement. Achievement furnishings require an achievement. Choose Other for other vendors."] },
-  guild_gift: {"source.note": ["Which guild", "The player guild that it is dedicated to, e.g. Aetherius Art."],},
-};
+/** The English texts by id, which is what the Translation list offers. */
+export function englishTexts() {
+  return en;
+}
 
-const ORPHAN_TIP =
-  "This detail is no longer allowed for this kind of source. Remove it to save.";
+/** Throws unless `id` is a text of the interface and the translation fills the same `{name}` holes as its English text. */
+export function checkInterfaceText(id, text) {
+  if (!has(id)) throw new Error(`${JSON.stringify(id)} is not a text of this interface`);
+  const holes = (s) => (s.match(HOLE) || []).sort().join(" ");
+  if (holes(text) !== holes(en[id])) throw new Error(`the translation must keep ${holes(en[id]) || "the text free of {name} holes"}`);
+}
 
-const SOURCE_TYPES = {
-  vendor: "Vendor",
-  container: "Container contents",
-  pvp_vendor: "PvP vendor",
-  writ_vendor: "Master writ vendor",
-  luxury: "Luxury Furnisher",
-  event_drop: "Event drop",
-  event_vendor: "Event vendor",
-  crown_crate: "Crown Crate",
-  crown_store: "Crown Store",
-  recipe: "Crafting",
-  drop: "World drop",
-  quest_reward: "Quest reward",
-  dungeon_drop: "Dungeon drop",
-  housing: "Comes with a house",
-  companion: "Companion rapport",
-  guild_gift: "Player gift",
-  tome_pack: "Tome pack",
-  rumour: "UNCONFIRMED",
-  ignored: "IGNORED",
-};
+// A page's fixed markup names its text id in data-t (the element's text) and data-t-<attribute>.
+const MARKED = ["title", "placeholder", "aria-label"];
+
+/** Writes the chosen language into every marked element under `root`. */
+export function translateTree(root) {
+  for (const el of root.querySelectorAll("[data-t]")) el.textContent = t(el.dataset.t);
+  for (const attr of MARKED) {
+    for (const el of root.querySelectorAll(`[data-t-${attr}]`)) el.setAttribute(attr, t(el.getAttribute(`data-t-${attr}`)));
+  }
+}
 
 // New types without a custom label still sort in, after the known ones.
 export function orderedSourceTypes(types = []) {
   const ordinary = types.filter((type) => type !== "rumour" && type !== "ignored");
-  const order = Object.keys(SOURCE_TYPES);
+  const order = Object.keys(en).filter((id) => id.startsWith("kind.")).map((id) => id.slice("kind.".length));
   ordinary.sort((a, b) => {
     const rank = (t) => order.includes(t) ? order.indexOf(t) : order.length;
     return rank(a) - rank(b);
   });
   return [...ordinary, ...["rumour", "ignored"].filter((t) => types.includes(t))];
 }
-
-// Flat symbol lists only; object-shaped vocabularies carry their own `name`, read by data.js `labelOf`.
-const VALUES = {
-  currencies: {
-    GOLD: "Gold", AP: "Alliance Points", TEL_VAR: "Tel Var Stones",
-    WRIT_VOUCHERS: "Writ Vouchers",
-    CROWNS: "Crowns", CROWN_GEMS: "Crown Gems", SEALS: "Seals of Endeavour",
-    UNDAUNTED_KEYS: "Undaunted Keys", ARCHIVAL_FORTUNES: "Archival Fortunes",
-    TRADE_BARS: "Trade Bars",
-  },
-  crown_store_subtypes: { housing_editor: "Housing editor" },
-  drop_subtypes: {
-    chest: "Treasure chest", fish: "Fishing", harvest: "Harvesting node",
-    mob: "Dropped by monsters", scryable: "Antiquity (scrying)",
-    tales_of_tribute: "Tales of Tribute", dark_brotherhood: "Dark Brotherhood",
-    lorebook: "Lorebook",
-    steal: "Justice: Stolen from a container", safebox: "Justice: Safebox",
-    wardrobe: "Justice: Wardrobe", cabinet: "Justice: Cabinet", pickpocket: "Justice: Pickpocketing",
-  },
-  dungeon_drop_subtypes: {
-    chest: "Treasure chest",
-  },
-  quest_reward_subtypes: { daily: "Daily quest" },
-  rarities: { common: "Common", rare: "Rare", extremely_rare: "Very rare" },
-};
 
 export function titleCase(key) {
   return String(key == null ? "" : key)
@@ -140,53 +79,52 @@ export function titleCase(key) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+// A source kind's own wording of a field wins over the general one.
+const fieldId = (group, path, sourceType) =>
+  (has(`${group}.${path}@${sourceType}`) ? `${group}.${path}@${sourceType}` : `${group}.${path}`);
+
 export function labelFor(path, sourceType) {
-  const byType = FIELD_BY_TYPE[sourceType];
-  const hit = (byType && byType[path]) || FIELDS[path];
-  return hit ? t(hit[0]) : titleCase(path);
+  const id = fieldId("field", path, sourceType);
+  return has(id) ? t(id) : titleCase(path);
 }
 
 export function tipFor(path, sourceType) {
-  const byType = FIELD_BY_TYPE[sourceType];
-  const hit = (byType && byType[path]) || FIELDS[path];
-  if (hit) return hit[1] ? t(hit[1]) : "";
-  return path.startsWith("source.") ? t(ORPHAN_TIP) : "";
+  if (isKnownField(path, sourceType)) {
+    const id = fieldId("tip", path, sourceType);
+    return has(id) ? t(id) : "";
+  }
+  return path.startsWith("source.") ? t("tip.orphan") : "";
 }
 
 export function isKnownField(path, sourceType) {
-  const byType = FIELD_BY_TYPE[sourceType];
-  return Boolean((byType && byType[path]) || FIELDS[path]);
+  return has(fieldId("field", path, sourceType));
 }
 
 export function sourceTypeLabel(type) {
-  return SOURCE_TYPES[type] ? t(SOURCE_TYPES[type]) : titleCase(type);
+  return has(`kind.${type}`) ? t(`kind.${type}`) : titleCase(type);
 }
 
+// Flat symbol lists only; object-shaped vocabularies carry their own `name`, read by data.js `labelOf`.
 export function valueLabel(vocab, symbol) {
-  const table = VALUES[vocab];
-  const hit = table && table[symbol];
-  return hit ? t(hit) : titleCase(symbol);
+  const id = `value.${vocab}.${symbol}`;
+  return has(id) ? t(id) : titleCase(symbol);
+}
+
+/** The name of a sidebar group spanning several source kinds, null when it has none of its own. */
+export function groupLabel(prefix) {
+  return has(`group.${prefix}`) ? t(`group.${prefix}`) : null;
 }
 
 export function subtypeVocab(sourceType) {
   return `${sourceType}_subtypes`;
 }
 
-// Suffix for a vocabulary entry the library does not define; shown, never selectable as a new value, and kept on a record that already carries one.
-export const NOT_IN_GAME_DATA = " (not in the game data)";
+// Text ids. The first is the suffix for a vocabulary entry the library does not define; shown, never selectable as a new value, and kept on a record that already carries one.
+export const NOT_IN_GAME_DATA = "common.not_in_game_data";
 
 // Never the number: "0" in an achievement column is indistinguishable from bad data.
-export const ID_NOT_RECORDED = "required, but not recorded";
-
-/** Every text of the tables above, which is what the Translation list offers; `more` adds text kept elsewhere. */
-export function interfaceTexts(more = []) {
-  const texts = new Set([ORPHAN_TIP, ...Object.values(SOURCE_TYPES), ...more]);
-  for (const table of [FIELDS, ...Object.values(FIELD_BY_TYPE)]) for (const pair of Object.values(table)) pair.forEach((s) => texts.add(s));
-  for (const table of Object.values(VALUES)) Object.values(table).forEach((s) => texts.add(s));
-  texts.delete("");
-  return [...texts].sort();
-}
+export const ID_NOT_RECORDED = "common.id_not_recorded";
 
 export function knownPaths() {
-  return Object.keys(FIELDS);
+  return Object.keys(en).filter((id) => id.startsWith("field.") && !id.includes("@")).map((id) => id.slice("field.".length));
 }

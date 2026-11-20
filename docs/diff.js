@@ -78,11 +78,11 @@ export class DirtyBuffer {
     this.changed();
     return key;
   }
-  // A translation of one interface text, keyed by its English text. The published translation drops the entry.
-  setText(locale, english, text, published) {
-    const key = `text:${locale}:${english}`;
+  // A translation of one interface text, by its text id. The published translation drops the entry.
+  setText(locale, id, text, published) {
+    const key = `text:${locale}:${id}`;
     if (!text || text === published) this.entries.delete(key);
-    else this.entries.set(key, { op: "text", key, locale, english, text, before: published ?? null });
+    else this.entries.set(key, { op: "text", key, locale, id, text, before: published ?? null });
     this.changed();
     return key;
   }
@@ -245,7 +245,7 @@ export function serialiseDiff(buffer) {
     } else if (entry.op === "enum-name") {
       lines.push(JSON.stringify({ v: DIFF_VERSION, op: "enum-name", enum: entry.enumName, value: entry.value, name: entry.name }));
     } else if (entry.op === "text") {
-      lines.push(JSON.stringify({ v: DIFF_VERSION, op: "text", locale: entry.locale, key: entry.english, text: entry.text }));
+      lines.push(JSON.stringify({ v: DIFF_VERSION, op: "text", locale: entry.locale, id: entry.id, text: entry.text }));
     } else if (entry.op === "string") {
       lines.push(JSON.stringify({ v: DIFF_VERSION, op: "string", locale: entry.locale, id: entry.id, text: entry.text }));
     } else if (entry.op === "item") {
@@ -295,7 +295,7 @@ export function buildIssueParts(buffer, allRecords, ctx) {
     if (e.op === "add-enum") return `Enum ${e.enumName}.${e.value}`;
     if (e.op === "name") return `${e.kind} name ${e.id}`;
     if (e.op === "string") return `Translation ${e.locale} ${e.id}`;
-    if (e.op === "text") return `Interface text ${e.locale} ${e.english}`;
+    if (e.op === "text") return `Interface text ${e.locale} ${e.id}`;
     if (e.op === "item") return `ID ${e.id}`;
     const record = e.before ?? e.after;
     return record.id === undefined ? `Blueprint ${record.blueprint}` : `ID ${record.id}`;

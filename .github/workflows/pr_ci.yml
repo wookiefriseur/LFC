@@ -73,3 +73,12 @@ jobs:
       # Required check for db-edit PRs (data, manifests and generated Lua have to agree)
       - name: Verify canonical data and generated database agree
         run: python3 scripts/apply_issue.py --check --lua "$LUA"
+
+  # A job of its own, so a text problem already on main does not fail the required check of a db-edit PR
+  interface-text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Interface text ids and translations agree with the master file
+        run: python3 scripts/webview_stamp.py --texts

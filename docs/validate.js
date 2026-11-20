@@ -151,7 +151,7 @@ const CODE_MESSAGES = {
     `recorded"; this is not one of them.`,
   int_list_required: (f) => `${fieldLabel(f)} has to be whole numbers, separated by commas.`,
   id_cross_file: (f) =>
-    `This item also has ${f.value.split(", ").map(sourceTypeLabel).join(", ")} records - check this is another way to get it.`,
+    `This item also has ${f.value.split(", ").map(sourceTypeLabel).join(", ")} records - check this is another source.`,
   rumour_confirmed: (f) => f.blueprint
     ? `This item already has a confirmed source (${sourceTypeLabel(f.value)}), so a blueprint for it is a ` +
       `${sourceTypeLabel("recipe")} record, not ${sourceTypeLabel("rumour")}. Change its source to ${sourceTypeLabel("recipe")}.`
