@@ -1,3 +1,5 @@
+import { alsoInEnglish } from "./lexicon.js";
+
 // Bump on any change to the cached payload shape so browsers drop stale entries.
 const CACHE_KEY = "furcat-webview-cache-v8";
 
@@ -210,6 +212,11 @@ export function setZoneNameLookup(fn) {
 // English is the fallback of every other language.
 let strings = {};
 let stringLanguage = "en";
+alsoInEnglish(() => {
+  const chosen = stringLanguage;
+  stringLanguage = "en";
+  return () => { stringLanguage = chosen; };
+});
 export function setStrings(all, language) {
   if (all && typeof all === "object") strings = all;
   if (language) stringLanguage = language;

@@ -42,11 +42,22 @@ export function tn(n, id, values) {
   return t(n === 1 ? `${id}_one` : id, { n, ...values });
 }
 
-/** Runs `fn` with the interface text in English whatever language is chosen, for text that is sent to the maintainers. */
+const englishSwitches = [];
+
+/** Registers what else has a language: `enter` switches it to English and returns the function that switches it back. */
+export function alsoInEnglish(enter) {
+  englishSwitches.push(enter);
+}
+
+/** Runs `fn` with the interface text, and whatever registered itself, in English whatever language is chosen: for text that is sent to the maintainers. */
 export function inEnglish(fn) {
   const chosen = translation;
   translation = {};
-  try { return fn(); } finally { translation = chosen; }
+  const back = englishSwitches.map((enter) => enter());
+  try { return fn(); } finally {
+    back.forEach((undo) => undo());
+    translation = chosen;
+  }
 }
 
 /** The English texts by id, which is what the Translation list offers. */

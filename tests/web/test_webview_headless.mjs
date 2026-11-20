@@ -4000,6 +4000,7 @@ test("language: German names show and are found in Browse, and a list copies out
     fallback: { items: {}, houses: {}, quests: {}, achievements: {}, zones: {} },
   }));
   const isGerman = () => page.waitForFunction(() => document.documentElement.dataset.nameLanguage === "de", { timeout: 10000 });
+  const englishName = JSON.parse(await fs.readFile(path.join(ROOT, "data", "names.en.json"), "utf8"))["94097"];
   try {
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
@@ -4017,6 +4018,18 @@ test("language: German names show and are found in Browse, and a list copies out
     assertEq(await page.$eval("#lists-text", (el) => el.value), "Favorites\nKaiserliches Testbett, Koje", "the names export");
     await page.select("#lists-format", "ids");
     assert((await page.$eval("#lists-text", (el) => el.value)).includes("94097"), "the game export lost the id");
+    // a change shows in German on the page, and in English in the issue the maintainers read
+    await switchTab(page, "advanced");
+    const imported = await pasteImport(page, JSON.stringify({ v: 1, op: "update", id: 94097, category: "crown_store",
+      fields: { cost: [{ currency: "CROWNS", amount: 96 }] } }));
+    await page.click("#btn-submit");
+    await page.waitForSelector("#modal-changelist .chg-item", { timeout: 10000 }).catch(() => { throw new Error(`no change row after: ${imported}`); });
+    assert((await page.$eval("#modal-changelist .chg-item", (e) => e.textContent)).startsWith("Kaiserliches Testbett, Koje"), "the page names the item in German");
+    assertEq(await page.$eval("#modal-changelist .chg-what", (e) => e.textContent), "Preis", "the page names the field in German");
+    const issue = await page.$eval("#modal-diff", (e) => e.value);
+    assert(issue.includes(`| ${englishName} (94097) |`) && issue.includes("| Price | 95 Crowns | 96 Crowns |"), `the issue is not English: ${issue.slice(0, 400)}`);
+    assert(!issue.includes("Testbett") && !issue.includes("Preis"), "the issue carries German text");
+    await page.click("#modal-close");
     await switchTab(page, "names");
     await page.waitForFunction(() => document.querySelector("#names-locale")?.value === "de", { timeout: 5000 })
       .catch(() => { throw new Error("the Names tab does not open in the chosen language"); });
@@ -4027,7 +4040,7 @@ test("language: German names show and are found in Browse, and a list copies out
   } finally {
     overrides.delete(manifestURL);
     overrides.delete(namesURL);
-    await page.evaluate(() => { localStorage.removeItem("furcat-prefs-v1"); document.querySelector("#panel-browse .browse-card .lists-fave.is-on")?.click(); });
+    await page.evaluate(() => { localStorage.removeItem("furcat-prefs-v1"); document.querySelector("#panel-browse .browse-card .lists-fave.is-on")?.click(); window.__proto.forgetPending(); });
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
   }

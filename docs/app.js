@@ -20,7 +20,7 @@ import {
 } from "./validate.js";
 import {
   labelFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA,
-  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t, tn, translateTree,
+  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t, tn, translateTree, alsoInEnglish,
 } from "./lexicon.js";
 import {
   parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
@@ -122,6 +122,17 @@ mobileRows.addEventListener("change", () => {
 const OVERSCAN = 8;     // extra rows above/below the viewport
 
 const $ = (sel) => document.querySelector(sel);
+
+// Game names in text for the maintainers are English too
+alsoInEnglish(() => {
+  const names = state.names, translated = names?.translated, chosen = referenceData.language;
+  if (names) names.translated = null;
+  referenceData.language = "en";
+  return () => {
+    if (names) names.translated = translated;
+    referenceData.language = chosen;
+  };
+});
 
 async function init() {
   translateTree(document.body);   // English until the chosen language has loaded
