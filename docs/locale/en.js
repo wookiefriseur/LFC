@@ -526,6 +526,8 @@ export default {
   "luxury.note.no_price": "record has no price and the paste gives none",
   "luxury.note.was": "was {price}",
   "luxury.note.pasted_ignored": "pasted {price} ignored",
+  "luxury.zanil": "Zanil Theran - Luxury Furnisher",
+  "luxury.zanil.photo": "Zanil Theran, the in-game Luxury Furnisher NPC",
 
   // Crown Store prices
   "crown.sibling.other": "another Crown Store source",
@@ -920,4 +922,12 @@ export default {
   "about.links.library": "Library on ESOUI",
   "about.links.addon": "FurnitureCatalogue on ESOUI",
   "about.credit": "Item pages and icons via {uesp}. Content licensed {licence}.",
+
+  // Item links and icons
+  "links.trading.item": "Guild store prices on ESO-HUB",
+  "links.trading.blueprint": "Blueprint prices on ESO-HUB",
+  "links.icon.retry": "{problem} - click to retry",
+  "links.icon.unknown": "no icon known",
+  "links.icon.loading": "icon still loading",
+  "links.icon.failed": "icon failed to load",
 };

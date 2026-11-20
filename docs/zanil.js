@@ -1,3 +1,5 @@
+import { t } from "./lexicon.js";
+
 const ZANIL_IMAGE_URL = "./assets/zanil_theran.png";
 
 function placeholderSVG() {
@@ -8,7 +10,7 @@ function placeholderSVG() {
   svg.setAttribute("height", "84");
   svg.setAttribute("class", "zanil-svg");
   svg.setAttribute("role", "img");
-  svg.setAttribute("aria-label", "Zanil Theran - Luxury Furnisher");
+  svg.setAttribute("aria-label", t("luxury.zanil"));
   svg.innerHTML = `
     <title>Zanil Theran - Luxury Furnisher</title>
     <rect x="2" y="2" width="92" height="108" rx="6"
@@ -44,7 +46,7 @@ export function zanilPortrait() {
     img.width = 287;
     img.height = 640;
     img.src = ZANIL_IMAGE_URL;
-    img.alt = "Zanil Theran, the in-game Luxury Furnisher NPC";
+    img.alt = t("luxury.zanil.photo");
     img.className = "zanil-img";
     // Same file, so a dead URL takes both down: the left drops back to the SVG, the mirror goes.
     const mirror = img.cloneNode();

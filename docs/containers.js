@@ -1,3 +1,5 @@
+import { t } from "./lexicon.js";
+
 export function containerContents(records, id) {
   const seen = new Set();
   return records.filter(r => {
@@ -39,5 +41,5 @@ export function containerIndex(records) {
 }
 
 export function containerLabel(record) {
-  return record?.container === "folio" ? "Furnishing folio" : "Book collection";
+  return record?.container === "folio" ? t("folio.fallback") : t("form.container.books");
 }

@@ -1,6 +1,7 @@
 // Do not fetch() these URLs: esoicons.uesp.net sends no ACAO header and sits behind a Cloudflare challenge, so only <a href> and <img src> work. Only resolved icon URL strings are cached, never image bytes.
 
 import { dropCachedIconURL, getCachedIconURL, putCachedIconURL } from "./icon-cache.js";
+import { t } from "./lexicon.js";
 
 const ESO_LINKS = {
   UESP_ITEM:       (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}`,
@@ -75,8 +76,8 @@ export function itemLinkAnchor(id, text) {
 }
 
 export const TRADING_ICONS = {
-  item:      { glyph: '💰', label: 'Guild store prices on ESO-HUB' },
-  blueprint: { glyph: '📜', label: 'Blueprint prices on ESO-HUB' },
+  item:      { glyph: '💰', label: "links.trading.item" },
+  blueprint: { glyph: '📜', label: "links.trading.blueprint" },
 };
 
 const BOUND_SOURCES = new Set(['crown_store', 'crown_crate', 'housing']);
@@ -87,7 +88,8 @@ export function isTradeable(records) {
 
 /** @param kind "item", or "blueprint" for the recipe of a paired craftable */
 export function tradingLinkAnchor(id, kind = 'item') {
-  const { glyph, label } = TRADING_ICONS[kind];
+  const { glyph } = TRADING_ICONS[kind];
+  const label = t(TRADING_ICONS[kind].label);
   const a = extLink(ESO_LINKS.ESOHUB_TRADING(id), glyph);
   a.classList.add('trade-link');
   a.title = label;
@@ -101,7 +103,7 @@ export function itemIconImg(id, alt, retry = 0) {
   const placeholder = (why, extra = '') => {
     const ph = document.createElement('span');
     ph.className = `ext-icon ext-icon-placeholder${extra}`;
-    ph.title = `${why} - click to retry`;
+    ph.title = t("links.icon.retry", { problem: why });
     ph.setAttribute('role', 'button');
     ph.addEventListener('click', (ev) => {
       ev.stopPropagation();
@@ -111,8 +113,8 @@ export function itemIconImg(id, alt, retry = 0) {
     return ph;
   };
   if (!url) {
-    if (!iconPendingLookup(Number(id))) return placeholder('no icon known');
-    const ph = placeholder('icon still loading', ' ext-icon-loading');
+    if (!iconPendingLookup(Number(id))) return placeholder(t("links.icon.unknown"));
+    const ph = placeholder(t("links.icon.loading"), ' ext-icon-loading');
     loadingIcons.set(ph, { id, alt });
     return ph;
   }
@@ -120,8 +122,8 @@ export function itemIconImg(id, alt, retry = 0) {
   img.loading = 'lazy';
   // A retry must not be answered from the browser's record of the failure.
   img.src = retry ? `${url}?retry=${retry}` : url;
-  img.alt = alt || `item ${id}`;
+  img.alt = alt || t("common.item_fallback", { id });
   img.className = 'ext-icon';
-  img.onerror = () => img.replaceWith(placeholder('icon failed to load'));
+  img.onerror = () => img.replaceWith(placeholder(t("links.icon.failed")));
   return img;
 }
