@@ -42,12 +42,23 @@ test("export, wipe and import gives the same name and order back", () => {
   assert.deepEqual(findList("round trip").ids, [30, 10, 20]);
 });
 
-test("import merges into a same-named list, like the add-on", () => {
+test("import replaces a same-named list by its line and adds by an add line, like the add-on", () => {
   getLists().length = 0;
-  createList("Merge").list.ids.push(5);
-  const r = importLists("FURC LIST: merge: 6,5");
-  assert.deepEqual([r.lists, r.added, r.duplicates, namedLists().length], [1, 1, 1, 1]);
-  assert.deepEqual(findList("Merge").ids, [5, 6]);
+  createList("Hall").list.ids.push(5, 4);
+  createList("Kitchen").list.ids.push(1);
+  const paste = "FURC LIST: hall: 6,5\nFURC LIST+ Hall: 7\nFURC LIST Hall: 8";
+  const check = importLists(paste + "\nFURC LIST New: 9", undefined, null, undefined, { check: true });
+  assert.deepEqual([check.removed, findList("Hall").ids, findList("New")], [1, [5, 4], null], "a check counts and changes nothing");
+  const r = importLists(paste);
+  assert.deepEqual([r.lists, r.added, r.duplicates, r.removed, namedLists().length], [1, 3, 1, 1, 2], "5 stayed, so it is no addition");
+  assert.deepEqual(findList("Hall").ids, [6, 5, 7, 8], "only the first line of a list in one paste replaces");
+  assert.deepEqual(findList("Kitchen").ids, [1], "a list the paste does not name is left alone");
+  assert.equal(importLists("FURC LIST+ Hall: 9\n\n10", undefined, findList("Hall")).removed, 0, "an add line and a line of ids only add");
+  assert.equal(importLists("FURC LIST Hall: 11", undefined, null, undefined, { merge: true }).removed, 0);
+  assert.deepEqual(findList("Hall").ids, [6, 5, 7, 8, 9, 10, 11]);
+  importLists("FURC LIST + odd: 12");
+  assert.deepEqual(findList("+ odd").ids, [12], "the plus belongs to the prefix; apart from it, it starts the name");
+  assert.equal(reportText(importLists("FURC LIST Hall: 6")).text, "Imported 1 list: 0 items added, 6 removed, 1 duplicate");
 });
 
 test("names: trimmed, unique ignoring case, at most 32 bytes as the add-on counts them", () => {
@@ -60,18 +71,18 @@ test("names: trimmed, unique ignoring case, at most 32 bytes as the add-on count
   assert.ok(cleanName("   ").error);
 });
 
-test("an over-long imported name merges into the list it truncates to, like the add-on", () => {
+test("an over-long imported name goes to the list it truncates to, like the add-on", () => {
   getLists().length = 0;
   createList("A".repeat(32)).list.ids.push(1);
   const r = importLists(`FURC LIST: ${"A".repeat(40)}: 2`);
   assert.deepEqual([r.lists, namedLists().length, r.errors.length], [1, 1, 0]);
-  assert.deepEqual(findList("A".repeat(32)).ids, [1, 2]);
+  assert.deepEqual(findList("A".repeat(32)).ids, [2]);
 });
 
 test("the import report is one short line, and a warning when something was left out", () => {
   getLists().length = 0;
   assert.deepEqual(reportText(importLists("FURC LIST: One: 1,2\nnonsense")), { text: "Imported 1 list: 2 items added, 1 line skipped", warn: true });
-  assert.deepEqual(reportText(importLists("FURC LIST: one: 3,1")), { text: "Imported 1 list: 1 item added, 1 duplicate", warn: false });
+  assert.deepEqual(reportText(importLists("FURC LIST: one: 3,1")), { text: "Imported 1 list: 1 item added, 1 removed, 1 duplicate", warn: false });
   assert.deepEqual(reportText(importLists("hello")), { text: "No list lines found", warn: true });
 });
 
@@ -101,8 +112,8 @@ test("export wraps at 1000 ids a line, and the wrapped lines import back into on
   for (let id = 1; id <= 2 * MAX_IDS_PER_LINE + 1; id++) made.ids.push(id);
   const lines = formatList(made).split("\n");
   assert.equal(lines.length, 3);
-  assert.ok(lines.every((l) => l.startsWith("FURC LIST Big: ") && l.length < 8000));
-  assert.equal(lines[2], `FURC LIST Big: ${2 * MAX_IDS_PER_LINE + 1}`);
+  assert.ok(lines.every((l, i) => l.startsWith(i ? "FURC LIST+ Big: " : "FURC LIST Big: ") && l.length < 8000));
+  assert.equal(lines[2], `FURC LIST+ Big: ${2 * MAX_IDS_PER_LINE + 1}`);
   const text = formatList(made);
   getLists().length = 0;
   const r = importLists(text);
@@ -151,7 +162,7 @@ test("a stored list already called Favorites stays an ordinary list beside the f
   assert.notEqual(findList("Favorites"), favourites());
   assert.ok(!renameList(findList("Favorites"), "favorites").error, "it may keep its own name");
   const r = importLists("FURC LIST: Favorites: 8\nFURC FAVES: 4");
-  assert.deepEqual([findList("Favorites").ids, favourites().ids], [[9, 8], [4]]);
+  assert.deepEqual([findList("Favorites").ids, favourites().ids], [[8], [4]]);
   assert.equal(r.first, findList("Favorites"), "the first list the import touched");
 });
 

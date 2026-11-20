@@ -207,6 +207,17 @@ async function init() {
     referenceData.setPendingNameSource((kind, id) =>
       state.buffer.entries.get(`name:${referenceData.namesLocale}:${kind}:${id}`)?.name);
     setZoneNameLookup((zone) => referenceData.gameName("zones", zone));
+    // A page that opens on Batch edit draws its table before the zone names are in, and nothing else asks for them: fetch them once the manifest is there and draw once more when they land.
+    let zoneNamesDrawn = false;
+    referenceData.onShardLoaded(() => {
+      // No table yet: its first draw asks for the names itself.
+      if (zoneNamesDrawn || !$("#table-body")) return;
+      if (!referenceData.names) { referenceData.loadNames(); return; }
+      // Rebuilding the rows under a pressed button would swallow its click; the click redraws the table itself.
+      if ($("#table-body:active")) return;
+      zoneNamesDrawn = true;
+      renderTable();
+    });
     const startRefData = () => { referenceData.init(); };
     if (typeof requestIdleCallback === "function") {
       requestIdleCallback(startRefData, { timeout: 3000 });
@@ -2054,6 +2065,10 @@ async function runBatchImport() {
         }
         continue;
       }
+      if (obj === null || typeof obj !== "object" || Array.isArray(obj)) {
+        parseErrors.push({ lineNo: i + 1, message: t("import.error.not_record") });
+        continue;
+      }
       const cat = deriveCategory(obj, targetCat);
       candidates.push({ record: obj, category: cat, sourceName: null, lineNo: i + 1 });
     }
@@ -2181,8 +2196,10 @@ async function runBatchImport() {
     // An exact (id, source) match re-states that record as an update; a same-id-different-source paste is a new record. Never a hard block here.
     const { exact: existing } = findDuplicateRecord(
       rec.id, c.category, rec.source, state.records, undefined, rec.blueprint);
-    const cleanRec = clean(rec);
+    let cleanRec = clean(rec);
     if (existing) {
+      // A field the pasted line leaves out stays as it is; removing one is done in the form.
+      cleanRec = { ...clean(existing), ...cleanRec };
       state.buffer.update(existing._key, clean(existing), cleanRec, c.category);
       Object.assign(existing, cleanRec);
       updated++;

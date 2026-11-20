@@ -6,8 +6,8 @@
 The dump's own locale decides the file, docs/reference-data/names.<locale>.json. A name in the dump replaces
 the stored one; an id the dump does not carry keeps its name. The manifest is updated with it.
 
-English item names live in docs/data/names.en.json and come from item details (discovery lines). An English dump
-only sets the names of blueprints there, which no discovery line carries.
+English item names live in docs/data/names.en.json. Item details (discovery lines) bring them in, and an English dump
+replaces them like any other name, so a renamed item and a blueprint, which no discovery line carries, are corrected.
 
 A language file other than English holds two things: the names read from a client in that language, per table,
 and under "fallback" the English names of every id that has none. The fallback is generated here and by
@@ -103,16 +103,6 @@ def english(obj):
     return en
 
 
-def blueprint_ids(root):
-    """Ids some record names as its blueprint. No discovery line carries a blueprint's own name."""
-    ids = set()
-    for path in sorted((root / 'docs/data').glob('*.jsonl')):
-        for line in path.read_text(encoding='utf-8').splitlines():
-            if line.strip() and json.loads(line).get('blueprint') is not None:
-                ids.add(str(json.loads(line)['blueprint']))
-    return ids
-
-
 def data_digest(manifest, read):
     """What the site compares to know its stored catalogue is stale: every data file, the enums and the English item names."""
     fingerprint = hashlib.sha256()
@@ -176,15 +166,15 @@ def main():
         sys.exit('no names in this file - use "All names to file" on the Dump tab, then reload the UI')
     if locale == 'en' and 'items' in dump['kinds']:
         found = dump['kinds'].pop('items')
-        items, blueprints = obj(ITEMS), blueprint_ids(args.root)
-        named = {i: n for i, n in found.items() if i in blueprints and items.get(i) != n}
-        items.update(named)
+        items = obj(ITEMS)
+        new = sum(1 for i in found if i not in items)
+        changed = sum(1 for i, n in found.items() if i in items and items[i] != n)
+        items.update(found)
         (args.root / ITEMS).write_bytes(dumps(by_id(items), 0))
         data = obj(DATA_MANIFEST)
         data['digest'] = data_digest(data, lambda name: (args.root / name).read_bytes())
         (args.root / DATA_MANIFEST).write_bytes(dumps(data, 2))
-        print(f'{"blueprints":13} {len(named):6} English names set. Other English item names are left alone: '
-              'they come from item details (discovery lines).')
+        print(f'{"items":13} {len(found):6} read, {new} new, {changed} changed')
 
     path = args.root / names_file(locale)
     names = obj(names_file(locale)) if path.exists() else {}

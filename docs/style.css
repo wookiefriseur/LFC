@@ -1642,6 +1642,10 @@ td.cell-clamp { white-space: normal; padding-block: 0.1rem; font-size: 0.85rem; 
   line-height: 1.15;
   overflow-wrap: anywhere;
 }
+/* Prices line up on their currency icon. Not in the narrow layout, where a row is a card. */
+@media (min-width: 901px) {
+  #table-body td:has(> .cell-cost), #scroller th[data-t="field.cost"] { text-align: right; }
+}
 /* The discriminating source fields, kept narrow: a "these two rows differ" cue, not a reading surface. */
 td.cell-source-detail {
   max-width: 34rem;

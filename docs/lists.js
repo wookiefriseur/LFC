@@ -271,9 +271,10 @@ function chunks(ids) {
 }
 
 // One line per 1000 ids, each repeating the head with the full path, so the game's edit box never cuts one and every line stands alone.
+// The first line is the list ("FURC LIST name:"), every further one adds to it ("FURC LIST+ name:"), so an import replaces the list once however its lines are spread over pages.
 export function formatList(list) {
-  const head = list.faves ? `${FAVES_PREFIX}:` : `${PREFIX} ${list.name}:`;
-  return chunks(list.ids).map((ids) => `${head} ${ids.join(",")}`.trimEnd()).join("\n");
+  const head = (plus) => (list.faves ? `${FAVES_PREFIX}${plus}:` : `${PREFIX}${plus} ${list.name}:`);
+  return chunks(list.ids).map((ids, i) => `${head(i ? "+" : "")} ${ids.join(",")}`.trimEnd()).join("\n");
 }
 
 export function formatListNames(list, nameOf) {
@@ -308,7 +309,7 @@ function payloadOf(line, kind) {
     const head = bracketed[1].replace(/\s+/g, " ").toUpperCase().match(/^(.*?)(?: (\d+))?$/);
     return head[1] === kind && (head[2] ?? "1") === "1" ? bracketed[2] : null;
   }
-  const rest = line.match(new RegExp(`^${kind.replace(/ /g, "\\s+")}(?=$|[\\s:])(.*)$`, "i"))?.[1];
+  const rest = line.match(new RegExp(`^${kind.replace(/[+]/g, "\\$&").replace(/ /g, "\\s+")}(?=$|[\\s:])(.*)$`, "i"))?.[1];
   if (rest == null) return null;
   // A number is the version only right before the colon: "FURC LIST 2 chairs: ..." is a list called "2 chairs".
   const versioned = rest.match(/^\s+(\d+)\s*:\s*(.*)$/);
@@ -348,48 +349,66 @@ export function parseLists(text) {
     const known = knowledgeLine(line);
     if (known?.bad) { skipped++; continue; }
     if (known) { entry({ knowledge: known.kind, page: known.page, pages: known.pages }, known.ids, knowledge); continue; }
-    const fav = payloadOf(line, FAVES_PREFIX)?.match(FAVES_LINE);
-    if (fav) { entry({ faves: true }, fav[1]); continue; }
-    const m = payloadOf(line, PREFIX)?.match(LINE) || line.match(BRACES);
+    // The plus belongs to the prefix ("FURC LIST+ name"); apart from it, it starts the list's name.
+    const favAdd = payloadOf(line, FAVES_PREFIX + "+")?.match(FAVES_LINE);
+    const fav = favAdd || payloadOf(line, FAVES_PREFIX)?.match(FAVES_LINE);
+    if (fav) { entry({ faves: true, ...(favAdd && { add: true }) }, fav[1]); continue; }
+    const listAdd = payloadOf(line, PREFIX + "+")?.match(LINE);
+    const m = listAdd || payloadOf(line, PREFIX)?.match(LINE) || line.match(BRACES);
     // Brought into its written form before matching, as the add-on does, so an over-long or over-deep path merges into the list it became.
     const name = m && normPath(m[0].startsWith('"') ? m[1].replace(/\\(.)/g, "$1") : m[1]);
     if (!name) { skipped++; continue; }
-    entry({ name }, m[2]);
+    entry({ name, ...(listAdd && { add: true }) }, m[2]);
   }
   for (const l of [...lists, ...knowledge]) l.ids = idsOf(l.ids);
   return { lists, knowledge, skipped };
 }
 
 /**
- * Merges into the favourites or the list at the same path, like the add-on's import: nothing is removed, new ids go to the end, missing parents are made empty. Saved and announced once, after the whole paste.
+ * Like the add-on's import: the first line of a list or of the favourites in a paste replaces what it held, unless it is an add line ("FURC LIST+") or `mode.merge` is set; every further line, and a line of ids alone, adds. A list the paste does not name is left alone, missing parents are made empty. Saved and announced once, after the whole paste.
+ * @param mode `check`: count what the import would do (`removed` above all) and change nothing; `merge`: add only, remove nothing.
  * @param resolve maps a furnishing or blueprint id to the furnishing id, or null when the catalogue does not know it; the default keeps every id.
  * @param target the selected list, which takes lines of ids that name no list; without one they are refused.
  * @param craftable the same for crafting knowledge lines, which name craftables only.
  */
-export function importLists(text, resolve = (id) => id, target = null, craftable = (id) => id) {
+export function importLists(text, resolve = (id) => id, target = null, craftable = (id) => id, mode = {}) {
   const { lists, knowledge, skipped } = parseLists(text);
-  const report = { lists: 0, added: 0, duplicates: 0, unknown: 0, skipped, errors: [], first: null, knowledge: null };
-  if (knowledge.length) report.knowledge = importKnowledge(knowledge, craftable);
-  const touched = new Set();
+  const report = { lists: 0, added: 0, duplicates: 0, unknown: 0, removed: 0, skipped, errors: [], first: null, knowledge: null };
+  if (knowledge.length && !mode.check) report.knowledge = importKnowledge(knowledge, craftable);
+  const work = new Map();     // list -> its ids, a copy when only checking
+  const before = new Map();   // list -> what it held when its first line replaced it
   for (const incoming of lists) {
     let list = incoming.faves ? favourites() : incoming.bare ? target : findList(incoming.name);
     if (!list && incoming.bare) { report.errors.push(t("lists.error.bare_ids")); continue; }
     if (!list) {
       const { name, error } = cleanName(incoming.name);
       if (error) { report.errors.push(error); continue; }
+      if (mode.check) continue;   // a new list loses nothing
       list = ensure(name);
     }
-    touched.add(list);
+    if (!work.has(list)) work.set(list, mode.check ? [...list.ids] : list.ids);
+    const ids = work.get(list);
+    if (!incoming.add && !incoming.bare && !mode.merge && !before.has(list)) {
+      before.set(list, [...ids]);
+      ids.length = 0;
+    }
     report.first ??= list;
     for (const raw of incoming.ids) {
       const id = resolve(raw);
       if (id == null) report.unknown++;
-      else if (list.ids.includes(id)) report.duplicates++;
-      else { list.ids.push(id); report.added++; }
+      else if (ids.includes(id)) report.duplicates++;
+      else { ids.push(id); report.added++; }
     }
   }
-  report.lists = touched.size;
-  if (lists.length) save();
+  for (const [list, old] of before) {
+    // What was there and stays is no addition.
+    const kept = old.filter((id) => work.get(list).includes(id)).length;
+    report.added -= kept;
+    report.duplicates += kept;
+    report.removed += old.length - kept;
+  }
+  report.lists = work.size;
+  if (lists.length && !mode.check) save();
   return report;
 }
 
@@ -413,6 +432,7 @@ export function reportText(r) {
   const parts = [];
   if (r.lists) {
     let text = t("lists.report.imported", { lists: tn(r.lists, "common.count_lists"), items: tn(r.added, "lists.report.added") });
+    if (r.removed) text += `, ${t("lists.report.removed", { n: r.removed })}`;
     if (r.duplicates) text += `, ${tn(r.duplicates, "lists.report.duplicates")}`;
     if (r.unknown) text += `, ${t("lists.report.unknown", { n: r.unknown })}`;
     parts.push(text);
@@ -586,8 +606,24 @@ export function listsMask(deps) {
     syncImport();
   }
 
-  function runImport(text) {
-    const r = importLists(text, catalogueResolver(state.records), current === ALL || current === KNOWLEDGE ? null : current, recipeResolver(state.records));
+  // Replacing a list is only asked about when it would lose items.
+  function runImport(text, mode) {
+    const args = [text, catalogueResolver(state.records), current === ALL || current === KNOWLEDGE ? null : current, recipeResolver(state.records)];
+    const removed = mode ? 0 : importLists(...args, { check: true }).removed;
+    if (removed) {
+      const choice = (label, onClick) => {
+        const btn = elem("button", { type: "button", class: "btn-mini" }, t(label));
+        btn.addEventListener("click", onClick);
+        return btn;
+      };
+      status("", true);
+      $("#lists-status").replaceChildren(t("lists.import.confirm", { n: removed }), " ",
+        choice("lists.import.replace", () => runImport(text, {})), " ",
+        choice("lists.import.add_only", () => runImport(text, { merge: true })), " ",
+        choice("common.cancel", () => status("")));
+      return;
+    }
+    const r = importLists(...args, mode);
     const { text: message, warn } = reportText(r);
     status(message, warn);
     if (r.first && current !== ALL && current.faves) current = r.first;

@@ -821,6 +821,22 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
       && document.querySelector(".lists-item")?.textContent.includes("#94116"));
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.lists")));
     assertEq(JSON.stringify(stored.lists), JSON.stringify([{ name: "Favorites", ids: [], faves: true }, { name: "Hall: west", ids: [94116] }]), "what is kept in the browser");
+
+    // A paste that would drop an item asks first: Replace, Add only or Cancel.
+    const other = "FURC LIST Hall: west: 132173";
+    const paste = async (answer) => {
+      await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, other);
+      await page.click("#lists-import");
+      const asked = await page.$eval("#lists-status", (p) => [p.firstChild.textContent, ...[...p.querySelectorAll("button")].map((b) => b.textContent)].join("|"));
+      assertEq(asked, "Replacing removes 1 item(s) that the pasted text does not hold.|Replace|Add only|Cancel", "the question before items are removed");
+      await page.$$eval("#lists-status button", (bs, label) => bs.find((b) => b.textContent === label).click(), answer);
+      return page.evaluate(() => JSON.stringify(JSON.parse(localStorage.getItem("lfc.lists")).lists[1].ids));
+    };
+    assertEq(await paste("Cancel"), "[94116]", "Cancel changed the list");
+    assertEq(await paste("Add only"), "[94116,130326]", "Add only, the blueprint read as its furnishing");
+    await page.$eval("#lists-text", (t) => { t.value = ""; });
+    assertEq(await paste("Replace"), "[130326]", "Replace");
+    assertEq(await page.$eval("#lists-status", (p) => p.textContent), "Imported 1 list: 0 items added, 1 removed, 1 duplicate", "the report names what went");
   } finally {
     await switchTab(page, "lists");
     await deleteShown();
@@ -2380,6 +2396,47 @@ test("icons show loading until the map lands, then turn into the icon", async (p
   }
 });
 
+test("a page opened on Batch edit shows zone names once they arrive, without losing a click in progress", async (page) => {
+  const ROW = "#panel-advanced tbody tr:not(.spacer)";
+  const zones = () => page.$$eval(`${ROW} .cell-source-detail`, (cells) =>
+    cells.map((c) => c.textContent).find((text) => text.includes("; ")) || "");
+  let release;
+  refDataGate = new Promise((res) => { release = res; });
+  try {
+    await page.evaluate(() => { history.replaceState(null, "", `${location.pathname}#advanced`); });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+    await page.waitForSelector(ROW, { timeout: 10000 });
+    const symbols = await zones();
+    assert(/\b[A-Z]{4,}; [A-Z]{4,}\b/.test(symbols), `no row lists zone symbols before the names are in: "${symbols}"`);
+
+    // Held down while the names land: the rows under the pointer must survive until the release.
+    const cell = await page.$(`${ROW} td:nth-child(3)`);
+    const box = await cell.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    const names = page.waitForResponse((r) => /\/reference-data\/names\./.test(r.url()), { timeout: 15000 });
+    release();
+    await names;
+    await new Promise((r) => setTimeout(r, 300));
+    await page.mouse.up();
+    await page.waitForSelector("#panel-advanced #detail h2", { timeout: 5000 });
+    assert(await page.$(`${ROW}.selected`), "the click held while the names arrived selected no row");
+
+    await page.waitForFunction((sel, was) => [...document.querySelectorAll(`${sel} .cell-source-detail`)]
+      .every((c) => !c.textContent.includes(was)), { timeout: 5000 }, ROW, symbols.split(" \u00b7 ").pop());
+    const named = await zones();
+    assert(/[a-z]{3,}; /.test(named), `the zones still read as symbols: "${named}"`);
+  } finally {
+    refDataGate = null;
+    release?.();
+    await page.mouse.up().catch(() => {});
+    await page.evaluate(() => { history.replaceState(null, "", location.pathname); });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await waitForBoot(page);
+  }
+});
+
 test("findings mark their own field, follow the edit, and have no block", async (page) => {
   await switchTab(page, "advanced");
   await page.waitForSelector("#panel-advanced table tbody tr", { timeout: 20000 });
@@ -2806,6 +2863,10 @@ test("a batch edit writes only the field that was changed", async (page) => {
     s.value = "";
     s.dispatchEvent(new Event("input", { bubbles: true }));
   });
+  // The search box applies after a delay; a test that ends before it leaves a table redraw to land under the next test's click.
+  await page.waitForFunction((q) => [...document.querySelectorAll(
+    "#panel-advanced tbody tr:not(.spacer)")].some((tr) => tr.cells[1]?.textContent !== q),
+  { timeout: 10000 }, String(b.id));
 });
 
 test("the send screen's Edit changes opens Batch edit on the changed rows", async (page) => {
@@ -3608,6 +3669,22 @@ test("ignored source: batch ignore and restore preserve notes and export source 
     assertEq(mine[0].category, "rumour", "re-edit lost original category");
     assertEq(mine[0].fields.notes, "Old item IDs; replaced by newer entries", "restoring lost the note");
   }
+});
+
+test("batch import leaves a field the pasted line omits, and reports a line that is no record", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "advanced");
+  await page.evaluate(() => { if (document.querySelector("#adv-import").hidden) document.querySelector("#btn-add-dump").click(); });
+  const full = (await fs.readFile(path.join(ROOT, "data/housing.jsonl"), "utf8")).split("\n").map((l) => l && JSON.parse(l)).find((r) => r?.notes);
+  const { notes, ...withoutNotes } = full;
+  await page.$eval("#adv-import-paste", (e, text) => { e.value = text; }, [JSON.stringify(withoutNotes), "null"].join("\n"));
+  await page.click("#adv-import-run");
+  const status = await page.$eval("#adv-import-status", (e) => e.textContent);
+  assert(status.includes("1 error"), `the null line was not reported: ${status}`);
+  // with nothing to send, the Send button is not offered
+  assert(await page.$eval("#btn-submit", (b) => b.disabled || !b.checkVisibility()),
+    `re-pasting a record without its notes (${notes.slice(0, 20)}...) queued a change`);
 });
 
 test("dump import: button, display order and unlimited manual submissions", async (page) => {

@@ -95,7 +95,7 @@ test("craftables only: a recipe blueprint marks its furnishing; rumours, other i
 });
 
 test("knowledge and lists in one paste are both reported; knowledge never becomes a list", () => {
-  const r = importLists("FURC LIST Hall: 9\nFURC UNKNOWN 1/1: 5");
+  const r = importLists("FURC LIST+ Hall: 9\nFURC UNKNOWN 1/1: 5");
   assert.equal(reportText(r).text, "Imported 1 list: 1 item added. Crafting knowledge: 1 unknown");
   assert.deepEqual(getLists().map((l) => l.name), ["Favorites", "Hall"]);
   assert.ok(!formatLists().includes("5"));

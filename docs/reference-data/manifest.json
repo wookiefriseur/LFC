@@ -170,7 +170,7 @@
             "skills": 8
           },
           "digest": "fab4df5825bc",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         },
         "fr": {
@@ -187,7 +187,7 @@
             "skills": 8
           },
           "digest": "2a9793ccf5ce",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         },
         "jp": {
@@ -204,7 +204,7 @@
             "skills": 8
           },
           "digest": "cc58c38f1bca",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         },
         "ru": {
@@ -221,7 +221,7 @@
             "skills": 8
           },
           "digest": "2e0317327e62",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         },
         "es": {
@@ -238,7 +238,7 @@
             "skills": 8
           },
           "digest": "ffc5af917b90",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         },
         "zh": {
@@ -255,11 +255,11 @@
             "skills": 8
           },
           "digest": "19109d26e638",
-          "dumped": "2026-11-19",
+          "dumped": "2026-11-20",
           "apiVersion": 101051
         }
       },
-      "dumped": "2026-11-19",
+      "dumped": "2026-11-20",
       "apiVersion": 101051
     },
     "crafts": {
