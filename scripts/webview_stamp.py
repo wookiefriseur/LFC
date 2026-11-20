@@ -61,19 +61,21 @@ def interface_texts(source):
 def text_problems(docs):
     """What disagrees between the master file, the pages that use its ids and the translations."""
     english = interface_texts((docs / MASTER).read_text(encoding="utf-8"))
-    problems, literals = [], set()
+    problems, counted_ids, sources = [], set(), []
     for path in sorted(docs.iterdir()):
         if path.suffix not in (".js", ".html"):
             continue
         source = path.read_text(encoding="utf-8")
-        literals.update(re.findall(r'"([^"\n]*)"', source))
+        sources.append(source)
         # A counted text is two entries
         counted = [key + suffix for key in COUNTED.findall(source) for suffix in ("", "_one")]
-        literals.update(counted)
+        counted_ids.update(counted)
         problems += [f"{path.name}: {key!r} is not in {MASTER}"
                      for key in [*counted, *(key for pattern in USED for key in pattern.findall(source))] if key not in english]
+    # Used: named as a quoted id anywhere in the pages, which also covers tables of ids
+    everything = "\n".join(sources)
     problems += [f"{MASTER}: {key!r} is used nowhere" for key in english
-                 if key not in literals and not key.startswith(BUILT)]
+                 if key not in counted_ids and not key.startswith(BUILT) and f'"{key}"' not in everything]
     for path in sorted((docs / "locale").glob("*.json")):
         for key, text in json.loads(path.read_text(encoding="utf-8")).items():
             if key not in english:

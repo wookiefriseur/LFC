@@ -3879,6 +3879,12 @@ test("language: tab names and source kinds follow the interface translation, and
     await page.waitForSelector("#crate-new-open", { timeout: 10000 });
     assertEq(await page.$eval("#crate-new-open", (e) => e.textContent), "Neue Kiste", "the New crate button");
     assertEq(await page.$eval("#crate-new-symbol", (e) => e.textContent), "Recorded as -", "an untranslated drawn text");
+    // Batch edit: a button, a column head taken from the record fields, and the counted row line
+    await switchTab(page, "advanced");
+    assertEq(await page.$eval("#btn-add", (e) => e.textContent), "+ Neu", "the Add button");
+    assertEq(await page.$eval("#panel-advanced thead th:nth-child(6)", (e) => e.textContent), "Preis", "the price column");
+    await page.waitForFunction(() => /^[\d.,]+ Einträge - /.test(document.querySelector("#row-count")?.textContent || ""), { timeout: 10000 })
+      .catch(() => { throw new Error("the Batch edit row count is not German"); });
     // a page's own text: fixed markup, drawn text and a filled hole, and back to English without a reload
     await switchTab(page, "browse");
     await page.waitForFunction(() => /Gegenstände/.test(document.querySelector("#browse-count")?.textContent || ""), { timeout: 10000 })

@@ -887,44 +887,42 @@ function commitLuxuryPlan() {
 function renderAdvancedPanel(container) {
   container.innerHTML = `
     <details id="batch-filters" class="batch-filters" open>
-      <summary>Search and filters</summary>
+      <summary data-t="batch.filters"></summary>
       <div class="adv-controls">
-      <button id="btn-add" class="btn-primary">+ Add new</button>
+      <button id="btn-add" class="btn-primary" data-t="batch.add"></button>
       <button id="btn-add-dump" class="btn-dump" aria-expanded="false" aria-controls="adv-import"
-        title="Paste a DevUtility dump, or the diff from a submitted issue to review its changes">++Add from Dump or Diff</button>
+        data-t-title="batch.import.tip" data-t="batch.import"></button>
       <span class="search-box">
-        <input id="search" type="search" placeholder="search by id or name…">
+        <input id="search" type="search" data-t-placeholder="browse.search">
         <button id="search-clear" type="button" class="search-clear"
-                aria-label="Clear the search" hidden>×</button>
+                data-t-aria-label="browse.search_clear" hidden>×</button>
       </span>
       <select id="filter-type" title="source.type"></select>
       <select id="filter-version" title="availability.version"></select>
-      <label class="adv-changed-toggle" title="Show only the rows you have ticked.">
+      <label class="adv-changed-toggle" data-t-title="batch.selected_only.tip">
         <input id="filter-selected" type="checkbox" role="switch">
-        <span>Selected only</span>
+        <span data-t="batch.selected_only"></span>
       </label>
-      <label class="adv-changed-toggle" title="Show only records you have edited this session.">
+      <label class="adv-changed-toggle" data-t-title="batch.changed_only.tip">
         <input id="filter-changed" type="checkbox" role="switch">
-        <span>Changed only</span>
+        <span data-t="batch.changed_only"></span>
         <span id="changed-count" class="adv-changed-count"></span>
       </label>
       </div>
     </details>
     <div class="batch-view-nav">
-      <button id="batch-show-results" type="button">Back to results</button>
-      <button id="batch-show-editor" type="button" disabled>Continue editing</button>
+      <button id="batch-show-results" type="button" data-t="batch.back"></button>
+      <button id="batch-show-editor" type="button" disabled></button>
     </div>
 
-    <section class="adv-import" id="adv-import" hidden aria-label="Add from Dump or Diff">
+    <section class="adv-import" id="adv-import" hidden data-t-aria-label="batch.import.label">
       <div class="adv-import-body">
-        <p class="muted">Paste the discovery lines from DevUtility's text box (one JSON object per item). You can paste
-          several pages together. New discoveries arrive as Unconfirmed, choose their source
-          if you know it. Existing entries are skipped.</p>
-        <p class="muted">You can also use this to review a submitted issue: just paste the diff or whole raw text in here. The changes load into an empty change list and you can inspect and edit the entries.</p>
-        <textarea id="adv-import-paste" rows="7" placeholder="Paste a dump or an issue's diff here"></textarea>
+        <p class="muted" data-t="batch.import.help"></p>
+        <p class="muted" data-t="batch.import.help_diff"></p>
+        <textarea id="adv-import-paste" rows="7" data-t-placeholder="batch.import.placeholder"></textarea>
         <div class="adv-import-actions">
-          <button id="adv-import-run" class="btn-primary">Import to the change list</button>
-          <button id="adv-import-clear">Clear</button>
+          <button id="adv-import-run" class="btn-primary" data-t="batch.import.run"></button>
+          <button id="adv-import-clear" data-t="luxury.clear"></button>
           <span id="adv-import-status" class="muted"></span>
         </div>
         <ul id="adv-import-report" class="adv-import-report"></ul>
@@ -933,26 +931,27 @@ function renderAdvancedPanel(container) {
 
     <div class="adv-split">
       <section class="table-pane">
-        <div id="row-count" class="muted">loading…</div>
+        <div id="row-count" class="muted" data-t="batch.loading"></div>
         <div id="scroller" class="scroller">
           <table>
             <thead>
               <tr><th class="cell-tick"><input id="tick-all" type="checkbox"
-                      title="Tick every row the filters leave"></th>
-                  <th title="id">Item ID</th><th>Name</th>
-                  <th title="source.type">Source</th>
-                  <th title="source.*">Details</th>
-                  <th title="cost">Price</th>
-                  <th title="availability.version">Version</th></tr>
+                      data-t-title="batch.tick_all"></th>
+                  <th title="id" data-t="field.id"></th><th data-t="batch.column.name"></th>
+                  <th title="source.type" data-t="field.source.type"></th>
+                  <th title="source.*" data-t="batch.column.details"></th>
+                  <th title="cost" data-t="field.cost"></th>
+                  <th title="availability.version" data-t="field.availability.version"></th></tr>
             </thead>
             <tbody id="table-body"></tbody>
           </table>
         </div>
       </section>
       <aside id="detail" class="detail-pane">
-        <p class="muted">Select a row to edit, or click + Add new above.</p>
+        <p class="muted" data-t="batch.select_row"></p>
       </aside>
     </div>`;
+  translateTree(container);
 
   const narrow = matchMedia("(max-width: 1000px)");
   const filters = $("#batch-filters");
@@ -996,7 +995,7 @@ function showBatchView(editing) {
 
 function populateFilters() {
   fillSelect("#filter-type", ["", ...orderedSourceTypes(state.enums.source_types)],
-    (t) => (t ? sourceTypeLabel(t) : "(anywhere it comes from)"));
+    (type) => (type ? sourceTypeLabel(type) : t("batch.any_source")));
   fillVersionSelect("#filter-version", { includeAny: true });
 }
 
@@ -1029,7 +1028,7 @@ function fillVersionSelect(sel, opts = {}) {
   if (opts.includeAny) {
     const o = document.createElement("option");
     o.value = "";
-    o.textContent = "(any version)";
+    o.textContent = t("batch.any_version");
     el.append(o);
   }
   for (const v of versionsDesc(state.enums)) {
@@ -1107,7 +1106,7 @@ function addNewRecord(opts = {}) {
 // "Start from": fills the fixed parts of a common source and leaves the rest to pick. Picking again replaces source and price
 function presetPicker() {
   const sel = elem("select", { id: "adv-preset" },
-    elem("option", { value: "" }, "Fill in everything myself"),
+    elem("option", { value: "" }, t("batch.preset.none")),
     ...PRESETS.map((p) => elem("option", { value: p.id }, p.label)));
   sel.value = state.editing._preset || "";
   sel.addEventListener("change", () => {
@@ -1124,10 +1123,10 @@ function presetPicker() {
     renderDetail();
   });
   const wrap = elem("div", { class: "form-row preset-row" },
-    elem("label", { for: "adv-preset" }, "Start from"), sel);
+    elem("label", { for: "adv-preset" }, t("batch.preset")), sel);
   if (state.editing._fromLast) {
     wrap.append(elem("p", { class: "muted" },
-      "Filled in like the last record you added, except the item and the price. Change anything that differs."));
+      t("batch.preset.from_last")));
   }
   return wrap;
 }
@@ -1219,7 +1218,7 @@ function renderTable() {
       const problems = bufferFindings().perEntry.get(r._key)?.errors || [];
       if (problems.length) {
         tr.classList.add("dirty-error");
-        tr.title = `Cannot be sent yet: ${problems.map(messageFor).join(" ")}`;
+        tr.title = t("batch.row.blocked", { problems: problems.map(messageFor).join(" ") });
       }
     }
 
@@ -1227,7 +1226,7 @@ function renderTable() {
     const tickTd = elem("td", { class: "cell-tick" });
     const tick = elem("input", { type: "checkbox" });
     tick.checked = state.ticked.has(r._key);
-    tick.setAttribute("aria-label", `Tick record ${r.id}`);
+    tick.setAttribute("aria-label", t("batch.row.tick", { id: r.id }));
     tick.addEventListener("click", (ev) => ev.stopPropagation());
     tick.addEventListener("change", () => {
       state.tickAnchor = r._key;
@@ -1246,7 +1245,7 @@ function renderTable() {
 
     const detail = sourceDetail(r.source);
     const note = typeof r.notes === "string" ? r.notes.trim() : "";
-    const detailTitle = note ? `${detail.title}\nData note: ${note}` : detail.title;
+    const detailTitle = note ? `${detail.title}\n${t("batch.row.note", { note })}` : detail.title;
     const typeText = r.source?.type ? sourceTypeLabel(r.source.type) : "";
     const typeTitle = typeText ? `${typeText} (${r.source.type})` : "";
     const rest = document.createElement("template");
@@ -1255,7 +1254,7 @@ function renderTable() {
       `<td class="cell-clamp" title="${escapeHTML(typeTitle)}"><div class="clamp2">` +
         `${escapeHTML(typeText)}</div></td>` +
       `<td class="cell-clamp cell-source-detail" title="${escapeHTML(detailTitle)}"><div class="clamp2">` +
-        (note ? `<span class="note-glyph" title="This record carries a data note.">✎</span> ` : "") +
+        (note ? `<span class="note-glyph" title="${escapeHTML(t("batch.row.note.tip"))}">✎</span> ` : "") +
         `${escapeHTML(detail.text)}</div></td>` +
       `<td class="cell-clamp" title="${escapeHTML(formatCost(r.cost))}"><div class="clamp2">` +
         `${escapeHTML(formatCost(r.cost))}</div></td>` +
@@ -1305,9 +1304,9 @@ function renderTable() {
 
   renderTickAll();
   $("#row-count").textContent =
-    `${total.toLocaleString()} record${total === 1 ? "" : "s"}` +
-    (state.changedOnly ? " (changed only)" : "") +
-    (total > 0 ? ` - showing ${first + 1}–${last}` : "");
+    tn(total, "batch.count", { n: total.toLocaleString() }) +
+    (state.changedOnly ? ` ${t("batch.count.changed_only")}` : "") +
+    (total > 0 ? ` - ${t("browse.showing", { first: first + 1, last })}` : "");
 }
 
 // The table is virtualised, so the header tick reads the filtered set, not the rendered rows.
@@ -1346,9 +1345,9 @@ function onTickChange({ rerender = true } = {}) {
 function refreshTickCount() {
   const n = state.ticked.size;
   const count = $("#multi-count");
-  if (count) count.textContent = `${n} record${n === 1 ? "" : "s"} ticked`;
+  if (count) count.textContent = tn(n, "batch.multi.ticked");
   const apply = $("#multi-apply");
-  if (apply) apply.textContent = `Apply to these ${n} records`;
+  if (apply) apply.textContent = t("batch.multi.apply", { n });
 }
 
 function spacerRow(heightPx) {
@@ -1380,7 +1379,7 @@ function renderDetail() {
   if (!host) return;
   const resume = $("#batch-show-editor");
   resume.disabled = !state.editing && state.ticked.size === 0;
-  resume.textContent = state.ticked.size >= BATCH_MIN ? `Edit ${state.ticked.size} selected records` : "Continue editing";
+  resume.textContent = state.ticked.size >= BATCH_MIN ? t("batch.multi.edit", { n: state.ticked.size }) : t("batch.continue");
   if (resume.disabled) $("#panel-advanced").classList.remove("is-editing");
   host.innerHTML = "";
   // Ticked rows take the pane; a single tick is not a batch and gets the ordinary editor.
@@ -1398,7 +1397,7 @@ function renderDetail() {
     }
   }
   if (!state.editing) {
-    host.append(em("Select a row to edit, or click + Add new above."));
+    host.append(em(t("batch.select_row")));
     return;
   }
   if (!state.editing._isNew && state.buffer.isDeleted(state.editing._key)) {
@@ -1406,22 +1405,22 @@ function renderDetail() {
     return;
   }
   const title = state.editing._isNew
-    ? "Add new record"
-    : `Edit ${state.editing.id ?? state.editing.blueprint} - ${nameOf(state.editing.id ?? state.editing.blueprint)}`;
+    ? t("batch.edit.new")
+    : t("batch.edit.title", { id: state.editing.id ?? state.editing.blueprint, name: nameOf(state.editing.id ?? state.editing.blueprint) });
   host.append(elem("h2", {}, title));
   if (state.editing._isNew && !state.editing._pairFrom) host.append(presetPicker());
   if (!state.editing._isNew) {
     const links = elem("p", { class: "detail-links muted" });
     const { id, blueprint } = state.editing;
-    if (id != null) links.append(itemLinkAnchor(id, `#${id} on UESP`));
+    if (id != null) links.append(itemLinkAnchor(id, t("batch.edit.uesp", { id })));
     if (blueprint != null) {
       if (id != null) links.append(" - ");
-      links.append(itemLinkAnchor(blueprint, `recipe #${blueprint} on UESP`));
+      links.append(itemLinkAnchor(blueprint, t("batch.edit.uesp_recipe", { id: blueprint })));
     }
     host.append(links);
   }
   if (state.editing._pairFrom) {
-    host.append(elem("p", { class: "muted" }, "Saving replaces the record you started from, and any Unconfirmed record for either ID, with this one record. The replaced records are shown struck through and can be restored with Undo delete."));
+    host.append(elem("p", { class: "muted" }, t("batch.pair.hint")));
     const original = state.index.get(state.editing._pairFrom);
     const wanted = state.names.english(original.id ?? original.blueprint).toLowerCase().replace(/^(diagram|blueprint|pattern|praxis|formula|design|sketch):\s*/, "");
     const candidates = [...new Set(state.records.filter(r => original.id ? (r.blueprint && !r.id) : r.id)
@@ -1430,7 +1429,7 @@ function renderDetail() {
         return wanted && name && (name === wanted || (wanted.length >= 5 && (name.includes(wanted) || wanted.includes(name))));
       }).map(r => original.id ? r.blueprint : r.id))].slice(0, 8);
     if (candidates.length) {
-      host.append(elem("p", { class: "muted" }, "Possible matches by name - verify before linking:"));
+      host.append(elem("p", { class: "muted" }, t("batch.pair.matches")));
       for (const id of candidates) {
         const button = elem("button", { class: "btn-mini", type: "button" }, `${nameOf(id)} #${id}`);
         button.addEventListener("click", () => {
@@ -1476,9 +1475,9 @@ function renderDetail() {
   // Where a blocked save says what to do about it; no dialogs.
   host.append(elem("div", { class: "detail-message", id: "detail-message" }));
 
-  const saveBtn = elem("button", { class: "btn-primary" }, "Save to the change list");
+  const saveBtn = elem("button", { class: "btn-primary" }, t("batch.save"));
   saveBtn.addEventListener("click", () => commitEdit());
-  discardBtn = elem("button", {}, "Discard");
+  discardBtn = elem("button", {}, t("batch.discard"));
   discardBtn.disabled = unchanged();
   discardBtn.addEventListener("click", () => {
     state.editing = state.selectedKey
@@ -1488,7 +1487,7 @@ function renderDetail() {
   });
   let deleteBtn = null;
   if (!state.editing._isNew) {
-    deleteBtn = elem("button", { class: "btn-danger" }, "Delete");
+    deleteBtn = elem("button", { class: "btn-danger" }, t("batch.delete"));
     deleteBtn.addEventListener("click", () => confirmDelete());
   }
   const row = elem("div", { class: "form-actions" }, saveBtn, discardBtn);
@@ -1554,13 +1553,10 @@ function renderMultiEdit(host) {
   state.multiDraft = draft;
   state.multiMixed = mixed;
 
-  host.append(elem("h2", {}, "Edit these records together"));
+  host.append(elem("h2", {}, t("batch.multi.title")));
   const count = elem("p", { class: "muted", id: "multi-count" });
   host.append(count);
-  host.append(em("Only what you change is written. A field the records " +
-    "disagree on starts as \"(mixed - leave unchanged)\", and left that way " +
-    "each record keeps its own. A row that would become an exact copy of a " +
-    "record you already have is left alone and reported."));
+  host.append(em(t("batch.multi.hint")));
 
   host.append(renderForm(draft, state.enums, () => {}, {
     partition: "open",
@@ -1575,7 +1571,7 @@ function renderMultiEdit(host) {
 
   const apply = elem("button", { class: "btn-primary", id: "multi-apply" });
   apply.addEventListener("click", () => applyMultiEdit());
-  const clear = elem("button", {}, "Untick them");
+  const clear = elem("button", {}, t("batch.multi.untick"));
   clear.addEventListener("click", () => {
     state.ticked.clear();
     renderTable();
@@ -1622,17 +1618,17 @@ function applyMultiEdit() {
   }
 
   const parts = [];
-  if (applied) parts.push(`${changeCountText(applied)} saved to the change list`);
-  if (unchanged) parts.push(`${unchanged} already had it`);
-  if (duplicate) parts.push(`${duplicate} left alone (would repeat a record you already have)`);
-  if (invalid.length) parts.push(`${invalid.length} cannot take it: ${invalid[0]}`);
+  if (applied) parts.push(t("batch.multi.saved", { changes: changeCountText(applied) }));
+  if (unchanged) parts.push(t("batch.multi.unchanged", { n: unchanged }));
+  if (duplicate) parts.push(t("batch.multi.duplicate", { n: duplicate }));
+  if (invalid.length) parts.push(t("batch.multi.invalid", { n: invalid.length, problem: invalid[0] }));
   if (applied) renderDetail();
   const host = $("#multi-message");
   if (host) {
     host.innerHTML = "";
     host.className = "detail-message " +
       (applied ? "dm-ok" : (invalid.length || duplicate ? "dm-warn" : "dm-error"));
-    host.append(elem("p", {}, parts.length ? parts.join(". ") + "." : "Nothing to change."));
+    host.append(elem("p", {}, parts.length ? parts.join(". ") + "." : t("batch.multi.nothing")));
   }
   if (applied) {
     applyFilters();
@@ -1652,9 +1648,9 @@ function formMessage(text, level = "error") {
 // A deleted row is not editable: an edit would have to either cancel the delete or be lost with it.
 function renderDeletedDetail(host) {
   const rec = state.editing;
-  host.append(elem("h2", {}, `Deleted: ${rec.id ?? rec.blueprint} - ${nameOf(rec.id ?? rec.blueprint)}`));
-  host.append(elem("p", {}, `${recordLocator(rec)}. This record is removed when your changes are sent.`));
-  const undo = elem("button", {}, "Undo delete");
+  host.append(elem("h2", {}, t("batch.deleted.title", { id: rec.id ?? rec.blueprint, name: nameOf(rec.id ?? rec.blueprint) })));
+  host.append(elem("p", {}, t("batch.deleted.hint", { record: recordLocator(rec) })));
+  const undo = elem("button", {}, t("batch.deleted.undo"));
   undo.addEventListener("click", () => {
     state.buffer.entries.delete(rec._key);
     state.buffer.changed();
@@ -1680,10 +1676,10 @@ function confirmDelete() {
   if (!host) return;
   host.innerHTML = "";
   host.className = "detail-message dm-warn";
-  host.append(elem("p", {}, `Delete this record? ${recordLocator(orig)}, ` +
-    `${nameOf(orig.id) || "(no name)"} (#${orig.id}), ${formatCost(orig.cost)}.`));
-  const yes = elem("button", { class: "btn-danger" }, "Delete it");
-  const no = elem("button", {}, "Keep it");
+  host.append(elem("p", {}, t("batch.delete.ask", {
+    record: recordLocator(orig), name: nameOf(orig.id) || t("common.no_name"), id: orig.id, price: formatCost(orig.cost) })));
+  const yes = elem("button", { class: "btn-danger" }, t("lists.delete.yes"));
+  const no = elem("button", {}, t("lists.keep"));
   yes.addEventListener("click", () => {
     const kept = deleteRecord(live);
     state.editing = kept ? deepClone(live) : null;
@@ -1721,7 +1717,7 @@ function pairReplaced(pair, fromKey) {
 // A value the type label already names is dropped: there is one luxury vendor.
 function recordLocator(record) {
   const type = record?.source?.type;
-  const label = type ? sourceTypeLabel(type) : "(no source)";
+  const label = type ? sourceTypeLabel(type) : t("batch.no_source");
   const parts = sourceDetail(record?.source).parts
     .filter((v) => v && !label.includes(v));
   return parts.length ? `${label} - ${parts.join(" · ")}` : label;
@@ -1751,7 +1747,7 @@ function editingFindings() {
   if (sameId.length) {
     warnings.push({
       level: "warning", field: "id", code: "same_id_other_source",
-      message: `id ${state.editing.id} already has ${sameId.length} other source(s) in ${state.editing._category} - same item, another source; check you are not duplicating`,
+      message: t("batch.warn.same_id", { id: state.editing.id, n: sameId.length, file: state.editing._category }),
     });
   }
   return { errors, warnings };
@@ -1767,14 +1763,13 @@ function commitEdit() {
   e._category = deriveCategory(e, e._category || state.categories[0]);
   formMessage("");
   if (!Number.isInteger(e.id) && !Number.isInteger(e.blueprint)) {
-    formMessage("Enter a furnishing ID or blueprint ID, then save.");
+    formMessage(t("batch.error.no_id"));
     return;
   }
   const { errors } = validateRecord(e, state.enums, recordsBesides(e));
   if (errors.length) {
     formMessage(
-      `This cannot be saved yet: ${errors.map((f) => messageFor(f)).join(" ")} ` +
-      `Fix the highlighted field and save again.`,
+      t("batch.error.invalid", { problems: errors.map((f) => messageFor(f)).join(" ") }),
     );
     return;
   }
@@ -1784,15 +1779,13 @@ function commitEdit() {
   );
   if (exact) {
     formMessage(
-      `There is already a record exactly like this one (${recordLocator(exact)}). ` +
-      `Edit that record instead, or change something about this source - the ` +
-      `same item with a different source is a second record and is allowed.`,
+      t("batch.error.duplicate", { record: recordLocator(exact) }),
     );
     return;
   }
   if (e._isNew) {
     if (e._pairFrom && (!e.id || !e.blueprint)) {
-      formMessage("Enter both IDs to propose a paired replacement.");
+      formMessage(t("batch.error.pair_ids"));
       return;
     }
     let folio = null;
@@ -1843,7 +1836,7 @@ function commitEdit() {
   renderTable();
   renderDetail();
   renderFooter();
-  formMessage(`Saved. ${changeCountText()} ready to send.`, "ok");
+  formMessage(t("batch.saved", { changes: changeCountText() }), "ok");
 }
 
 function changeCountText(n = state.buffer.size()) {
@@ -1914,11 +1907,11 @@ function offerToCatalogue(c, warnLines, counts, typeSets) {
   const lives = state.records.filter((r) => r.id === id && !state.buffer.isDeleted(r._key));
   if (!lives.length) return;
   const item = lives.map(clean);
-  const where = `line ${c.lineNo} (id ${id})`;
+  const where = t("import.where", { line: c.lineNo, id });
   const offered = `${c.offer.amount} ${c.offer.currency}`;
   const plan = offerPlan(item, c.offer, typeSets, state.enums.source_type_contracts);
-  if (plan.kind === "several") warnLines.push(`${where}: the dump offers ${offered}, which none of its ${plan.count} trader records in ${c.offer.currency} states - not changed`);
-  if (plan.kind === "unrecorded") warnLines.push(`${where}: also offered for ${offered} by a trader the catalogue does not record - not changed`);
+  if (plan.kind === "several") warnLines.push(`${where}: ${t("import.offer.several", { offer: offered, n: plan.count, currency: c.offer.currency })}`);
+  if (plan.kind === "unrecorded") warnLines.push(`${where}: ${t("import.offer.unrecorded", { offer: offered })}`);
   if (plan.kind === "add") {
     const type = plan.record.source.type;
     const key = newKey(type);
@@ -1936,7 +1929,7 @@ function offerToCatalogue(c, warnLines, counts, typeSets) {
     mirror(live, record);
     if (replaced.length) {
       counts.replaced++;
-      warnLines.push(`${where}: replaced from the dump - ${replaced.join(", ")}; check it in the change list`);
+      warnLines.push(`${where}: ${t("import.offer.replaced", { fields: replaced.join(", ") })}`);
     } else {
       counts.filled++;
     }
@@ -1955,7 +1948,7 @@ async function runBatchImport() {
   try {
     diff = readDiff(text);
   } catch (err) {
-    status.textContent = `Diff not imported: ${err.message}.`;
+    status.textContent = t("import.diff.refused", { error: err.message });
     return;
   }
   if (diff) {
@@ -1973,13 +1966,13 @@ async function runBatchImport() {
     candidates = [];
     const lines = text.split(/\r?\n/);
     for (let i = 0; i < lines.length; i++) {
-      const t = lines[i].trim();
-      if (!t) continue;
+      const raw = lines[i].trim();
+      if (!raw) continue;
       let obj;
       try {
-        obj = JSON.parse(t);
+        obj = JSON.parse(raw);
       } catch (err) {
-        parseErrors.push({ lineNo: i + 1, message: `not valid JSON - ${err.message}` });
+        parseErrors.push({ lineNo: i + 1, message: t("import.error.json", { error: err.message }) });
         continue;
       }
       if (obj?.format !== undefined) {
@@ -1997,12 +1990,12 @@ async function runBatchImport() {
       candidates.push({ record: obj, category: cat, sourceName: null, lineNo: i + 1 });
     }
   } else {
-    status.textContent = "Not imported: paste FurCDev discovery lines (one JSON object per line) or an issue's diff.";
+    status.textContent = t("import.status.not_a_dump");
     return;
   }
 
   if (candidates.length === 0 && parseErrors.length === 0 && unfinished.size === 0 && notFurniture.size === 0) {
-    status.textContent = "nothing to import - paste at least one record.";
+    status.textContent = t("import.status.nothing");
     return;
   }
 
@@ -2012,7 +2005,7 @@ async function runBatchImport() {
   const refreshable = (c) => c.reference && discoveryKnown(c.record, state.records) && published(c.record.id);
   const refreshIds = candidates.filter(refreshable).map((c) => c.record.id);
   if (refreshIds.length) {
-    status.textContent = "Loading item metadata to compare against...";
+    status.textContent = t("import.status.loading");
     await referenceData.loadMeta(refreshIds);
   }
 
@@ -2030,12 +2023,12 @@ async function runBatchImport() {
   const currencyTypes = offerTypes(state.records);
   const typeSets = offerTypeSets(state.records);
   const warnLines = unfinished.size
-    ? [`The following furnishings do not seem to be finalised in the game yet (missing category metadata) and were skipped. Please dump them again after the next game update: ${[...unfinished].join(", ")}.`]
+    ? [t("import.warn.unfinished", { ids: [...unfinished].join(", ") })]
     : [];
   if (notFurniture.size) {
-    warnLines.push(`These ids are not furnishings (furniture category 0, e.g. equipment from a datamine) and were refused: ${[...notFurniture].join(", ")}.`);
+    warnLines.push(t("import.warn.not_furniture", { ids: [...notFurniture].join(", ") }));
   }
-  const errorLines = [...parseErrors.map((e) => `line ${e.lineNo}: ${e.message}`)];
+  const errorLines = [...parseErrors.map((e) => t("import.error.line", { line: e.lineNo, error: e.message }))];
 
   for (const c of candidates) {
     let rec = c.record;
@@ -2069,7 +2062,7 @@ async function runBatchImport() {
         asRecipe++;
       }
     }
-    const where = `line ${c.lineNo} (id ${rec.id ?? "?"})`;
+    const where = t("import.where", { line: c.lineNo, id: rec.id ?? "?" });
     const fromOffer = c.reference && rec.source?.type === "rumour"
       && recordFromOffer(rec, c.offer, currencyTypes, state.enums.source_type_contracts);
     if (fromOffer) {
@@ -2096,11 +2089,11 @@ async function runBatchImport() {
       };
       c.category = "rumour";
       c.rumourFallback = true;
-      warnLines.push(`${where}: no known source - imported as a rumour record`);
+      warnLines.push(`${where}: ${t("import.warn.rumour")}`);
     }
 
     if (!c.category) {
-      errorLines.push(`${where}: no category - pick a target category`);
+      errorLines.push(`${where}: ${t("import.error.no_category")}`);
       continue;
     }
 
@@ -2111,7 +2104,7 @@ async function runBatchImport() {
       errorLines.push(`${where}: ${blocking.map((f) => messageFor(f)).join(" ")}`);
       continue;
     }
-    if (blocking.length !== errors.length) warnLines.push(`${where}: ${sourceTypeLabel(rec.source.type)} from its ${rec.cost[0]?.currency} price - ${errors.map((f) => messageFor(f)).join(" ")}`);
+    if (blocking.length !== errors.length) warnLines.push(`${where}: ${t("import.warn.typed", { kind: sourceTypeLabel(rec.source.type), currency: rec.cost[0]?.currency, problems: errors.map((f) => messageFor(f)).join(" ") })}`);
     for (const w of warnings) warnLines.push(`${where}: ${messageFor(w)}`);
     // Imported anyway: the row turns red and the change cannot be sent until it is fixed in the form.
     const clash = rumourClash(rec, state.records);
@@ -2142,22 +2135,22 @@ async function runBatchImport() {
     }
   }
 
-  const parts = [`${imported} added`, `${updated} updated`];
-  if (ignored) parts.push(`${ignored} ignored (skipped)`);
-  if (notFurniture.size) parts.push(`${notFurniture.size} not furniture (refused)`);
-  if (knownDiscoveries) parts.push(`${knownDiscoveries} already catalogued (skipped)`);
-  if (refreshed) parts.push(`${refreshed} item detail change(s) - see the change list`);
-  if (current) parts.push(`${current} item(s) already up to date`);
-  if (rumoured) parts.push(`${rumoured} as ${sourceTypeLabel("rumour")} (no source yet)`);
-  if (typed) parts.push(`${typed} typed from their price's currency (pick the trader)`);
-  if (pricedRumours) parts.push(`${pricedRumours} Unconfirmed with a price (see Maintenance: has a price but no trader)`);
-  if (offerCount.filled) parts.push(`${offerCount.filled} record(s) given the dump's price or gate`);
-  if (offerCount.replaced) parts.push(`${offerCount.replaced} price(s) or gate(s) replaced from the dump`);
-  if (offerCount.added) parts.push(`${offerCount.added} additional offer(s) added as new records (pick the trader)`);
-  if (foreignNames) parts.push(`${foreignNames} name(s) in another language left out (the English name stays)`);
-  if (asRecipe) parts.push(`${asRecipe} new blueprint(s) of confirmed items as ${sourceTypeLabel("recipe")}`);
-  if (warnLines.length) parts.push(`${warnLines.length} warning(s)`);
-  if (errorLines.length) parts.push(`${errorLines.length} error(s)`);
+  const parts = [t("import.report.added", { n: imported }), t("import.report.updated", { n: updated })];
+  if (ignored) parts.push(t("import.report.ignored", { n: ignored }));
+  if (notFurniture.size) parts.push(t("import.report.not_furniture", { n: notFurniture.size }));
+  if (knownDiscoveries) parts.push(t("import.report.known", { n: knownDiscoveries }));
+  if (refreshed) parts.push(t("import.report.refreshed", { n: refreshed }));
+  if (current) parts.push(t("import.report.current", { n: current }));
+  if (rumoured) parts.push(t("import.report.rumoured", { n: rumoured, kind: sourceTypeLabel("rumour") }));
+  if (typed) parts.push(t("import.report.typed", { n: typed }));
+  if (pricedRumours) parts.push(t("import.report.priced_rumours", { n: pricedRumours }));
+  if (offerCount.filled) parts.push(t("import.report.offer_filled", { n: offerCount.filled }));
+  if (offerCount.replaced) parts.push(t("import.report.offer_replaced", { n: offerCount.replaced }));
+  if (offerCount.added) parts.push(t("import.report.offer_added", { n: offerCount.added }));
+  if (foreignNames) parts.push(t("import.report.foreign_names", { n: foreignNames }));
+  if (asRecipe) parts.push(t("import.report.as_recipe", { n: asRecipe, kind: sourceTypeLabel("recipe") }));
+  if (warnLines.length) parts.push(t("import.report.warnings", { n: warnLines.length }));
+  if (errorLines.length) parts.push(t("import.report.errors", { n: errorLines.length }));
   status.textContent = parts.join(" · ") + ".";
   showImportReport(errorLines, warnLines);
 
@@ -2180,7 +2173,7 @@ function loadNameLocales(lines) {
 // A pasted contribution diff replays into the change list all or nothing, so its change list is exactly the issue's
 async function importDiff(lines, status, complete) {
   if (state.buffer.size()) {
-    status.textContent = `Diff not imported: send or discard your ${changeCountText()} first, so the change list shows only this diff.`;
+    status.textContent = t("import.diff.pending", { changes: changeCountText() });
     return;
   }
   await loadNameLocales(lines);
@@ -2191,14 +2184,14 @@ async function importDiff(lines, status, complete) {
     publishedItem, metaLocale: referenceData.metaLocale,
   });
   if (errors.length) {
-    status.textContent = `Diff not imported, nothing changed. ${errors.slice(0, 3).join("; ")}`
-      + (errors.length > 3 ? ` (${errors.length - 3} more in the console)` : "");
+    status.textContent = `${t("import.diff.errors")} ${errors.slice(0, 3).join("; ")}`
+      + (errors.length > 3 ? ` ${t("import.diff.more", { n: errors.length - 3 })}` : "");
     console.warn("diff import - errors:", errors);
     return;
   }
   applySteps(steps, state, referenceData);
-  status.textContent = `Diff loaded: ${changeCountText()} to review, compared against the catalogue as loaded now.`
-    + (complete ? "" : " Pasted without the issue's diff markers, so it cannot be confirmed complete: the copy button on the issue's diff block copies all of it.")
+  status.textContent = t("import.diff.loaded", { changes: changeCountText() })
+    + (complete ? "" : ` ${t("import.diff.incomplete")}`)
     + (warnings.length ? ` ${warnings.join("; ")}.` : "");
   state.changedOnly = true;
   const cb = $("#filter-changed");
@@ -2596,7 +2589,7 @@ function titleFromSymbol(symbol) {
 }
 
 function folioLabel(id) {
-  return `${nameOf(id) || "Furnishing folio"} (${id})`;
+  return `${nameOf(id) || t("folio.fallback")} (${id})`;
 }
 
 // The search narrows the dropdown in place, so typing keeps its focus; picking writes source.part_of
@@ -2604,17 +2597,15 @@ function renderFolioPicker(host) {
   const e = state.editing;
   const original = state.index.get(e._moveFrom);
   host.append(elem("p", { class: "muted" },
-    "Saving replaces the vendor record you started from, and any Unconfirmed record for either ID, " +
-    "with an entry in the folio. The folio's price applies, so the entry has no price or vendor of its own. " +
-    "The replaced records are shown struck through and can be restored with Undo delete."));
+    t("folio.hint")));
   const folios = folioRecords();
   // A folio the vocabulary already names, but that has no record yet: picking it adds the record with its id filled in.
   const listed = new Set(liveRecords().map((r) => r.id));
   const named = (state.enums.containers || [])
     .filter((c) => /_FOLIO$/.test(c?.symbol ?? "") && Number.isInteger(c.item) && !listed.has(c.item))
-    .map((c) => ({ id: c.item, label: `${nameOf(c.item) || titleFromSymbol(c.symbol)} (${c.item}) - not listed yet, adds it` }));
+    .map((c) => ({ id: c.item, label: t("folio.unlisted", { name: nameOf(c.item) || titleFromSymbol(c.symbol), id: c.item }) }));
   const search = elem("input", { type: "search", id: "folio-search", autocomplete: "off",
-    placeholder: "search a folio by name or ID" });
+    placeholder: t("folio.search") });
   const select = elem("select", { id: "folio-pick" });
   const NEW = "new";
   const fill = () => {
@@ -2622,10 +2613,10 @@ function renderFolioPicker(host) {
     const shown = folios.filter((r) => !q || String(r.id).includes(q) || folioLabel(r.id).toLowerCase().includes(q));
     const namedShown = named.filter((c) => !q || c.label.toLowerCase().includes(q) || String(c.id).includes(q));
     select.replaceChildren(
-      elem("option", { value: "" }, shown.length + namedShown.length ? "(pick a folio)" : "(no folio matches)"),
+      elem("option", { value: "" }, shown.length + namedShown.length ? t("folio.pick") : t("folio.no_match")),
       ...shown.map((r) => elem("option", { value: String(r.id) }, folioLabel(r.id))),
       ...namedShown.map((c) => elem("option", { value: `${NEW}:${c.id}` }, c.label)),
-      elem("option", { value: NEW }, "A folio that is not listed yet..."));
+      elem("option", { value: NEW }, t("folio.new")));
     const pending = e._newFolio && named.some((c) => c.id === e._newFolio.id) ? `${NEW}:${e._newFolio.id}` : NEW;
     select.value = e._newFolio ? pending : (shown.some((r) => r.id === e.source.part_of) ? String(e.source.part_of) : "");
   };
@@ -2635,8 +2626,8 @@ function renderFolioPicker(host) {
   const fresh = elem("div", { class: "folio-new", id: "folio-new" });
   fresh.hidden = !e._newFolio;
   const versions = versionsDesc(state.enums).map((v) => v.symbol);
-  const folioId = elem("input", { type: "number", min: "1", id: "folio-new-id", placeholder: "folio item ID" });
-  const price = elem("input", { type: "number", min: "1", id: "folio-new-price", placeholder: "price in writ vouchers" });
+  const folioId = elem("input", { type: "number", min: "1", id: "folio-new-id", placeholder: t("folio.new.id.placeholder") });
+  const price = elem("input", { type: "number", min: "1", id: "folio-new-price", placeholder: t("folio.new.price.placeholder") });
   const version = elem("select", { id: "folio-new-version" },
     ...versions.map((v) => elem("option", { value: v }, versionLabel(state.enums, v))));
   const sync = () => {
@@ -2652,11 +2643,10 @@ function renderFolioPicker(host) {
   }
   for (const input of [folioId, price, version]) input.addEventListener("input", sync);
   fresh.append(
-    elem("p", { class: "muted" }, "Adds the folio too, sold by the same vendor. Its name comes from the game: " +
-      "Maintenance -> Missing a name or metadata requests it."),
-    elem("label", { class: "lc-field" }, elem("span", {}, "Folio item ID"), folioId),
-    elem("label", { class: "lc-field" }, elem("span", {}, "Folio price (writ vouchers)"), price),
-    elem("label", { class: "lc-field" }, elem("span", {}, "Folio released in"), version));
+    elem("p", { class: "muted" }, t("folio.new.hint")),
+    elem("label", { class: "lc-field" }, elem("span", {}, t("folio.new.id")), folioId),
+    elem("label", { class: "lc-field" }, elem("span", {}, t("folio.new.price")), price),
+    elem("label", { class: "lc-field" }, elem("span", {}, t("folio.new.version")), version));
 
   select.addEventListener("change", () => {
     if (select.value.startsWith(NEW)) {
@@ -2671,19 +2661,19 @@ function renderFolioPicker(host) {
     renderDetail();
   });
   host.append(elem("div", { class: "folio-picker" },
-    elem("label", { class: "lc-field" }, elem("span", {}, `Move ${nameOf(original?.id) || original?.id} into`), search, select),
+    elem("label", { class: "lc-field" }, elem("span", {}, t("folio.move", { name: nameOf(original?.id) || original?.id })), search, select),
     fresh));
 }
 
 // Move into a not yet listed folio adds it or says what is missing
 function newFolioRecord(e) {
-  if (!Number.isInteger(e.source?.part_of)) return "Pick the folio to move the item into.";
+  if (!Number.isInteger(e.source?.part_of)) return t("folio.error.pick");
   if (!e._newFolio) return null;
   const { id, amount, version } = e._newFolio;
-  if (!Number.isInteger(id) || id < 1) return "Enter the folio's item ID.";
-  if (!Number.isInteger(amount) || amount < 1) return "Enter the folio's price in writ vouchers.";
-  if (folioRecords().some((r) => r.id === id)) return `Folio ${id} is already listed: pick it from the list.`;
-  if (liveRecords().some((r) => r.id === id)) return `ID ${id} is already catalogued as something other than a folio.`;
+  if (!Number.isInteger(id) || id < 1) return t("folio.error.id");
+  if (!Number.isInteger(amount) || amount < 1) return t("folio.error.price");
+  if (folioRecords().some((r) => r.id === id)) return t("folio.error.listed", { id });
+  if (liveRecords().some((r) => r.id === id)) return t("folio.error.other", { id });
   const original = state.index.get(e._moveFrom);
   const locations = original.source.locations ?? folioRecords()[0]?.source.locations;
   const folio = {
@@ -2695,7 +2685,7 @@ function newFolioRecord(e) {
     _category: "writ_vendor", _key: newKey("writ_vendor"),
   };
   const { errors } = validateRecord(folio, state.enums, liveRecords());
-  return errors.length ? `The new folio cannot be saved yet: ${errors.map((f) => messageFor(f)).join(" ")}` : folio;
+  return errors.length ? t("folio.error.invalid", { problems: errors.map((f) => messageFor(f)).join(" ") }) : folio;
 }
 
 function addRecordForItem(id, sourceType) {

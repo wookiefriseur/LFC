@@ -1,4 +1,7 @@
 {
+ "batch.add": "+ Neu",
+ "batch.count": "{n} Einträge",
+ "batch.count_one": "1 Eintrag",
  "browse.all_items": "Alle Gegenstände",
  "browse.any_category": "Alle Kategorien",
  "browse.any_style": "Alle Stile",
