@@ -12,9 +12,9 @@
   {
     "imports": {
       "./about.js": "./about.js?v=5cbcba6b8262",
-      "./app.js": "./app.js?v=7ca450dc439b",
+      "./app.js": "./app.js?v=a6d375c50aa6",
       "./browse.js": "./browse.js?v=641f76850fc0",
-      "./changelist.js": "./changelist.js?v=a019b958e99e",
+      "./changelist.js": "./changelist.js?v=8072ced1a326",
       "./containers.js": "./containers.js?v=3d2af7b127b1",
       "./crown-crate.js": "./crown-crate.js?v=adc3f177669e",
       "./crown-store.js": "./crown-store.js?v=3231f6064a45",
@@ -27,11 +27,11 @@
       "./icon-cache.js": "./icon-cache.js?v=1cb5a8fe93b5",
       "./ignored-items.js": "./ignored-items.js?v=2bafeeb1a80e",
       "./knowledge.js": "./knowledge.js?v=38a3c3f1887a",
-      "./lexicon.js": "./lexicon.js?v=9209f487cb8d",
+      "./lexicon.js": "./lexicon.js?v=5dadb29ad78b",
       "./lists.js": "./lists.js?v=f01704a55ecf",
       "./luxury.js": "./luxury.js?v=c1d23c4d4a1d",
       "./maintenance.js": "./maintenance.js?v=6024b163cb36",
-      "./masks.js": "./masks.js?v=57987e72617d",
+      "./masks.js": "./masks.js?v=e29b740d262b",
       "./names-dump.js": "./names-dump.js?v=e7887711c110",
       "./names.js": "./names.js?v=13d1933040d5",
       "./prefs.js": "./prefs.js?v=1c6e035da428",
@@ -42,16 +42,16 @@
       "./taxonomy.js": "./taxonomy.js?v=40469ffce4b1",
       "./validate.js": "./validate.js?v=a82f0143eb0a",
       "./zanil.js": "./zanil.js?v=40b7c8b90df8",
-      "./locale/en.js": "./locale/en.js?v=26f81c1cfcab"
+      "./locale/en.js": "./locale/en.js?v=2916b9aef929"
     }
   }
   </script>
 </head>
 <body>
   <header>
-    <h1><a id="home-link" href="./" title="Reload and open the first view">Furniture Catalogue</a><small><time id="site-updated" hidden></time><a id="site-commit" hidden></a></small></h1>
+    <h1><a id="home-link" href="./" data-t-title="site.home.tip">Furniture Catalogue</a><small><time id="site-updated" hidden></time><a id="site-commit" hidden></a></small></h1>
     <!-- Tab bar - generated from masks.js -->
-    <button id="nav-toggle" type="button" popovertarget="tab-bar" aria-label="Navigation" aria-expanded="false">Menu</button>
+    <button id="nav-toggle" type="button" popovertarget="tab-bar" aria-expanded="false" data-t="site.menu"></button>
     <nav id="tab-bar" class="tabs" role="tablist"></nav>
   </header>
 
@@ -61,45 +61,45 @@
   <footer>
     <span class="credit muted">
       <a href="https://esoitem.uesp.net/" target="_blank" rel="noopener noreferrer"
-         title="Item pages and icons via UESP" aria-label="Item pages and icons via UESP">
+         data-t-title="site.credit.uesp" data-t-aria-label="site.credit.uesp">
         <svg class="credit-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M7.4 3.6C6.3 2.9 4.9 2.6 3.2 2.6c-.4 0-.7.3-.7.7v8.3c0 .4.3.7.7.7 1.5 0 2.8.3 3.8.9.2.1.4 0 .4-.2V3.8a.3.3 0 0 0-.1-.2Zm1.2 0C9.7 2.9 11.1 2.6 12.8 2.6c.4 0 .7.3.7.7v8.3c0 .4-.3.7-.7.7-1.5 0-2.8.3-3.8.9-.2.1-.4 0-.4-.2V3.8c0-.1 0-.2.1-.2Z"/>
         </svg>
       </a>
       <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener noreferrer"
-         title="Content licensed CC BY-SA 2.5" aria-label="Content licensed CC BY-SA 2.5">
+         data-t-title="site.credit.licence" data-t-aria-label="site.credit.licence">
         <svg class="credit-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
           <circle cx="8" cy="8" r="6.8" fill="none" stroke="currentColor" stroke-width="1.4"/>
           <path fill="currentColor" d="M6.6 6.6a2 2 0 1 0 0 2.8l-.9-.6a1 1 0 1 1 0-1.6l.9-.6Zm4 0a2 2 0 1 0 0 2.8l-.9-.6a1 1 0 1 1 0-1.6l.9-.6Z"/>
         </svg>
       </a>
     </span>
-    <label class="theme-pick muted">Language
-      <select id="language-select" aria-label="Language" title="Item names are shown and searched in this language"></select>
+    <label class="theme-pick muted"><span data-t="site.language"></span>
+      <select id="language-select" data-t-aria-label="site.language" data-t-title="site.language.tip"></select>
     </label>
-    <label class="theme-pick muted">Theme
-      <select id="theme-select" aria-label="Colour theme">
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
+    <label class="theme-pick muted"><span data-t="site.theme"></span>
+      <select id="theme-select" data-t-aria-label="site.theme.label">
+        <option value="system" data-t="site.theme.system"></option>
+        <option value="light" data-t="site.theme.light"></option>
+        <option value="dark" data-t="site.theme.dark"></option>
       </select>
     </label>
     <span id="status" class="muted"></span>
     <span class="footer-actions">
-      <span id="pending-count">Nothing to send yet.</span>
+      <span id="pending-count"></span>
       <span id="pending-restore" class="muted" role="status"></span>
-      <button id="btn-submit" class="btn-primary" hidden>Send it -&gt;</button>
+      <button id="btn-submit" class="btn-primary" hidden data-t="send.open"></button>
     </span>
   </footer>
 
   <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title">
     <div class="modal-inner">
-      <button id="modal-close" class="modal-close" aria-label="close">×</button>
+      <button id="modal-close" class="modal-close" data-t-aria-label="common.close">×</button>
       <div class="modal-head">
         <img class="modal-scribe" src="./assets/scribe.png" alt=""
              width="72" height="72" loading="lazy">
         <div class="modal-head-text">
-          <h2 id="modal-title">Send your changes</h2>
+          <h2 id="modal-title" data-t="send.title"></h2>
           <p id="modal-summary" class="muted"></p>
         </div>
       </div>
@@ -107,37 +107,36 @@
       <div id="modal-changelist" class="modal-changelist"></div>
       <div id="modal-parts"></div>
       <div id="modal-single-actions" class="modal-actions">
-        <a id="modal-open-issue" class="btn-primary" target="_blank" rel="noopener">Send using GitHub</a>
-        <button id="modal-copy">Copy to clipboard</button>
+        <a id="modal-open-issue" class="btn-primary" target="_blank" rel="noopener"></a>
+        <button id="modal-copy"></button>
       </div>
       <div id="modal-oversize" class="modal-oversize" role="alert" hidden>
-        <p><strong>Too many changes for a one-click issue.</strong> Send them in two steps:</p>
+        <p data-t="send.oversize"><strong data-hole="lead" data-t="send.oversize.lead"></strong></p>
         <ol>
-          <li><button id="modal-oversize-copy" class="btn-primary">Copy to clipboard</button>
-            <span>copies all your changes.</span></li>
-          <li><a id="modal-oversize-open" class="btn-primary" target="_blank" rel="noopener">Open blank issue</a>
-            <span>opens GitHub in a new tab. Click into the issue text, paste (Ctrl+V) and submit.</span></li>
+          <li><button id="modal-oversize-copy" class="btn-primary"></button>
+            <span data-t="send.oversize.copy_hint"></span></li>
+          <li><a id="modal-oversize-open" class="btn-primary" target="_blank" rel="noopener" data-t="send.oversize.open"></a>
+            <span data-t="send.oversize.open_hint"></span></li>
         </ol>
       </div>
       <div class="modal-reset">
-        <button id="modal-edit-changes">Edit changes</button>
-        <button id="modal-discard" class="btn-danger">Start over - discard these changes</button>
+        <button id="modal-edit-changes" data-t="send.edit"></button>
+        <button id="modal-discard" class="btn-danger" data-t="send.discard"></button>
         <span id="modal-discard-ask" class="modal-discard-ask" hidden>
           <span id="modal-discard-question"></span>
-          <button id="modal-discard-yes" class="btn-danger">Discard them</button>
-          <button id="modal-discard-no">Keep them</button>
+          <button id="modal-discard-yes" class="btn-danger" data-t="send.discard.yes"></button>
+          <button id="modal-discard-no" data-t="send.discard.no"></button>
         </span>
       </div>
-      <p class="modal-no-github muted">No GitHub account? Paste this on the
-        <a href="https://www.esoui.com/downloads/info4804-LibFurnitureCatalogue.html#comments"
-           target="_blank" rel="noopener noreferrer">ESOUI forums</a> instead</p>
+      <p class="modal-no-github muted" data-t="send.no_github"><a data-hole="forums" href="https://www.esoui.com/downloads/info4804-LibFurnitureCatalogue.html#comments"
+           target="_blank" rel="noopener noreferrer" data-t="send.no_github.forums"></a></p>
       <details id="modal-technical" class="modal-technical">
-        <summary>Raw data</summary>
+        <summary data-t="send.raw"></summary>
         <textarea id="modal-diff" readonly rows="12"></textarea>
       </details>
     </div>
   </div>
 
-  <script type="module" src="./app.js?v=7ca450dc439b"></script>
+  <script type="module" src="./app.js?v=a6d375c50aa6"></script>
 </body>
 </html>

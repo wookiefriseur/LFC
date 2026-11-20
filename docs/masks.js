@@ -157,7 +157,7 @@ export function switchMask(id, quiet = false) {
   if (!mask) throw new Error(`switchMask: unknown mask "${id}"`);
   activeId = id;
   if (tabBarEl.hasAttribute("popover") && tabBarEl.matches(":popover-open")) tabBarEl.hidePopover();
-  document.getElementById("nav-toggle")?.setAttribute("aria-label", `Navigation, current page: ${translate(`tab.${mask.id}`)}`);
+  document.getElementById("nav-toggle")?.setAttribute("aria-label", translate("site.nav.current", { page: translate(`tab.${mask.id}`) }));
 
   for (const m of masks) {
     const isActive = m.id === id;

@@ -3851,6 +3851,11 @@ test("language: tab names and source kinds follow the interface translation, and
     // no tab or subtab shows a bare text id
     const bare = await page.$$eval(".tab, .subtab", (els) => els.map((e) => e.textContent).filter((text) => /\btab\./.test(text)));
     assertEq(bare.join("; "), "", "tabs without a text in the master file");
+    // the footer is part of the page file itself
+    assertEq(await page.$eval("#pending-count", (e) => e.textContent), "Noch nichts zu senden.", "the footer count");
+    assertEq(await page.$eval("footer .theme-pick span", (e) => e.textContent), "Sprache", "the language label");
+    assertEq(await page.$eval('#theme-select option[value="dark"]', (e) => e.textContent), "Dunkel", "a theme choice");
+    assertEq(await page.$eval('#theme-select option[value="light"]', (e) => e.textContent), "Light", "an untranslated theme choice");
     // Lists is the landing page: fixed markup, drawn text, and markup inside a translated sentence
     await switchTab(page, "lists");
     assertEq(await page.$eval("#lists-new button", (e) => e.textContent), "Anlegen", "the Create button");

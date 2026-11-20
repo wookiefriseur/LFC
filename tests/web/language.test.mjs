@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { gameLanguage } from "../../docs/prefs.js";
 import { NameStore, labelOf, noteLabel, setStrings, checkTranslation } from "../../docs/data.js";
 import { DirtyBuffer, serialiseDiff } from "../../docs/diff.js";
+import { changeRows, changeListText } from "../../docs/changelist.js";
 import { t, tn, checkInterfaceText, setInterfaceTranslation, englishTexts, sourceTypeLabel, valueLabel, labelFor, tipFor } from "../../docs/lexicon.js";
 import { formatListNames } from "../../docs/lists.js";
 import { itemSearch } from "../../docs/crown-store.js";
@@ -126,4 +127,21 @@ test("a page text fills its holes in either language, and a translation keeps th
   assert.throws(() => checkInterfaceText("common.count_items", "Gegenstände"), /\{n\}/);
   assert.throws(() => checkInterfaceText("browse.all_items", "Alle {n}"), /free of/);
   assert.throws(() => checkInterfaceText("browse.no_such_text", "x"), /not a text/);
+});
+
+test("the change list follows the language on the page, and the issue text stays English", () => {
+  const buffer = new DirtyBuffer();
+  buffer.setText("fr", "field.cost", "Prix", null);
+  setInterfaceTranslation({ "changes.what.new_translation": "Neue Übersetzung", "changes.column.item": "Gegenstand", "changes.summary_one": "1 Änderung" });
+  try {
+    assert.equal(changeRows(buffer.list())[0].what, "Neue Übersetzung");
+    const issue = changeListText(buffer.list());
+    assert.match(issue, /^1 change - 1 game data, 0 site-only text\n/);
+    assert.match(issue, /\| Item \| Record \| What changed \| Before \| After \| Check \|/);
+    assert.match(issue, /\| New translation \| \(none\) \| Prix \|/);
+    // and the page is back in the chosen language afterwards
+    assert.equal(changeRows(buffer.list())[0].what, "Neue Übersetzung");
+  } finally {
+    setInterfaceTranslation(null);
+  }
 });

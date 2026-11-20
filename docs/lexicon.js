@@ -42,6 +42,13 @@ export function tn(n, id, values) {
   return t(n === 1 ? `${id}_one` : id, { n, ...values });
 }
 
+/** Runs `fn` with the interface text in English whatever language is chosen, for text that is sent to the maintainers. */
+export function inEnglish(fn) {
+  const chosen = translation;
+  translation = {};
+  try { return fn(); } finally { translation = chosen; }
+}
+
 /** The English texts by id, which is what the Translation list offers. */
 export function englishTexts() {
   return en;

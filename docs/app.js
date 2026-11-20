@@ -20,7 +20,7 @@ import {
 } from "./validate.js";
 import {
   labelFor, sourceTypeLabel, orderedSourceTypes, valueLabel, subtypeVocab, NOT_IN_GAME_DATA,
-  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t, translateTree,
+  ID_NOT_RECORDED, loadInterfaceTranslation, setInterfaceTranslation, t, tn, translateTree,
 } from "./lexicon.js";
 import {
   parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
@@ -124,6 +124,7 @@ const OVERSCAN = 8;     // extra rows above/below the viewport
 const $ = (sel) => document.querySelector(sel);
 
 async function init() {
+  translateTree(document.body);   // English until the chosen language has loaded
   bindThemeSelect($("#theme-select"));
   try {
     const { enums, records, names, errors, manifest } = await loadAll();
@@ -202,7 +203,7 @@ async function init() {
       setTimeout(startRefData, 1200);
     }
   } catch (e) {
-    $("#status").textContent = `load failed: ${e.message}`;
+    $("#status").textContent = t("site.load_failed", { error: e.message });
     console.error(e);
   }
 }
@@ -262,7 +263,7 @@ async function showSiteUpdated() {
   const date = new Date(latest.date);
   if (Number.isNaN(date.getTime())) return;
   el.dateTime = date.toISOString();
-  el.textContent = `Updated ${date.toISOString().slice(0, 16).replace("T", " ")} UTC`;
+  el.textContent = t("site.updated", { date: date.toISOString().slice(0, 16).replace("T", " ") });
   el.hidden = false;
   const link = $("#site-commit");
   if (typeof latest.sha === "string" && /^https:\/\/github\.com\//.test(latest.url || "")) {
@@ -1838,7 +1839,7 @@ function commitEdit() {
 }
 
 function changeCountText(n = state.buffer.size()) {
-  return `${n} change${n === 1 ? "" : "s"}`;
+  return tn(n, "common.count_changes");
 }
 
 // Batch import
@@ -2232,7 +2233,7 @@ function savePending() {
       clearIconCache();
       write();
     } catch (_) {
-      $("#pending-restore").textContent = "This browser cannot keep your changes - send them before closing the page.";
+      $("#pending-restore").textContent = t("send.cannot_keep");
     }
   }
 }
@@ -2259,11 +2260,11 @@ async function restorePending() {
     if (errors.length) throw new Error(errors.slice(0, 3).join("; "));
     applySteps(steps, state, referenceData);
     if (state.buffer.size()) {
-      note.textContent = `Restored ${changeCountText()} you had not sent yet (from ${when}).`;
+      note.textContent = t("send.restored", { changes: changeCountText(), when });
     } else {
       // Every saved change is in the published data by now
       localStorage.removeItem(PENDING_KEY);
-      note.textContent = `Your unsent changes from ${when} are already in the published DB, nothing left to send.`;
+      note.textContent = t("send.restored_published", { when });
     }
   } catch (err) {
     try {
@@ -2276,8 +2277,7 @@ async function restorePending() {
       paste.value = saved.diff;
       $("#adv-import").hidden = false;
     }
-    note.textContent = `Your unsent changes from ${when} no longer fit the catalogue (${err.message}). ` +
-      "They are in Batch edit -> Add from Dump or Diff, to review and import again.";
+    note.textContent = t("send.unrestored", { when, error: err.message });
     console.warn("pending changes not restored:", err);
   }
   applyFilters();
@@ -2295,7 +2295,7 @@ function bufferFindings() {
 // Shared footer + submit modal
 function renderFooter() {
   const n = state.buffer.size();
-  let txt = n === 0 ? "Nothing to send yet." : `${changeCountText(n)} ready`;
+  let txt = n === 0 ? t("send.nothing") : t("send.ready", { changes: changeCountText(n) });
   $("#pending-count").textContent = txt;
   $("#btn-submit").hidden = n === 0;
   $("#btn-submit").disabled = n === 0;
@@ -2328,7 +2328,7 @@ function bindDiscard() {
   const hideAsk = () => { ask.hidden = true; trigger.hidden = false; };
   trigger.addEventListener("click", () => {
     $("#modal-discard-question").textContent =
-      `Discard all ${changeCountText()} and start over?`;
+      t("send.discard.ask", { changes: changeCountText() });
     trigger.hidden = true;
     ask.hidden = false;
   });
@@ -2373,17 +2373,17 @@ function openSubmitModal() {
     if (!found || !(found.errors.length || found.warnings.length)) continue;
     const rec = entry.after ?? entry.before;
     const id = rec?.id ?? rec?.blueprint;
-    const item = `${nameOf(id) || "(no name)"} (${id}), ${sourceTypeLabel(rec?.source?.type)}`;
+    const item = `${nameOf(id) || t("common.no_name")} (${id}), ${sourceTypeLabel(rec?.source?.type)}`;
     flagged.push(elem("li", {}, elem("strong", {}, item), ": ",
       ...found.errors.map((f) => elem("span", { class: "v-error" }, messageFor(f), " ")),
       ...found.warnings.map((f) => elem("span", { class: "v-warning" }, messageFor(f), " "))));
   }
   if (errors) {
-    vHost.append(elem("span", { class: "v-error" }, "Fix these changes before sending - open each in Batch edit:"));
+    vHost.append(elem("span", { class: "v-error" }, t("send.check.errors")));
   } else if (flagged.length) {
-    vHost.append(elem("span", { class: "v-warning" }, "Look over these changes before sending:"));
+    vHost.append(elem("span", { class: "v-warning" }, t("send.check.warnings")));
   } else {
-    vHost.append(elem("span", { class: "v-ok" }, "Looks good."));
+    vHost.append(elem("span", { class: "v-ok" }, t("send.check.ok")));
   }
   if (flagged.length) vHost.append(elem("ul", { class: "modal-findings" }, ...flagged));
 
@@ -2397,38 +2397,38 @@ function openSubmitModal() {
     $("#modal").classList.add("open");
     return;
   }
-  const copyInto = (btn, body, copied = "Copied!") => async () => {
+  const copyInto = (btn, body, copied = t("send.copied")) => async () => {
     try {
       await navigator.clipboard.writeText(body);
       btn.textContent = copied;
     } catch {
-      btn.textContent = "Copy failed (use Ctrl+C from the raw data)";
+      btn.textContent = t("send.copy_failed");
     }
   };
   if (parts.length > 1) {
     $("#modal-technical").hidden = true;
     $("#modal-diff").value = "";
-    partsHost.append(elem("p", {}, `Your changes need ${parts.length} GitHub issues. Copy and submit each part below.`),
-      elem("p", {}, `For maintainers: ${PART_ORDER_NOTE}`));
+    partsHost.append(elem("p", {}, t("send.parts", { n: parts.length })),
+      elem("p", {}, t("send.parts.maintainers", { note: PART_ORDER_NOTE })));
     parts.forEach((part, i) => {
-      const label = `Part ${i + 1} of ${parts.length}`;
-      const copy = elem("button", { type: "button", "aria-live": "polite" }, `Copy part ${i + 1}`);
-      copy.onclick = copyInto(copy, part.body, `Part ${i + 1} copied`);
-      const open = elem("a", { class: "btn-primary", target: "_blank", rel: "noopener" }, `Open GitHub for part ${i + 1}`);
+      const label = t("send.part", { n: i + 1, total: parts.length });
+      const copy = elem("button", { type: "button", "aria-live": "polite" }, t("send.part.copy", { n: i + 1 }));
+      copy.onclick = copyInto(copy, part.body, t("send.part.copied", { n: i + 1 }));
+      const open = elem("a", { class: "btn-primary", target: "_blank", rel: "noopener" }, t("send.part.open", { n: i + 1 }));
       if (blocked) {
         open.classList.add("is-disabled");
         open.setAttribute("aria-disabled", "true");
       }
       else open.href = `https://github.com/${ISSUE_REPO}/issues/new?` +
         new URLSearchParams({ title: part.title, labels: "db-edit" }).toString();
-      const raw = elem("textarea", { readonly: "", rows: "12", "aria-label": `${label} issue body` });
+      const raw = elem("textarea", { readonly: "", rows: "12", "aria-label": t("send.part.body", { part: label }) });
       raw.value = part.body;
       partsHost.append(elem("section", {},
         elem("h3", {}, label),
-        elem("p", { class: "muted" }, `${changeCountText(part.buffer.size())}, ${part.body.length.toLocaleString("en-US")} characters`),
+        elem("p", { class: "muted" }, t("send.part.size", { changes: changeCountText(part.buffer.size()), n: part.body.length.toLocaleString("en-US") })),
         elem("div", { class: "modal-actions" }, copy, open),
-        elem("p", {}, "Copy this part, open GitHub, paste into the issue text and submit."),
-        elem("details", { class: "modal-technical" }, elem("summary", {}, `Raw data - ${label}`), raw)));
+        elem("p", {}, t("send.part.hint")),
+        elem("details", { class: "modal-technical" }, elem("summary", {}, t("send.part.raw", { part: label })), raw)));
     });
     $("#modal").classList.add("open");
     return;
@@ -2442,7 +2442,7 @@ function openSubmitModal() {
   const copyBtn = $("#modal-copy");
   const oversize = $("#modal-oversize");
   oversize.hidden = true;
-  openBtn.textContent = "Send using GitHub";
+  openBtn.textContent = t("send.github");
   if (blocked) {
     openBtn.classList.add("is-disabled");
     openBtn.removeAttribute("href");
@@ -2465,7 +2465,7 @@ function openSubmitModal() {
     new URLSearchParams({ title: suggestTitle(state.buffer), labels: "db-edit" }).toString();
 
   for (const btn of [copyBtn, $("#modal-oversize-copy")]) {
-    btn.textContent = "Copy to clipboard";
+    btn.textContent = t("send.copy");
     btn.onclick = copyInto(btn, issueBody);
   }
   $("#modal").classList.add("open");
@@ -2749,6 +2749,7 @@ async function applyLanguage(locale) {
   applyFilters();
   renderTable();
   renderDetail();
+  renderFooter();
   switchMask(activeMaskId(), true);
 }
 

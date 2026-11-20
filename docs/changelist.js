@@ -1,7 +1,7 @@
 // A diff line is after-only, but the buffer holds before and after, so the review screen can say which item, which record and whether the change reaches the game. The submit modal and the issue body are both projections of changeRows(), so contributor and reviewer read the same sentences.
 
 import {
-  labelFor, sourceTypeLabel, valueLabel, subtypeVocab, titleCase, NOT_IN_GAME_DATA, t,
+  labelFor, sourceTypeLabel, valueLabel, subtypeVocab, titleCase, NOT_IN_GAME_DATA, t, tn, inEnglish,
 } from "./lexicon.js";
 import {
   entryOf, labelOf, noteLabel, placementsText, versionLabel,
@@ -137,7 +137,7 @@ function locatorOf(entry, source, ctx) {
     text = shown ? `${head} - ${shown}` : head;
   }
   const ordinal = ordinalOf(entry, ctx);
-  return ordinal ? `${text} (${ordinal.n} of ${ordinal.m})` : text;
+  return ordinal ? t("changes.ordinal", { record: text, n: ordinal.n, m: ordinal.m }) : text;
 }
 
 // Ordered by app.js's `recordsForItem` when supplied (the same order the detail list and modal header use); load order otherwise.
@@ -215,22 +215,22 @@ export function changeRows(bufferOrEntries, ctx = {}) {
   for (const entry of entries) {
     if (entry.op === "enum-name") {
       rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
-        item: `${entry.enumName}: ${entry.value}`, record: "en", field: `${entry.enumName}.name`, what: "Vocabulary name",
+        item: `${entry.enumName}: ${entry.value}`, record: "en", field: `${entry.enumName}.name`, what: t("changes.what.vocab_name"),
         before: entry.before, after: entry.name, markers: [], siteOnly: false });
       continue;
     }
     if (entry.op === "text") {
       rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
-        item: `Interface text: ${entry.id}`, record: entry.locale, field: "text",
-        what: entry.before ? "Translation" : "New translation",
-        before: entry.before || "(none)", after: entry.text, markers: [], siteOnly: false });
+        item: t("changes.item.interface_text", { id: entry.id }), record: entry.locale, field: "text",
+        what: entry.before ? t("changes.what.translation") : t("changes.what.new_translation"),
+        before: entry.before || t("changes.none"), after: entry.text, markers: [], siteOnly: false });
       continue;
     }
     if (entry.op === "string") {
       rows.push({ entryKey: entry.key, op: entry.op, itemId: null, itemName: "",
-        item: `Translation: ${entry.id}`, record: entry.locale, field: `string.${entry.id}`,
-        what: entry.before ? "Translation" : "New translation",
-        before: entry.before || "(none)", after: entry.text, markers: [], siteOnly: false });
+        item: t("changes.item.translation", { id: entry.id }), record: entry.locale, field: `string.${entry.id}`,
+        what: entry.before ? t("changes.what.translation") : t("changes.what.new_translation"),
+        before: entry.before || t("changes.none"), after: entry.text, markers: [], siteOnly: false });
       continue;
     }
     if (entry.op === "name") {
@@ -239,11 +239,11 @@ export function changeRows(bufferOrEntries, ctx = {}) {
         op: entry.op,
         itemId: entry.id,
         itemName: "",
-        item: `Names: ${titleCase(entry.kind)} (${entry.id})`,
+        item: t("changes.item.names", { kind: titleCase(entry.kind), id: entry.id }),
         record: entry.locale,
         field: `name.${entry.kind}`,
-        what: entry.before ? "Game name" : "New game name",
-        before: entry.before || "(none)",
+        what: entry.before ? t("changes.what.game_name") : t("changes.what.new_game_name"),
+        before: entry.before || t("changes.none"),
         after: entry.name,
         markers: [],
         siteOnly: false,
@@ -253,22 +253,22 @@ export function changeRows(bufferOrEntries, ctx = {}) {
     if (entry.op === "item") {
       const now = entry.reference.meta;
       const had = entry.previous?.meta;
-      const describe = (m) => (m ? `quality ${m.quality}, category ${m.cat}/${m.sub}, theme ${m.theme}, icon ${iconLeaf(m.icon)}` : "(none)");
+      const describe = (m) => (m ? t("changes.item_meta", { ...m, icon: iconLeaf(m.icon) }) : t("changes.none"));
       // A discovery in another language brings no name: the English one stays.
       const name = entry.keepName ? entry.previous?.name || "" : now.name;
       const common = {
         entryKey: entry.key, op: entry.op, itemId: entry.id, itemName: name,
-        item: `${name} (${entry.id})`, record: "item details", markers: [], siteOnly: false,
+        item: `${name} (${entry.id})`, record: t("changes.record.item_details"), markers: [], siteOnly: false,
       };
       if (!entry.keepName && now.name !== (entry.previous?.name ?? null)) {
-        rows.push({ ...common, field: "item.name", what: "Game name", before: entry.previous?.name || "(none)", after: now.name });
+        rows.push({ ...common, field: "item.name", what: t("changes.what.game_name"), before: entry.previous?.name || t("changes.none"), after: now.name });
       }
       if (describe(had) !== describe(now)) {
-        rows.push({ ...common, field: "item.meta", what: "Item metadata", before: describe(had), after: describe(now) });
+        rows.push({ ...common, field: "item.meta", what: t("changes.what.item_meta"), before: describe(had), after: describe(now) });
       }
       // A replayed line that matches what is published still has to be visible, or it is sent unseen.
       if (rows.at(-1)?.entryKey !== entry.key) {
-        rows.push({ ...common, field: "item", what: "Item details", before: "(as published)", after: "(unchanged)" });
+        rows.push({ ...common, field: "item", what: t("changes.what.item_details"), before: t("changes.as_published"), after: t("changes.unchanged") });
       }
       continue;
     }
@@ -278,11 +278,11 @@ export function changeRows(bufferOrEntries, ctx = {}) {
         op: entry.op,
         itemId: null,
         itemName: "",
-        item: `Vocabulary: ${titleCase(entry.enumName)}`,
+        item: t("changes.item.vocabulary", { name: titleCase(entry.enumName) }),
         record: "",
         field: `enum.${entry.enumName}`,
-        what: "New word",
-        before: "(none)",
+        what: t("changes.what.new_word"),
+        before: t("changes.none"),
         after: entry.meta?.name ? `${entry.meta.name} (${entry.value})` : String(entry.value),
         markers: ["NEW WORD"],
         siteOnly: false,
@@ -309,7 +309,7 @@ export function changeRows(bufferOrEntries, ctx = {}) {
       op: entry.op,
       itemId: id,
       itemName: name,
-      item: `${name || "(no name)"} (${id})`,
+      item: `${name || t("common.no_name")} (${id})`,
       record: locatorOf(entry, source, ctx),
     };
 
@@ -317,8 +317,8 @@ export function changeRows(bufferOrEntries, ctx = {}) {
       rows.push({
         ...common,
         field: "record",
-        what: "New record",
-        before: "(none)",
+        what: t("changes.what.new_record"),
+        before: t("changes.none"),
         after: describeRecord(after),
         markers: markerList({
           hadFinding: false,
@@ -333,9 +333,9 @@ export function changeRows(bufferOrEntries, ctx = {}) {
       rows.push({
         ...common,
         field: "record",
-        what: "Record removed",
+        what: t("changes.what.removed"),
         before: describeRecord(before),
-        after: "(removed)",
+        after: t("changes.removed"),
         markers: markerList({
           hadFinding,
           noteLost: !isEmptyValue(before?.notes),
@@ -350,8 +350,8 @@ export function changeRows(bufferOrEntries, ctx = {}) {
       const a = valueAt(after, path);
       const siteOnly = SITE_ONLY.has(path);
       const [beforeText, afterText] = shortenPair(
-        formatValue(path, b, enums, sourceType) || "(none)",
-        formatValue(path, a, enums, sourceType) || "(removed)",
+        formatValue(path, b, enums, sourceType) || t("changes.none"),
+        formatValue(path, a, enums, sourceType) || t("changes.removed"),
       );
       rows.push({
         ...common,
@@ -461,22 +461,24 @@ export function changeSummary(bufferOrEntries, rows) {
   let siteOnly = 0;
   for (const v of byEntry.values()) if (v) siteOnly++;
   const game = total - siteOnly;
-  return `${total} change${total === 1 ? "" : "s"} - ${game} game data, ` +
-    `${siteOnly} site-only text`;
+  return tn(total, "changes.summary", { game, site: siteOnly });
 }
 
 // Call site 1: the submit modal
 
-const COLUMNS = ["Item", "Record", "What changed", "Before", "After", "Check"];
+// Text ids
+const COLUMNS = ["changes.column.item", "changes.column.record", "changes.column.what", "changes.column.before", "changes.column.after", "changes.column.check"];
 
 // What each marker asks the reader to look at, shown as its tooltip.
-const MARKER_TIPS = {
-  "TENFOLD": "The new number is ten times larger or smaller than the old one, or more. Check for a typo or a missing zero.",
-  "NOTE LOST": "The contributor note is gone or shorter than before.",
-  "KNOWN PROBLEM": "This record already had a validation finding before the edit.",
-  "NEW WORD": "Uses a vocabulary word added in this session.",
-  "SITE ONLY": "Only the web site shows this; it does not reach the game.",
+// A row carries the marker's key; these are the text ids of its name and tooltip.
+const MARKERS = {
+  "TENFOLD": ["changes.marker.tenfold", "changes.marker.tenfold.tip"],
+  "NOTE LOST": ["changes.marker.note_lost", "changes.marker.note_lost.tip"],
+  "KNOWN PROBLEM": ["changes.marker.known_problem", "changes.marker.known_problem.tip"],
+  "NEW WORD": ["changes.marker.new_word", "changes.marker.new_word.tip"],
+  "SITE ONLY": ["changes.marker.site_only", "changes.marker.site_only.tip"],
 };
+const markerText = (m) => (MARKERS[m] ? t(MARKERS[m][0]) : m);
 
 export function renderChangeList(bufferOrEntries, ctx = {}) {
   const entries = entriesOf(bufferOrEntries);
@@ -492,7 +494,7 @@ export function renderChangeList(bufferOrEntries, ctx = {}) {
   if (rows.length === 0) {
     const empty = document.createElement("p");
     empty.className = "chg-empty muted";
-    empty.textContent = "Nothing to send yet.";
+    empty.textContent = t("send.nothing");
     host.append(empty);
     return host;
   }
@@ -503,7 +505,7 @@ export function renderChangeList(bufferOrEntries, ctx = {}) {
   const htr = document.createElement("tr");
   for (const c of COLUMNS) {
     const th = document.createElement("th");
-    th.textContent = c;
+    th.textContent = t(c);
     htr.append(th);
   }
   thead.append(htr);
@@ -536,8 +538,8 @@ export function renderChangeList(bufferOrEntries, ctx = {}) {
     for (const m of row.markers) {
       const span = document.createElement("span");
       span.className = `chg-marker ${markerClass(m)}`;
-      span.textContent = m;
-      if (MARKER_TIPS[m]) span.title = MARKER_TIPS[m];
+      span.textContent = markerText(m);
+      if (MARKERS[m]) span.title = t(MARKERS[m][1]);
       markers.append(span);
     }
     tr.append(markers);
@@ -558,16 +560,21 @@ function mdCell(text) {
   return String(text ?? "").replace(/\|/g, "\\|").replace(/\n+/g, " ");
 }
 
+// In English whatever the site's language: the maintainers read it.
 export function changeListText(bufferOrEntries, ctx = {}) {
+  return inEnglish(() => issueText(bufferOrEntries, ctx));
+}
+
+function issueText(bufferOrEntries, ctx) {
   const entries = entriesOf(bufferOrEntries);
   const rows = changeRows(entries, ctx);
   const out = [changeSummary(entries, rows), ""];
   if (rows.length === 0) return out.join("\n").trim();
-  out.push(`| ${COLUMNS.map((c) => c || " ").join(" | ")} |`);
+  out.push(`| ${COLUMNS.map((c) => t(c)).join(" | ")} |`);
   out.push(`|${COLUMNS.map(() => "---").join("|")}|`);
   for (const row of rows) {
     out.push("| " + [
-      row.item, row.record, row.what, row.before, row.after, row.markers.join(" "),
+      row.item, row.record, row.what, row.before, row.after, row.markers.map(markerText).join(" "),
     ].map(mdCell).join(" | ") + " |");
   }
   return out.join("\n");
