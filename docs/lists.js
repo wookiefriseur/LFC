@@ -645,6 +645,8 @@ export function listsMask(deps) {
   }
 
   function select(list) {
+    // Knowledge only goes out as names; coming back to a list, the box is ids again.
+    if ((list === KNOWLEDGE) !== (current === KNOWLEDGE)) $("#lists-format").value = list === KNOWLEDGE ? "names" : "ids";
     current = list;
     matches = [];
     edited = false;

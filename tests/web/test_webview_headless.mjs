@@ -1162,8 +1162,13 @@ test("lists: crafting knowledge copies out as names, the selection shown: All, K
     await page.click("#lists-import");
     await page.click("#lists-knowledge .lists-index-item");
     await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 2);
+    assertEq(await page.$eval("#lists-format", (f) => f.value), "names", "knowledge opens as item names");
+    await page.select("#lists-format", "ids");
     assertEq(await box(), "", "the game format has no knowledge export here");
-    await page.select("#lists-format", "names");
+    await page.$$eval("#lists-index .lists-index-item", (bs) => bs[0].click());
+    assertEq(await page.$eval("#lists-format", (f) => f.value), "ids", "a list is ids again");
+    await page.click("#lists-knowledge .lists-index-item");
+    await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 2);
     const all = await shown();
     assertEq(all.length, 2);
     assertEq(await box(), ["Crafting knowledge: All", ...all].join("\n"), "All as names");
