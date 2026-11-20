@@ -4,7 +4,7 @@ import { successPanelText } from "./luxury.js";
 import {
   versionsDesc, versionLabel, cratesDesc, crateLabel, latestVersion, entryOf,
 } from "./data.js";
-import { labelFor, tipFor, NOT_IN_GAME_DATA, t } from "./lexicon.js";
+import { NOT_IN_GAME_DATA, t, translateTree } from "./lexicon.js";
 import { queueEnumValue, nextFreeIntFor } from "./maintenance.js";
 import { itemSearch } from "./crown-store.js";
 
@@ -55,7 +55,7 @@ function parseLine(raw, lineNo) {
     const priceTok = (after.match(/\d[\d\s,._]*/) || [])[0];
     if (priceTok != null) out.price = parseIntLoose(priceTok);
     if (!Number.isInteger(out.id) || out.id < 1) {
-      out.error = "could not read itemId from item link";
+      out.error = t("luxury.error.item_link");
     }
     return out;
   }
@@ -64,7 +64,7 @@ function parseLine(raw, lineNo) {
   if (parts.length === 0) return null;
   out.id = parseIntLoose(parts[0]);
   if (out.id == null || out.id < 1) {
-    out.error = `unrecognised line - expected "itemId" or "itemId, name", got "${raw.trim()}"`;
+    out.error = t("crate.error.line", { line: raw.trim() });
     return out;
   }
   if (parts.length >= 2) {
@@ -85,6 +85,13 @@ export const CRATE_ACTION = {
   EXISTS: "ALREADY EXISTS",         // (id + this crate) already exists
   WARN: "WARN",                     // parse error / bad id / duplicate in list
 };
+// The codes as the page names them: text ids
+const CRATE_ACTION_TEXT = {
+  [CRATE_ACTION.NEW]: "luxury.action.new",
+  [CRATE_ACTION.EXISTS]: "crate.action.exists",
+  [CRATE_ACTION.WARN]: "luxury.action.warn",
+};
+const actionText = (action) => (CRATE_ACTION_TEXT[action] ? t(CRATE_ACTION_TEXT[action]) : action);
 
 /**
  * Build the crown-crate add-plan from the items entered so far.
@@ -108,7 +115,7 @@ export function computeCratePlan(parsedRows, opts) {
     }
     if (!Number.isInteger(row.id) || row.id < 1) {
       entry.action = CRATE_ACTION.WARN;
-      entry.messages.push("no usable itemId on this line");
+      entry.messages.push(t("crate.note.no_id"));
       plan.push(entry);
       continue;
     }
@@ -116,13 +123,12 @@ export function computeCratePlan(parsedRows, opts) {
     // A second number after the id is not a price, so it is reported rather than stored or folded into the name.
     if (row.ignoredNumber != null) {
       entry.messages.push(
-        `"${row.ignoredNumber}" ignored - a crate item has no price of its ` +
-        `own, the crate is what is bought`);
+        t("crate.note.number_ignored", { number: row.ignoredNumber }));
     }
 
     if (seenInList.has(row.id)) {
       entry.action = CRATE_ACTION.WARN;
-      entry.messages.push(`id ${row.id} is already on this list`);
+      entry.messages.push(t("crate.note.on_list", { id: row.id }));
       plan.push(entry);
       continue;
     }
@@ -131,8 +137,7 @@ export function computeCratePlan(parsedRows, opts) {
     if (existingCrateKeys && existingCrateKeys.has(crateKey(row.id, crate))) {
       entry.action = CRATE_ACTION.EXISTS;
       entry.messages.push(
-        `id ${row.id} is already recorded in crate ${crate} - skipped ` +
-        `(edit that record in Batch edit instead)`,
+        t("crate.note.exists", { id: row.id, crate }),
       );
       plan.push(entry);
       continue;
@@ -141,8 +146,7 @@ export function computeCratePlan(parsedRows, opts) {
     // Same item in a different crate: a legitimate second source, noted so a mis-picked crate is still noticed.
     if (existingCrateIds && existingCrateIds.has(row.id)) {
       entry.messages.push(
-        `id ${row.id} already has a crown_crate record in another crate - ` +
-        `adding it to ${crate} is a second source; check the crate is right`,
+        t("crate.note.other_crate", { id: row.id, crate }),
       );
     }
 
@@ -169,7 +173,7 @@ const CRATE_BADGE_CLASS = {
 /** The "Crate seasons" subtab of the Crown Store mask. */
 export function crownCrateMask(deps) {
   const {
-    state, $, fillSelectPairs, elem, escapeHTML, validateRecord,
+    state, $, fillSelectPairs, elem, validateRecord,
     findDuplicateRecord, newKey, itemLinkAnchor, itemIconImg, nameOf,
     applyFilters, renderFooter,
   } = deps;
@@ -216,57 +220,52 @@ export function crownCrateMask(deps) {
       <section class="crate-mask">
         <div class="crate-head">
           <div class="crate-head-text">
-            <h2>Add a Crown Crate season</h2>
-            <p class="muted">
-              A new Crown Crate ships a batch of furnishings at once. Crate
-              contents cannot be dumped out of the game, so they are entered by
-              hand: pick the crate - adding it here if it is new - then list its
-              items one at a time.
-            </p>
+            <h2 data-t="crate.title"></h2>
+            <p class="muted" data-t="crate.intro"></p>
           </div>
         </div>
 
         <ol class="lux-steps">
           <li class="lux-step">
             <div class="lux-step-head"><span class="lux-step-num">1</span>
-              <h3>Which crate?</h3></div>
+              <h3 data-t="crate.which"></h3></div>
             <div class="luxury-controls">
               <label class="lc-field">
-                <span title="${escapeHTML(tipFor("source.crate"))}">${escapeHTML(labelFor("source.crate"))}</span>
+                <span data-t-title="tip.source.crate" data-t="field.source.crate"></span>
                 <span class="crate-pick">
                   <select id="crate-crate"></select>
-                  <button id="crate-new-open" type="button">New crate</button>
+                  <button id="crate-new-open" type="button" data-t="crate.new"></button>
                 </span>
-                <small class="muted">Every item you list is filed under this season.</small>
+                <small class="muted" data-t="crate.which.hint"></small>
               </label>
               <label class="lc-field">
-                <span title="${escapeHTML(tipFor("availability.version"))}">Game update</span>
+                <span data-t-title="tip.availability.version" data-t="crown.version"></span>
                 <select id="crate-version"></select>
-                <small class="muted">The update the season launched in - applies to every item.</small>
+                <small class="muted" data-t="crate.version.hint"></small>
               </label>
             </div>
 
             <div id="crate-new" class="crate-new" hidden>
               <div class="luxury-controls">
                 <label class="lc-field">
-                  <span>Crate name</span>
-                  <input id="crate-new-name" type="text" placeholder="e.g. Wild Hunt">
-                  <small class="muted" id="crate-new-symbol">Recorded as -</small>
+                  <span data-t="crate.new.name"></span>
+                  <input id="crate-new-name" type="text" data-t-placeholder="crate.new.name.placeholder">
+                  <small class="muted" id="crate-new-symbol"></small>
                 </label>
                 <label class="lc-field">
-                  <span>Crown crate id</span>
+                  <span data-t="crate.new.id"></span>
                   <input id="crate-new-id" type="number" min="1">
-                  <small class="muted">What <code>GetCrownCrateName(N)</code> answers to. Prefilled with the next free one.</small>
+                  <small class="muted" data-t="crate.new.id.hint"><code data-hole="call">GetCrownCrateName(N)</code></small>
                 </label>
                 <label class="lc-field">
-                  <span>Season</span>
+                  <span data-t="crate.new.season"></span>
                   <input id="crate-new-season" type="text" placeholder="2026-06">
-                  <small class="muted">The month it opened, <code>YYYY-MM</code>. Leave blank if it is not announced.</small>
+                  <small class="muted" data-t="crate.new.season.hint"><code data-hole="format">YYYY-MM</code></small>
                 </label>
               </div>
               <div class="lux-actions">
-                <button id="crate-new-add" class="btn-primary">Add this crate</button>
-                <button id="crate-new-cancel">Cancel</button>
+                <button id="crate-new-add" class="btn-primary" data-t="crate.new.add"></button>
+                <button id="crate-new-cancel" data-t="common.cancel"></button>
                 <span id="crate-new-status" class="muted"></span>
               </div>
             </div>
@@ -274,43 +273,41 @@ export function crownCrateMask(deps) {
 
           <li class="lux-step">
             <div class="lux-step-head"><span class="lux-step-num">2</span>
-              <h3>What is in it?</h3></div>
+              <h3 data-t="crate.what"></h3></div>
             <div class="crate-entry">
               <label class="lc-field">
-                <span>Item</span>
+                <span data-t="crate.item"></span>
                 <input id="crate-item" type="text" autocomplete="off"
-                       placeholder="item number, or number and name">
-                <small class="muted">Search by name or number and pick a match,
-                  or type the number (an item link pasted from the game works
-                  too). Press Enter to add it and keep typing.</small>
+                       data-t-placeholder="crate.item.placeholder">
+                <small class="muted" data-t="crate.item.hint"></small>
                 <ul id="crate-matches" class="cstore-matches"></ul>
               </label>
-              <button id="crate-add" class="btn-primary">Add to the list</button>
-              <button id="crate-clear">Start the list again</button>
+              <button id="crate-add" class="btn-primary" data-t="crate.add"></button>
+              <button id="crate-clear" data-t="crate.clear"></button>
               <span id="crate-status" class="muted"></span>
             </div>
           </li>
 
           <li class="lux-step">
             <div class="lux-step-head"><span class="lux-step-num">3</span>
-              <h3>Check &amp; add</h3></div>
-            <p id="crate-step3-hint" class="muted">The items you add appear here.</p>
+              <h3 data-t="luxury.check"></h3></div>
+            <p id="crate-step3-hint" class="muted" data-t="crate.list.hint"></p>
             <div id="crate-preview-wrap" class="lux-preview-wrap" hidden>
               <div class="lux-preview-head">
-                <h3>The list so far</h3>
+                <h3 data-t="crate.list"></h3>
                 <label class="lc-checkbox lc-icons">
                   <input id="crate-show-icons" type="checkbox">
-                  <span>Show item icons</span>
+                  <span data-t="crate.list.icons"></span>
                 </label>
               </div>
               <table class="lux-preview">
                 <thead>
-                  <tr><th>icon</th><th>id</th><th>name</th><th>${escapeHTML(labelFor("source.crate"))}</th><th>action</th><th>notes</th><th></th></tr>
+                  <tr><th data-t="crate.column.icon"></th><th data-t="luxury.column.id"></th><th data-t="luxury.column.name"></th><th data-t="field.source.crate"></th><th data-t="luxury.column.action"></th><th data-t="luxury.column.notes"></th><th></th></tr>
                 </thead>
                 <tbody id="crate-preview-body"></tbody>
               </table>
               <div class="lux-commit-row">
-                <button id="crate-commit" class="btn-primary">Add these items to the change list</button>
+                <button id="crate-commit" class="btn-primary" data-t="crate.commit"></button>
                 <span id="crate-commit-status" class="muted"></span>
               </div>
             </div>
@@ -321,11 +318,13 @@ export function crownCrateMask(deps) {
           <div class="lux-success-msg"><span class="lux-success-tick">✓</span>
             <span id="crate-success-text"></span></div>
           <div class="lux-success-actions">
-            <button id="crate-success-send" class="btn-primary">Send now</button>
-            <button id="crate-success-more">Keep adding</button>
+            <button id="crate-success-send" class="btn-primary" data-t="common.send_now"></button>
+            <button id="crate-success-more" data-t="common.keep_adding"></button>
           </div>
         </div>
       </section>`;
+    translateTree(container);
+    $("#crate-new-symbol").textContent = t("crate.new.recorded_none");
 
     fillCrateOptions();
     fillSelectPairs("#crate-version",
@@ -417,15 +416,15 @@ export function crownCrateMask(deps) {
         id: `crate-match-${i}`,
         class: "cstore-match" + (i === activeMatch ? " is-active" : ""),
       });
-      li.append(itemIconImg(c.id, c.name || `item ${c.id}`));
+      li.append(itemIconImg(c.id, c.name || t("common.item_fallback", { id: c.id })));
       const txt = elem("span", { class: "cstore-match-txt" });
-      txt.append(elem("span", { class: "cstore-match-name" }, c.name || "(no name)"));
+      txt.append(elem("span", { class: "cstore-match-name" }, c.name || t("common.no_name")));
       txt.append(elem("span", { class: "cstore-match-id muted" }, `#${c.id}`));
       li.append(txt);
       if (inThis.has(crateKey(c.id, crate))) {
-        li.append(elem("span", { class: "cstore-match-has" }, "already in this crate"));
+        li.append(elem("span", { class: "cstore-match-has" }, t("crate.match.here")));
       } else if (inAny.has(c.id)) {
-        li.append(elem("span", { class: "cstore-match-has" }, "in another crate"));
+        li.append(elem("span", { class: "cstore-match-has" }, t("crate.match.elsewhere")));
       }
       li.addEventListener("click", () => pickMatch(c));
       ul.append(li);
@@ -443,7 +442,7 @@ export function crownCrateMask(deps) {
     const raw = $("#crate-item").value;
     const row = parseOneItem(raw);
     if (!row) {
-      $("#crate-status").textContent = "type an item number first.";
+      $("#crate-status").textContent = t("crate.status.no_item");
       return;
     }
     if (row.error) {
@@ -508,24 +507,24 @@ export function crownCrateMask(deps) {
       nameEl.value = "";
       seasonEl.value = "";
       idEl.value = String(nextFreeIntFor(state.enums, "crates", "crate"));
-      $("#crate-new-symbol").textContent = "Recorded as -";
+      $("#crate-new-symbol").textContent = t("crate.new.recorded_none");
       nameEl.focus();
     });
     $("#crate-new-cancel").addEventListener("click", () => close());
     nameEl.addEventListener("input", () => {
       const sym = crateSymbolFor(nameEl.value);
-      $("#crate-new-symbol").textContent = sym ? `Recorded as ${sym}` : "Recorded as -";
+      $("#crate-new-symbol").textContent = sym ? t("crate.new.recorded", { symbol: sym }) : t("crate.new.recorded_none");
     });
     $("#crate-new-add").addEventListener("click", () => {
       const name = nameEl.value.trim();
       const symbol = crateSymbolFor(name);
       const setErr = (msg) => { status.textContent = msg; status.className = "v-error"; };
-      if (!name) return setErr("the crate needs a name.");
-      if (!symbol) return setErr("that name gives no usable code word - it has to start with a letter.");
+      if (!name) return setErr(t("crate.error.no_name"));
+      if (!symbol) return setErr(t("crate.error.no_symbol"));
       const crateId = parseInt(idEl.value, 10);
-      if (!Number.isInteger(crateId) || crateId < 1) return setErr("the crown crate id has to be a whole number.");
+      if (!Number.isInteger(crateId) || crateId < 1) return setErr(t("crate.error.id"));
       const season = seasonEl.value.trim();
-      if (season && !/^\d{4}-\d{2}$/.test(season)) return setErr('the season is a month, written "YYYY-MM".');
+      if (season && !/^\d{4}-\d{2}$/.test(season)) return setErr(t("crate.error.season"));
 
       const meta = { crate: crateId, name };
       if (season) meta.season = season;
@@ -538,7 +537,7 @@ export function crownCrateMask(deps) {
       if (crateRows.length) replan();
       close();
       $("#crate-status").textContent =
-        `${name} added - it goes with this submission. Now list its items.`;
+        t("crate.status.crate_added", { name });
       $("#crate-item").focus();
     });
   }
@@ -554,7 +553,7 @@ export function crownCrateMask(deps) {
 
       const iconTd = elem("td");
       if (state.crateShowIcons && Number.isInteger(p.id)) {
-        iconTd.append(itemIconImg(p.id, nameOf(p.id) || `item ${p.id}`));
+        iconTd.append(itemIconImg(p.id, nameOf(p.id) || t("common.item_fallback", { id: p.id })));
       } else {
         iconTd.textContent = "-";
       }
@@ -567,7 +566,7 @@ export function crownCrateMask(deps) {
 
       const nameTd = elem("td", { class: "lux-name" });
       if (Number.isInteger(p.id)) {
-        nameTd.append(itemLinkAnchor(p.id, nameOf(p.id) || "(no name)"));
+        nameTd.append(itemLinkAnchor(p.id, nameOf(p.id) || t("common.no_name")));
       } else {
         nameTd.textContent = "-";
       }
@@ -577,14 +576,14 @@ export function crownCrateMask(deps) {
 
       const actTd = elem("td");
       const cls = CRATE_BADGE_CLASS[p.action] || "b-warn";
-      actTd.append(elem("span", { class: `lux-badge ${cls}` }, p.action));
+      actTd.append(elem("span", { class: `lux-badge ${cls}` }, actionText(p.action)));
       tr.append(actTd);
 
       tr.append(elem("td", { class: "lux-notes" }, p.messages.join(" · ")));
 
       const dropTd = elem("td", { class: "crate-drop" });
-      const drop = elem("button", { class: "linklike", type: "button" }, "remove");
-      drop.setAttribute("aria-label", `Remove ${p.id ?? "this line"} from the list`);
+      const drop = elem("button", { class: "linklike", type: "button" }, t("crate.remove"));
+      drop.setAttribute("aria-label", p.id == null ? t("crate.remove.line") : t("crate.remove.label", { id: p.id }));
       drop.addEventListener("click", () => {
         const at = crateRows.indexOf(p.row);
         if (at >= 0) crateRows.splice(at, 1);
@@ -611,17 +610,17 @@ export function crownCrateMask(deps) {
       }
     }
     const summary = Object.entries(counts)
-      .map(([a, n]) => `${n} ${a}`).join(" · ");
-    let statusTxt = `${plan.length} item(s): ${summary}.`;
-    if (invalid) statusTxt += ` ⚠ ${invalid} record(s) fail validation.`;
+      .map(([a, n]) => `${n} ${actionText(a)}`).join(" · ");
+    let statusTxt = t("crate.status.items", { n: plan.length, summary });
+    if (invalid) statusTxt += ` ${t("luxury.status.invalid", { n: invalid })}`;
     $("#crate-status").textContent = statusTxt;
 
     $("#crate-commit").disabled = committable === 0;
     $("#crate-commit-status").textContent =
       committable === 0
-        ? "no new crate items to add (all skipped / WARN)."
-        : `${committable} new record(s) will be added to the change list` +
-          (invalid ? ` - ${invalid} have validation errors and are skipped.` : ".");
+        ? t("crate.commit.nothing")
+        : invalid ? t("crate.commit.ready_invalid", { n: committable, invalid })
+          : t("crate.commit.ready", { n: committable });
     $("#crate-preview-wrap").hidden = false;
     const hint = $("#crate-step3-hint");
     if (hint) hint.hidden = true;
@@ -646,8 +645,7 @@ export function crownCrateMask(deps) {
         blocked++;
         p.action = CRATE_ACTION.WARN;
         p.messages.push(
-          `id ${p.record.id} with an identical source already exists in ` +
-          `crown_crate - skipped`,
+          t("crate.note.duplicate", { id: p.record.id }),
         );
         continue;
       }
@@ -661,9 +659,9 @@ export function crownCrateMask(deps) {
       added++;
     }
 
-    let msg = `Added to the change list: ${added} new crate item(s)`;
-    if (skipped) msg += `, ${skipped} skipped (EXISTS / WARN / invalid)`;
-    if (blocked) msg += `, ${blocked} BLOCKED (duplicate id)`;
+    let msg = t("crate.commit.done", { n: added });
+    if (skipped) msg += `, ${t("crate.commit.skipped", { n: skipped })}`;
+    if (blocked) msg += `, ${t("luxury.commit.blocked", { n: blocked })}`;
     // Re-render first: the re-render writes this same status line, and its "nothing left to add" would otherwise be the last word after a successful commit.
     renderPreview();
     $("#crate-commit-status").textContent = msg + ".";

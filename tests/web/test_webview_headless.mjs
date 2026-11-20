@@ -3871,6 +3871,14 @@ test("language: tab names and source kinds follow the interface translation, and
     assertEq(await page.$eval("#panel-luxury .lux-help-list p", (e) => [...e.children].map((c) => `${c.tagName}:${c.textContent}`).join(" ")),
       "CODE:/furcdev EM:Add all from trader", "the help sentence keeps its command and button");
     assert((await page.$eval("#panel-luxury .lux-help-list p", (e) => e.textContent)).startsWith("Öffne im Spiel"), "the help sentence is not German");
+    // Crown: both subtabs, and a field label and tooltip taken from the record fields
+    await switchTab(page, "crown-store");
+    assertEq(await page.$eval("#panel-crown-store .cstore-head h2", (e) => e.textContent), "Preise im Kronen-Shop", "the Prices heading");
+    assertEq(await page.$eval("#cstore-session-count", (e) => e.textContent), "0 Gegenstände", "the session count");
+    await page.click("#subtab-crown-store-crate-seasons");
+    await page.waitForSelector("#crate-new-open", { timeout: 10000 });
+    assertEq(await page.$eval("#crate-new-open", (e) => e.textContent), "Neue Kiste", "the New crate button");
+    assertEq(await page.$eval("#crate-new-symbol", (e) => e.textContent), "Recorded as -", "an untranslated drawn text");
     // a page's own text: fixed markup, drawn text and a filled hole, and back to English without a reload
     await switchTab(page, "browse");
     await page.waitForFunction(() => /Gegenstände/.test(document.querySelector("#browse-count")?.textContent || ""), { timeout: 10000 })
@@ -3891,7 +3899,11 @@ test("language: tab names and source kinds follow the interface translation, and
     await page.waitForSelector('#names-lists [data-list="strings:interface"]', { timeout: 10000 });
     // the sidebar is redrawn as the French files arrive, so the click must not hold a node across that
     await page.$eval('#names-lists [data-list="strings:interface"]', (e) => e.click());
+    // the list is longer than what the table draws at once, so the text is searched for by its id
+    await page.$eval("#names-search", (e) => { e.value = "field.cost"; e.dispatchEvent(new Event("input", { bubbles: true })); });
     const cell = '#names-table td.names-editable[data-name-id="field.cost"]';
+    // the search is applied a moment after typing, and redraws the table when it is
+    await page.waitForFunction(() => document.querySelectorAll("#names-table tbody tr").length < 20, { timeout: 10000 });
     await page.waitForSelector(`${cell} .names-edit-button`, { timeout: 10000 });
     await page.$eval(`${cell} .names-edit-button`, (e) => e.click());
     await page.$eval(`${cell} input`, (e) => { e.value = "Prix"; });

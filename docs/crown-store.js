@@ -3,7 +3,7 @@
 
 import { parseLine, successPanelText } from "./luxury.js";
 import { versionsDesc, versionLabel, latestVersion, labelOf } from "./data.js";
-import { labelFor, tipFor, sourceTypeLabel } from "./lexicon.js";
+import { labelFor, sourceTypeLabel, t, tn, translateTree } from "./lexicon.js";
 import { messageFor } from "./validate.js";
 
 export const CROWN_STORE_CATEGORY = "crown_store";
@@ -67,7 +67,7 @@ export function buildCrownStoreRecord(id, price, version) {
 /** The "Prices" subtab of the Crown Store mask. */
 export function crownStoreMask(deps) {
   const {
-    state, $, elem, escapeHTML, fillSelectPairs, nameOf, newKey,
+    state, $, elem, fillSelectPairs, nameOf, newKey,
     validateRecord, findDuplicateRecord, itemLinkAnchor, itemIconImg,
     applyFilters, renderFooter,
   } = deps;
@@ -102,7 +102,7 @@ export function crownStoreMask(deps) {
     }
     if (s.bundle) return `${labelFor("source.bundle")} ${labelOf(state.enums, "bundles", s.bundle)}`;
     if (s.note) return `${labelFor("source.note")} "${s.note}"`;
-    return "another Crown Store source";
+    return t("crown.sibling.other");
   }
 
   function findingText(errors) {
@@ -113,37 +113,34 @@ export function crownStoreMask(deps) {
     container.innerHTML = `
       <section class="cstore-mask">
         <div class="cstore-head">
-          <h2>Crown Store prices</h2>
-          <p class="muted">
-            Search an item, type its Crown price, press <kbd>Enter</kbd>, and
-            the form clears for the next one.
-          </p>
+          <h2 data-t="crown.title"></h2>
+          <p class="muted" data-t="crown.intro"><kbd data-hole="key">Enter</kbd></p>
         </div>
 
         <div class="cstore-controls">
           <label class="lc-field">
-            <span title="${escapeHTML(tipFor("availability.version"))}">Game update</span>
+            <span data-t-title="tip.availability.version" data-t="crown.version"></span>
             <select id="cstore-version"></select>
-            <small class="muted">Applies to every price you add - defaults to the newest update.</small>
+            <small class="muted" data-t="crown.version.hint"></small>
           </label>
         </div>
 
         <div class="cstore-loop">
           <div class="cstore-step">
-            <label class="cstore-step-label" for="cstore-search">Find the item</label>
+            <label class="cstore-step-label" for="cstore-search" data-t="crown.search"></label>
             <input id="cstore-search" type="search" autocomplete="off"
-                   placeholder="type an itemId or name, then ↑↓ + Enter…">
+                   data-t-placeholder="crown.search.placeholder">
             <ul id="cstore-matches" class="cstore-matches"></ul>
           </div>
 
           <div id="cstore-price-step" class="cstore-step" hidden>
-            <label class="cstore-step-label" for="cstore-price">Crown price</label>
+            <label class="cstore-step-label" for="cstore-price" data-t="crown.price"></label>
             <div class="cstore-picked" id="cstore-picked"></div>
             <div class="cstore-price-row">
               <input id="cstore-price" type="number" min="1" step="1"
-                     placeholder="price in Crowns">
-              <button id="cstore-save" class="btn-primary">Save &amp; next (Enter)</button>
-              <button id="cstore-cancel">Cancel (Esc)</button>
+                     data-t-placeholder="crown.price.placeholder">
+              <button id="cstore-save" class="btn-primary" data-t="crown.save"></button>
+              <button id="cstore-cancel" data-t="crown.cancel"></button>
             </div>
             <p id="cstore-price-note" class="muted cstore-price-note"></p>
           </div>
@@ -151,9 +148,9 @@ export function crownStoreMask(deps) {
 
         <div class="cstore-session">
           <div class="cstore-session-head">
-            <h3>Added this session</h3>
-            <span id="cstore-session-count" class="muted">0 items</span>
-            <button id="cstore-undo" class="btn-mini" disabled>Undo last</button>
+            <h3 data-t="crown.session"></h3>
+            <span id="cstore-session-count" class="muted"></span>
+            <button id="cstore-undo" class="btn-mini" disabled data-t="crown.undo"></button>
           </div>
           <ul id="cstore-session-list" class="cstore-session-list"></ul>
         </div>
@@ -162,35 +159,29 @@ export function crownStoreMask(deps) {
           <div class="lux-success-msg"><span class="lux-success-tick">✓</span>
             <span id="cstore-success-text"></span></div>
           <div class="lux-success-actions">
-            <button id="cstore-success-send" class="btn-primary">Send now</button>
-            <button id="cstore-success-more">Keep adding</button>
+            <button id="cstore-success-send" class="btn-primary" data-t="common.send_now"></button>
+            <button id="cstore-success-more" data-t="common.keep_adding"></button>
           </div>
         </div>
 
         <details class="cstore-batch">
-          <summary>Optional - paste a whole batch at once</summary>
+          <summary data-t="crown.batch"></summary>
           <div class="cstore-batch-body">
             <details class="cstore-batch-format">
-              <summary>What can I paste here?</summary>
-              <p class="muted">
-                One item per line: the item id or an item link, then its Crown
-                price, optionally a name (<code>126560, 400, Some furnishing</code>).
-                Lines with no price are skipped: a Crown item with no price is
-                not useful. An item that already has a Crown price is skipped;
-                an item sold only inside a pack or a bundle is not, because
-                that is a different source.
-              </p>
+              <summary data-t="luxury.help"></summary>
+              <p class="muted" data-t="crown.batch.help"><code data-hole="example">126560, 400, Some furnishing</code></p>
             </details>
             <textarea id="cstore-batch-paste" rows="6"
               placeholder="126560, 400, Some Crown furnishing&#10;126561, 1200"></textarea>
             <div class="cstore-batch-actions">
-              <button id="cstore-batch-run" class="btn-primary">Add batch to the change list</button>
-              <button id="cstore-batch-clear">Clear</button>
+              <button id="cstore-batch-run" class="btn-primary" data-t="crown.batch.run"></button>
+              <button id="cstore-batch-clear" data-t="luxury.clear"></button>
               <span id="cstore-batch-status" class="muted"></span>
             </div>
           </div>
         </details>
       </section>`;
+    translateTree(container);
 
     fillSelectPairs("#cstore-version",
       versionsDesc(state.enums).map((v) => ({
@@ -267,20 +258,20 @@ export function crownStoreMask(deps) {
         id: `cstore-match-${i}`,
         class: "cstore-match" + (i === activeMatch ? " is-active" : ""),
       });
-      li.append(itemIconImg(c.id, c.name || `item ${c.id}`));
+      li.append(itemIconImg(c.id, c.name || t("common.item_fallback", { id: c.id })));
       const txt = elem("span", { class: "cstore-match-txt" });
-      txt.append(elem("span", { class: "cstore-match-name" }, c.name || "(no name)"));
+      txt.append(elem("span", { class: "cstore-match-name" }, c.name || t("common.no_name")));
       txt.append(elem("span", { class: "cstore-match-id muted" }, `#${c.id}`));
       li.append(txt);
       const existing = known.get(c.id);
       if (existing && existing.price) {
         const amt = crownAmount(existing.price);
         li.append(elem("span", { class: "cstore-match-has" },
-          amt != null ? `has crown price: ${amt}` : "has a crown price record"));
+          amt != null ? t("crown.match.price", { price: amt }) : t("crown.match.record")));
       } else if (existing && existing.others.length) {
         // A pack/bundle/note record only: no Crown price yet, so still an add.
         li.append(elem("span", { class: "cstore-match-has" },
-          `in ${siblingTag(existing.others[0])} - no price yet`));
+          t("crown.match.sibling", { source: siblingTag(existing.others[0]) })));
       }
       li.addEventListener("click", () => pickItem(c));
       ul.append(li);
@@ -296,17 +287,16 @@ export function crownStoreMask(deps) {
 
     const pickedHost = $("#cstore-picked");
     pickedHost.innerHTML = "";
-    pickedHost.append(itemIconImg(cand.id, m.picked.name || `item ${cand.id}`));
+    pickedHost.append(itemIconImg(cand.id, m.picked.name || t("common.item_fallback", { id: cand.id })));
     const info = elem("div", {});
-    info.append(elem("strong", {}, m.picked.name || "(no name)"));
+    info.append(elem("strong", {}, m.picked.name || t("common.no_name")));
     info.append(itemLinkAnchor(cand.id, ` #${cand.id} ↗`));
     pickedHost.append(info);
 
     const note = $("#cstore-price-note");
     const priceInput = $("#cstore-price");
     const sibNote = siblings.length
-      ? ` It is also sold as ${siblings.map(siblingTag).join(", ")} - those are` +
-        ` separate sources and are left alone.`
+      ? ` ${t("crown.note.siblings", { sources: siblings.map(siblingTag).join(", ") })}`
       : "";
 
     if (existing) {
@@ -314,8 +304,7 @@ export function crownStoreMask(deps) {
       m.picked.editing = existing;
       const amt = crownAmount(existing);
       note.textContent =
-        `This item already has a Crown price: ${amt != null ? amt.toLocaleString() : "(none)"}. ` +
-        `Saving changes that price - it does not add a second one.` + sibNote;
+        t("crown.note.editing", { price: amt != null ? amt.toLocaleString() : t("changes.none") }) + sibNote;
       note.className = "cstore-price-note cstore-note-editing";
       priceInput.value = amt ?? "";
     } else {
@@ -329,11 +318,11 @@ export function crownStoreMask(deps) {
         const types = [...new Set(otherRecs.map((r) => r.source?.type))]
           .filter(Boolean).map(sourceTypeLabel).join(", ");
         note.textContent =
-          (types ? `This item also has another source (${types}). ` : "") +
-          `A Crown price is one more source, not a duplicate.` + sibNote;
+          (types ? `${t("crown.note.other_source", { kinds: types })} ` : "") +
+          t("crown.note.one_more") + sibNote;
         note.className = "cstore-price-note";
       } else {
-        note.textContent = "This is the first Crown price for this item.";
+        note.textContent = t("crown.note.first");
         note.className = "cstore-price-note";
       }
       priceInput.value = "";
@@ -365,7 +354,7 @@ export function crownStoreMask(deps) {
     const price = parseInt(priceRaw, 10);
     if (!Number.isInteger(price) || price < 1) {
       $("#cstore-price-note").textContent =
-        "A price has to be a whole number, 1 or more.";
+        t("crown.error.price");
       $("#cstore-price-note").className = "cstore-price-note cstore-note-error";
       $("#cstore-price").focus();
       return;
@@ -387,7 +376,7 @@ export function crownStoreMask(deps) {
       const { errors } = validateRecord(after, state.enums);
       if (errors.length) {
         $("#cstore-price-note").textContent =
-          `Cannot save - ${findingText(errors)}`;
+          t("crown.error.cannot_save", { problem: findingText(errors) });
         $("#cstore-price-note").className = "cstore-price-note cstore-note-error";
         return;
       }
@@ -401,7 +390,7 @@ export function crownStoreMask(deps) {
       const { errors } = validateRecord(rec, state.enums);
       if (errors.length) {
         $("#cstore-price-note").textContent =
-          `Cannot save - ${findingText(errors)}`;
+          t("crown.error.cannot_save", { problem: findingText(errors) });
         $("#cstore-price-note").className = "cstore-price-note cstore-note-error";
         return;
       }
@@ -410,8 +399,7 @@ export function crownStoreMask(deps) {
         id, CROWN_STORE_CATEGORY, rec.source, state.records);
       if (exact) {
         $("#cstore-price-note").textContent =
-          `This item already got a Crown price this session - search for it ` +
-          `again to change that price.`;
+          t("crown.error.repeat");
         $("#cstore-price-note").className = "cstore-price-note cstore-note-error";
         return;
       }
@@ -464,16 +452,16 @@ export function crownStoreMask(deps) {
     for (let i = m.session.length - 1; i >= 0; i--) {
       const s = m.session[i];
       const li = elem("li", { class: "cstore-session-item" });
-      li.append(elem("span", { class: "cstore-session-op cstore-op-" + s.op }, s.op));
+      li.append(elem("span", { class: "cstore-session-op cstore-op-" + s.op }, t(s.op === "edited" ? "crown.session.edited" : "crown.session.added")));
       li.append(elem("span", { class: "cstore-session-name" },
-        s.name || `item ${s.id}`));
+        s.name || t("common.item_fallback", { id: s.id })));
       li.append(elem("span", { class: "cstore-session-id muted" }, `#${s.id}`));
       li.append(elem("span", { class: "cstore-session-price" },
-        `${s.price.toLocaleString()} Crowns`));
+        t("crown.session.price", { price: s.price.toLocaleString() })));
       ul.append(li);
     }
     $("#cstore-session-count").textContent =
-      `${m.session.length} item${m.session.length === 1 ? "" : "s"}`;
+      tn(m.session.length, "common.count_items");
     $("#cstore-undo").disabled = m.session.length === 0;
     renderSuccess();
   }
@@ -516,7 +504,7 @@ export function crownStoreMask(deps) {
     const version = $("#cstore-version").value;
     const blocks = String(text).split(/\r?\n/).map((line, i) => parseLine(line, i + 1)).filter(Boolean);
     if (blocks.length === 0) {
-      $("#cstore-batch-status").textContent = "nothing to parse - paste one \"id, price\" line per item.";
+      $("#cstore-batch-status").textContent = t("crown.batch.nothing");
       return;
     }
     let added = 0, skippedNoPrice = 0, skippedDup = 0, skippedRepeat = 0, invalid = 0;
@@ -545,11 +533,11 @@ export function crownStoreMask(deps) {
       added++;
     }
     searchItems.reset();
-    let msg = `added ${added}`;
-    if (skippedNoPrice) msg += `, ${skippedNoPrice} skipped (no price)`;
-    if (skippedDup) msg += `, ${skippedDup} skipped (already has a Crown price)`;
-    if (skippedRepeat) msg += `, ${skippedRepeat} skipped (repeated in this paste)`;
-    if (invalid) msg += `, ${invalid} invalid`;
+    let msg = t("crown.batch.added", { n: added });
+    if (skippedNoPrice) msg += `, ${t("crown.batch.no_price", { n: skippedNoPrice })}`;
+    if (skippedDup) msg += `, ${t("crown.batch.has_price", { n: skippedDup })}`;
+    if (skippedRepeat) msg += `, ${t("crown.batch.repeated", { n: skippedRepeat })}`;
+    if (invalid) msg += `, ${t("crown.batch.invalid", { n: invalid })}`;
     $("#cstore-batch-status").textContent = msg + ".";
     renderSession();
     applyFilters();

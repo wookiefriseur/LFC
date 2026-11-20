@@ -10,6 +10,8 @@
  "common.count_items_one": "1 Gegenstand",
  "common.count_lists": "{n} Listen",
  "common.count_lists_one": "1 Liste",
+ "crate.new": "Neue Kiste",
+ "crown.title": "Preise im Kronen-Shop",
  "field.availability.version": "Version",
  "field.cost": "Preis",
  "field.cost[].amount": "Betrag",
