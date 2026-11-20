@@ -35,6 +35,8 @@
  "lists.all": "Alle Listen",
  "lists.create": "Anlegen",
  "lists.help.ids": "Es lassen sich auch nur IDs importieren ({example}); sie landen in der gerade gewählten Liste.",
+ "luxury.help.dump": "Öffne im Spiel das Inventar des Luxusausstatters, dann die Dev Toolbox (Befehl {command} oder dessen Taste) und wähle {button}. Füge die ausgegebenen Zeilen ein, eine pro Gegenstand; jede enthält den Goldpreis:",
+ "luxury.when": "Wann?",
  "send.nothing": "Noch nichts zu senden.",
  "site.language": "Sprache",
  "site.theme.dark": "Dunkel",

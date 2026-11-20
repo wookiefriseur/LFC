@@ -3814,12 +3814,14 @@ test("names: a library string is translated, checked for its placeholders, and r
   await switchTab(page, "names");
   await page.select("#names-locale", "de");
   await page.waitForSelector('#names-lists [data-list="strings:library"]', { timeout: 10000 });
-  await page.click('#names-lists [data-list="strings:library"]');
+  // the tab is redrawn as the German files arrive, so a click must not hold a node across that
+  await page.$eval('#names-lists [data-list="strings:library"]', (e) => e.click());
   const row = (id) => `#names-table td.names-editable[data-name-id="${id}"]`;
   // untranslated strings come first, and say what the English text is
   assertEq(await page.$eval("#names-table tbody tr td:nth-child(2)", (e) => e.textContent), "Translate", "the list does not start with what is untranslated");
   const edit = async (id, text) => {
-    await page.click(`${row(id)} .names-edit-button`);
+    await page.waitForSelector(`${row(id)} .names-edit-button`, { timeout: 10000 });
+    await page.$eval(`${row(id)} .names-edit-button`, (e) => e.click());
     await page.$eval(`${row(id)} input`, (e, t) => { e.value = t; e.dispatchEvent(new Event("input")); }, text);
   };
   await edit("SI_FURC_RANK", "Stufe");
@@ -3862,6 +3864,13 @@ test("language: tab names and source kinds follow the interface translation, and
     assertEq(await page.$eval("#lists-index .lists-index-all span", (e) => e.textContent), "Alle Listen", "the All lists row");
     assertEq(await page.$eval("#lists-help p:last-child", (e) => `${e.textContent} | ${e.querySelector("code")?.textContent}`),
       "Es lassen sich auch nur IDs importieren (115647,118303); sie landen in der gerade gewählten Liste. | 115647,118303", "the help line keeps its example");
+    // Luxury: a heading from the source kinds, and a sentence that keeps two pieces of markup in their German places
+    await switchTab(page, "luxury");
+    assertEq(await page.$eval("#panel-luxury .lux-title", (e) => e.textContent), "Luxusausstatter", "the Luxury heading");
+    assertEq(await page.$eval("#panel-luxury .lux-step h3", (e) => e.textContent), "Wann?", "the first step");
+    assertEq(await page.$eval("#panel-luxury .lux-help-list p", (e) => [...e.children].map((c) => `${c.tagName}:${c.textContent}`).join(" ")),
+      "CODE:/furcdev EM:Add all from trader", "the help sentence keeps its command and button");
+    assert((await page.$eval("#panel-luxury .lux-help-list p", (e) => e.textContent)).startsWith("Öffne im Spiel"), "the help sentence is not German");
     // a page's own text: fixed markup, drawn text and a filled hole, and back to English without a reload
     await switchTab(page, "browse");
     await page.waitForFunction(() => /Gegenstände/.test(document.querySelector("#browse-count")?.textContent || ""), { timeout: 10000 })

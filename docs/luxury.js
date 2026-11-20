@@ -1,4 +1,5 @@
 import { parseDiscovery } from "./discovery.js";
+import { t, tn } from "./lexicon.js";
 // The weekly luxury-furnishing update: a lenient paste parser (parseLuxuryPaste) and the price-update rule (computeLuxuryPlan), both pure. Zanil Theran (vendor LUXF, source.type "luxury") sells about five furnishings once a week.
 // A re-sale update deep-copies the stored record, so `source.note` or any other field this mask does not know about survives untouched.
 //
@@ -40,14 +41,14 @@ export function parseLine(raw, lineNo) {
     const after = line.slice(line.indexOf("|h|h") + 4) || line.slice(link.index + link[0].length);
     const priceTok = (after.match(/\d[\d\s,._]*/) || [])[0];
     if (priceTok != null) out.price = parseIntLoose(priceTok);
-    if (!Number.isInteger(out.id) || out.id < 1) out.error = "could not read itemId from item link";
+    if (!Number.isInteger(out.id) || out.id < 1) out.error = t("luxury.error.item_link");
     return out;
   }
 
   const [, idTok = "", rest = ""] = line.match(/^([^\s,;]+)[\s,;]*(.*)$/) || [];
   out.id = parseIntLoose(idTok);
   if (out.id == null || out.id < 1) {
-    out.error = `unrecognised line - expected "itemId, price", got "${raw.trim()}"`;
+    out.error = t("luxury.error.line", { line: raw.trim() });
     return out;
   }
   // Separator rule: one space, comma, dot or underscore followed by exactly three digits continues the price ("50,000", "50 000"); any other separator ends the field.
@@ -71,10 +72,10 @@ function parseDiscoveryLine(raw, lineNo) {
   const { record, reference, offer } = found;
   out.id = record.id;
   out.comment = reference.meta.name;
-  if (!offer) out.error = "no trader offer on this line - dump it from the Luxury Furnisher's store";
-  else if (offer.currency !== "GOLD") out.error = `offer currency is ${offer.currency}, not Gold - luxury items must be Gold`;
+  if (!offer) out.error = t("luxury.error.no_offer");
+  else if (offer.currency !== "GOLD") out.error = t("luxury.error.currency", { currency: offer.currency });
   else out.price = offer.amount;
-  if (offer?.achievement) out._achievementNote = `offer is gated by achievement ${offer.achievement} - ignored for the luxury mask`;
+  if (offer?.achievement) out._achievementNote = t("luxury.note.achievement", { achievement: offer.achievement });
   return out;
 }
 
@@ -113,12 +114,22 @@ export const LUX_ACTION = {
 
 // One word each: the price column states the effect, the badge only says which kind of row this is. The codes above stay distinct because the summary counts them separately.
 export const LUX_ACTION_LABEL = {
-  [LUX_ACTION.NEW]: "NEW",
-  [LUX_ACTION.RESALE_DATE]: "date",
-  [LUX_ACTION.RESALE_PRICE]: "price",
-  [LUX_ACTION.PRICE_ADDED]: "price",
-  [LUX_ACTION.CURRENT]: "same",
-  [LUX_ACTION.WARN]: "WARN",
+  [LUX_ACTION.NEW]: "luxury.badge.new",
+  [LUX_ACTION.RESALE_DATE]: "luxury.badge.date",
+  [LUX_ACTION.RESALE_PRICE]: "luxury.badge.price",
+  [LUX_ACTION.PRICE_ADDED]: "luxury.badge.price",
+  [LUX_ACTION.CURRENT]: "luxury.badge.same",
+  [LUX_ACTION.WARN]: "luxury.badge.warn",
+};
+
+// The codes as the summary line names them. Both tables hold text ids.
+export const LUX_ACTION_TEXT = {
+  [LUX_ACTION.NEW]: "luxury.action.new",
+  [LUX_ACTION.RESALE_DATE]: "luxury.action.resale_date",
+  [LUX_ACTION.RESALE_PRICE]: "luxury.action.resale_price",
+  [LUX_ACTION.PRICE_ADDED]: "luxury.action.price_added",
+  [LUX_ACTION.CURRENT]: "luxury.action.current",
+  [LUX_ACTION.WARN]: "luxury.action.warn",
 };
 
 function storedAmount(record) {
@@ -147,10 +158,10 @@ export function priceEffect(entry) {
   const n = (v) => v.toLocaleString();
 
   if (!entry.record) return entry.price != null ? `${n(entry.price)}${g}` : "-";
-  if (!entry.before) return after != null ? `${n(after)}${g}` : "no price";
+  if (!entry.before) return after != null ? `${n(after)}${g}` : t("luxury.no_price");
   if (before == null && after != null) return `+${n(after)}${g}`;
   if (before != null && after == null) return `-${n(before)}${g}`;
-  if (before == null && after == null) return "no price";
+  if (before == null && after == null) return t("luxury.no_price");
   if (before === after) return `${n(before)}${g}`;
   return `*${n(after)}${g}`;
 }
@@ -162,12 +173,11 @@ export function successPanelText(c) {
   const added = c.added || 0;
   const parts = [];
   // "0 items added, 1 changed" reads as a failure, so a price-only commit leads with what it did.
-  if (added || !c.updated) parts.push(`${added} item${added === 1 ? "" : "s"} added`);
-  if (c.updated) parts.push(`${c.updated} item${c.updated === 1 ? "" : "s"} changed`);
-  if (c.skipped) parts.push(`${c.skipped} skipped (WARN)`);
-  if (c.blocked) parts.push(`${c.blocked} blocked (duplicate)`);
-  const n = c.pending || 0;
-  return `${parts.join(", ")} - ${n} change${n === 1 ? "" : "s"} ready to send.`;
+  if (added || !c.updated) parts.push(tn(added, "common.success.added"));
+  if (c.updated) parts.push(tn(c.updated, "common.success.changed"));
+  if (c.skipped) parts.push(t("common.success.skipped", { n: c.skipped }));
+  if (c.blocked) parts.push(t("common.success.blocked", { n: c.blocked }));
+  return t("common.success.ready", { done: parts.join(", "), changes: tn(c.pending || 0, "common.count_changes") });
 }
 
 function hasNoPrice(record) {
@@ -210,8 +220,7 @@ export function computeLuxuryPlan(parsedRows, opts) {
     const existing = Array.isArray(hit) ? hit[0] : hit;
     if (Array.isArray(hit) && hit.length > 1) {
       entry.messages.push(
-        `id ${row.id} has ${hit.length} luxury records - updating the first; ` +
-        `check the others in Batch edit`,
+        t("luxury.note.several", { id: row.id, n: hit.length }),
       );
     }
 
@@ -219,11 +228,11 @@ export function computeLuxuryPlan(parsedRows, opts) {
       entry.action = LUX_ACTION.NEW;
       if (row.price == null) {
         entry.action = LUX_ACTION.WARN;
-        entry.messages.push("new item but no price in the paste - add a price");
+        entry.messages.push(t("luxury.note.new_no_price"));
       } else if (row.price === 0) {
         // A price of 0 is almost always a mis-parse, e.g. a comma splitting "100,000".
         entry.action = LUX_ACTION.WARN;
-        entry.messages.push("price is 0 - check the paste (thousands separators split on commas)");
+        entry.messages.push(t("luxury.note.price_zero"));
       }
       entry.record = {
         id: row.id,
@@ -247,23 +256,23 @@ export function computeLuxuryPlan(parsedRows, opts) {
       if (row.price != null) {
         after.cost = [{ currency: "GOLD", amount: row.price }];
         entry.action = LUX_ACTION.PRICE_ADDED;
-        entry.messages.push("record had no price - price added");
+        entry.messages.push(t("luxury.note.price_added"));
       } else {
         after.cost = Array.isArray(after.cost) ? after.cost : [];
         entry.action = LUX_ACTION.WARN;
-        entry.messages.push("record has no price and the paste gives none");
+        entry.messages.push(t("luxury.note.no_price"));
       }
     } else if (!keepPrices && row.price != null) {
       after.cost = [{ ...(after.cost[0] || { currency: "GOLD" }), amount: row.price }];
       entry.action = LUX_ACTION.RESALE_PRICE;
       if (row.price !== before.cost[0].amount) {
-        entry.messages.push(`was ${before.cost[0].amount}`);
+        entry.messages.push(t("luxury.note.was", { price: before.cost[0].amount }));
       }
     } else {
       entry.action = LUX_ACTION.RESALE_DATE;
       if (keepPrices && row.price != null && row.price !== before.cost[0].amount) {
         // Kept short: this is on every re-sale whose paste disagrees, and a sentence wraps the row.
-        entry.messages.push(`pasted ${row.price} ignored`);
+        entry.messages.push(t("luxury.note.pasted_ignored", { price: row.price }));
       }
     }
     // The record already says all of this (the same weekend pasted twice, or already published): no change to queue.

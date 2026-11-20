@@ -24,7 +24,7 @@ import {
 } from "./lexicon.js";
 import {
   parseLuxuryPaste, computeLuxuryPlan, luxuryIndex, mostRecentFriday, snapToFriday,
-  LUX_ACTION_LABEL,
+  LUX_ACTION_LABEL, LUX_ACTION_TEXT,
   LUX_ACTION, priceEffect, successPanelText,
 } from "./luxury.js";
 import {
@@ -360,61 +360,57 @@ function renderLuxuryPanel(container) {
   container.innerHTML = `
     <section class="luxury-mask">
       <div class="zanil-host" id="zanil-host" aria-hidden="true"></div>
-      <h2 class="lux-title">Luxury Furnisher</h2>
+      <h2 class="lux-title" data-t="kind.luxury"></h2>
 
       <ol class="lux-steps">
         <li class="lux-step">
           <div class="lux-step-head"><span class="lux-step-num">1</span>
-            <h3>When?</h3></div>
+            <h3 data-t="luxury.when"></h3></div>
           <div class="luxury-controls">
             <label class="lc-field">
-              <span>Weekend date</span>
+              <span data-t="luxury.date"></span>
               <input id="lux-date" type="date">
-              <small class="muted">Pick the weekend the items went on sale.</small>
+              <small class="muted" data-t="luxury.date.hint"></small>
             </label>
             <label class="lc-field lc-checkbox lux-adv-toggle">
               <input id="lux-advanced" type="checkbox">
-              <span>Advanced</span>
+              <span data-t="luxury.advanced"></span>
             </label>
           </div>
           <div id="lux-advanced-fields" class="luxury-controls lux-advanced" hidden>
             <label class="lc-field">
-              <span>Patch / version</span>
+              <span data-t="luxury.version"></span>
               <select id="lux-version"></select>
-              <small class="muted">For new items, re-sales remain unchanged.</small>
+              <small class="muted" data-t="luxury.version.hint"></small>
             </label>
             <label class="lc-field lc-checkbox">
               <input id="lux-update-prices" type="checkbox">
-              <span title="In-game events temporarily discount luxury items. The DB keeps the canonical price, so a re-sale updates the date and not the price unless you say otherwise.">Update prices</span>
-              <small class="muted">Only check if the prices really changed, temporary event sales don't count.</small>
+              <span data-t-title="luxury.update_prices.tip" data-t="luxury.update_prices"></span>
+              <small class="muted" data-t="luxury.update_prices.hint"></small>
             </label>
           </div>
         </li>
 
         <li class="lux-step">
           <div class="lux-step-head"><span class="lux-step-num">2</span>
-            <h3>What is Zanil selling?</h3></div>
+            <h3 data-t="luxury.what"></h3></div>
           <div class="lux-mode-switch" role="tablist">
-            <button id="lux-mode-paste" class="lux-mode is-active" role="tab" aria-selected="true">Paste from game</button>
-            <button id="lux-mode-manual" class="lux-mode" role="tab" aria-selected="false">Type items manually</button>
+            <button id="lux-mode-paste" class="lux-mode is-active" role="tab" aria-selected="true" data-t="luxury.mode.paste"></button>
+            <button id="lux-mode-manual" class="lux-mode" role="tab" aria-selected="false" data-t="luxury.mode.manual"></button>
           </div>
 
           <div id="lux-paste-panel">
-            <label class="lux-paste-label" for="lux-paste">Paste the in-game DevUtility export</label>
+            <label class="lux-paste-label" for="lux-paste" data-t="luxury.paste.label"></label>
             <textarea id="lux-paste" rows="8" placeholder="{&quot;format&quot;:&quot;furniture-discovery-v1&quot;, ... ,&quot;offer&quot;:{&quot;currency&quot;:&quot;GOLD&quot;,&quot;amount&quot;:50000}}&#10;126560, 50000, Dwarven Fountain"></textarea>
             <details class="lux-format-help">
-            <summary>What can I paste here?</summary>
+            <summary data-t="luxury.help"></summary>
             <ol class="lux-help-list muted">
               <li>
-                <p>Open the Luxury Furnisher's inventory in the game, open the
-                Dev Toolbox (the <code>/furcdev</code> command or its hotkey)
-                and use <em>Add all from trader</em>. Paste the lines it gives you,
-                one per item; each carries the item's Gold price:</p>
+                <p data-t="luxury.help.dump"><code data-hole="command">/furcdev</code><em data-hole="button">Add all from trader</em></p>
                 <pre><code>{"format":"furniture-discovery-v1", ... ,"offer":{"currency":"GOLD","amount":50000}}</code></pre>
               </li>
               <li>
-                <p>Or type one item per line, mixing whichever of these you
-                have:</p>
+                <p data-t="luxury.help.typed"></p>
                 <pre><code>126560, 50000, Dwarven Fountain
 118243, 25000
 126561</code></pre>
@@ -425,34 +421,34 @@ function renderLuxuryPanel(container) {
 
           <div id="lux-manual-panel" hidden>
             <div id="lux-manual-rows" class="lux-manual-rows"></div>
-            <button id="lux-manual-add" class="btn-mini">+ add another item</button>
+            <button id="lux-manual-add" class="btn-mini" data-t="luxury.manual.add"></button>
           </div>
 
           <div class="lux-actions">
-            <button id="lux-parse" class="btn-primary">Preview items</button>
-            <button id="lux-clear">Clear</button>
+            <button id="lux-parse" class="btn-primary" data-t="luxury.preview.run"></button>
+            <button id="lux-clear" data-t="luxury.clear"></button>
             <span id="lux-status" class="muted"></span>
           </div>
         </li>
 
         <li class="lux-step">
           <div class="lux-step-head"><span class="lux-step-num">3</span>
-            <h3>Check &amp; add</h3></div>
-          <p id="lux-step3-hint" class="muted">The preview appears here once you hit “Preview items”.</p>
+            <h3 data-t="luxury.check"></h3></div>
+          <p id="lux-step3-hint" class="muted" data-t="luxury.preview.hint"></p>
           <div id="lux-preview-wrap" class="lux-preview-wrap" hidden>
             <div class="lux-preview-head">
-              <h3>Preview</h3>
+              <h3 data-t="luxury.preview"></h3>
             </div>
             <table class="lux-preview">
               <thead>
-                <tr><th class="lux-col-icon"></th><th class="lux-col-id">id</th>
-                  <th class="lux-col-name">name</th><th>price</th><th>action</th>
-                  <th>notes</th></tr>
+                <tr><th class="lux-col-icon"></th><th class="lux-col-id" data-t="luxury.column.id"></th>
+                  <th class="lux-col-name" data-t="luxury.column.name"></th><th data-t="luxury.column.price"></th><th data-t="luxury.column.action"></th>
+                  <th data-t="luxury.column.notes"></th></tr>
               </thead>
               <tbody id="lux-preview-body"></tbody>
             </table>
             <div class="lux-commit-row">
-              <button id="lux-commit" class="btn-primary">Add previewed items to the change list</button>
+              <button id="lux-commit" class="btn-primary" data-t="luxury.commit"></button>
               <span id="lux-commit-status" class="muted"></span>
             </div>
           </div>
@@ -463,11 +459,12 @@ function renderLuxuryPanel(container) {
         <div class="lux-success-msg"><span class="lux-success-tick">✓</span>
           <span id="lux-success-text"></span></div>
         <div class="lux-success-actions">
-          <button id="lux-success-review" class="btn-primary">Send now</button>
-          <button id="lux-success-more">Keep adding</button>
+          <button id="lux-success-review" class="btn-primary" data-t="common.send_now"></button>
+          <button id="lux-success-more" data-t="common.keep_adding"></button>
         </div>
       </div>
     </section>`;
+  translateTree(container);
 
   $("#zanil-host").append(zanilPortrait());
 
@@ -551,7 +548,7 @@ function luxSuggestionsFor(query) {
   const q = String(query || "").trim();
   if (q.length < 2) return [];
   const link = q.match(/\|H\d*:item:(\d+):/i);
-  if (link) return [{ id: parseInt(link[1], 10), name: nameOf(parseInt(link[1], 10)) || "(unnamed item)" }];
+  if (link) return [{ id: parseInt(link[1], 10), name: nameOf(parseInt(link[1], 10)) || t("common.unnamed_item") }];
   if (/^\d+$/.test(q)) {
     const idNum = parseInt(q, 10);
     const out = [];
@@ -561,7 +558,7 @@ function luxSuggestionsFor(query) {
     }
     // A bare id the names file doesn't know is still selectable (new item).
     if (!out.some((e) => e.id === idNum)) {
-      out.unshift({ id: idNum, name: nameOf(idNum) || "(unnamed item)" });
+      out.unshift({ id: idNum, name: nameOf(idNum) || t("common.unnamed_item") });
     }
     return out.slice(0, 8);
   }
@@ -596,7 +593,7 @@ function renderLuxManualRows() {
     if (!Number.isInteger(row.id)) {
       const search = elem("input", {
         type: "search", class: "lux-mrow-search",
-        placeholder: "item name, itemId, or paste an item link…",
+        placeholder: t("luxury.manual.search"),
       });
       search.value = row.query;
       const dropdown = elem("div", { class: "lux-suggest", hidden: "" });
@@ -619,12 +616,12 @@ function renderLuxManualRows() {
         current.forEach((s, si) => {
           const known = luxIndex.get(s.id);
           const opt = elem("button", { type: "button", class: "lux-suggest-opt" });
-          opt.append(elem("span", { class: "lux-suggest-name" }, s.name || "(unnamed item)"));
+          opt.append(elem("span", { class: "lux-suggest-name" }, s.name || t("common.unnamed_item")));
           opt.append(elem("span", { class: "lux-suggest-id muted" }, `#${s.id}`));
           if (known) {
             const amt = known.record.cost?.[0]?.amount;
             opt.append(elem("span", { class: "lux-suggest-known" },
-              amt != null ? `in DB - ${amt.toLocaleString()}g` : "in DB"));
+              amt != null ? t("luxury.manual.known_price", { price: amt.toLocaleString() }) : t("luxury.manual.known")));
           }
           opt.addEventListener("click", () => select(s));
           opt.dataset.idx = si;
@@ -656,15 +653,15 @@ function renderLuxManualRows() {
     } else {
       const known = luxIndex.get(row.id);
       const chip = elem("span", { class: "lux-mrow-chip" });
-      chip.append(itemIconImg(row.id, row.name || `item ${row.id}`));
+      chip.append(itemIconImg(row.id, row.name || t("common.item_fallback", { id: row.id })));
       chip.append(elem("span", { class: "lux-mrow-chip-name" },
-        row.name || nameOf(row.id) || "(unnamed item)"));
+        row.name || nameOf(row.id) || t("common.unnamed_item")));
       chip.append(elem("span", { class: "muted" }, `#${row.id}`));
       rowEl.append(chip);
 
       const price = elem("input", {
         type: "number", class: "lux-mrow-price", min: 0, step: 1,
-        placeholder: known ? "price (empty = keep stored)" : "price in gold",
+        placeholder: known ? t("luxury.manual.price_keep") : t("luxury.manual.price"),
       });
       if (row.price != null) price.value = row.price;
       price.addEventListener("input", (e) => {
@@ -685,13 +682,13 @@ function renderLuxManualRows() {
 
       const hintTxt = known
         ? (known.record.cost?.[0]?.amount != null
-            ? `re-sale - stored ${known.record.cost[0].amount.toLocaleString()}g`
-            : "re-sale - no stored price yet")
-        : "new item - price needed";
+            ? t("luxury.manual.resale", { price: known.record.cost[0].amount.toLocaleString() })
+            : t("luxury.manual.resale_no_price"))
+        : t("luxury.manual.new");
       rowEl.append(elem("span", { class: `lux-mrow-hint muted${known ? "" : " lux-mrow-new"}` }, hintTxt));
     }
 
-    const rm = elem("button", { type: "button", class: "btn-mini lux-mrow-rm", title: "remove this row" }, "×");
+    const rm = elem("button", { type: "button", class: "btn-mini lux-mrow-rm", title: t("luxury.manual.remove") }, "×");
     rm.addEventListener("click", () => {
       state.luxManualRows.splice(i, 1);
       if (state.luxManualRows.length === 0) state.luxManualRows.push(blankLuxRow());
@@ -708,7 +705,7 @@ function runLuxuryPreview() {
   const keepPrices = !$("#lux-update-prices").checked;
 
   if (!date) {
-    $("#lux-status").textContent = "set a weekend date first (step 1).";
+    $("#lux-status").textContent = t("luxury.status.no_date");
     return;
   }
   let rows;
@@ -725,8 +722,8 @@ function runLuxuryPreview() {
   }
   if (rows.length === 0) {
     $("#lux-status").textContent = state.luxMode === "manual"
-      ? "no items yet - search and pick at least one item above."
-      : "nothing to parse - paste at least one item line.";
+      ? t("luxury.status.no_items")
+      : t("luxury.status.nothing");
     $("#lux-preview-wrap").hidden = true;
     $("#lux-step3-hint").hidden = false;
     state.luxPlan = null;
@@ -766,7 +763,7 @@ function renderLuxuryPreview() {
     // The icon resolves only once the reference overlay carries a path for the id; until then the cell stays empty.
     const iconTd = elem("td", { class: "lux-col-icon" });
     if (Number.isInteger(p.id)) {
-      iconTd.append(itemIconImg(p.id, nameOf(p.id) || `item ${p.id}`));
+      iconTd.append(itemIconImg(p.id, nameOf(p.id) || t("common.item_fallback", { id: p.id })));
     }
     tr.append(iconTd);
 
@@ -777,7 +774,7 @@ function renderLuxuryPreview() {
 
     const nameTd = elem("td", { class: "lux-name lux-col-name" });
     if (Number.isInteger(p.id)) {
-      const nm = nameOf(p.id) || "(no name)";
+      const nm = nameOf(p.id) || t("common.no_name");
       nameTd.append(itemLinkAnchor(p.id, nm));
     } else {
       nameTd.textContent = "-";
@@ -789,7 +786,7 @@ function renderLuxuryPreview() {
 
     const actTd = elem("td");
     const badgeCls = LUX_BADGE_CLASS[p.action] || "b-warn";
-    const badgeText = LUX_ACTION_LABEL[p.action] || p.action;
+    const badgeText = LUX_ACTION_LABEL[p.action] ? t(LUX_ACTION_LABEL[p.action]) : p.action;
     actTd.append(elem("span", { class: `lux-badge ${badgeCls}` }, badgeText));
     tr.append(actTd);
 
@@ -812,17 +809,17 @@ function renderLuxuryPreview() {
     }
   }
   const summary = Object.entries(counts)
-    .map(([a, n]) => `${n} ${a}`).join(" · ");
-  let statusTxt = `${plan.length} line(s): ${summary}.`;
-  if (invalid) statusTxt += ` ⚠ ${invalid} record(s) fail validation.`;
+    .map(([a, n]) => `${n} ${LUX_ACTION_TEXT[a] ? t(LUX_ACTION_TEXT[a]) : a}`).join(" · ");
+  let statusTxt = t("luxury.status.lines", { n: plan.length, summary });
+  if (invalid) statusTxt += ` ${t("luxury.status.invalid", { n: invalid })}`;
   $("#lux-status").textContent = statusTxt;
 
   $("#lux-commit").disabled = committable === 0;
   $("#lux-commit-status").textContent =
     committable === 0
-      ? "nothing to add (every row is up to date or WARN)."
-      : `${committable} record(s) will be added to the change list` +
-        (invalid ? ` - ${invalid} have validation errors and are skipped.` : ".");
+      ? t("luxury.commit.nothing")
+      : invalid ? t("luxury.commit.ready_invalid", { n: committable, invalid })
+        : t("luxury.commit.ready", { n: committable });
   $("#lux-preview-wrap").hidden = false;
   $("#lux-step3-hint").hidden = true;
 }
@@ -855,7 +852,7 @@ function commitLuxuryPlan() {
         blocked++;
         p.action = LUX_ACTION.WARN;
         p.messages.push(
-          `id ${p.record.id} with an identical source already exists in luxury - edit that record instead`,
+          t("luxury.note.duplicate", { id: p.record.id }),
         );
         continue;
       }
@@ -868,10 +865,10 @@ function commitLuxuryPlan() {
     }
   }
 
-  let msg = `Added to the change list: ${added} new, ${updated} re-sale update(s)`;
-  if (current) msg += `, ${current} already up to date`;
-  if (skipped) msg += `, ${skipped} skipped (WARN / invalid)`;
-  if (blocked) msg += `, ${blocked} BLOCKED (duplicate id)`;
+  let msg = t("luxury.commit.done", { added, updated });
+  if (current) msg += `, ${t("luxury.commit.current", { n: current })}`;
+  if (skipped) msg += `, ${t("luxury.commit.skipped", { n: skipped })}`;
+  if (blocked) msg += `, ${t("luxury.commit.blocked", { n: blocked })}`;
   $("#lux-commit-status").textContent = msg + ".";
   if (blocked) renderLuxuryPreview();
   applyFilters();
