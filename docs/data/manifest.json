@@ -100,7 +100,7 @@
       "name": "housing.jsonl",
       "type": "housing",
       "records": 697,
-      "digest": "c7376dc813a9ec02"
+      "digest": "3baeb78a98b7729b"
     },
     {
       "name": "companion.jsonl",
@@ -139,7 +139,7 @@
       "digest": "3fc76eaadb5f56ce"
     }
   ],
-  "digest": "c22396233e95bd0b",
+  "digest": "6d1d7242d8285d5b",
   "counts": {
     "records": 10215,
     "ids": 12489,
