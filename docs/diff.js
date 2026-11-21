@@ -12,7 +12,7 @@ export const PART_ORDER_NOTE = "Please process and finish each issue in order (f
 
 // `id` is immutable (changing an id = delete+add) and internal `_*` keys never ship. Matches diff-line.schema.json `fields.propertyNames`.
 export const MUTABLE_FIELDS = new Set([
-  "source", "cost", "availability", "rarity", "name_overrides",
+  "source", "cost", "availability", "rarity",
   "notes", "container",
 ]);
 

@@ -126,12 +126,13 @@ export function isPlaceholderName(name, id) {
   return false;
 }
 
-// Display-only name layer: a record's own name_overrides.en wins (a deliberate correction), then a real name from names.en.json, then a name a pasted dump line or price line carried. Import names are never written into record data.
+// Display-only name layer: a rename waiting in the change list, then a real name from names.en.json, then a name a pasted dump line or price line carried. Import names are never written into record data.
 export class NameStore {
   constructor(names = {}) {
     this.base = names;
     this.overrides = new Map();
-    this.recordNames = new Map();
+    // (id) -> the name an unsent rename gives the item; set by the app
+    this.pendingName = null;
     // Game names an unsent item-details change brings; they replace the file's name, as the pipeline will.
     this.refreshed = new Map();
     // The visitor's game language, when it is not English: id -> name. EN as fallback
@@ -141,7 +142,7 @@ export class NameStore {
     return this.translated?.get(Number(id)) || this.english(id);
   }
   english(id) {
-    return this.recordNames.get(id) || this.gameName(id);
+    return this.gameName(id);
   }
   // A no-break space (RU+FR) normalised to regular space. First letter capitalised, as the game shows a name
   // (it stores "kaiserlicher Teppich" and formats it on display).
@@ -153,11 +154,6 @@ export class NameStore {
     };
     this.translated = names ? new Map([...names].map(([id, name]) => [id, name && shown(name)])) : null;
   }
-  setRecordName(id, name) {
-    if (id == null) return;
-    if (typeof name === "string" && name.trim()) this.recordNames.set(id, name);
-    else this.recordNames.delete(id);
-  }
   hasRealName(id) {
     const n = this.base[id];
     return typeof n === "string" && n.length > 0 && n !== `Item ${id}`;
@@ -168,6 +164,8 @@ export class NameStore {
   }
   // The names file wins so a stale import comment never masks the real name.
   gameName(id) {
+    const pending = this.pendingName?.(id);
+    if (pending) return pending;
     if (this.refreshed.has(id)) return this.refreshed.get(id);
     if (this.hasRealName(id)) return this.base[id];
     const o = this.overrides.get(id);

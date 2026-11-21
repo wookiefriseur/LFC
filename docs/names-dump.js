@@ -6,6 +6,12 @@ const PAGE_LABEL_RE = new RegExp(`^\\s*--\\s*(${NAME_KINDS.join("|")})\\b(?:,\\s
 const ENTRY_RE = /^\s*\[(\d+)\]\s*=\s*"(.*)"\s*,?\s*$/;
 const LOCALE_RE = /^\s*\["locale"\]\s*=\s*"([a-z]{2})"/;
 
+// Not empty, not the id itself, and no run of six or more digits, which is an item id that leaked into the text.
+export function isName(name, id) {
+  const text = String(name ?? "").trim();
+  return text !== "" && text !== String(id) && !/\d{6,}/.test(text);
+}
+
 // Lua string escapes as the game writes them; `\ddd` is a byte, so the text is rebuilt as bytes and decoded as UTF-8.
 export function unescapeLua(body) {
   if (!body.includes("\\")) return body;
@@ -64,8 +70,9 @@ export function parseNamesDump(text) {
       skipped++;
       continue;
     }
-    const name = unescapeLua(entry[2]).trim();
-    if (!name) continue;
+    // The game's own data ends a few names in a comma and drops it when it shows them
+    const name = unescapeLua(entry[2]).trim().replace(/[\s,]+$/, "");
+    if (!isName(name, entry[1])) continue;
     (kinds[kind] ??= new Map()).set(Number(entry[1]), name);
   }
   return { locale, kinds, skipped };

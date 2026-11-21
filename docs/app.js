@@ -144,7 +144,10 @@ async function init() {
     state.categories = categoriesFrom(manifest);
     state.names = new NameStore(names);
     state.records = records;
-    for (const r of state.records) state.names.setRecordName(r.id ?? r.blueprint, r.name_overrides?.en);
+    state.names.pendingName = (id) => state.buffer?.entries.get(`name:${referenceData.namesLocale}:items:${id}`)?.name;
+    // The Names tab reads and edits the English item names like any other table
+    referenceData.setItemNames(new Map(Object.entries(names)
+      .filter(([id, name]) => name && name !== `Item ${id}`).map(([id, name]) => [Number(id), name])));
     state.index = new Map(records.map((r) => [r._key, r]));
     if (errors && errors.length) {
       console.warn(`${errors.length} JSONL parse error(s):`, errors);
@@ -1476,8 +1479,6 @@ function renderDetail() {
     expanderOpen: (!!state.editing._isNew && !state.editing._preset) || detailExpanderOpen(),
     hideContainerKind: !!state.editing._preset,
     onExpanderToggle: state.editing._isNew ? null : rememberDetailExpander,
-    // The Item name box starts from the game's name, and typing it back is not a change.
-    knownName: state.names?.gameName(state.editing.id ?? state.editing.blueprint) || "",
     idPrefix: "adv",
     findings: editingFindings(),
     onPair: state.editing._isNew ? null : () => pairRecord(state.editing._key),
@@ -1844,7 +1845,6 @@ function commitEdit() {
     state.buffer.update(e._key, clean(before), clean(after), before._category);
     mirror(before, after);
   }
-  state.names.setRecordName(e.id ?? e.blueprint, e.name_overrides?.en);
   applyFilters();
   renderTable();
   renderDetail();

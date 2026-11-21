@@ -174,12 +174,12 @@
 {"id":118663,"source":{"type":"housing","houses":[1078,1079]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":119576,"source":{"type":"housing","houses":[4795]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":119587,"source":{"type":"housing","houses":[1066]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120408,"source":{"type":"housing","houses":[1071]},"cost":[],"availability":{"version":"HOMESTEAD"},"name_overrides":{"en":"Argonian Fish in a Basket"}}
+{"id":120408,"source":{"type":"housing","houses":[1071]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120412,"source":{"type":"housing","houses":[1077]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120413,"source":{"type":"housing","houses":[1098]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120414,"source":{"type":"housing","houses":[1097]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120415,"source":{"type":"housing","houses":[1097,1076]},"cost":[],"availability":{"version":"HOMESTEAD"}}
-{"id":120416,"source":{"type":"housing","houses":[1445,1099,13558,1075]},"cost":[],"availability":{"version":"HOMESTEAD"},"name_overrides":{"en":"Common Cloak on a Hook"}}
+{"id":120416,"source":{"type":"housing","houses":[1445,1099,13558,1075]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120417,"source":{"type":"housing","houses":[]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120420,"source":{"type":"housing","houses":[1088,14586,7601]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"id":120456,"source":{"type":"housing","houses":[1093]},"cost":[],"availability":{"version":"HOMESTEAD"}}
@@ -657,41 +657,41 @@
 {"id":223181,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223732,"source":{"type":"housing","houses":[13881]},"cost":[],"availability":{"version":"WORMS2"}}
 {"id":223942,"source":{"type":"housing","houses":[13882]},"cost":[],"availability":{"version":"WORMS2"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225406,"name_overrides":{"en":"Carnaval Wagon, Covered"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225405,"name_overrides":{"en":"Carnaval Wall, Long Rectangular Cloth"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225404,"name_overrides":{"en":"Carnaval Tent, Enclosed"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217695,"name_overrides":{"en":"Carnaval Tent, Open"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217697,"name_overrides":{"en":"Carnaval Wall, Rectangular Cloth"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217698,"name_overrides":{"en":"Carnaval Wall, Triangular Cloth"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225410,"name_overrides":{"en":"Vines, Rose Ivy Curtain"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225412,"name_overrides":{"en":"Vines, Rose Ivy Drape"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225411,"name_overrides":{"en":"Vines, Rose Ivy Swath"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225409,"name_overrides":{"en":"Vines, Verdant Rose Ivy Swath"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225414,"name_overrides":{"en":"Flowers, Large Rose Ivy Patch"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225413,"name_overrides":{"en":"Flowers, Small Rose Ivy Patch"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"DRAGONS"},"id":134900,"name_overrides":{"en":"Flowers, Red Poppy"}}
-{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225407,"name_overrides":{"en":"Colovian Throne, Noble"}}
-{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192420,"name_overrides":{"en":"Maormer Rug, Serpentine"}}
-{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192422,"name_overrides":{"en":"Maormer Half-Rug"}}
-{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192423,"name_overrides":{"en":"Maormer Runner, Amethyst Waves"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":125605,"name_overrides":{"en":"Mushroom, Young Erupted Stinkcap"}}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225406}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225405}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225404}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217695}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217697}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"SHADOWS"},"id":217698}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225410}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225412}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225411}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225409}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225414}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225413}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"DRAGONS"},"id":134900}
+{"source":{"type":"housing","houses":[14778]},"cost":[],"availability":{"version":"ECHOES"},"id":225407}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192420}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192422}
+{"source":{"type":"housing","houses":[14077]},"cost":[],"availability":{"version":"DRUID"},"id":192423}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":125605}
 {"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":125603}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126597,"name_overrides":{"en":"Velothi Painting, Oversized Volcano"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126597}
 {"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126598}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126604,"name_overrides":{"en":"Velothi Panels, Geyser"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226923,"name_overrides":{"en":"Cheese Stack, Large"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226924,"name_overrides":{"en":"Cheese Stack, Medium"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226925,"name_overrides":{"en":"Cheese Stack, Small"}}
-{"source":{"type":"housing","houses":[14479]},"cost":[],"availability":{"version":"ECHOES"},"id":226931,"name_overrides":{"en":"Hanging Cheese Stack, Long"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226929,"name_overrides":{"en":"Hanging Cheese Stack, Long Aged"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226932,"name_overrides":{"en":"Hanging Cheese Stack, Short"}}
-{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226930,"name_overrides":{"en":"Hanging Cheese Stack, Short Aged"}}
-{"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"},"id":171818,"name_overrides":{"en":"Tree, Giant Cork Oak"}}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"MORROWIND"},"id":126604}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226923}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226924}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226925}
+{"source":{"type":"housing","houses":[14479]},"cost":[],"availability":{"version":"ECHOES"},"id":226931}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226929}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226932}
+{"source":{"type":"housing","houses":[14779]},"cost":[],"availability":{"version":"ECHOES"},"id":226930}
+{"source":{"type":"housing","houses":[9014]},"cost":[],"availability":{"version":"FLAMES"},"id":171818}
 {"id":204456,"source":{"type":"housing","houses":[11456]},"cost":[],"availability":{"version":"SCIONS"}}
-{"source":{"type":"housing","houses":[10223]},"cost":[],"availability":{"version":"TIDES"},"id":184105,"name_overrides":{"en":"Green Algae Coral Formation, Tree Capped"}}
+{"source":{"type":"housing","houses":[10223]},"cost":[],"availability":{"version":"TIDES"},"id":184105}
 {"source":{"type":"housing","houses":[1095,14078,11456,14077]},"cost":[],"availability":{"version":"HOMESTEAD"},"id":120473}
-{"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"ENDLESS"},"id":203133,"name_overrides":{"en":"Apocrypha Coral, Spiky"}}
-{"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
+{"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"ENDLESS"},"id":203133}
+{"source":{"type":"housing","houses":[11687]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004}
 {"source":{"type":"housing","houses":[4794,1085,1309]},"cost":[],"availability":{"version":"HOMESTEAD"},"id":94093}
 {"id":116490,"source":{"type":"housing","houses":[1445]},"cost":[],"availability":{"version":"HOMESTEAD"}}
 {"source":{"type":"housing","houses":[1071,5169,1310]},"cost":[],"availability":{"version":"HOMESTEAD"},"id":118053}

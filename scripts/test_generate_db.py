@@ -45,7 +45,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
 
     def test_full_catalogue(self):
         _, database, projection = self.roundtrip(self.records)
-        expected = [{k: v for k, v in r.items() if k not in ('notes', 'name_overrides')} for r in self.records]
+        expected = [{k: v for k, v in r.items() if k != 'notes'} for r in self.records]
         self.assertEqual(projection, sorted(expected, key=canonical))
         self.assertEqual(len(projection), len(self.records))
         self.assertEqual(database['blueprints'][225123], 224910)
@@ -121,7 +121,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
         }
         rows = [self.row(source=source, cost=[{'currency': 'GOLD', 'amount': 42}, {'currency': 'AP', 'amount': 8}],
                          availability={'version': 'HOMESTEAD', 'last_seen': '2024-02-29'}, rarity='rare',
-                         notes='exclude me', name_overrides={'en': 'also excluded'}),
+                         notes='exclude me'),
                 self.row(item=2, container='books')]
         self.roundtrip(rows)
 
@@ -270,7 +270,7 @@ class GeneratedDatabaseTests(unittest.TestCase):
     def test_discovered_items_and_blueprints_are_named_in_comments(self):
         labels = self.catalogue.labels['items']
         self.assertEqual(labels[122609], 'Blacksmithing Station (Shacklebreaker)')
-        self.assertEqual(labels[132173], labels[130326])
+        self.assertEqual(labels[132173], 'Blueprint: ' + labels[130326])
 
     def test_rumour_beside_confirmed_source_names_the_ids(self):
         with self.assertRaisesRegex(ValueError, r'rumour also has a confirmed source: id 1 / blueprint 9000001 '):

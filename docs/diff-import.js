@@ -6,6 +6,7 @@ import { mirror, newKey, checkTranslation } from "./data.js";
 import { queueEnumValue } from "./maintenance.js";
 import { interfaceTranslationOf, checkInterfaceText } from "./lexicon.js";
 import { itemDetailsChanges } from "./discovery.js";
+import { isName } from "./names-dump.js";
 
 const BEGIN = "[//]: # (diff-begin)";
 const END = "[//]: # (diff-end)";
@@ -141,8 +142,7 @@ export function planDiff(lines, ctx) {
       } else if (line.op === "name") {
         if (!NAME_KINDS.includes(line.kind)) throw new Error(`unknown name list ${JSON.stringify(line.kind)}`);
         if (!GAME_LOCALES.includes(line.locale)) throw new Error(`name locale ${line.locale} is not a game language`);
-        if (line.locale === "en" && line.kind === "items") throw new Error("an English item name comes from item details, not a name line");
-        if (!Number.isSafeInteger(line.id) || line.id < 1 || typeof line.name !== "string" || !line.name.trim()) throw new Error("name needs an id and a name");
+        if (!Number.isSafeInteger(line.id) || line.id < 1 || typeof line.name !== "string" || !isName(line.name, line.id)) throw new Error("name needs an id and a name");
         steps.push({ op: "name", kind: line.kind, id: line.id, locale: line.locale, name: line.name,
           before: ctx.publishedName(line.kind, line.id, line.locale) });
       } else if (line.op === "item") {
@@ -228,10 +228,6 @@ export function applySteps(steps, state, referenceData) {
         state.buffer.add(key, record, step.category);
         state.records.push(live);
         state.index.set(key, live);
-      }
-      // A name the diff sets shows in the table at once, as it does after "Save to the change list".
-      if (record.name_overrides?.en || step.before?.name_overrides?.en) {
-        state.names.setRecordName(record.id ?? record.blueprint, record.name_overrides?.en);
       }
       if (step.reference) {
         state.buffer.references.set(key, step.reference);

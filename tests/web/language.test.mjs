@@ -20,7 +20,7 @@ test("the browser's language maps onto the game's codes, English when the game d
 
 test("a translated name wins, an id without one shows the English name", () => {
   const names = new NameStore({ 1: "Imperial Chair", 2: "Imperial Rug" });
-  names.setRecordName(1, "Imperial Chair, corrected");
+  names.pendingName = (id) => (Number(id) === 1 ? "Imperial Chair, corrected" : null);
   names.setTranslation(new Map([[1, "Kaiserlicher Stuhl"]]));
   assert.equal(names.get(1), "Kaiserlicher Stuhl");
   assert.equal(names.get("1"), "Kaiserlicher Stuhl");

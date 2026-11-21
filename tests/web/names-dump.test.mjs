@@ -66,3 +66,14 @@ test("item names: a page from the Dump tab, with its language", () => {
   const d = diffNames(p, { items: new Map() });
   assert.equal(d.items.added.length, 2);
 });
+
+test("a trailing comma in a name is dropped, as the game does when it shows it", () => {
+  const p = parseNamesDump('items = {\n  [120408] = "Argonian Fish in a Basket,",\n  [120409] = "Argonian Rack, Woven",\n}');
+  assert.equal(p.kinds.items.get(120408), "Argonian Fish in a Basket");
+  assert.equal(p.kinds.items.get(120409), "Argonian Rack, Woven");
+});
+
+test("a name that is empty, blank, only the id or holds an item id is skipped; other numbers stay", () => {
+  const p = parseNamesDump('items = {\n  [1] = "",\n  [2] = "  ",\n  [3] = "3",\n  [4] = "Chair 12345",\n  [5] = "Item 120408",\n}');
+  assert.deepEqual([...p.kinds.items], [[4, "Chair 12345"]]);
+});

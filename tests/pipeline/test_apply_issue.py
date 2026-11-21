@@ -210,9 +210,15 @@ class IssueApplicationTests(unittest.TestCase):
         self.assertEqual((entry['file'], entry['counts']['themes'], entry['digest']),
                          ('names.zh.json', len(names['themes']), digest(files['docs/reference-data/names.zh.json'], 12)))
 
-    def test_english_item_name_line_is_refused(self):
-        with self.assertRaisesRegex(ValueError, 'item details'):
-            self.run_plan({'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'en', 'name': 'Bed'})
+    def test_name_line_without_a_real_name_is_refused(self):
+        for name in (' ', '94097', 'Item 120408'):
+            with self.assertRaisesRegex(ValueError, 'must not be empty'):
+                self.run_plan({'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'en', 'name': name})
+
+    def test_english_item_name_line_sets_the_catalogue_name(self):
+        files, _ = self.run_plan({'v': 1, 'op': 'name', 'kind': 'items', 'id': 94097, 'locale': 'en', 'name': 'Bed'})
+        self.assertEqual(json.loads(files['docs/data/names.en.json'])['94097'], 'Bed')
+        self.assertNotIn('docs/reference-data/names.en.json', files)
 
     def test_discovery_adds_shard_and_recipe_without_dropping_references(self):
         row = {'id': 230123, 'blueprint': 230124, 'source': {'type': 'recipe'}, 'cost': [],

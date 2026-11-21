@@ -28,7 +28,7 @@ SOURCE_FIELDS = (
     'skill_rank', 'note', 'part_of', 'event', 'container', 'collectible',
     'crate', 'packs', 'bundle', 'npc_class', 'npc_group', 'leads', 'houses', 'companion', 'tome',
 )
-WEB_FIELDS = {'notes', 'name_overrides'}
+WEB_FIELDS = {'notes'}
 CONTAINER_KINDS = ('books', 'folio')
 LOCALE_BEGIN = '  -- BEGIN WEBINTERFACE STRINGS - generated from docs/data/enums.json\n'
 LOCALE_END = '  -- END WEBINTERFACE STRINGS\n'

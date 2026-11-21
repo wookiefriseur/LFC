@@ -372,7 +372,7 @@
 {"id":120233,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120234,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120235,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
-{"id":120236,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"},"name_overrides":{"en":"Proper Life: Three Chants"}}
+{"id":120236,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120237,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120238,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120239,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
@@ -732,7 +732,7 @@
 {"id":125639,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":100}],"availability":{"version":"MORROWIND"}}
 {"id":125641,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"}}
 {"id":125642,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL","place":"VVARDENFELL_VIVEC"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"}}
-{"id":125643,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL","place":"VVARDENFELL_VIVEC"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"},"name_overrides":{"en":"Saplings, Sturdy Ash Laurel"}}
+{"id":125643,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL","place":"VVARDENFELL_VIVEC"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"}}
 {"id":125644,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"}}
 {"id":125645,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":250}],"availability":{"version":"MORROWIND"}}
 {"id":125673,"source":{"type":"vendor","vendor":"HGF","locations":[{"location":"VVARDENFELL","place":"VVARDENFELL_VIVEC"}],"subtype":"home_goods"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"MORROWIND"}}

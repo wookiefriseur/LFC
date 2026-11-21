@@ -39,7 +39,6 @@
               "cost",
               "availability",
               "rarity",
-              "name_overrides",
               "notes",
               "container"
             ]
@@ -172,7 +171,7 @@
         "v": { "const": 1 },
         "op": { "const": "name" },
         "kind": {
-          "description": "Which names table: items (any language but English, whose item names come from item details), house collectibles, quests, achievements or zones.",
+          "description": "Which names table: items, house collectibles, quests, achievements or zones.",
           "enum": ["items", "houses", "quests", "achievements", "zones", "categories", "themes", "skills"]
         },
         "id": {

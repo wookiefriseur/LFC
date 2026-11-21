@@ -6,8 +6,9 @@
 The dump's own locale decides the file, docs/reference-data/names.<locale>.json. A name in the dump replaces
 the stored one; an id the dump does not carry keeps its name. The manifest is updated with it.
 
-English item names live in docs/data/names.en.json. Item details (discovery lines) bring them in, and an English dump
-replaces them like any other name, so a renamed item and a blueprint, which no discovery line carries, are corrected.
+English item names live in docs/data/names.en.json. Item details (discovery lines) and name changes from the site bring
+them in, and an English dump replaces them like any other name, so a renamed item, a hand-set name and a blueprint,
+which no discovery line carries, are corrected.
 
 A language file other than English holds two things: the names read from a client in that language, per table,
 and under "fallback" the English names of every id that has none. The fallback is generated here and by
@@ -37,6 +38,12 @@ CRAFT_RE = re.compile(r'^\s*\[(\d+)\]\s*=\s*(\d+)\s*,?\s*$')
 ENTRY_RE = re.compile(r'^\s*\[(\d+)\]\s*=\s*"(.*)"\s*,?\s*$')
 FIELD_RE = re.compile(r'^\s*\["(locale|apiVersion)"\]\s*=\s*"?([a-z0-9]+)"?')
 ESCAPES = {'n': '\n', 't': '\t', 'r': '\r', '\\': '\\', '"': '"', "'": "'", '\n': '\n'}
+
+
+def is_name(name, ident):
+    """Not empty, not the id itself, and no run of six or more digits, which is an item id that leaked into the text."""
+    name = name.strip()
+    return bool(name) and name != str(ident) and not re.search(r'\d{6,}', name)
 
 
 def names_file(locale):
@@ -86,8 +93,9 @@ def parse(text):
             continue
         m = ENTRY_RE.match(line)
         if m and kind and kind != 'crafts':
-            name = unescape(m.group(2)).strip()
-            if name:
+            # the game's own data ends a few names in a comma and drops it when it shows them
+            name = unescape(m.group(2)).strip().rstrip(',').rstrip()
+            if is_name(name, m.group(1)):
                 dump['kinds'].setdefault(kind, {})[m.group(1)] = name
     return dump
 

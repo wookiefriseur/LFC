@@ -13,7 +13,6 @@ import { messageFor, SOURCE_ENUM_FIELD, allowedSourceFields } from "./validate.j
 // Which side of the build a field lands on: "game" reaches the in-game addon DB, "browser" is stripped.
 export const FIELD_META = {
   notes: { translationClass: "browser" },
-  name_overrides: { translationClass: "browser" },
   note: { translationClass: "game" },
 };
 
@@ -34,7 +33,7 @@ export const DATES_GROUP = "availability.dates";
 
 const BATCH_PATHS = new Set(["cost", "availability.version", ...AVAIL_DATES]);
 
-export const SITE_ONLY_FIELDS = ["notes", "name_overrides"];
+export const SITE_ONLY_FIELDS = ["notes"];
 
 // Where the ticked records disagree. No vocabulary contains it, and the caller writes only paths moved off their starting value, so a field left on it is never written.
 export const MIXED = "\u0000mixed";
@@ -836,10 +835,7 @@ function siteOnlyFieldset(ctx) {
     for (const field of SITE_ONLY_FIELDS) {
       if (!hasSiteValue(record, field)) continue;
       any = true;
-      const v = field === "name_overrides"
-        ? Object.entries(record.name_overrides).map(([k, s]) => `${k}: ${s}`).join(", ")
-        : record[field];
-      fs.append(row(fieldLabel(ctx, field), readonlyValue(v), [], true));
+      fs.append(row(fieldLabel(ctx, field), readonlyValue(record[field]), [], true));
     }
     if (!any) fs.append(h("p", { class: "muted site-only-empty" }, t("form.site_only.empty")));
     return fs;
@@ -859,30 +855,6 @@ function siteOnlyFieldset(ctx) {
     ctx.onChange();
   });
   fs.append(row(fieldLabel(ctx, "notes", { forId: notesId }), notes, [], true));
-
-  // The name_overrides map and its `en` key exist only while the box holds something other than the game's name, so saving untouched, or typing the game's name back, leaves the diff clean. Other keys are preserved.
-  const known = typeof ctx.opts.knownName === "string" ? ctx.opts.knownName.trim() : "";
-  const noId = ctx.uid("name-overrides-en");
-  const no = h("input", {
-    type: "text", id: noId,
-    value: record.name_overrides?.en ?? known,
-    placeholder: t("form.name.placeholder"),
-    "data-field": "name_overrides.en",
-  });
-  no.addEventListener("input", (e) => {
-    const v = e.target.value.trim();
-    if (v === "" || v === known) {
-      if (record.name_overrides) {
-        delete record.name_overrides.en;
-        if (Object.keys(record.name_overrides).length === 0) delete record.name_overrides;
-      }
-    } else {
-      (record.name_overrides ??= {}).en = e.target.value;
-    }
-    ctx.onChange();
-  });
-  fs.append(row(fieldLabel(ctx, "name_overrides", { forId: noId }),
-    h("div", { class: "name-override" }, no), [], true));
   return fs;
 }
 

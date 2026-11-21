@@ -143,10 +143,12 @@ export class ReferenceData {
         { cache: dataset.digest ? "default" : "no-cache" });
       if (!r.ok) throw new Error(`${file} ${r.status}`);
       this.names = nameMaps(JSON.parse(await r.text()));
+      if (this._itemNames) this.names.items = this._itemNames;
       return this.names;
     })()
       .catch((e) => {
         this.names = nameMaps({});
+        if (this._itemNames) this.names.items = this._itemNames;
         console.info(`reference-data ${file} unavailable (${e.message})`);
         return this.names;
       })
@@ -219,6 +221,12 @@ export class ReferenceData {
       console.info(`reference-data crafts unavailable (${e.message})`);
     }
     return this.crafts;
+  }
+
+  // The English item names live in the catalogue's own file; here they join the other English tables.
+  setItemNames(names) {
+    this._itemNames = names;
+    if (this.names) this.names.items = names;
   }
 
   // Null until that language is loaded.

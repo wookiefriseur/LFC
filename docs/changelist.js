@@ -75,9 +75,6 @@ function formatValue(path, value, enums, sourceType) {
   if (path === "source.locations") return placementsText(enums, value);
   // Not truncated here: shortenPair cuts the pair together once both sides are known.
   if (path === "notes") return `"${value}"`;
-  if (path === "name_overrides" && typeof value === "object") {
-    return Object.entries(value).map(([lang, name]) => `${lang}: "${name}"`).join(", ");
-  }
   const vocab = path.startsWith("source.") ? SOURCE_ENUM_FIELD[path.slice(7)] : null;
   if (vocab) return formatSymbol(enums, vocab, value);
   if (Array.isArray(value)) return value.join(", ");

@@ -28,7 +28,7 @@
       "name": "vendor.jsonl",
       "type": "vendor",
       "records": 1386,
-      "digest": "02221ff6e4d644f5"
+      "digest": "c6cb5e5af5474a4a"
     },
     {
       "name": "pvp_vendor.jsonl",
@@ -40,7 +40,7 @@
       "name": "writ_vendor.jsonl",
       "type": "writ_vendor",
       "records": 56,
-      "digest": "27482050faeb1a4d"
+      "digest": "4bd5eb077ca387e1"
     },
     {
       "name": "luxury.jsonl",
@@ -52,7 +52,7 @@
       "name": "event_drop.jsonl",
       "type": "event_drop",
       "records": 97,
-      "digest": "3cc3128cbda1ee5d"
+      "digest": "8707c1a9f623ec7d"
     },
     {
       "name": "event_vendor.jsonl",
@@ -70,7 +70,7 @@
       "name": "crown_store.jsonl",
       "type": "crown_store",
       "records": 1730,
-      "digest": "9e8f60327998e0ff"
+      "digest": "266fc4542fbd2f01"
     },
     {
       "name": "recipe.jsonl",
@@ -82,7 +82,7 @@
       "name": "drop.jsonl",
       "type": "drop",
       "records": 712,
-      "digest": "661dbe85422defd8"
+      "digest": "89e1569515269123"
     },
     {
       "name": "quest_reward.jsonl",
@@ -100,7 +100,7 @@
       "name": "housing.jsonl",
       "type": "housing",
       "records": 697,
-      "digest": "3baeb78a98b7729b"
+      "digest": "012b0dabedbe9963"
     },
     {
       "name": "companion.jsonl",
@@ -139,7 +139,7 @@
       "digest": "3fc76eaadb5f56ce"
     }
   ],
-  "digest": "6d1d7242d8285d5b",
+  "digest": "96f8e4aad7f00d98",
   "counts": {
     "records": 10215,
     "ids": 12489,

@@ -1711,8 +1711,8 @@
 {"id":226930,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":15}],"availability":{"version":"ECHOES"}}
 {"id":226933,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":210}],"availability":{"version":"ECHOES"}}
 {"id":225408,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":50}],"availability":{"version":"ECHOES"}}
-{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":2100}],"availability":{"version":"SHADOWS"},"id":217695,"name_overrides":{"en":"Carnaval Tent, Open"}}
-{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":310}],"availability":{"version":"SHADOWS"},"id":217697,"name_overrides":{"en":"Carnaval Wall, Rectangular Cloth"}}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":2100}],"availability":{"version":"SHADOWS"},"id":217695}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":310}],"availability":{"version":"SHADOWS"},"id":217697}
 {"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":200}],"availability":{"version":"SHADOWS"},"id":217698}
 {"id":225374,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"ECHOES"}}
 {"id":225375,"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":140}],"availability":{"version":"ECHOES"}}
@@ -1722,9 +1722,9 @@
 {"id":224850,"source":{"type":"crown_store"},"cost":[{"currency":"CROWNS","amount":4500}],"availability":{"version":"THIEVES"}}
 {"id":152258,"source":{"type":"crown_store","bundle":"FEARSTRUCK"},"cost":[],"availability":{"version":"SCALES"}}
 {"id":175578,"source":{"type":"crown_store","bundle":"DAWNBREAKER"},"cost":[],"availability":{"version":"BLACKW"}}
-{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
-{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004,"name_overrides":{"en":"Specimen Jar, Spare Brain"}}
+{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"WEREWOLF"},"id":142004}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":180}],"availability":{"version":"WEREWOLF"},"id":142004}
 {"id":223131,"source":{"type":"crown_store","packs":["WINTER"]},"cost":[],"availability":{"version":"WORMS2"}}
-{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":80}],"availability":{"version":"HOMESTEAD"},"id":118053,"name_overrides":{"en":"Common Campfire, Outdoor"}}
-{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"HARROW"},"id":118277,"name_overrides":{"en":"Ram Horns, Mounted"}}
-{"source":{"type":"crown_store","packs":["DRUIDIC"]},"cost":[],"availability":{"version":"SCRIBE"},"name_overrides":{"en":"Galen Dogwood, Medium Cluster"},"id":194401}
+{"source":{"type":"crown_store","subtype":"housing_editor"},"cost":[{"currency":"CROWNS","amount":80}],"availability":{"version":"HOMESTEAD"},"id":118053}
+{"source":{"type":"crown_store","packs":["HOLLOWJACK"]},"cost":[],"availability":{"version":"HARROW"},"id":118277}
+{"source":{"type":"crown_store","packs":["DRUIDIC"]},"cost":[],"availability":{"version":"SCRIBE"},"id":194401}

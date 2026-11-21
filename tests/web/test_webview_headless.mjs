@@ -111,7 +111,7 @@ async function reloadWithRumours(page, lines) {
 }
 
 async function withRumourFixture(page, fn) {
-  await reloadWithRumours(page, rumourLine({ id: FIXTURE_ITEM }) + rumourLine({ blueprint: FIXTURE_BLUEPRINT, name_overrides: { en: "Fixture Blueprint" } }));
+  await reloadWithRumours(page, rumourLine({ id: FIXTURE_ITEM }) + rumourLine({ blueprint: FIXTURE_BLUEPRINT }));
   try {
     await fn();
   } finally {
@@ -1788,7 +1788,7 @@ test("an unpaired blueprint opens Quick Edit titled by its blueprint", async (pa
     await page.waitForSelector(".modal-title", { timeout: 10000 });
     const title = await page.$eval(".modal-title", (e) => e.textContent);
     await page.keyboard.press("Escape");
-    assert(!/undefined|unnamed item/.test(title), `title: ${title}`);
+    assert(!/undefined/.test(title), `title: ${title}`);
     assert(title.includes(`#${FIXTURE_BLUEPRINT}`), `title does not name blueprint ${FIXTURE_BLUEPRINT}: ${title}`);
   });
 });
@@ -1866,7 +1866,7 @@ test("help tooltips stay inside the viewport", async (page) => {
   await page.click("#panel-advanced tbody tr:not(.spacer) td:nth-child(3)");
   await page.waitForSelector("#panel-advanced .form-fieldset-site .tip", { timeout: 10000 });
   const site = await page.$$("#panel-advanced .form-fieldset-site .tip");
-  assertAtLeast(site.length, 2, "the site-only fields lost their help");
+  assertAtLeast(site.length, 1, "the site-only field lost its help");
   for (const tip of site) {
     const r = await inside(tip);
     assert(r.ok, `a site-only tooltip leaves the ${r.vw}x${r.vh} window or its "?": ${r.rect}`);
@@ -2283,69 +2283,46 @@ test("Luxury, Crown, Maintenance and About share one box width", async (page) =>
   assert(/How to contribute/.test(text), "About's text is not inside its box");
 });
 
-test("the Item name box shows the item's name and edits it", async (page) => {
+test("names: an English item name is changed on the Names tab and shows in Batch edit until reverted", async (page) => {
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await waitForBoot(page);
+  await switchTab(page, "names");
+  await page.waitForFunction(() => /^\d+ entries$/.test(document.querySelector("#names-count")?.textContent || ""),
+    { timeout: 15000 });
+  await page.click('#names-lists [data-list="game:items"]');
+  await page.type("#names-search", "114327");
+  const cell = '#names-table td.names-editable[data-name-id="114327"]';
+  await page.waitForSelector(`${cell} .names-edit-button`, { timeout: 10000 });
+  const gameName = await page.$eval(cell, (e) => e.textContent);
+  assert(gameName && !/add name/i.test(gameName), `114327 has no name to show: ${gameName}`);
+
+  const NEW = "Test Renamed Stool";
+  await page.$eval(`${cell} .names-edit-button`, (e) => e.click());
+  await page.$eval(`${cell} input`, (e, v) => { e.value = v; e.dispatchEvent(new Event("input")); }, NEW);
+  await page.keyboard.press("Enter");
+  const mine = (await diffLines(page)).filter((l) => l.id === 114327);
+  assertEq(JSON.stringify(mine), JSON.stringify([{ v: 1, op: "name", kind: "items", id: 114327, locale: "en", name: NEW }]),
+    "the rename is not one English item name line");
+
   await switchTab(page, "advanced");
   await page.evaluate(() => {
     const c = document.querySelector("#filter-changed");
     if (c.checked) c.click();
-  });
-  const target = await page.evaluate(() => {
-    const r = window.__proto.records().find((x) => x.id === 114327);
-    return r && { key: r._key, id: r.id };
-  });
-  assert(target, "record 114327 is missing");
-  await page.evaluate(() => {
     const s = document.querySelector("#search");
     s.value = "114327";
     s.dispatchEvent(new Event("input", { bubbles: true }));
   });
-  const row = () => page.evaluateHandle(() => [...document.querySelectorAll(
-    "#panel-advanced tbody tr:not(.spacer)")].find((tr) => tr.cells[1]?.textContent === "114327"));
-  await page.waitForFunction(() => [...document.querySelectorAll(
-    "#panel-advanced tbody tr:not(.spacer)")].some((tr) => tr.cells[1]?.textContent === "114327"),
-  { timeout: 10000 });
-  const gameName = await (await row()).evaluate((tr) => tr.cells[2].textContent);
-  assert(gameName && !/no name/.test(gameName), `114327 has no name to show: ${gameName}`);
-  await (await row()).evaluate((tr) => tr.cells[2].click());
+  const shown = () => page.evaluate(() => [...document.querySelectorAll("#panel-advanced tbody tr:not(.spacer)")]
+    .find((tr) => tr.cells[1]?.textContent === "114327")?.cells[2].textContent);
+  await page.waitForFunction((v) => [...document.querySelectorAll("#panel-advanced tbody tr:not(.spacer)")]
+    .some((tr) => tr.cells[1]?.textContent === "114327" && tr.cells[2].textContent === v), { timeout: 10000 }, NEW).catch(() => {});
+  assertEq(await shown(), NEW, "Batch edit does not show the renamed item");
+  assertEq(await page.$('#panel-advanced [data-field="name_overrides.en"]'), null, "the record form still has an Item name box");
 
-  const box = '#panel-advanced [data-field="name_overrides.en"]';
-  await page.waitForSelector(box, { timeout: 10000 });
-  const shown = await page.$eval(box, (i) => ({ value: i.value,
-    label: document.querySelector(`label[for="${i.id}"]`)?.firstChild?.textContent }));
-  assertEq(shown.label, "Item name", "the box is not labelled Item name");
-  assertEq(shown.value, gameName, "the box does not show the item's name");
-
-  const pending = () => page.$eval("#pending-count", (e) => e.textContent);
-  const save = () => page.evaluate(() => [...document.querySelectorAll("#panel-advanced button")]
-    .find((b) => /save to the change list/i.test(b.textContent)).click());
-  const before = await pending();
-  await save();
-  assertEq(await pending(), before, "saving an untouched Item name made a change");
-
-  const NEW = "Test Renamed Stool";
-  await page.$eval(box, (i, v) => {
-    i.value = v;
-    i.dispatchEvent(new Event("input", { bubbles: true }));
-  }, NEW);
-  await save();
-  await page.waitForFunction((v) => [...document.querySelectorAll(
-    "#panel-advanced tbody tr:not(.spacer)")].some((tr) => tr.cells[2]?.textContent === v),
-  { timeout: 5000 }, NEW).catch(() => {});
-  assertEq(await (await row()).evaluate((tr) => tr.cells[2].textContent), NEW,
-    "the table does not show the edited name");
-  const mine = (await diffLines(page)).filter((l) => l.id === 114327);
-  assertEq(mine.length, 1, `the rename exports ${mine.length} lines`);
-  assertEq(JSON.stringify(mine[0].fields?.name_overrides ?? mine[0].record?.name_overrides),
-    JSON.stringify({ en: NEW }), `the line does not carry the name: ${JSON.stringify(mine[0])}`);
-
-  await page.$eval(box, (i, v) => {
-    i.value = v;
-    i.dispatchEvent(new Event("input", { bubbles: true }));
-  }, gameName);
-  await save();
-  assertEq(await pending(), before, "restoring the game's name left a change behind");
-  assertEq(await (await row()).evaluate((tr) => tr.cells[2].textContent), gameName,
-    "the table did not go back to the game's name");
+  await switchTab(page, "names");
+  await page.click("#names-table tr.is-pending .names-revert");
+  assertEq(await page.$eval(cell, (e) => e.textContent), gameName, "Revert did not restore the game's name");
+  assert(await page.$eval("#btn-submit", (e) => e.disabled), "the reverted rename can still be sent");
 });
 
 test("icons show loading until the map lands, then turn into the icon", async (page) => {
@@ -3334,16 +3311,15 @@ test("folio: a master writ recipe pair moves into a listed folio or into a new o
   await page.click("#modal-close");
 });
 
-test("diff: an item name set by a loaded diff shows in the Batch-edit table without saving again", async (page) => {
+test("diff: an English item name set by a loaded diff shows in the Batch-edit table", async (page) => {
   await page.reload({ waitUntil: "domcontentloaded" });
   await waitForBoot(page);
   await switchTab(page, "advanced");
   const rec = await page.evaluate(() => {
-    const r = window.__proto.records().find((x) => Number.isInteger(x.id) && !x.name_overrides && x.source?.type === "writ_vendor");
-    return { id: r.id, blueprint: r.blueprint, category: r._category, key: r._key, source: r.source };
+    const r = window.__proto.records().find((x) => Number.isInteger(x.id) && x.source?.type === "writ_vendor");
+    return { id: r.id, key: r._key };
   });
-  const line = { v: 1, op: "update", id: rec.id, ...(rec.blueprint === undefined ? {} : { blueprint: rec.blueprint }),
-    category: rec.category, fields: { name_overrides: { en: "Zz Loaded Name" } }, match: rec.source };
+  const line = { v: 1, op: "name", kind: "items", id: rec.id, locale: "en", name: "Zz Loaded Name" };
   const status = await pasteImport(page, `[//]: # (diff-begin)\n${JSON.stringify(line)}\n[//]: # (diff-end)`);
   assert(/1 change/.test(status), `the diff did not load: ${status}`);
   await selectRecord(page, rec.key, rec.id);
@@ -4324,7 +4300,7 @@ test("names: another game language has its own names, and an id it has none for 
     await page.reload({ waitUntil: "domcontentloaded" });
     await waitForBoot(page);
     await switchTab(page, "names");
-    assert(!await page.$('#names-lists [data-list="game:items"]'), "English lists item names");
+    await page.waitForSelector('#names-lists [data-list="game:items"]', { timeout: 10000 });
     await page.select("#names-locale", "de");
     await page.waitForSelector('#names-lists [data-list="game:items"]', { timeout: 10000 });
     await page.click('#names-lists [data-list="game:items"]');

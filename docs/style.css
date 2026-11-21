@@ -474,14 +474,6 @@ input.is-readonly, textarea.is-readonly {
 .source-fields { display: flex; flex-direction: column; gap: 0.5rem; }
 .source-fields .form-row { grid-template-columns: 120px minmax(0, 1fr); }
 
-.name-override { display: flex; }
-.name-override input {
-  padding: 0.3rem 0.4rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  width: 100%;
-}
-
 .form-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
 
 button, .btn-primary {

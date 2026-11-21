@@ -33,6 +33,7 @@ from import_names import (
     MANIFEST,
     data_digest,
     english,
+    is_name,
     manifest_entry,
     names_file,
     with_fallback,
@@ -191,8 +192,12 @@ def put_names(files, manifest, locale, names):
 
 def update_name(files, line):
     locale, kind = line['locale'], line['kind']
+    require(is_name(line['name'], line['id']), 'a name must not be empty, the id itself or hold an item id')
     require(locale in GAME_LOCALES, f'name locale {locale} is not a game language')
-    require(locale != 'en' or kind != 'items', 'an English item name comes from item details, not a name line')
+    if locale == 'en' and kind == 'items':
+        # the catalogue's own file; the next English dump or item details replace a hand-set name
+        add_name(files, line['id'], line['name'], overwrite=True)
+        return
     name = names_file(locale)
     names = files.obj(name) if (files.root / name).exists() or name in files.changed else {}
     names.setdefault(kind, {})[str(line['id'])] = line['name']

@@ -1,6 +1,6 @@
 // Names tab: every id -> name table the site shows, the game names from the reference data, per game language, and the vocabularies from enums.json. A names dump from FurCDev updates the game names of its language through the change list.
 import { NAME_KINDS, GAME_LOCALES } from "./reference-data.js";
-import { parseNamesDump, diffNames } from "./names-dump.js";
+import { parseNamesDump, diffNames, isName } from "./names-dump.js";
 import { labelOf, libraryStrings, checkTranslation } from "./data.js";
 import { titleCase, englishTexts, interfaceTranslationOf, loadInterfaceTranslation, checkInterfaceText, t, tn, translateTree } from "./lexicon.js";
 import { language } from "./prefs.js";
@@ -47,16 +47,10 @@ export function namesMask(deps) {
     return referenceData.namesOf(locale());
   }
 
-  // English item names are the catalogue's own and are not edited here
-  function kinds() {
-    return NAME_KINDS.filter((kind) => kind !== "items" || locale() !== referenceData.namesLocale);
-  }
-
   async function setLocale(next) {
     view.locale = next;
     const select = $("#names-locale");
     if (select) select.value = next;
-    if (!kinds().includes(kindOfList()) && view.list.startsWith("game:")) view.list = "game:houses";
     await Promise.all([referenceData.loadTranslation(next), loadInterfaceTranslation(next)]);
     renderSidebar();
     renderTable();
@@ -154,7 +148,7 @@ export function namesMask(deps) {
       return li;
     };
     ul.append(elem("li", { class: "names-group" }, t("names.group.game", { language: locale() })));
-    for (const kind of kinds()) {
+    for (const kind of NAME_KINDS) {
       ul.append(item(`game:${kind}`, t(KIND_LABELS[kind]), store()?.names[kind].size));
     }
     ul.append(elem("li", { class: "names-group" }, t("names.group.vocab")));
@@ -250,7 +244,9 @@ export function namesMask(deps) {
   // One name into the change list. The published name, or an empty box, drops the change.
   function setName(kind, id, name) {
     const published = referenceData.publishedName(kind, id, locale());
-    state.buffer.setName(kind, id, locale(), name.trim() || published || "", published);
+    // What is no name is dropped like an empty box
+    const given = isName(name, id) ? name.trim() : "";
+    state.buffer.setName(kind, id, locale(), given || published || "", published);
     renderFooter();
     renderSidebar();
     renderTable();
@@ -348,8 +344,6 @@ export function namesMask(deps) {
     const status = $("#names-import-status");
     const parsed = parseNamesDump(text);
     const dumpLocale = parsed.locale || locale();
-    const englishItems = dumpLocale === referenceData.namesLocale && parsed.kinds.items;
-    if (englishItems) delete parsed.kinds.items;
     const kinds = Object.keys(parsed.kinds);
     if (!GAME_LOCALES.includes(dumpLocale)) {
       status.textContent = t("names.import.bad_language", { language: dumpLocale });
@@ -359,8 +353,7 @@ export function namesMask(deps) {
       return;
     }
     if (kinds.length === 0) {
-      status.textContent = englishItems ? t("names.import.english_items")
-        : parsed.skipped
+      status.textContent = parsed.skipped
         ? t("names.import.no_table")
         : t("names.import.none");
       $("#names-import-report").innerHTML = "";
