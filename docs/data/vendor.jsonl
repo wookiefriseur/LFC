@@ -372,7 +372,7 @@
 {"id":120233,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120234,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120235,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
-{"id":120236,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
+{"id":120236,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"},"name_overrides":{"en":"Proper Life: Three Chants"}}
 {"id":120237,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120238,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
 {"id":120239,"source":{"type":"vendor","vendor":"MAGES_MYSTIC","locations":[{"place":"GUILD_MAGES"}],"subtype":"other"},"cost":[{"currency":"GOLD","amount":500}],"availability":{"version":"HOMESTEAD"}}
