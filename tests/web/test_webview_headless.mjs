@@ -859,6 +859,10 @@ test("lists: crafting knowledge marks Browse and list rows, links go to ESO-Hub,
     assertEq(await page.$eval("#lists-knowledge .lists-knowledge-status", (d) => d.textContent), "Known: 1Unknown: 1 (page 2 of 2 missing)", "the knowledge entry");
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lfc.knowledge")));
     assertEq(JSON.stringify(stored), JSON.stringify({ learned: [], known: { total: 1, pages: [1], ids: [130326] }, unknown: { total: 2, pages: [1], ids: [114327] } }), "what is kept in the browser");
+    assertEq(await page.$("#lists-knowledge .knowledge-bar"), null, "a share bar while a page is missing");
+    await importText("FURC UNKNOWN 2/2:");
+    assertEq(await page.$eval("#lists-knowledge .lists-knowledge-status", (d) => d.textContent), "50%Known: 1Unknown: 1", "the knowledge entry once complete");
+    assertEq(await page.$eval("#lists-knowledge .knowledge-bar", (b) => `${b.getAttribute("aria-valuenow")} ${b.firstChild.style.width}`), "50 50%", "the share bar");
 
     await page.$$eval("#lists-index .lists-index-item", (bs) => bs.find((b) => b.title === "Knowledge test").click());
     await page.waitForFunction(() => document.querySelectorAll(".lists-item").length === 2);

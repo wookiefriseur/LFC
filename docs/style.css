@@ -2291,6 +2291,10 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .lists-knowledge { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
 .lists-knowledge-status { font-size: 0.85rem; }
 .lists-knowledge-status p { margin: 0.25rem 0.5rem; }
+.lists-knowledge-counts { display: flex; flex-wrap: wrap; gap: 0 1rem; }
+.lists-knowledge-share { display: flex; align-items: center; gap: 0.5rem; }
+.knowledge-bar { flex: 1 1 auto; height: 0.5rem; border-radius: 0.25rem; background: var(--border); overflow: hidden; }
+.knowledge-bar-known { display: block; height: 100%; background: var(--accent); }
 .list-pick { border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; max-width: min(24rem, calc(100vw - 2rem)); }
 .list-pick::backdrop { background: rgb(0 0 0 / 0.3); }
 .list-pick h3 { margin-top: 0; overflow-wrap: anywhere; }

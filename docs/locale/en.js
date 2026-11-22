@@ -285,6 +285,7 @@ export default {
   "lists.none": "No lists yet.",
   "lists.knowledge.tip": "Which furnishing plans your character knows",
   "lists.knowledge.learned": "Learned since: {n}",
+  "lists.knowledge.share": "Share of the craftable furnishings you know",
   "lists.knowledge.import_other": "Import {kind} to mark those as well.",
   "lists.knowledge.source": "Export it in FurnitureCatalogue (/furcexport or the list manager) and import it here.",
   "lists.keep": "Keep it",

@@ -681,7 +681,9 @@ export function listsMask(deps) {
     const btn = elem("button", { type: "button", class: "lists-index-item" + (current === KNOWLEDGE ? " is-active" : ""), title: t("lists.knowledge.tip") },
       elem("span", {}, t("lists.knowledge")));
     btn.addEventListener("click", () => select(KNOWLEDGE));
-    const lines = kinds.map((kind) => elem("p", {}, kindStatus(kind)));
+    // Known and unknown on one line; with both complete, a bar of the known share above it. A missing page would skew it.
+    const lines = kinds.length ? [elem("p", { class: "lists-knowledge-counts" }, kinds.map((kind) => elem("span", {}, kindStatus(kind))))] : [];
+    if (kinds.length === 2 && !missingPages("known").length && !missingPages("unknown").length) lines.unshift(knowledgeBar(new Set([...k.known.ids, ...k.learned]).size, k.unknown.ids.length));
     if (k.learned.length) lines.push(elem("p", {}, t("lists.knowledge.learned", { n: k.learned.length })));
     if (kinds.length === 1) {
       const other = kinds[0] === "known" ? "unknown" : "known";
@@ -689,6 +691,18 @@ export function listsMask(deps) {
     }
     if (!kinds.length) lines.push(elem("p", {}, t("lists.knowledge.source")));
     host.replaceChildren(btn, elem("div", { class: "muted lists-knowledge-status" }, lines));
+  }
+
+  function knowledgeBar(known, unknown) {
+    const share = known + unknown ? known / (known + unknown) : 0;
+    let pct;
+    try { pct = new Intl.NumberFormat(document.documentElement.lang || undefined, { style: "percent" }).format(share); } catch (_) { pct = `${Math.round(share * 100)} %`; }
+    const label = t("lists.knowledge.share");
+    const bar = elem("span", { class: "knowledge-bar", role: "progressbar", "aria-label": label, title: label,
+      "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(Math.round(share * 100)), "aria-valuetext": pct },
+      elem("span", { class: "knowledge-bar-known" }));
+    bar.firstChild.style.width = `${share * 100}%`;
+    return elem("p", { class: "lists-knowledge-share" }, bar, elem("span", {}, pct));
   }
 
   let knowledgeFilter = "all";
