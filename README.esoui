@@ -1,10 +1,11 @@
-Database library for [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]FurnitureCatalogue[/URL] (required).
+Database library for [URL="https://www.esoui.com/downloads/info1617-FurnitureCatalogue.html"]Furniture Catalogue[/URL].
 
 [COLOR=red][SIZE=4]Database updates ship here, independent of FurnitureCatalogue releases.[/SIZE][/COLOR]
 
 [COLOR=wheat][SIZE=6]Links[/SIZE][/COLOR]
+[URL="https://wookiefriseur.github.io/LFC/"][SIZE=4][B]Web interface: browse items, manage lists, contribute[/B][/SIZE][/URL]
+
 [LIST]
-[*][URL="https://wookiefriseur.github.io/LFC/"]Web interface: browse, lists, contribute[/URL]
 [*][URL="https://github.com/wookiefriseur/LFC/blob/main/LibFurnitureCatalogue/Api.lua"]API reference[/URL]
 [*][URL="https://github.com/wookiefriseur/LFC"]GitHub: source and issues[/URL]
 [/LIST]
@@ -27,7 +28,8 @@ Database library for [URL="https://www.esoui.com/downloads/info1617-FurnitureCat
 Manifest:
 [code]## DependsOn: LibFurnitureCatalogue[/code]
 
-[highlight="lua"]local LFC = LibFurnitureCatalogue.API
+[highlight="lua"]
+local LFC = LibFurnitureCatalogue.API
 
 LFC.OnReady(function()
   local entry = LFC.GetEntry(203600)
@@ -35,7 +37,8 @@ LFC.OnReady(function()
     d(zo_strformat("<<C:1>>", GetItemLinkName(LFC.GetItemLink(entry.id))))
     d(#LFC.GetSourceDetails(entry.id) .. " sources")
   end
-end)[/highlight]
+end)
+[/highlight]
 
 [COLOR=wheat][SIZE=3]Queries[/SIZE][/COLOR]
 
