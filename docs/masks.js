@@ -16,8 +16,8 @@ let translate = (id) => id;
 
 function labelTab(btn, mask) {
   btn.textContent = translate(`tab.${mask.id}`);
-  // The glyph is decoration; the tab's name stays the label.
-  if (mask.icon) btn.prepend(Object.assign(document.createElement("span"), { textContent: `${mask.icon} `, ariaHidden: "true" }));
+  // The icon is decoration; the tab's name stays the label.
+  if (mask.icon) btn.prepend(Object.assign(document.createElement("span"), { className: `ico ico-${mask.icon}`, ariaHidden: "true" }), " ");
 }
 
 /** Redraws the tab names with a new translator. */

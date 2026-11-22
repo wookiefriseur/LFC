@@ -5,15 +5,15 @@
   <title>Furniture Catalogue</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>try { const t = JSON.parse(localStorage.getItem("furcat-prefs-v1") || "{}").theme; if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (_) {}</script>
-  <link rel="stylesheet" href="./style.css?v=3b36398c6d83">
+  <link rel="stylesheet" href="./style.css?v=e69b7b5ae8a7">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%237a5714'/%3E%3Cpath d='M4 11h8M4 8h8M4 5h5' stroke='white' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
 
   <script type="importmap">
   {
     "imports": {
       "./about.js": "./about.js?v=205c75a494b2",
-      "./app.js": "./app.js?v=3aef3ec39213",
-      "./browse.js": "./browse.js?v=f7f2ac7a82ff",
+      "./app.js": "./app.js?v=b96512e511de",
+      "./browse.js": "./browse.js?v=d55aff546c10",
       "./changelist.js": "./changelist.js?v=8a0e81e2db01",
       "./containers.js": "./containers.js?v=8b0843767f3b",
       "./crown-crate.js": "./crown-crate.js?v=99d70bf28bf4",
@@ -22,19 +22,19 @@
       "./diff-import.js": "./diff-import.js?v=d77c89cca325",
       "./diff.js": "./diff.js?v=cf5610ab4ceb",
       "./discovery.js": "./discovery.js?v=2f0c06874f5a",
-      "./external-links.js": "./external-links.js?v=a0b6177432a7",
+      "./external-links.js": "./external-links.js?v=4e9ad3864722",
       "./form.js": "./form.js?v=6fca84548811",
       "./icon-cache.js": "./icon-cache.js?v=1cb5a8fe93b5",
       "./ignored-items.js": "./ignored-items.js?v=2bafeeb1a80e",
       "./knowledge.js": "./knowledge.js?v=38a3c3f1887a",
       "./lexicon.js": "./lexicon.js?v=6a84e1908435",
-      "./lists.js": "./lists.js?v=df53d9a839cd",
+      "./lists.js": "./lists.js?v=8a3d232651f4",
       "./luxury.js": "./luxury.js?v=afaca01b6799",
       "./maintenance.js": "./maintenance.js?v=6024b163cb36",
-      "./masks.js": "./masks.js?v=e29b740d262b",
+      "./masks.js": "./masks.js?v=899604f72e14",
       "./names-dump.js": "./names-dump.js?v=921e015d52e4",
       "./names.js": "./names.js?v=9ff4d264f2e6",
-      "./prefs.js": "./prefs.js?v=1c6e035da428",
+      "./prefs.js": "./prefs.js?v=5b54bbbbfebf",
       "./presets.js": "./presets.js?v=59ac205e0187",
       "./quick-edit.js": "./quick-edit.js?v=165e6df8586d",
       "./reference-data.js": "./reference-data.js?v=2aacc053c8d3",
@@ -42,7 +42,7 @@
       "./taxonomy.js": "./taxonomy.js?v=40469ffce4b1",
       "./validate.js": "./validate.js?v=db5fb73ad093",
       "./zanil.js": "./zanil.js?v=044188392755",
-      "./locale/en.js": "./locale/en.js?v=122184e281f5"
+      "./locale/en.js": "./locale/en.js?v=37ea91207748"
     }
   }
   </script>
@@ -62,9 +62,7 @@
     <span class="credit muted">
       <a href="https://esoitem.uesp.net/" target="_blank" rel="noopener noreferrer"
          data-t-title="site.credit.uesp" data-t-aria-label="site.credit.uesp">
-        <svg class="credit-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-          <path fill="currentColor" d="M7.4 3.6C6.3 2.9 4.9 2.6 3.2 2.6c-.4 0-.7.3-.7.7v8.3c0 .4.3.7.7.7 1.5 0 2.8.3 3.8.9.2.1.4 0 .4-.2V3.8a.3.3 0 0 0-.1-.2Zm1.2 0C9.7 2.9 11.1 2.6 12.8 2.6c.4 0 .7.3.7.7v8.3c0 .4-.3.7-.7.7-1.5 0-2.8.3-3.8.9-.2.1-.4 0-.4-.2V3.8c0-.1 0-.2.1-.2Z"/>
-        </svg>
+        <img class="credit-icon" src="./assets/sites/uesp.png" alt="" width="16" height="16">
       </a>
       <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener noreferrer"
          data-t-title="site.credit.licence" data-t-aria-label="site.credit.licence">
@@ -74,10 +72,12 @@
         </svg>
       </a>
     </span>
-    <label class="theme-pick muted"><span data-t="site.language"></span>
+    <button id="settings-open" type="button" class="btn-mini footer-control" data-t-title="site.settings.tip" data-t-aria-label="site.settings">
+      <span class="ico ico-settings" aria-hidden="true"></span><span class="pick-text" data-t="site.settings"></span></button>
+    <label class="theme-pick muted">
       <select id="language-select" data-t-aria-label="site.language" data-t-title="site.language.tip"></select>
     </label>
-    <label class="theme-pick muted"><span data-t="site.theme"></span>
+    <label class="theme-pick muted"><span class="pick-glyph ico ico-paintbrush" aria-hidden="true"></span><span class="pick-text" data-t="site.theme"></span>
       <select id="theme-select" data-t-aria-label="site.theme.label">
         <option value="system" data-t="site.theme.system"></option>
         <option value="light" data-t="site.theme.light"></option>
@@ -91,6 +91,33 @@
       <button id="btn-submit" class="btn-primary" hidden data-t="send.open"></button>
     </span>
   </footer>
+
+  <dialog id="settings" class="settings-dialog" aria-labelledby="settings-title">
+    <button type="button" class="modal-close" data-t-aria-label="common.close">×</button>
+    <h2 id="settings-title" data-t="settings.title"></h2>
+    <section class="settings-section">
+      <h3 data-t="settings.trade"></h3>
+      <p class="muted" data-t="trade.intro"></p>
+      <fieldset>
+        <legend><img class="site-icon" src="./assets/sites/esohub.png" alt="" width="16" height="16"> ESO-Hub
+          <button type="button" class="help-toggle" aria-expanded="false" aria-controls="help-esohub" data-t-title="trade.help" data-t-aria-label="trade.help"><span class="ico ico-circle-help" aria-hidden="true"></span></button></legend>
+        <p id="help-esohub" class="settings-help muted" data-t="trade.esohub.help" hidden></p>
+        <label><input type="checkbox" name="trade-site" value="esohub"> <span data-t="trade.show"></span></label>
+      </fieldset>
+      <fieldset>
+        <legend><img class="site-icon" src="./assets/sites/ttc.png" alt="" width="16" height="16"> Tamriel Trade Centre
+          <button type="button" class="help-toggle" aria-expanded="false" aria-controls="help-ttc" data-t-title="trade.help" data-t-aria-label="trade.help"><span class="ico ico-circle-help" aria-hidden="true"></span></button></legend>
+        <p id="help-ttc" class="settings-help muted" data-t="trade.ttc.help" hidden></p>
+        <label><input type="checkbox" name="trade-site" value="ttc"> <span data-t="trade.show"></span></label>
+        <div class="settings-row">
+          <label><span data-t="trade.ttc.server"></span>
+            <select id="ttc-server"><option value="eu">EU</option><option value="us">NA</option></select></label>
+          <label><span data-t="trade.ttc.platform"></span>
+            <select id="ttc-platform"><option value="pc">PC</option><option value="xb">Xbox</option><option value="ps">PlayStation</option></select></label>
+        </div>
+      </fieldset>
+    </section>
+  </dialog>
 
   <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title">
     <div class="modal-inner">
@@ -137,6 +164,6 @@
     </div>
   </div>
 
-  <script type="module" src="./app.js?v=3aef3ec39213"></script>
+  <script type="module" src="./app.js?v=b96512e511de"></script>
 </body>
 </html>

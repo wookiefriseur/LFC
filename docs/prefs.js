@@ -86,3 +86,54 @@ export function bindThemeSelect(select) {
     applyTheme(choice);
   });
 }
+
+// Guild trader price links: which sites, and the Tamriel Trade Centre megaserver and platform, whose listings are separate.
+export const TRADE_SITE_IDS = ["esohub", "ttc"];
+export const TTC_SERVERS = ["eu", "us"];
+export const TTC_PLATFORMS = ["pc", "xb", "ps"];
+
+export function tradeSettings() {
+  const sites = getPref("tradeSites");
+  const server = getPref("ttcServer");
+  const platform = getPref("ttcPlatform");
+  return {
+    // ESO-Hub alone until the visitor chooses: that is what the page linked before there was a choice.
+    sites: Array.isArray(sites) ? sites.filter((s) => TRADE_SITE_IDS.includes(s)) : ["esohub"],
+    ttcServer: TTC_SERVERS.includes(server) ? server : "eu",
+    ttcPlatform: TTC_PLATFORMS.includes(platform) ? platform : "pc",
+  };
+}
+
+/** Wires the trade link settings dialog; `onChange` runs after every stored change. */
+export function bindTradeSettings(dialog, opener, onChange) {
+  if (!dialog || !opener) return;
+  const site = (id) => dialog.querySelector(`input[name="trade-site"][value="${id}"]`);
+  const server = dialog.querySelector("#ttc-server");
+  const platform = dialog.querySelector("#ttc-platform");
+  const fill = () => {
+    const s = tradeSettings();
+    TRADE_SITE_IDS.forEach((id) => { if (site(id)) site(id).checked = s.sites.includes(id); });
+    server.value = s.ttcServer;
+    platform.value = s.ttcPlatform;
+    server.disabled = platform.disabled = !s.sites.includes("ttc");
+  };
+  opener.addEventListener("click", () => { fill(); dialog.showModal(); });
+  dialog.addEventListener("change", () => {
+    setPref("tradeSites", TRADE_SITE_IDS.filter((id) => site(id)?.checked));
+    setPref("ttcServer", server.value);
+    setPref("ttcPlatform", platform.value);
+    fill();
+    onChange?.();
+  });
+  dialog.querySelector(".modal-close")?.addEventListener("click", () => dialog.close());
+  // A click on the backdrop lands on the dialog itself.
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) return dialog.close();
+    // The "?" next to a site opens its note on links that do not work; a title would never show on a touch screen.
+    const help = e.target.closest(".help-toggle");
+    if (!help) return;
+    const note = dialog.querySelector(`#${help.getAttribute("aria-controls")}`);
+    note.hidden = !note.hidden;
+    help.setAttribute("aria-expanded", String(!note.hidden));
+  });
+}

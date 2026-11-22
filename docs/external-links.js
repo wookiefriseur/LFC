@@ -2,13 +2,48 @@
 
 import { dropCachedIconURL, getCachedIconURL, putCachedIconURL } from "./icon-cache.js";
 import { t, valueLabel } from "./lexicon.js";
+import { language, tradeSettings } from "./prefs.js";
 
 const ESO_LINKS = {
   UESP_ITEM:       (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}`,
   UESP_ITEM_EMBED: (id) => `https://esoitem.uesp.net/itemLink.php?itemid=${id}&embed`,
   // The site appends the name after the id; the id alone is enough.
-  ESOHUB_TRADING:  (id) => `https://eso-hub.com/en/trading/${id}`,
+  ESOHUB_TRADING:  (lang, id) => `https://eso-hub.com/${lang}/trading/${id}`,
+  // Screenshots, 3D model and prices, but furnishings only, and keyed by the name in that language: any other slug is a 404.
+  ESOHUB_FURNITURE: (lang, slug) => `https://eso-hub.com/${lang}/furniture/${slug}`,
+  // TTC has ids of its own, so the exact name it is: the pattern also matches partial names.
+  TTC_SEARCH: (server, platform, name, lang) =>
+    `https://${server}.tamrieltradecentre.com/${platform}/Trade/SearchResult?ItemNamePattern=${encodeURIComponent(name)}&lang=${lang}`,
 };
+
+// Page language -> each site's own language code. ESO-Hub has no Japanese or Chinese pages; TTC speaks every game language.
+const ESOHUB_LANGUAGES = { en: "en", de: "de", fr: "fr", es: "es", ru: "ru" };
+const TTC_LANGUAGES = { en: "en-US", de: "de-DE", fr: "fr-FR", es: "es-ES", ru: "ru-RU", jp: "ja-JP", zh: "zh-CN" };
+
+// Cyrillic as ICU's Any-Latin then Latin-ASCII write it, which is what ESO-Hub's slugs match ("Сырные крошки (эшатер)" -> syrnye-kroski-esater).
+const CYRILLIC = {
+  а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "e", ж: "z", з: "z", и: "i", й: "j", к: "k", л: "l", м: "m",
+  н: "n", о: "o", п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "h", ц: "c", ч: "c", ш: "s", щ: "s", ъ: "",
+  ы: "y", ь: "", э: "e", ю: "u", я: "a",
+};
+const LATIN_EXTRA = { ß: "ss", æ: "ae", œ: "oe", ø: "o", đ: "d", ł: "l", þ: "th" };
+
+/** ESO-Hub's furniture slug: lower case ASCII, accents dropped, words joined by hyphens, other punctuation removed. */
+export function esoHubSlug(name) {
+  return String(name).toLowerCase()
+    .replace(/[\u0400-\u04ff]/g, (c) => CYRILLIC[c] ?? c)
+    .replace(/[ßæœøđłþ]/g, (c) => LATIN_EXTRA[c])
+    .normalize("NFD").replace(/\p{M}/gu, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim().replace(/[\s-]+/g, "-");
+}
+
+// (id) -> { local, english }: the item's name in the chosen language ("" when it has none) and in English.
+let itemNameLookup = (_id) => ({ local: "", english: "" });
+
+export function setItemNameLookup(fn) {
+  if (typeof fn === "function") itemNameLookup = fn;
+}
 
 export function bareIconURL(iconPath) {
   let p = String(iconPath).trim();
@@ -80,21 +115,68 @@ export const TRADING_ICONS = {
   blueprint: { glyph: '📜', label: "links.trading.blueprint" },
 };
 
+export const TRADE_SITES = {
+  esohub: { name: "ESO-Hub", tag: "EH" },
+  ttc:    { name: "Tamriel Trade Centre", tag: "TTC" },
+};
+
 const BOUND_SOURCES = new Set(['crown_store', 'crown_crate', 'housing']);
 
 export function isTradeable(records) {
   return !records.length || records.some((r) => !BOUND_SOURCES.has(r.source?.type));
 }
 
-/** @param kind "item", or "blueprint" for the recipe of a paired craftable */
-export function tradingLinkAnchor(id, kind = 'item') {
-  const { glyph } = TRADING_ICONS[kind];
-  const label = t(TRADING_ICONS[kind].label);
-  const a = extLink(ESO_LINKS.ESOHUB_TRADING(id), glyph);
+function esoHubURL(id, kind, lang, names) {
+  const hubLang = ESOHUB_LANGUAGES[lang] || "en";
+  // Blueprints have no furniture page; a furnishing without a name in the page language would have no valid slug.
+  const name = hubLang === lang ? names.local : names.english;
+  const slug = kind === "item" && name ? esoHubSlug(name) : "";
+  return slug ? ESO_LINKS.ESOHUB_FURNITURE(hubLang, slug) : ESO_LINKS.ESOHUB_TRADING(hubLang, id);
+}
+
+function ttcURL(lang, names, { ttcServer, ttcPlatform }) {
+  const [name, ttcLang] = names.local ? [names.local, TTC_LANGUAGES[lang] || "en-US"] : [names.english, "en-US"];
+  return name ? ESO_LINKS.TTC_SEARCH(ttcServer, ttcPlatform, name, ttcLang) : null;
+}
+
+function tradeNames(id, lang) {
+  const raw = itemNameLookup(id) || {};
+  const real = (n) => (n && !/^Item \d+$/.test(n) ? String(n) : "");
+  return { english: real(raw.english), local: lang === "en" ? real(raw.english) : real(raw.local) };
+}
+
+function tradeLink(site, id, kind, lang, settings) {
+  const names = tradeNames(id, lang);
+  const href = site === "esohub" ? esoHubURL(id, kind, lang, names) : ttcURL(lang, names, settings);
+  if (!href) return null;
+  const label = t(TRADING_ICONS[kind].label, { site: TRADE_SITES[site].name });
+  const a = extLink(href, TRADING_ICONS[kind].glyph);
   a.classList.add('trade-link');
+  a.dataset.site = site;
   a.title = label;
   a.setAttribute('aria-label', label);
   return a;
+}
+
+/**
+ * One group per trade site the visitor chose, in TRADE_SITES order: the site's tag, then its item and blueprint links.
+ * None when they chose no site or nothing is linkable.
+ * @param ids { item, blueprint }: either may be missing, e.g. a bound item has no item link
+ */
+export function tradingLinkGroups({ item = null, blueprint = null } = {}) {
+  const settings = tradeSettings();
+  const lang = language();
+  return Object.keys(TRADE_SITES).filter((site) => settings.sites.includes(site)).flatMap((site) => {
+    const links = [[item, "item"], [blueprint, "blueprint"]]
+      .filter(([id]) => id != null).map(([id, kind]) => tradeLink(site, id, kind, lang, settings)).filter(Boolean);
+    if (!links.length) return [];
+    const group = document.createElement("span");
+    group.className = "trade-group";
+    group.dataset.site = site;
+    const tag = Object.assign(document.createElement("span"), { className: "trade-site", textContent: TRADE_SITES[site].tag, title: TRADE_SITES[site].name });
+    group.append(tag, ...links);
+    return [group];
+  });
 }
 
 // The game's own currency icons under esoui/art/currency/, kept by hand: currencies change rarely.

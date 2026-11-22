@@ -729,10 +729,10 @@ test("icons: browsing paints game icons rather than the placeholder", async (pag
     "the page never asked the icon CDN for anything");
 });
 
-test("the tab bar is Lists, Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", async (page) => {
+test("the tab bar is Lists, Catalogue, Luxury, Crown, Batch edit, Maintenance, Names, About", async (page) => {
   const labels = await page.$$eval("#tab-bar > button", (bs) => bs.map((b) => b.textContent.trim()));
-  assertEq(labels.join(", "), "Lists, \u{1F50D} Browse, Luxury, Crown, Batch edit, Maintenance, Names, About", "the tab bar");
-  assertEq(await page.$eval("#tab-browse > span", (s) => s.getAttribute("aria-hidden")), "true", "the Browse glyph is hidden from screen readers");
+  assertEq(labels.join(", "), "Lists, Catalogue, Luxury, Crown, Batch edit, Maintenance, Names, About", "the tab bar");
+  assertEq(await page.$eval("#tab-browse > span", (s) => s.getAttribute("aria-hidden") + " " + s.className), "true ico ico-book-open", "the Catalogue icon is hidden from screen readers");
   assertEq(await page.$("header input, header form"), null, "the header still has a search box");
   const footerAbout = await page.$$eval("footer a, footer button",
     (els) => els.filter((e) => /about/i.test(e.textContent)).length);
@@ -843,13 +843,14 @@ test("lists: create, add from Browse in two clicks, pill, rename, copy and impor
   }
 });
 
-test("lists: crafting knowledge marks Browse and list rows, links go to ESO-HUB, Forget clears it", async (page) => {
+test("lists: crafting knowledge marks Browse and list rows, links go to ESO-Hub, Forget clears it", async (page) => {
   const importText = async (text) => {
     await page.$eval("#lists-transfer", (d) => { d.open = true; });
     await page.$eval("#lists-text", (t, v) => { t.value = v; t.dispatchEvent(new Event("input")); }, text);
     await page.click("#lists-import");
   };
   const hub = (id) => `https://eso-hub.com/en/trading/${id}`;
+  const furniture = (slug) => `https://eso-hub.com/en/furniture/${slug}`;
   try {
     await switchTab(page, "lists");
     await importText("FURC KNOWN 1/1: 132173,94116\nFURC UNKNOWN 1/2: 118991\nFURC LIST Knowledge test: 130326,114327");
@@ -864,16 +865,16 @@ test("lists: crafting knowledge marks Browse and list rows, links go to ESO-HUB,
     const rows = await page.$$eval(".lists-item-row", (rs) => rs.map((r) => [r.querySelector(".knowledge-mark")?.getAttribute("aria-label"),
       ...[...r.querySelectorAll("a.trade-link")].map((a) => `${a.textContent} ${a.getAttribute("aria-label")} ${a.href}`)]));
     assertEq(JSON.stringify(rows), JSON.stringify([
-      ["You can craft this", `\u{1F4DC} Blueprint prices on ESO-HUB ${hub(132173)}`, `\u{1F4B0} Guild store prices on ESO-HUB ${hub(130326)}`],
-      ["You cannot craft this yet", `\u{1F4DC} Blueprint prices on ESO-HUB ${hub(118991)}`, `\u{1F4B0} Guild store prices on ESO-HUB ${hub(114327)}`],
+      ["You can craft this", `\u{1F4B0} Guild store prices on ESO-Hub ${furniture("witches-brazier-primitive-log")}`, `\u{1F4DC} Blueprint prices on ESO-Hub ${hub(132173)}`],
+      ["You cannot craft this yet", `\u{1F4B0} Guild store prices on ESO-Hub ${furniture("high-elf-stool-curved")}`, `\u{1F4DC} Blueprint prices on ESO-Hub ${hub(118991)}`],
     ]), "row markers and trading links");
     assertEq(await page.$eval(".lists-item-row a.trade-link", (a) => `${a.target} ${a.rel}`), "_blank noopener noreferrer", "a trading link opens a new tab");
-    const order = await page.$eval(".lists-item-row", (r) => [...r.querySelectorAll("img, .ext-icon, .lists-item-name, .knowledge-mark, a, .lists-item-tail > span, button:not(.lists-item-name)")]
+    const order = await page.$eval(".lists-item-row", (r) => [...r.querySelectorAll("img, .ext-icon, .lists-item-name, .knowledge-mark, a, .lists-item-tail > span:not(.trade-group), .trade-site, button:not(.lists-item-name)")]
       .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left)
       .map((e) => (e.matches(".lists-item-name") ? e.lastChild.textContent : e.getAttribute("aria-label") || e.textContent)).join(" | "));
-    assertEq(order.replace(/^[^|]*\| /, ""), "Witches Brazier, Primitive Log | You can craft this | Blueprint prices on ESO-HUB | Guild store prices on ESO-HUB | #130326 | "
-      + "Show Witches Brazier, Primitive Log in Browse | Add to Favorites | Remove Witches Brazier, Primitive Log", "the order of a row");
-    assertEq(await page.$eval(".lists-item-row button[title='Show in Browse']", (b) => b.textContent), "\u{1F50D}", "the Browse button is an icon");
+    assertEq(order.replace(/^[^|]*\| /, ""), "Witches Brazier, Primitive Log | You can craft this | EH | Guild store prices on ESO-Hub | Blueprint prices on ESO-Hub | #130326 | "
+      + "Show Witches Brazier, Primitive Log in the Catalogue | Add to Favorites | Remove Witches Brazier, Primitive Log", "the order of a row");
+    assertEq(await page.$eval(".lists-item-row button[title='Show in the Catalogue']", (b) => b.querySelector(".ico-book-open") && b.textContent), "", "the Catalogue button is an icon");
     // The marker stands directly before the name's first word, on its line.
     const hug = (sel) => page.$$eval(sel, (ms) => ms.map((m) => {
       if (m.parentElement.lastChild.previousSibling?.previousSibling !== m) return "not right before the name";
@@ -912,7 +913,26 @@ test("lists: crafting knowledge marks Browse and list rows, links go to ESO-HUB,
     await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#130326")).click());
     await page.waitForSelector("#browse-detail:not([hidden])");
     const links = await page.$$eval("#browse-detail .browse-detail-title a.trade-link", (as) => as.map((a) => `${a.title} ${a.href}`));
-    assertEq(links.join(", "), `Guild store prices on ESO-HUB ${hub(130326)}, Blueprint prices on ESO-HUB ${hub(132173)}`, "detail trading links for the item and its recipe");
+    assertEq(links.join(", "), `Guild store prices on ESO-Hub ${furniture("witches-brazier-primitive-log")}, Blueprint prices on ESO-Hub ${hub(132173)}`, "detail trading links for the item and its recipe");
+    // The trade links dialog: TTC on NA Xbox joins ESO-Hub, the choice is stored, and the open detail redraws with it.
+    await page.click("#settings-open");
+    assert(await page.$eval("#settings", (d) => d.open && document.querySelector("#ttc-server").disabled), "the dialog opens, TTC options off while TTC is");
+    await page.click('#settings input[value="ttc"]');
+    await page.select("#ttc-server", "us");
+    await page.select("#ttc-platform", "xb");
+    assertEq(await page.evaluate(() => JSON.stringify(["tradeSites", "ttcServer", "ttcPlatform"].map((k) => JSON.parse(localStorage.getItem("furcat-prefs-v1"))[k]))),
+      JSON.stringify([["esohub", "ttc"], "us", "xb"]), "the choice is kept in the browser");
+    await page.click("#settings .modal-close");
+    await page.waitForFunction(() => document.querySelectorAll("#browse-detail .browse-detail-title a.trade-link").length === 4);
+    const ttc = (name) => `https://us.tamrieltradecentre.com/xb/Trade/SearchResult?ItemNamePattern=${encodeURIComponent(name)}&lang=en-US`;
+    assertEq((await page.$$eval("#browse-detail .browse-detail-links .trade-group", (gs) => gs.map((g) => g.textContent + " " + [...g.querySelectorAll("a")].map((a) => a.href).join(" ")))).join(", "),
+      `EH\u{1F4B0}\u{1F4DC} ${furniture("witches-brazier-primitive-log")} ${hub(132173)}, `
+      + `TTC\u{1F4B0}\u{1F4DC} ${ttc("Witches Brazier, Primitive Log")} ${ttc("Blueprint: Witches Brazier, Primitive Log")}`, "one group per chosen site, item then blueprint");
+    await page.evaluate(() => {
+      const p = JSON.parse(localStorage.getItem("furcat-prefs-v1"));
+      ["tradeSites", "ttcServer", "ttcPlatform"].forEach((k) => delete p[k]);
+      localStorage.setItem("furcat-prefs-v1", JSON.stringify(p));
+    });
     assertEq(await page.$eval("#browse-detail .knowledge-mark", (m) => m.getAttribute("role") + " " + m.textContent), "img \u2705", "the detail marker");
     assertEq(await page.$eval("#browse-detail .knowledge-mark", (m) => m.parentElement.tagName), "H3", "the detail marker follows the name");
     assertEq(await page.$$eval(card, (cs) => cs.find((c) => c.textContent.includes("#130326")).querySelector(".knowledge-mark").parentElement.className), "browse-card-name", "the card marker follows the name");
@@ -3948,13 +3968,13 @@ test("language: tab names and source kinds follow the interface translation, and
     await page.select("#language-select", "de");
     await page.waitForFunction(() => document.querySelector("#tab-lists")?.textContent === "Listen", { timeout: 10000 })
       .catch(() => { throw new Error("the tab names are not German"); });
-    assertEq(await page.$eval("#tab-browse", (b) => b.textContent.trim()), "\uD83D\uDD0D Katalog", "the Browse tab keeps its glyph");
+    assertEq(await page.$eval("#tab-browse", (b) => b.textContent.trim()), "Katalog", "the Catalogue tab is translated");
     // no tab or subtab shows a bare text id
     const bare = await page.$$eval(".tab, .subtab", (els) => els.map((e) => e.textContent).filter((text) => /\btab\./.test(text)));
     assertEq(bare.join("; "), "", "tabs without a text in the master file");
     // the footer is part of the page file itself
     assertEq(await page.$eval("#pending-count", (e) => e.textContent), "Noch nichts zu senden.", "the footer count");
-    assertEq(await page.$eval("footer .theme-pick span", (e) => e.textContent), "Sprache", "the language label");
+    assertEq(await page.$eval("#language-select", (e) => e.getAttribute("aria-label")), "Sprache", "the language label");
     assertEq(await page.$eval('#theme-select option[value="dark"]', (e) => e.textContent), "Dunkel", "a theme choice");
     assertEq(await page.$eval('#theme-select option[value="light"]', (e) => e.textContent), "Light", "an untranslated theme choice");
     // Lists is the landing page: fixed markup, drawn text, and markup inside a translated sentence
@@ -4178,7 +4198,7 @@ test("language: vocabulary labels, zone names and string-id notes follow the lan
     await page.type("#browse-search", String(id));
     await page.waitForFunction((n) => { const cards = document.querySelectorAll("#panel-browse .browse-card"); return cards.length === 1 && cards[0].textContent.includes(`#${n}`); }, { timeout: 5000 }, id);
     await page.click("#panel-browse .browse-card");
-    await page.waitForFunction((n) => document.querySelector("#browse-detail:not([hidden])")?.textContent.includes(`#${n}`), { timeout: 5000 }, id);
+    await page.waitForFunction((n) => document.querySelector("#browse-detail:not([hidden]) .browse-detail-links")?.textContent.includes(String(n)), { timeout: 5000 }, id);
     return page.$eval("#browse-detail", (d) => d.textContent);
   };
   try {

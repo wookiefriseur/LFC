@@ -584,9 +584,18 @@ a.is-disabled {
 
 .theme-pick { font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.35rem; }
 .theme-pick select { font: inherit; padding: 0.1rem 0.25rem; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--fg); }
-.credit { font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+/* A divider keeps the licence link apart from the Settings button next to it. */
+.credit { font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.5rem; padding-right: 0.75rem; border-right: 1px solid var(--border); }
 .credit a { color: var(--accent); display: inline-flex; }
 .credit-icon { width: 16px; height: 16px; display: block; }
+/* Lucide icons as masks, so they take the text colour of whatever they sit in (an active tab, either theme). */
+.ico { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -0.2em; background: currentColor;
+  mask: var(--ico) center / contain no-repeat; -webkit-mask: var(--ico) center / contain no-repeat; }
+.ico-book-open { --ico: url("./assets/icons/book-open.svg"); }
+.ico-settings { --ico: url("./assets/icons/settings.svg"); }
+.ico-paintbrush { --ico: url("./assets/icons/paintbrush.svg"); }
+.ico-circle-help { --ico: url("./assets/icons/circle-help.svg"); }
+#settings-open { display: inline-flex; align-items: center; gap: 0.35rem; }
 /* Prose, so the About page takes a reading measure rather than the full width every working screen uses. */
 .about { max-width: var(--screen-width); margin: 0 auto; padding: 1.25rem 1.5rem 3rem; }
 .about-box {
@@ -1238,8 +1247,7 @@ table.lux-preview tr.lux-warn { background: var(--danger-bg); }
 .browse-card-name { font-weight: 600; }
 .browse-card-meta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.2rem; font-size: 0.8rem; }
 /* The recipe a crafted item comes from: a footnote beside the item's own id, never in place of it. */
-.browse-card-recipe, .browse-detail-recipe { color: var(--muted); }
-.browse-detail-recipe { margin-left: 0.5rem; font-size: 0.85rem; }
+.browse-card-recipe { color: var(--muted); }
 .browse-card-n { color: var(--accent); }
 
 .browse-detail {
@@ -2244,6 +2252,39 @@ input, select, textarea { min-width: 0; max-width: 100%; }
 .lists-item-tail { display: flex; align-items: center; gap: 0.6rem; flex: 0 0 auto; margin-left: auto; }
 .lists-remove { margin-left: 0.8rem; }   /* kept apart, so it is not hit for its neighbour */
 .trade-link, .trade-link:hover { text-decoration: none; }
+/* Price links grouped by site: the site's tag, then its item and blueprint glyphs. */
+.browse-detail-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.75rem; font-size: 0.85rem; }
+/* The UESP ids on a line of their own, the price links on the next, whether or not there is a blueprint. */
+.uesp-ids { white-space: nowrap; flex-basis: 100%; }
+.trade-group { display: inline-flex; align-items: center; gap: 0.15rem; white-space: nowrap; }
+.trade-site { font-size: 0.65rem; font-weight: 600; color: var(--muted); cursor: default; }
+/* Footer controls: words on wide screens, glyphs on narrow ones so the footer stays on one line. */
+.pick-glyph { display: none; }
+@media (max-width: 760px) {
+  .pick-glyph { display: inline-block; }
+  .pick-text { display: none; }
+  /* One short row: compact controls, and the status shares the row instead of taking one of its own. */
+  footer { gap: 0.25rem 0.5rem; padding: 0.25rem 0.5rem; }
+  footer select, footer .footer-control { min-height: 2.75rem; padding-block: 0; }
+  footer #status { flex: 0 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* With nothing to send, the pending note shares the controls' row; a Send button still wraps to a row of its own. */
+  footer .footer-actions:has(#btn-submit[hidden]) { flex: 1 1 0; min-width: 0; justify-content: flex-end; }
+  footer .footer-actions:has(#btn-submit[hidden]) #pending-count { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+.settings-dialog { background: var(--surface); color: var(--fg); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; width: min(26rem, calc(100% - 2rem)); }
+.settings-dialog::backdrop { background: var(--scrim); }
+.settings-dialog h2 { margin: 0 0 0.5rem; }
+.settings-dialog h3 { margin: 0.75rem 0 0.25rem; font-size: 1rem; }
+.settings-dialog h3 + p { margin: 0 0 0.25rem; }
+.settings-dialog fieldset { border: 1px solid var(--border); border-radius: 6px; margin: 0.75rem 0 0; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.settings-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; padding-top: 0.5rem; border-top: 1px solid var(--border); align-self: stretch; }
+.settings-dialog legend { font-weight: 600; display: flex; align-items: center; gap: 0.35rem; }
+.site-icon { width: 16px; height: 16px; }
+.help-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 0.15rem; border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 50%; }
+.help-toggle[aria-expanded="true"], .help-toggle:hover { color: var(--accent); }
+.settings-help { margin: 0; font-size: 0.85rem; }
+.settings-dialog label { display: inline-flex; align-items: center; gap: 0.35rem; }
+.settings-dialog select { font: inherit; padding: 0.1rem 0.25rem; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--fg); }
 .knowledge-mark { cursor: default; }
 .knowledge-mark.is-unknown, .knowledge-mark.is-missing { filter: grayscale(1); opacity: 0.45; }
 .lists-switch { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }

@@ -14,7 +14,7 @@ import { SOURCE_ENUM_FIELD } from "./validate.js";
 import { SITE_ONLY_FIELDS, canMoveToFolio } from "./form.js";
 import { leafOf, listsWith, onListsChange, openAddToList, starButton } from "./lists.js";
 import { knowledgeMarker, onKnowledgeChange } from "./knowledge.js";
-import { tradingLinkAnchor, isTradeable, costNode } from "./external-links.js";
+import { tradingLinkGroups, isTradeable, costNode } from "./external-links.js";
 import { language } from "./prefs.js";
 // Re-exported: this module was the helpers' original home.
 export { originOf, sortBySourcePriority } from "./data.js";
@@ -680,12 +680,18 @@ export function browseMask(deps) {
     const mark = knowledgeMarker(item.id);
     title.append(elem("h3", {}, mark ? [mark, " "] : [], nameOf(item.id) || t("common.no_name")));
     const blueprint = item.records.find(r => r.blueprint)?.blueprint;
-    title.append(itemLinkAnchor(item.id, `#${item.id}`), " ", isTradeable(item.records) ? tradingLinkAnchor(item.id) : []);
-    if (blueprint && item.records.some(r => r.id)) {
-      const from = elem("span", { class: "browse-detail-recipe muted" }, t("browse.from_recipe"), " ");
-      from.append(itemLinkAnchor(blueprint, `#${blueprint}`), " ", tradingLinkAnchor(blueprint, "blueprint"));
-      title.append(from);
+    const crafted = blueprint && item.records.some(r => r.id);
+    // Under the name: the UESP ids (the blueprint's in brackets), then a line of price links, one group per chosen site.
+    const uesp = elem("span", { class: "uesp-ids" }, elem("span", { class: "trade-site", title: "UESP" }, "UESP"), " ",
+      itemLinkAnchor(item.id, String(item.id)));
+    if (crafted) {
+      const bp = itemLinkAnchor(blueprint, String(blueprint));
+      bp.title = t("browse.from_recipe_id", { id: blueprint });
+      uesp.append(" (", bp, ")");
     }
+    const links = elem("div", { class: "browse-detail-links" }, uesp,
+      tradingLinkGroups({ item: isTradeable(item.records) ? item.id : null, blueprint: crafted ? blueprint : null }));
+    title.append(links);
     titleWrap.append(title);
     head.append(titleWrap);
     host.append(head);
@@ -958,5 +964,5 @@ export function browseMask(deps) {
     applyFilter(filter);
   }
 
-  return { id: "browse", icon: "🔍", render, onShow, focus };
+  return { id: "browse", icon: "book-open", render, onShow, focus };
 }

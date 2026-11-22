@@ -1,6 +1,6 @@
 // Named furnishing lists, kept in this browser only. The text form is FurnitureCatalogue's own list line, so a list copied here pastes into the add-on's import window, and an add-on export pastes back here.
 import { itemSearch } from "./crown-store.js";
-import { tradingLinkAnchor, isTradeable, costNode } from "./external-links.js";
+import { tradingLinkGroups, isTradeable, costNode } from "./external-links.js";
 import {
   forgetKnowledge, getKnowledge, importKnowledge, kindReport, kindStatus, knowledgeLine, knowledgeMarker, knowledgeOf, missingPages, onKnowledgeChange, recipeResolver,
 } from "./knowledge.js";
@@ -913,7 +913,7 @@ export function listsMask(deps) {
       li.classList.toggle("is-open", !where.hidden);
       toggle.setAttribute("aria-expanded", String(!where.hidden));
     });
-    const show = elem("button", { type: "button", class: "btn-mini", title: t("lists.show_in_browse"), "aria-label": t("lists.show_in_browse.label", { name: name || id }) }, "🔍");
+    const show = elem("button", { type: "button", class: "btn-mini", title: t("lists.show_in_browse"), "aria-label": t("lists.show_in_browse.label", { name: name || id }) }, elem("span", { class: "ico ico-book-open", "aria-hidden": "true" }));
     show.addEventListener("click", () => deps.switchToBrowse?.({ query: String(id) }));
     let remove = [];
     if (list) {
@@ -926,7 +926,7 @@ export function listsMask(deps) {
     const star = () => starButton(id, () => line.querySelector(".lists-fave").replaceWith(star()));
     // One group, so at narrow widths it wraps whole and keeps its order; trader icon stays beside the id
     line.append(elem("span", { class: "lists-item-tail" },
-      blueprint ? tradingLinkAnchor(blueprint, "blueprint") : [], isTradeable(recs) ? tradingLinkAnchor(id) : [], elem("span", { class: "muted" }, `#${id}`),
+      tradingLinkGroups({ item: isTradeable(recs) ? id : null, blueprint: blueprint || null }), elem("span", { class: "muted" }, `#${id}`),
       show, list?.faves ? [] : star(), remove));
     li.append(line, where);
     return li;

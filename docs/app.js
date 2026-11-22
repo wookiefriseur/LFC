@@ -2,7 +2,7 @@ import "./responsive-tables.js";
 
 // Every mask shares one dirty buffer (state.buffer) and one Review & Submit flow (quick-edit modal is a reduced view of the same write path)
 
-import { bindThemeSelect, bindLanguageSelect, language } from "./prefs.js";
+import { bindThemeSelect, bindLanguageSelect, bindTradeSettings, language } from "./prefs.js";
 import {
   loadAll, newKey, categoriesFrom, NameStore, isPlaceholderName,
   versionsDesc, versionLabel, latestVersion,
@@ -28,7 +28,7 @@ import {
   LUX_ACTION, priceEffect, successPanelText,
 } from "./luxury.js";
 import {
-  itemLinkAnchor, itemIconImg, setIconPathLookup, setIconPendingLookup, refreshLoadingIcons, costNode,
+  itemLinkAnchor, itemIconImg, setIconPathLookup, setIconPendingLookup, refreshLoadingIcons, costNode, setItemNameLookup,
 } from "./external-links.js";
 import { registerMask, mountMasks, switchMask, activeMaskId, relabelMasks } from "./masks.js";
 import { zanilPortrait } from "./zanil.js";
@@ -144,6 +144,8 @@ async function init() {
     state.categories = categoriesFrom(manifest);
     state.names = new NameStore(names);
     state.records = records;
+    // Trade links need to know whether a name exists in the chosen language, which NameStore.get hides behind its English fallback.
+    setItemNameLookup((id) => ({ local: state.names.translated?.get(Number(id)) || "", english: state.names.english(id) }));
     state.names.pendingName = (id) => state.buffer?.entries.get(`name:${referenceData.namesLocale}:items:${id}`)?.name;
     // The Names tab reads and edits the English item names like any other table
     referenceData.setItemNames(new Map(Object.entries(names)
@@ -192,6 +194,7 @@ async function init() {
     await restorePending();
     installTestHook();
     bindLanguageSelect($("#language-select"), applyLanguage);
+    bindTradeSettings($("#settings"), $("#settings-open"), () => { renderDetail(); switchMask(activeMaskId(), true); });
     applyLanguage(language());
     // A name pasted out of the game can carry no-break spaces; every search box takes them as plain spaces.
     document.addEventListener("input", (e) => {
