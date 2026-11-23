@@ -1,3 +1,9 @@
+1.4.0 (2026-11-23)
+- More lux furnishing updates
+- Updated sourcing on a large number of items
+- Better language support
+- NEW LFC's web UI (https://wookiefriseur.github.io/LFC/) is a one stop shop if you want to help maintain Furniture Catalogue or to organize builds. Lists (including your favorites and your crafting knowledge) can be exported/imported between FC in game and the web UI. Your browser will store your list data, but you should always backup to text files. If you craft on multiple servers/accounts/characters, use a different browser or browser profile to keep crafted knowledge separate.
+
 1.3.0 (2026-11-04)
 - updated sourcing on a large number of items
 - lux furnishing updates
