@@ -127,6 +127,8 @@ Persist keys, not numeric IDs: those can change between releases.
 [*]FurC.GetItemId / FurC.GetItemLink -> LFC.GetItemId / LFC.GetItemLink
 [*]FurC.GetIngredients / FurC.GetMats -> LFC.GetIngredients (unformatted quantities)
 [*]GetSources -> GetSourceDetails (cost: one table or nil)
+[*]GetMiscItemPrice -> GetSourceDetails, read record.cost
+[*]FURC_* globals -> GetSourceTypes / GetDataVersions
 [*]SourceType -> GetSourceTypes, check entry.sources
 [*]entry.origin -> first GetSourceDetails record
 [*]record.source.location / place -> record.source.locations (list)

@@ -71,13 +71,13 @@
 --   GetFurnitureCategories  furnishing category id -> name
 --
 -- Older calls: supported for migration, avoid in new code
---   GetSources            old GetSourceDetails, cost is a list
 --   GetItemDescription    basic source text, use GetSourceDetails for your own display
---   GetMiscItemPrice      old price lookup, use GetSourceDetails
---   FURC_* globals        old constants, use GetSourceTypes and GetDataVersions
 --
 -- Removed
 --   SourceType            replaced by GetSourceTypes, which returns a copy
+--   GetSources            replaced by GetSourceDetails, whose cost is one table or nil
+--   GetMiscItemPrice      replaced by GetSourceDetails, read record.cost
+--   FURC_* globals        replaced by GetSourceTypes and GetDataVersions
 --
 -- Old FurC calls: compatibility only
 --   FurC.Find             returns `{}`, replace with GetEntry, which returns nil on a miss
@@ -99,7 +99,6 @@ local fmt, query = internal.Format, internal.Query
 local getItemId, getItemLink = fmt.GetItemId, fmt.GetItemLink
 local find, getSourceRecords = query.Find, query.GetSourceRecords
 local getIngredients, getItemDescription = query.GetIngredients, query.GetItemDescription
-local getMiscItemPrice = query.GetMiscItemPrice
 local ensureDB = internal.Build.EnsureDB
 local sourceSet = internal.Build.SourceSet
 
@@ -744,41 +743,6 @@ end
 function api.GetItemDescription(recipeKey, recipeArray, stripColor, opts)
   return getItemDescription(recipeKey, recipeArray, stripColor)
 end
-
----Temporary compatibility bridge for prices hidden in baked strings.
----Just for legacy callers. New code should read record.cost from GetSourceDetails.
----@deprecated Use GetSourceDetails, which gives a stable price per source
----@param itemId integer
----@param version integer
----@param source integer source type constant, see GetSourceTypes
----@return integer? currency ESO currency constant
----@return integer? amount
----```lua
----local entry = LFC.GetEntry(134686)
----if entry and entry.version then
----  local currency, amount = LFC.GetMiscItemPrice(entry.id, entry.version, LFC.GetSourceTypes().CROWN)
----  if currency and amount then
----    d(amount .. " " .. GetCurrencyName(currency, false, false))
----  end
----end
----```
-function api.GetMiscItemPrice(itemId, version, source)
-  return getMiscItemPrice(itemId, version, source)
-end
-
----Old name and record shape of GetSourceDetails
----@deprecated Use GetSourceDetails: its cost is one table or nil. This older call uses cost[1], or an empty cost list.
----@param itemOrLink string|integer
----@return LFCSourceRecord[] records
-function api.GetSources(itemOrLink)
-  local records = getSourceRecords(itemOrLink)
-  for _, record in ipairs(records) do
-    record.cost = (record.cost and { record.cost }) or {}
-  end
-  return records
-end
-
--- Any deprecated enum globals are in Constants.lua, all marked
 
 -- ---------------------------------------------------------------------------
 -- Legacy FurC entry points

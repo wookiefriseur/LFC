@@ -572,55 +572,6 @@ local function eventRecord(rec, recipeKey)
   end
 end
 
-local SOURCE_CURRENCY_MAP = {
-  [src.CROWN] = CURT_CROWNS,
-  [src.DROP] = CURT_MONEY,
-  [src.JUSTICE] = CURT_MONEY,
-  [src.FISHING] = CURT_MONEY,
-  [src.ANTIQUITY] = CURT_MONEY,
-  [src.OTHER] = CURT_MONEY,
-  [src.BAZAAR] = CURT_TRADE_BARS,
-  [src.TOMES] = CURT_TOME_POINTS,
-  [src.TELVAR] = CURT_TELVAR_STONES,
-  [src.COLL_MERCH] = CURT_TELVAR_STONES,
-  [src.GUILDSTORE] = CURT_MONEY,
-  [src.EDITOR] = CURT_CROWNS,
-}
---- Extract a numeric price from baked strings
--- TODO: if performance allows it we should get raw values from DB.. no need to "extract"
-local function extractPrice(entry, source)
-  if not entry then
-    return nil, nil
-  end
-  local t = type(entry)
-  if t == "number" then
-    return SOURCE_CURRENCY_MAP[source], entry
-  end
-  if t == "table" then
-    local sources = entry[1] ~= nil and entry or { entry }
-    for i = 1, #sources do
-      local one = sources[i]
-      if type(one) == "table" and one.itemPrice then
-        return one.currency or SOURCE_CURRENCY_MAP[source], one.itemPrice
-      end
-    end
-    return nil, nil
-  end
-  if t == "string" then
-    -- Strings come as `|c<hex>...|r|u...:currency:|u` (digit grouping is locale-dependent 1,234; 1 234; 1.234)
-    -- numbers outside that markup are item links, control markers, colour codes or some custom text
-    local amountText = entry:match("|c%x%x%x%x%x%x(.-)|r|u[^|]*:currency:|u")
-    if amountText and not amountText:find("%a") then
-      local digits = amountText:gsub("%D", "")
-      local n = #digits > 0 and tonumber(digits)
-      if n then
-        return SOURCE_CURRENCY_MAP[source], n
-      end
-    end
-  end
-  return nil, nil
-end
-
 -- A crown-store offer names exactly one of these
 local CROWN_OFFER_KINDS = { "itemPrice", "pack", "bundle", "crate", "houses", "note", "category" }
 
@@ -946,18 +897,6 @@ local function getSourceRecords(itemOrLink)
   return records
 end
 this.GetSourceRecords = getSourceRecords
-
----Extract a numeric price from baked string
----@param itemId integer
----@param version integer
----@param source integer source type constant
----@return integer? currency ESO currency constant
----@return integer? amount
-local function getMiscItemPrice(itemId, version, source)
-  local entry = findMiscRow(itemId, version, source)
-  return extractPrice(entry, source)
-end
-this.GetMiscItemPrice = getMiscItemPrice
 
 --[[_______________________
     |                     |

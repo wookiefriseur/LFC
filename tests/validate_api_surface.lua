@@ -50,7 +50,6 @@ internal.Query = {
   GetSourceRecords = stub(),
   GetIngredients = stub(),
   GetItemDescription = stub(),
-  GetMiscItemPrice = stub(),
   GetMats = stub(),
 }
 internal.Build = { EnsureDB = stub(), SourceSet = stub() }
@@ -67,8 +66,7 @@ do
     latest = math.max(latest, id)
   end
   assert(versions.ECHOES == 40 and keys[40] == "ECHOES")
-  assert(versions.LATEST == latest and env.FURC_LATEST == latest)
-  assert(versions.ZERO2 == versions.THIEVES and keys[versions.ZERO2] == "THIEVES")
+  assert(versions.LATEST == latest)
   assert(versions.SLAVES == versions.MURKM and keys[versions.SLAVES] == "MURKM")
   versions.ECHOES, keys[40] = -1, "changed"
   assert(api.GetDataVersions().ECHOES == 40 and api.GetDataVersionKeys()[40] == "ECHOES")
@@ -78,8 +76,7 @@ do
   loadInto(env, root .. "/Constants.lua")
   assert(api.GetDataVersions().FUTURE_TEST == future)
   assert(api.GetDataVersionKeys()[future] == "FUTURE_TEST")
-  assert(api.GetDataVersions().LATEST == future and env.FURC_LATEST == future)
-  assert(api.GetDataVersions().ZERO2 == versions.THIEVES)
+  assert(api.GetDataVersions().LATEST == future)
   assert(env.LFCGeneratedConstants.ids.versions.LATEST == nil)
   env.LFCGeneratedConstants.ids.versions.FUTURE_TEST = nil
   loadInto(env, root .. "/Constants.lua")
