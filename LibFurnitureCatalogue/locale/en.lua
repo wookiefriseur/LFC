@@ -34,6 +34,7 @@ local strings = {
   SI_FURC_CHAT_MATS = "Mats:",
   SI_FURC_CHAT_NO_MATS = "Not craftable.",
   SI_FURC_CHAT_NO_SOURCE = "No known source.",
+  SI_FURC_CHAT_NOT_IN_CLIENT = "not in this game client",
   SI_FURC_CHAT_UNKNOWN = "<<1>> is not in the database",
   SI_FURC_CHAT_USAGE = "Commands:",
   SI_FURC_DB = "The Dark Brotherhood supplies vendor hands these out",

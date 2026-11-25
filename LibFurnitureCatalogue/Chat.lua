@@ -99,6 +99,10 @@ end
 ---@return string
 local function label(itemId, entry)
   local text = idAndLink(itemId)
+  -- removed from the game, or not yet in this client
+  if getItemName(itemId) == "" then
+    text = text .. " (" .. GetString(SI_FURC_CHAT_NOT_IN_CLIENT) .. ")"
+  end
   if entry and entry.blueprint then
     text = text .. " (" .. idAndLink(entry.blueprint) .. ")"
   end

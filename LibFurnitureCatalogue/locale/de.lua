@@ -9,6 +9,7 @@ local strings = {
   SI_FURC_CHAT_MATS = "Materialien:",
   SI_FURC_CHAT_NO_MATS = "Nicht herstellbar.",
   SI_FURC_CHAT_NO_SOURCE = "Keine bekannte Quelle.",
+  SI_FURC_CHAT_NOT_IN_CLIENT = "nicht in diesem Spielclient",
   SI_FURC_CHAT_UNKNOWN = "<<1>> ist nicht in der Datenbank",
   SI_FURC_CHAT_USAGE = "Befehle:",
   SI_FURC_DB = "Die Händler der Dunklen Bruderschaft verkaufen diese",
