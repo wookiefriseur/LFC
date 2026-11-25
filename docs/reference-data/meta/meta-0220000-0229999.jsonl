@@ -367,7 +367,7 @@
 {"id":224894,"name":"Breton Amphora, Marble","quality":4,"cat":3,"sub":57,"theme":2,"icon":"housing_bre_inc_planter002","blueprint":225107}
 {"id":224895,"name":"Breton Vase, Marble","quality":3,"cat":3,"sub":57,"theme":2,"icon":"housing_bre_inc_planter003","blueprint":225108}
 {"id":224896,"name":"Breton Planter, Blue Ivy","quality":3,"cat":12,"sub":109,"theme":2,"icon":"housing_bre_waf_housingplanterdarkflowerscombo001","blueprint":225109}
-{"id":224897,"name":"Metal Grate, Hexagonal","icon":"housing_gen_sew_scalecallergrate001","quality":2,"cat":13,"sub":117,"theme":2}
+{"id":224897,"name":"Metal Grate, Hexagonal","icon":"housing_gen_sew_scalecallergrate001","quality":2,"cat":13,"sub":117,"theme":2,"blueprint":225110}
 {"id":224898,"name":"Birdhouse, Large Cylindrical Mounted","quality":3,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse003","blueprint":225111}
 {"id":224899,"name":"Birdhouse, Small Red","quality":2,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse019","blueprint":225112}
 {"id":224900,"name":"Birdhouse, Small Green","quality":2,"cat":6,"sub":99,"theme":2,"icon":"housing_gen_exc_birdhouse023","blueprint":225113}
@@ -705,9 +705,9 @@
 {"id":227519,"name":"Blueprint: Wood Ladder, Long","quality":3,"cat":10,"sub":96,"theme":2,"icon":"crafting_planfurniture_woodworking_3"}
 {"id":227554,"name":"Enormous Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear001","quality":5,"cat":7,"sub":107,"theme":8}
 {"id":227555,"name":"Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear002","quality":4,"cat":7,"sub":107,"theme":8}
-{"id":227606,"name":"Supply Crate, Blacksmithing","icon":"housing_sys_fur_housingchestblacksmith001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227609}
-{"id":227607,"name":"Supply Crate, Woodworking","icon":"housing_sys_fur_housingchestwoodwork001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227610}
-{"id":227608,"name":"Supply Crate, Provisioning","icon":"housing_sys_fur_housingchestprovision001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227611}
+{"id":227606,"name":"Supply Crate, Blacksmithing","icon":"housing_sys_fur_housingchestblacksmith001","quality":5,"cat":10,"sub":95,"theme":1,"blueprint":227609}
+{"id":227607,"name":"Supply Crate, Woodworking","icon":"housing_sys_fur_housingchestwoodwork001","quality":5,"cat":10,"sub":95,"theme":1,"blueprint":227610}
+{"id":227608,"name":"Supply Crate, Provisioning","icon":"housing_sys_fur_housingchestprovision001","quality":5,"cat":10,"sub":95,"theme":1,"blueprint":227611}
 {"id":227612,"name":"Shimmerfrost Fish, Purple","icon":"u51_furnishing_fish_violet","quality":5,"cat":14,"sub":162,"theme":1}
 {"id":227613,"name":"Shimmerfrost Fish, Blue","icon":"u51_furnishing_fish_blue","quality":5,"cat":14,"sub":162,"theme":1}
 {"id":227614,"name":"Shimmerfrost Fish, Green","icon":"u51_furnishing_fish_green","quality":5,"cat":14,"sub":162,"theme":1}

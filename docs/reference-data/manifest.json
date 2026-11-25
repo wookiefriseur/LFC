@@ -120,8 +120,8 @@
           "id_min": 220000,
           "id_max": 229999,
           "count": 722,
-          "bytes": 97802,
-          "digest": "cb086e6d2fc6"
+          "bytes": 97821,
+          "digest": "25c3f685592e"
         }
       ],
       "dumped": "2026-11-25",
@@ -160,9 +160,9 @@
       "translations": {
         "de": {
           "file": "names.de.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -171,15 +171,15 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "fab4df5825bc",
+          "digest": "bef74e869615",
           "dumped": "2026-11-25",
           "apiVersion": 101051
         },
         "fr": {
           "file": "names.fr.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -188,15 +188,15 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "2a9793ccf5ce",
-          "dumped": "2026-11-20",
+          "digest": "8a7bbc167e55",
+          "dumped": "2026-11-25",
           "apiVersion": 101051
         },
         "jp": {
           "file": "names.jp.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -205,15 +205,15 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "cc58c38f1bca",
-          "dumped": "2026-11-20",
+          "digest": "869477159c35",
+          "dumped": "2026-11-25",
           "apiVersion": 101051
         },
         "ru": {
           "file": "names.ru.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -222,15 +222,15 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "2e0317327e62",
-          "dumped": "2026-11-20",
+          "digest": "d165ae0ddfb3",
+          "dumped": "2026-11-25",
           "apiVersion": 101051
         },
         "es": {
           "file": "names.es.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -239,15 +239,15 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "6b1936407cae",
-          "dumped": "2026-11-20",
+          "digest": "3c16e8318c4e",
+          "dumped": "2026-11-25",
           "apiVersion": 101051
         },
         "zh": {
           "file": "names.zh.json",
-          "fallback": 72,
+          "fallback": 53,
           "counts": {
-            "items": 12369,
+            "items": 12388,
             "houses": 124,
             "quests": 3431,
             "achievements": 3913,
@@ -256,19 +256,19 @@
             "themes": 18,
             "skills": 8
           },
-          "digest": "19109d26e638",
-          "dumped": "2026-11-20",
+          "digest": "7326809a32ad",
+          "dumped": "2026-11-25",
           "apiVersion": 101051
         }
       },
-      "dumped": "2026-11-20",
+      "dumped": "2026-11-25",
       "apiVersion": 101051
     },
     "crafts": {
       "description": "The crafting skill that makes a furnishing, {furnishing id: skill id}. Skill names are the `skills` table of the names files.",
       "file": "crafts.json",
-      "count": 3444,
-      "digest": "0b995e09da76"
+      "count": 3453,
+      "digest": "e32c921d9ae7"
     }
   }
 }
