@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Import a FurCDev names dump ("All names to file") into the site's per-language names.
+"""Import a FurCDev names dump ("Names dump" on the Dump tab) into the site's per-language names.
 
     python3 scripts/import_names.py <FurnitureCatalogue_DevUtility.lua> [--date YYYY-MM-DD]
 
@@ -171,7 +171,7 @@ def main():
     if locale not in GAME_LOCALES:
         sys.exit(f'the dump names no game language (locale: {locale})')
     if not dump['kinds']:
-        sys.exit('no names in this file - use "All names to file" on the Dump tab, then reload the UI')
+        sys.exit('no names in this file - use "Names dump" on the Dump tab, then reload the UI')
     if locale == 'en' and 'items' in dump['kinds']:
         found = dump['kinds'].pop('items')
         items = obj(ITEMS)

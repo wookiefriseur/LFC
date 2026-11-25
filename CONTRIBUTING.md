@@ -22,7 +22,7 @@ In **Names**, click the name of a vocabulary entry to change its label. Enter or
 
 ## Names in other game languages
 
-- Ingame, on a client in that language: **FurCDev -> Dump -> All names to file**, reload the UI
+- Ingame, on a client in that language: **FurCDev -> Dump -> Names dump**, reload the UI
 - Website: **Names -> Import a names dump**, choose the SavedVariables file. The tab switches to the dump's language
 - Single names: **Names**, pick the language, click a name. Rows marked `English:` have no name in that language yet
 - A first full dump (thousands of names) is too large for an issue: run `python3 scripts/import_names.py <SAVED_VARS_LOCATION>/FurnitureCatalogue_DevUtility.lua`
