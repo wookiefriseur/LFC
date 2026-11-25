@@ -438,8 +438,8 @@
 {"id":187876,"name":"Gonfalon Colossus Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodpaintinglarge005"}
 {"id":187877,"name":"Gates of Gonfalon Bay Painting, Wood","quality":4,"cat":9,"sub":54,"theme":2,"icon":"housing_sys_inc_woodpaintinglarge006"}
 {"id":187922,"name":"Antique Map of Fargrave","quality":2,"cat":4,"sub":64,"theme":13,"icon":"housing_gen_inc_mappropsfargravescroll001"}
-{"id":188201,"name":"Letter from Ember","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_uni_inc_scrollunsealed002"}
-{"id":188202,"name":"Letter from Isobel","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_cwc_crf_scroll001"}
+{"id":188201,"name":"Letter from Ember","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_uni_inc_scrollunsealed002"}
+{"id":188202,"name":"Letter from Isobel","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_cwc_crf_scroll001"}
 {"id":188272,"name":"Blackfeather Knight Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryblackfeatherknightsmall001"}
 {"id":188273,"name":"Blackfeather Knight Tapestry, Large","quality":4,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryblackfeatherknightlarge001"}
 {"id":188274,"name":"Hagraven Matron Tapestry","quality":3,"cat":3,"sub":52,"theme":2,"icon":"housing_uni_inc_tottapestryhagravenmatronsmall001"}

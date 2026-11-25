@@ -395,8 +395,8 @@
 {"id":153703,"name":"Elsweyr Shrine, Ancient Multilevel","quality":3,"cat":7,"sub":107,"theme":7,"icon":"housing_els_run_seshrinern001","blueprint":153725}
 {"id":153750,"name":"Hemo Helot, Benign","quality":5,"cat":11,"sub":126,"theme":1,"icon":"housing_hemohelot"}
 {"id":153751,"name":"Volendrung Replica","quality":5,"cat":9,"sub":91,"theme":13,"icon":"housing_volendrung_icon"}
-{"id":153814,"name":"Dragon's Treasure Trove","quality":5,"icon":"housing_els_inc_dragonloot001"}
-{"id":153841,"name":"Rewoven Khajiiti Tapestry","quality":1,"icon":"icon_missing"}
+{"id":153814,"name":"Dragon's Treasure Trove","quality":5,"icon":"housing_els_inc_dragonloot001","cat":0,"sub":0,"theme":0}
+{"id":153841,"name":"Rewoven Khajiiti Tapestry","quality":1,"icon":"icon_missing","cat":0,"sub":0,"theme":0}
 {"id":153887,"name":"Dragonguard Banner","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_els_lsb_bannerdragonguardmedium001"}
 {"id":155400,"name":"Clothing Station (Daring Corsair)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":155401,"name":"Woodworking Station (Daring Corsair)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}

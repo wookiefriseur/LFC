@@ -274,21 +274,21 @@
 {"id":223894,"name":"Flowers, Blue Moth","quality":3,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bad_bluemothflower001"}
 {"id":223942,"name":"Druidspring Gazebo, Round","quality":3,"cat":13,"sub":185,"theme":13,"icon":"housing_uni_str_housinggreenhouse004"}
 {"id":223978,"name":"West Weald Furnishing Folio II","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
-{"id":223993,"name":"Jornibret's Last Dance","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_scroll_closed002"}
-{"id":223994,"name":"Rislav the Righteous, Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":223995,"name":"Heavy Armor Forging","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":223996,"name":"Report: Quality of Recruits","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_inc_openbook001"}
-{"id":223997,"name":"Xil-Go's Spell","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":223998,"name":"Undeniable Truths of Attire","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":223999,"name":"Call to the Faithful","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":224000,"name":"Discomforts of War","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":224001,"name":"Settling the Debate","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":224002,"name":"Azarrid's Race","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
-{"id":224003,"name":"Husks and Bones","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":224004,"name":"The Masters' Hall","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybookshelfbooks005"}
-{"id":224005,"name":"Folly in Fixation","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":224006,"name":"Armor of Myth and Legend","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":224007,"name":"The Rotwood Enigma","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":223993,"name":"Jornibret's Last Dance","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_scroll_closed002"}
+{"id":223994,"name":"Rislav the Righteous, Part 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":223995,"name":"Heavy Armor Forging","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":223996,"name":"Report: Quality of Recruits","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_inc_openbook001"}
+{"id":223997,"name":"Xil-Go's Spell","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":223998,"name":"Undeniable Truths of Attire","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":223999,"name":"Call to the Faithful","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":224000,"name":"Discomforts of War","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":224001,"name":"Settling the Debate","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":224002,"name":"Azarrid's Race","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":224003,"name":"Husks and Bones","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":224004,"name":"The Masters' Hall","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybookshelfbooks005"}
+{"id":224005,"name":"Folly in Fixation","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":224006,"name":"Armor of Myth and Legend","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":224007,"name":"The Rotwood Enigma","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
 {"id":224074,"name":"High Isle Fireplace, Stone","quality":4,"cat":13,"sub":117,"theme":2,"icon":"housing_sys_str_fireplace002"}
 {"id":224075,"name":"Stained Glass of Julianos, Symbol","quality":5,"cat":11,"sub":126,"theme":2,"icon":"housing_chl_str_housingjulianoswindow001"}
 {"id":224076,"name":"Fireplace Screen, Wrought Iron","quality":3,"cat":10,"sub":96,"theme":3,"icon":"housing_sum_inc_fireplacescreen001"}
@@ -375,50 +375,50 @@
 {"id":224902,"name":"Mushroom Planter, Half Barrel","quality":3,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poismushroombarrel003","blueprint":225115}
 {"id":224903,"name":"Mushroom Planter, Tiered Rack","quality":4,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poisfarmrack001","blueprint":225116}
 {"id":224904,"name":"Mushroom Planter, Barrel Stand","quality":3,"cat":12,"sub":143,"theme":2,"icon":"housing_uni_inc_poismushroombarrel002","blueprint":225117}
-{"id":224905,"name":"Breton Cemetary Fence, Archway","icon":"housing_bre_cem_housingfenceportal001","quality":4,"cat":13,"sub":163,"theme":2}
-{"id":224906,"name":"Breton Cemetary Fence, Post","icon":"housing_bre_cem_housingfencepost001","quality":3,"cat":6,"sub":69,"theme":2}
-{"id":224907,"name":"Breton Cemetary Fence","icon":"housing_bre_cem_housingfencestraight001","quality":3,"cat":13,"sub":164,"theme":2}
-{"id":224908,"name":"Breton Window, Rectangular","icon":"housing_bre_str_housingremintwallwindowinsertwood003","quality":4,"cat":11,"sub":126,"theme":2}
-{"id":224909,"name":"Breton Window, Peaked","icon":"housing_bre_str_housingremintwallwindowinsertwood004","quality":4,"cat":11,"sub":126,"theme":2}
+{"id":224905,"name":"Breton Cemetary Fence, Archway","icon":"housing_bre_cem_housingfenceportal001","quality":4,"cat":13,"sub":163,"theme":2,"blueprint":225118}
+{"id":224906,"name":"Breton Cemetary Fence, Post","icon":"housing_bre_cem_housingfencepost001","quality":3,"cat":6,"sub":69,"theme":2,"blueprint":225119}
+{"id":224907,"name":"Breton Cemetary Fence","icon":"housing_bre_cem_housingfencestraight001","quality":3,"cat":13,"sub":164,"theme":2,"blueprint":225120}
+{"id":224908,"name":"Breton Window, Rectangular","icon":"housing_bre_str_housingremintwallwindowinsertwood003","quality":4,"cat":11,"sub":126,"theme":2,"blueprint":225121}
+{"id":224909,"name":"Breton Window, Peaked","icon":"housing_bre_str_housingremintwallwindowinsertwood004","quality":4,"cat":11,"sub":126,"theme":2,"blueprint":225122}
 {"id":224910,"name":"Breton Monument, Short","quality":3,"cat":7,"sub":76,"theme":2,"icon":"housing_bre_cem_housingmonumentshort002","blueprint":225123}
-{"id":224911,"name":"Breton Grate, Brass","icon":"housing_bre_waf_wallsdoorsspikes001","quality":4,"cat":13,"sub":164,"theme":2}
-{"id":224912,"name":"Breton Fence, Stone","icon":"housing_bre_waf_housingwallssmallfence001","quality":3,"cat":13,"sub":164,"theme":2}
-{"id":224913,"name":"Breton Fence, Stone Archway","icon":"housing_bre_waf_housingwallssmallgate001","quality":3,"cat":13,"sub":163,"theme":2}
-{"id":224914,"name":"Breton Fence, Stone Post","icon":"housing_bre_waf_housingwallssmallpostlantern001","quality":2,"cat":6,"sub":69,"theme":2}
-{"id":224915,"name":"Breton Door, Wooden","icon":"housing_bre_str_housingreminthousedoor001","quality":3,"cat":13,"sub":163,"theme":2}
-{"id":224916,"name":"Breton Gate, Metal","icon":"housing_bre_str_housingreminthousegate001","quality":2,"cat":13,"sub":163,"theme":2}
-{"id":224917,"name":"Breton Pillar, Wooden Interior","icon":"housing_bre_str_housingreminthousepillar002","quality":2,"cat":6,"sub":69,"theme":2}
-{"id":224918,"name":"Breton Flooring, Wooden Small","icon":"housing_bre_str_housingreminthousefloorsmall001","quality":2,"cat":13,"sub":138,"theme":2}
+{"id":224911,"name":"Breton Grate, Brass","icon":"housing_bre_waf_wallsdoorsspikes001","quality":4,"cat":13,"sub":164,"theme":2,"blueprint":225124}
+{"id":224912,"name":"Breton Fence, Stone","icon":"housing_bre_waf_housingwallssmallfence001","quality":3,"cat":13,"sub":164,"theme":2,"blueprint":225125}
+{"id":224913,"name":"Breton Fence, Stone Archway","icon":"housing_bre_waf_housingwallssmallgate001","quality":3,"cat":13,"sub":163,"theme":2,"blueprint":225126}
+{"id":224914,"name":"Breton Fence, Stone Post","icon":"housing_bre_waf_housingwallssmallpostlantern001","quality":2,"cat":6,"sub":69,"theme":2,"blueprint":225127}
+{"id":224915,"name":"Breton Door, Wooden","icon":"housing_bre_str_housingreminthousedoor001","quality":3,"cat":13,"sub":163,"theme":2,"blueprint":225128}
+{"id":224916,"name":"Breton Gate, Metal","icon":"housing_bre_str_housingreminthousegate001","quality":2,"cat":13,"sub":163,"theme":2,"blueprint":225129}
+{"id":224917,"name":"Breton Pillar, Wooden Interior","icon":"housing_bre_str_housingreminthousepillar002","quality":2,"cat":6,"sub":69,"theme":2,"blueprint":225130}
+{"id":224918,"name":"Breton Flooring, Wooden Small","icon":"housing_bre_str_housingreminthousefloorsmall001","quality":2,"cat":13,"sub":138,"theme":2,"blueprint":225131}
 {"id":224919,"name":"Secret Door, Bookcase","quality":4,"cat":13,"sub":163,"theme":2,"icon":"housing_sys_str_intbookcasedoor001","blueprint":225132}
-{"id":224920,"name":"Breton Footbridge, Wooden","icon":"housing_bre_str_housingbridgefoot001","quality":4,"cat":0,"sub":0,"theme":0}
+{"id":224920,"name":"Breton Footbridge, Wooden","icon":"housing_bre_str_housingbridgefoot001","quality":4,"cat":0,"sub":0,"theme":0,"blueprint":225133}
 {"id":224921,"name":"Breton Support Beam, Wood","quality":1,"cat":13,"sub":117,"theme":2,"icon":"housing_bre_str_housingremintcellarbeam001"}
 {"id":224922,"name":"Breton Panel, Wood","quality":1,"cat":13,"sub":117,"theme":2,"icon":"housing_bre_str_housingremintcellarpannel001"}
-{"id":224923,"name":"Breton Flooring, Wooden Rectangular","icon":"housing_bre_str_housingreminthousefloorhalf001","quality":2,"cat":13,"sub":138,"theme":2}
-{"id":224925,"name":"Breton Roof, Peak","icon":"housing_bre_str_housingreminthouseceilingpeak001","quality":3,"cat":13,"sub":117,"theme":2}
-{"id":224926,"name":"Breton Roof, Angled","icon":"housing_bre_str_housingremintceilingwallramp002","quality":3,"cat":13,"sub":117,"theme":2}
-{"id":224927,"name":"Breton Staircase, Western Landing","icon":"housing_bre_str_housingreminthousestaircorner001","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224928,"name":"Breton Staircase, Eastern Landing","icon":"housing_bre_str_housingreminthousestaircorner002","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224929,"name":"Breton Staircase, Straight","icon":"housing_bre_str_housingreminthousestairstraight001","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224930,"name":"Breton Cellar Doorway, Stone","icon":"housing_bre_str_housingremintcellardoorway001","quality":3,"cat":13,"sub":163,"theme":2}
-{"id":224931,"name":"Breton Cellar Wall, Broken","icon":"housing_bre_str_housingremintcellarhallwallbroken001","quality":2,"cat":13,"sub":163,"theme":2}
-{"id":224932,"name":"Breton Doorway, Grand","icon":"housing_bre_str_housingreminthousewallmiddlearch001","quality":4,"cat":13,"sub":163,"theme":2}
-{"id":224933,"name":"Breton Doorway, Paneled","icon":"housing_bre_str_housingremintwallmiddledoor001","quality":3,"cat":13,"sub":163,"theme":2}
-{"id":224934,"name":"Breton Window Frame, Bay","icon":"housing_bre_str_housingremintwallstraightwindowbox001","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224935,"name":"Breton Cellar Wall, Plain","icon":"housing_bre_str_housingremintcellarhallwall001","quality":3,"cat":13,"sub":164,"theme":2}
-{"id":224936,"name":"Breton Cellar Wall, Framed","icon":"housing_bre_str_housingreminthousecrawlspacewall003","quality":2,"cat":13,"sub":164,"theme":2}
-{"id":224937,"name":"Breton Cellar Wall, Framed Half","icon":"housing_bre_str_housingreminthousecrawlspacewall004","quality":2,"cat":13,"sub":164,"theme":2}
-{"id":224938,"name":"Breton Wall, Plaster Half","icon":"housing_bre_str_housingremintwallmiddlestraighthalf001","quality":3,"cat":13,"sub":164,"theme":2}
-{"id":224939,"name":"Breton Wall, Plaster","icon":"housing_bre_str_housingremintwallstraight001","quality":3,"cat":13,"sub":164,"theme":2}
-{"id":224940,"name":"Breton Framework, Arch","icon":"housing_bre_str_housingremintcellararch001","quality":2,"cat":13,"sub":117,"theme":2}
-{"id":224941,"name":"Breton Stairway, Wooden","icon":"housing_bre_str_housingremintcrawlspacestairs001","quality":3,"cat":13,"sub":117,"theme":2}
-{"id":224942,"name":"Breton Ceiling, Simple Dual Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":3,"cat":13,"sub":117,"theme":2}
-{"id":224943,"name":"Breton Ceiling, Ornate Dual-Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224944,"name":"Breton Flooring, Wooden Large","icon":"housing_bre_str_housingreminthousefloor001","quality":3,"cat":13,"sub":138,"theme":2}
+{"id":224923,"name":"Breton Flooring, Wooden Rectangular","icon":"housing_bre_str_housingreminthousefloorhalf001","quality":2,"cat":13,"sub":138,"theme":2,"blueprint":225134}
+{"id":224925,"name":"Breton Roof, Peak","icon":"housing_bre_str_housingreminthouseceilingpeak001","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":225136}
+{"id":224926,"name":"Breton Roof, Angled","icon":"housing_bre_str_housingremintceilingwallramp002","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":225137}
+{"id":224927,"name":"Breton Staircase, Western Landing","icon":"housing_bre_str_housingreminthousestaircorner001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225138}
+{"id":224928,"name":"Breton Staircase, Eastern Landing","icon":"housing_bre_str_housingreminthousestaircorner002","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225139}
+{"id":224929,"name":"Breton Staircase, Straight","icon":"housing_bre_str_housingreminthousestairstraight001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225140}
+{"id":224930,"name":"Breton Cellar Doorway, Stone","icon":"housing_bre_str_housingremintcellardoorway001","quality":3,"cat":13,"sub":163,"theme":2,"blueprint":225141}
+{"id":224931,"name":"Breton Cellar Wall, Broken","icon":"housing_bre_str_housingremintcellarhallwallbroken001","quality":2,"cat":13,"sub":163,"theme":2,"blueprint":225142}
+{"id":224932,"name":"Breton Doorway, Grand","icon":"housing_bre_str_housingreminthousewallmiddlearch001","quality":4,"cat":13,"sub":163,"theme":2,"blueprint":225143}
+{"id":224933,"name":"Breton Doorway, Paneled","icon":"housing_bre_str_housingremintwallmiddledoor001","quality":3,"cat":13,"sub":163,"theme":2,"blueprint":225144}
+{"id":224934,"name":"Breton Window Frame, Bay","icon":"housing_bre_str_housingremintwallstraightwindowbox001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225145}
+{"id":224935,"name":"Breton Cellar Wall, Plain","icon":"housing_bre_str_housingremintcellarhallwall001","quality":3,"cat":13,"sub":164,"theme":2,"blueprint":225146}
+{"id":224936,"name":"Breton Cellar Wall, Framed","icon":"housing_bre_str_housingreminthousecrawlspacewall003","quality":2,"cat":13,"sub":164,"theme":2,"blueprint":225147}
+{"id":224937,"name":"Breton Cellar Wall, Framed Half","icon":"housing_bre_str_housingreminthousecrawlspacewall004","quality":2,"cat":13,"sub":164,"theme":2,"blueprint":225148}
+{"id":224938,"name":"Breton Wall, Plaster Half","icon":"housing_bre_str_housingremintwallmiddlestraighthalf001","quality":3,"cat":13,"sub":164,"theme":2,"blueprint":225149}
+{"id":224939,"name":"Breton Wall, Plaster","icon":"housing_bre_str_housingremintwallstraight001","quality":3,"cat":13,"sub":164,"theme":2,"blueprint":225150}
+{"id":224940,"name":"Breton Framework, Arch","icon":"housing_bre_str_housingremintcellararch001","quality":2,"cat":13,"sub":117,"theme":2,"blueprint":225151}
+{"id":224941,"name":"Breton Stairway, Wooden","icon":"housing_bre_str_housingremintcrawlspacestairs001","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":225152}
+{"id":224942,"name":"Breton Ceiling, Simple Dual Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":225153}
+{"id":224943,"name":"Breton Ceiling, Ornate Dual-Sided","icon":"housing_bre_str_housingremintceilingstraightcornercombo001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225154}
+{"id":224944,"name":"Breton Flooring, Wooden Large","icon":"housing_bre_str_housingreminthousefloor001","quality":3,"cat":13,"sub":138,"theme":2,"blueprint":225155}
 {"id":224945,"name":"Breton Footbridge, Stone","icon":"housing_bre_str_housingbridgesmall001","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225156}
-{"id":224946,"name":"Breton Stone Walkway, Crossing","icon":"housing_bre_waf_housingcitystair4way001","quality":4,"cat":13,"sub":138,"theme":2}
-{"id":224947,"name":"Breton Stone Walkway, Side","icon":"housing_bre_waf_housingcitystairsstraight002","quality":3,"cat":13,"sub":138,"theme":2}
-{"id":224948,"name":"Breton Stone Walkway Stairs","icon":"housing_bre_waf_housingcitystairsswitchback002","quality":4,"cat":13,"sub":117,"theme":2}
-{"id":224949,"name":"Breton Stone Walkway, Corner","icon":"housing_bre_waf_housingcitystairsturnleft001","quality":3,"cat":13,"sub":138,"theme":2}
+{"id":224946,"name":"Breton Stone Walkway, Crossing","icon":"housing_bre_waf_housingcitystair4way001","quality":4,"cat":13,"sub":138,"theme":2,"blueprint":225157}
+{"id":224947,"name":"Breton Stone Walkway, Side","icon":"housing_bre_waf_housingcitystairsstraight002","quality":3,"cat":13,"sub":138,"theme":2,"blueprint":225158}
+{"id":224948,"name":"Breton Stone Walkway Stairs","icon":"housing_bre_waf_housingcitystairsswitchback002","quality":4,"cat":13,"sub":117,"theme":2,"blueprint":225159}
+{"id":224949,"name":"Breton Stone Walkway, Corner","icon":"housing_bre_waf_housingcitystairsturnleft001","quality":3,"cat":13,"sub":138,"theme":2,"blueprint":225160}
 {"id":225015,"name":"Amber Chunk, Display","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_rok_sum_dlrrosin001"}
 {"id":225016,"name":"Ore, Display","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_rok_sum_dlrtemperingalloy001"}
 {"id":225017,"name":"Keg Spigot, Brass","quality":2,"cat":10,"sub":96,"theme":2,"icon":"housing_bre_inc_kegspigot001"}
@@ -455,7 +455,7 @@
 {"id":225083,"name":"High Elf Walkway, Broad Ancient Ornate","quality":4,"cat":13,"sub":138,"theme":3,"icon":"housing_sum_str_aldplatformrecbasic002b","blueprint":225170}
 {"id":225084,"name":"High Elf Staircase, Right Ancient Ornate","quality":3,"cat":13,"sub":117,"theme":3,"icon":"housing_sum_str_aldstaircase002","blueprint":225171}
 {"id":225088,"name":"Cheers to the Hero Painting, Gold","quality":5,"cat":9,"sub":54,"theme":2,"icon":"housing_uni_inc_darientributepainting003"}
-{"id":225110,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225110,"name":"","quality":2,"icon":"crafting_planfurniture_blacksmithing2","cat":13,"sub":117,"theme":2}
 {"id":225118,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225119,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225120,"name":"","quality":0,"icon":"icon_missing"}
@@ -491,6 +491,7 @@
 {"id":225153,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225154,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225155,"name":"","quality":0,"icon":"icon_missing"}
+{"id":225156,"name":"Praxis: Breton Footbridge, Stone","quality":4,"cat":0,"sub":0,"theme":0,"icon":"crafting_planfurniture_enchanting4"}
 {"id":225157,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225158,"name":"","quality":0,"icon":"icon_missing"}
 {"id":225159,"name":"","quality":0,"icon":"icon_missing"}
@@ -553,14 +554,14 @@
 {"id":225413,"name":"Flowers, Small Rose Ivy Patch","quality":3,"icon":"housing_veg_bad_housingredflowerivy011","cat":12,"sub":112,"theme":1}
 {"id":225414,"name":"Flowers, Large Rose Ivy Patch","quality":3,"icon":"housing_veg_bad_housingredflowerivy012","cat":12,"sub":112,"theme":1}
 {"id":226738,"name":"Dwarven Diving Chamber, Replica","quality":4,"icon":"housing_uni_exc_highseasdivebell001","cat":10,"sub":96,"theme":12}
-{"id":226739,"name":"Undaunted Tent, Elevated","icon":"housing_uni_cmp_undauntedtent001","quality":5,"cat":13,"sub":185,"theme":2}
-{"id":226740,"name":"Breton Bust, Veiled","icon":"housing_bre_inc_statuebust001","quality":5,"cat":9,"sub":92,"theme":2}
-{"id":226741,"name":"Breton Footbridge, Quaint","icon":"housing_bre_str_housingbridgefoot001","quality":5,"cat":13,"sub":117,"theme":2}
-{"id":226742,"name":"Hag's Den, Overgrown","icon":"housing_cre_str_housinghagden001","quality":5,"cat":13,"sub":185,"theme":15}
-{"id":226743,"name":"Firepit Provisioning Station","icon":"housing_gen_exc_firepit001","quality":5,"cat":25,"sub":104,"theme":2}
-{"id":226744,"name":"Cheese Pile, Impressive","icon":"housing_gen_inc_housingcheesepilegiant001","quality":5,"cat":8,"sub":155,"theme":2}
-{"id":226745,"name":"Token of Mara","icon":"housing_uni_exc_u47maraamulet001","quality":5,"cat":7,"sub":107,"theme":13}
-{"id":226746,"name":"Mural, Fluffy Clouds Tile","icon":"housing_vrd_str_housingceiling_sky001","quality":4,"cat":13,"sub":138,"theme":6}
+{"id":226739,"name":"Undaunted Tent, Elevated","icon":"housing_uni_cmp_undauntedtent001","quality":5,"cat":13,"sub":185,"theme":2,"blueprint":226777}
+{"id":226740,"name":"Breton Bust, Veiled","icon":"housing_bre_inc_statuebust001","quality":5,"cat":9,"sub":92,"theme":2,"blueprint":226778}
+{"id":226741,"name":"Breton Footbridge, Quaint","icon":"housing_bre_str_housingbridgefoot001","quality":5,"cat":13,"sub":117,"theme":2,"blueprint":226779}
+{"id":226742,"name":"Hag's Den, Overgrown","icon":"housing_cre_str_housinghagden001","quality":5,"cat":13,"sub":185,"theme":15,"blueprint":226780}
+{"id":226743,"name":"Firepit Provisioning Station","icon":"housing_gen_exc_firepit001","quality":5,"cat":25,"sub":104,"theme":2,"blueprint":226781}
+{"id":226744,"name":"Cheese Pile, Impressive","icon":"housing_gen_inc_housingcheesepilegiant001","quality":5,"cat":8,"sub":155,"theme":2,"blueprint":226782}
+{"id":226745,"name":"Token of Mara","icon":"housing_uni_exc_u47maraamulet001","quality":5,"cat":7,"sub":107,"theme":13,"blueprint":226783}
+{"id":226746,"name":"Mural, Fluffy Clouds Tile","icon":"housing_vrd_str_housingceiling_sky001","quality":4,"cat":13,"sub":138,"theme":6,"blueprint":227313}
 {"id":226747,"name":"Fossil, Giant Sea Beast Tail","quality":5,"icon":"housing_uni_exc_aquaticfossilmossosaurus002","cat":7,"sub":75,"theme":1}
 {"id":226748,"name":"Fossil, Giant Sea Beast Head","quality":5,"icon":"housing_uni_exc_aquaticfossilmossosaurus003","cat":7,"sub":75,"theme":1}
 {"id":226749,"name":"Fossil, Mudcrab","quality":4,"icon":"housing_uni_exc_aquaticfossilmudcrab001","cat":7,"sub":75,"theme":1}
@@ -569,22 +570,22 @@
 {"id":226752,"name":"Fossil, Yaghra","quality":4,"icon":"housing_uni_exc_aquaticfossilyaghra001","cat":7,"sub":75,"theme":1}
 {"id":226753,"name":"Aquarium, Conjured Sphere","quality":5,"icon":"housing_uni_exc_fishsphere001","cat":14,"sub":162,"theme":1}
 {"id":226754,"name":"Cursed Ship's Bell","quality":2,"icon":"housing_uni_exc_highseasshipbell001","cat":3,"sub":55,"theme":2}
-{"id":226755,"name":"Driftwood Bowl","icon":"housing_uni_fur_hsotdriftwoodbowl001","quality":2,"cat":8,"sub":81,"theme":2}
-{"id":226756,"name":"Driftwood Divider, Folding","icon":"housing_uni_fur_hsotdriftwooddivider001","quality":3,"cat":2,"sub":47,"theme":2}
-{"id":226757,"name":"Driftwood Arrangement, Hanging","icon":"housing_uni_fur_hsotdriftwoodwalldeco001","quality":3,"cat":9,"sub":89,"theme":2}
+{"id":226755,"name":"Driftwood Bowl","icon":"housing_uni_fur_hsotdriftwoodbowl001","quality":2,"cat":8,"sub":81,"theme":2,"blueprint":226897}
+{"id":226756,"name":"Driftwood Divider, Folding","icon":"housing_uni_fur_hsotdriftwooddivider001","quality":3,"cat":2,"sub":47,"theme":2,"blueprint":226898}
+{"id":226757,"name":"Driftwood Arrangement, Hanging","icon":"housing_uni_fur_hsotdriftwoodwalldeco001","quality":3,"cat":9,"sub":89,"theme":2,"blueprint":226899}
 {"id":226758,"name":"Bountiful Treasure Chest","quality":5,"icon":"housing_uni_fur_hstreasurechest001","cat":9,"sub":91,"theme":2}
 {"id":226759,"name":"Book, Ship's Log","quality":4,"icon":"housing_uni_inc_captainslogbook001","cat":4,"sub":62,"theme":2}
 {"id":226760,"name":"Pirate Flag, Sea Elf","quality":4,"icon":"housing_uni_inc_highseasmaormerflag001","cat":3,"sub":58,"theme":1}
 {"id":226761,"name":"Golden King of the Abecean Sea","quality":5,"icon":"housing_uni_inc_hspirateskeleton001","cat":7,"sub":75,"theme":2}
-{"id":226762,"name":"Scrimshaw, Horn","icon":"housing_uni_inc_hsscrimshawcarving001","quality":3,"cat":3,"sub":56,"theme":2}
-{"id":226763,"name":"Scrimshaw, Skull","icon":"housing_uni_inc_hsscrimshawcarving002","quality":3,"cat":3,"sub":56,"theme":2}
-{"id":226764,"name":"Scrimshaw, Tooth","icon":"housing_uni_inc_hsscrimshawcarving003","quality":3,"cat":3,"sub":56,"theme":2}
+{"id":226762,"name":"Scrimshaw, Horn","icon":"housing_uni_inc_hsscrimshawcarving001","quality":3,"cat":3,"sub":56,"theme":2,"blueprint":226900}
+{"id":226763,"name":"Scrimshaw, Skull","icon":"housing_uni_inc_hsscrimshawcarving002","quality":3,"cat":3,"sub":56,"theme":2,"blueprint":226901}
+{"id":226764,"name":"Scrimshaw, Tooth","icon":"housing_uni_inc_hsscrimshawcarving003","quality":3,"cat":3,"sub":56,"theme":2,"blueprint":226902}
 {"id":226765,"name":"Ship in a Bottle, Yokudan","quality":4,"icon":"housing_uni_inc_hsshipbottle001","cat":9,"sub":91,"theme":2}
-{"id":226766,"name":"Fountain, Grand Seashell","icon":"housing_uni_str_fountainseashell001","quality":5,"cat":6,"sub":74,"theme":1}
-{"id":226767,"name":"Sandcastle, Abecean Seafloor","icon":"housing_uni_inc_hsseashelldollhouse001","quality":4,"cat":3,"sub":56,"theme":1}
-{"id":226768,"name":"Ancient Dwarven Mechanism","icon":"housing_uni_inc_hsantikythera001","quality":5,"cat":10,"sub":159,"theme":1}
+{"id":226766,"name":"Fountain, Grand Seashell","icon":"housing_uni_str_fountainseashell001","quality":5,"cat":6,"sub":74,"theme":1,"blueprint":226903}
+{"id":226767,"name":"Sandcastle, Abecean Seafloor","icon":"housing_uni_inc_hsseashelldollhouse001","quality":4,"cat":3,"sub":56,"theme":1,"blueprint":226904}
+{"id":226768,"name":"Ancient Dwarven Mechanism","icon":"housing_uni_inc_hsantikythera001","quality":5,"cat":10,"sub":159,"theme":1,"blueprint":226905}
 {"id":226769,"name":"Ship Figurehead, Yokudan","quality":5,"icon":"housing_uni_exc_hsshipfigurehead001","cat":9,"sub":91,"theme":1}
-{"id":226770,"name":"Fish Bowl, Small","icon":"housing_uni_inc_fishbowl001","quality":5,"cat":14,"sub":162,"theme":1}
+{"id":226770,"name":"Fish Bowl, Small","icon":"housing_uni_inc_fishbowl001","quality":5,"cat":14,"sub":162,"theme":1,"blueprint":226906}
 {"id":226771,"name":"Driftwood Sculpture, Large","quality":3,"icon":"housing_uni_inc_driftwoodsculpture002","cat":9,"sub":91,"theme":1}
 {"id":226772,"name":"Nexus Orrery, Replica","quality":5,"icon":"housing_uni_exc_conformalmap001","cat":7,"sub":106,"theme":1}
 {"id":226773,"name":"Scrying Device, Untuned","quality":4,"icon":"housing_uni_inc_sageislescryingdevice001","cat":7,"sub":106,"theme":1}
@@ -599,7 +600,7 @@
 {"id":226782,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226783,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226784,"name":"Driftwood Log","quality":2,"icon":"housing_uni_inc_driftwoodsculpture001","cat":12,"sub":165,"theme":1}
-{"id":226785,"name":"Driftwood Archway","icon":"housing_uni_inc_driftwoodsculpture003","quality":3,"cat":12,"sub":165,"theme":1}
+{"id":226785,"name":"Driftwood Archway","icon":"housing_uni_inc_driftwoodsculpture003","quality":3,"cat":12,"sub":165,"theme":1,"blueprint":226907}
 {"id":226897,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226898,"name":"","quality":0,"icon":"icon_missing"}
 {"id":226899,"name":"","quality":0,"icon":"icon_missing"}
@@ -653,13 +654,14 @@
 {"id":227376,"name":"Daedric Cage, Soul Refinery","icon":"housing_bad_lsb_dedfloorsoulrefinery001","quality":4,"cat":7,"sub":77,"theme":13}
 {"id":227377,"name":"Deadlands Tile, Octagonal","icon":"housing_bad_str_dedbirthingmachinepartsmallvar001","quality":4,"cat":7,"sub":106,"theme":13}
 {"id":227378,"name":"Tree Stump, Mushroom-Hollowed","icon":"housing_tlv_fur_binhigh001","quality":3,"cat":12,"sub":143,"theme":6}
-{"id":227379,"name":"Mushroom, Enormous Baldcap","icon":"housing_veg_fug_housinggiantmushroom007","quality":5,"cat":12,"sub":143,"theme":1}
+{"id":227379,"name":"Mushroom, Enormous Baldcap","icon":"housing_veg_fug_housinggiantmushroom007","quality":4,"cat":12,"sub":143,"theme":1}
 {"id":227422,"name":"Storage Vat, Covered","icon":"housing_gen_crf_dyestationbarrelcovered001","quality":3,"cat":10,"sub":97,"theme":2,"blueprint":227428}
 {"id":227423,"name":"Storage Vat, Empty","icon":"housing_gen_crf_dyestationbarrelempty001","quality":2,"cat":10,"sub":97,"theme":2,"blueprint":227429}
 {"id":227424,"name":"Storage Jar, Covered","icon":"housing_gen_crf_dyestationjarcovered001","quality":3,"cat":10,"sub":97,"theme":2,"blueprint":227430}
 {"id":227425,"name":"Poison Flask, Sealed","icon":"housing_uni_inc_poisbeaker001","quality":2,"cat":10,"sub":96,"theme":2,"blueprint":227431}
 {"id":227426,"name":"Poison Bottle, Sealed","icon":"housing_uni_inc_poiscontainer001","quality":3,"cat":10,"sub":96,"theme":2,"blueprint":227432}
 {"id":227427,"name":"Breton Shelf, Covered Wall","icon":"housing_uni_inc_poiscraftingshelf001","quality":2,"cat":4,"sub":60,"theme":2,"blueprint":227473}
+{"id":227473,"name":"Blueprint: Breton Shelf, Covered Wall","quality":2,"cat":4,"sub":60,"theme":2,"icon":"crafting_planfurniture_woodworking_2"}
 {"id":227479,"name":"Wood Ladder, Scavenged","icon":"housing_apc_str_scaffoldladder002","quality":3,"cat":10,"sub":96,"theme":1,"blueprint":227513}
 {"id":227480,"name":"Wood Ladder, Short","icon":"housing_gen_inc_ladder001","quality":2,"cat":10,"sub":96,"theme":2,"blueprint":227514}
 {"id":227481,"name":"Metal Grate, Square","icon":"housing_gen_sew_channelslotgrateb001","quality":3,"cat":13,"sub":117,"theme":2,"blueprint":227515}
@@ -694,6 +696,13 @@
 {"id":227510,"name":"Plant, Paddle Palm Sprouts","icon":"housing_veg_sys_pingpongpaddleleaf001","quality":2,"cat":12,"sub":109,"theme":1}
 {"id":227511,"name":"Plant, Paddle Palm","icon":"housing_veg_sys_pingpongpaddleleaf002","quality":2,"cat":12,"sub":109,"theme":1}
 {"id":227512,"name":"Plant Cluster, Paddle Palm","icon":"housing_veg_sys_pingpongpaddleleaf005","quality":3,"cat":12,"sub":109,"theme":1}
+{"id":227513,"name":"Blueprint: Wood Ladder, Scavenged","quality":3,"cat":10,"sub":96,"theme":1,"icon":"crafting_planfurniture_woodworking_3"}
+{"id":227514,"name":"Blueprint: Wood Ladder, Short","quality":2,"cat":10,"sub":96,"theme":2,"icon":"crafting_planfurniture_woodworking_2"}
+{"id":227515,"name":"Diagram: Metal Grate, Square","quality":3,"cat":13,"sub":117,"theme":2,"icon":"crafting_planfurniture_blacksmithing3"}
+{"id":227516,"name":"Blueprint: Cleated Ramp, Wood","quality":3,"cat":13,"sub":138,"theme":1,"icon":"crafting_planfurniture_woodworking_3"}
+{"id":227517,"name":"Blueprint: Rustic Shelves, Wide","quality":3,"cat":4,"sub":60,"theme":2,"icon":"crafting_planfurniture_woodworking_3"}
+{"id":227518,"name":"Blueprint: Rustic Shelf, Tall","quality":2,"cat":4,"sub":60,"theme":2,"icon":"crafting_planfurniture_woodworking_2"}
+{"id":227519,"name":"Blueprint: Wood Ladder, Long","quality":3,"cat":10,"sub":96,"theme":2,"icon":"crafting_planfurniture_woodworking_3"}
 {"id":227554,"name":"Enormous Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear001","quality":5,"cat":7,"sub":107,"theme":8}
 {"id":227555,"name":"Rimegale Runespear, Replica","icon":"housing_skr_exc_winrimegalespear002","quality":4,"cat":7,"sub":107,"theme":8}
 {"id":227606,"name":"Supply Crate, Blacksmithing","icon":"housing_sys_fur_housingchestblacksmith001","quality":1,"cat":10,"sub":95,"theme":1,"blueprint":227609}

@@ -1444,7 +1444,7 @@
 {"id":119587,"name":"Auridon Coneplants, Cluster","quality":1,"cat":12,"sub":111,"theme":1,"icon":"housing_veg_bsh_shadowfenconebulbcluster001"}
 {"id":119588,"name":"Auridon Mushrooms, Cluster","quality":1,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_maltormushroomssmallcluster002"}
 {"id":119589,"name":"Mushrooms, Auridon Group","quality":1,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_malabaltorglowmushrooms002"}
-{"id":119594,"name":"Attunable Blacksmithing Station","quality":5,"icon":"housing_gen_crf_portableblacksmith001"}
+{"id":119594,"name":"Attunable Blacksmithing Station","quality":5,"icon":"housing_gen_crf_portableblacksmith001","cat":0,"sub":0,"theme":0}
 {"id":119611,"name":"Dominion Wall Banner, Small","quality":2,"cat":9,"sub":148,"theme":1,"icon":"housing_gen_lsb_banneraldmerismall001"}
 {"id":119612,"name":"Dominion Wall Banner, Medium","quality":2,"cat":9,"sub":148,"theme":1,"icon":"housing_gen_lsb_banneraldmerimed001"}
 {"id":119613,"name":"Dominion Camp Banner","quality":2,"cat":9,"sub":148,"theme":1,"icon":"housing_imp_lsb_avapennantsgroundaldmeri001"}
@@ -1634,8 +1634,8 @@
 {"id":119815,"name":"Blacksmithing Station (Kvatch Gladiator)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119816,"name":"Blacksmithing Station (Varen's Legacy)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":119817,"name":"Blacksmithing Station (Pelinal's Wrath)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
-{"id":119821,"name":"Attunable Clothing Station","quality":5,"icon":"housing_gen_crf_portabletableleatherworking001"}
-{"id":119822,"name":"Attunable Woodworking Station","quality":5,"icon":"housing_gen_crf_portabletablewoodworking001"}
+{"id":119821,"name":"Attunable Clothing Station","quality":5,"icon":"housing_gen_crf_portabletableleatherworking001","cat":0,"sub":0,"theme":0}
+{"id":119822,"name":"Attunable Woodworking Station","quality":5,"icon":"housing_gen_crf_portabletablewoodworking001","cat":0,"sub":0,"theme":0}
 {"id":119823,"name":"Tanzelwil Culanda Stone","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_ayl_duc_welkydclusteryellow001"}
 {"id":119824,"name":"Veiled Crystal","quality":4,"cat":11,"sub":126,"theme":14,"icon":"housing_ayl_duc_welkyditemyellow001"}
 {"id":119825,"name":"Mehrunes Dagon Brazier","quality":4,"cat":11,"sub":124,"theme":13,"icon":"housing_dae_lsb_brazier001"}

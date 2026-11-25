@@ -66,6 +66,7 @@
 {"id":191608,"name":"Clothing Station (Old Growth Brewer)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":191609,"name":"Woodworking Station (Old Growth Brewer)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":191610,"name":"Blacksmithing Station (Old Growth Brewer)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
+{"id":191611,"name":"Jewelry Station (Old Growth Brewer)","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_portabletablejewelry001"}
 {"id":191988,"name":"Clothing Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":191989,"name":"Woodworking Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":191990,"name":"Blacksmithing Station (Claw of the Forest Wraith)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
@@ -210,27 +211,27 @@
 {"id":194422,"name":"Hermaeus Mora Banner, Extra Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner001"}
 {"id":194423,"name":"Hermaeus Mora Banner, Long","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_apc_lsb_sombanner005"}
 {"id":194429,"name":"Deadlands Furnishing Folio","icon":"housing_bre_inc_book_closed002","quality":5,"cat":0,"sub":0,"theme":0}
-{"id":194439,"name":"The Journal of Emperor Leovic","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194440,"name":"Tome of Daedric Portals","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194441,"name":"Graccus' Journal, Volume I","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":194442,"name":"Journal of Culanwe","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":194443,"name":"Daedra Dossier: The Titans","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":194444,"name":"Persistence of Daedric Veneration","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":194445,"name":"Boethiah and Her Avatars","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":194446,"name":"Bisnensel: Our Ancient Roots","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":194447,"name":"Stonefire Ritual Tome","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194448,"name":"Glorious Upheaval","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":194449,"name":"In Dreams We Awaken","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194450,"name":"Thwarting the Daedra: Dagon's Cult","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":194451,"name":"A Memory Book, Part 3","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194452,"name":"A Memory Book, Part 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":194453,"name":"A Memory Book, Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":194454,"name":"The Waters of Oblivion","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":194455,"name":"Havocrel: Strangers from Oblivion","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":194456,"name":"Invocation of Hircine","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":194458,"name":"Lord Hollowjack's Dream Realm","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":194459,"name":"Dream of a Thousand Dreamers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_open001"}
-{"id":194460,"name":"Apocrypha, Apocrypha","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194439,"name":"The Journal of Emperor Leovic","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194440,"name":"Tome of Daedric Portals","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194441,"name":"Graccus' Journal, Volume I","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":194442,"name":"Journal of Culanwe","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":194443,"name":"Daedra Dossier: The Titans","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194444,"name":"Persistence of Daedric Veneration","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194445,"name":"Boethiah and Her Avatars","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194446,"name":"Bisnensel: Our Ancient Roots","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194447,"name":"Stonefire Ritual Tome","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194448,"name":"Glorious Upheaval","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194449,"name":"In Dreams We Awaken","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194450,"name":"Thwarting the Daedra: Dagon's Cult","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194451,"name":"A Memory Book, Part 3","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194452,"name":"A Memory Book, Part 2","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194453,"name":"A Memory Book, Part 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":194454,"name":"The Waters of Oblivion","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194455,"name":"Havocrel: Strangers from Oblivion","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":194456,"name":"Invocation of Hircine","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":194458,"name":"Lord Hollowjack's Dream Realm","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":194459,"name":"Dream of a Thousand Dreamers","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_open001"}
+{"id":194460,"name":"Apocrypha, Apocrypha","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":194534,"name":"Dock Bell, Mounted","quality":4,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockbell001"}
 {"id":194536,"name":"Dock Buoys, Mounted","quality":2,"cat":10,"sub":96,"theme":1,"icon":"housing_gen_dck_dockwallbouys002"}
 {"id":194538,"name":"Cargo Netting, Large","quality":3,"cat":10,"sub":95,"theme":1,"icon":"housing_gen_dck_hangingcargonet002"}
@@ -409,8 +410,8 @@
 {"id":197753,"name":"Telvanni Peninsula Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe007"}
 {"id":197754,"name":"Offerings to the Dead Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe009"}
 {"id":197755,"name":"Shadow Over Necrom Painting","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe010"}
-{"id":197779,"name":"Letter from Azandar","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libscroll002"}
-{"id":197780,"name":"Letter from Sharp","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libpaper001"}
+{"id":197779,"name":"Letter from Azandar","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libscroll002"}
+{"id":197780,"name":"Letter from Sharp","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libpaper001"}
 {"id":197781,"name":"The City of Necrom Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe011"}
 {"id":197782,"name":"Alleyway Still Life Painting","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe014"}
 {"id":197783,"name":"Pilgrimage Triptych Painting, Wood","quality":4,"cat":9,"sub":54,"theme":6,"icon":"housing_tlv_inc_necwoodpictureframe017"}
@@ -434,11 +435,11 @@
 {"id":197847,"name":"Apocrypha Specimen Jar, Large Empty","quality":5,"cat":9,"sub":91,"theme":13,"icon":"housing_apc_inc_specimenjarlarge001","blueprint":197850}
 {"id":197848,"name":"Apocrypha Lamp, Floor","quality":4,"cat":11,"sub":120,"theme":13,"icon":"housing_apc_lsb_libcandlestandlarge001","blueprint":197851}
 {"id":197916,"name":"Archival Light Diffuser, Small","quality":4,"cat":11,"sub":126,"theme":13,"icon":"u40_furniture_multicolororb"}
-{"id":197917,"name":"Ode to Vaermina","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":197918,"name":"Deal with a Daedric Prince","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":197919,"name":"The Legend of Fathoms Drift","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":197920,"name":"The Doom of the Hushed","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":197921,"name":"Peryite's Salvation","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":197917,"name":"Ode to Vaermina","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":197918,"name":"Deal with a Daedric Prince","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":197919,"name":"The Legend of Fathoms Drift","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":197920,"name":"The Doom of the Hushed","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":197921,"name":"Peryite's Salvation","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
 {"id":198002,"name":"Hedge, Dense Low Long Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges006"}
 {"id":198003,"name":"Hedge, Dense Low Corner Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges008"}
 {"id":198004,"name":"Hedge, Dense Low Extensive Wall","quality":3,"cat":12,"sub":142,"theme":1,"icon":"housing_veg_bsh_gchedges007"}

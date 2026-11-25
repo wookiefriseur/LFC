@@ -356,12 +356,12 @@
 {"id":178475,"name":"Guild Banner, Museum","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannermuseum001"}
 {"id":178476,"name":"Guild Banner, Nomads of Nirn","quality":5,"cat":3,"sub":58,"theme":1,"icon":"housing_uni_lsb_contestbannernomadsnirn001"}
 {"id":178477,"name":"Nedic Bookcase, Filled","quality":4,"cat":4,"sub":60,"theme":8,"icon":"housing_cra_fur_bookshelvescombo005"}
-{"id":178497,"name":"The Sonnet of Aetherius Art","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
-{"id":178498,"name":"A Tale of the Dauntless Bananas","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":178499,"name":"Goldleaf Acquisitions, Manager's Notes","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
-{"id":178500,"name":"Museum Guild Letter","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
-{"id":178501,"name":"The Nomads of Nirn","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paperstack001"}
-{"id":178502,"name":"An Ode to the Disenfranchised","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_paper001"}
+{"id":178497,"name":"The Sonnet of Aetherius Art","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178498,"name":"A Tale of the Dauntless Bananas","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":178499,"name":"Goldleaf Acquisitions, Manager's Notes","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":178500,"name":"Museum Guild Letter","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178501,"name":"The Nomads of Nirn","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_paperstack001"}
+{"id":178502,"name":"An Ode to the Disenfranchised","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_paper001"}
 {"id":178521,"name":"Music Box, Invitation to Chaos","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxdreadcellar001"}
 {"id":178522,"name":"Music Box, Silver Rose","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxsilverrose001"}
 {"id":178694,"name":"Target Ogrim","quality":5,"cat":25,"sub":98,"theme":1,"icon":"target_greenarmoredogrim"}

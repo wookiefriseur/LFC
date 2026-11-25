@@ -1,4 +1,4 @@
-{"id":140220,"name":"Rumors of the Spiral Skein","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":140220,"name":"Rumors of the Spiral Skein","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
 {"id":140297,"name":"Replica Throne of Alinor","quality":5,"cat":9,"sub":93,"theme":3,"icon":"housing_sum_fur_throne001"}
 {"id":141752,"name":"Plant, Cerulean Spadeleaf","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_flr_hrcelephantearplant001"}
 {"id":141753,"name":"Plants, Cerulean Spadeleaf Cluster","quality":3,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_flr_hrcelephantearplant003"}
@@ -201,7 +201,7 @@
 {"id":145442,"name":"Grave-Stake, Large Twinned","quality":3,"cat":7,"sub":76,"theme":4,"icon":"housing_arg_exc_mrkburialstick005"}
 {"id":145443,"name":"Murkmire Shrine, Sithis Looming","quality":3,"cat":7,"sub":107,"theme":4,"icon":"housing_arg_run_mrksithisshrine005"}
 {"id":145444,"name":"Murkmire Totem, Hist Guardian","quality":4,"cat":7,"sub":107,"theme":4,"icon":"housing_arg_duc_histguardianarchaictotemfull001"}
-{"id":145445,"name":"The Sharper Tongue: A Jel Primer","quality":3,"cat":4,"sub":62,"theme":4,"icon":"housing_arg_inc_mrkbook002"}
+{"id":145445,"name":"The Sharper Tongue: A Jel Primer","quality":3,"cat":4,"sub":217,"theme":4,"icon":"housing_arg_inc_mrkbook002"}
 {"id":145446,"name":"Sithis, the Hungering Dark","quality":5,"cat":6,"sub":70,"theme":4,"icon":"housing_arg_run_sithisstatue001"}
 {"id":145447,"name":"Murkmire Dais, Engraved","quality":4,"cat":13,"sub":138,"theme":4,"icon":"housing_arg_duc_dais001"}
 {"id":145448,"name":"Murkmire Throne, Engraved","quality":5,"cat":9,"sub":93,"theme":4,"icon":"housing_arg_duc_throne001"}
@@ -223,7 +223,7 @@
 {"id":145464,"name":"Plant, Red Sister Ti","quality":2,"cat":12,"sub":109,"theme":4,"icon":"housing_veg_flr_mrksistertiflower003"}
 {"id":145465,"name":"Plant Cluster, Wilted Hist Bulb","quality":2,"cat":12,"sub":109,"theme":4,"icon":"housing_veg_fan_mrkhistleafy004"}
 {"id":145466,"name":"Plant, Wilted Hist Bulb","quality":2,"cat":12,"sub":109,"theme":4,"icon":"housing_veg_fan_mrkhistleafy003"}
-{"id":145467,"name":"The Way of Shadow","quality":3,"cat":4,"sub":62,"theme":4,"icon":"housing_arg_inc_mrkbook001"}
+{"id":145467,"name":"The Way of Shadow","quality":3,"cat":4,"sub":217,"theme":4,"icon":"housing_arg_inc_mrkbook001"}
 {"id":145468,"name":"Wedding Lantern, Hanging","quality":4,"cat":11,"sub":125,"theme":10,"icon":"housing_red_lsb_weddinglanternhanging001"}
 {"id":145469,"name":"Redguard Gazebo, Palatial Domed","quality":5,"cat":13,"sub":138,"theme":10,"icon":"housing_red_str_varwayshrine001"}
 {"id":145470,"name":"Redguard Vase, Golden","quality":4,"cat":3,"sub":57,"theme":10,"icon":"housing_red_inc_vargoldvase003"}
@@ -272,13 +272,13 @@
 {"id":145557,"name":"Plant Cluster, Spadeleaf","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_flr_mrkelephantearplant008"}
 {"id":145576,"name":"Timid Vine-Tongue","quality":4,"cat":12,"sub":109,"theme":1,"icon":"housing_monster_strangler"}
 {"id":145595,"name":"Scuttlebloom","quality":4,"cat":12,"sub":109,"theme":4,"icon":"housing_veg_flr_mrkspiderplant002"}
-{"id":145596,"name":"Look upon Their Nothing Eyes","quality":3,"icon":"housing_bre_inc_book_row003"}
-{"id":145597,"name":"Scales of Shadow","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
-{"id":145923,"name":"Lies of the Dread-Father","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
-{"id":145926,"name":"That of Void","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
-{"id":145927,"name":"Acts of Honoring","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
-{"id":145928,"name":"Speakers of Nothing","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
-{"id":146047,"name":"From Old Life To New","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed005"}
+{"id":145596,"name":"Look upon Their Nothing Eyes","quality":3,"icon":"housing_bre_inc_book_row003","cat":0,"sub":0,"theme":0}
+{"id":145597,"name":"Scales of Shadow","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
+{"id":145923,"name":"Lies of the Dread-Father","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
+{"id":145926,"name":"That of Void","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
+{"id":145927,"name":"Acts of Honoring","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
+{"id":145928,"name":"Speakers of Nothing","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_arg_inc_mrkbook001"}
+{"id":146047,"name":"From Old Life To New","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":146048,"name":"New Life Festive Fir","quality":5,"cat":7,"sub":106,"theme":1,"icon":"housing_tre_dec_newlifetree001"}
 {"id":146049,"name":"Winter Festival Hearth","quality":5,"cat":13,"sub":117,"theme":1,"icon":"housing_uni_inc_holidayhearth001"}
 {"id":146050,"name":"Winter Festival Hearthfire","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_uni_inc_holidayhearthlogs001"}

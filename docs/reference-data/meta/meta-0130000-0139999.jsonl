@@ -22,7 +22,7 @@
 {"id":130090,"name":"Daedric Sconce, Molag Bal","quality":4,"cat":11,"sub":123,"theme":13,"icon":"housing_cld_lsb_wallsconce001"}
 {"id":130091,"name":"Statue of Molag Bal, God of Schemes","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_vrd_exc_statuemolagbal001"}
 {"id":130092,"name":"Seal of Molag Bal, Grand","quality":5,"cat":13,"sub":138,"theme":13,"icon":"housing_cld_duc_floorseal001"}
-{"id":130093,"name":"Coldharbour Compact","quality":4,"cat":4,"sub":62,"theme":13,"icon":"housing_cld_inc_bookopen001"}
+{"id":130093,"name":"Coldharbour Compact","quality":4,"cat":4,"sub":217,"theme":13,"icon":"housing_cld_inc_bookopen001"}
 {"id":130094,"name":"Daedric Chains, Hanging","quality":3,"cat":10,"sub":96,"theme":13,"icon":"housing_cld_inc_hangingchains002"}
 {"id":130095,"name":"Daedric Torture Device, Chained","quality":4,"cat":7,"sub":77,"theme":13,"icon":"housing_cld_duc_shackledprisoner001"}
 {"id":130189,"name":"Tapestry of Sheogorath","quality":5,"cat":3,"sub":52,"theme":13,"icon":"housing_dae_lsb_bannersheogorath001"}
@@ -47,7 +47,7 @@
 {"id":130209,"name":"Ayleid Table, Carved","quality":3,"cat":5,"sub":66,"theme":14,"icon":"housing_ayl_duc_altar001","blueprint":132342}
 {"id":130210,"name":"Books, Scattered Row","quality":4,"cat":4,"sub":62,"theme":14,"icon":"housing_cra_inc_book003"}
 {"id":130211,"name":"Books, Ordered Row","quality":4,"cat":4,"sub":62,"theme":14,"icon":"housing_cra_inc_book002"}
-{"id":130212,"name":"Daedra Worship: The Ayleids","quality":4,"cat":4,"sub":62,"theme":14,"icon":"housing_cra_inc_book001"}
+{"id":130212,"name":"Daedra Worship: The Ayleids","quality":4,"cat":4,"sub":217,"theme":14,"icon":"housing_cra_inc_book001"}
 {"id":130213,"name":"Ayleid Cage, Hanging","quality":4,"cat":7,"sub":77,"theme":14,"icon":"housing_ayl_duc_lanternhangingc001"}
 {"id":130214,"name":"Ayleid Brazier, Fiery","quality":4,"cat":11,"sub":124,"theme":14,"icon":"housing_ayl_duc_braziera001","blueprint":132189}
 {"id":130215,"name":"Witches' Cauldron, Provisioning","quality":5,"cat":25,"sub":104,"theme":15,"icon":"housing_uni_exc_harvestcauldronshort001"}
@@ -61,7 +61,7 @@
 {"id":130225,"name":"Skulls, Heap","quality":4,"cat":7,"sub":75,"theme":15,"icon":"housing_coh_inc_pileoskulls002"}
 {"id":130226,"name":"Carcass, Hanging Deer","quality":4,"cat":8,"sub":86,"theme":15,"icon":"housing_orc_inc_deercarcass001"}
 {"id":130227,"name":"Witches' Tent, Lean-To","quality":4,"cat":13,"sub":114,"theme":15,"icon":"housing_gen_cmp_primativeleantoo002"}
-{"id":130228,"name":"The Witches of Hag Fen","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":130228,"name":"The Witches of Hag Fen","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
 {"id":130229,"name":"Tree, Wretched Cypress","quality":4,"cat":12,"sub":108,"theme":15,"icon":"housing_tre_dec_sfcypressdead010"}
 {"id":130230,"name":"Stump, Wretched Cypress","quality":3,"cat":12,"sub":165,"theme":1,"icon":"housing_tre_dec_sfcypressstump001"}
 {"id":130247,"name":"Tree, Fetid Cypress","quality":4,"cat":12,"sub":108,"theme":15,"icon":"housing_tre_dec_sfcypress004"}
@@ -205,7 +205,7 @@
 {"id":132348,"name":"The Precursor","quality":5,"cat":25,"sub":98,"theme":16,"icon":"targetdummy_theprecursor"}
 {"id":132531,"name":"Hlaalu Planter, Tall","quality":4,"cat":6,"sub":99,"theme":6,"icon":"housing_vrd_inc_housinghlaboxplanter002"}
 {"id":133576,"name":"Transmute Station","quality":5,"cat":25,"sub":104,"theme":16,"icon":"housing_cwc_crf_housingretrait001"}
-{"id":134246,"name":"The Law of Gears","quality":4,"cat":4,"sub":62,"theme":16,"icon":"housing_cwc_fur_housingpodium002"}
+{"id":134246,"name":"The Law of Gears","quality":4,"cat":4,"sub":217,"theme":16,"icon":"housing_cwc_fur_housingpodium002"}
 {"id":134247,"name":"Soul Gem Module, Experimental","quality":4,"cat":7,"sub":199,"theme":16,"icon":"housing_cwc_inc_gemrecharger001"}
 {"id":134248,"name":"Grand Mnemograph","quality":5,"cat":10,"sub":170,"theme":16,"icon":"housing_cwc_inc_sundial001"}
 {"id":134249,"name":"Sotha Sil, The Clockwork God","quality":5,"cat":6,"sub":70,"theme":16,"icon":"housing_uni_str_sothasilstatue001"}
@@ -216,8 +216,8 @@
 {"id":134254,"name":"Seal of Molag Bal","quality":4,"cat":7,"sub":107,"theme":13,"icon":"housing_cld_duc_floorsealentcenter"}
 {"id":134255,"name":"Transliminal Rupture","quality":5,"cat":14,"sub":167,"theme":13,"icon":"housing_fx_transliminalrupture"}
 {"id":134256,"name":"Coldharbour Bookcase, Filled Pillar","quality":4,"cat":4,"sub":60,"theme":13,"icon":"housing_cld_duc_storagecolumn001"}
-{"id":134257,"name":"Daedra Dossier: Cold-Flame Atronach","quality":3,"cat":4,"sub":62,"theme":13,"icon":"housing_cld_inc_bookopen001"}
-{"id":134258,"name":"Prayer to the Furious One","quality":3,"cat":4,"sub":62,"theme":9,"icon":"housing_cra_fur_desk002"}
+{"id":134257,"name":"Daedra Dossier: Cold-Flame Atronach","quality":3,"cat":4,"sub":217,"theme":13,"icon":"housing_cld_inc_bookopen001"}
+{"id":134258,"name":"Prayer to the Furious One","quality":3,"cat":4,"sub":217,"theme":9,"icon":"housing_cra_fur_desk002"}
 {"id":134259,"name":"Malacath, God of Oaths and Curses","quality":5,"cat":6,"sub":70,"theme":9,"icon":"housing_dae_exc_malacathstatue001"}
 {"id":134260,"name":"Orcish Bas-Relief, Axe","quality":4,"cat":9,"sub":92,"theme":9,"icon":"housing_orc_duc_housingbasrelief001"}
 {"id":134261,"name":"Orcish Bas-Relief, Sword","quality":4,"cat":9,"sub":92,"theme":9,"icon":"housing_orc_duc_housingbasrelief002"}
@@ -432,19 +432,19 @@
 {"id":134473,"name":"Tapestry, Malacath","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermalacath001"}
 {"id":134474,"name":"Banner, Malacath","quality":5,"cat":3,"sub":58,"theme":13,"icon":"housing_dae_lsb_bannermalacathsmall001"}
 {"id":134475,"name":"Statue of Malacath, Orc-Father","quality":5,"cat":6,"sub":70,"theme":13,"icon":"housing_vrd_exc_housingstatuemalacath002"}
-{"id":134547,"name":"The Truth in Sequence","quality":3,"icon":"quest_cwc_inc_book001"}
-{"id":134548,"name":"The Truth in Sequence: Volume 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134549,"name":"The Truth in Sequence: Volume 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134550,"name":"The Truth in Sequence: Volume 3","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134551,"name":"The Truth in Sequence: Volume 4","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134552,"name":"The Truth in Sequence: Volume 5","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134553,"name":"The Truth in Sequence: Volume 6","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134554,"name":"The Truth in Sequence: Volume 7","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134555,"name":"The Truth in Sequence: Volume 8","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134556,"name":"The Truth in Sequence: Volume 9","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134557,"name":"The Truth in Sequence: Volume 10","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134558,"name":"The Truth in Sequence: Volume 11","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":134559,"name":"The Truth in Sequence: Volume 12","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134547,"name":"The Truth in Sequence","quality":3,"icon":"quest_cwc_inc_book001","cat":0,"sub":0,"theme":0}
+{"id":134548,"name":"The Truth in Sequence: Volume 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134549,"name":"The Truth in Sequence: Volume 2","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134550,"name":"The Truth in Sequence: Volume 3","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134551,"name":"The Truth in Sequence: Volume 4","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134552,"name":"The Truth in Sequence: Volume 5","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134553,"name":"The Truth in Sequence: Volume 6","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134554,"name":"The Truth in Sequence: Volume 7","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134555,"name":"The Truth in Sequence: Volume 8","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134556,"name":"The Truth in Sequence: Volume 9","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134557,"name":"The Truth in Sequence: Volume 10","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134558,"name":"The Truth in Sequence: Volume 11","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":134559,"name":"The Truth in Sequence: Volume 12","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
 {"id":134564,"name":"Clockwork Shelf, Wall","quality":2,"cat":4,"sub":60,"theme":16,"icon":"housing_cwc_fur_table004","blueprint":134582}
 {"id":134565,"name":"Fabrication Tank, Reinforced","quality":4,"cat":10,"sub":159,"theme":16,"icon":"housing_cwc_fur_tank001"}
 {"id":134566,"name":"Shrub Cluster, Snowswept","quality":2,"cat":12,"sub":110,"theme":1,"icon":"housing_veg_bsh_wrothgarevergreensnowclst002"}
@@ -499,7 +499,7 @@
 {"id":134858,"name":"Dragon Priest Frieze: Exodus","quality":5,"cat":9,"sub":92,"theme":8,"icon":"housing_nor_duc_housingwtgdpfriezeb001"}
 {"id":134859,"name":"Dragon Priest Frieze: Restoration","quality":5,"cat":9,"sub":92,"theme":8,"icon":"housing_nor_duc_housingwtgdpfriezec001"}
 {"id":134860,"name":"Dragon Priest Frieze: Ascension","quality":5,"cat":9,"sub":92,"theme":8,"icon":"housing_nor_duc_housingwtgdpfriezed001"}
-{"id":134861,"name":"The History of Zaan The Scalecaller","quality":3,"cat":4,"sub":62,"theme":8,"icon":"housing_cra_fur_podiumscroll003"}
+{"id":134861,"name":"The History of Zaan The Scalecaller","quality":3,"cat":4,"sub":217,"theme":8,"icon":"housing_cra_fur_podiumscroll003"}
 {"id":134862,"name":"Ancient Nord Runestone, Memorial","quality":4,"cat":6,"sub":69,"theme":8,"icon":"housing_nor_cem_housingstandingstone001"}
 {"id":134863,"name":"Ancient Nord Sconce, Dragon Crest","quality":4,"cat":11,"sub":123,"theme":8,"icon":"housing_nor_duc_sconcewall001"}
 {"id":134864,"name":"Dragon Cranium, Ancient","quality":5,"cat":7,"sub":76,"theme":1,"icon":"housing_cft_min_dragonbones001"}
@@ -519,7 +519,7 @@
 {"id":134878,"name":"Ancient Nord Funerary Jar, Dragon Crest","quality":4,"cat":7,"sub":78,"theme":8,"icon":"housing_nor_duc_urn006"}
 {"id":134879,"name":"Hubalajad's Reflection","quality":5,"cat":6,"sub":70,"theme":10,"icon":"housing_red_exc_housingvarstatuehewsbane001"}
 {"id":134880,"name":"Ra Gada Reliquary, Miniature Palace","quality":5,"cat":2,"sub":49,"theme":10,"icon":"housing_red_inc_vardoweryholder002"}
-{"id":134881,"name":"In Defense of Prince Hubalajad","quality":3,"cat":4,"sub":62,"theme":10,"icon":"housing_red_inc_varbook002"}
+{"id":134881,"name":"In Defense of Prince Hubalajad","quality":3,"cat":4,"sub":217,"theme":10,"icon":"housing_red_inc_varbook002"}
 {"id":134882,"name":"Gold Drakes, Pristine","quality":3,"cat":3,"sub":56,"theme":1,"icon":"housing_gen_inc_coinstack004"}
 {"id":134883,"name":"Ra Gada Funerary Statue, Stone Cat","quality":4,"cat":7,"sub":107,"theme":10,"icon":"housing_red_run_varcatstatue001"}
 {"id":134884,"name":"Ra Gada Funerary Statue, Gilded Cat","quality":4,"cat":7,"sub":107,"theme":10,"icon":"housing_red_run_varcatstatue002"}
@@ -589,7 +589,7 @@
 {"id":134952,"name":"Mushrooms, Sporous Browncap","quality":2,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_malabaltorglowmushrooms001"}
 {"id":134953,"name":"Brotherhood Carpet, Large Worn","quality":4,"cat":3,"sub":53,"theme":1,"icon":"housing_col_inc_dbhrugsanctuary004"}
 {"id":134959,"name":"Jester's Pavilion, Open","quality":4,"cat":13,"sub":114,"theme":1,"icon":"housing_uni_cmp_jestertents001","blueprint":134998}
-{"id":134961,"name":"Dibella's Mysteries and Revelations","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":134961,"name":"Dibella's Mysteries and Revelations","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":134970,"name":"Mushrooms, Glowing Sprawl","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fug_maltorshroomslgglw007"}
 {"id":134971,"name":"Candles, Votive Group","quality":4,"cat":11,"sub":129,"theme":1,"icon":"housing_bre_lsb_candleset010"}
 {"id":134972,"name":"Brotherhood Brazier, Wrought Iron","quality":4,"cat":11,"sub":124,"theme":1,"icon":"housing_col_lsb_dbhbrazier001"}
@@ -638,7 +638,7 @@
 {"id":137910,"name":"Jewelry Station (Innate Axiom)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":137911,"name":"Jewelry Station (Fortified Brass)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":137912,"name":"Jewelry Station (Mechanical Acuity)","icon":"housing_gen_crf_portabletablejewelry001","quality":5,"cat":25,"sub":104,"theme":1}
-{"id":137947,"name":"Attunable Jewelry Crafting Station","quality":5,"icon":"housing_gen_crf_portabletablejewelry001"}
+{"id":137947,"name":"Attunable Jewelry Crafting Station","quality":5,"icon":"housing_gen_crf_portabletablejewelry001","cat":0,"sub":0,"theme":0}
 {"id":138737,"name":"Clothing Station (Adept Rider)","icon":"housing_gen_crf_portabletableleatherworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":138738,"name":"Woodworking Station (Adept Rider)","icon":"housing_gen_crf_portabletablewoodworking001","quality":5,"cat":25,"sub":104,"theme":1}
 {"id":138739,"name":"Blacksmithing Station (Adept Rider)","icon":"housing_gen_crf_portableblacksmith001","quality":5,"cat":25,"sub":104,"theme":1}
@@ -977,7 +977,7 @@
 {"id":139382,"name":"Spiral Skein Coral, Elkhorn","quality":2,"cat":12,"sub":130,"theme":1,"icon":"housing_veg_fan_mphelkhorncoral001"}
 {"id":139383,"name":"Psijic Control Globe, Inactive","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_sum_str_dreamingcaveconsole001"}
 {"id":139384,"name":"Waterfall, Small Everlasting","quality":4,"cat":6,"sub":74,"theme":1,"icon":"housing_rok_sum_decorativewaterfall004"}
-{"id":139385,"name":"The Keeper's Oath","quality":4,"cat":7,"sub":107,"theme":3,"icon":"housing_sum_duc_dirennitablet001"}
+{"id":139385,"name":"The Keeper's Oath","quality":4,"cat":4,"sub":217,"theme":3,"icon":"housing_sum_duc_dirennitablet001"}
 {"id":139386,"name":"Direnni Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":3,"icon":"housing_sum_lsb_bannerdirennimedium001"}
 {"id":139387,"name":"Lillandril Banner, Hanging","quality":3,"cat":3,"sub":58,"theme":3,"icon":"housing_sum_lsb_bannerlillandrilmedium001"}
 {"id":139388,"name":"Banner of the House of Reveries, Hanging","quality":3,"cat":3,"sub":58,"theme":3,"icon":"housing_sum_lsb_bannerrevereiesmedium001"}

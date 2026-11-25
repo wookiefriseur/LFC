@@ -66,26 +66,26 @@
 {"id":120099,"name":"To Dream Beyond Dreams","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120100,"name":"Tower of Adamant","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120101,"name":"Wayrest, Jewel of the Bay","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
-{"id":120102,"name":"The Barrows of Westmark Moor","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120102,"name":"The Barrows of Westmark Moor","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120103,"name":"The Story of Princess Eselde","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120104,"name":"Bloodfiends of Rivenspire","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120104,"name":"Bloodfiends of Rivenspire","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120105,"name":"The Remnant of Light","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120106,"name":"Horse-Folk of Silverhoof","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120106,"name":"Horse-Folk of Silverhoof","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
 {"id":120107,"name":"Dire Legends of the Doomcrag","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120108,"name":"House Tamrith: A Recent History","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120109,"name":"Shornhelm, Crown City of the North","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120110,"name":"Northpoint: An Assessment","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120111,"name":"House Ravenwatch Proclamation","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":120112,"name":"The Legend of Fallen Grotto","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120113,"name":"Living with Lycanthropy","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120114,"name":"Bangkorai, Shield of High Rock","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120115,"name":"The Posting of the Hunt","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120116,"name":"Aspects of Lord Hircine","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120117,"name":"The Viridian Sentinel","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120108,"name":"House Tamrith: A Recent History","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120109,"name":"Shornhelm, Crown City of the North","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120110,"name":"Northpoint: An Assessment","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120111,"name":"House Ravenwatch Proclamation","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":120112,"name":"The Legend of Fallen Grotto","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120113,"name":"Living with Lycanthropy","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120114,"name":"Bangkorai, Shield of High Rock","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120115,"name":"The Posting of the Hunt","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120116,"name":"Aspects of Lord Hircine","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120117,"name":"The Viridian Sentinel","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120118,"name":"The True-Told Tale of Hallin, Pt. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120119,"name":"The True-Told Tale of Hallin, Pt. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120120,"name":"A Life Barbaric and Brutal","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120121,"name":"The Glenmoril Wyrd","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120120,"name":"A Life Barbaric and Brutal","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120121,"name":"The Glenmoril Wyrd","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120122,"name":"Redguards, History and Heroes, V. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120123,"name":"Redguards, History and Heroes, V. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120124,"name":"Redguards, History and Heroes, V. 3","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
@@ -96,8 +96,8 @@
 {"id":120129,"name":"The Salas En Expedition","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120130,"name":"Sentinel, the Jewel of Alik'r","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":120131,"name":"Sacrilege and Mayhem in the Alik'r","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":120132,"name":"Circus of Cheerful Slaughter","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
-{"id":120133,"name":"Robier's Vegetable Garden","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
+{"id":120132,"name":"Circus of Cheerful Slaughter","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
+{"id":120133,"name":"Robier's Vegetable Garden","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
 {"id":120134,"name":"Galerion the Mystic","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
 {"id":120135,"name":"Great Harbingers of the Companions","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
 {"id":120136,"name":"The Illusion of Death","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
@@ -145,25 +145,25 @@
 {"id":120178,"name":"Ancient Scrolls of the Dwemer VI","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120179,"name":"Ancient Scrolls of the Dwemer X","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120180,"name":"Ancient Scrolls of the Dwemer XI","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120181,"name":"Antecedents of Dwemer Law","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120181,"name":"Antecedents of Dwemer Law","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120182,"name":"Dwarven Automatons","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120183,"name":"Ancient Scrolls of the Dwemer I-B","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120184,"name":"Guylaine's Dwemer Architecture","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120185,"name":"Ancient Scrolls of the Dwemer VIII","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120186,"name":"Dwemer Inquiries Volume I","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120187,"name":"Dwemer Inquiries Volume II","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120188,"name":"Dwemer Inquiries Volume III","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120186,"name":"Dwemer Inquiries Volume I","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120187,"name":"Dwemer Inquiries Volume II","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":120188,"name":"Dwemer Inquiries Volume III","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
 {"id":120189,"name":"Ancient Scrolls of the Dwemer IV","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":120190,"name":"The Homilies of Blessed Almalexia","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120191,"name":"The Legendary Scourge","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120192,"name":"The Lusty Argonian Maid, Vol. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120193,"name":"The Lusty Argonian Maid, Vol. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120194,"name":"Myths of Sheogorath, Vol. 1","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120195,"name":"Myths of Sheogorath, Vol. 2","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120196,"name":"The Red Book of Riddles","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120197,"name":"16 Accords of Madness, Vol. VI","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120190,"name":"The Homilies of Blessed Almalexia","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120191,"name":"The Legendary Scourge","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120192,"name":"The Lusty Argonian Maid, Vol. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120193,"name":"The Lusty Argonian Maid, Vol. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120194,"name":"Myths of Sheogorath, Vol. 1","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120195,"name":"Myths of Sheogorath, Vol. 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120196,"name":"The Red Book of Riddles","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120197,"name":"16 Accords of Madness, Vol. VI","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120198,"name":"Crow and Raven: Three Short Fables","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":120199,"name":"Wabbajack","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":120199,"name":"Wabbajack","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
 {"id":120200,"name":"Arcana Restored","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120201,"name":"Liminal Bridges","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
 {"id":120202,"name":"Magic from the Sky","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed005"}
@@ -194,14 +194,14 @@
 {"id":120227,"name":"Varieties of Daedra, Part 2","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
 {"id":120228,"name":"The Slave Pits of Coldharbour","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
 {"id":120229,"name":"On the Nature of Coldharbour","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed002"}
-{"id":120230,"name":"The Battle of Glenumbria Moors","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120231,"name":"The Book of Dawn and Dusk","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120232,"name":"The Cantatas of Vivec","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120230,"name":"The Battle of Glenumbria Moors","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120231,"name":"The Book of Dawn and Dusk","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120232,"name":"The Cantatas of Vivec","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120233,"name":"The Five Far Stars","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120234,"name":"Flesh to Cut from Bone","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120235,"name":"Ode to the Tundrastriders","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120236,"name":"Proper-Life: Three Chants","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":120237,"name":"Song of the Askelde Men","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120235,"name":"Ode to the Tundrastriders","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120236,"name":"Proper-Life: Three Chants","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":120237,"name":"Song of the Askelde Men","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120238,"name":"The Warrior's Charge","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120239,"name":"Words of the Wind","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
 {"id":120240,"name":"Ayleid Inscriptions Translated","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
@@ -739,7 +739,7 @@
 {"id":121043,"name":"Plant, Summer Hosta","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_bsh_auridontealhosta_002"}
 {"id":121044,"name":"Plant, Healthy White Hosta","quality":2,"cat":12,"sub":109,"theme":1,"icon":"housing_veg_bsh_auridongreenhosta_003"}
 {"id":121045,"name":"Book Row, Decorative","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_row002"}
-{"id":121046,"name":"Cheeses of Tamriel","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed007"}
+{"id":121046,"name":"Cheeses of Tamriel","quality":2,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed007"}
 {"id":121047,"name":"Book Row, Long","quality":2,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_row005"}
 {"id":121049,"name":"Parcels, Wrapped","quality":2,"cat":10,"sub":95,"theme":1,"icon":"housing_red_exc_varcargogoods001"}
 {"id":121050,"name":"Redguard Censer, Hanging Disc","quality":4,"cat":7,"sub":105,"theme":10,"icon":"housing_red_exc_varmarketbrasshanging003","blueprint":121374}
@@ -924,13 +924,13 @@
 {"id":126124,"name":"Daedric Urn, Ashen","quality":4,"cat":7,"sub":78,"theme":13,"icon":"housing_dae_inc_ashstatueurn001","blueprint":126837}
 {"id":126125,"name":"Daedric Candles, Ritual Set","quality":4,"cat":11,"sub":129,"theme":13,"icon":"housing_bre_lsb_candlesetblueflame003","blueprint":126835}
 {"id":126126,"name":"Daedric Candles, Group","quality":4,"cat":11,"sub":129,"theme":13,"icon":"housing_bre_lsb_candlesetblueflame002","blueprint":126834}
-{"id":126128,"name":"The Five Points of the Star","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
+{"id":126128,"name":"The Five Points of the Star","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_cld_inc_bookclosed001"}
 {"id":126132,"name":"Resplendent Sweetroll","quality":5,"cat":8,"sub":156,"theme":1,"icon":"crowncrate_sweetroll"}
 {"id":126133,"name":"Dwarven Pipeline, Column","quality":3,"cat":10,"sub":159,"theme":12,"icon":"housing_dwe_duc_housingpipe1way002","blueprint":126859}
 {"id":126134,"name":"Dwarven Lamppost, Powered","quality":4,"cat":11,"sub":122,"theme":12,"icon":"housing_dwe_lsb_lamposta001","blueprint":126896}
 {"id":126135,"name":"Dwarven Sconce, Powered","quality":4,"cat":11,"sub":123,"theme":12,"icon":"housing_dwe_lsb_lampwalla001","blueprint":126897}
 {"id":126136,"name":"Dwarven Lantern, Powered","quality":4,"cat":11,"sub":121,"theme":12,"icon":"housing_dwe_lsb_lampa001"}
-{"id":126138,"name":"A Guide to Dwemer Mega-Structures","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook003"}
+{"id":126138,"name":"A Guide to Dwemer Mega-Structures","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook003"}
 {"id":126140,"name":"Vivec's Grand Bed","quality":5,"cat":2,"sub":46,"theme":6,"icon":"housing_vrd_fur_vivecbed001"}
 {"id":126141,"name":"Vivec's Grand Throne","quality":5,"cat":9,"sub":93,"theme":6,"icon":"housing_vrd_fur_vivecthrone001"}
 {"id":126142,"name":"Vivec's Divination Pool","quality":5,"cat":6,"sub":74,"theme":6,"icon":"housing_vrd_str_housingvivdivpool001"}
@@ -942,15 +942,15 @@
 {"id":126149,"name":"Tapestry, Vivec","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_vrd_lsb_varhlavivecbanner001"}
 {"id":126150,"name":"Tribunal Tablet of Sotha Sil","quality":4,"cat":9,"sub":92,"theme":6,"icon":"housing_vrd_str_housingvivrelief001"}
 {"id":126151,"name":"Tribunal Tablet of Almalexia","quality":4,"cat":9,"sub":92,"theme":6,"icon":"housing_vrd_str_housingvivrelief002","blueprint":127102}
-{"id":126152,"name":"The Cliff-Strider Song","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook004"}
-{"id":126157,"name":"The Song of Pelinal, Volume 1","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126158,"name":"The Song of Pelinal, Volume 2","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126159,"name":"The Song of Pelinal, Volume 3","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126160,"name":"The Song of Pelinal, Volume 4","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126161,"name":"The Song of Pelinal, Volume 5","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126162,"name":"The Song of Pelinal, Volume 6","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126163,"name":"The Song of Pelinal, Volume 7","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
-{"id":126164,"name":"The Song of Pelinal, Volume 8","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126152,"name":"The Cliff-Strider Song","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook004"}
+{"id":126157,"name":"The Song of Pelinal, Volume 1","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126158,"name":"The Song of Pelinal, Volume 2","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126159,"name":"The Song of Pelinal, Volume 3","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126160,"name":"The Song of Pelinal, Volume 4","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126161,"name":"The Song of Pelinal, Volume 5","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126162,"name":"The Song of Pelinal, Volume 6","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126163,"name":"The Song of Pelinal, Volume 7","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
+{"id":126164,"name":"The Song of Pelinal, Volume 8","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook001"}
 {"id":126338,"name":"Hlaalu Stool, Polished","quality":2,"cat":10,"sub":135,"theme":6,"icon":"housing_vrd_fur_extchair002","blueprint":126911}
 {"id":126339,"name":"Dres Sideboard, Display","quality":3,"cat":8,"sub":83,"theme":6,"icon":"housing_vrd_fur_exttable002","blueprint":126916}
 {"id":126340,"name":"Hlaalu Bed, Single","quality":2,"cat":2,"sub":46,"theme":6,"icon":"housing_vrd_fur_hlabedsingle001","blueprint":126926}
@@ -1190,7 +1190,7 @@
 {"id":126574,"name":"Velothi Cerecloth, Prayer","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_duc_rug002"}
 {"id":126575,"name":"Velothi Seat, Meditation","quality":4,"cat":7,"sub":107,"theme":6,"icon":"housing_vrd_duc_chair001"}
 {"id":126576,"name":"Velothi Kneeler, Prayer","quality":3,"cat":7,"sub":107,"theme":6,"icon":"housing_vrd_duc_kneeler001"}
-{"id":126577,"name":"Velothi Podium of Recitation","quality":5,"cat":4,"sub":61,"theme":6,"icon":"housing_vrd_duc_podium002"}
+{"id":126577,"name":"Velothi Podium of Recitation","quality":5,"cat":4,"sub":217,"theme":6,"icon":"housing_vrd_duc_podium002"}
 {"id":126578,"name":"Velothi Urn, Burial","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_duc_tomburn001"}
 {"id":126579,"name":"Velothi Altar, Sacrificial","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_duc_sarcophagus002"}
 {"id":126580,"name":"Vvardenfell Glowstalk, Towering","quality":4,"cat":11,"sub":126,"theme":1,"icon":"housing_veg_fug_lightstalk001"}
@@ -1334,7 +1334,7 @@
 {"id":126758,"name":"Velothi Cerecloth, Austere","quality":4,"cat":7,"sub":76,"theme":6,"icon":"housing_vrd_duc_rug001"}
 {"id":126759,"name":"Sir Socks's Ball of Yarn","quality":3,"cat":7,"sub":107,"theme":1,"icon":"housing_uni_inc_yarnball001"}
 {"id":126764,"name":"Velothi Mat, Prayer","quality":4,"cat":3,"sub":53,"theme":6,"icon":"housing_vrd_duc_rugprayer001"}
-{"id":126771,"name":"Velothi Podium of Illumination","quality":5,"cat":4,"sub":61,"theme":6,"icon":"housing_vrd_duc_podium001"}
+{"id":126771,"name":"Velothi Podium of Illumination","quality":5,"cat":4,"sub":217,"theme":6,"icon":"housing_vrd_duc_podium001"}
 {"id":126772,"name":"Khajiit Ponder Sphere","quality":3,"cat":7,"sub":107,"theme":1,"icon":"housing_uni_inc_yarnball002"}
 {"id":126773,"name":"Velothi Caisson, Crypt","quality":3,"cat":7,"sub":78,"theme":6,"icon":"housing_vrd_duc_urn001"}
 {"id":126774,"name":"Dres Tapestry, House","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dun_lsb_housebannerdres001"}
@@ -1342,44 +1342,44 @@
 {"id":126776,"name":"Indoril Tapestry, House","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dun_lsb_housebannerindoril001"}
 {"id":126777,"name":"Redoran Tapestry, House","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dun_lsb_housebannerredoran001"}
 {"id":126778,"name":"Telvanni Tapestry, House","quality":4,"cat":3,"sub":52,"theme":6,"icon":"housing_dun_lsb_housebannertelvanni001"}
-{"id":126792,"name":"Temple Doctrine: The 36 Lessons","quality":3,"icon":"housing_bre_inc_book_row004"}
-{"id":126793,"name":"The 36 Lessons: Sermon 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126794,"name":"The 36 Lessons: Sermon 37","quality":4,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126795,"name":"The 36 Lessons: Sermon 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126796,"name":"The 36 Lessons: Sermon 3","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126797,"name":"The 36 Lessons: Sermon 4","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126798,"name":"The 36 Lessons: Sermon 5","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126799,"name":"The 36 Lessons: Sermon 6","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126800,"name":"The 36 Lessons: Sermon 7","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126801,"name":"The 36 Lessons: Sermon 8","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126802,"name":"The 36 Lessons: Sermon 9","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126803,"name":"The 36 Lessons: Sermon 10","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126804,"name":"The 36 Lessons: Sermon 11","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126805,"name":"The 36 Lessons: Sermon 12","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126806,"name":"The 36 Lessons: Sermon 13","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126807,"name":"The 36 Lessons: Sermon 14","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126808,"name":"The 36 Lessons: Sermon 15","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126809,"name":"The 36 Lessons: Sermon 16","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126810,"name":"The 36 Lessons: Sermon 17","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126811,"name":"The 36 Lessons: Sermon 18","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126812,"name":"The 36 Lessons: Sermon 19","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126813,"name":"The 36 Lessons: Sermon 20","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126814,"name":"The 36 Lessons: Sermon 21","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126815,"name":"The 36 Lessons: Sermon 22","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126816,"name":"The 36 Lessons: Sermon 23","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126817,"name":"The 36 Lessons: Sermon 24","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126818,"name":"The 36 Lessons: Sermon 25","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126819,"name":"The 36 Lessons: Sermon 26","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126820,"name":"The 36 Lessons: Sermon 27","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126821,"name":"The 36 Lessons: Sermon 28","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126822,"name":"The 36 Lessons: Sermon 29","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126823,"name":"The 36 Lessons: Sermon 30","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126824,"name":"The 36 Lessons: Sermon 31","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126825,"name":"The 36 Lessons: Sermon 32","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126826,"name":"The 36 Lessons: Sermon 33","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126827,"name":"The 36 Lessons: Sermon 34","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126828,"name":"The 36 Lessons: Sermon 35","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
-{"id":126829,"name":"The 36 Lessons: Sermon 36","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126792,"name":"Temple Doctrine: The 36 Lessons","quality":3,"icon":"housing_bre_inc_book_row004","cat":0,"sub":0,"theme":0}
+{"id":126793,"name":"The 36 Lessons: Sermon 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126794,"name":"The 36 Lessons: Sermon 37","quality":4,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126795,"name":"The 36 Lessons: Sermon 2","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126796,"name":"The 36 Lessons: Sermon 3","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126797,"name":"The 36 Lessons: Sermon 4","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126798,"name":"The 36 Lessons: Sermon 5","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126799,"name":"The 36 Lessons: Sermon 6","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126800,"name":"The 36 Lessons: Sermon 7","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126801,"name":"The 36 Lessons: Sermon 8","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126802,"name":"The 36 Lessons: Sermon 9","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126803,"name":"The 36 Lessons: Sermon 10","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126804,"name":"The 36 Lessons: Sermon 11","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126805,"name":"The 36 Lessons: Sermon 12","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126806,"name":"The 36 Lessons: Sermon 13","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126807,"name":"The 36 Lessons: Sermon 14","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126808,"name":"The 36 Lessons: Sermon 15","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126809,"name":"The 36 Lessons: Sermon 16","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126810,"name":"The 36 Lessons: Sermon 17","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126811,"name":"The 36 Lessons: Sermon 18","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126812,"name":"The 36 Lessons: Sermon 19","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126813,"name":"The 36 Lessons: Sermon 20","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126814,"name":"The 36 Lessons: Sermon 21","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126815,"name":"The 36 Lessons: Sermon 22","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126816,"name":"The 36 Lessons: Sermon 23","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126817,"name":"The 36 Lessons: Sermon 24","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126818,"name":"The 36 Lessons: Sermon 25","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126819,"name":"The 36 Lessons: Sermon 26","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126820,"name":"The 36 Lessons: Sermon 27","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126821,"name":"The 36 Lessons: Sermon 28","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126822,"name":"The 36 Lessons: Sermon 29","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126823,"name":"The 36 Lessons: Sermon 30","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126824,"name":"The 36 Lessons: Sermon 31","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126825,"name":"The 36 Lessons: Sermon 32","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126826,"name":"The 36 Lessons: Sermon 33","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126827,"name":"The 36 Lessons: Sermon 34","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126828,"name":"The 36 Lessons: Sermon 35","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
+{"id":126829,"name":"The 36 Lessons: Sermon 36","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed003"}
 {"id":126830,"name":"Mushrooms, Volcanic Cluster","quality":2,"cat":12,"sub":143,"theme":1,"icon":"housing_veg_fug_vrdsmmushroom002"}
 {"id":126831,"name":"Hlaalu Boxes, Compact","quality":3,"cat":3,"sub":56,"theme":6,"icon":"housing_vrd_inc_hlasmallstorage001","blueprint":127104}
 {"id":127149,"name":"Morrowind Banner of the 6th House","quality":4,"cat":3,"sub":58,"theme":1,"icon":"housing_dae_lsb_dagothancestralbanner001"}

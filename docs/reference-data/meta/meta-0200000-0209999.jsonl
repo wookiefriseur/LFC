@@ -90,102 +90,102 @@
 {"id":203311,"name":"Apocrypha Fence, Stone","quality":2,"cat":13,"sub":164,"theme":13,"icon":"housing_apc_waf_libwallsmallstraight002","blueprint":203353}
 {"id":203312,"name":"Mirror Barrier, Shattered","quality":4,"cat":12,"sub":152,"theme":13,"icon":"housing_chl_duc__mirrorsiegewall001"}
 {"id":203313,"name":"Many Paths Monument","quality":4,"cat":9,"sub":91,"theme":9,"icon":"housing_chl_duc_staffdisplaycase001"}
-{"id":203377,"name":"A Brief History of Ald Sotha","quality":3,"cat":4,"sub":62,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
-{"id":203378,"name":"Engine of Expression","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cwc_inc_bookopen001"}
-{"id":203379,"name":"The Blackfeather Court","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203380,"name":"Worshiping the Illogical","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_cwc_inc_book001"}
-{"id":203381,"name":"Journal of Tsona-Ei, Part Four","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203382,"name":"Journal of Tsona-Ei, Part One","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203383,"name":"Journal of Tsona-Ei, Part Three","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203384,"name":"Journal of Tsona-Ei, Part Two","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203385,"name":"Cathedral Hierarchy","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":203386,"name":"On Minotaurs","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203387,"name":"The Blade of Woe","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203388,"name":"The Wolf and the Dragon","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203389,"name":"The Red Curse, Volume 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203390,"name":"The Red Curse, Volume 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203391,"name":"The Red Curse, Volume 3","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203392,"name":"Anequina and Pellitine: An Introduction","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":203393,"name":"On Those Who Know Baan Dar","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203394,"name":"The Angry Alfiq: A Collection","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203395,"name":"Trail and Tide","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_inc_openbook001"}
-{"id":203396,"name":"Azurah's Crossing","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":203397,"name":"Khunzar-ri and the Lost Alfiq","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203398,"name":"The Favored Daughter of Fadomai","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":203399,"name":"The Marriage of Moon and Tide","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203400,"name":"Artaeum Lost","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203401,"name":"The Flight of Gryphons","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook002"}
-{"id":203402,"name":"The Truth of Minotaurs","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":203403,"name":"The Ubiquitous Sinking Isle","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":203404,"name":"Birds of Wrothgar","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203405,"name":"Orc Clans and Symbology","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203406,"name":"Vorgrosh Rot-Tusk's Guide to Dirty Fighting","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203407,"name":"Vosh Rakh","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybook002"}
-{"id":203408,"name":"Larydeilmo is Sane","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_bookopenburned001"}
-{"id":203409,"name":"Oath of the Keepers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203410,"name":"Ranks and Titles of House Telvanni","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybook003"}
-{"id":203411,"name":"A Report on the Dusksabers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203412,"name":"On Joining the Keepers of the Dead","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203413,"name":"The Currency of Secrets","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203414,"name":"Uluscant's Manifesto","quality":3,"cat":4,"sub":62,"theme":1,"icon":"skr_inc_vampirelabbook001"}
-{"id":203415,"name":"On Tracts Perilous","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
-{"id":203416,"name":"How Rajhin Stole the Book that Knows","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203417,"name":"Herma-Mora: The Woodland Man?","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":203418,"name":"Life in the Camonna Tong","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203419,"name":"Kynmarcher Strix's Journal","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203420,"name":"A Summoner's Guide to Nymics","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_inc_openbook001"}
-{"id":203421,"name":"The Dangers of Truth","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203422,"name":"On the Nature of Nymics","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":203423,"name":"Master of the Tides of Fate","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203424,"name":"The Spires of the 34th Sermon","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":203425,"name":"Our Puny Allies","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybook002"}
-{"id":203426,"name":"We Reject the Pact","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":203427,"name":"Critter Dangers: Telvanni Peninsula","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203428,"name":"Visitor's Guide: Telvanni Peninsula","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203429,"name":"A Feast Among the Dead, Chapter I","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203430,"name":"A Brief History of House Telvanni","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable001"}
-{"id":203431,"name":"Brave Little Scrib and the River Troll","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203432,"name":"History of Necrom: The City of the Dead","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
-{"id":203433,"name":"Denizens of Apocrypha","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203434,"name":"Beverages for the Bereaved","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_inc_openbook001"}
-{"id":203435,"name":"Planar Exploration Vol. 14: Darkreave Curators","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203436,"name":"Ciphers of the Eye","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203437,"name":"Daedric Worship and the Dark Elves","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed001"}
-{"id":203438,"name":"Torvesard's Journal","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203439,"name":"A New Cult Arises","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203440,"name":"The Littlest Tomeshell","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203441,"name":"On Cipher's Midden","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203442,"name":"What About Glyphics?","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203443,"name":"Working in the Infinite Panopticon","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203444,"name":"What's an Arcanist? Part 2","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":203445,"name":"What's an Arcanist? Part 1","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed006"}
-{"id":203446,"name":"A Feast Among the Dead, Chapter II","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203447,"name":"A Feast Among the Dead, Chapter III","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203448,"name":"A Feast Among the Dead, Chapter IV","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203449,"name":"Our Dunmer Heritage","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
-{"id":203450,"name":"Tidefall Cantos I","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203451,"name":"Fanlyrion's Journal","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203452,"name":"First Mate Dalmir's Log","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203453,"name":"Mouth Vabdru's Journal","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203454,"name":"Dusksaber Report","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203455,"name":"Plague Concoctor's Instructions","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203456,"name":"The Prior's Fulcrum","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
-{"id":203457,"name":"Preparing Necrom Kwama, Fifth Draft","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook002"}
-{"id":203458,"name":"The Last Addition of Bikkus-Muz","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203459,"name":"A Servant's Tale","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed002"}
-{"id":203460,"name":"Malkhest's Journal","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203461,"name":"Parables of Saint Vorys","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_bre_inc_book_closed004"}
-{"id":203462,"name":"The Remnant Truth","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203463,"name":"Obscure Killers of the North","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_red_inc_varbook002"}
-{"id":203464,"name":"Fynboar the Resurrected","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook001"}
-{"id":203465,"name":"Archmagister Mavon's Ascension","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
-{"id":203466,"name":"The Silver Rose Blooms over Borderwatch","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_marklibrarybook001"}
-{"id":203467,"name":"Captain Burwarah's Records","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook003"}
-{"id":203468,"name":"The Waiting Door","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203469,"name":"House Telvanni Song","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203470,"name":"Song of Fate","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203471,"name":"The Spotted Towers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_apc_inc_libbook004"}
-{"id":203472,"name":"Materials for Novice Necromancers","quality":3,"cat":4,"sub":62,"theme":1,"icon":"housing_skr_inc_vampirelabbook003"}
+{"id":203377,"name":"A Brief History of Ald Sotha","quality":3,"cat":4,"sub":217,"theme":1,"icon":"quest_cwc_inc_bookplate001"}
+{"id":203378,"name":"Engine of Expression","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_cwc_inc_bookopen001"}
+{"id":203379,"name":"The Blackfeather Court","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203380,"name":"Worshiping the Illogical","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_cwc_inc_book001"}
+{"id":203381,"name":"Journal of Tsona-Ei, Part Four","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203382,"name":"Journal of Tsona-Ei, Part One","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203383,"name":"Journal of Tsona-Ei, Part Three","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203384,"name":"Journal of Tsona-Ei, Part Two","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203385,"name":"Cathedral Hierarchy","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":203386,"name":"On Minotaurs","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203387,"name":"The Blade of Woe","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203388,"name":"The Wolf and the Dragon","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203389,"name":"The Red Curse, Volume 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203390,"name":"The Red Curse, Volume 2","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203391,"name":"The Red Curse, Volume 3","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203392,"name":"Anequina and Pellitine: An Introduction","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":203393,"name":"On Those Who Know Baan Dar","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203394,"name":"The Angry Alfiq: A Collection","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203395,"name":"Trail and Tide","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_inc_openbook001"}
+{"id":203396,"name":"Azurah's Crossing","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":203397,"name":"Khunzar-ri and the Lost Alfiq","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203398,"name":"The Favored Daughter of Fadomai","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":203399,"name":"The Marriage of Moon and Tide","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203400,"name":"Artaeum Lost","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203401,"name":"The Flight of Gryphons","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook002"}
+{"id":203402,"name":"The Truth of Minotaurs","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":203403,"name":"The Ubiquitous Sinking Isle","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":203404,"name":"Birds of Wrothgar","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203405,"name":"Orc Clans and Symbology","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203406,"name":"Vorgrosh Rot-Tusk's Guide to Dirty Fighting","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203407,"name":"Vosh Rakh","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybook002"}
+{"id":203408,"name":"Larydeilmo is Sane","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_bookopenburned001"}
+{"id":203409,"name":"Oath of the Keepers","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203410,"name":"Ranks and Titles of House Telvanni","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybook003"}
+{"id":203411,"name":"A Report on the Dusksabers","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203412,"name":"On Joining the Keepers of the Dead","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203413,"name":"The Currency of Secrets","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203414,"name":"Uluscant's Manifesto","quality":3,"cat":4,"sub":217,"theme":1,"icon":"skr_inc_vampirelabbook001"}
+{"id":203415,"name":"On Tracts Perilous","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":203416,"name":"How Rajhin Stole the Book that Knows","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203417,"name":"Herma-Mora: The Woodland Man?","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":203418,"name":"Life in the Camonna Tong","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203419,"name":"Kynmarcher Strix's Journal","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203420,"name":"A Summoner's Guide to Nymics","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_inc_openbook001"}
+{"id":203421,"name":"The Dangers of Truth","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203422,"name":"On the Nature of Nymics","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":203423,"name":"Master of the Tides of Fate","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203424,"name":"The Spires of the 34th Sermon","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":203425,"name":"Our Puny Allies","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybook002"}
+{"id":203426,"name":"We Reject the Pact","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":203427,"name":"Critter Dangers: Telvanni Peninsula","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203428,"name":"Visitor's Guide: Telvanni Peninsula","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203429,"name":"A Feast Among the Dead, Chapter I","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203430,"name":"A Brief History of House Telvanni","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable001"}
+{"id":203431,"name":"Brave Little Scrib and the River Troll","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203432,"name":"History of Necrom: The City of the Dead","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":203433,"name":"Denizens of Apocrypha","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203434,"name":"Beverages for the Bereaved","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_inc_openbook001"}
+{"id":203435,"name":"Planar Exploration Vol. 14: Darkreave Curators","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203436,"name":"Ciphers of the Eye","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203437,"name":"Daedric Worship and the Dark Elves","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed001"}
+{"id":203438,"name":"Torvesard's Journal","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203439,"name":"A New Cult Arises","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203440,"name":"The Littlest Tomeshell","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203441,"name":"On Cipher's Midden","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203442,"name":"What About Glyphics?","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203443,"name":"Working in the Infinite Panopticon","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203444,"name":"What's an Arcanist? Part 2","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":203445,"name":"What's an Arcanist? Part 1","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed006"}
+{"id":203446,"name":"A Feast Among the Dead, Chapter II","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203447,"name":"A Feast Among the Dead, Chapter III","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203448,"name":"A Feast Among the Dead, Chapter IV","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203449,"name":"Our Dunmer Heritage","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":203450,"name":"Tidefall Cantos I","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203451,"name":"Fanlyrion's Journal","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203452,"name":"First Mate Dalmir's Log","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203453,"name":"Mouth Vabdru's Journal","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203454,"name":"Dusksaber Report","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203455,"name":"Plague Concoctor's Instructions","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203456,"name":"The Prior's Fulcrum","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":203457,"name":"Preparing Necrom Kwama, Fifth Draft","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook002"}
+{"id":203458,"name":"The Last Addition of Bikkus-Muz","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203459,"name":"A Servant's Tale","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed002"}
+{"id":203460,"name":"Malkhest's Journal","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203461,"name":"Parables of Saint Vorys","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_bre_inc_book_closed004"}
+{"id":203462,"name":"The Remnant Truth","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203463,"name":"Obscure Killers of the North","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_red_inc_varbook002"}
+{"id":203464,"name":"Fynboar the Resurrected","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook001"}
+{"id":203465,"name":"Archmagister Mavon's Ascension","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybooktable007"}
+{"id":203466,"name":"The Silver Rose Blooms over Borderwatch","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_marklibrarybook001"}
+{"id":203467,"name":"Captain Burwarah's Records","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook003"}
+{"id":203468,"name":"The Waiting Door","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203469,"name":"House Telvanni Song","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203470,"name":"Song of Fate","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203471,"name":"The Spotted Towers","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_apc_inc_libbook004"}
+{"id":203472,"name":"Materials for Novice Necromancers","quality":3,"cat":4,"sub":217,"theme":1,"icon":"housing_skr_inc_vampirelabbook003"}
 {"id":203553,"name":"Grand Master Clothing Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_clothingattunabletable001"}
 {"id":203554,"name":"Grand Master Woodworking Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_woodworkingattunabletable001"}
 {"id":203555,"name":"Grand Master Blacksmithing Station","quality":5,"cat":25,"sub":104,"theme":1,"icon":"housing_gen_crf_blacksmithingattunabletable001"}
@@ -208,7 +208,7 @@
 {"id":203597,"name":"Shrubs, Speckled Forest Cluster","quality":1,"cat":12,"sub":110,"theme":10,"icon":"housing_veg_bsh_bangkoraiisouthgreenscrub006"}
 {"id":203598,"name":"Flowers, Desert Blush","quality":1,"cat":12,"sub":111,"theme":10,"icon":"housing_veg_bsh_bansouthcactusclutter001"}
 {"id":203599,"name":"Redguard Fountain, Lion","quality":3,"cat":6,"sub":74,"theme":10,"icon":"housing_red_str_oasisfountain001","blueprint":227448}
-{"id":203600,"name":"Scribing Altar","quality":5,"cat":25,"sub":104,"icon":"housing_sum_str_housingscribingaltarcombo001"}
+{"id":203600,"name":"Scribing Altar","quality":5,"cat":25,"sub":104,"icon":"housing_sum_str_housingscribingaltarcombo001","theme":0}
 {"id":203601,"name":"Haunted Dresser, Floating","quality":5,"cat":2,"sub":146,"theme":1,"icon":"housing_u43_haunteddresser"}
 {"id":203602,"name":"Haunted Door, Clattering","quality":4,"cat":13,"sub":163,"theme":1,"icon":"housing_u43_haunteddoor"}
 {"id":203603,"name":"Haunted Still Life Painting","quality":4,"cat":9,"sub":92,"theme":1,"icon":"housing_chl_inc_woodframepainting05"}
@@ -537,4 +537,4 @@
 {"id":208128,"name":"Apocrypha Jewelry Crafting Station","quality":5,"cat":25,"sub":104,"theme":13,"icon":"housing_gen_crf_jewelryapocryphacraftingstationtable001"}
 {"id":208159,"name":"Imperial Banner, Emperor's","quality":4,"cat":3,"sub":58,"theme":11,"icon":"housing_imp_lsb_bannerimperialmedium001"}
 {"id":208160,"name":"Music Box, Sorrow of the Night Mother","quality":5,"cat":25,"sub":182,"theme":1,"icon":"housing_uni_inc_musicboxnightmother001"}
-{"id":208358,"name":"Handbook for New Homeowners","quality":5,"cat":4,"sub":62,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
+{"id":208358,"name":"Handbook for New Homeowners","quality":5,"cat":4,"sub":217,"theme":1,"icon":"housing_gen_crf_tablepropsarcanebook001"}
