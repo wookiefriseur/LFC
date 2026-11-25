@@ -282,13 +282,25 @@ local function recordsFor(id, active)
   return result
 end
 generated.Records = recordsFor
+-- A rumour with a blueprint is keyed by the blueprint in the data, but listed under its furnishing like any other row
+local rumourFurnishings = {}
+for blueprint in pairs(data.rumours) do
+  local furnishing = data.blueprints[blueprint]
+  if furnishing and furnishing ~= 0 then
+    rumourFurnishings[furnishing] = blueprint
+  end
+end
+
 function generated.Key(id)
-  if data.items[id] or data.rumours[id] then
+  if data.items[id] or rumourFurnishings[id] then
     return id
   end
   local target = data.blueprints[id]
   if target and target ~= 0 then
     return target
+  end
+  if data.rumours[id] then
+    return id
   end
 end
 
@@ -302,6 +314,7 @@ local function bucket(table_, version, source)
 end
 function generated.Install()
   local build = LFC.Internal.Build
+  blueprintsExist = {}
   LFC.Internal.IgnoredItems = {}
   FurC.MiscItemSources, FurC.LuxuryFurnisher, FurC.Rolis, FurC.Faustina = {}, {}, {}, {}
   containers = {}
@@ -369,9 +382,11 @@ function generated.Install()
     if blueprint then
       mask = build.AddSource(mask, src.CRAFTING)
     end
-    -- only craftable, from a blueprint this client does not have: nothing to list
     if mask ~= 0 or row[ROW.blueprint] == 0 then
       build.Upsert(id, { sources = mask, version = row[ROW.version], blueprint = blueprint })
+    else
+      -- keep rumour item, even if its blueprint is gone
+      build.Upsert(id, { origin = src.RUMOUR, version = row[ROW.version] })
     end
     for i = FIRST_RECORD, #row do
       if row[i][RECORD.container] then
@@ -400,7 +415,16 @@ function generated.Install()
     end
   end
   for id, version in pairs(data.rumours) do
-    build.Upsert(id, { origin = src.RUMOUR, version = version })
+    local furnishing = data.blueprints[id]
+    if furnishing and furnishing ~= 0 then
+      -- blueprint paired with furnishing only when this client has it, without it the furnishing is still a rumour
+      build.Upsert(
+        furnishing,
+        { origin = src.RUMOUR, version = version, blueprint = blueprintExists(id) and id or nil }
+      )
+    else
+      build.Upsert(id, { origin = src.RUMOUR, version = version })
+    end
   end
 end
 
