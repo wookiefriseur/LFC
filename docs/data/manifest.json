@@ -45,8 +45,8 @@
     {
       "name": "luxury.jsonl",
       "type": "luxury",
-      "records": 672,
-      "digest": "b1c646625de6ac12"
+      "records": 673,
+      "digest": "09e7c5f34db6fb78"
     },
     {
       "name": "event_drop.jsonl",
@@ -75,8 +75,8 @@
     {
       "name": "recipe.jsonl",
       "type": "recipe",
-      "records": 3448,
-      "digest": "14b03a8a5ef53ba5"
+      "records": 3447,
+      "digest": "06edc8341edfccdc"
     },
     {
       "name": "drop.jsonl",
@@ -130,7 +130,7 @@
       "name": "rumour.jsonl",
       "type": "rumour",
       "records": 353,
-      "digest": "04138d448ab4486d"
+      "digest": "78ad33373c81fc7b"
     },
     {
       "name": "ignored.jsonl",
@@ -139,7 +139,7 @@
       "digest": "3fc76eaadb5f56ce"
     }
   ],
-  "digest": "96f8e4aad7f00d98",
+  "digest": "f8d3f86840a2e1a8",
   "counts": {
     "records": 10215,
     "ids": 12489,
@@ -153,12 +153,12 @@
       "vendor": 1386,
       "pvp_vendor": 84,
       "writ_vendor": 56,
-      "luxury": 672,
+      "luxury": 673,
       "event_drop": 97,
       "event_vendor": 101,
       "crown_crate": 153,
       "crown_store": 1730,
-      "recipe": 3448,
+      "recipe": 3447,
       "drop": 712,
       "quest_reward": 41,
       "dungeon_drop": 120,

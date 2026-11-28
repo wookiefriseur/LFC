@@ -19,13 +19,13 @@
 {"id":120805,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-08-21"}}
 {"id":120806,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"HOMESTEAD","last_seen":"2026-08-21"}}
 {"id":120807,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-08-21"}}
-{"id":120808,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"HOMESTEAD","last_seen":"2025-10-17"}}
+{"id":120808,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-27"}}
 {"id":120809,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-20"}}
 {"id":120810,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-20"}}
-{"id":120811,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2025-10-17"}}
+{"id":120811,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-27"}}
 {"id":120812,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-20"}}
-{"id":120813,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2025-10-17"}}
-{"id":120814,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2025-10-17"}}
+{"id":120813,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-27"}}
+{"id":120814,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-11-27"}}
 {"id":120815,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-09-25"}}
 {"id":120816,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-09-25"}}
 {"id":120817,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HOMESTEAD","last_seen":"2026-09-25"}}
@@ -202,7 +202,7 @@
 {"id":134841,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":100000}],"availability":{"version":"DRAGONS","last_seen":"2026-11-13"}}
 {"id":134842,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"DRAGONS","last_seen":"2026-11-20"}}
 {"id":134843,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"DRAGONS","last_seen":"2026-11-20"}}
-{"id":134844,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"DRAGONS","last_seen":"2025-10-17"}}
+{"id":134844,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"DRAGONS","last_seen":"2026-11-27"}}
 {"id":134845,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"DRAGONS","last_seen":"2025-11-07"}}
 {"id":134846,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"DRAGONS","last_seen":"2025-11-14"}}
 {"id":139092,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":24000}],"availability":{"version":"DRAGONS","last_seen":"2025-11-21"}}
@@ -255,7 +255,7 @@
 {"id":145482,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":1000}],"availability":{"version":"MURKM","last_seen":"2026-11-06"}}
 {"id":145483,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"MURKM","last_seen":"2026-11-13"}}
 {"id":145484,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"MURKM","last_seen":"2026-11-20"}}
-{"id":145485,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"MURKM","last_seen":"2025-10-17"}}
+{"id":145485,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"MURKM","last_seen":"2026-11-27"}}
 {"id":145486,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"MURKM","last_seen":"2025-11-07"}}
 {"id":145487,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"MURKM","last_seen":"2025-11-14"}}
 {"id":147647,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":3500}],"availability":{"version":"WOTL","last_seen":"2025-11-28"}}
@@ -325,7 +325,7 @@
 {"id":156667,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"DRAGON2","last_seen":"2026-10-16"}}
 {"id":156668,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"DRAGON2","last_seen":"2026-10-09"}}
 {"id":159447,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HARROW","last_seen":"2026-11-20"}}
-{"id":159448,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HARROW","last_seen":"2025-10-17"}}
+{"id":159448,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"HARROW","last_seen":"2026-11-27"}}
 {"id":159449,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"HARROW","last_seen":"2025-11-07"}}
 {"id":159450,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":7500}],"availability":{"version":"HARROW","last_seen":"2025-11-07"}}
 {"id":159451,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"HARROW","last_seen":"2025-11-14"}}
@@ -383,7 +383,7 @@
 {"id":171830,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"FLAMES","last_seen":"2026-11-06"}}
 {"id":171831,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2500}],"availability":{"version":"FLAMES","last_seen":"2026-11-13"}}
 {"id":171832,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"FLAMES","last_seen":"2026-11-20"}}
-{"id":171833,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"FLAMES","last_seen":"2025-10-17"}}
+{"id":171833,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"FLAMES","last_seen":"2026-11-27"}}
 {"id":175760,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"BLACKW","last_seen":"2025-11-07"}}
 {"id":175761,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"BLACKW","last_seen":"2025-11-14"}}
 {"id":175762,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"BLACKW","last_seen":"2025-11-21"}}
@@ -440,7 +440,7 @@
 {"id":187787,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"BRETON","last_seen":"2026-11-06"}}
 {"id":187788,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"BRETON","last_seen":"2026-11-13"}}
 {"id":187789,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"BRETON","last_seen":"2026-11-20"}}
-{"id":187790,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"BRETON","last_seen":"2025-10-17"}}
+{"id":187790,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"BRETON","last_seen":"2026-11-27"}}
 {"id":187791,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":12000}],"availability":{"version":"BRETON","last_seen":"2025-11-07"}}
 {"id":187792,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"BRETON","last_seen":"2025-11-14"}}
 {"id":187793,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":30000}],"availability":{"version":"BRETON","last_seen":"2025-11-21"}}
@@ -497,7 +497,7 @@
 {"id":196209,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4500}],"availability":{"version":"NECROM","last_seen":"2026-11-06"}}
 {"id":196210,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":17000}],"availability":{"version":"NECROM","last_seen":"2026-11-13"}}
 {"id":196211,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":22500}],"availability":{"version":"NECROM","last_seen":"2026-11-20"}}
-{"id":196212,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":17500}],"availability":{"version":"NECROM","last_seen":"2025-10-17"}}
+{"id":196212,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":17500}],"availability":{"version":"NECROM","last_seen":"2026-11-27"}}
 {"id":196213,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":50000}],"availability":{"version":"NECROM","last_seen":"2025-11-07"}}
 {"id":196214,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"NECROM","last_seen":"2025-11-14"}}
 {"id":198042,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4500}],"availability":{"version":"BASED","last_seen":"2026-02-20"}}
@@ -554,7 +554,7 @@
 {"id":204626,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"WEALD","last_seen":"2026-11-06"}}
 {"id":204627,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"WEALD","last_seen":"2026-11-13"}}
 {"id":204628,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"WEALD","last_seen":"2026-11-20"}}
-{"id":204629,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"WEALD","last_seen":"2025-10-17"}}
+{"id":204629,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":20000}],"availability":{"version":"WEALD","last_seen":"2026-11-27"}}
 {"id":204630,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":40000}],"availability":{"version":"WEALD","last_seen":"2025-11-07"}}
 {"id":204631,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"WEALD","last_seen":"2025-11-14"}}
 {"id":204632,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4500}],"availability":{"version":"WEALD","last_seen":"2025-11-21"}}
@@ -614,7 +614,7 @@
 {"id":217588,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":25000}],"availability":{"version":"WORMS","last_seen":"2026-11-20"}}
 {"id":217589,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":2000}],"availability":{"version":"WORMS","last_seen":"2026-10-23"}}
 {"id":217590,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"WORMS","last_seen":"2026-10-30"}}
-{"id":218005,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"SHADOWS","last_seen":"2025-10-17"}}
+{"id":218005,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"SHADOWS","last_seen":"2026-11-27"}}
 {"id":218006,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":24000}],"availability":{"version":"SHADOWS","last_seen":"2025-11-07"}}
 {"id":218007,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":4000}],"availability":{"version":"SHADOWS","last_seen":"2025-11-14"}}
 {"id":218008,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":15000}],"availability":{"version":"SHADOWS","last_seen":"2025-11-21"}}
@@ -670,3 +670,4 @@
 {"id":224865,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":10000}],"availability":{"version":"ECHOES","last_seen":"2026-11-06"}}
 {"id":224866,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":5000}],"availability":{"version":"ECHOES","last_seen":"2026-11-13"}}
 {"id":224867,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":30000}],"availability":{"version":"ECHOES","last_seen":"2026-11-20"}}
+{"id":224868,"source":{"type":"luxury","vendor":"LUXF"},"cost":[{"currency":"GOLD","amount":35000}],"availability":{"version":"ECHOES","last_seen":"2026-11-27"}}

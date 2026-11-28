@@ -243,7 +243,6 @@
 {"id":223994,"source":{"type":"rumour"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":223995,"source":{"type":"rumour"},"cost":[],"availability":{"version":"ZERO"}}
 {"id":224859,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
-{"id":224868,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225028,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225337,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
 {"id":225364,"source":{"type":"rumour"},"cost":[],"availability":{"version":"THIEVES"}}
@@ -351,3 +350,4 @@
 {"id":227622,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"id":227623,"source":{"type":"rumour"},"cost":[],"availability":{"version":"NONE"}}
 {"source":{"type":"rumour"},"cost":[],"availability":{"version":"HOMESTEAD"},"blueprint":225110,"id":224897}
+{"source":{"type":"rumour"},"cost":[],"availability":{"version":"ECHOES"},"blueprint":225133,"id":224920,"notes":"Looks like ZOS removed the item before it went live. It still exists in game files."}
